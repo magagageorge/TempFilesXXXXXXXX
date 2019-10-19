@@ -1,1 +1,73 @@
+@import "~@ng-select/ng-select/themes/material.theme.css";
 /* You can add global styles to this file, and also import other style files */
+
+.card{
+    margin-top:2px;
+    margin-bottom:2px;
+    border-radius: 1px;
+}
+.form-rounded {
+border-radius: 1.2rem;
+}
+
+[contentEditable=true]:empty:not(:focus):before{
+    content:attr(data-text)
+}
+
+.btn-liked{
+    color:red;
+    font-size: 105%;
+}
+
+.wf-profile-name{
+  color:#000;
+}
+
+.wf-profile-desc{
+  color:#6C6A6A;
+}
+
+.cut-text {
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.wf-link{
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.wf-link:hover{
+  text-decoration: underline;
+}
+
+.btn-circle {  box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);  width: 47px;  height: 47px;  position: relative;  z-index: 1;  display: inline-block;  overflow: hidden;  transition: all .2s ease-in-out;  margin: 5px;  border-radius: 50%;  padding: 0; cursor: pointer;}
+.btn-circle i {    font-size: 1.25rem;    line-height: 47px;    display: inline-block;    width: inherit;    text-align: center;    color: #fff; }
+.btn-circle:hover {    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); }
+.btn-circle:before {  border-radius: 0; }
+.btn-circle.btn-sm {  width: 36.15px;  height: 36.15px; }
+.btn-circle.btn-sm i {    font-size: .96154rem;    line-height: 36.15px; }
+.btn-circle.btn-lg {  width: 61.1px;  height: 61.1px; }
+.btn-circle.btn-lg i {    font-size: 1.625rem;    line-height: 61.1px; }
+
+
+.round-btn{
+  place-content: center;
+  align-items: center;
+  flex-direction: row;
+  box-sizing: border-box;
+  display: flex;
+  flex: 1 1 100%;
+  width:30px;
+  height: 30px;
+  border:1px solid gray;
+  background-color: grey;
+  color: white;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.round-btn:hover{
+  background-color: darkgray;
+  box-shadow: complement($color: #000000)
+}

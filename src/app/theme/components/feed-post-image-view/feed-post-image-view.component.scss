@@ -1,0 +1,13 @@
+
+.post-image-view-controls {
+	position: absolute;
+	top: 47%;
+    border: 2px solid transparent;
+    left:2px;
+    right:2px;
+}
+
+.post-image-view-controls .action-btn{
+ color:#ffffff;
+ background-color: transparentize($color: #000000, $amount: 0.6);
+}

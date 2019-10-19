@@ -1,0 +1,38 @@
+<app-wf-navbar>
+  
+</app-wf-navbar>   
+<app-wf-main-content>
+
+<div  class="container-fluid px-md-5 px-lg-5" style="min-height: 100%;">
+<div class="row" style="min-height: 80vh;">
+<div class="pull-left d-none d-md-block d-lg-block col-md-2 col-lg-2" style="min-height:80vh;">
+<app-notifications-left-widget></app-notifications-left-widget>
+</div>
+<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6  p-0">
+<div class="card w-100">
+  <div class="card-header py-0">
+    <span class="float-left" i18n>Recent</span>
+    <span class="float-right"><a routerLink="/settings/notifications"><span class="fa fa-gear"></span><span>&nbsp;</span> <ng-container i18n>Settings</ng-container></a></span>
+  </div>
+  <div class="card-body p-1">
+    <div *ngIf="notificationsService.NOTIFICATIONS.length" class="row p-0 m-0">
+       <div   infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="notificationsService.onScrollDown()" [scrollWindow]="true" id="scroller" *ngFor="let notification of notificationsService.NOTIFICATIONS" class="col-12 m-0 ">
+          <app-notification-widget [notification]="notification"></app-notification-widget>
+       </div>
+    </div>
+    <div *ngIf="notificationsService.loading_notifications" class="row p-0 m-1">
+       <div class="col-12 text-center">
+         <span class="fa fa-spinner fa-pulse fa-spin"></span>
+       </div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="col-xs-12 col-sm-12 col-md-4  d-none d-md-block d-lg-block col-lg-4 pull-right">
+<app-wf-right-sidebar></app-wf-right-sidebar>
+</div>
+</div>
+</div>
+</app-wf-main-content>
+<!--Main layout-->
+<app-wf-footer></app-wf-footer>

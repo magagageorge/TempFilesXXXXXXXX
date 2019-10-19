@@ -1,0 +1,22 @@
+<div  *ngIf="deviceService.isDesktop" class="w-100 sticky-top">
+<div class="card m-0">
+<div class="card-body py-0">
+
+<div class="row p-0" >
+<div class="col-md-12 col-lg-12 px-0 py-1 text-center "  >
+<img style="max-width:80px;" src="{{profileService.MYPROFILE.avatar}}" class="img-fluid rounded-circle z-depth-0">
+<div class="w-100">Hello {{profileService.MYPROFILE.firstname}}</div>
+<div class="w-100" style="font-size:80%;"><a routerLink="/{{profileService.MYPROFILE.url}}/edit">Update your profile <span class="fa fa-edit"></span></a></div>
+</div>
+<div class="col-md-12 col-lg-12 p-0"  >
+<ul class="list-group list-group-flush mx-0">
+  <li class="list-group-item px-1"><a routerLink="/feed"><i class="fa fa-home"></i> Feed</a></li>
+  <li class="list-group-item px-1"><a routerLink="/mynetwork"><i class="fa fa-connectdevelop"></i> My network <span class="badge badge-secondary">23</span></a></li>
+</ul>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>

@@ -1,0 +1,45 @@
+<div class="container-fluid px-md-5 px-lg-5" style="min-height: 100%;">
+    <div class="row" style="min-height: 80vh;">
+        <div class="pull-left d-none d-md-block d-lg-block col-md-2 col-lg-2" style="min-height:80vh;">
+            <app-profile-left-widget></app-profile-left-widget>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6  p-0 mx-auto">
+            <div class="card w-100 mx-0">
+                <div class="card-header py-0">
+                    <span><span>{{urlviewerService.PPVIEWER.profile.name}}</span><span>'s&nbsp;</span><span
+                            i18n>Connections</span></span>
+                </div>
+                <div class="card-body p-0">
+                    <div class="row p-0 m-0">
+                        <div infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
+                            (scrolled)="profileConnectionsService.onScrollDownConnections()" [scrollWindow]="true"
+                            id="scroller" *ngFor="let profile of profileConnectionsService.CONNECTIONS"
+                            class="col-12 col-md-6 m-0 p-0">
+                            <app-profile-card-widget [profile]="profile"></app-profile-card-widget>
+                        </div>
+                    </div>
+
+                    <div *ngIf="profileConnectionsService.loading_connections==true && profileConnectionsService.CONNECTIONS.length"
+                        class=" py-2 text-center">
+                        <span class="fa fa-spinner fa-pulse fa-fw"></span>
+                    </div>
+
+                    <div *ngIf="profileConnectionsService.loading_connections==true && !profileConnectionsService.CONNECTIONS.length"
+                        class=" py-2 text-center">
+                        <span class="fa fa-spinner fa-pulse fa-fw"></span>
+                    </div>
+
+                    <div *ngIf="profileConnectionsService.loading_connections==false && !profileConnectionsService.CONNECTIONS.length"
+                        class=" py-0 text-center">
+                        <span class="fa fa-info-circle"></span> <span i18n>Currently
+                            <span>{{urlviewerService.PPVIEWER.profile.name}}</span> does not have any connection
+                            yet.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4  d-none d-md-block d-lg-block pull-right">
+            <app-wf-right-sidebar></app-wf-right-sidebar>
+        </div>
+    </div>
+</div>

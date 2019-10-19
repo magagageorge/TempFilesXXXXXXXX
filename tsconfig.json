@@ -1,7 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
+    "baseUrl": "src",
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
@@ -12,9 +12,20 @@
     "typeRoots": [
       "node_modules/@types"
     ],
+    "paths": {
+      "@app/*": [ "app/*" ],           // src/app      
+      "@services/*": [ "app/services/*" ], // src/app/services
+      "@assets/*": [ "assets/*" ],     // src/assests
+      "@models/*": [ "app/models/*" ],      // src/app/models
+      "@auth/*": [ "app/auth/*" ],     // src/app/auth
+      "@libs/*": [ "app/libs/*" ]      // src/app/libs
+    },
     "lib": [
       "es2017",
       "dom"
     ]
-  }
+  },
+  "angularCompilerOptions": {
+    "enableIvy": false
+  }   
 }

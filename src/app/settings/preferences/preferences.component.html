@@ -1,0 +1,105 @@
+<app-wf-navbar class="d-none d-md-block d-lg-block"></app-wf-navbar>
+<app-wf-navbar-summary [back_route]="parent_route" [display_text]="title" class="d-block d-md-none d-lg-none">
+</app-wf-navbar-summary>
+
+<app-wf-main-content>
+
+  <div class="container-fluid px-md-5 px-lg-5" style="min-height: 100%;">
+    <div class="row" style="min-height: 80vh;">
+      <div class="d-none d-md-block d-lg-block col-md-3 col-lg-3" style="min-height:80vh;">
+        <app-settings-left-widget></app-settings-left-widget>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6  p-0">
+        <div class="card w-100">
+          <div class="card-header py-0">
+            <span i18n>Preferences Settings</span>
+          </div>
+          <div *ngIf="settingsService.loading_settings==true" class="card-body text-center">
+            <span class="fa fa-circle-o-notch fa-spin"></span>
+          </div>
+          <div *ngIf="settingsService.loading_settings==false" class="card-body p-1">
+
+            <form [formGroup]="missionGroup" (ngSubmit)="save()" class="p-1 m-2">
+              <div class="d-block w-100 text-center">
+                <h4 i18n>What is your primary goal?</h4>
+                <h6 class="font-weight-light" i18n>This helps us personalize your experience</h6>
+              </div>
+              <br>
+              <div *ngIf="showMessages.error && errors && errors.length > 0 && !submitted"
+                class="alert alert-info text-danger" role="alert">
+                <div *ngFor="let error of errors">{{ error }}</div>
+              </div>
+              <div *ngIf="showMessages.success && messages && messages.length > 0 && !submitted"
+                class="alert alert-success" role="alert">
+                <div><strong>Hooray!</strong></div>
+                <div *ngFor="let message of messages">{{ message }}</div>
+              </div>
+              <div class="d-block">
+                <div class="form-row">
+                  <div class="w-100">
+                    <label class="pull-left" for="inputlookingfor" i18n>Looking for an opportunity to *</label>
+                  </div>
+                  <div class="d-block w-100" [ngClass]="{ 'is-invalid': submitted && missionGroup.invalid }">
+
+                    <div class="row mx-0">
+                      <div class="col-12 pull-left">
+                        <div class="form-check m-0 p-0  disabled">
+                          <input type="checkbox" formControlName="networking_entertainment"
+                            [(ngModel)]="settingsService.user_preferences.networking_entertainment"
+                            class="form-check-input disabled" id="networking_entertainment">
+                          <label for="networking_entertainment" class="disabled">Create Network and Entertainment</label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row mx-0">
+                      <div class="col-12  pull-left">
+                        <div class="form-check m-0 p-0">
+                          <input type="checkbox" formControlName="find_sales_leads"
+                            [(ngModel)]="settingsService.user_preferences.find_sales_leads" class="form-check-input"
+                            id="find_sales_leads">
+                          <label for="find_sales_leads">Find  and or Sale Products,goods or Services</label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row mx-0">
+                      <div class="col-12  pull-left">
+                        <div class="form-check m-0 p-0">
+                          <input type="checkbox" formControlName="find_job_opportunity"
+                            [(ngModel)]="settingsService.user_preferences.find_job_opportunity" class="form-check-input"
+                            id="find_job_opportunity">
+                          <label for="find_job_opportunity">Find Job Opportunity </label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row mx-0">
+                      <div class="col-12">
+                        <div class="form-check m-0 p-0">
+                          <input type="checkbox" formControlName="employ_someone"
+                            [(ngModel)]="settingsService.user_preferences.employ_someone" class="form-check-input"
+                            id="employ_someone">
+                          <label for="employ_someone">Employ Someone </label>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+              <button type="submit" [class.disabled]="missionGroup.invalid"
+                class="btn btn-primary btn-sm btn-rounded  my-4 waves-effect z-depth-0"><span
+                *ngIf="submitted==true"><span
+                  class="fa fa-circle-o-notch fa-spin"></span></span><span>&nbsp;</span><span i18n>Save Changes</span></button>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-wf-main-content>
+<!--Main layout-->
+<app-wf-footer></app-wf-footer>

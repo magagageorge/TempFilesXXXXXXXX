@@ -1,0 +1,24 @@
+<div class="contact-card d-block p-0">
+ <div class="row m-0">
+    <div class="col-1 text-center p-1">
+        <div class="form-check  text-center  m-0 p-0">
+            <input type="checkbox" class="form-check-input" id="contact_{{contact.id}}">
+            <label for="contact_{{contact.id}}"></label>
+        </div>
+    </div> 
+    <div class="col-11 p-1 align-middle">
+        <div *ngIf="contact.profile" class="d-block h-100 p-0 m-0 align-middle">
+         <div class="row h-100 m-0 p-0">
+          <div class="col-2 p-0">
+            <img src="{{contact.profile.avatar}}" class="img-fluid rounded-circle m-0">
+          </div>
+          <div class="col-10 py-0 px-1">
+            <span class="d-block w-100 text-truncate"><strong>{{contact.profile.name}}</strong></span> 
+            <span class="d-block w-100 text-truncate">{{contact.profile.short_info}}</span>  
+          </div>
+         </div>
+        </div>
+      
+    </div>
+ </div>
+</div>

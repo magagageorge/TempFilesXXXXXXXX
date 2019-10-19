@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/wfmobile",
+            "outputPath": "www",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -27,7 +27,10 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "node_modules/font-awesome/scss/font-awesome.scss",
+              "src/assets/md/scss/bootstrap/bootstrap.scss",
+              "src/assets/md/scss/mdb-pro.scss",
+			        "src/styles.scss"
             ],
             "scripts": []
           },
@@ -41,6 +44,7 @@
               ],
               "optimization": true,
               "outputHashing": "all",
+              "i18nLocale": "en",              
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
@@ -54,7 +58,7 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "wfmobile:build"
+            "browserTarget": "wfmobile:build","port": 5000
           },
           "configurations": {
             "production": {

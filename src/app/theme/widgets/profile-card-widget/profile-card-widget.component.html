@@ -1,0 +1,42 @@
+ 
+  <div class="profile-card d-block w-100 p-0 h-100 m-0">
+    <div class="display-pic">
+    <div class="cover-photo">
+    <div class="display-pic-gradient">
+      <a routerLink="/{{profile.url}}" class="w-100 h-100 p-0 m-0">&nbsp;&nbsp;&nbsp;</a>
+    </div>
+    <a routerLink="/{{profile.url}}" (click)="urlViewerService.setProfile(profile);" class="w-100 h-100 p-0 m-0"><span  *ngIf="profile.cover==''">&nbsp;&nbsp;&nbsp;</span><img *ngIf="profile.cover!=''" src="{{profile.cover}}" class="img-fluid"></a>
+   
+    </div>
+    <div class="profile-pic">
+    <div class="pic">
+        <a routerLink="/{{profile.url}}" (click)="urlViewerService.setProfile(profile);"><img src="{{profile.avatar}}" class="img-fluid rounded-circle"></a>				
+    </div>
+     </div>
+    </div>
+    
+  
+    <div class="title-container">
+      <a routerLink="/{{profile.url}}"  (click)="urlViewerService.setProfile(profile);"><span class="w-100 d-block text-truncate"> {{profile.name}}<span class="url-tag">@{{profile.url}}</span></span></a>
+    </div>
+    
+    <div class="details d-block">
+      {{profile.short_info}}
+    </div>
+    <div *ngIf="profile.my_profile!=true" class="d-block p-0">
+      <div class="row m-0 p-0 align-middle">
+         <div *ngIf="profile.connectStatus.connected==true" class="col-12 px-auto m-0 text-center justify-content-center"><button  class="btn btn-sm btn-outline-primary waves-effect btn-rounded w-100 mx-auto"><span class="fa fa-envelope"></span><span>&nbsp;</span> <ng-container i18n>Message</ng-container></button></div>
+         <div *ngIf="profile.connectStatus.connected==false && profile.connectStatus.request_sent==false && profile.connectStatus.request_received==false" class="col-12 px-auto m-0 text-center justify-content-center"><button (click)="connectionsService.Connect(profile);" class="btn btn-sm btn-outline-primary waves-effect btn-rounded w-100 mx-auto"><span class="fa fa-user-plus"></span><span>&nbsp;</span>  <ng-container i18n>Connect</ng-container></button></div>
+  
+         <ng-container *ngIf="profile.connectStatus.connected==false && profile.connectStatus.request_received==true">
+         <div class="col-6 px-auto m-0 text-center justify-content-center"><button (click)="connectionsService.Accept(profile);" class="btn btn-sm btn-outline-primary waves-effect btn-rounded w-100 mx-auto"><span class="fa fa-user-plus"></span><span>&nbsp;</span>  <ng-container i18n>Accept</ng-container></button></div>
+         <div class="col-6 px-auto m-0 text-center justify-content-center"><button (click)="connectionsService.Ignore(profile);"  class="btn btn-sm btn-outline-default waves-effect btn-rounded w-100 mx-auto"><span>&nbsp;</span> <ng-container i18n>Ignore</ng-container></button></div>
+        </ng-container>
+        <ng-container *ngIf="profile.connectStatus.connected==false && profile.connectStatus.request_sent==true">
+         <div class="col-6 px-auto m-0 text-center justify-content-center  align-middle"><span class="text-primary w-100 mx-auto my-auto align-middle"><span class="fa fa-check"></span><span>&nbsp;</span>  <ng-container i18n>Request Sent</ng-container></span></div>
+         <div class="col-6 px-auto m-0 text-center justify-content-center"><button  (click)="connectionsService.Cancel(profile);"  class="btn btn-sm btn-outline-default waves-effect btn-rounded w-100 mx-auto"><span>&nbsp;</span> <ng-container i18n>Cancel</ng-container></button></div>  
+        </ng-container>
+      </div>
+    </div> 
+    </div>
+  

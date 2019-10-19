@@ -1,0 +1,25 @@
+<div class="card">
+    <div class="card-header py-1">
+        <span>Videos</span>
+    </div>
+    <div class="card-body p-1">
+        <div class="row m-0" style="border:1px solid #ffffff;">
+            <div class="col-4 p-0" style="border:1px solid #ffffff;"><img src="assets/img/video.jpg" class="img-fluid"></div>
+            <div class="col-4 p-0" style="border:1px solid #ffffff;"><img src="assets/img/video.jpg" class="img-fluid"></div>
+            <div class="col-4 p-0" style="border:1px solid #ffffff;"><img src="assets/img/video.jpg" class="img-fluid"></div>
+        </div>
+        <div class="row m-0" style="border:1px solid #ffffff;">
+            <div class="col-4 p-0" style="border:1px solid #ffffff;"><img src="assets/img/video.jpg" class="img-fluid"></div>
+            <div class="col-4 p-0" style="border:1px solid #ffffff;"><img src="assets/img/video.jpg" class="img-fluid"></div>
+            <div class="col-4 p-0" style="border:1px solid #ffffff;"><img src="assets/img/video.jpg" class="img-fluid"></div>
+        </div>
+        <div class="row m-0" style="border:1px solid #ffffff;">
+            <div class="col-4 p-0" style="border:1px solid #ffffff;"><img src="assets/img/video.jpg" class="img-fluid"></div>
+            <div class="col-4 p-0" style="border:1px solid #ffffff;"><img src="assets/img/video.jpg" class="img-fluid"></div>
+            <div class="col-4 p-0" style="border:1px solid #ffffff;"><img src="assets/img/video.jpg" class="img-fluid"></div>
+        </div>    
+        <div *ngIf="urlviwerService.loading_viewer" class="d-block p-0 m-0 text-center">
+            <span class="fa fa-spinner fa-pulse fa-fw"></span>
+        </div>
+    </div>
+</div>

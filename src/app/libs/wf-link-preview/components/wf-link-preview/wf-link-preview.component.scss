@@ -1,0 +1,50 @@
+:host {
+    display: block;
+  }
+  
+  .wf-card-content {
+    flex-direction: row;
+    box-sizing: border-box;
+    display: flex;
+  
+    a {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+  
+  .img-container {
+    place-content: center;
+    align-items: center;
+    flex-direction: row;
+    box-sizing: border-box;
+    display: flex;
+    flex: 1 1 100%;
+  }
+  
+  .center-auto {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  
+  .round-btn{
+    place-content: center;
+    align-items: center;
+    flex-direction: row;
+    box-sizing: border-box;
+    display: flex;
+    flex: 1 1 100%;
+    width:30px;
+    height: 30px;
+    border:1px solid gray;
+    background-color: grey;
+    color: white;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  .round-btn:hover{
+    background-color: darkgray;
+    box-shadow: complement($color: #000000)
+  }
+  

@@ -1,0 +1,31 @@
+<div class="row py-1" style="border-bottom:1px solid dimgrey" id="notification_item_{{notification.id}}">
+<div class="col-2 col-md-1 col-lg-1 p-0">
+  <img *ngIf="notification.s_profile" (mouseover)="hovercardService.OnHover($event,notification.s_profile)" (mouseover)="hovercardService.OnHover($event,notification.s_profile)" (click)="hovercardService.OnMouseOut($event);urlViewerService.setProfile(notification.s_profile);" (mouseleave)="hovercardService.OnMouseOut($event)" src="{{notification.s_profile.avatar}}" class="img-fluid rounded-circle m-0">
+</div>
+<div class="col-9  col-md-10 col-lg-10 p-1">
+  <div class="d-block p-0 m-0">
+    <p  class="w-100 m-0">
+      <a *ngIf="notification.s_profile" routerLink="/{{notification.s_profile.url}}"  (mouseover)="hovercardService.OnHover($event,notification.s_profile)" (click)="hovercardService.OnMouseOut($event);urlViewerService.setProfile(notification.s_profile);" (mouseleave)="hovercardService.OnMouseOut($event)">{{notification.s_profile.name}}</a>  {{notification.note}}
+    
+      <a *ngIf="notification.action.do=='view'" routerLink="">{{notification.action.label}}</a>
+      <button *ngIf="notification.action.do=='message'" class="btn btn-sm btn-outline-primary waves-effect btn-rounded px-2 py-1">Message</button>
+  
+      <ng-container *ngIf="notification.action.do=='accept'">
+          <button (click)="connectionsService.Accept(notification.s_profile);" class="btn btn-sm btn-outline-primary waves-effect btn-rounded px-2 py-1"><span class="fa fa-user-plus"></span><span>&nbsp;</span>  <ng-container i18n>Accept</ng-container></button>
+          <button (click)="connectionsService.Ignore(notification.s_profile);"  class="btn btn-sm btn-outline-default waves-effect btn-rounded px-2 py-1"><span>&nbsp;</span> <ng-container i18n>Ignore</ng-container></button>
+         </ng-container>
+    </p>
+    <p class="w-100 m-0" style="font-size:80%;">{{notification.time}}</p>
+  </div>
+</div>
+<div class="col-1 text-center px-0">
+  <div class="card-tools w-100">
+    <div class="dropdown btn-group" ngbDropdown placement="bottom-right">
+      <a class="px-2" ngbDropdownToggle></a>
+      <ul class="dropdown-menu  dropdown-menu-left" ngbDropdownMenu style="position:absolute;left:10px;">
+        <li  class="dropdown-item"><a href="javascript:void(0);" (click)="notificationsService.DeleteNotification(notification.id)"><span class="fa fa-trash"></span><span>&nbsp;</span>  <ng-container i18n>Delete</ng-container></a></li>
+    </ul>
+    </div>
+  </div>
+</div>
+</div>

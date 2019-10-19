@@ -1,0 +1,18 @@
+<div class="card">
+  <div class="card-body">
+      <h5>About</h5>
+    <div class="d-block  w-100">
+        <div
+          *ngIf="urlviwerService.loading_viewer==true || (urlviwerService.PPVIEWER.profile.about!='' && urlviwerService.PPVIEWER.profile.about!=null) || urlviwerService.PPVIEWER.profile.my_profile==true"
+          class="row my-2">
+
+          <div *ngIf="urlviwerService.PPVIEWER.profile.about!='' && urlviwerService.PPVIEWER.profile.about!=null"
+            class="col-12">
+            <p>
+              {{urlviwerService.PPVIEWER.profile.about}}
+            </p>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>

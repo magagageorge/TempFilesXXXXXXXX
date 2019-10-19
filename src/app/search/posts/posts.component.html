@@ -1,0 +1,46 @@
+<app-wf-navbar class="d-none d-md-block d-lg-block"></app-wf-navbar>
+<app-wf-navbar-summary [back_route]="parent_route" [display_text]="title" class="d-block d-md-none d-lg-none"></app-wf-navbar-summary>      
+  
+  <app-wf-main-content>
+  
+  <div  class="container-fluid px-md-5 px-lg-5" style="min-height: 100%;">
+  <div class="row" style="min-height: 80vh;">
+    <div class="col-xs-12 col-sm-12 col-md-4  d-none d-md-block d-lg-block col-lg-4">
+      <app-wf-right-sidebar></app-wf-right-sidebar>
+    </div>    
+  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6  p-0">
+  <div class="card w-100">
+    <div class="card-header py-0 px-0">
+      <app-search-nav-widget [tab]="tab_name"></app-search-nav-widget>
+    </div>
+    <div class="card-body p-0">
+        <div *ngIf="!searchService.POSTS.length && searchService.search_query.trim().length>2 && (searchService.loading_posts==false && searchService.loading_search==false)" class="d-block p-0">
+            <div class="row m-0">
+              <div class="col-12 text-center">
+                 <h5><ng-container i18n>No results found for</ng-container> {{searchService.search_query.trim()}}</h5>
+                <p i18n>The term you entered did not bring up any results. You may have mistyped your term or content privacy could be protecting you from some potentially sensitive content.</p>
+                </div>
+            </div>
+        </div>  
+    </div>
+  </div>
+
+  <div class="w-100 d-block m-0 p-0" >
+      <div *ngIf="searchService.POSTS.length" class="row p-0 m-0">
+          <div   infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="searchService.onPostsScrollDown()" [scrollWindow]="true" id="scroller" *ngFor="let feed of searchService.POSTS" class="col-12 m-0 px-0">
+             <app-simple-feed-card-widget [feed]="feed"></app-simple-feed-card-widget>
+          </div>
+       </div>
+  </div>
+  <div *ngIf="searchService.loading_posts || searchService.loading_search" class="row w-100 p-0 m-1">
+      <div class="col-12 text-center">
+        <span class="fa fa-spinner fa-spin"></span>
+      </div>
+   </div> 
+  </div>
+  </div>
+  </div>
+  </app-wf-main-content>
+  <!--Main layout-->
+  <app-wf-footer></app-wf-footer>
+  

@@ -1,0 +1,20 @@
+        <!-- Sidebar navigation -->
+        <div class="d-block w-100">
+        <ul  class="list-group list-group-flush">
+            <li class="list-group-item  p-1">
+              <a routerLink="/{{profileService.MYPROFILE.url}}" class="w-100">
+                <img src="{{profileService.MYPROFILE.avatar}}" class="rounded-circle z-depth-0" style="width:50px;height:50px;">
+                 <span class="px-2">{{profileService.MYPROFILE.name}}</span>
+              </a>
+            </li>         
+            <li class="list-group-item p-1 bg-gray">Help & Settings</li>
+            <li class="list-group-item"><a routerLink="/settings"><i class="fa fa-gear"></i> Settings</a></li>          
+            <li class="list-group-item"><a routerLink="/tos" class="waves-effect waves-light">Terms of Service</a></li>
+            <li class="list-group-item d-none"><a routerLink="/privacy" class="waves-effect waves-light">Privacy Policy</a></li>			
+            <li class="list-group-item"><a routerLink="/logout" class="waves-effect waves-light">Log Out</a></li>		            			 
+        </ul>
+        <div class="p-2">
+            <strong>Epanko &copy; 2018</strong>
+        </div>	
+      </div>
+      <!--/. Sidebar navigation -->

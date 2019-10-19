@@ -1,0 +1,21 @@
+<div class="row">
+    <div class="col-12">
+      <div *ngIf="urlviwerService.PPVIEWER.profile.experiences.length" class="d-block">
+        <div *ngFor="let experience of urlviwerService.PPVIEWER.profile.experiences;let i=index;" class="w-100">
+          <span class="fa fa-briefcase"></span><span>&nbsp;</span><span>{{experience.company_name}}</span>
+        </div>
+      </div>
+      <div *ngIf="urlviwerService.PPVIEWER.profile.educations.length" class="d-block">
+        <div *ngFor="let education of urlviwerService.PPVIEWER.profile.educations;let i=index;" class="w-100">
+          <span class="fa fa-graduation-cap"></span><span>&nbsp;</span><span>{{education.institution_name}}</span>
+        </div>
+      </div>
+      <div *ngIf="urlviwerService.PPVIEWER.profile.no_connections>0" class="d-block">
+        <span class="fa fa-users"></span><span>&nbsp;</span>{{urlviwerService.PPVIEWER.profile.no_connections}}
+        <ng-container i18n>Connections</ng-container>
+      </div>
+      <div *ngIf="urlviwerService.loading_viewer" class="d-block text-center">
+        <span class="fa fa-spinner fa-pulse fa-fw"></span>
+      </div>
+    </div>
+  </div>

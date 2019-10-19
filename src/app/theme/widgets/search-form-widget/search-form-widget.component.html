@@ -1,0 +1,21 @@
+<div class="w-100 h-100 position-ralative">
+<div class="d-block search-form">
+    <input type="text" class="form-control form-rounded" (focus)="Onfocus()"  (blur)="Outfocus()" (keyup)="searchService.loadSearch()" placeholder="Search Epanko" [(ngModel)]="searchService.search_query">
+    <button class="search-input-icon search-icon" (click)="searchService.searchAll()">
+        <span class="fa fa-search"></span>
+    </button>
+</div>
+<div *ngIf="search_on_focus==true || results_hovered==true" class="w-100 position-relative d-block">
+  <div *ngIf="searchService.PEOPLE.length || searchService.loading_search==true" class="search-form-preview" (mouseover)="resultsHovered($event)" (mouseleave)="resultsUnHovered($event)">
+    <div class="w-100 container-fluid p-0" style="max-height: 80vh;overflow-y: scroll;">
+        <app-quick-search-results-widget></app-quick-search-results-widget>
+    </div>
+    <div *ngIf="searchService.PEOPLE.length" class="w-100">
+        <div class="row m-0">
+            <div class="col-12 text-center">
+              <a routerLink="/search/top/{{searchService.search_query}}" class="text-primary"><ng-container>See all  results for </ng-container> {{searchService.search_query}}</a>
+            </div>
+        </div>      
+    </div>
+  </div>
+</div>

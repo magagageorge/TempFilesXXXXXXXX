@@ -1,0 +1,89 @@
+<app-wf-social-header></app-wf-social-header>
+    <!--Double navigation-->
+    <header class="container-fluid px-0">
+        <!-- Navbar -->
+        <nav class="navbar fixed-top px-1 px-md-5 px-lg-5 m-0">
+            <!-- SideNav slide-out button -->
+            <ul class="nav navbar-nav nav-flex-icons float-left container-fluid w-100 px-0 px-md-5 px-lg-5 m-0" style="margin-left:1px;margin-right:1px;">
+                <li *ngIf="is_authenticated==true" class="nav-item d-block d-md-none d-lg-none float-left">
+                <a  routerLink="/feed"  class="nav-link waves-effect waves-light" style="color:#fff;"><i class="fa fa-home"></i></a>
+                </li>
+                <li  *ngIf="is_authenticated==true" class="nav-item d-none d-md-block d-lg-block  float-left" style="max-width: 150px;">
+                <a class="nav-link navbar-brand px-0 mx-0" routerLink="/feed" style="font-weight:bold;color:#fff;font-size:20px;">
+                    Epanko
+                </a>
+                </li> 
+			  <li *ngIf="is_authenticated==true;" class="nav-item d-block float-left ml-1" style="max-width: 150px;">
+                    <a  routerLink="/mynetwork" class="nav-link waves-effect waves-light"><span class="fa fa-connectdevelop"></span> <span class="clearfix d-none d-sm-inline-block">Network</span></a>
+              </li>				  
+			  <li *ngIf="is_authenticated==true;" class="nav-item  d-none  float-left ml-1"  style="max-width: 150px;">
+                    <a  routerLink="/messages" class="nav-link waves-effect waves-light"><span class="fa fa-envelope"><span [class.d-none]="notificationService.hide_notification_bubble" id="notification_count">{{notificationService.new_notifications}}</span></span> <span class="clearfix d-none d-sm-inline-block">Messages</span></a>
+              </li>				  
+			  <li *ngIf="is_authenticated==true;" class="nav-item  d-block  float-left ml-1"  style="max-width: 150px;">
+                    <a  routerLink="/notifications" class="nav-link waves-effect waves-light"><span class="fa fa-bell-o"><span [class.d-none]="notificationService.hide_notification_bubble" id="notification_count">{{notificationService.new_notifications}}</span></span> <span class="clearfix d-none d-sm-inline-block">Notifications</span></a>
+              </li>
+			  <li *ngIf="is_authenticated==true;" class="nav-item d-sm-none">
+                <a  routerLink="/search" class="nav-link waves-effect waves-light"><span class="fa fa-search"></span></a>
+              </li>
+			  <li *ngIf="is_authenticated==true;" class="nav-item d-none d-md-block">
+                <div class="w-100  h-100">  <app-search-form-widget></app-search-form-widget></div>
+              </li> 
+			  <li *ngIf="is_authenticated==true;" class="nav-item d-md-none d-lg-none float-right">
+                <a  routerLink="/nav" class="nav-link waves-effect waves-light"><span class="fa fa-list-ul"></span></a>
+              </li>              
+              <li *ngIf="is_authenticated==true;" ngbDropdown placement="bottom-right" class="nav-item nav-item avatar dropdown nav-user d-none d-md-block d-lg-block">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-5" data-toggle="dropdown" ngbDropdownToggle>
+					<img  style="max-height:50px;" src="{{profileService.MYPROFILE.avatar}}" class="img-fluid rounded-circle z-depth-0">
+					</a>
+                    <div class="dropdown-menu dropdown-menu-righ" style="width:300px;" ngbDropdownMenu>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item px-0 py-1">
+                                <a routerLink="/{{profileService.MYPROFILE.url}}" class="p-0 m-0 text-decoration-none" style="text-decoration: none;">
+                                <div class="row p-0 m-0">
+                                 <div class="col-3 p-0">
+                                    <img  style="max-height:60px;" src="{{profileService.MYPROFILE.avatar}}" class="img-fluid rounded-circle z-depth-0 m-0">
+                                 </div>
+                                 <div class="col-9 p-0">
+                                     <div class="d-inline-block w-100 m-0 p-0 font-weight-bold text-truncate">
+                                       {{profileService.MYPROFILE.firstname}} {{profileService.MYPROFILE.lastname}}
+                                     </div>
+                                     <div class="d-inline-block w-100  m-0 p-0 text-muted" style="font-size:90%;">
+                                            {{profileService.MYPROFILE.short_info}}
+                                    </div>
+                                 </div>
+                                </div>
+                                <div class="w-100 d-flex justify-content-center py-1">
+                                      <div class="dropdown-item w-100 text-center text-info py-1">View Profile</div>
+                                </div>
+                            </a>
+                            </li>
+                            <li class="list-group-item p-0">
+                                <a class="dropdown-item" routerLink="/settings/account">Settings and Privacy</a>
+                            </li>
+                            <li class="list-group-item p-0">
+                                <a class="dropdown-item" routerLink="/help"> Help</a>
+                            </li>                            
+                            <li class="list-group-item p-0">
+                                <a class="dropdown-item" routerLink="/logout">Logout</a>  
+                            </li>
+                          </ul>
+                        
+                        
+                                              
+                    </div>
+               </li>
+               <ng-container *ngIf="is_authenticated!=true">
+               <li class="nav-item w-50  float-left">
+                <a class="nav-link navbar-brand  px-0 mx-0" routerLink="/" style="font-weight:bold;color:#fff;font-size:20px;">
+                    Epanko 
+                </a>
+                </li>               
+               <li class="nav-item" *ngFor="let login_menu of login_menus">
+				<a routerLink="/{{login_menu.link}}" class=" nav-link waves-effect waves-light">{{login_menu.title}}</a>
+                </li>
+              </ng-container>                                                	                
+            </ul>				
+        </nav>
+        <!-- /.Navbar -->
+    </header>
+    <!--/.Double navigation-->

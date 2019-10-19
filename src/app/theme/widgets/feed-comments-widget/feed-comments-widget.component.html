@@ -1,0 +1,354 @@
+<div class="row mx-0 px-2" #feedComments_{{feedId}}>
+        <div *ngIf="feed.no_comments < 4 || feed.comment_mode==true" class="col-12 mx-0">
+                <div class="row align-top">
+
+                        <div class="col-2 col-md-1 col-lg-1 d-block p-1 align-top mt-0"
+                                style="float:left;max-width: 50px;">
+                                <img class="rounded-circle img-fluid w-100 py-1"
+                                        src="{{profileService.MYPROFILE.avatar}}" alt="">
+                        </div>
+                        <div class="col px-0 py-1 align-top" style="float:right;">
+                                <form (ngSubmit)="commentService.comment(feed)" #commentForm_feedId="ngForm"
+                                        class="w-100 mx-0 align-top my-auto px-0 py-1"
+                                        style="position:relative;min-height:50px;">
+
+                                        <div class="w-100 h-100 form-control text-break form-text form-rounded align-middle my-0"
+                                                id="feed_comment_box_{{feedId}}" [(ngModel)]="feed.comment_input_box"
+                                                #ctrl="ngModel" name="message" contenteditable="true"
+                                                data-text="Write your Comment">
+                                        </div>
+                                        <div *ngIf="feed.comment_image_preview==null"
+                                                (click)="commentService.CommentImageUpload(feed)" class="align-middle"
+                                                style="position:absolute;top:12px;right:0px;">
+                                                <span class="text-primary p-2 m-1"
+                                                        style="cursor: pointer;font-size: 120%"><span
+                                                                class="fa fa-camera"></span></span>
+                                        </div>
+                                        <div class="d-block w-100">
+                                                <div *ngIf="feed.comment_image_preview!=null"
+                                                        class="pull-left m-1 d-block post-image-preview-item"
+                                                        style="position:relative;width:100px;height:100px;">
+                                                        <span (click)="commentService.RemoveCommentPreviewImage(feed)"
+                                                                class="round-btn" title="Remove"
+                                                                style="z-index:3001; width:20px;height:20px;padding:1px;cursor:pointer;position:absolute;top:-5px;right:-5px;">
+                                                                <span class="fa fa-close"></span>
+                                                        </span>
+                                                        <div class="h-100 w-100 p-0" style="overflow:hidden;">
+                                                                <img [src]="feed.comment_image_preview.url"
+                                                                        class="rounded m-0"
+                                                                        [class.w-100]="feed.comment_image_preview.width<=feed.comment_image_preview.height"
+                                                                        [class.h-100]="feed.comment_image_preview.width>=feed.comment_image_preview.height">
+                                                        </div>
+                                                        <div class="img-preview-overlay"> &nbsp;</div>
+                                                </div>
+                                        </div>
+                                        <div *ngIf="(feed.comment_input_box!='' && feed.comment_input_box!=null) || feed.comment_image_preview!=null"
+                                                class="input-group w-100 pull-right">
+                                                <button type="submit"
+                                                        class="btn  btn-primary btn-sm p-1 text-primary pull-right mr-1"><span
+                                                                class="fa fa-send"></span> Post</button>
+                                        </div>
+                                        <input class="d-none" type='file' name="upload_files"
+                                                (change)="commentService.onSelectFile($event,feed)"
+                                                id='comment_upload_input_{{feed.id}}'>
+                                </form>
+                        </div>
+                </div>
+        </div>
+
+        <div class="d-block w-100 px-2" *ngIf="feed.loading_new_comment">
+                <div class="w-100 align-middle py-2 text-center"> <span class="fa fa-circle-o-notch fa-spin"></span>
+                </div>
+        </div>
+
+        <div *ngIf="feedComments.length" class="col-12">
+                <div *ngFor="let feedComment of feedComments" class="row my-1"
+                        id="comment_item_{{feedComment.object_id}}_{{feedComment.id}}">
+                        <div class="col-12 px-0">
+                                <div *ngIf="!feedComment.edit_mode" class="user-block">
+                                        <a routerLink="/{{feedComment.profile.url}}"
+                                                (mouseover)="hovercardService.OnHover($event,feedComment.profile)"
+                                                (click)="hovercardService.OnMouseOut($event);urlViewerService.setProfile(feedComment.profile);"
+                                                (mouseleave)="hovercardService.OnMouseOut($event)">
+                                                <img class="rounded-circle img-fluid my-1"
+                                                        src="{{feedComment.profile.avatar}}" alt="">
+                                        </a>
+                                        <div class="description" style="position: relative;">
+                                                <div class="d-block w-100 pl-1 font-weight-bold username"><a
+                                                                routerLink="/{{feedComment.profile.url}}"
+                                                                (mouseover)="hovercardService.OnHover($event,feedComment.profile)"
+                                                                (click)="hovercardService.OnMouseOut($event);urlViewerService.setProfile(feedComment.profile);"
+                                                                (mouseleave)="hovercardService.OnMouseOut($event)">{{feedComment.profile.name}}</a>
+                                                </div>
+                                                <div class="d-block w-100 pl-1 short-info text-truncate"
+                                                        style="padding-right:30px;">
+                                                        {{feedComment.profile.short_info}}
+                                                </div>
+                                                <div class="comment-message d-block w-100 pl-1"
+                                                        style="padding-right:30px;">
+                                                        <p class="w-100 m-0">
+                                                                {{feedComment.message}}
+                                                        </p>                                                      
+                                                        <div *ngIf="feedComment.pictures.length" class="d-block p-0"
+                                                                [ngStyle]="{'width':''+container_width+'px','background-image':'url(' + imageIconsService.loadingPictureImage + ')'}"
+                                                                style="background-size: 100%;background-repeat: no-repeat; ">
+                                                                <div *ngFor="let feed_image of feedComment.pictures"
+                                                                        [ngStyle]="{'background-image':'url(' + feed_image.data.url + ')','min-height':''+getPictureHeight(feed_image.data.width,feed_image.data.height)+'px'}"
+                                                                        class="d-block w-100 h-100 m-0 p-0"
+                                                                        style="background-size: 100%;background-repeat: no-repeat;border-radius:5px;">
+
+                                                                </div>
+                                                        </div>
+
+                                                        <div *ngIf="feedComment.sending!=true"
+                                                                class="w-100 my-1 comment-stats">
+                                                                <span class="font-weight-bold" style="cursor:pointer"
+                                                                        *ngIf="feedComment.i_like==true"
+                                                                        (click)="commentService.commentLike(feedComment,'unlike')"
+                                                                        class="btn-liked"><span
+                                                                                class="fa fa-heart"></span><span>&nbsp;</span>
+                                                                        <span i18n>Love</span></span>
+                                                                <span style="cursor:pointer"
+                                                                        *ngIf="feedComment.i_like!=true"
+                                                                        (click)="commentService.commentLike(feedComment,'like')"><span
+                                                                                class="fa fa-heart-o"></span><span>&nbsp;</span>
+                                                                        <span i18n>Love</span></span>
+                                                                <span>&nbsp;&nbsp;</span>
+                                                                <span (click)="commentService.showPostLikes(feedComment.id,feedComment.no_likes)"
+                                                                        *ngIf="feedComment.no_likes>0"
+                                                                        style="cursor:pointer"> {{feedComment.no_likes}}
+                                                                        <span *ngIf="feedComment.no_likes>1"
+                                                                                i18n>Loves</span><span
+                                                                                *ngIf="feedComment.no_likes==1"
+                                                                                i18n>Love</span> </span>
+
+                                                                <span>&nbsp;&nbsp;</span>
+                                                                <span class="font-weight-bold" style="cursor:pointer"
+                                                                        (click)="commentService.setToReplyComment(feedComment)"><span
+                                                                                class="fa fa-comment-o"></span><span>&nbsp;</span><span
+                                                                                i18n>Reply</span></span><span>&nbsp;&nbsp;&nbsp;</span>
+
+                                                                <span *ngIf="feedComment.no_replies>0"
+                                                                        style="cursor:pointer">
+                                                                        {{feedComment.no_replies}}
+                                                                        <span *ngIf="feedComment.no_replies>1"
+                                                                                i18n>Replies</span><span
+                                                                                *ngIf="feedComment.no_replies==1"
+                                                                                i18n>Reply</span> </span>
+
+
+                                                                <span>&nbsp;&nbsp;&nbsp;</span>
+                                                                <span
+                                                                        title="{{feedComment.updated_at.title}}">{{feedComment.updated_at.date}}</span>
+
+
+                                                        </div>
+                                                        <div *ngIf="feedComment.sending==true" class="w-100">
+                                                                <span class="font-weight-bold">
+                                                                        <i class="fa fa-circle-o-notch fa-spin"></i>
+                                                                        <span>&nbsp;</span>
+                                                                        <i i18n>Sending...</i></span>
+                                                        </div>
+                                                </div>
+
+                                                <div class="d-block w-100 p-0 m-0">
+                                                        <div class="d-block w-100 px-2 py-2"
+                                                                *ngIf="feedComment.no_replies > feedComment.replies.length">
+                                                                <div (click)="commentService.viewMoreCommentReplies(feedComment)"
+                                                                        class="wf-link color-primary " i18n>View
+                                                                        previous
+                                                                        replies</div>
+
+                                                                <div *ngIf="feedComment.loading_replies"
+                                                                        class="w-100 align-middle py-2 text-center">
+                                                                        <span
+                                                                                class="fa fa-circle-o-notch fa-spin"></span>
+                                                                </div>
+                                                        </div>
+
+                                                        <app-feed-comment-replies-widget [commentId]="feedComment.id"
+                                                                [feedComment]="feedComment"
+                                                                [commentReplies]="feedComment.replies">
+                                                        </app-feed-comment-replies-widget>
+
+                                                        <div class="d-block w-100 px-2"
+                                                                *ngIf="feedComment.loading_new_reply">
+                                                                <div class="w-100 align-middle py-2 text-center"> <span
+                                                                                class="fa fa-circle-o-notch fa-spin"></span>
+                                                                </div>
+                                                        </div>
+
+                                                </div>
+
+                                                <div *ngIf="feedComment.replying" class="d-block w-100 px-0">
+                                                        <div class="row mx-0 px-0 align-items-top">
+
+                                                                <div class="col-1 d-block d-sm-block d-lg-block p-1 align-top mt-0"
+                                                                        style="float:left;min-width: 40px;">
+                                                                        <img class="rounded-circle img-fluid w-100 mx-0 align-middle my-1"
+                                                                                style="min-width: 35px;min-height:35px;"
+                                                                                src="{{profileService.MYPROFILE.avatar}}"
+                                                                                alt="">
+                                                                </div>
+                                                                <div class="col px-0 py-1" style="float:right;">
+                                                                        <form class="w-100 mx-0 my-auto px-0 py-1"
+                                                                                style="position:relative;min-height:50px;">
+                                                                                <div class="w-100 h-100 form-control text-break form-rounded align-middle my-0 pr-4"
+                                                                                        id="comment_reply_box_{{feedComment.object_id}}_{{feedComment.id}}"
+                                                                                        [(ngModel)]="feedComment.reply_box"
+                                                                                        #ctrl="ngModel" name="message"
+                                                                                        contenteditable="true"
+                                                                                        data-text="Add a reply">
+                                                                                </div>
+                                                                                <div class="d-none align-middle"
+                                                                                        style="position:absolute;top:12px;right:0px;">
+                                                                                        <span class="text-primary p-2 m-1"
+                                                                                                style="cursor: pointer;font-size: 120%"><span
+                                                                                                        class="fa fa-camera"></span></span>
+                                                                                </div>
+                                                                                <div
+                                                                                        class="d-block w-100 px-1 py-0 pull-right">
+                                                                                        <button *ngIf="feedComment.reply_box!=''"
+                                                                                                (click)="ReplyComment(feedComment)"
+                                                                                                class="btn  btn-primary btn-sm p-1 text-primary pull-left mx-0 my-2">
+                                                                                                Reply</button>
+                                                                                </div>
+                                                                        </form>
+                                                                </div>
+                                                        </div>
+                                                </div>
+
+
+
+
+
+
+
+                                                <div class="p-0" style="position:absolute;right:0px;top:0px;">
+                                                        <div class="dropdown btn-group" ngbDropdown
+                                                                placement="bottom-right">
+                                                                <a class="p-1" ngbDropdownToggle></a>
+                                                                <ul class="dropdown-menu  dropdown-menu-left"
+                                                                        ngbDropdownMenu
+                                                                        style="position:absolute;left:10px;">
+                                                                        <li *ngIf="feedComment.my_comment!=true"
+                                                                                class="dropdown-item"><a
+                                                                                        href="javascript:void(0);"
+                                                                                        (click)="commentService.reportCommentContent(feedComment.id)"><span
+                                                                                                class="fa fa-flag-o"></span><span>&nbsp;</span>
+                                                                                        <ng-container i18n>Report this
+                                                                                        </ng-container>
+                                                                                </a></li>
+                                                                        <li *ngIf="feedComment.my_comment==true"
+                                                                                class="dropdown-item"><a
+                                                                                        href="javascript:void(0);"
+                                                                                        (click)="commentService.setToEditComment(feedComment)"><span
+                                                                                                class="fa fa-edit"></span><span>&nbsp;</span>
+                                                                                        <ng-container i18n>Edit
+                                                                                        </ng-container>
+                                                                                </a></li>
+                                                                        <li *ngIf="feedComment.my_comment==true"
+                                                                                class="dropdown-item"><a
+                                                                                        href="javascript:void(0);"
+                                                                                        (click)="commentService.confirmDeleteComment(feedComment)"><span
+                                                                                                class="fa fa-delete"></span><span>&nbsp;</span>
+                                                                                        <ng-container i18n>Delete
+                                                                                        </ng-container>
+                                                                                </a></li>
+                                                                </ul>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                </div>
+
+
+
+
+
+
+
+                                <div *ngIf="feedComment.edit_mode" class="col-12 mx-0">
+                                        <div class="row align-top">
+
+                                                <div class="col-md-1 col-lg-1 d-none d-sm-block d-lg-block p-1 align-top mt-0"
+                                                        style="float:left;max-width: 50px;">
+                                                        <img class="rounded-circle img-fluid w-100 m-0"
+                                                                src="{{profileService.MYPROFILE.avatar}}" alt="">
+                                                </div>
+                                                <div class="col-xs-12 col-sm-12 col-md-11 col-lg-11 px-0 py-1 align-top"
+                                                        style="float:right;">
+                                                        <form (ngSubmit)="commentService.commentEdit(feedComment)"
+                                                                #commentEditForm_{{feedComment.id}}="ngForm"
+                                                                class="w-100 mx-0 align-top my-auto px-0 py-1"
+                                                                style="position:relative;min-height:50px;">
+                                                                <div class="w-100 h-100 form-control text-break form-rounded align-middle my-0"
+                                                                        id="comment_edit_box_{{feedComment.id}}"
+                                                                        [(ngModel)]="feedComment.edit_input_content"
+                                                                        #ctrl="ngModel" name="message"
+                                                                        contenteditable="true"
+                                                                        data-text="Write your Comment">
+                                                                </div>
+                                                                <div *ngIf="!feedComment.preview_pictures.length"
+                                                                        (click)="commentService.CommentEditImageUpload(feedComment)"
+                                                                        class="align-middle"
+                                                                        style="position:absolute;top:12px;right:0px;">
+                                                                        <span class="text-primary p-2 m-1"
+                                                                                style="cursor: pointer;font-size: 120%"><span
+                                                                                        class="fa fa-camera"></span></span>
+                                                                </div>
+
+                                                                <div *ngIf="feedComment.preview_pictures.length"
+                                                                        class="d-block w-100">
+                                                                        <div *ngFor="let preview of feedComment.preview_pictures" class="pull-left m-1 d-block post-image-preview-item"
+                                                                                style="position:relative;width:100px;height:100px;">
+                                                                                <span (click)="commentService.RemoveCommentEditPreviewImage(feedComment,preview)"
+                                                                                        class="round-btn" title="Remove"
+                                                                                        style="z-index:3001; width:20px;height:20px;padding:1px;cursor:pointer;position:absolute;top:-5px;right:-5px;">
+                                                                                        <span
+                                                                                                class="fa fa-close"></span>
+                                                                                </span>
+                                                                                <div class="h-100 w-100 p-0"
+                                                                                        style="overflow:hidden;">
+                                                                                        <img [src]="preview.url"
+                                                                                                class="rounded m-0"
+                                                                                                [class.w-100]="preview.width<=preview.height"
+                                                                                                [class.h-100]="preview.width>=preview.height">
+                                                                                </div>
+                                                                                <div class="img-preview-overlay"> &nbsp;
+                                                                                </div>
+                                                                        </div>
+                                                                </div>
+
+                                                                <div class="input-group w-100 pull-right">
+                                                                        <button type="submit"
+                                                                                [class.disabled]="feedComment.message==feedComment.edit_input_content && feedComment.pictures.length && feedComment.upload_file && feedComment.pictures[0].data.url==feedComment.preview_pictures[0].url"
+                                                                                class="btn  btn-primary btn-sm p-1 text-primary pull-right mr-1">
+                                                                                <span i18n>Save Changes</span></button>
+                                                                        <span (click)="commentService.CancelcommentEdit(feedComment)"
+                                                                                class="btn btn-outline-default btn-sm p-1 text-primary pull-right mr-1"
+                                                                                i18n>
+                                                                                Cancel</span>
+                                                                </div>
+                                                                <input class="d-none" type='file' name="upload_files"
+                                                                        (change)="commentService.onSelectFileEditComment($event,feedComment)"
+                                                                        id='comment_edit_upload_input_{{feedComment.id}}'>
+                                                        </form>
+                                                </div>
+                                        </div>
+                                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+                        </div>
+                </div>
+        </div>
+</div>

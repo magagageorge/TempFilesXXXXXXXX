@@ -1,0 +1,76 @@
+<app-wf-navbar class="d-none d-md-block d-lg-block"></app-wf-navbar>
+<app-wf-navbar-summary [back_route]="parent_route" [display_text]="title" class="d-block d-md-none d-lg-none"></app-wf-navbar-summary>    
+
+  <app-wf-main-content>
+  
+    <div  class="container-fluid" style="min-height: 100%;">
+     <div class="row">
+     <div class="col-12 col-md-10 col-lg-10  mt-1 mx-auto px-auto">
+       <div class="w-100 h-100 d-block"> 
+    <h4 class="m-0 p-1" i18n>These are the people you know in Epanko</h4>
+     <h6  class="m-0 p-1" i18n>Add them to your network now,to drive more opportunities from within the people you know.</h6>
+   </div>
+   </div>
+  <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 mt-1 mx-auto px-auto">
+      <div class="card w-100 mx-0 px-0">
+          <div class="card-header  py-0">
+          </div>
+          <div *ngIf="contactsService.CONNECT_CONTACTS.length" class="card-body p-1">
+                <div class="row">
+                   <div class="col-12">
+                        <span class="form-check m-1 p-0 d-inline-block">
+                                <input type="checkbox" class="form-check-input" (change) ="contactsService.SelectAllConnectContacts($event)" id="contact_select_all" [checked]="(contactsService.SELECTED_CONTACTS.length && contactsService.SELECTED_CONTACTS.length==contactsService.CONNECT_CONTACTS.length) ? 'checked' : ''">
+                                <label for="contact_select_all" i18n>Select all</label><span>&nbsp;</span><span i18n>Contacts</span><span *ngIf="contactsService.CONNECT_CONTACTS.length">({{contactsService.CONNECT_CONTACTS.length}})</span>
+                        </span>
+                        <span class="d-inline-block">
+                            <button  (click)="submit()" class="btn btn-sm btn-primary btn-rounded waves-effect"> <span class="fa fa-plus-circle"></span><span>&nbsp;</span> <ng-container>Add to my network</ng-container> <span *ngIf="contactsService.SELECTED_CONTACTS.length">({{contactsService.SELECTED_CONTACTS.length}})</span></button> <button (click)="redirect_to_invites()" class="btn btn-sm btn-outline-default  btn-rounded waves-effect" i18n>Skip</button>
+                        </span>
+                   </div>
+                </div>
+                <div class="row p-0 m-0">
+                  <div *ngFor="let contact of contactsService.CONNECT_CONTACTS;let i=index;" class="col-12 col-md-4 m-0 p-0">
+                            <div *ngIf="i<200" class="contact-card d-block p-0 m-1">
+                                    <div class="row m-0">
+                                       <div class="col-1 text-center p-1">
+                                           <div class="form-check  text-center  m-0 p-0">
+                                               <input type="checkbox" name="{{contact.profile.user_id}}" [checked]="(contactsService.SELECTED_CONTACTS.length && (contactsService.checkSelectedContact(contact.profile.user_id)>-1) ? 'checked' : '')" (change) ="contactsService.UpdateSelectedConnectContact($event)" class="form-check-input" id="{{contact.profile.user_id}}">
+                                               <label for="{{contact.profile.user_id}}"></label>
+                                           </div>
+                                       </div> 
+                                       <div class="col-11 p-1 align-middle">
+                                           <div *ngIf="contact.profile" class="d-block h-100 p-0 m-0 align-middle">
+                                            <div class="row h-100 m-0 p-0">
+                                             <div class="col-2 p-0">
+                                               <img src="{{contact.profile.avatar}}" class="img-fluid rounded-circle m-0">
+                                             </div>
+                                             <div class="col-10 py-0 px-1">
+                                               <span class="d-block w-100 text-truncate"><strong>{{contact.profile.name}}</strong></span> 
+                                               <span class="d-block w-100 text-truncate">{{contact.profile.short_info}}</span>  
+                                             </div>
+                                            </div>
+                                           </div>
+                                         
+                                       </div>
+                                    </div>
+                                   </div>                                                         
+                  </div>
+               </div>
+              </div> 
+              <div *ngIf="contactsService.loading_connect_contacts==true && !contactsService.CONNECT_CONTACTS.length" class="card-body py-0 text-center">
+                <span class="fa fa-spinner fa-pulse fa-spin"></span>
+              </div>
+              <div *ngIf="contactsService.loading_connect_contacts==false && !contactsService.CONNECT_CONTACTS.length" class="card-body py-0 text-center">
+                  <span i18n>Currently you have no contact to connect.</span>
+              </div>
+              <div *ngIf="contactsService.done_loading_connect_contacts==true && !contactsService.CONNECT_CONTACTS.length">
+                  {{redirect_to_invites()}}
+              </div>
+
+        </div>
+  </div>
+  </div>
+  </div>
+  </app-wf-main-content>
+  <!--Main layout-->
+  <app-wf-footer></app-wf-footer>
+  

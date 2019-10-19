@@ -1,0 +1,4 @@
+#Thu Aug 01 16:45:30 EAT 2019
+base.0=D\:\\Projects\\Wfmobile\\platforms\\android\\app\\build\\intermediates\\transforms\\dex\\release\\0
+path.0=classes.dex
+renamed.0=classes.dex

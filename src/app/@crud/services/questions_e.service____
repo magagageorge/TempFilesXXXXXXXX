@@ -1,0 +1,125 @@
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable} from 'rxjs/Observable';
+import { of } from 'rxjs/observable/of';
+import { catchError, map, tap } from 'rxjs/operators';
+import { Question } from '../models/question-model';
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
+
+@Injectable()
+export class QuestionsService {
+  questionsUrl = 'http://localhost/legal/frontend/web/questions';  // URL to web api
+  //crudconfigUrl = 'http://localhost/api/assets/crudconfig.json'; 
+  question:Question;
+  constructor(private http: HttpClient){ }
+  
+  
+  /** GET Questions from the server */
+  getAll(): Observable<Question[]> {
+    return this.http.get<Question[]>(this.questionsUrl).pipe(
+        tap(question => this.log('fetched questions')),
+        catchError(this.handleError('getAll', []))
+      );
+  }
+  
+  
+  /** GET Questions from the server */
+  getMine(): Observable<Question[]> {
+    return this.http.get<Question[]>(this.questionsUrl+'/mine').pipe(
+        tap(questions => this.log('fetched questions')),
+        catchError(this.handleError('getAll', []))
+      );
+  }
+  
+  /** GET question by id. Will 404 if id not found */
+  getOne(id: number): Observable<Question> {
+    const url = '${this.questionsUrl}/${id}';
+    return this.http.get<Question>(url).pipe(
+      tap(_ => this.log('fetched question id=${id}')),
+      catchError(this.handleError<Question>('getOne id=${id}'))
+    );
+  }
+ 
+  /** POST: add a new question to the server */
+  create(question: Question): Observable<Question> {
+    return this.http.post<Question>(this.questionsUrl+'/create', question, httpOptions).pipe(
+      tap((question: Question) => this.log('added question w/ id=${question.id}')),
+      catchError(this.handleError<Question>('create'))
+    );
+  }
+  
+ 
+  /** PUT: update the question on the server */
+  update(question: Question): Observable<Question> {
+    return this.http.put<Question>(this.questionsUrl+'/update', question, httpOptions).pipe(
+      tap(_ => this.log('updated question id=${question.id}')),
+      catchError(this.handleError<any>('update'))
+    );
+  }
+ 
+
+  /** DELETE: delete the question from the server */
+  delete(question: Question | number): Observable<Question> {
+    const id = typeof question === 'number' ? question : question.id;
+    const url = '${this.questionsUrl}/${id}';
+ 
+    return this.http.delete<Question>(url, httpOptions).pipe(
+      tap(_ => this.log('deleted question id=${id}')),
+      catchError(this.handleError<Question>('delete'))
+    );
+  }
+ 
+  /** GET question by id. Return 'undefined' when id not found */
+  getOneNo404<Data>(id: number): Observable<Question> {
+    const url = '${this.questionsUrl}/?id=${id}';
+    return this.http.get<Question[]>(url)
+      .pipe(
+        map(questions => questions[0]), // returns a {0|1} element array
+        tap(h => {
+          const outcome = h ? 'fetched' : 'did not find';
+          this.log('${outcome} question id=${id}');
+        }),
+        catchError(this.handleError<Question>('getOne id=${id}'))
+      );
+  }
+ 
+  /* GET questions whose name contains search title */
+  search(title: string): Observable<Question[]> {
+    if (!title.trim()) {
+      // if not search title, return empty question array.
+      return of([]);
+    }
+    return this.http.get<Question[]>('${this.questionsUrl}/?name=${title}').pipe(
+      tap(_ => this.log('found questions matching "${title}"')),
+      catchError(this.handleError<Question[]>('search', []))
+    );
+  }
+ 
+  /**
+   * Handle Http operation that failed.
+   * Let the app continue.
+   * @param operation - name of the operation that failed
+   * @param result - optional value to return as the observable result
+   */
+  private handleError<T> (operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+ 
+      // TODO: send the error to remote logging infrastructure
+      console.error(error); // log to console instead
+ 
+      // TODO: better job of transforming error for user consumption
+      this.log('${operation} failed: ${error.message}');
+ 
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
+  }
+ 
+  /** Log a QuestionService message with the MessageService */
+  private log(message: string) {
+    //this.messageService.add('QuestionsService: ' + message);
+  }
+}

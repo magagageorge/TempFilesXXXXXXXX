@@ -1,0 +1,36 @@
+<div class="mobile-overlay-post-form d-block d-md-none d-lg-none">
+    <!--Double navigation-->
+    <header class="container-fluid px-0">
+        <!-- Navbar -->
+        <nav class="navbar fixed-top px-1 px-md-5 px-lg-5 m-0">
+            <!-- SideNav slide-out button -->
+            <ul class="nav navbar-nav nav-flex-icons float-left px-1 container-fluid  m-0">
+                <li class="nav-item float-left" style="width:10%;">
+                    <div class="nav-link navbar-brand px-1 mx-0" (click)="postingService.messageBlur()"
+                        style="cursor: pointer;">
+                        <span class="fa fa-arrow-left"></span>
+                    </div>
+                </li>
+                <li class="nav-item float-left" style="width:70%;">
+                    <span class="nav-link navbar-brand  px-0 mx-0 pull-left">
+                        Create Post
+                    </span>
+                </li>
+                <li class="nav-item   float-right" style="width:20%;">
+                    <span class="nav-link navbar-brand  px-0 mx-2 pull-right" style="cursor: pointer;"
+                        (click)="postingService.post()">
+                        Post
+                    </span>
+                </li>
+            </ul>
+        </nav>
+        <!-- /.Navbar -->
+    </header>
+    <!--/.Double navigation-->
+    <app-wf-main-content>
+        <div class="p-0 m-0 mobile-overlay-post-form-content">
+            <app-post-form></app-post-form>
+        </div>
+    </app-wf-main-content>
+
+</div>

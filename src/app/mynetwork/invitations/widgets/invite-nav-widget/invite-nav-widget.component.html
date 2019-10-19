@@ -1,0 +1,16 @@
+<span class="d-block px-1" i18n>Manage Invitations</span>
+<!-- Navbar -->
+<nav class="navbar navbar-search-nav m-0 w-100 p-0">
+  <ul class="nav navbar-nav nav-flex-icons container-fluid p-0 m-0 content-justify-center">
+    <li class="nav-item d-inline-block" [class.active]="tab=='received'" style="width:49%;">
+      <a  routerLink="/mynetwork/invitations" class="nav-link waves-effect waves-light w-100 text-center">
+         <span class="clearfix">Invitations <span *ngIf="connectionsService.CONNECT_REQUESTS.length">({{connectionsService.CONNECT_REQUESTS.length}})</span></span>
+        </a>
+    </li>				  
+    <li class="nav-item d-inline-block" [class.active]="tab=='sent'" style="width:49%;">
+      <a  routerLink="/mynetwork/invitations/sent"  class="nav-link waves-effect waves-light text-center">
+         <span class="clearfix">Sent Invitations <span *ngIf="connectionsService.CONNECT_SENT_REQUESTS.length">({{connectionsService.CONNECT_SENT_REQUESTS.length}})</span></span>
+      </a>
+    </li>				                                             	                
+  </ul>				
+</nav>

@@ -1,0 +1,19 @@
+.navbar-search-nav{
+    background-color: transparent;
+}
+
+.navbar-search-nav .nav-item{
+    border-bottom: 3px solid transparent;
+}
+
+.navbar-search-nav .nav-item:hover{
+    border-bottom: 3px solid #cfa9f1;
+}
+
+.navbar-search-nav .nav-item.active{
+    border-bottom: 3px solid #8a2be2;
+}
+
+.navbar-search-nav .nav-item.active:hover{
+    border-bottom: 3px solid #8a2be2;
+}

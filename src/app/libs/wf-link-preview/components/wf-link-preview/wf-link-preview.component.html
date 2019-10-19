@@ -1,0 +1,33 @@
+  <ng-container *ngIf="!this.linkPreview && !this.loaded && this.showLoadingsProgress;then fetch else preview">
+  </ng-container>
+  <ng-template #preview>
+    <div class="card">
+      <div class="card-body wf-card-content p-0 m-0" class="cut-text">
+      <div  style="position: absolute;right:4px;top:4px;z-index: 1000;" class="round-btn" (click)="clearLinksPreview()"><span class="fa fa-close"></span></div>
+      <div *ngIf="linkPreview.image!=''" class="row m-0 p-0">
+        <div class="col-3 img-container" *ngIf="linkPreview.image">
+          <img src="{{linkPreview?.image}}" class="img-fluid">
+        </div>
+        <div class="col-9">
+          <div class="card-title">{{linkPreview?.title}}</div>
+          <div class="card-title">{{linkPreview?.description}}</div>
+        </div>        
+       </div>
+       <div *ngIf="linkPreview.image==''" class="row m-0 p-0">
+          <div class="col-12">
+              <div class="card-title">{{linkPreview?.title}}</div>
+              <div class="card-title">{{linkPreview?.description}}</div>
+          </div>
+       </div>      
+      </div>
+    </div>
+  </ng-template>  
+  <ng-template #fetch>
+    <div class="d-block text-center"  *ngIf="!this.hasError">
+        <span class="">Loading Preview...</span>
+    </div>
+  </ng-template>
+
+
+
+  

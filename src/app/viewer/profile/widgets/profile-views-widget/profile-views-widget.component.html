@@ -1,0 +1,37 @@
+<div *ngIf="urlViewerService.PPVIEWER.profile.profile_views" class="card right-pviews-widget">
+    <div class="card-body py-1">
+        <div class="row">
+            <div class="col-12 p-1">
+                <span>Also Viewed By</span>
+            </div>
+        </div>
+        <ng-container *ngFor="let profile_viewer of urlViewerService.PPVIEWER.profile.profile_views;let i=index;">
+            <div *ngIf="i<10" class="row">
+                <div class="col-2 p-1">
+                    <a class="w-100 h-100" (mouseover)="hovercardService.OnHover($event,profile_viewer.viewer)"
+                        (click)="hovercardService.OnMouseOut($event);urlViewerService.setProfile(profile_viewer.viewer);"
+                        (mouseleave)="hovercardService.OnMouseOut($event)" routerLink="/{{profile_viewer.viewer.url}}"><img
+                            class="rounded-circle img-fluid" src="{{profile_viewer.viewer.avatar}}" alt=""></a>
+                </div>
+                <div class="col-8 col-md-10 col-lg-10 py-1 px-0 align-middle">
+                    <span class="d-block p-0 m-0 align-middle h-100" style="margin-left:0%;margin-right:1%;">
+                        <a class="d-block  align-middle w-100 text-truncate py-0 my-0"
+                            (mouseover)="hovercardService.OnHover($event,profile_viewer.viewer)"
+                            (click)="hovercardService.OnMouseOut($event);urlViewerService.setProfile(profile_viewer.viewer);"
+                            (mouseleave)="hovercardService.OnMouseOut($event)" routerLink="/{{profile_viewer.viewer.url}}"
+                            profile-data="1039"><strong>{{profile_viewer.viewer.name}}</strong> <span
+                                class="url-tag">@{{profile_viewer.viewer.url}}</span></a>
+                        <span
+                            class="d-block  align-middle w-100  py-0  my-0">{{profile_viewer.viewer.title}}</span>
+                    </span>
+                </div>
+                <div *ngIf="profile_viewer.viewer.connectStatus.action=='connect'" class="col-2 p-1 d-block d-md-none d-lg-none">
+                    <button (click)="connectionsService.Connect(profile_viewer.viewer);"
+                    class="btn btn-sm btn-outline-primary waves-effect btn-rounded pull-right py-1 px-2 my-auto"><i
+                        class="fa fa-user-plus"></i><span>&nbsp;</span>
+                </button>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>

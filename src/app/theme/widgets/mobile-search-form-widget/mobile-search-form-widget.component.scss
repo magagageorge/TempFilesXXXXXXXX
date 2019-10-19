@@ -1,0 +1,29 @@
+.mobile-search-form{
+    position: relative;
+    display: block;
+
+}
+
+.mobile-search-form .form-control{
+ padding-left:40px;
+ padding-right:40px;
+}
+
+.mobile-search-form .search-input-icon{
+	position:absolute;
+	top:0px;
+	bottom:0px;
+	border:1px solid transparent;
+    background:transparent;
+    width:40px;
+    cursor: pointer;
+}
+
+.mobile-search-form .search-icon{
+    left:0px;
+}
+
+.mobile-search-form .search-clear-icon{
+    right:0px;
+}
+

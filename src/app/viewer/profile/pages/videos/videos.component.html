@@ -1,0 +1,20 @@
+<div  class="container-fluid px-md-5 px-lg-5" style="min-height: 100%;">
+        <div class="row" style="min-height: 80vh;">
+        <div class="col-12 col-md-8 col-lg-8  mx-0 px-0">
+          <app-profile-header></app-profile-header>
+          <div class="d-block p-0 m-0 w-100">
+          <div class="row  p-0 m-0">
+            <div class="col-12 p-0 m-0">
+                <app-profile-videos-widget></app-profile-videos-widget>
+                <div *ngIf="urlviwerService.loading_viewer" class="d-block p-0 m-0 text-center">
+                        <span class="fa fa-spinner fa-pulse fa-fw"></span>
+                    </div> 
+            </div>     
+          </div>
+        </div>
+        </div>
+        <div class="col-12 col-md-4 col-lg-4  d-none d-md-block d-lg-block pull-right">
+          <app-profile-right-sidebar></app-profile-right-sidebar>
+        </div>
+        </div>
+        </div>

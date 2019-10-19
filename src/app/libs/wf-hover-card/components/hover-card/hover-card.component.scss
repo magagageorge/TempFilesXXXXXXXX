@@ -1,0 +1,106 @@
+
+/** Cover picture styles */
+
+.display-pic {
+    height: 97px;
+    background-color: #8a2be2;
+    position: relative;
+}
+
+.display-pic-gradient {
+    height: 97px;
+    position: absolute;
+    top: 43;
+    width: 100%;
+	}
+
+.cover-photo {
+    height: 100px;
+    overflow: hidden;
+}
+
+.profile-pic {
+    position: absolute;
+    width: 350px;
+    height: 100px;
+    left: 10px;
+    top: 45px;
+    z-index: 1;
+}
+
+.pic {
+    border: 1px solid transparent;
+    width: 80px;
+    height: 80px;
+    border-radius: 5px;
+    padding: 0px;
+    background-color: transparent;
+}
+
+.title-container {
+    /*margin: -40px 0 0 140px;*/
+    position: absolute;	
+    margin: 0 !important;
+    right: 1px;
+    left:30%;
+	padding:1px;
+	margin-top:5px;
+   font-weight: 900;
+   z-index: 4;  
+}
+
+.title-container a {
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.other-info {
+    color: #fff;
+    font-size: 12px;
+    margin: 0;
+}
+
+/** Hover card info and interaction */
+
+.info {
+    height: 37px;
+    width: 100%;
+    background-color: #f2f2f2;
+    border: 1px solid #ccc;
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
+    position: absolute;
+    top: 200px;
+}
+
+.info-inner {
+    padding: 0px;
+    margin-left: 0px;
+    padding-top:7px;
+	padding-bottom:7px;
+}
+
+.info-inner a {
+    text-decoration: none;
+}
+
+.interactions {
+    float: right;
+}
+
+.details {
+    margin-top: 30px;
+    margin-left: 2px;
+	margin-right:2px;
+}
+
+.details-list {
+    list-style-type: none;
+    color: #333;
+    font-family: 'lucida grande',tahoma,verdana,arial,sans-serif;
+}
+
+.details-list-sub-item {
+    color: #9197a3;
+}

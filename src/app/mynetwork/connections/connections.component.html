@@ -1,0 +1,39 @@
+<app-wf-navbar class="d-none d-md-block d-lg-block"></app-wf-navbar>
+<app-wf-navbar-summary [back_route]="parent_route" [display_text]="title" class="d-block d-md-none d-lg-none"></app-wf-navbar-summary>  
+<app-wf-main-content>
+
+<div  class="container-fluid px-md-5 px-lg-5" style="min-height: 100%;">
+<div class="row" style="min-height: 80vh;">
+<div class="pull-left d-none d-md-block d-lg-block col-md-2 col-lg-2" style="min-height:80vh;">
+<app-network-left-widget></app-network-left-widget>
+</div>
+<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6  p-0">
+<div class="card w-100 mx-0">
+  <div class="card-header py-0">
+    <span *ngIf="profileService.MYPROFILE.no_connections>0">{{profileService.MYPROFILE.no_connections}}</span><span>&nbsp;</span><span i18n>Connections</span>
+  </div>
+  <div class="card-body p-0">
+    <div *ngIf="connectionsService.CONNECTIONS.length" class="row p-0 m-0">
+       <div   infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="connectionsService.onScrollDownConnections()" [scrollWindow]="true" id="scroller" *ngFor="let profile of connectionsService.CONNECTIONS" class="col-12 col-md-6 m-0 p-0">
+          <app-profile-card-widget [profile]="profile"></app-profile-card-widget>
+       </div>
+    </div>
+  </div>
+  <div *ngIf="connectionsService.loading_connections==true && !connectionsService.CONNECTIONS.length" class="card-body py-0 text-center">
+    <span class="fa fa-spinner fa-pulse fa-spin"></span>
+ </div>
+ <div *ngIf="connectionsService.loading_connections==false && !connectionsService.CONNECTIONS.length" class="card-body py-0 text-center">
+     <span class="fa fa-info-circle"></span> <span i18n>Currently you do not have any connection yet.</span>
+     <span i18n>Kindly import you contacts and quickly connect with them in Epanko.</span><br>
+     <a routerLink="/mynetwork/contacts/import" class="btn btn-sm btn-outline-primary btn-rounded" i18n>Import contacts Now</a>
+ </div>
+</div>
+</div>
+<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4  d-none d-md-block d-lg-block pull-right">
+<app-wf-right-sidebar></app-wf-right-sidebar>
+</div>
+</div>
+</div>
+</app-wf-main-content>
+<!--Main layout-->
+<app-wf-footer></app-wf-footer>

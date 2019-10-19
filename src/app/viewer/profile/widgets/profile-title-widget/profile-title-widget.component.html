@@ -1,0 +1,12 @@
+<div class="d-block">
+  <h4 class="p-0 my-0">{{urlviewerService.PPVIEWER.profile.name}}</h4>  
+  <div class="p-0 my-0" class="d-block">@{{urlviewerService.PPVIEWER.profile.url}}</div>            
+  <div *ngIf="urlviewerService.PPVIEWER.profile.title!=''" class="d-block profile-title">
+     {{urlviewerService.PPVIEWER.profile.title}}
+  </div>
+  <div  class="d-block">
+    <span *ngIf="urlviewerService.PPVIEWER.profile.location!=''"><span class="fa fa-map-marker"></span> {{urlviewerService.PPVIEWER.profile.location}}</span>
+    <span>&nbsp;&nbsp;</span>
+    <a *ngIf="urlviewerService.PPVIEWER.profile.no_connections>0" routerLink="/{{urlviewerService.PPVIEWER.profile.url}}/connections" class="font-weight-bold text-primary">{{urlviewerService.PPVIEWER.profile.no_connections}} <span>Connections</span></a>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+export class AccountSettings {
+    user_id:number;
+    firstname:string;
+    lastname:string;
+    title:string;
+    gender:string;
+    street:string;
+    city_id:string;
+    zip:string;
+    city:string;
+    country:string;
+    language:string;
+    timezone:string;
+    state:string;
+    birthday_hide_year:string;
+    birthday:string;
+    about:string;
+    phone_private:string;
+    phone_work:string;
+    mobile:string;
+    fax:string;
+    url:string;
+    account_email:string;
+}

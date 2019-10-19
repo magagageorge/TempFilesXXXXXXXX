@@ -1,0 +1,77 @@
+<div class="card right-connect-widget">
+    <div class="card-header right-ad-header">
+        People you may know
+    </div>
+    <div *ngIf="connectionsService.loading_suggestions && !connectionsService.CONNECT_SUGGESTIONS.length"
+        class="card-body p-1 timeline-wrapper">
+        <div class="timeline-item mx-0 mb-1">
+            <div class="animated-background">
+                <div class="background-masker header-top"></div>
+                <div class="background-masker header-left"></div>
+                <div class="background-masker header-right"></div>
+                <div class="background-masker header-bottom"></div>
+                <div class="background-masker subheader-left"></div>
+                <div class="background-masker subheader-right"></div>
+                <div class="background-masker subheader-bottom"></div>
+            </div>
+        </div>
+        <div class="timeline-item mx-0 mb-1">
+            <div class="animated-background">
+                <div class="background-masker header-top"></div>
+                <div class="background-masker header-left"></div>
+                <div class="background-masker header-right"></div>
+                <div class="background-masker header-bottom"></div>
+                <div class="background-masker subheader-left"></div>
+                <div class="background-masker subheader-right"></div>
+                <div class="background-masker subheader-bottom"></div>
+            </div>
+        </div>
+        <div class="timeline-item mx-0 mb-1">
+            <div class="animated-background">
+                <div class="background-masker header-top"></div>
+                <div class="background-masker header-left"></div>
+                <div class="background-masker header-right"></div>
+                <div class="background-masker header-bottom"></div>
+                <div class="background-masker subheader-left"></div>
+                <div class="background-masker subheader-right"></div>
+                <div class="background-masker subheader-bottom"></div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="connectionsService.CONNECT_SUGGESTIONS.length" class="card-body py-1">
+
+        <ng-container *ngFor="let suggestion of connectionsService.CONNECT_SUGGESTIONS;let i=index;">
+            <div *ngIf="i<3" class="row">
+                <div class="col-2 p-1">
+                    <a class="w-100 h-100" (mouseover)="hovercardService.OnHover($event,suggestion)"
+                        (click)="hovercardService.OnMouseOut($event);urlViewerService.setProfile(suggestion);"
+                        (mouseleave)="hovercardService.OnMouseOut($event)" routerLink="/{{suggestion.url}}"><img
+                            class="rounded-circle img-fluid" src="{{suggestion.avatar}}" alt=""></a>
+                </div>
+                <div class="col-10 p-0  align-top">
+                    <span class="d-block p-0 m-0 align-top" style="margin-left:0%;margin-right:1%;">
+                        <a class="d-block  align-top w-100 text-truncate py-0 my-0"
+                            (mouseover)="hovercardService.OnHover($event,suggestion)"
+                            (click)="hovercardService.OnMouseOut($event);urlViewerService.setProfile(suggestion);"
+                            (mouseleave)="hovercardService.OnMouseOut($event)" routerLink="/{{suggestion.url}}"
+                            profile-data="1039"><strong>{{suggestion.name}}</strong> <span
+                                class="url-tag">@{{suggestion.url}}</span></a>
+                        <span
+                            class="d-block  align-top w-100 text-truncate  py-0  my-0">{{suggestion.short_info}}</span>
+                        <button (click)="connectionsService.Connect(suggestion);"
+                            class="btn btn-sm btn-outline-primary waves-effect btn-rounded pull-right py-1 px-2"><i
+                                class="fa fa-user-plus"></i><span>&nbsp;</span>
+                            <ng-container i18n>Connect</ng-container>
+                        </button>
+                        <button (click)="connectionsService.RemoveSuggestion(suggestion);"
+                            class="btn btn-sm btn-link btn-rounded pull-right py-1 px-2"><i
+                                class="fa fa-close"></i></button>
+                    </span>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+    <div *ngIf="connectionsService.CONNECT_SUGGESTIONS.length" class="card-footer right-ad-footer">
+        <a routerLink="/mynetwork" i18n>View all Suggestions</a>
+    </div>
+</div>

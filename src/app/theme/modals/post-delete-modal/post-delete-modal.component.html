@@ -1,0 +1,15 @@
+<div class="modal-header">
+  <h6 class="modal-title" id="modal-title" i18n>Delete Post?</h6>
+  <button type="button" class="close btn-sm" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <p i18n><strong>Are you sure you want to delete this Post?</strong></p>
+  <p i18n>You can just edit it if you want to change something.</p>
+</div>
+<div class="modal-footer p-1">
+  <button type="button" class="btn btn-outline-secondary btn-sm pull-left" (click)="modal.dismiss('cancel click')" i18n>Cancel</button>
+  <button type="button" class="btn btn-outline-secondary btn-sm pull-right" (click)="modal.dismiss('cancel click')" i18n>Edit</button>
+  <button type="button" class="btn btn-danger btn-sm pull-right" (click)="feedService.deletePost(feedId)" i18n>Delete</button>
+</div>

@@ -1,0 +1,32 @@
+<app-wf-navbar>
+  
+</app-wf-navbar>   
+<app-wf-main-content>
+
+<div  class="container-fluid px-md-5 px-lg-5" style="min-height: 100%;">
+<div class="row" style="min-height: 80vh;">
+<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6  p-0">
+<div class="card w-100">
+  <div class="card-header py-1 px-1">
+    <app-mobile-search-form-widget></app-mobile-search-form-widget>
+  </div>
+  <div class="card-body container-fluid p-0">
+   <div class="w-100 container-fluid p-0" style="max-height: 70vh;overflow-y: scroll;">
+      <app-quick-search-results-widget></app-quick-search-results-widget>
+   </div>
+    <div *ngIf="searchService.PEOPLE.length" class="w-100">
+        <div class="row m-0">
+            <div class="col-12 text-center">
+              <a routerLink="/search/top/{{searchService.search_query}}" class="text-primary"><ng-container>See all results for </ng-container> {{searchService.search_query}}</a>
+            </div>
+        </div>      
+    </div>    
+  </div>
+</div>
+</div>
+<div class="col-xs-12 col-sm-12 col-md-4  d-none d-md-block d-lg-block col-lg-4 pull-right">
+<app-wf-right-sidebar></app-wf-right-sidebar>
+</div>
+</div>
+</div>
+</app-wf-main-content>

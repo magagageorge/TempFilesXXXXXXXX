@@ -1,0 +1,212 @@
+<app-loading-new-post-widget *ngIf="profileFeedService.loading_new_post"></app-loading-new-post-widget>
+<div class="col-xs-14 col-sm-14 col-md-14 col-md-14 p-0" #feedContainer>
+    <div class="w-100 h-100 m-0 p-0" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
+        (scrolled)="profileFeedService.onScrollDown()" [scrollWindow]="true" id="scroller">
+        <ng-container *ngFor="let feed of profileFeedService.feeds">
+            <ng-container *ngIf="feed.edit_mode!=true">
+                <div class="card windo-post-card" id="feed_item_{{feed.id}}">
+                    <ng-container *ngIf="feed.hidden_post!=true">
+                        <div class="card-header with-border p-2">
+                            <div class="mr-4 d-block text-truncate" *ngIf="feed.post_type!='STATUS_UPDATE'"
+                                style="font-size:95%;font-style:italic;padding-bottom:5px;margin-top:0px;">
+                                <a routerLink="/{{feed.profile.url}}">{{feed.profile.name}}</a>
+                                <ng-container *ngIf="feed.post_type=='PROFILE_COVER'"> <span> updated profile
+                                        cover</span>
+                                </ng-container>
+                                <ng-container *ngIf="feed.post_type=='PROFILE_PHOTO'"> <span> updated profile
+                                        picture</span>
+                                </ng-container>
+                                <hr style="margin-bottom:5px;margin-top:5px;">
+                            </div>
+
+                            <div class="user-block">
+                                <a routerLink="/{{feed.profile.url}}"
+                                    (mouseover)="hovercardService.OnHover($event,feed.profile)"
+                                    (click)="hovercardService.OnMouseOut($event);urlViewerService.setProfile(feed.profile);"
+                                    (mouseleave)="hovercardService.OnMouseOut($event)"><img
+                                        class="rounded-circle img-fluid" src="{{feed.profile.avatar}}" alt=""></a>
+
+                                <span class="username mr-4">
+                                    <a class="w-100 d-block text-truncate"
+                                        (mouseover)="hovercardService.OnHover($event,feed.profile)"
+                                        (click)="hovercardService.OnMouseOut($event);urlViewerService.setProfile(feed.profile);"
+                                        (mouseleave)="hovercardService.OnMouseOut($event)"
+                                        routerLink="/{{feed.profile.url}}">{{feed.profile.name}} <span
+                                            class="url-tag">@{{feed.profile.url}}</span></a>
+                                </span>
+
+                                <span class="description">
+                                    <span class="d-block text-truncate">{{feed.profile.short_info}}</span>
+                                    <span class="d-block text-truncate"><a href="javascript:void(0)" title="Everyone"><i
+                                                class="fa fa-globe"></i></a> <a routerLink="#" onclick="return false;"
+                                            title="{{feed.updated_at.title}}">{{feed.updated_at.date}} <i
+                                                *ngIf="feed.updated_at.title!=feed.created_at.title"
+                                                i18n>Edited</i></a></span>
+                                </span>
+
+                            </div>
+
+                            <div class="card-tools">
+                                <div class="dropdown btn-group" ngbDropdown placement="bottom-right">
+                                    <a class="px-2" ngbDropdownToggle></a>
+                                    <ul class="dropdown-menu  dropdown-menu-left" ngbDropdownMenu
+                                        style="position:absolute;left:10px;">
+                                        <li *ngIf="feed.my_post==true" class="dropdown-item"><a
+                                                href="javascript:void(0);"
+                                                (click)="postingService.setEdititablePost(feed,feed)"><span
+                                                    class="fa fa-edit"></span><span>&nbsp;</span>
+                                                <ng-container i18n>Edit</ng-container>
+                                            </a></li>
+                                        <li *ngIf="feed.my_post==true" class="dropdown-item"><a
+                                                href="javascript:void(0);"
+                                                (click)="profileFeedService.confirmDeletePost(feed.id)"><span
+                                                    class="fa fa-trash"></span><span>&nbsp;</span>
+                                                <ng-container i18n>Delete</ng-container>
+                                            </a></li>
+
+                                        <li *ngIf="feed.my_post!=true" class="dropdown-item"><a
+                                                href="javascript:void(0);"
+                                                (click)="profileFeedService.reportPostContent(feed.id)"><span
+                                                    class="fa fa-flag-o"></span><span>&nbsp;</span>
+                                                <ng-container i18n>Report this</ng-container>
+                                            </a></li>
+                                        <li *ngIf="feed.my_post!=true" class="dropdown-item"><a
+                                                href="javascript:void(0);"
+                                                (click)="profileFeedService.hidePost(feed.id)"><span
+                                                    class="fa fa-eye-slash"></span><span>&nbsp;</span>
+                                                <ng-container i18n>Hide thi Post</ng-container>
+                                            </a></li>
+                                        <li *ngIf="feed.my_post!=true" class="dropdown-item"><a
+                                                href="javascript:void(0);"
+                                                (click)="profileFeedService.reportPostContent(feed.id)"><span
+                                                    class="fa fa-flag-o"></span><span>&nbsp;</span>
+                                                <ng-container i18n>Unfollow</ng-container> {{feed.profile.name}}
+                                            </a></li>
+
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="card-body" style="overflow:hidden;">
+
+                            <p *ngIf="feed.message!=''" class="p-2" id="post-content-container">{{feed.message}}</p>
+
+                            <div *ngIf="feed.images && feed.images.length>0" class="w-100"
+                                style="padding-left:-1px;padding-right:-1px;background-image:url('data:image/gif;base64,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');background-size: 100%;background-repeat: no-repeat; ">
+                                <app-feed-image-view-widget [container_width]="container_width" [feedPost]="feed" [IMAGES]="feed.images">
+                                </app-feed-image-view-widget>
+                            </div>
+                            <div *ngIf="feed.links.length" class="w-100">
+                                <div *ngFor="let link of feed.links" class="w-100">
+                                    <app-link-preview-widget [link]="link"></app-link-preview-widget>
+                                </div>
+
+                            </div>
+
+                            <div *ngIf="feed.no_comments>0 || feed.no_likes>0" class="row"
+                                style="padding:0px;margin:0px;">
+                                <div class="col-md-12">
+                                    <span *ngIf="feed.no_likes>0" class="post-statistics epanko-post-statistics">
+                                        <a href="javascript:void(0);"
+                                            (click)="profileFeedService.showPostLikes(feed.id,feed.no_likes)"
+                                            class="show-post-no-likes windo-list-tooltip tooltipstered"><span
+                                                *ngIf="feed.no_likes>0">{{feed.no_likes}}</span> <span
+                                                i18n>Loves</span></a>
+                                    </span>
+                                    <span>&nbsp;&nbsp;</span>
+                                    <span *ngIf="feed.no_comments>0" class="post-statistics epanko-post-statistics">
+                                        <a href="javascript:void(0);" class="hidden show-post-no-comments"><span
+                                                *ngIf="feed.no_comments>0">{{feed.no_comments}}</span> <span
+                                                i18n>Comments</span></a>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="row" style="padding:0px;margin:0px;">
+                                <div class="col-md-12" style="padding:2px;margin:0px;"> </div>
+                            </div>
+                            <div class="row" style="padding:0px;margin:0px;">
+                                <div class="col-md-12" style="padding:2px;margin:0px;"> </div>
+                            </div>
+
+                            <div class="card-footer px-0">
+                                <div class="row actions">
+                                    <div class="col-4 text-center px-0">
+                                        <span style="cursor: pointer;" *ngIf="feed.i_like==true"
+                                            (click)="profileFeedService.feedLike(feed,'unlike')" class="btn-liked"><span
+                                                class="fa fa-heart"></span> <span>&nbsp;</span><span
+                                                i18n>Love</span></span><span style="cursor: pointer;"
+                                            *ngIf="feed.i_like!=true"
+                                            (click)="profileFeedService.feedLike(feed,'like')"><span
+                                                class="fa fa-heart-o"></span><span>&nbsp;</span><span
+                                                i18n>Love</span></span>
+                                    </div>
+
+                                    <div class="col-4 text-center px-0">
+                                        <a href="javascript:void(0);" data-guid="317"
+                                            (click)="commentService.setToCommentPost(feed)"><i
+                                                class="fa fa-comment-o"></i><span>&nbsp;</span><span
+                                                i18n>Comment</span></a>
+                                    </div>
+
+                                    <div class="col-4 text-center px-0">
+                                        <a href="javascript:void(0);" data-guid="317"><i
+                                                class="fa fa-share"></i><span>&nbsp;</span>
+                                            <span i18n>Share</span></a>
+                                    </div>
+
+                                </div>
+                                <app-feed-comments-widget [feedId]="feed.id" [feed]="feed"
+                                    [feedComments]="feed.comments">
+                                </app-feed-comments-widget>
+                                <div class="d-block w-100 px-2">
+                                    <div *ngIf="feed.loading_comments" class="w-100 align-middle py-2 text-center">
+                                        <span class="fa fa-circle-o-notch fa-spin"></span> </div>
+                                    <div *ngIf="feed.no_comments > feed.comments.length"
+                                        (click)="commentService.viewMoreComments(feed)"
+                                        class="wf-link w-50 color-primary pull-left  py-2" i18n>View more comments</div>
+                                    <div *ngIf="feed.comments.length > 5"
+                                        (click)="commentService.setToCommentPost(feed)"
+                                        class="wf-link w-50 color-primary pull-right text-right py-2" i18n>Write Comment
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                    <ng-container *ngIf="feed.hidden_post==true">
+                        <div class="card-body" style="overflow:hidden;">
+                            <div class="col-md-12 px-auto py-2">
+                                <h5 i18n>You will no longer see this post in your feed!</h5>
+                                <hr>
+                                <span class="px-2 py-1" style="cursor:pointer;font-size:105%;"
+                                    (click)="profileFeedService.unhidePost(feed.id)"><span class="fa fa-undo"></span>
+                                    <span>&nbsp;</span><span i18n>Undo</span><span>&nbsp;</span><span>&nbsp;</span>
+                                    <span *ngIf="feed.unhidding_post==true" style="font-size:12px;">
+                                        <i class="fa fa-circle-o-notch fa-spin fa-1x fa-fw"></i>
+                                        <span class="sr-only" i18n>Loading...</span>
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+            </ng-container>
+        </ng-container>
+
+        <div *ngIf="profileFeedService.loading_feeds==false && !profileFeedService.feeds.length" class="card-body">
+            <div *ngIf="!urlViewerService.PPVIEWER.profile.my_profile" class="d-block px-auto py-2 text-center">
+                <h5><span>{{urlViewerService.PPVIEWER.profile.name}}</span> <span>&nbsp;</span><span i18n>has not posted
+                        anything yet!</span></h5>
+                <hr>
+            </div>
+            <div *ngIf="urlViewerService.PPVIEWER.profile.my_profile" class="d-block px-auto py-2 text-center">
+                <h5><span i18n>You have not posted anything yet! Feel free to share your thoughts, interests and more
+                        importantly your skills and abilities with.</span></h5>
+                <hr>
+            </div>
+        </div>
+        
+    </div>
+</div>
+<app-loading-new-post-widget *ngIf="profileFeedService.loading_feeds"></app-loading-new-post-widget>

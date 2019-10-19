@@ -1,0 +1,33 @@
+<div class="modal-header">
+  <h6 class="modal-title" id="modal-title">{{likes_model.no_likes}} <span *ngIf="likes_model.no_likes>1">Loves</span><span *ngIf="likes_model.no_likes==1">Love</span></h6>
+  <button type="button" class="close btn-sm" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body" style="max-height: 80vh;overflow-y:scroll;">
+
+    <div *ngIf="likes_model.likes.length>0" class="w-100">
+    <div *ngFor="let o_like of likes_model.likes" class="row" style="border-bottom: 1px solid gray">
+     <div class="col-md-12 d-block py-1" >
+       <a routerLink="/{{o_like.profile.url}}" (click)="modal.dismiss('Cross click')" class="d-inline-block w-100 align-middle">
+         <span class="" style="float:left;height:40px;width:40px;">
+           <img src="{{o_like.profile.avatar}}" class="h-100 w-100 rounded-circle img-fluid">
+         </span>
+         <span style="float:left;margin-left:4px;">
+             <span class="d-block">
+               <span class="">{{o_like.profile.name}}</span>
+             </span>
+             <span class="d-block">
+                <span class="wf-profile-desc text-truncate">{{o_like.profile.short_info}}</span>
+              </span>
+            </span>
+         </a>
+     </div>
+    </div>
+
+    </div>
+         <div *ngIf="likes_model.likes.length<1" class="w-100 text-center">
+            <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+            <span class="sr-only">Loading...</span>
+          </div> 
+</div>

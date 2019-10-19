@@ -1,0 +1,52 @@
+<app-wf-navbar></app-wf-navbar>
+<app-wf-main-content>
+<div  class="container-fluid px-md-5 px-lg-5" style="min-height: 100%;">
+<div class="row" style="min-height: 80vh;">
+<div class="pull-left d-none d-md-block d-lg-block col-md-2 col-lg-2" style="min-height:80vh;">
+<app-network-left-widget></app-network-left-widget>
+</div>
+<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6  p-0 mx-auto">
+
+     <div class="d-block d-md-none d-lg-none w-100">
+        <app-network-nav-widget></app-network-nav-widget>
+     </div>
+     <div *ngIf="connectionsService.CONNECT_REQUESTS.length" class="card w-100 mx-0">
+        <div class="card-header  py-0">
+          <span i18n>Invitations</span><span>({{connectionsService.CONNECT_REQUESTS.length}})</span>
+        </div>
+        <div class="card-body p-0">
+          <div *ngIf="connectionsService.CONNECT_REQUESTS.length" class="row p-0 m-0">
+            <div  *ngFor="let profile of connectionsService.CONNECT_REQUESTS;let i=index;" class="col-12 col-md-6 m-0 p-0">
+               <app-profile-card-widget *ngIf="i<4" [profile]="profile"></app-profile-card-widget>
+            </div>
+         </div>
+          
+        </div>
+        <div *ngIf="connectionsService.CONNECT_REQUESTS.length>4" class="card-footer py-0">
+           <span><a routerLink="/mynetwork/invitations">View All Reqeuests</a></span>
+        </div>
+      </div>
+
+
+<div *ngIf="connectionsService.CONNECT_SUGGESTIONS.length" class="card w-100 mx-0">
+  <div class="card-header py-0">
+    <span i18n>You may know these People</span>
+  </div>
+  <div class="card-body p-0">
+    <div class="row p-0 m-0">
+       <div   infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="connectionsService.onScrollDownSuggestions()" [scrollWindow]="true" id="scroller" *ngFor="let profile of connectionsService.CONNECT_SUGGESTIONS" class="col-12 col-md-6 m-0 p-0">
+          <app-profile-card-widget [profile]="profile"></app-profile-card-widget>
+       </div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4  d-none d-md-block d-lg-block pull-right">
+<app-wf-right-sidebar></app-wf-right-sidebar>
+</div>
+</div>
+</div>
+</app-wf-main-content>
+<!--Main layout-->
+<app-wf-footer></app-wf-footer>
+<app-hover-card-container></app-hover-card-container>

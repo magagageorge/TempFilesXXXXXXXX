@@ -1,0 +1,524 @@
+<app-wf-navbar-empty
+  *ngIf="profileService.MYPROFILE.init.location==true && profileService.MYPROFILE.init.activity==true && profileService.MYPROFILE.init.mission==true && profileService.MYPROFILE.init.verified==false">
+</app-wf-navbar-empty>
+<app-wf-main-content>
+  <div class="container-fluid px-0 mx-0" style="min-height: 100%;">
+    <div *ngIf="profileService.MYPROFILE" class="container-fluid" style="padding:0px;">
+      <div class="row w-100  mx-auto">
+        <div class="col-12 col-sm-10 col-lg-6 col-lg-6 mx-auto" style="padding:0px;">
+          <div class="d-block text-center w-100">
+            <span>
+              <h3>Epanko</h3>
+            </span>
+          </div>
+          <div *ngIf="profileService.loading_myprofile" class="d-block w-100 text-center" style="font-size: 150%;">
+            <span class="fa fa-3x fa-circle-o-notch fa-spin"></span>
+          </div>
+
+          <div *ngIf="profileService.MYPROFILE.init.location==false" class="card">
+            <div class="card-body">
+              <form [formGroup]="locationGroup" (ngSubmit)="saveLocation()" class="text-center p-1">
+                <h3 i18n>Let's Start with your Profile</h3>
+                <h6 class="font-weight-light" i18n>Adding Your Location will make Epanko more Usefull to you.</h6>
+                <br>
+                <div *ngIf="showMessages.error && errors && errors.length > 0 && !submitted"
+                  class="alert alert-info text-danger" role="alert">
+                  <div *ngFor="let error of errors">{{ error }}</div>
+                </div>
+                <div *ngIf="showMessages.success && messages && messages.length > 0 && !submitted"
+                  class="alert alert-success" role="alert">
+                  <div><strong>Hooray!</strong></div>
+                  <div *ngFor="let message of messages">{{ message }}</div>
+                </div>
+                <div *ngIf="processing_request" class="d-block text-center color-primary">
+                  <i class="fa fa-spinner fa-pulse fa-3x fa-fw color-primary"></i>
+                  <span class="sr-only color-primary">Loading...</span>
+                </div>
+
+                <div class="form-group">
+                  <label class="pull-left" for="inputcountry" i18n>Country</label>
+                  <select id="inputcountry" formControlName="country"
+                    [ngClass]="{ 'is-invalid': submitted && f.country.errors }" [(ngModel)]="locationModel.country"
+                    (ngModelChange)="switchLocation(locationModel.country)" name="country"
+                    class="form-control form-rounded">
+                    <option value="" i18n>-Select Your Country -</option>
+                    <option *ngFor="let country of countries" value="{{country.id}}">{{country.name}}</option>
+                  </select>
+                  <div *ngIf="submitted && f.country.errors"
+                    class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                    <div *ngIf="f.country.errors.required" i18n>Required</div>
+                  </div>
+                </div>
+                <div *ngIf="selectedLocation" class="form-group">
+                  <label class="pull-left" for="inputCity" i18n>City or Town </label>
+                  <select id="inputCity" formControlName="city" [(ngModel)]="locationModel.city"
+                    [ngClass]="{ 'is-invalid': submitted && f.city.errors }" name="city"
+                    class="form-control form-rounded">
+                    <option value="" i18n>- City/Town -</option>
+                    <option *ngFor="let city of selectedLocation.cities" value="{{city.id}}">{{city.name}}</option>
+                  </select>
+                  <div *ngIf="submitted && f.city.errors"
+                    class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                    <div *ngIf="f.city.errors.required" i18n>Required</div>
+                  </div>
+                </div>
+
+                <!--
+        <div class="form-group">
+                      <input type="text" formControlName="fullName" [(ngModel)]="locationModel.fullName" class="form-control form-rounded" placeholder="Full Name" [ngClass]="{ 'is-invalid': submitted && f.fullName.errors }" />
+                      <div *ngIf="submitted && f.fullName.errors" class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                          <div *ngIf="f.fullName.errors.required">Fullname is required</div>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <input type="text" formControlName="email" [(ngModel)]="locationModel.email" class="form-control form-rounded" placeholder="Email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                      <div *ngIf="submitted && f.email.errors" class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                          <div *ngIf="f.email.errors.required">Email is required</div>
+                          <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <input type="password" formControlName="password"  [(ngModel)]="locationModel.password" class="form-control form-rounded" placeholder="Password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                      <div *ngIf="submitted && f.password.errors" class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                          <div *ngIf="f.password.errors.required">Password is required</div>
+                          <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+                      </div>
+                  </div>
+              -->
+                <!-- Sign up button -->
+                <button [class.disabled]="f.city.errors || f.country.errors"
+                  class="btn btn-primary btn-sm btn-rounded  my-4 waves-effect z-depth-0">Next</button>
+
+              </form>
+            </div>
+          </div>
+
+          <div *ngIf="profileService.MYPROFILE.init.location==true && profileService.MYPROFILE.init.activity==false"
+            class="card">
+            <div class="card-body">
+              <form [formGroup]="careerGroup" (ngSubmit)="saveCareer()" class="text-center p-1">
+
+                <h3 i18n>What are you doing?</h3>
+                <h6 class="font-weight-light" i18n></h6>
+                <br>
+                <div *ngIf="showMessages.error && errors && errors.length > 0 && !submitted"
+                  class="alert alert-info text-danger" role="alert">
+                  <div *ngFor="let error of errors">{{ error }}</div>
+                </div>
+                <div *ngIf="showMessages.success && messages && messages.length > 0 && !submitted"
+                  class="alert alert-success" role="alert">
+                  <div><strong>Hooray!</strong></div>
+                  <div *ngFor="let message of messages">{{ message }}</div>
+                </div>
+                <div *ngIf="processing_request" class="d-block text-center color-primary">
+                  <i class="fa fa-spinner fa-pulse fa-3x fa-fw color-primary"></i>
+                  <span class="sr-only color-primary">Loading...</span>
+                </div>
+
+                <div class="form-row">
+                  <div class="w-100">
+                    <label class="pull-left" for="inputis_student" i18n>Are you a Student?</label>
+                  </div>
+                  <div class="form-group" [ngClass]="{ 'is-invalid': submitted && c.is_student.errors }">
+                    <div class="custom-control custom-radio custom-control-inline pull-left">
+                      <input type="radio" class="custom-control-input" formControlName="is_student" name="is_student"
+                        [(ngModel)]="careerModel.is_student" [checked]="careerModel.is_student==='yes'"
+                        id="is_student_Yes" name="is_student" value="yes">
+                      <label class="custom-control-label" for="is_student_Yes" i18n>Yes</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline pull-left">
+                      <input type="radio" class="custom-control-input" formControlName="is_student" name="is_student"
+                        [(ngModel)]="careerModel.is_student" [checked]="careerModel.is_student==='no'"
+                        id="is_student_No" name="is_student" value="no">
+                      <label class="custom-control-label" for="is_student_No" i18n>No</label>
+                    </div>
+                  </div>
+                </div>
+
+                <ng-container *ngIf="careerModel.is_student=='no'">
+                  <div class="form-row">
+                    <div class="w-100">
+                      <label class="pull-left" for="inputnon_student_type" i18n>Nice,So What are you doing? *</label>
+                    </div>
+                    <div class="form-group" [ngClass]="{ 'is-invalid': submitted && c.non_student_type.errors }">
+                      <div class="custom-control custom-radio d-block pull-left my-1 w-100 text-left">
+                        <input type="radio" class="custom-control-input" formControlName="non_student_type"
+                          [(ngModel)]="careerModel.non_student_type"
+                          [checked]="careerModel.non_student_type==='employed'" id="non_student_type_employed"
+                          name="non_student_type" value="employed">
+                        <label class="custom-control-label" for="non_student_type_employed" i18n>I'm currently working
+                          for a certain organization, private company or public sector.</label>
+                      </div><br>
+                      <div class="custom-control custom-radio d-block  pull-left my-1 w-100 text-left">
+                        <input type="radio" class="custom-control-input" formControlName="non_student_type"
+                          [(ngModel)]="careerModel.non_student_type"
+                          [checked]="careerModel.non_student_type==='entrepreneur'" id="non_student_type_entrepreneur"
+                          name="non_student_type" value="entrepreneur">
+                        <label class="custom-control-label" for="non_student_type_entrepreneur" i18n>I'm Self
+                          Employed currently running my own business.</label>
+                      </div>
+                      <br>
+                      <div class="custom-control custom-radio d-block  pull-left my-1 w-100 text-left">
+                        <input type="radio" class="custom-control-input" formControlName="non_student_type"
+                          [(ngModel)]="careerModel.non_student_type"
+                          [checked]="careerModel.non_student_type==='unemployed'" id="non_student_type_unemployed"
+                          name="non_student_type" value="unemployed">
+                        <label class="custom-control-label" for="non_student_type_unemployed" i18n>I'm unemployed and
+                          looking for permanent or temporary job opportunities.</label>
+                      </div><br>
+
+                    </div>
+                  </div>
+
+                  <div *ngIf="careerModel.is_student=='no' && careerModel.non_student_type=='employed'"
+                    class="form-row">
+                    <div class="form-group col-12">
+                      <label class="pull-left" i18n>Job Title or Work</label>
+                      <input type="text" formControlName="position" [(ngModel)]="careerModel.position"
+                        class="form-control form-rounded" placeholder="Job Title or Work"
+                        [ngClass]="{ 'is-invalid': submitted && c.position.errors }" />
+                      <div *ngIf="submitted && c.position.errors"
+                        class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                        <div *ngIf="c.position.errors.required">Position is required</div>
+                      </div>
+                    </div>
+                    <div class="form-group col-12">
+                      <label class="pull-left" i18n>Company or Business Name</label>
+                      <input type="text" formControlName="company_name" [(ngModel)]="careerModel.company_name"
+                        class="form-control form-rounded" placeholder="Name of Company or Business"
+                        [ngClass]="{ 'is-invalid': submitted && c.company_name.errors }" />
+                      <div *ngIf="submitted && c.company_name.errors"
+                        class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                        <div *ngIf="c.company_name.errors.required">Company Name is required</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    *ngIf="careerModel.is_student=='no' && careerModel.non_student_type=='unemployed' && skills_list.length"
+                    class="form-row">
+                    <div class="form-group col-12">
+                      <label class="pull-left" i18n>Specify your Specialties or main Skills *</label>
+                      <ng-select [items]="skills_list" bindLabel="name" formControlName="knows_about" bindValue="id"
+                        [multiple]="true" placeholder="Write your Skills here" [(ngModel)]="careerModel.knows_about">
+                      </ng-select>
+                    </div>
+                  </div>
+
+                  <div
+                    *ngIf="careerModel.is_student=='no' && careerModel.non_student_type=='entrepreneur' && industries_list.length"
+                    class="form-row">
+                    <div class="form-group col-12">
+                      <label class="pull-left" i18n>What are you dealing with? This helps us find potential leads for
+                        you *</label>
+                      <ng-select [items]="industries_list" bindLabel="name" formControlName="businesstype"
+                        bindValue="id" [multiple]="true" placeholder="Write what you are dealing with"
+                        [(ngModel)]="careerModel.businesstype">
+                      </ng-select>
+                    </div>
+                  </div>
+                </ng-container>
+
+                <div *ngIf="careerModel.is_student=='yes'" class="form-row">
+                  <div class="form-group col-12">
+                    <label class="pull-left" i18n>School or College/University *</label>
+                    <input type="text" formControlName="institution_name" [(ngModel)]="careerModel.institution_name"
+                      class="form-control form-rounded" placeholder="School or College/University *"
+                      [ngClass]="{ 'is-invalid': submitted && c.institution_name.errors }" />
+                    <div *ngIf="submitted && c.institution_name.errors"
+                      class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                      <div *ngIf="c.institution_name.errors.required">College is required</div>
+                    </div>
+                  </div>
+                  <div class="form-group col-6">
+                    <label class="pull-left" for="inputStartyear" i18n>From Year </label>
+                    <select id="inputStartyear" formControlName="startyear" [(ngModel)]="careerModel.startyear"
+                      [ngClass]="{ 'is-invalid': submitted && c.startyear.errors }" name="startyear"
+                      class="form-control form-rounded">
+                      <option value="" i18n>- From -</option>
+                      <option *ngFor="let startyear of START_YEARS" value="{{startyear.id}}">{{startyear.name}}</option>
+                    </select>
+                    <div *ngIf="submitted && c.startyear.errors"
+                      class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                      <div *ngIf="c.startyear.errors.required" i18n>Required</div>
+                    </div>
+                  </div>
+                  <div class="form-group col-6">
+                    <label class="pull-left" for="inputEndyear" i18n>To </label>
+                    <select id="inputEndyear" formControlName="endyear" [(ngModel)]="careerModel.endyear"
+                      [ngClass]="{ 'is-invalid': submitted && c.endyear.errors }" name="endyear"
+                      class="form-control form-rounded">
+                      <option value="" i18n>- To -</option>
+                      <option *ngFor="let endyear of END_YEARS" value="{{endyear.id}}">{{endyear.name}}</option>
+                    </select>
+                    <div *ngIf="submitted && c.endyear.errors"
+                      class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                      <div *ngIf="c.endyear.errors.required" i18n>Required</div>
+                    </div>
+                  </div>
+                </div>
+
+                <button [class.disabled]="careerGroup.invalid"
+                  class="btn btn-primary btn-sm btn-rounded  my-4 waves-effect z-depth-0">Next</button>
+
+              </form>
+            </div>
+          </div>
+
+
+
+
+          <div
+            *ngIf="profileService.MYPROFILE.init.location==true && profileService.MYPROFILE.init.activity==true  && profileService.MYPROFILE.init.mission==false"
+            class="card">
+            <div class="card-body">
+              <form [formGroup]="missionGroup" (ngSubmit)="saveMission()" class="p-1">
+                <div class="d-block w-100 text-center">
+                  <h4 i18n>What is your primary goal?</h4>
+                  <h6 class="font-weight-light" i18n>This helps us personalize your experience</h6>
+                </div>
+                <br>
+                <div *ngIf="showMessages.error && errors && errors.length > 0 && !submitted"
+                  class="alert alert-info text-danger" role="alert">
+                  <div *ngFor="let error of errors">{{ error }}</div>
+                </div>
+                <div *ngIf="showMessages.success && messages && messages.length > 0 && !submitted"
+                  class="alert alert-success" role="alert">
+                  <div><strong>Hooray!</strong></div>
+                  <div *ngFor="let message of messages">{{ message }}</div>
+                </div>
+                <div *ngIf="processing_request" class="d-block text-center color-primary">
+                  <i class="fa fa-spinner fa-pulse fa-3x fa-fw color-primary"></i>
+                  <span class="sr-only color-primary">Loading...</span>
+                </div>
+                <div class="form-row">
+                  <div class="d-block">
+                    <div class="form-row">
+                      <div class="w-100">
+                        <label class="pull-left" for="inputlookingfor" i18n>Looking for an opportunity to *</label>
+                      </div>
+                      <div class="d-block w-100" [ngClass]="{ 'is-invalid': submitted && missionGroup.invalid }">
+
+                        <div class="row mx-0">
+                          <div class="col-12 pull-left">
+                            <div class="form-check m-0 p-0  disabled">
+                              <input type="checkbox" formControlName="networking_entertainment"
+                                [(ngModel)]="profileService.MYPROFILE.my_preferences.networking_entertainment"
+                                class="form-check-input disabled" id="networking_entertainment">
+                              <label for="networking_entertainment" class="disabled">Create Network and
+                                Entertainment</label>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="row mx-0">
+                          <div class="col-12  pull-left">
+                            <div class="form-check m-0 p-0">
+                              <input type="checkbox" formControlName="find_sales_leads"
+                                [(ngModel)]="profileService.MYPROFILE.my_preferences.find_sales_leads"
+                                class="form-check-input" id="find_sales_leads">
+                              <label for="find_sales_leads">Find and or Sale Products,goods or Services </label>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="row mx-0">
+                          <div class="col-12  pull-left">
+                            <div class="form-check m-0 p-0">
+                              <input type="checkbox" formControlName="find_job_opportunity"
+                                [(ngModel)]="profileService.MYPROFILE.my_preferences.find_job_opportunity"
+                                class="form-check-input" id="find_job_opportunity">
+                              <label for="find_job_opportunity">Find Job Opportunity </label>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="row mx-0">
+                          <div class="col-12">
+                            <div class="form-check m-0 p-0">
+                              <input type="checkbox" formControlName="employ_someone"
+                                [(ngModel)]="profileService.MYPROFILE.my_preferences.employ_someone"
+                                class="form-check-input" id="employ_someone">
+                              <label for="employ_someone">Employ Someone </label>
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <button [class.disabled]="missionGroup.invalid"
+                  class="btn btn-primary btn-sm btn-rounded  my-4 waves-effect z-depth-0">Next</button>
+
+              </form>
+            </div>
+          </div>
+
+          <div
+            *ngIf="profileService.MYPROFILE.init.location==true && profileService.MYPROFILE.init.activity==true && profileService.MYPROFILE.init.mission==true && profileService.MYPROFILE.init.verified==false"
+            class="card">
+            <div class="card-body">
+              <form [formGroup]="verifyGroup" (ngSubmit)="verify()" class="text-center p-1">
+
+                <h4 i18n>Verify Your Account Now!</h4>
+                <p class="font-weight-light">
+                  <ng-container i18n>Verification code has been sent to</ng-container>
+                  &nbsp;<strong>{{profileService.MYPROFILE.user.email}}</strong>.&nbsp;<ng-container i18n>Please use
+                    sent code to verify your account in the input box bellow</ng-container>
+                </p>
+                <p class="font-weight-light">
+                  <ng-container i18n>Sometimes it can take up to one minute for the email to alive. If you don't see the
+                    email, check other places it might be, like your junk, spam, social or other folders.</ng-container>
+                </p>
+
+                <div *ngIf="showMessages.error && errors && errors.length > 0 && !submitted"
+                  class="alert alert-info text-danger" role="alert">
+                  <div *ngFor="let error of errors">{{ error }}</div>
+                </div>
+                <div *ngIf="showMessages.success && messages && messages.length > 0 && !submitted"
+                  class="alert alert-success" role="alert">
+                  <div><strong>Hooray!</strong></div>
+                  <div *ngFor="let message of messages">{{ message }}</div>
+                </div>
+                <div *ngIf="processing_request" class="d-block text-center color-primary">
+                  <i class="fa fa-spinner fa-pulse fa-3x fa-fw color-primary"></i>
+                  <span class="sr-only color-primary">Loading...</span>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-12  d-flex justify-content-center align-items-center">
+                    <label for="inputState" i18n>Enter Verification Code</label>
+                  </div>
+                  <div class="col-md-12  d-flex justify-content-center align-items-center">
+                    <span [textContent]="str_success_code" style="color:green;"></span>
+                  </div>
+                  <div class="col-md-12  d-flex justify-content-center align-items-center">
+                    <input (keyup)="onCodeKey(verifyModel.code)" formControlName="code" [(ngModel)]="verifyModel.code"
+                      name="code" autocomplete="off" type="text" class="form-control text-center" maxlength="6"
+                      id="vcode_input" min="100000" max="999999" ng-maxlength="6"
+                      style="max-width:150px;font-size:25px;" placeholder="_ _ _ _ _ _">
+                  </div>
+                  <div class="col-md-12  d-flex justify-content-center align-items-center">
+                    <div class="has_error error" style="color:red;" [textContent]="str_invalid_code"></div>
+                  </div>
+                </div>
+                <div class="row py-0">
+                  <div class="col-md-12 d-flex justify-content-center align-items-center  py-0">
+                    <button [class.disabled]="verifyGroup.invalid"
+                      class="btn btn-primary btn-sm btn-rounded  my-1 waves-effect z-depth-0" i18n>Verify</button>
+                  </div>
+                </div>
+                <div class="row py-0">
+                  <div class="col-md-12 py-1">
+                    <span *ngIf="code_resent==false" class="pull-right">Didn't received the Code? <span
+                        *ngIf="resending_code" class="fa fa-spinner fa-pulse fa-1x fa-fw"></span><span
+                        class="btn btn-primary btn-sm btn-rounded my-1 waves-effect z-depth-0 p-1"
+                        (click)="resendCode()" i18n>Resend Code</span></span>
+                  </div>
+                </div>
+
+              </form>
+            </div>
+          </div>
+
+          <div
+            *ngIf="profileService.MYPROFILE.init.location==true && profileService.MYPROFILE.init.activity==true && profileService.MYPROFILE.init.mission==true && profileService.MYPROFILE.init.verified==true && profileService.MYPROFILE.init.contact_imported==false"
+            class="card">
+            <div class="card-body text-center">
+
+              <h4 i18n>Creating a Strong Network is a Great way to start</h4>
+              <p class="font-weight-light">Connecting with your contacts is the simplest way to create yours..</p>
+              <br>
+              <div *ngIf="showMessages.error && errors && errors.length > 0 && !submitted"
+                class="alert alert-info text-danger" role="alert">
+                <div *ngFor="let error of errors">{{ error }}</div>
+              </div>
+              <div *ngIf="showMessages.success && messages && messages.length > 0 && !submitted"
+                class="alert alert-success" role="alert">
+                <div><strong>Hooray!</strong></div>
+                <div *ngFor="let message of messages">{{ message }}</div>
+              </div>
+
+
+              <div class="row form-inline mx-auto px-auto">
+                <div class="input-group col-md-8 mb-2 d-flex">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text"><span class="fa fa-envelope"></span></div>
+                  </div>
+                  <input type="email" value="{{this.profileService.MYPROFILE.user.email}}" name="email"
+                    autocomplete="off" id="inlineFormEmail" class="form-control form-rounded py-0" value="sdfa sdfas"
+                    placeholder="email">
+                </div>
+
+                <div class="input-group  col-md-4 mb-2 d-flex">
+                  <button class="btn btn-primary btn-sm btn-rounded  my-4 waves-effect z-depth-0" i18n>Continue</button>
+                </div>
+
+              </div>
+              <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+                  <p>Or use either of these options.</p>
+                </div>
+              </div>
+
+              <div class="row justify-content-center">
+                <div class="col-4 col-md-2 col-lg-2  text-center p-1">
+                  <a class="center-block" href="/mynetwork/import-linkedin" title="Linkedin"><img
+                      class="img-thumbnail center-block" src="http://www.epanko.com/icons/linkedin-icon-sm.jpg"
+                      alt="Gmail" style="max-width:70px;"></a>
+                </div>
+
+                <div class="col-4 col-md-2 col-lg-2 text-center p-1">
+                  <a href="/mynetwork/import-google" title="Gmail"><img class="img-thumbnail center-block"
+                      src="http://www.epanko.com/icons/gmail-icon-sm.jpg" alt="Gmail" style="max-width:70px;"></a>
+                </div>
+
+                <div class="col-4 col-md-2 col-lg-2 text-center p-1">
+                  <a href="/mynetwork/import-yahoo" title="Yahoo"><img class="img-thumbnail center-block"
+                      src="http://www.epanko.com/icons/yahoo-icon-sm.jpg" alt="Yahoo" style="max-width:70px;"></a>
+                </div>
+
+                <div class="col-4 col-md-2 col-lg-2 text-center p-1">
+                  <a href="/mynetwork/import-outlook" title="Outlook/Hotmail"><img class="img-thumbnail center-block"
+                      src="http://www.epanko.com/icons/outlook-icon-sm.jpg" alt="Outlook/Hotmail"
+                      style="max-width:70px;"></a>
+                </div>
+
+                <div class="col-4 col-md-2 col-lg-2 text-center p-1">
+                  <a href="/mynetwork/import-email" title="Invite by Email"><img class="img-thumbnail center-block"
+                      src="http://www.epanko.com/icons/email-icon-sm.jpg" alt="" style="max-width:70px;"></a>
+                </div>
+
+                <div class="col-4 col-md-2 col-lg-2 text-center p-1">
+                  <a href="/mynetwork/import-upload" title="Upload a File"><img class="img-thumbnail center-block"
+                      src="http://www.epanko.com/icons/upload-icon-sm.jpg" alt="" style="max-width:70px;"></a>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <br>
+                  <p i18n>We let you import your contacts to help you connect with them effortlessly and suggest the
+                    best opportunities for you.</p>
+
+                  <div class="form-group">
+                    <span *ngIf="processing_request==true" class="fa fa-spinner fa-pulse fa-fw"></span><button
+                      (click)="skipContactImport()" class="btn btn-default btn-sm pull-right form-controls btn-rounded"
+                      style="color:gray;border:1px solid gray;">Skip</button>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div
+            *ngIf="profileService.MYPROFILE.init.location==true && profileService.MYPROFILE.init.activity==true && profileService.MYPROFILE.init.mission==true && profileService.MYPROFILE.init.verified==true && profileService.MYPROFILE.init.contact_imported==true">
+            {{RedirectToFeed()}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</app-wf-main-content>

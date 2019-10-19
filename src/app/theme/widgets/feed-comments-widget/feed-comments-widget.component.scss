@@ -1,0 +1,98 @@
+.card-comments {
+    background: #fff !important;
+  }
+  
+  .card-footer .comment-card {
+    background-color: #fff;
+  }
+  
+  .card-comments .card-comment {
+    &:first-of-type {
+      padding-top: 0;
+    }
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+    border: 1px solid red;
+  }
+  
+  .img-sm, .card-comments .card-comment img, .user-block.user-block-sm img {
+    float: left;
+    margin-left: 0px;
+    width: 30px !important;
+    height: 30px !important;
+  }
+  
+  .img-sm, .img-md, .img-lg, .card-comments .card-comment img, .user-block.user-block-sm img {
+    float: left;
+  }
+  
+
+  .card-comments {
+    .comment-text {
+      margin-left: 40px;
+      position: relative;
+    }
+    .username {
+      font-weight: 600;
+      font-size: 13px;
+    }
+    .comment-message {
+      font-weight: 100;
+      font-size: 14px;
+      padding-right: 30px;
+      position: relative;
+      width: 100%;
+      display: block;
+      /* for IE 6 */
+      img {
+        position: absolute;
+        left: 0;
+        width: 100%;
+      }
+    }
+    .username .comment-metadata {
+      position: absolute;
+      top: 0px;
+      right: 0px;
+    }
+    .comment-text .text-muted {
+      font-weight: 400;
+      font-size: 12px;
+    }
+  }
+
+  .user-block{
+    display:block;
+}
+
+  .user-block img {
+    width: 35px;
+    height: 35px;
+    float: left;
+}
+.user-block .username {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.url-tag{
+    font-size: 12px;	
+    font-weight: 100;
+    color:gray;	
+}
+
+.user-block .description {
+    font-size: 14px;
+}
+
+.user-block .description .comment-stats,.short-info{ 
+  font-size: 13px;	
+  font-weight: 500;
+  color: indigo;
+}
+
+.user-block .description, 
+.user-block .comment {
+    display: block;
+    margin-left: 38px;
+}

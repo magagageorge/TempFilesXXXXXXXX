@@ -1,0 +1,35 @@
+<div class="w-100 sticky-top">
+  <div class="card m-0">
+  <div class="card-body py-0">    
+  <div class="row p-0">      
+  <div class="col-12 p-0">
+  <ul class="list-group list-group-flush mx-0">
+    <li class="list-group-item px-1 text-center">
+      <a routerLink="/mynetwork/connections" class="d-block w-100">
+      <span *ngIf="profileService.MYPROFILE.no_connections>0"  class="w-100"><h3>{{profileService.MYPROFILE.no_connections}}</h3></span>
+      <span class="w-100" i18n>Connections</span>
+      </a>
+    </li>
+    <li class="list-group-item px-1 text-center"><a routerLink="/mynetwork/invitations"><i class="fa fa-users"></i> Invitations</a></li>
+    <li class="list-group-item px-1 text-center">
+      <a routerLink="/mynetwork/contacts" class="d-block w-100">
+       <span class="w-100">
+        <span class="fa fa-address-book"></span><span>&nbsp;</span> <span i18n>Contacts</span>
+       </span>
+     </a>
+      <br>
+     <a routerLink="/mynetwork/contacts/import" class="d-block w-100" style="font-size:80%;">
+      <span class="w-100">
+       <span>Import Your Contacts</span>
+      </span>
+    </a>
+    </li>      
+  </ul>
+  </div>
+  </div>
+  
+  </div>
+  </div>
+  
+  </div>
+  

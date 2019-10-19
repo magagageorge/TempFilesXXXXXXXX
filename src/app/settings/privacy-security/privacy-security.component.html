@@ -1,0 +1,135 @@
+<app-wf-navbar class="d-none d-md-block d-lg-block"></app-wf-navbar>
+<app-wf-navbar-summary [back_route]="parent_route" [display_text]="title" class="d-block d-md-none d-lg-none">
+</app-wf-navbar-summary>
+
+<app-wf-main-content>
+
+  <div class="container-fluid px-md-5 px-lg-5" style="min-height: 100%;">
+    <div class="row" style="min-height: 80vh;">
+      <div class="d-none d-md-block d-lg-block col-md-3 col-lg-3" style="min-height:80vh;">
+        <app-settings-left-widget></app-settings-left-widget>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6  p-0">
+        <div class="card w-100">
+          <div class="card-header py-0">
+            <span i18n>Privacy Settings</span>
+          </div>
+          <div *ngIf="settingsService.loading_settings==true" class="card-body text-center">
+            <span class="fa fa-circle-o-notch fa-spin"></span>
+          </div>
+          <div *ngIf="settingsService.loading_settings==false" class="card-body p-1">
+              <form [formGroup]="privacyGroup" (ngSubmit)="save()" class="p-1">
+            <div *ngIf="showMessages.error && errors && errors.length > 0 && !submitted"
+              class="alert alert-info text-danger" role="alert">
+              <div *ngFor="let error of errors">{{ error }}</div>
+            </div>
+            <div *ngIf="showMessages.success && messages && messages.length > 0 && !submitted"
+              class="alert alert-success" role="alert">
+              <div><strong>Hooray!</strong></div>
+              <div *ngFor="let message of messages">{{ message }}</div>
+            </div>
+            <div class="d-block p-0 m-0">
+              <h5 i18n>Update your privacy settings.</h5>
+              <div  class="d-block w-100 py-1">
+                
+                
+                <div class="row mx-0 py-1 set-list-item">
+                  <div class="col-12 col-md-7 col-lg-7"> {{settingsService.privacy_settings.options.show_email_to}}</div>
+                  <div class="col-12 col-md-5 col-lg-5">
+                      <select id="inputshow_email_to" formControlName="show_email_to"  [(ngModel)]="settingsService.privacy_settings.show_email_to"   [ngClass]="{ 'is-invalid': submitted && f.show_email_to.errors }" name="show_email_to" class="form-control form-rounded">  
+                          <option *ngFor="let option of privacy_options"  value="{{option.key}}" >{{option.value}}</option>		
+                        </select>
+                        <div *ngIf="submitted && f.show_email_to.errors" class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                          <div *ngIf="f.show_email_to.errors.required" i18n>Required</div>
+                        </div>
+                    </div>
+              </div>
+      
+              <div class="row mx-0 py-1 set-list-item">
+                  <div class="col-12 col-md-7 col-lg-7">{{settingsService.privacy_settings.options.show_posts_to}}</div>
+                  <div class="col-12 col-md-5 col-lg-5">
+                      <select id="inputshow_posts_to" formControlName="show_posts_to"  [(ngModel)]="settingsService.privacy_settings.show_posts_to"   [ngClass]="{ 'is-invalid': submitted && f.show_posts_to.errors }" name="show_posts_to" class="form-control form-rounded">  
+                          <option *ngFor="let option of privacy_options"  value="{{option.key}}" >{{option.value}}</option>		
+                        </select>
+                        <div *ngIf="submitted && f.show_posts_to.errors" class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                          <div *ngIf="f.show_posts_to.errors.required" i18n>Required</div>
+                        </div>
+                    </div>
+              </div>
+    
+              <div class="row mx-0 py-1 set-list-item">
+                  <div class="col-12 col-md-7 col-lg-7">{{settingsService.privacy_settings.options.show_phone_to}} </div>
+                  <div class="col-12 col-md-5 col-lg-5">
+                      <select id="inputshow_phone_to" formControlName="show_phone_to"  [(ngModel)]="settingsService.privacy_settings.show_phone_to"   [ngClass]="{ 'is-invalid': submitted && f.show_phone_to.errors }" name="show_phone_to" class="form-control form-rounded">  
+                          <option *ngFor="let option of privacy_options"  value="{{option.key}}" >{{option.value}}</option>		
+                        </select>
+                        <div *ngIf="submitted && f.show_phone_to.errors" class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                          <div *ngIf="f.show_phone_to.errors.required" i18n>Required</div>
+                        </div>
+                    </div>
+              </div>
+    
+              <div class="row mx-0 py-1 set-list-item">
+                  <div class="col-12 col-md-7 col-lg-7">{{settingsService.privacy_settings.options.show_online_status_to}}</div>
+                  <div class="col-12 col-md-5 col-lg-5">
+                      <select id="inputshow_online_status_to" formControlName="show_online_status_to"  [(ngModel)]="settingsService.privacy_settings.show_online_status_to"   [ngClass]="{ 'is-invalid': submitted && f.show_online_status_to.errors }" name="show_online_status_to" class="form-control form-rounded">  
+                          <option *ngFor="let option of privacy_options"  value="{{option.key}}" >{{option.value}}</option>		
+                        </select>
+                        <div *ngIf="submitted && f.show_online_status_to.errors" class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                          <div *ngIf="f.show_online_status_to.errors.required" i18n>Required</div>
+                        </div>
+                    </div>
+              </div>
+              
+              <div class="row mx-0 py-1 set-list-item">
+                  <div class="col-12 col-md-7 col-lg-7">{{settingsService.privacy_settings.options.show_birthdate_to}} </div>
+                  <div class="col-12 col-md-5 col-lg-5">
+                      <select id="inputshow_birthdate_to" formControlName="show_birthdate_to"  [(ngModel)]="settingsService.privacy_settings.show_birthdate_to"   [ngClass]="{ 'is-invalid': submitted && f.show_birthdate_to.errors }" name="show_birthdate_to" class="form-control form-rounded">  
+                          <option *ngFor="let option of privacy_options"  value="{{option.key}}" >{{option.value}}</option>		
+                        </select>
+                        <div *ngIf="submitted && f.show_birthdate_to.errors" class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                          <div *ngIf="f.show_birthdate_to.errors.required" i18n>Required</div>
+                        </div>
+                    </div>
+              </div>
+              
+              <div class="row mx-0 py-1 set-list-item">
+                  <div class="col-12 col-md-7 col-lg-7">{{settingsService.privacy_settings.options.who_post_onwall}} </div>
+                  <div class="col-12 col-md-5 col-lg-5">
+                      <select id="inputwho_post_onwall" formControlName="who_post_onwall"  [(ngModel)]="settingsService.privacy_settings.who_post_onwall"   [ngClass]="{ 'is-invalid': submitted && f.who_post_onwall.errors }" name="who_post_onwall" class="form-control form-rounded">  
+                          <option *ngFor="let option of privacy_options"  value="{{option.key}}" >{{option.value}}</option>		
+                        </select>
+                        <div *ngIf="submitted && f.who_post_onwall.errors" class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                          <div *ngIf="f.who_post_onwall.errors.required" i18n>Required</div>
+                        </div>
+                    </div>
+              </div>
+              
+              <div class="row mx-0 py-1 set-list-item">
+                  <div class="col-12 col-md-7 col-lg-7">{{settingsService.privacy_settings.options.who_send_request}} </div>
+                  <div class="col-12 col-md-5 col-lg-5">
+                      <select id="inputwho_send_request" formControlName="who_send_request"  [(ngModel)]="settingsService.privacy_settings.who_send_request"   [ngClass]="{ 'is-invalid': submitted && f.who_send_request.errors }" name="who_send_request" class="form-control form-rounded">  
+                          <option *ngFor="let option of privacy_options2"  value="{{option.key}}" >{{option.value}}</option>		
+                        </select>
+                        <div *ngIf="submitted && f.who_send_request.errors" class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                          <div *ngIf="f.who_send_request.errors.required" i18n>Required</div>
+                        </div>
+                    </div>
+              </div>          
+
+              </div>
+              <div class="d-block push-right">
+                <button type="submit" class="btn btn-sm btn-primary btn-rounded"><span
+                  *ngIf="submitted==true"><span
+                    class="fa fa-circle-o-notch fa-spin"></span></span><span>&nbsp;</span><span i18n>Save Changes</span></button>
+              </div>
+            </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-wf-main-content>
+<!--Main layout-->
+<app-wf-footer></app-wf-footer>

@@ -1,0 +1,17 @@
+<!-- Navbar -->
+<nav class="navbar navbar-search-nav m-0 p-0">
+  <ul class="p-0 m-0">
+    <li class="nav-item d-block float-left ml-1" [class.active]="tab=='top'">
+      <a  routerLink="/search/top/{{searchService.search_query}}" class="nav-link waves-effect waves-light"> <span class="clearfix">Top</span></a>
+    </li>				  
+    <li class="nav-item  d-block  float-left ml-1" [class.active]="tab=='people'">
+      <a  routerLink="/search/people/{{searchService.search_query}}" class="nav-link waves-effect waves-light"> <span class="clearfix">People</span></a>
+    </li>				  
+    <li class="nav-item  d-block  float-left ml-1" [class.active]="tab=='posts'">
+      <a  routerLink="/search/posts/{{searchService.search_query}}" class="nav-link waves-effect waves-light"> <span class="clearfix">Posts</span></a>
+    </li>
+    <li class="nav-item  d-none  float-left ml-1" [class.active]="tab=='pages'">
+      <a routerLink="/search/pages/{{searchService.search_query}}" class="nav-link waves-effect waves-light"><span class="clearfix">Pages</span></a>
+    </li>                                              	                
+  </ul>				
+</nav>

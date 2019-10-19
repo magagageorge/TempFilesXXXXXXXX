@@ -1,0 +1,35 @@
+<div class="d-block w-100">
+<div *ngIf="searchService.loading_search" class="d-block text-center p-1">
+  <span class="fa fa-circle-o-notch fa-spin"></span>
+</div>
+<div *ngIf="searchService.PEOPLE.length" class="d-block p-0">
+    <div class="row m-0">
+      <div class="col-12">People</div>
+    </div>
+    <div *ngFor="let profile of searchService.PEOPLE" class="row m-0 search-result-profile-card">
+       <div class="col-12 p-0 m-0 align-middle">
+          <a routerLink="/{{profile.url}}" (click)="urlViewerService.setProfile(profile);" class="h-100 w-100 m-0 p-0">
+           <div *ngIf="profile" class="d-block h-100 p-1 m-0 align-middle">
+            <div class="row h-100 m-0 p-0">
+             <div class="col-2 col-md-1 col-lg-1 p-0">
+               <img src="{{profile.avatar}}" class="img-fluid rounded-circle m-0"  style="max-height:60px;">
+             </div>
+             <div class="col-10  col-md-11 col-lg-11 py-auto px-1 align-middle">
+               <span class="d-block w-100 text-truncate"><strong>{{profile.name}}</strong></span> 
+               <span class="d-block w-100 text-truncate">{{profile.short_info}}</span>  
+             </div>
+            </div>
+           </div> 
+          </a>       
+       </div>
+    </div>
+   </div>
+   <div *ngIf="!searchService.PEOPLE.length && searchService.search_query.trim().length>2 && searchService.loading_search==false" class="d-block p-0">
+      <div class="row m-0">
+        <div class="col-12 text-center">
+           <h5><ng-container i18n>No results found for</ng-container> {{searchService.search_query.trim()}}</h5>
+          <p i18n>The term you entered did not bring up any results. You may have mistyped your term or content privacy could be protecting you from some potentially sensitive content.</p>
+          </div>
+      </div>
+    </div>
+  </div>   

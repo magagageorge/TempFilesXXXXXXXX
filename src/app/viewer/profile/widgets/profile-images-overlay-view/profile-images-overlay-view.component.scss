@@ -1,0 +1,25 @@
+.faint-body-overlay{
+    position: fixed;
+    top:0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    background-color: transparentize($color: #000000, $amount: 0.2);
+    z-index: 2000;
+}
+
+.overlay-close-btn{
+    margin:3px;
+    padding: 4px;
+    display: inline-block;
+    border-radius: 50%;
+    font-size: 120%;
+    color:#ffffff;
+    text-align: center;
+    width:35px;
+    height:35px;
+}
+
+.overlay-close-btn:hover{
+    background-color: transparentize($color: #000000, $amount: 0.9);
+}

@@ -1,0 +1,181 @@
+<app-wf-navbar class="d-none d-md-block d-lg-block"></app-wf-navbar>
+<app-wf-navbar-summary [back_route]="parent_route" [display_text]="title" class="d-block d-md-none d-lg-none">
+</app-wf-navbar-summary>
+<app-wf-main-content>
+  <div class="container-fluid px-md-5 px-lg-5" style="min-height: 100%;">
+    <div class="row" style="min-height: 80vh;">
+      <div class="d-none d-md-block d-lg-block col-md-3 col-lg-3" style="min-height:80vh;">
+        <app-settings-left-widget></app-settings-left-widget>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6  p-0">
+        <div class="card w-100">
+          <div class="card-header py-0">
+            <span i18n>Account Settings</span>
+          </div>
+          <div *ngIf="settingsService.loading_settings==true" class="card-body text-center">
+            <span class="fa fa-circle-o-notch fa-spin"></span>
+          </div>
+
+          <div *ngIf="settingsService.loading_settings==false" class="card-body p-1">
+            <form [formGroup]="accountGroup" (ngSubmit)="save()" class="p-1">
+              <div *ngIf="showMessages.error && errors && errors.length > 0 && !submitted"
+                class="alert alert-info text-danger" role="alert">
+                <div *ngFor="let error of errors">{{ error }}</div>
+              </div>
+              <div *ngIf="showMessages.success && messages && messages.length > 0 && !submitted"
+                class="alert alert-success" role="alert">
+                <div><strong>Hooray!</strong></div>
+                <div *ngFor="let message of messages">{{ message }}</div>
+              </div>
+              <div class="form">
+                <h5 i18n>Change your basic account and language settings.</h5>
+                <div class="d-block  set-list-item">
+                  <div *ngIf="accountForm.edit_username==false" class="row align-middle py-1">
+                    <div class="set-list-item-edit-btn"><span (click)="FormEditUsername(true)"><span
+                          class="fa fa-pencil"></span><span>&nbsp;</span> <span i18n>Edit</span></span></div>
+                    <div class="col-12 col-md-3 col-lg-3" i18n>User Name</div>
+                    <div class="col-12 col-md-9 col-lg-9">
+                      <p i18n>
+                        http://www.epanko.com/{{settingsService.account_settings.url}}
+                      </p>
+                    </div>
+                  </div>
+                  <div *ngIf="accountForm.edit_username" class="row align-middle py-1">
+                    <div class="col-3" i18n>User Name</div>
+                    <div class="col-12 col-md-9 col-lg-9">
+                      <label i18n>Change Your Username</label>
+                      <input type="text" formControlName="url" [(ngModel)]="settingsService.account_settings.url"
+                        class="form-control form-rounded" name="url" placeholder="Username">
+                      <div *ngIf="submitted && f.url.errors"
+                        class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                        <div *ngIf="f.url.errors.required" i18n>Required</div>
+                      </div>                      
+                      <button class="btn btn-sm btn-primary btn-rounded"> <span *ngIf="submitted==true && accountForm.edit_username" ><span class="fa fa-circle-o-notch fa-spin"></span></span><span>&nbsp;</span> <span>Save</span></button>
+                      <span  (click)="CanceEdit()" class="btn btn-sm btn-rounded btn-default">Cancel</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-block  set-list-item">
+                  <div *ngIf="accountForm.edit_primary_email==false" class="row align-middle py-1">
+                    <div class="set-list-item-edit-btn"><span (click)="FormEditPEmail(true)"><span
+                          class="fa fa-pencil"></span><span>&nbsp;</span> <span i18n>Edit</span></span></div>
+                    <div class="col-12 col-md-3 col-lg-3" i18n>Primary Email</div>
+                    <div class="col-12 col-md-9 col-lg-9">
+                      <p i18n>
+                        {{settingsService.account_settings.account_email}}
+                      </p>
+                    </div>
+                  </div>
+                  <div *ngIf="accountForm.edit_primary_email" class="row align-middle py-1">
+                    <div class="col-12 col-md-3 col-lg-3">Primary Email</div>
+                    <div class="col-12 col-md-9 col-lg-9">
+                      <input type="email" formControlName="account_email"
+                        [(ngModel)]="settingsService.account_settings.account_email" class="form-control form-rounded"
+                        name="account_email" placeholder="Primary Email">
+                      <p i18n>
+                        Email will not be displayed publicly.Once you change your account email,you must first confirm
+                        the change through the link sent to your email before being able to login with it.
+                      </p>
+                      <button class="btn btn-sm btn-primary btn-rounded"> <span *ngIf="submitted==true && accountForm.edit_primary_email" ><span class="fa fa-circle-o-notch fa-spin"></span></span><span>&nbsp;</span> <span>Save</span></button>
+                      <span (click)="CanceEdit()" class="btn btn-sm btn-rounded btn-default">Cancel</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-block  set-list-item">
+                  <div *ngIf="accountForm.edit_mobile_phone==false" class="row align-middle py-1">
+                    <div class="set-list-item-edit-btn"><span (click)="FormEditMobilePhone(true)"><span
+                          class="fa fa-pencil"></span><span>&nbsp;</span> <span i18n>Edit</span></span></div>
+                    <div class="col-12 col-md-3 col-lg-3" i18n>Mobile Phone</div>
+                    <div class="col-12 col-md-9 col-lg-9">
+                      <p i18n>
+                        {{settingsService.account_settings.mobile}}
+                      </p>
+                    </div>
+                  </div>
+                  <div *ngIf="accountForm.edit_mobile_phone" class="row align-middle py-1">
+                    <div class="col-12 col-md-3 col-lg-3">Mobile Phone</div>
+                    <div class="col-12 col-md-9 col-lg-9">
+                      <input type="email" formControlName="Mobile"
+                        [(ngModel)]="settingsService.account_settings.mobile" class="form-control form-rounded"
+                        name="account_email" placeholder="Mobile Phone">
+                      <p i18n>
+                        We will text a verification code to this number. Standard SMS fees may apply. Others will be
+                        able to find you by email or phone number. You can change these settings at any time.
+                      </p>
+                      <button class="btn btn-sm btn-primary btn-rounded"> <span *ngIf="submitted==true && accountForm.edit_mobile_phone" ><span class="fa fa-circle-o-notch fa-spin"></span></span><span>&nbsp;</span> <span>Save</span></button>
+                      <span (click)="CanceEdit()" class="btn btn-sm btn-rounded btn-default">Cancel</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-block  set-list-item">
+                  <div *ngIf="accountForm.edit_timezone==false" class="row align-middle py-1">
+                    <div class="set-list-item-edit-btn"><span (click)="FormEditTimezone(true)"><span
+                          class="fa fa-pencil"></span><span>&nbsp;</span> <span i18n>Edit</span></span></div>
+                    <div class="col-12 col-md-3 col-lg-3" i18n>Timezome</div>
+                    <div class="col-12 col-md-9 col-lg-9">
+                      <p i18n>
+                        {{settingsService.account_settings.timezone}}
+                      </p>
+                    </div>
+                  </div>
+                  <div *ngIf="accountForm.edit_timezone" class="row py-1">
+                    <div class="col-12 col-md-3 col-lg-3">Timezome</div>
+                    <div class="col-12 col-md-9 col-lg-9">
+                      <select id="inputcountry" formControlName="timezone"
+                        [ngClass]="{ 'is-invalid': submitted && f.timezone.errors }"
+                        [(ngModel)]="settingsService.account_settings.timezone" name="timezone"
+                        class="form-control form-rounded">
+                        <option value="" i18n>-Select Your Timezone -</option>
+                        <option *ngFor="let country of countries" value="{{country.id}}">{{country.name}}</option>
+                      </select>
+                      <div *ngIf="submitted && f.timezone.errors"
+                        class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                        <div *ngIf="f.timezone.errors.required" i18n>Required</div>
+                      </div>
+                      <button class="btn btn-sm btn-primary btn-rounded"> <span *ngIf="submitted==true && accountForm.edit_timezone" ><span class="fa fa-circle-o-notch fa-spin"></span></span><span>&nbsp;</span> <span>Save</span></button>
+                      <span (click)="CanceEdit()" class="btn btn-sm btn-rounded btn-default">Cancel</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-block  set-list-item">
+                  <div *ngIf="accountForm.edit_language==false" class="row align-middle py-1">
+                    <div class="set-list-item-edit-btn"><span (click)="FormEditLanguage(true)"><span
+                          class="fa fa-pencil"></span><span>&nbsp;</span> <span i18n>Edit</span></span></div>
+                    <div class="col-12 col-md-3 col-lg-3" i18n>Language</div>
+                    <div class="col-12 col-md-9 col-lg-9">
+                      <p i18n>
+                        {{settingsService.account_settings.language}}
+                      </p>
+                    </div>
+                  </div>
+                  <div *ngIf="accountForm.edit_language" class="row py-1">
+                    <div class="col-12 col-md-3 col-lg-3">Language</div>
+                    <div class="col-12 col-md-9 col-lg-9">
+                      <select id="inputlanguage" formControlName="language"
+                        [ngClass]="{ 'is-invalid': submitted && f.language.errors }"
+                        [(ngModel)]="settingsService.account_settings.language" name="language"
+                        class="form-control form-rounded">
+                        <option value="" i18n>-Select Your Language -</option>
+                        <option *ngFor="let country of countries" value="{{country.id}}">{{country.name}}</option>
+                      </select>
+                      <div *ngIf="submitted && f.language.errors"
+                        class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                        <div *ngIf="f.language.errors.required" i18n>Required</div>
+                      </div>
+                      <button class="btn btn-sm btn-primary btn-rounded"> <span *ngIf="submitted==true && accountForm.edit_language" ><span class="fa fa-circle-o-notch fa-spin"></span></span><span>&nbsp;</span> <span>Save</span></button>
+                      <span (click)="CanceEdit()" class="btn btn-sm btn-rounded btn-default">Cancel</span>
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-wf-main-content>
+<!--Main layout-->
+<app-wf-footer></app-wf-footer>

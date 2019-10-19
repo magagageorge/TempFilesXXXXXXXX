@@ -1,0 +1,22 @@
+
+<app-profile *ngIf="urlviwerService.PPVIEWER.type=='profile' && urlviwerService.PPVIEWER.profile"></app-profile>
+<ng-container *ngIf="urlviwerService.PPVIEWER.type==''">
+    <app-wf-navbar></app-wf-navbar>
+    <app-wf-main-content>
+    <div  class="container-fluid px-md-5 px-lg-5" style="min-height: 100%;">
+    <div class="row" style="min-height: 80vh;">
+    <div class="col-12 col-md-8 col-lg-8  mx-auto text-center py-6" style="font-size: 120%;">
+
+        <span class="fa fa-spinner fa-pulse fa-fw"></span>
+      
+    </div>
+    <div class="col-12 col-md-4 col-lg-4  d-none d-md-block d-lg-block pull-right">
+    <app-wf-right-sidebar></app-wf-right-sidebar>
+    </div>
+    </div>
+    </div>
+    </app-wf-main-content>
+    <!--Main layout-->
+    <app-wf-footer></app-wf-footer>
+</ng-container>
+

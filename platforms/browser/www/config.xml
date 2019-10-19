@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget android-versionCode="1" id="io.windoface.apprelease" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Windoface</name>
+    <description>
+        Windoface is an online social platform where you discover and unlock the power of your potential and exploring career and business Opportunities while staying connected and engaged.
+    </description>
+    <author email="info@windoface.co.tz" href="http://www.windoface.co.tz">
+        Windoface Team
+    </author>
+    <content src="index.html" />
+    <access origin="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+</widget>

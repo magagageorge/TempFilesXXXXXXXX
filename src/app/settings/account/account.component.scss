@@ -1,0 +1,17 @@
+.set-list-item{
+    border-bottom: 1px solid grey;
+    position: relative;
+}
+
+.set-list-item .set-list-item-edit-btn{
+    position: absolute;
+    right:2px;
+    top:2px;
+    cursor: pointer;
+    padding:2px;
+    z-index: 100;
+}
+
+.set-list-item .set-list-item-edit-btn:hover{
+text-decoration: underline;    
+}

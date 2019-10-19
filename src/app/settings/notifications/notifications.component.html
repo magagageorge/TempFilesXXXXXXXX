@@ -1,0 +1,312 @@
+<app-wf-navbar class="d-none d-md-block d-lg-block"></app-wf-navbar>
+<app-wf-navbar-summary [back_route]="parent_route" [display_text]="title" class="d-block d-md-none d-lg-none">
+</app-wf-navbar-summary>
+
+<app-wf-main-content>
+
+    <div class="container-fluid px-md-5 px-lg-5" style="min-height: 100%;">
+        <div class="row" style="min-height: 80vh;">
+            <div class="d-none d-md-block d-lg-block col-md-3 col-lg-3" style="min-height:80vh;">
+                <app-settings-left-widget></app-settings-left-widget>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6  p-0">
+                <div class="card w-100">
+                    <div class="card-header py-0">
+                        <span i18n>Notification Settings</span>
+                    </div>
+                    <div *ngIf="settingsService.loading_settings==true" class="card-body text-center">
+                        <span class="fa fa-circle-o-notch fa-spin"></span>
+                    </div>
+                    <div *ngIf="settingsService.loading_settings==false" class="card-body p-1">
+                        <form [formGroup]="notificationGroup" (ngSubmit)="save()" class="p-1">
+                            <div *ngIf="showMessages.error && errors && errors.length > 0 && !submitted"
+                                class="alert alert-info text-danger" role="alert">
+                                <div *ngFor="let error of errors">{{ error }}</div>
+                            </div>
+                            <div *ngIf="showMessages.success && messages && messages.length > 0 && !submitted"
+                                class="alert alert-success" role="alert">
+                                <div><strong>Hooray!</strong></div>
+                                <div *ngFor="let message of messages">{{ message }}</div>
+                            </div>
+                            <div class="form">
+                                <h5 i18n>Control when and how often Epanko sends emails to you</h5>
+                                <div class="d-block">
+                                    <div class="w-100">Email me When</div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-check m-0 p-0">
+                                                <input type="checkbox" formControlName="email_post_likes"
+                                                    [(ngModel)]="settingsService.notification_settings.email_post_likes"
+                                                    class="form-check-input" id="email_post_likes">
+                                                <label for="email_post_likes">Someone Likes my Post </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-check m-0 p-0">
+                                                <input type="checkbox" formControlName="email_comment_likes"
+                                                    [(ngModel)]="settingsService.notification_settings.email_comment_likes"
+                                                    class="form-check-input" id="email_comment_likes">
+                                                <label for="email_comment_likes">Someone Likes my Comment </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-check m-0 p-0">
+                                                <input type="checkbox" formControlName="email_mypost_shared"
+                                                    [(ngModel)]="settingsService.notification_settings.email_mypost_shared"
+                                                    class="form-check-input" id="email_mypost_shared">
+                                                <label for="email_mypost_shared">My post is shared </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-check m-0 p-0">
+                                                <input type="checkbox" formControlName="email_when_mypost_commented"
+                                                    [(ngModel)]="settingsService.notification_settings.email_when_mypost_commented"
+                                                    class="form-check-input" id="email_when_mypost_commented">
+                                                <label for="email_when_mypost_commented">When someone Commented on my
+                                                    Post </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-check m-0 p-0">
+                                                <input type="checkbox" formControlName="email_when_myask_answered"
+                                                    [(ngModel)]="settingsService.notification_settings.email_when_myask_answered"
+                                                    class="form-check-input" id="email_when_myask_answered">
+                                                <label for="email_when_myask_answered">When someone Answer my Question
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-check m-0 p-0">
+                                                <input type="checkbox" formControlName="email_when_followed"
+                                                    [(ngModel)]="settingsService.notification_settings.email_when_followed"
+                                                    class="form-check-input" id="email_when_followed">
+                                                <label for="email_when_followed">When I'm Followed </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-check m-0 p-0">
+                                                <input type="checkbox" formControlName="email_when_mentioned"
+                                                    [(ngModel)]="settingsService.notification_settings.email_when_mentioned"
+                                                    class="form-check-input" id="email_when_mentioned">
+                                                <label for="email_when_mentioned">When I'm Mentioned </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-check m-0 p-0">
+                                                <input type="checkbox" formControlName="email_whenimsent_message"
+                                                    [(ngModel)]="settingsService.notification_settings.email_whenimsent_message"
+                                                    class="form-check-input" id="email_whenimsent_message">
+                                                <label for="email_whenimsent_message">When I'm sent a Message </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-check m-0 p-0">
+                                                <input type="checkbox"
+                                                    formControlName="email_whenimsent_connection_request"
+                                                    [(ngModel)]="settingsService.notification_settings.email_whenimsent_connection_request"
+                                                    class="form-check-input" id="email_whenimsent_connection_request">
+                                                <label for="email_whenimsent_connection_request">When I have new
+                                                    connection Request </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-check m-0 p-0">
+                                                <input type="checkbox"
+                                                    formControlName="email_whensomeone_accept_connection"
+                                                    [(ngModel)]="settingsService.notification_settings.email_whensomeone_accept_connection"
+                                                    class="form-check-input" id="email_whensomeone_accept_connection">
+                                                <label for="email_whensomeone_accept_connection">When Someone Accepted
+                                                    my Connection Request </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-check m-0 p-0">
+                                                <input type="checkbox" formControlName="email_whenmycontact_join"
+                                                    [(ngModel)]="settingsService.notification_settings.email_whenmycontact_join"
+                                                    class="form-check-input" id="email_whenmycontact_join">
+                                                <label for="email_whenmycontact_join">When someone from my contacts Join
+                                                    epanko </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-check m-0 p-0">
+                                                <input type="checkbox" formControlName="email_research_surveys"
+                                                    [(ngModel)]="settingsService.notification_settings.email_research_surveys"
+                                                    class="form-check-input" id="email_research_surveys">
+                                                <label for="email_research_surveys">There are new Research Surveys to
+                                                    take </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <h5 i18n>Web Notification</h5>
+                                <div class="d-block">
+                                    <div class="w-100">Notify me When</div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-check m-0 p-0">
+                                                <input type="checkbox" formControlName="notify_post_likes"
+                                                    [(ngModel)]="settingsService.notification_settings.notify_post_likes"
+                                                    class="form-check-input" id="notify_post_likes">
+                                                <label for="notify_post_likes">Someone Likes my Post </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-check m-0 p-0">
+                                                <input type="checkbox" formControlName="notify_comment_likes"
+                                                    [(ngModel)]="settingsService.notification_settings.notify_comment_likes"
+                                                    class="form-check-input" id="notify_comment_likes">
+                                                <label for="notify_comment_likes">Someone Likes my Comment </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-check m-0 p-0">
+                                                <input type="checkbox" formControlName="notify_mypost_shared"
+                                                    [(ngModel)]="settingsService.notification_settings.notify_mypost_shared"
+                                                    class="form-check-input" id="notify_mypost_shared">
+                                                <label for="notify_mypost_shared">My post is shared </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-check m-0 p-0">
+                                                <input type="checkbox" formControlName="notify_when_mypost_commented"
+                                                    [(ngModel)]="settingsService.notification_settings.notify_when_mypost_commented"
+                                                    class="form-check-input" id="notify_when_mypost_commented">
+                                                <label for="notify_when_mypost_commented">When someone Commented on my
+                                                    Post </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-check m-0 p-0">
+                                                <input type="checkbox" formControlName="notify_when_myask_answered"
+                                                    [(ngModel)]="settingsService.notification_settings.notify_when_myask_answered"
+                                                    class="form-check-input" id="notify_when_myask_answered">
+                                                <label for="notify_when_myask_answered">When someone Answer my Question
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-check m-0 p-0">
+                                                <input type="checkbox" formControlName="notify_when_followed"
+                                                    [(ngModel)]="settingsService.notification_settings.notify_when_followed"
+                                                    class="form-check-input" id="notify_when_followed">
+                                                <label for="notify_when_followed">When I'm Followed </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-check m-0 p-0">
+                                                <input type="checkbox" formControlName="notify_when_mentioned"
+                                                    [(ngModel)]="settingsService.notification_settings.notify_when_mentioned"
+                                                    class="form-check-input" id="notify_when_mentioned">
+                                                <label for="notify_when_mentioned">When I'm Mentioned </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-check m-0 p-0">
+                                                <input type="checkbox" formControlName="notify_whenimsent_message"
+                                                    [(ngModel)]="settingsService.notification_settings.notify_whenimsent_message"
+                                                    class="form-check-input" id="notify_whenimsent_message">
+                                                <label for="notify_whenimsent_message">When I'm sent a Message </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-check m-0 p-0">
+                                                <input type="checkbox"
+                                                    formControlName="notify_whenimsent_connection_request"
+                                                    [(ngModel)]="settingsService.notification_settings.notify_whenimsent_connection_request"
+                                                    class="form-check-input" id="notify_whenimsent_connection_request">
+                                                <label for="notify_whenimsent_connection_request">When I have new
+                                                    connection Request </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-check m-0 p-0">
+                                                <input type="checkbox"
+                                                    formControlName="notify_whensomeone_accept_connection"
+                                                    [(ngModel)]="settingsService.notification_settings.notify_whensomeone_accept_connection"
+                                                    class="form-check-input" id="notify_whensomeone_accept_connection">
+                                                <label for="notify_whensomeone_accept_connection">When Someone Accepted
+                                                    my Connection Request </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-check m-0 p-0">
+                                                <input type="checkbox" formControlName="notify_whenmycontact_join"
+                                                    [(ngModel)]="settingsService.notification_settings.notify_whenmycontact_join"
+                                                    class="form-check-input" id="notify_whenmycontact_join">
+                                                <label for="notify_whenmycontact_join">When someone from my contacts
+                                                    Join epanko </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-check m-0 p-0">
+                                                <input type="checkbox" formControlName="notify_research_surveys"
+                                                    [(ngModel)]="settingsService.notification_settings.notify_research_surveys"
+                                                    class="form-check-input" id="notify_research_surveys">
+                                                <label for="notify_research_surveys">There are new Research Surveys to
+                                                    take </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-block push-right">
+                                        <button type="submit" class="btn btn-sm btn-primary btn-rounded"><span
+                                                *ngIf="submitted==true"><span
+                                                    class="fa fa-circle-o-notch fa-spin"></span></span><span>&nbsp;</span><span
+                                                i18n>Save Changes</span></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</app-wf-main-content>
+<!--Main layout-->
+<app-wf-footer></app-wf-footer>
