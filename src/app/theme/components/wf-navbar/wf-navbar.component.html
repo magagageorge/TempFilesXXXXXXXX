@@ -10,7 +10,7 @@
                 </li>
                 <li  *ngIf="is_authenticated==true" class="nav-item d-none d-md-block d-lg-block  float-left" style="max-width: 150px;">
                 <a class="nav-link navbar-brand px-0 mx-0" routerLink="/feed" style="font-weight:bold;color:#fff;font-size:20px;">
-                    Epanko
+                    Woorbi
                 </a>
                 </li> 
 			  <li *ngIf="is_authenticated==true;" class="nav-item d-block float-left ml-1" style="max-width: 150px;">
@@ -33,7 +33,7 @@
               </li>              
               <li *ngIf="is_authenticated==true;" ngbDropdown placement="bottom-right" class="nav-item nav-item avatar dropdown nav-user d-none d-md-block d-lg-block">
                     <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-5" data-toggle="dropdown" ngbDropdownToggle>
-					<img  style="max-height:50px;" src="{{profileService.MYPROFILE.avatar}}" class="img-fluid rounded-circle z-depth-0">
+					<img  style="max-height:50px;" src="{{profileService.MYPROFILE.avatar.face}}" class="img-fluid rounded-circle z-depth-0">
 					</a>
                     <div class="dropdown-menu dropdown-menu-righ" style="width:300px;" ngbDropdownMenu>
                         <ul class="list-group list-group-flush">
@@ -41,7 +41,7 @@
                                 <a routerLink="/{{profileService.MYPROFILE.url}}" class="p-0 m-0 text-decoration-none" style="text-decoration: none;">
                                 <div class="row p-0 m-0">
                                  <div class="col-3 p-0">
-                                    <img  style="max-height:60px;" src="{{profileService.MYPROFILE.avatar}}" class="img-fluid rounded-circle z-depth-0 m-0">
+                                    <img  style="max-height:60px;" src="{{profileService.MYPROFILE.avatar.face}}" class="img-fluid rounded-circle z-depth-0 m-0">
                                  </div>
                                  <div class="col-9 p-0">
                                      <div class="d-inline-block w-100 m-0 p-0 font-weight-bold text-truncate">
@@ -75,7 +75,7 @@
                <ng-container *ngIf="is_authenticated!=true">
                <li class="nav-item w-50  float-left">
                 <a class="nav-link navbar-brand  px-0 mx-0" routerLink="/" style="font-weight:bold;color:#fff;font-size:20px;">
-                    Epanko 
+                    Woorbi 
                 </a>
                 </li>               
                <li class="nav-item" *ngFor="let login_menu of login_menus">

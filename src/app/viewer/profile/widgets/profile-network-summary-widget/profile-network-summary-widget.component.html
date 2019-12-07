@@ -8,7 +8,7 @@
             <ng-container *ngFor="let connection of profileConnectionsService.CONNECTIONS;let i=index">
                 <div *ngIf="i<6" class="col-4 col-md-6 col-lg-6 p-0" style="border:1px solid #ffffff;">
                     <a routerLink="/{{connection.url}}" (click)="urlViewerService.setProfile(connection);" class="w-100 m-0 p-0">
-                        <span class="d-block w-100 p-0"><img src="{{connection.avatar}}" class="w-100"></span>
+                        <span class="d-block w-100 p-0"><img src="{{connection.avatar.face}}" class="w-100"></span>
                         <span class="d-block w-100 p-0 text-center font-weight-bold">{{connection.name}}</span>
                     </a>
                 </div>

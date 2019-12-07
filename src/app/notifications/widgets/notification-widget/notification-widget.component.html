@@ -1,6 +1,6 @@
 <div class="row py-1" style="border-bottom:1px solid dimgrey" id="notification_item_{{notification.id}}">
 <div class="col-2 col-md-1 col-lg-1 p-0">
-  <img *ngIf="notification.s_profile" (mouseover)="hovercardService.OnHover($event,notification.s_profile)" (mouseover)="hovercardService.OnHover($event,notification.s_profile)" (click)="hovercardService.OnMouseOut($event);urlViewerService.setProfile(notification.s_profile);" (mouseleave)="hovercardService.OnMouseOut($event)" src="{{notification.s_profile.avatar}}" class="img-fluid rounded-circle m-0">
+  <img *ngIf="notification.s_profile" (mouseover)="hovercardService.OnHover($event,notification.s_profile)" (mouseover)="hovercardService.OnHover($event,notification.s_profile)" (click)="hovercardService.OnMouseOut($event);urlViewerService.setProfile(notification.s_profile);" (mouseleave)="hovercardService.OnMouseOut($event)" src="{{notification.s_profile.avatar.face}}" class="img-fluid rounded-circle m-0">
 </div>
 <div class="col-9  col-md-10 col-lg-10 p-1">
   <div class="d-block p-0 m-0">

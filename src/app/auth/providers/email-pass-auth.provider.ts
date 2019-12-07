@@ -111,8 +111,8 @@ export class EmailPassAuthProvider extends AbstractAuthProvider {
 	    super();
 		var __this =  this;
         __this.defaultConfig = {
-            //baseEndpoint: 'http://localhost/epanko.api/api/web/auth/',
-            baseEndpoint: 'http://app.epanko.com/auth/',
+            //baseEndpoint: 'http://localhost/woorbi.api/api/web/auth/',
+            baseEndpoint: 'http://app.woorbi.com/auth/',
             login: {
                 alwaysFail: false,
                 rememberMe: true,
@@ -245,7 +245,7 @@ export class EmailPassAuthProvider extends AbstractAuthProvider {
             var errors = [];
             if (res instanceof HttpErrorResponse) {
                 if(res.status===422){
-                 errors.push('This email has already been registered with Epanko.If you have previously signed up with this email please try to login with it.');
+                 errors.push('This email has already been registered with Woorbi.If you have previously signed up with this email please try to login with it.');
                 }else{
                     errors = __this.getConfigValue('errors.getter')('register', res);
                 }

@@ -5,12 +5,12 @@
     <div class="display-pic-gradient">
       <a routerLink="/{{profile.url}}" class="w-100 h-100 p-0 m-0">&nbsp;&nbsp;&nbsp;</a>
     </div>
-    <a routerLink="/{{profile.url}}" (click)="urlViewerService.setProfile(profile);" class="w-100 h-100 p-0 m-0"><span  *ngIf="profile.cover==''">&nbsp;&nbsp;&nbsp;</span><img *ngIf="profile.cover!=''" src="{{profile.cover}}" class="img-fluid"></a>
+    <a routerLink="/{{profile.url}}" (click)="urlViewerService.setProfile(profile);" class="w-100 h-100 p-0 m-0"><span  *ngIf="profile.cover.picture==''">&nbsp;&nbsp;&nbsp;</span><img *ngIf="profile.cover.picture!=''" src="{{profile.cover.picture}}" class="img-fluid"></a>
    
     </div>
     <div class="profile-pic">
     <div class="pic">
-        <a routerLink="/{{profile.url}}" (click)="urlViewerService.setProfile(profile);"><img src="{{profile.avatar}}" class="img-fluid rounded-circle"></a>				
+        <a routerLink="/{{profile.url}}" (click)="urlViewerService.setProfile(profile);"><img src="{{profile.avatar.face}}" class="img-fluid rounded-circle"></a>				
     </div>
      </div>
     </div>

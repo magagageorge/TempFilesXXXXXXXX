@@ -50,9 +50,9 @@ export class PostingService {
   size: any;
   width: number;
   height: number;
-  img_url:string;
-  loadedImage:any;
-  fileReader:any;
+  img_url: string;
+  loadedImage: any;
+  fileReader: any;
 
   constructor(service: CrudService, feedService: FeedService, @Inject(CRUD_OPTIONS) CRUD_OPTIONS: CrudOptions, private _modalService: NgbModal, router: Router, linkPreviewService: WfLinkPreviewService) {
     this.service = service;
@@ -74,36 +74,36 @@ export class PostingService {
           continue;
         }
         this.filesToUpload.push(<File>f);
-        this.PushPreviewFiles(<File>f);        
+        this.PushPreviewFiles(<File>f);
       }
-      this.focus_on_message_input=true;
-      this.show_input_buttons = true; 
+      this.focus_on_message_input = true;
+      this.show_input_buttons = true;
       this.show_hide_inputs();
 
     }
   }
 
-  PushPreviewFiles(f:File){
+  PushPreviewFiles(f: File) {
     var fileReader = new FileReader();
     var i_url;
     fileReader.onload = (e) => {
-      if(e){
+      if (e) {
         i_url = (<FileReader>e.target).result;
         var loadedImage = new Image();
-        loadedImage .onload = (event) => { 
-          if(event){
-            this.file_preview_urls.push({url:i_url,width:loadedImage.width,height:loadedImage.height,file:<File>f}); 
-          }          
+        loadedImage.onload = (event) => {
+          if (event) {
+            this.file_preview_urls.push({ url: i_url, width: loadedImage.width, height: loadedImage.height, file: <File>f });
+          }
         }
-        loadedImage.src = i_url;  
-      }               
+        loadedImage.src = i_url;
+      }
     }
-    fileReader.readAsDataURL(<File>f); 
+    fileReader.readAsDataURL(<File>f);
   }
 
   RemovePreviewImage(preview: PreviewPicture) {
     this.file_preview_urls = this.file_preview_urls.filter((x: PreviewPicture) => x.url !== preview.url);
-    this.posted_images_in_edit=this.posted_images_in_edit.filter((x: PreviewPicture) => x.url !== preview.url);
+    this.posted_images_in_edit = this.posted_images_in_edit.filter((x: PreviewPicture) => x.url !== preview.url);
     if (preview.file !== null) {
       this.filesToUpload = this.filesToUpload.filter((x: File) => x !== <File>preview.file);
     }
@@ -125,7 +125,7 @@ export class PostingService {
       for (let i = 0; i < files.length; i++) {
         formData.append("PostForm[upload_files][]", files[i], files[i]['name']);
       }
-      formData.append("edited_pictures",JSON.stringify(this.posted_images_in_edit));
+      formData.append("edited_pictures", JSON.stringify(this.posted_images_in_edit));
     } else {
       formData.append("link", JSON.stringify(this.linkPreviewService.link_Preview));
     }
@@ -230,9 +230,9 @@ export class PostingService {
   }
 
 
-  SelectFeedUploadImage(){
-    var elem:HTMLElement = document.querySelector('#post_upload_input_id');
-    if(elem!=null){
+  SelectFeedUploadImage() {
+    var elem: HTMLElement = document.querySelector('#post_upload_input_id');
+    if (elem != null) {
       elem.click();
     }
   }

@@ -9,7 +9,7 @@
                         <div class="card-header with-border p-2">
                             <div class="mr-4 d-block text-truncate" *ngIf="feed.post_type!='STATUS_UPDATE'"
                                 style="font-size:95%;font-style:italic;padding-bottom:5px;margin-top:0px;">
-                                <a routerLink="/{{feed.profile.url}}">{{feed.profile.name}}</a>
+                                <a routerLink="/{{feed.profile.url}}" (click)="hovercardService.OnMouseOut($event);urlViewerService.setProfile(feed.profile);">{{feed.profile.name}}</a>
                                 <ng-container *ngIf="feed.post_type=='PROFILE_COVER'"> <span> updated profile
                                         cover</span>
                                 </ng-container>
@@ -24,7 +24,7 @@
                                     (mouseover)="hovercardService.OnHover($event,feed.profile)"
                                     (click)="hovercardService.OnMouseOut($event);urlViewerService.setProfile(feed.profile);"
                                     (mouseleave)="hovercardService.OnMouseOut($event)"><img
-                                        class="rounded-circle img-fluid" src="{{feed.profile.avatar}}" alt=""></a>
+                                        class="rounded-circle img-fluid" src="{{feed.profile.avatar.face}}" alt=""></a>
 
                                 <span class="username mr-4">
                                     <a class="w-100 d-block text-truncate"
@@ -73,7 +73,7 @@
                                         <li *ngIf="feed.my_post!=true" class="dropdown-item"><a
                                                 href="javascript:void(0);" (click)="feedService.hidePost(feed.id)"><span
                                                     class="fa fa-eye-slash"></span><span>&nbsp;</span>
-                                                <ng-container i18n>Hide thi Post</ng-container>
+                                                <ng-container i18n>Hide this Post</ng-container>
                                             </a></li>
                                         <li *ngIf="feed.my_post!=true" class="dropdown-item"><a
                                                 href="javascript:void(0);"
@@ -107,7 +107,7 @@
                             <div *ngIf="feed.no_comments>0 || feed.no_likes>0" class="row"
                                 style="padding:0px;margin:0px;">
                                 <div class="col-md-12">
-                                    <span *ngIf="feed.no_likes>0" class="post-statistics epanko-post-statistics">
+                                    <span *ngIf="feed.no_likes>0" class="post-statistics woorbi-post-statistics">
                                         <a href="javascript:void(0);"
                                             (click)="feedService.showPostLikes(feed.id,feed.no_likes)"
                                             class="show-post-no-likes windo-list-tooltip tooltipstered"><span
@@ -115,7 +115,7 @@
                                                 i18n>Loves</span></a>
                                     </span>
                                     <span>&nbsp;&nbsp;</span>
-                                    <span *ngIf="feed.no_comments>0" class="post-statistics epanko-post-statistics">
+                                    <span *ngIf="feed.no_comments>0" class="post-statistics woorbi-post-statistics">
                                         <a href="javascript:void(0);" class="hidden show-post-no-comments"><span
                                                 *ngIf="feed.no_comments>0">{{feed.no_comments}}</span> <span
                                                 i18n>Comments</span></a>

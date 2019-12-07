@@ -24,7 +24,7 @@
                                     (mouseover)="hovercardService.OnHover($event,feed.profile)"
                                     (click)="hovercardService.OnMouseOut($event);urlViewerService.setProfile(feed.profile);"
                                     (mouseleave)="hovercardService.OnMouseOut($event)"><img
-                                        class="rounded-circle img-fluid" src="{{feed.profile.avatar}}" alt=""></a>
+                                        class="rounded-circle img-fluid" src="{{feed.profile.avatar.face}}" alt=""></a>
 
                                 <span class="username mr-4">
                                     <a class="w-100 d-block text-truncate"
@@ -108,7 +108,7 @@
                             <div *ngIf="feed.no_comments>0 || feed.no_likes>0" class="row"
                                 style="padding:0px;margin:0px;">
                                 <div class="col-md-12">
-                                    <span *ngIf="feed.no_likes>0" class="post-statistics epanko-post-statistics">
+                                    <span *ngIf="feed.no_likes>0" class="post-statistics woorbi-post-statistics">
                                         <a href="javascript:void(0);"
                                             (click)="profileFeedService.showPostLikes(feed.id,feed.no_likes)"
                                             class="show-post-no-likes windo-list-tooltip tooltipstered"><span
@@ -116,7 +116,7 @@
                                                 i18n>Loves</span></a>
                                     </span>
                                     <span>&nbsp;&nbsp;</span>
-                                    <span *ngIf="feed.no_comments>0" class="post-statistics epanko-post-statistics">
+                                    <span *ngIf="feed.no_comments>0" class="post-statistics woorbi-post-statistics">
                                         <a href="javascript:void(0);" class="hidden show-post-no-comments"><span
                                                 *ngIf="feed.no_comments>0">{{feed.no_comments}}</span> <span
                                                 i18n>Comments</span></a>

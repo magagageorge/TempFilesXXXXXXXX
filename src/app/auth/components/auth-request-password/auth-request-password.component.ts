@@ -36,7 +36,7 @@ export class AuthRequestPasswordComponent implements OnInit {
     str_invalid_code:string;
     code_resent:boolean=false;
     resending_code:boolean=false;
-	title='Find your Epanko Account';
+	title='Find your Woorbi Account';
 	description='Enter your email and we will send you a password reset code';
 	socialLinks: AuthSocialLink[];
  

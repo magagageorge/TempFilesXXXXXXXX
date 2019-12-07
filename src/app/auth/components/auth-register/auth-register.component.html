@@ -6,7 +6,7 @@
 		  <div class="card-body">
                 <form [formGroup]="formGroup" (ngSubmit)="register()" class="text-center p-1">
                     
-              <h4>New to Epanko?</h4>
+              <h4>New to Woorbi?</h4>
               <h6 class="font-weight-light">Signing up is easy. It only takes a few steps</h6>
                    <div *ngIf="showMessages.error && errors && errors.length > 0 && !submitted"  class="alert alert-info text-danger" role="alert"> 
 				   <div *ngFor="let error of errors">{{ error }}</div>
@@ -40,7 +40,7 @@
                         </div>
                     </div>
     <!-- Sign up button -->
-    <button class="btn btn-primary btn-rounded btn-block my-4 waves-effect z-depth-0">Join Epanko</button>
+    <button class="btn btn-primary btn-rounded btn-block my-4 waves-effect z-depth-0">Join Woorbi</button>
       <!-- Register -->
       <p class="w-100 pull-right text-right">Have an Account?
         <a routerLink="/login">Login Now</a>
@@ -60,7 +60,7 @@
 
             <hr>
     <!-- Terms of service -->
-    <p>By Joining <em>Epanko</em>, you agree to it's
+    <p>By Joining <em>Woorbi</em>, you agree to it's
         <a routerLink="/tos">Terms of Service</a>,<a routerLink="/privacy">Privacy Policy</a>, and <a routerLink="/cookies">Cookie Policy</a></p>
 
                 </form>		  

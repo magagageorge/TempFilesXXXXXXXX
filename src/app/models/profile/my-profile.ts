@@ -1,4 +1,6 @@
 import { UserPreferences } from "../settings/user-preference";
+import { ProfileAvatar } from "./profile-avatar";
+import { ProfileCover } from "./profile-cover";
 
 export class ProfUser{
     email:string;
@@ -12,7 +14,8 @@ export class MyProfile {
     middlename:string; 
     lastname:string; 
     name:string; 
-    avatar:string; 
+    avatar:ProfileAvatar;
+    cover:ProfileCover; 
     title:string; 
     about:string;
     no_connections:number;
@@ -49,6 +52,7 @@ export class MyProfile {
     created_at:string; 
     updated_at:string;
     constructor(){
-        
+          this.avatar=new ProfileAvatar();
+          this.cover=new ProfileCover();
     }
 }

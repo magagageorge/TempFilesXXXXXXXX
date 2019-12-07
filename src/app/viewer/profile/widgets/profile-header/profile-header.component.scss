@@ -6,6 +6,37 @@
   border-radius: 0px 0px 20px 20px;
 }
 
+.wf-profile-cover .profile-cover-upload {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  box-shadow: 2px 0px 17px -1px rgba(161,157,157,1);
+  -webkit-box-shadow: 2px 0px 17px -1px rgba(161,157,157,1);
+  -moz-box-shadow: 2px 0px 17px -1px rgba(161,157,157,1);
+}
+
+.wf-profile-cover .profile-cover-upload .fa {
+  font-size: 130%;
+}
+
+.wf-profile-cover .profile-cover-upload .profile-cover-text {
+  display: none;
+}
+
+.wf-profile-cover:hover .profile-cover-upload .profile-cover-text {
+  display: block;
+}
+
+
+.wf-profile-image-container .profile-avatar-upload {
+  position: absolute;
+  top: 50%;
+  right: -10px;
+}
+.wf-profile-image-container .profile-avatar-upload .fa {
+  font-size: 130%;
+}
+
 /* 
   ##Device = Desktops
   ##Screen = 1281px to higher resolution desktops
@@ -13,23 +44,23 @@
 
 @media (min-width: 1281px) {
   .wf-profile-hearder {
-    height: 325px;
+    height: 275px;
     position: relative;
   }
 
   .wf-profile-hearder .wf-profile-cover {
     position: absolute;
-    height: 300px;
+    height: 250px;
     left: 0px;
     right: 0px;
     top: 0px;
-    background-color: #8a2be2;
+    background-color: #a7adba;
     overflow: hidden;
   }
 
   .wf-profile-hearder .wf-profile-image-container {
     position: absolute;
-    top: 190px;
+    bottom: 0px;
     left: 40px;
     height: 150px;
     width: 150px;
@@ -37,9 +68,9 @@
 
   .wf-profile-hearder .wf-profile-title-buttons {
     position: absolute;
-    top: 300px;
+    bottom: 0px;
     left: 190px;
-    height: 75px;
+    height: 50px;
     right: 0px;
   }
 }
@@ -51,14 +82,13 @@
 
 @media (min-width: 1025px) and (max-width: 1280px) {
   .wf-profile-hearder {
-    height: 325px;
+    height: 275px;
     position: relative;
-    border: 1px solid red;
   }
 
   .wf-profile-hearder .wf-profile-cover {
     position: absolute;
-    height: 300px;
+    height: 250px;
     left: 0px;
     right: 0px;
     top: 0px;
@@ -68,7 +98,7 @@
 
   .wf-profile-hearder .wf-profile-image-container {
     position: absolute;
-    top: 190px;
+    bottom: 0px;
     left: 40px;
     height: 150px;
     width: 150px;
@@ -76,9 +106,9 @@
 
   .wf-profile-hearder .wf-profile-title-buttons {
     position: absolute;
-    top: 300px;
+    bottom: 0px;
     left: 190px;
-    height: 75px;
+    height: 50px;
     right: 0px;
   }
 }
@@ -90,13 +120,13 @@
 
 @media (min-width: 768px) and (max-width: 1024px) {
   .wf-profile-hearder {
-    height: 300px;
+    height: 250px;
     position: relative;
   }
 
   .wf-profile-hearder .wf-profile-cover {
     position: absolute;
-    height: 200px;
+    height: 225px;
     left: 0px;
     right: 0px;
     top: 0px;
@@ -106,7 +136,7 @@
 
   .wf-profile-hearder .wf-profile-image-container {
     position: absolute;
-    top: 120px;
+    bottom: 0px;
     left: 2%;
     height: 120px;
     width: 120px;
@@ -114,7 +144,7 @@
 
   .wf-profile-hearder .wf-profile-title-buttons {
     position: absolute;
-    top: 200px;
+    bottom: 0px;
     left: 0px;
     height: 50px;
     right: 0px;
@@ -144,7 +174,7 @@
 
   .wf-profile-hearder .wf-profile-image-container {
     position: absolute;
-    top: 80px;
+    bottom: 5px;
     left: 2%;
     height: 120px;
     width: 120px;
@@ -152,7 +182,7 @@
 
   .wf-profile-hearder .wf-profile-title-buttons {
     position: absolute;
-    top: 160px;
+    bottom: 0px;
     left: 0px;
     height: 50px;
     right: 0px;
@@ -183,7 +213,7 @@
   .wf-profile-hearder .wf-profile-image-container {
     position: absolute;
     display: block;
-    top: 64px;
+    bottom: 5px;
     margin-left: auto;
     margin-right: auto;
     left: 0;
@@ -194,7 +224,7 @@
 
   .wf-profile-hearder .wf-profile-title-buttons {
     position: absolute;
-    top: 128px;
+    bottom: 0px;
     left: 0px;
     height: 50px;
     right: 0px;
@@ -225,7 +255,7 @@
   .wf-profile-hearder .wf-profile-image-container {
     position: absolute;
     display: block;
-    top: 51px;
+    bottom: 2px;
     margin-left: auto;
     margin-right: auto;
     left: 0;
@@ -236,7 +266,7 @@
 
   .wf-profile-hearder .wf-profile-title-buttons {
     position: absolute;
-    top: 102px;
+    bottom: 3px;
     left: 0px;
     height: 50px;
     right: 0px;

@@ -121,8 +121,8 @@ export class SocialAuthProvider extends AbstractAuthProvider {
 	    super();
 		var __this =  this;
         __this.defaultConfig = {
-            //baseEndpoint: 'http://localhost/epanko.api/api/web/auth/',
-            baseEndpoint: 'http://app.epanko.com/auth/',
+            //baseEndpoint: 'http://localhost/woorbi.api/api/web/auth/',
+            baseEndpoint: 'http://app.woorbi.com/auth/',
             oauth: {
                 alwaysFail: false,
                 rememberMe: true,

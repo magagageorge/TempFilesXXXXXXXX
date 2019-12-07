@@ -1,3 +1,6 @@
+import { ProfileAvatar } from "./profile-avatar";
+import { ProfileCover } from "./profile-cover";
+
 export class Profile {
     user_id:number;
     firstname:string; 
@@ -5,8 +8,8 @@ export class Profile {
     lastname:string; 
     name:string; 
     picture:string; 
-    avatar:string; 
-    cover:string; 
+    avatar:ProfileAvatar; 
+    cover:ProfileCover; 
     title:string; 
     about:string;
     no_connections:number;

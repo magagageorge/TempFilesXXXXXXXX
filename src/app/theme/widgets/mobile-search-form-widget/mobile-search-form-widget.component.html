@@ -2,7 +2,7 @@
   <button class="search-input-icon search-icon" (click)="searchService.searchAll()">
     <span class="fa fa-search"></span>
   </button>
-  <input type="text" class="form-control form-rounded" (keyup)="searchService.loadSearch()" placeholder="Search Epanko" [(ngModel)]="searchService.search_query">
+  <input type="text" class="form-control form-rounded" (keyup)="searchService.loadSearch()" placeholder="Search Woorbi" [(ngModel)]="searchService.search_query">
   <button *ngIf="searchService.search_query.trim()!=''" class="search-input-icon search-clear-icon" (click)="searchService.clearQuery()">
       <span class="fa fa-close"></span>
   </button>

@@ -6,7 +6,7 @@
 		  <div class="card-body">
                 <form [formGroup]="formGroup" (ngSubmit)="login()" class="text-center p-1">
                     
-              <h4>Login to Epanko?</h4>	
+              <h4>Login to Woorbi?</h4>	
           <div *ngIf="showMessages.error && errors && errors.length > 0 && !submitted"  class="alert alert-info text-danger" role="alert"> 
 				   <div *ngFor="let error of errors">{{ error }}</div>
 				   </div>
@@ -73,7 +73,7 @@
             -->            
 
             <hr>
-      <p class="w-100 pull-right text-right">New to Epanko?
+      <p class="w-100 pull-right text-right">New to Woorbi?
         <a routerLink="/join">Join Now</a>
       </p>
                 </form>		  

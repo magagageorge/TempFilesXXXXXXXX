@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ThemeModule } from './theme/theme.module';
 import { NgSelectModule } from '@ng-select/ng-select';
+import {NgxImageCompressService} from 'ngx-image-compress';
 
 
 
@@ -54,6 +55,8 @@ import { ProfileFeedService } from './services/profile-feed.service';
 import { ProfilePhotosService } from './services/profile-photos.service';
 import { ProfileConnectionsService } from './services/profile-connections.service';
 import { ImageIconsService } from './services/image-icons.service';
+import { EditProfileService } from './services/edit-profile.service';
+import { ProfileViewerService } from './services/profile-viewer.service';
  
 
 @NgModule({
@@ -117,7 +120,7 @@ import { ImageIconsService } from './services/image-icons.service';
          },
        }),	
   ],
-  providers: [AuthGuard,UrlViewerService,ProfileService,PostingService,UtilitiesService,FeedService,ProfileFeedService,ProfilePhotosService,ProfileConnectionsService,CommentsService,NotificationsService,ConnectionsService,ImageIconsService],
+  providers: [AuthGuard,UrlViewerService,ProfileService,PostingService,UtilitiesService,FeedService,ProfileFeedService,ProfilePhotosService,ProfileConnectionsService,CommentsService,NotificationsService,ConnectionsService,ImageIconsService,EditProfileService,ProfileViewerService, NgxImageCompressService],
   schemas: [ NO_ERRORS_SCHEMA ],
   bootstrap: [AppComponent]
 })

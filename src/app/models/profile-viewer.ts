@@ -2,6 +2,8 @@ import { ProfileSkill } from "./profile-skill";
 import { ProfileIndustry } from "./profile-industry";
 import { WorkExperience } from "./profile/work-experience";
 import { ProfileEducation } from "./profile/profile-education";
+import { ProfileAvatar } from "./profile/profile-avatar";
+import { ProfileCover } from "./profile/profile-cover";
 
 export class ProfileViewer {
     user_id:number;
@@ -10,8 +12,8 @@ export class ProfileViewer {
     lastname:string;
     name:string; 
     picture:string; 
-    avatar:string; 
-    cover:string; 
+    avatar:ProfileAvatar; 
+    cover:ProfileCover; 
     title:string; 
     about:string;
     no_connections:number;

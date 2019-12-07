@@ -3,12 +3,12 @@
   <div class="display-pic">
   <div class="cover-photo">
   <div class="display-pic-gradient"></div>
-     <a *ngIf="hovercardService.profile.cover!=''" routerLink="/{{hovercardService.profile.url}}" class="w-100 h-100 p-0 m-0" ><img src="{{hovercardService.profile.cover}}" class="img-fluid"></a>
+     <a *ngIf="hovercardService.profile.cover.picture!=''" routerLink="/{{hovercardService.profile.url}}" class="w-100 h-100 p-0 m-0" ><img src="{{hovercardService.profile.cover.picture}}" class="img-fluid"></a>
  
   </div>
   <div class="profile-pic">
   <div class="pic">
-      <a routerLink="/{{hovercardService.profile.url}}" ><img src="{{hovercardService.profile.avatar}}" class="img-fluid rounded-circle"></a>				
+      <a routerLink="/{{hovercardService.profile.url}}" ><img src="{{hovercardService.profile.avatar.face}}" class="img-fluid rounded-circle"></a>				
   </div>
    </div>
   </div>
