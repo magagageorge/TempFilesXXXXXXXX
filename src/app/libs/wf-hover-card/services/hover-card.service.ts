@@ -9,7 +9,7 @@ import { DeviceDetectorService } from '@app/libs/device-detector';
 })
 export class HoverCardService implements OnInit{
 
-  profile:ProfileHoverCard={user_id:0,name:'',avatar:{face:'',org_face:'',width:'',height:'',size:0,wh_ration:0},cover:{picture:'',org_picture:'',width:'',height:'',size:0,wh_ration:0},url:'',short_info:'',summary_info:'',connectStatus:{},my_profile:false};
+  profile:ProfileHoverCard={user_id:0,name:'',avatar:{face:'',org_face:'',width:'',height:'',size:0,show_alert:false,wh_ration:0},cover:{picture:'',org_picture:'',width:'',height:'',size:0,show_alert:false,wh_ration:0},url:'',short_info:'',summary_info:'',connectStatus:{},my_profile:false};
   plink_hovered:boolean=false;
   pcard_hovered:boolean=false;
   pcard_waiting_to_show:boolean=false;

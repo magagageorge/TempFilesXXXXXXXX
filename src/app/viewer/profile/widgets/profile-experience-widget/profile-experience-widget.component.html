@@ -1,21 +1,48 @@
-<div class="row">
-    <div class="col-12">
-      <div *ngIf="urlviwerService.PPVIEWER.profile.experiences.length" class="d-block">
-        <div *ngFor="let experience of urlviwerService.PPVIEWER.profile.experiences;let i=index;" class="w-100">
-          <span class="fa fa-briefcase"></span><span>&nbsp;</span><span>{{experience.company_name}}</span>
+<div class="card p-1">
+    <div class="card-body p-0">
+        <div class="d-block w-100">
+            <div class="row my-2 mx-0">
+                <div class="col-10">
+                    <h5>Work Experience</h5>
+                </div>
+                <div class="col-2 pull-right">
+                    <span *ngIf="urlViewerService.PPVIEWER.profile.my_profile==true" class="pull-right"
+                        style="font-size: 150%;cursor: pointer;" (click)="editProfileService.AddProfileExperience()">
+                        <span class="fa fa-plus-circle"></span>
+                    </span>
+                </div>
+            </div>
         </div>
-      </div>
-      <div *ngIf="urlviwerService.PPVIEWER.profile.educations.length" class="d-block">
-        <div *ngFor="let education of urlviwerService.PPVIEWER.profile.educations;let i=index;" class="w-100">
-          <span class="fa fa-graduation-cap"></span><span>&nbsp;</span><span>{{education.institution_name}}</span>
+        <div class="d-block  w-100">
+            <div *ngIf="urlViewerService.PPVIEWER.profile.experiences.length" class="d-block">
+                <div *ngFor="let experience of urlViewerService.PPVIEWER.profile.experiences;let i=index;"
+                    class="row px-0 w-100 mx-0 p-0">
+                    <div class="col-2 col-md-1 col-lg-1 mx-0" style="font-size: 200%;">
+                        <span class="fa fa-building-o"></span>
+                    </div>
+                    <div class="col-10 col-md-11 col-lg-11 mx-0 p-0">
+                        <div class="row px-0 mx-0">
+                            <div class="col-10 col-md-11 col-lg-11 col-xl-11 p-1">
+                                <div class="w-100 font-weight-bold">{{experience.position}}</div>
+                                <div class="w-100">{{experience.company_name}}</div>
+                                <div class="w-100">{{experience.from_to}}</div>
+                            </div>
+                            <div class="col-2 col-md-1 col-lg-1 col-xl-1">
+                                <span *ngIf="urlViewerService.PPVIEWER.profile.my_profile==true" class="pull-right p-2"
+                                    style="font-size: 150;cursor: pointer;"
+                                    (click)="editProfileService.EditProfileExperience(experience)">
+                                    <span class="fa fa-pencil"></span>
+                                </span>
+                            </div>
+                            <div class="col-12 p-1">
+                                <div class="w-100">
+                                    <p>{{experience.description}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <div *ngIf="urlviwerService.PPVIEWER.profile.no_connections>0" class="d-block">
-        <span class="fa fa-users"></span><span>&nbsp;</span>{{urlviwerService.PPVIEWER.profile.no_connections}}
-        <ng-container i18n>Connections</ng-container>
-      </div>
-      <div *ngIf="urlviwerService.loading_viewer" class="d-block text-center">
-        <span class="fa fa-spinner fa-pulse fa-fw"></span>
-      </div>
     </div>
-  </div>
+</div>

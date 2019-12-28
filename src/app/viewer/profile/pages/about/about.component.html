@@ -4,7 +4,7 @@
           <app-profile-header></app-profile-header>
           <div class="d-block p-0 m-0 w-100">
           <div class="row  p-0 m-0">
-            <div class="col-12 p-0 m-0">
+            <div  *ngIf="urlviwerService.loading_viewer==true || urlviwerService.PPVIEWER.profile.about!='' || urlviwerService.PPVIEWER.profile.my_profile==true" class="col-12 p-0 m-0" >
                 <app-profile-about-widget></app-profile-about-widget>
                 <div *ngIf="urlviwerService.loading_viewer" class="d-block p-0 m-0 text-center">
                         <span class="fa fa-spinner fa-pulse fa-fw"></span>
@@ -22,6 +22,22 @@
                     <span class="fa fa-spinner fa-pulse fa-fw"></span>
                 </div>
             </div>
+
+            <div  *ngIf="urlviwerService.loading_viewer==true || urlviwerService.PPVIEWER.profile.experiences.length || urlviwerService.PPVIEWER.profile.my_profile==true" class="col-12 p-0 m-0">
+                <app-profile-experience-widget></app-profile-experience-widget>
+                <div *ngIf="urlviwerService.loading_viewer" class="d-block p-0 m-0 text-center">
+                    <span class="fa fa-spinner fa-pulse fa-fw"></span>
+                </div>               
+            </div>
+
+            <div  *ngIf="urlviwerService.loading_viewer==true || urlviwerService.PPVIEWER.profile.educations.length || urlviwerService.PPVIEWER.profile.my_profile==true" class="col-12 p-0 m-0">
+                <app-profile-educations-widget></app-profile-educations-widget>
+                <div *ngIf="urlviwerService.loading_viewer" class="d-block p-0 m-0 text-center">
+                    <span class="fa fa-spinner fa-pulse fa-fw"></span>
+                </div>               
+            </div>
+
+
             <!--
             <div class="col-12 col-md-6 col-lg-6">
                 <app-profile-activity-widget></app-profile-activity-widget>

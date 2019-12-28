@@ -13,6 +13,8 @@ export class ProfileComponent implements OnInit {
 
   urlviwerService: UrlViewerService;
   postingService: PostingService;
+  parent_route:string='feed';
+  navbar_title:string='';
   route: ActivatedRoute;
   router: Router;
   url_page: string = '';
@@ -33,7 +35,6 @@ export class ProfileComponent implements OnInit {
         _this.urlviwerService.VIEWER_URL_PAGE='';
       }      
     });
-
   }
 
 }

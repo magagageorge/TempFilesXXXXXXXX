@@ -7,8 +7,8 @@
         <div class="card-body">
           <div class="list-group">
             <button type="button" (click)="editProfileService.UploadCoverFile()" class="list-group-item list-group-item-action cursor-pointer"><span>Upload New Photo</span></button>
-            <button type="button" class="list-group-item list-group-item-action cursor-pointer"><span>Select Existing Photo</span></button>
-            <button type="button" class="list-group-item list-group-item-action cursor-pointer"><span>Reposition Cover</span></button>
+            <button type="button" class="list-group-item list-group-item-action cursor-pointer d-none"><span>Select Existing Photo</span></button>
+            <button *ngIf="profileService.MYPROFILE.cover.org_picture!=null" type="button" (click)="editProfileService.RepositionProfileCover(profileService.MYPROFILE.cover.org_picture)" class="list-group-item list-group-item-action cursor-pointer"><span>Reposition Cover</span></button>
           </div>
           <input class="d-none" type='file' id="cover_upload_input_id" name="upload_cover_file"
           (change)="editProfileService.onSelectCoverFile($event)" #cover_upload_input_id>

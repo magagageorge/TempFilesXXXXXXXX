@@ -1,10 +1,47 @@
-<div *ngIf="urlviwerService.PPVIEWER.profile.dealing.length" class="d-blcok w-100">
-    <div class="card">
-    <div class="card-body"> 
-    <div class="w-100">Dealing with</div>
-    <ng-container *ngFor="let deal of urlviwerService.PPVIEWER.profile.dealing">
-        <span class="chip">{{deal.i_name}}</span>
-    </ng-container>
+<div *ngIf="urlViewerService.PPVIEWER.profile.dealing.length || urlViewerService.PPVIEWER.profile.my_profile==true"
+    class="d-block w-100">
+    <div class="card p-1">
+        <div class="card-body p-0">
+            <div class="d-block w-100">
+                <div class="row my-2 mx-0">
+                    <div class="col-10">
+                        <h5>Dealing with</h5>
+                    </div>
+                    <div class="col-2 pull-right">
+                        <ng-container  *ngIf="urlViewerService.PPVIEWER.profile.my_profile==true">
+                            <ng-container *ngIf="urlViewerService.PPVIEWER.profile.dealing.length>0">
+                                <span class="pull-right"
+                                style="font-size: 150%;cursor: pointer;"
+                                (click)="editProfileService.EditProfileDealingWith()">
+                                <span class="fa fa-pencil"></span>
+                            </span>
+                            </ng-container>
+                            <ng-container *ngIf="urlViewerService.PPVIEWER.profile.dealing.length==0">
+                                <span class="pull-right"
+                                style="font-size: 150%;cursor: pointer;"
+                                (click)="editProfileService.AddProfileDealingWith()">
+                                <span class="fa fa-plus"></span>
+                            </span>
+                            </ng-container>                            
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+            <div class="d-block">
+                <div class="row px-0 mx-0">
+                    <div *ngIf="urlViewerService.PPVIEWER.profile.dealing.length" class="col-12">
+                        <ng-container *ngFor="let deal of urlViewerService.PPVIEWER.profile.dealing">
+                            <span class="chip m-1">{{deal.i_name}}</span>
+                        </ng-container>
+                    </div>
+                    <div class="col-12">
+                        <div *ngIf="(!urlViewerService.PPVIEWER.profile.dealing.length || urlViewerService.PPVIEWER.profile.dealing.length==0) && urlViewerService.PPVIEWER.profile.my_profile==true"
+                            class="d-block">
+                            <p>Let others know the industries or businesses you are dealing with. </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    </div>  
 </div>

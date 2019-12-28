@@ -1,4 +1,5 @@
-<app-wf-navbar></app-wf-navbar>
+<app-wf-navbar class="d-none d-md-block d-lg-block"></app-wf-navbar>
+<app-wf-navbar-summary [back_route]="parent_route" [display_text]="urlviwerService.PPVIEWER.profile.name" class="d-block d-md-none d-lg-none"></app-wf-navbar-summary>   
 <app-wf-main-content>
 <app-time-line *ngIf="urlviwerService.VIEWER_URL_PAGE==''"></app-time-line>
 <app-about *ngIf="urlviwerService.VIEWER_URL_PAGE=='about'"></app-about>
@@ -10,6 +11,7 @@
 <app-wf-footer></app-wf-footer>
 <app-profile-images-overlay-view></app-profile-images-overlay-view>
 <app-edit-profile-overlay-container></app-edit-profile-overlay-container>
+<app-delete-profile-overlay-container></app-delete-profile-overlay-container>
 <app-feed-images-overlay-view></app-feed-images-overlay-view>
 <app-faint-body-overlay *ngIf="postingService.show_input_buttons" (click)="postingService.messageBlur()"></app-faint-body-overlay>
 <app-mobile-overlay-post-form *ngIf="postingService.show_input_buttons"></app-mobile-overlay-post-form>

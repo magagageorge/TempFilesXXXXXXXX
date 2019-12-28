@@ -2,7 +2,7 @@
         <div class="d-block w-100">
         <ul  class="list-group list-group-flush">
             <li class="list-group-item  p-1">
-              <a routerLink="/{{profileService.MYPROFILE.url}}" class="w-100">
+              <a routerLink="/{{profileService.MYPROFILE.url}}"  (click)="urlViewerService.setProfile(myProfile);" class="w-100">
                 <img src="{{profileService.MYPROFILE.avatar.face}}" class="rounded-circle z-depth-0" style="width:50px;height:50px;">
                  <span class="px-2">{{profileService.MYPROFILE.name}}</span>
               </a>
@@ -14,7 +14,7 @@
             <li class="list-group-item"><a routerLink="/logout" class="waves-effect waves-light">Log Out</a></li>		            			 
         </ul>
         <div class="p-2">
-            <strong>Woorbi &copy; 2018</strong>
+            <strong>Woorbi &copy; 2019</strong>
         </div>	
       </div>
       <!--/. Sidebar navigation -->

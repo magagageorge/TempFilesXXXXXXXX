@@ -1,0 +1,36 @@
+<div class="card" style="margin:0px;margin-bottom:5px;background-color:rgb(230, 228, 228);">
+    <div class="card-body p-1">
+        <div class="row mx-0">
+            <div class="col-12 p-1">
+              <div class="d-block pull-right px-1" (click)="editProfileService.postponeAddingAvatar()" style="cursor:pointer;font-size: 130%;">
+                  <span class="fa fa-close"></span>
+              </div>  
+            </div>
+        </div>
+        <div class="row mx-0">
+            <div class="col-12">
+                <div class="d-block text-center">
+                    <img style="max-height:80px;" src="{{profileService.MYPROFILE.avatar.face}}"
+                        class="img-fluid rounded-circle d-inline-block m-0">
+                </div>
+            </div>
+        </div>
+        <div class="row mx-0">
+            <div class="col-12 text-center">
+                <h5>Get Recognized</h5>
+            </div>
+        </div>
+        <div class="row mx-0">
+            <div class="col-12 text-center">
+                <p>
+                    You might be missing some opportunities when you don't have a profile Picture.
+                </p>
+            </div>
+        </div>
+        <div class="row mx-0">
+            <div class="col-12 text-center">
+                <div class="btn btn-sm btn-outline-primary  btn-rounded" (click)="editProfileService.editAvatar()">Add Profile Picture</div><br>
+            </div>
+        </div>
+    </div>
+</div>

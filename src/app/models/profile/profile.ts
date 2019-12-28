@@ -39,4 +39,8 @@ export class Profile {
     my_profile:boolean;
     short_info:string;
     summary_info:string;
+    constructor() {
+        this.avatar = new ProfileAvatar();
+        this.cover = new ProfileCover();
+    }
 }

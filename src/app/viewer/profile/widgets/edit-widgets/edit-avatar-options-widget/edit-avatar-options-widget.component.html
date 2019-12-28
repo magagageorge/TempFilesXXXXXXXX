@@ -7,8 +7,8 @@
               <div class="card-body">
                 <div class="list-group">
                   <button type="button" (click)="editProfileService.UploadAvatarFile()" class="list-group-item list-group-item-action cursor-pointer"><span>Upload New Photo</span></button>
-                  <button type="button" class="list-group-item list-group-item-action cursor-pointer"><span>Select Existing Photo</span></button>
-                  <button type="button" class="list-group-item list-group-item-action cursor-pointer"><span>Reposition Profile Photo</span></button>
+                  <button type="button" class="list-group-item list-group-item-action cursor-pointer d-none"><span>Select Existing Photo</span></button>
+                  <button *ngIf="profileService.MYPROFILE.avatar.org_face!=null" type="button" (click)="editProfileService.RepositionProfileAvatar(profileService.MYPROFILE.avatar.org_face)" class="list-group-item list-group-item-action cursor-pointer"><span>Reposition Profile Photo</span></button>
                 </div>
               </div>
               <div class="card-footer">

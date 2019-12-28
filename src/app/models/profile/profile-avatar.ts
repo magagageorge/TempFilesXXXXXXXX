@@ -5,5 +5,6 @@ export class ProfileAvatar{
     width:string;
     height:string;
     wh_ration:number;
+    show_alert:boolean;
     size:number;
 }

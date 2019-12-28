@@ -1,10 +1,44 @@
-<div *ngIf="urlviwerService.PPVIEWER.profile.skills.length" class="d-blcok w-100">
-    <div class="card">
-      <div class="card-body">
-        <div class="w-100">Knows about</div>
-        <ng-container *ngFor="let skill of urlviwerService.PPVIEWER.profile.skills">
-            <span class="chip">{{skill.s_name}}</span>
-        </ng-container> 
-      </div>
-    </div> 
+<div *ngIf="urlViewerService.PPVIEWER.profile.skills.length || urlViewerService.PPVIEWER.profile.my_profile==true"
+    class="d-block w-100">
+    <div class="card p-1">
+        <div class="card-body p-0">
+            <div class="d-block w-100">
+                <div class="row my-2 mx-0">
+                    <div class="col-10">
+                        <h5>Knows</h5>
+                    </div>
+                    <div class="col-2 pull-right">
+                        <ng-container *ngIf="urlViewerService.PPVIEWER.profile.my_profile==true">
+                            <ng-container *ngIf="urlViewerService.PPVIEWER.profile.skills.length>0">
+                                <span class="pull-right" style="font-size: 150%;cursor: pointer;"
+                                    (click)="editProfileService.EditProfileSkills()">
+                                    <span class="fa fa-pencil"></span>
+                                </span>
+                            </ng-container>
+                            <ng-container *ngIf="urlViewerService.PPVIEWER.profile.skills.length==0">
+                                <span class="pull-right" style="font-size: 150%;cursor: pointer;"
+                                    (click)="editProfileService.AddProfileSkills()">
+                                    <span class="fa fa-plus"></span>
+                                </span>
+                            </ng-container>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+            <div class="d-block">
+                <div class="row px-0 mx-0">
+                    <div *ngIf="urlViewerService.PPVIEWER.profile.skills.length" class="col-12">
+                        <ng-container *ngFor="let deal of urlViewerService.PPVIEWER.profile.skills">
+                            <span class="chip m-1">{{deal.s_name}}</span>
+                        </ng-container>
+                    </div>
+                    <div *ngIf="(!urlViewerService.PPVIEWER.profile.skills.length || urlViewerService.PPVIEWER.profile.skills.length==0) && urlViewerService.PPVIEWER.profile.my_profile==true"
+                        class="col-12">
+                        <p>What skills do you have, tell others what you can do. </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
 </div>

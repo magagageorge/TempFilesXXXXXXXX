@@ -18,10 +18,10 @@ import { UserPreferences } from '@app/models/settings/user-preference';
 
 export class Location{
       country:string;
-      city:string;
+      city_id:string;
       constructor(){
           this.country='';
-          this.city='';
+          this.city_id='';
       }
 }
 
@@ -150,7 +150,7 @@ export class StartComponent implements OnInit {
         __this.countries=results.getResultData();
         __this.switchLocation(Number(__this.profileService.MYPROFILE.country));
         __this.locationModel.country=__this.profileService.MYPROFILE.country;
-        __this.locationModel.city=__this.profileService.MYPROFILE.city;
+        __this.locationModel.city_id=__this.profileService.MYPROFILE.city_id;
         __this.careerModel.endyear=__this.profileService.MYPROFILE.college_end_year;
         __this.careerModel.startyear=__this.profileService.MYPROFILE.college_start_year;
         __this.careerModel.institution_name=__this.profileService.MYPROFILE.colleges;
@@ -165,7 +165,7 @@ export class StartComponent implements OnInit {
 
     this.locationGroup = this.formBuilder.group({
         country: ['', [Validators.required]],
-        city: ['', [Validators.required]]
+        city_id: ['', [Validators.required]]
     });
 
     this.missionGroup = this.formBuilder.group({

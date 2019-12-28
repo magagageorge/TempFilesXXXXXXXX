@@ -9,7 +9,7 @@
                             <app-edit-cover-options-widget></app-edit-cover-options-widget>
                         </ng-container>
                         <ng-container
-                            *ngIf="editProfileService.editMode.coverEdit.selectOptions==false && editProfileService.editMode.coverEdit.selectedOption=='UploadCover'">
+                            *ngIf="editProfileService.editMode.coverEdit.selectOptions==false && (editProfileService.editMode.coverEdit.selectedOption=='UploadCover' || editProfileService.editMode.coverEdit.selectedOption=='RepositionCover')">
                             <app-crop-cover-widget></app-crop-cover-widget>
                         </ng-container>
                     </ng-container>
@@ -19,11 +19,43 @@
                             <app-edit-avatar-options-widget></app-edit-avatar-options-widget>
                         </ng-container>
                         <ng-container
-                            *ngIf="editProfileService.editMode.avatarEdit.selectOptions==false && editProfileService.editMode.avatarEdit.selectedOption=='UploadAvatar'">
+                            *ngIf="editProfileService.editMode.avatarEdit.selectOptions==false && (editProfileService.editMode.avatarEdit.selectedOption=='UploadAvatar' || editProfileService.editMode.avatarEdit.selectedOption=='RepositionAvatar')">
                             <app-crop-avatar-widget></app-crop-avatar-widget>
                         </ng-container>
                     </ng-container>
-                    
+
+                    <ng-container
+                        *ngIf="editProfileService.editMode.inEdit==true && editProfileService.editMode.currentEditing=='topProfileCard'">
+                        <app-profile-top-card-widget></app-profile-top-card-widget>
+                    </ng-container>
+
+                    <ng-container
+                        *ngIf="editProfileService.editMode.inEdit==true && editProfileService.editMode.currentEditing=='ProfileAbout'">
+                        <app-edit-profile-about-widget></app-edit-profile-about-widget>
+                    </ng-container>
+
+                    <ng-container
+                        *ngIf="editProfileService.editMode.inEdit==true && editProfileService.editMode.currentEditing=='ProfileExperience'">
+                        <app-edit-profile-experience-widget></app-edit-profile-experience-widget>
+                    </ng-container>
+
+                    <ng-container
+                        *ngIf="editProfileService.editMode.inEdit==true && editProfileService.editMode.currentEditing=='ProfileEducation'">
+                        <app-edit-profile-education-widget></app-edit-profile-education-widget>
+                    </ng-container>
+
+                    <ng-container
+                        *ngIf="editProfileService.editMode.inEdit==true && editProfileService.editMode.currentEditing=='ProfileIndustries'">
+                        <app-edit-profile-industries-widget></app-edit-profile-industries-widget>
+                    </ng-container>
+
+                    <ng-container
+                        *ngIf="editProfileService.editMode.inEdit==true && editProfileService.editMode.currentEditing=='ProfileSkills'">
+                        <app-edit-profile-skills-widget></app-edit-profile-skills-widget>
+                    </ng-container>
+
+
+
                 </div>
             </div>
         </div>

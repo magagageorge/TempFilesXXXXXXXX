@@ -1,0 +1,12 @@
+<ng-container *ngIf="editProfileService.deleteMode.inDelete==true">
+
+
+<ng-container *ngIf="editProfileService.deleteMode.currentDeleting=='experience' && editProfileService.deleteMode.experience.action=='delete'">
+    <app-delete-profile-experience-widget></app-delete-profile-experience-widget>
+</ng-container>
+
+<ng-container *ngIf="editProfileService.deleteMode.currentDeleting=='education' && editProfileService.deleteMode.education.action=='delete'">
+    <app-delete-profile-education-widget></app-delete-profile-education-widget>
+</ng-container>
+
+</ng-container>>

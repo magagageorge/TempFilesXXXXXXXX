@@ -51,15 +51,15 @@
                 </div>
                 <div *ngIf="selectedLocation" class="form-group">
                   <label class="pull-left" for="inputCity" i18n>City or Town </label>
-                  <select id="inputCity" formControlName="city" [(ngModel)]="locationModel.city"
-                    [ngClass]="{ 'is-invalid': submitted && f.city.errors }" name="city"
+                  <select id="inputCity" formControlName="city_id" [(ngModel)]="locationModel.city_id"
+                    [ngClass]="{ 'is-invalid': submitted && f.city_id.errors }" name="city_id"
                     class="form-control form-rounded">
                     <option value="" i18n>- City/Town -</option>
                     <option *ngFor="let city of selectedLocation.cities" value="{{city.id}}">{{city.name}}</option>
                   </select>
-                  <div *ngIf="submitted && f.city.errors"
+                  <div *ngIf="submitted && f.city_id.errors"
                     class="invalid-feedback text-danger text-right form-text text-muted mb-1">
-                    <div *ngIf="f.city.errors.required" i18n>Required</div>
+                    <div *ngIf="f.city_id.errors.required" i18n>Required</div>
                   </div>
                 </div>
 

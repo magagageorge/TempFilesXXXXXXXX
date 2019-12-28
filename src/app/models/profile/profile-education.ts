@@ -1,5 +1,5 @@
 export class ProfileEducation {
-            id:string;
+            id:number;
             city:string;
             level_id:string;
             institution_id:string;
@@ -11,9 +11,13 @@ export class ProfileEducation {
             startyear:string;
             endmonth:string;
             endyear:string;
+            from_to:string;
             current_here:string;
             description:string;
             constructor(){
-                
+                this.startmonth='';
+                this.startyear='';
+                this.endmonth='';
+                this.endyear='';                
             }
 }

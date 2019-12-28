@@ -19,10 +19,19 @@
             </div>
           </div>
         </div>
-        <div class="wf-profile-title-buttons p-0 d-none d-md-block d-lg-block">
+        <div class="wf-profile-title-buttons p-0 d-block">
           <div class="row m-0 p-0">
             <div class="col-12 d-flex justify-content-end">
-              <app-profile-action-buttons-widget></app-profile-action-buttons-widget>
+              <div class="d-block">
+                <ng-container *ngIf="urlviewerService.PPVIEWER.profile.my_profile==true">
+                  <button class="btn btn-sm btn-outline-primary  btn-rounded waves-effect" (click)="editProfileService.EditTopProfileCard()"><span class="fa fa-pencil"></span>
+                    <ng-container i18n> <span>&nbsp;</span>Edit</ng-container>
+                  </button>
+                </ng-container>
+                <div class="d-none d-md-block d-lg-block">
+                  <app-profile-action-buttons-widget></app-profile-action-buttons-widget>
+                </div>
+              </div>
             </div>
           </div>
         </div>

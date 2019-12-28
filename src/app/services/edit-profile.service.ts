@@ -1,5 +1,5 @@
 import { Component, OnInit, Injectable, Inject } from '@angular/core';
-import { Observable, of as observableOf } from 'rxjs';
+import { Observable, of as observableOf, Observer } from 'rxjs';
 import { Router } from '@angular/router';
 import { ProfileModel } from '@app/@crud/models/ProfileModel';
 import { getDeepFromObject } from '@app/@crud/helpers';
@@ -11,6 +11,9 @@ import { MyProfile } from '@app/models/profile/my-profile';
 import { Profile } from '@app/models/profile/profile';
 import { NgxImageCompressService } from 'ngx-image-compress';
 import { UrlViewerService } from './url-viewer.service';
+import { ProfileService } from './profile.service';
+import { ProfileEducation } from '@app/models/profile/profile-education';
+import { WorkExperience } from '@app/models/profile/work-experience';
 
 export interface EditMode {
   inEdit: boolean;
@@ -20,8 +23,54 @@ export interface EditMode {
     selectedOption: string;
     processingCover: boolean;
   }
-  avatarEdit: any
+  avatarEdit: {
+    selectOptions: boolean;
+    selectedOption: string;
+    processingAvatar: boolean;
+  },
+  experience: {
+    action: string;
+    inEditData: WorkExperience;
+    processingExperience: boolean;
+  },
+  education: {
+    action: string;
+    inEditData: ProfileEducation;
+    processingEducation: boolean;
+  },
+  skills: {
+    action: string;
+    processingSkills: boolean;
+  },
+  industries: {
+    action: string;
+    processingIndustries: boolean;
+  }
 }
+
+export interface DeleteMode {
+  inDelete: boolean;
+  currentDeleting: string;
+  experience: {
+    action: string;
+    inDeleteData: WorkExperience;
+    processingExperience: boolean;
+  },
+  education: {
+    action: string;
+    inDeleteData: ProfileEducation;
+    processingEducation: boolean;
+  },
+  skills: {
+    action: string;
+    processingSkills: boolean;
+  },
+  industries: {
+    action: string;
+    processingIndustries: boolean;
+  }
+}
+
 
 export interface PreviewPicture {
   url: string;
@@ -40,6 +89,7 @@ export class EditProfileService {
   service: CrudService;
   crudprovider: CrudProvider;
   urlViewerService: UrlViewerService;
+  profileService: ProfileService;
   protected crudconfig: {};
   protected router: Router;
   redirectDelay: number;
@@ -53,14 +103,17 @@ export class EditProfileService {
   loading_profile: boolean = false;
   cover_preview_info: PreviewPicture = { url: '', width: 0, height: 0, file: null, isNew: true };
   avatar_preview_info: PreviewPicture = { url: '', width: 0, height: 0, file: null, isNew: true };
-  editMode: EditMode = { inEdit: false, currentEditing: '', coverEdit: { selectOptions: false, selectedOption: '', processingCover: false }, avatarEdit: { selectOptions: false, selectedOption: '', processingAvatar: false } }
+  editMode: EditMode = { inEdit: false, currentEditing: '', coverEdit: { selectOptions: false, selectedOption: '', processingCover: false }, avatarEdit: { selectOptions: false, selectedOption: '', processingAvatar: false }, education: { action: '', processingEducation: false, inEditData: new ProfileEducation() }, experience: { action: '', processingExperience: false, inEditData: new WorkExperience() },skills:{action:'',processingSkills:false},industries:{action:'',processingIndustries:false} }
+  deleteMode: DeleteMode = { inDelete: false, currentDeleting: '',education: { action: '', processingEducation: false, inDeleteData: new ProfileEducation() }, experience: { action: '', processingExperience: false, inDeleteData: new WorkExperience() },skills:{action:'',processingSkills:false},industries:{action:'',processingIndustries:false} }
 
-  constructor(service: CrudService, urlViewerService: UrlViewerService, imageCompress: NgxImageCompressService, @Inject(CRUD_OPTIONS) CRUD_OPTIONS: CrudOptions, router: Router) {
+
+  constructor(service: CrudService, profileService: ProfileService, urlViewerService: UrlViewerService, imageCompress: NgxImageCompressService, @Inject(CRUD_OPTIONS) CRUD_OPTIONS: CrudOptions, router: Router) {
     this.service = service;
     this.crudconfig = CRUD_OPTIONS;
     this.router = router;
     this.imageCompress = imageCompress;
     this.urlViewerService = urlViewerService;
+    this.profileService = profileService;
   }
 
 
@@ -103,19 +156,21 @@ export class EditProfileService {
       formData.append("ProfileCoverForm[org_image]", this.cover_preview_info.file);
     }
     formData.append("ProfileCoverForm[image]", cropped_image);
-    formData.append("wh_ratio",0);
+    formData.append("wh_ratio", 0);
 
-      this.service.update(this.provider, formData, {}).subscribe(function (result) {
-        _this.submitted = false;
-        if (result.isSuccess()) {
-          _this.messages = result.getMessages();
-          var data = result.getResultData();
-          console.log(data);
-          _this.urlViewerService.PPVIEWER.profile.cover.picture = base64CoverUri;
-        } else {
-          _this.errors = result.getErrors();
-        }
-      });
+    this.service.update(this.provider, formData, {}).subscribe(function (result) {
+      _this.submitted = false;
+      if (result.isSuccess()) {
+        _this.messages = result.getMessages();
+        var data = result.getResultData();
+        console.log(data);
+        _this.profileService.MYPROFILE.cover.picture = base64CoverUri;
+        _this.profileService.MYPROFILE.cover.show_alert = false;
+        _this.urlViewerService.PPVIEWER.profile.cover.picture = base64CoverUri;
+      } else {
+        _this.errors = result.getErrors();
+      }
+    });
 
     this.cancelEditCover();
   }
@@ -132,21 +187,61 @@ export class EditProfileService {
       formData.append("ProfileAvatarForm[org_image]", this.avatar_preview_info.file);
     }
     formData.append("ProfileAvatarForm[image]", cropped_image);
-    formData.append("wh_ratio",0);
+    formData.append("wh_ratio", 0);
 
-      this.service.update(this.provider, formData, {}).subscribe(function (result) {
-        _this.submitted = false;
-        if (result.isSuccess()) {
-          _this.messages = result.getMessages();
-          var data = result.getResultData();
-          console.log(data);
-          _this.urlViewerService.PPVIEWER.profile.avatar.face = base64AvatarUri;
-        } else {
-          _this.errors = result.getErrors();
-        }
-      });
+    this.service.update(this.provider, formData, {}).subscribe(function (result) {
+      _this.submitted = false;
+      if (result.isSuccess()) {
+        _this.messages = result.getMessages();
+        var data = result.getResultData();
+        _this.profileService.MYPROFILE.avatar.face = base64AvatarUri;
+        _this.profileService.MYPROFILE.avatar.show_alert = false;
+        _this.urlViewerService.PPVIEWER.profile.avatar.face = base64AvatarUri;
+      } else {
+        _this.errors = result.getErrors();
+      }
+    });
 
     this.cancelEditAvatar();
+  }
+
+  postponeAddingAvatar() {
+
+    var _this = this;
+    this.errors = this.messages = [];
+    const formData: any = new FormData();
+    this.provider = this.getConfigValue('forms.update.provider');
+    this.service.getProvider(this.provider).crudconfig.route_url = 'profile/my-profile-avatar/';
+    this.profileService.MYPROFILE.avatar.show_alert = false;
+    formData.append("SkipAddAvatar", true);
+    this.service.update(this.provider, formData, {}).subscribe(function (result) {
+      _this.submitted = false;
+      if (result.isSuccess()) {
+        _this.messages = result.getMessages();
+        var data = result.getResultData();
+      } else {
+        _this.errors = result.getErrors();
+      }
+    });
+  }
+
+  postponeAddingCover() {
+    var _this = this;
+    this.errors = this.messages = [];
+    const formData: any = new FormData();
+    this.provider = this.getConfigValue('forms.update.provider');
+    this.service.getProvider(this.provider).crudconfig.route_url = 'profile/my-profile-cover/';
+    this.profileService.MYPROFILE.cover.show_alert = false;
+    formData.append("SkipAddCover", true);
+    this.service.update(this.provider, formData, {}).subscribe(function (result) {
+      _this.submitted = false;
+      if (result.isSuccess()) {
+        _this.messages = result.getMessages();
+        var data = result.getResultData();
+      } else {
+        _this.errors = result.getErrors();
+      }
+    });
   }
 
   onSelectCoverFile(event) {
@@ -193,7 +288,7 @@ export class EditProfileService {
         result => {
           this.editMode.coverEdit.selectOptions = false;
           this.editMode.coverEdit.selectedOption = 'UploadCover';
-          this.PreviewCompressedCover(result);
+          this.PreviewCompressedCover(result, 'base64');
           //this.PreviewCover(this.DataUrlToFile(result));
           //this.imgResultAfterCompress = result;
           //console.warn('Size in bytes is now:', this.imageCompress.byteCount(result));
@@ -201,6 +296,13 @@ export class EditProfileService {
       );
     });
   }
+
+  RepositionProfileCover(ImgUrl: string) {
+    this.editMode.coverEdit.selectOptions = false;
+    this.editMode.coverEdit.selectedOption = 'RepositionCover';
+    this.PreviewCompressedCover(ImgUrl, 'url');
+  }
+
 
   UploadAvatarFile() {
     this.imageCompress.uploadFile().then(({ image, orientation }) => {
@@ -210,7 +312,7 @@ export class EditProfileService {
         result => {
           this.editMode.avatarEdit.selectOptions = false;
           this.editMode.avatarEdit.selectedOption = 'UploadAvatar';
-          this.PreviewCompressedAvatar(result);
+          this.PreviewCompressedAvatar(result, 'base64');
           //this.PreviewCover(this.DataUrlToFile(result));
           //this.imgResultAfterCompress = result;
           //console.warn('Size in bytes is now:', this.imageCompress.byteCount(result));
@@ -219,14 +321,34 @@ export class EditProfileService {
     });
   }
 
-  PreviewCompressedCover(loadedUrl: string) {
+
+  RepositionProfileAvatar(ImgUrl: string) {
+    this.editMode.avatarEdit.selectOptions = false;
+    this.editMode.avatarEdit.selectedOption = 'RepositionAvatar';
+    this.PreviewCompressedAvatar(ImgUrl, 'url');
+  }
+
+
+
+  PreviewCompressedCover(loadedUrl: string, urlType: string) {
     if (loadedUrl != '') {
       this.editMode.coverEdit.processingCover = true;
       var loadedImage = new Image();
+      loadedImage.setAttribute('crossorigin', 'anonymous'); // works for me
+      var base64Url = '';
       loadedImage.onload = (event) => {
         if (event) {
-          var imgFile = this.DataUrlToFile(loadedUrl);
-          this.cover_preview_info = { url: loadedUrl, width: loadedImage.width, height: loadedImage.height, file: imgFile, isNew: true };
+          if (urlType == 'base64') {
+            var imgFile = this.DataUrlToFile(loadedUrl);
+            base64Url = loadedUrl;
+          } else {
+            var canvas = document.createElement('canvas');
+            canvas.getContext('2d').drawImage(loadedImage, 0, 0);
+            var extension = loadedUrl.substring(loadedUrl.lastIndexOf('.') + 1);
+            base64Url = canvas.toDataURL('image/' + extension + '');
+            var imgFile = this.DataUrlToFile(base64Url);
+          }
+          this.cover_preview_info = { url: base64Url, width: loadedImage.width, height: loadedImage.height, file: imgFile, isNew: true };
         }
       }
       loadedImage.src = loadedUrl;
@@ -235,14 +357,25 @@ export class EditProfileService {
   }
 
 
-  PreviewCompressedAvatar(loadedUrl: string) {
+  PreviewCompressedAvatar(loadedUrl: string, urlType: string) {
     if (loadedUrl != '') {
       this.editMode.avatarEdit.processingAvatar = true;
       var loadedImage = new Image();
+      loadedImage.setAttribute('crossorigin', 'anonymous'); // works for me
+      var base64Url = '';
       loadedImage.onload = (event) => {
         if (event) {
-          var imgFile = this.DataUrlToFile(loadedUrl);
-          this.avatar_preview_info = { url: loadedUrl, width: loadedImage.width, height: loadedImage.height, file: imgFile, isNew: true };
+          if (urlType == 'base64') {
+            var imgFile = this.DataUrlToFile(loadedUrl);
+            base64Url = loadedUrl;
+          } else {
+            var canvas = document.createElement('canvas');
+            canvas.getContext('2d').drawImage(loadedImage, 0, 0);
+            var extension = loadedUrl.substring(loadedUrl.lastIndexOf('.') + 1);
+            base64Url = canvas.toDataURL('image/' + extension + '');
+            var imgFile = this.DataUrlToFile(base64Url);
+          }
+          this.avatar_preview_info = { url: base64Url, width: loadedImage.width, height: loadedImage.height, file: imgFile, isNew: true };
         }
       }
       loadedImage.src = loadedUrl;
@@ -347,7 +480,225 @@ export class EditProfileService {
     return new Blob([ab], { type: mimeString });
   }
 
+
+  /* Top Profile Card */
+
+  EditTopProfileCard() {
+    this.editMode.currentEditing = 'topProfileCard'
+    this.editMode.inEdit = true;
+  }
+
+  cancelEditTopProfileCard() {
+    this.editMode.inEdit = false;
+    this.editMode.currentEditing = '';
+  }
+
+  saveProfileInfo(profileModel: any): Observable<any> {
+    var _this = this;
+    this.errors = this.messages = [];
+    this.provider = this.getConfigValue('forms.update.provider');
+    this.service.getProvider(this.provider).crudconfig.route_url = 'profile/my-profile/';
+    /*
+    this.service.update(this.provider, profileModel,{}).subscribe(function (result) {
+        _this.submitted = false;
+        if(result.isSuccess()){
+            _this.messages = result.getMessages();
+            var data=result.getResultData();
+            if(data.done){
+                _this.profileService.MYPROFILE=data.profile;
+            }				
+        } else {
+            _this.errors = result.getErrors();			
+        }
+    });
+    */
+    return Observable.create((observer) => {
+      this.service.update(this.provider, profileModel, {}).subscribe(result => {
+        if (result.isSuccess()) {
+          _this.messages = result.getMessages();
+          var data = result.getResultData();
+          if (data.done) {
+            _this.profileService.MYPROFILE = data.profile;
+          }
+        } else {
+          _this.errors = result.getErrors();
+        }
+      });
+    })
+
+
+  }
+
+  EditProfileAbout() {
+    this.editMode.currentEditing = 'ProfileAbout';
+    this.editMode.inEdit = true;
+  }
+
+  cancelEditProfile() {
+    this.editMode.inEdit = false;
+    this.editMode.currentEditing = '';
+  }
+
+  cancelDeleteProfile() {
+    this.deleteMode.inDelete=false;
+    this.deleteMode.currentDeleting='';
+  }
+
+  AddProfileEducation() {
+    this.editMode.currentEditing = 'ProfileEducation';
+    this.editMode.education.action = 'add';
+    this.editMode.inEdit = true;
+  }
+
+  EditProfileEducation(education: ProfileEducation) {
+    this.editMode.currentEditing = 'ProfileEducation';
+    this.editMode.education.action = 'edit';
+    this.editMode.education.inEditData = education;
+    this.editMode.inEdit = true;
+  }
+
+  DeleteProfileEducation(education: ProfileEducation) {
+    this.deleteMode.currentDeleting='education';
+    this.deleteMode.education.inDeleteData=education;
+    this.deleteMode.education.action='delete';
+    this.deleteMode.inDelete=true;
+  }
+
+
+  AddProfileExperience() {
+    this.editMode.currentEditing = 'ProfileExperience';
+    this.editMode.experience.action = 'add';
+    this.editMode.inEdit = true;
+  }
+
+  EditProfileExperience(experience: WorkExperience) {
+    this.editMode.currentEditing = 'ProfileExperience';
+    this.editMode.experience.action = 'edit';
+    this.editMode.experience.inEditData = experience;
+    this.editMode.inEdit = true;
+  }
+
+  DeleteProfileExperience(experience: WorkExperience) {
+    this.deleteMode.currentDeleting='experience';
+    this.deleteMode.experience.inDeleteData=experience;
+    this.deleteMode.experience.action='delete';
+    this.deleteMode.inDelete=true;
+  }
+
+  EditProfileDealingWith() {
+    this.editMode.currentEditing = 'ProfileIndustries';
+    this.editMode.industries.action='editIndustries';
+    this.editMode.inEdit = true;
+  }
+
+  AddProfileDealingWith() {
+    this.editMode.currentEditing = 'ProfileIndustries';
+    this.editMode.industries.action='addIndustries';
+    this.editMode.inEdit = true;
+  }
+
+  EditProfileSkills() {
+    this.editMode.currentEditing = 'ProfileSkills';
+    this.editMode.skills.action='editSkills';
+    this.editMode.inEdit = true;
+  }
+
+  AddProfileSkills() {
+    this.editMode.currentEditing = 'ProfileSkills';
+    this.editMode.skills.action='addSkills';
+    this.editMode.inEdit = true;
+  }
+
+  saveProfileEducation(educationModel: ProfileEducation) {
+    var _this = this;
+    this.provider = this.getConfigValue('forms.update.provider');
+    this.service.getProvider(this.provider).crudconfig.route_url = 'profile/my-profile-education/';
+    this.service.create(this.provider, educationModel, {}).subscribe(function (result) {
+      if (result.isSuccess()) {
+        _this.messages = result.getMessages();
+        var data = result.getResultData();
+      } else {
+        _this.errors = result.getErrors();
+      }
+    });
+  }
+
+  updateProfileEducation(educationModel: ProfileEducation) {
+    var _this = this;
+    this.provider = this.getConfigValue('forms.update.provider');
+    this.service.getProvider(this.provider).crudconfig.route_url = 'profile/my-profile-education/';
+    this.service.update(this.provider, educationModel, {id:educationModel.id}).subscribe(function (result) {
+      if (result.isSuccess()) {
+        _this.messages = result.getMessages();
+        var data = result.getResultData();
+      } else {
+        _this.errors = result.getErrors();
+      }
+    });
+  }
+
+  saveWorkExperience(experienceModel: WorkExperience) {
+    var _this = this;
+    this.provider = this.getConfigValue('forms.update.provider');
+    this.service.getProvider(this.provider).crudconfig.route_url = 'profile/my-profile-experience/';
+    this.service.create(this.provider, experienceModel, {}).subscribe(function (result) {
+      if (result.isSuccess()) {
+        _this.messages = result.getMessages();
+        var data = result.getResultData();
+      } else {
+        _this.errors = result.getErrors();
+      }
+    });
+  }
+
+  updateWorkExperience(experienceModel: WorkExperience) {
+    var _this = this;
+    this.provider = this.getConfigValue('forms.update.provider');
+    this.service.getProvider(this.provider).crudconfig.route_url = 'profile/my-profile-experience/';
+    this.service.update(this.provider, experienceModel, { id: experienceModel.id }).subscribe(function (result) {
+      if (result.isSuccess()) {
+        _this.messages = result.getMessages();
+        var data = result.getResultData();
+      } else {
+        _this.errors = result.getErrors();
+      }
+    });
+  }
+
+  saveProfileSkills(skills: any[]) {
+    var _this = this;
+    const formData: any = new FormData();
+    this.provider = this.getConfigValue('forms.update.provider');
+    this.service.getProvider(this.provider).crudconfig.route_url = 'profile/my-profile-skills/';
+    formData.append("profile_skills", JSON.stringify(skills));
+    this.service.update(this.provider, formData, {}).subscribe(function (result) {
+      if (result.isSuccess()) {
+        _this.messages = result.getMessages();
+        var data = result.getResultData();
+      } else {
+        _this.errors = result.getErrors();
+      }
+    });
+  }
+
+  saveProfileIndustries(industries: any[]) {
+    var _this = this;
+    const formData: any = new FormData();
+    this.provider = this.getConfigValue('forms.update.provider');
+    this.service.getProvider(this.provider).crudconfig.route_url = 'profile/my-profile-industries/';
+    formData.append("profile_industries", JSON.stringify(industries));
+    this.service.update(this.provider, formData, {}).subscribe(function (result) {
+      if (result.isSuccess()) {
+        _this.messages = result.getMessages();
+        var data = result.getResultData();
+      } else {
+        _this.errors = result.getErrors();
+      }
+    });
+  }
+
   getConfigValue(key: string): any {
     return getDeepFromObject(this.crudconfig, key, null);
   };
+
 }

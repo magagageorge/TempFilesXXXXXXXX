@@ -57,6 +57,8 @@ import { ProfileConnectionsService } from './services/profile-connections.servic
 import { ImageIconsService } from './services/image-icons.service';
 import { EditProfileService } from './services/edit-profile.service';
 import { ProfileViewerService } from './services/profile-viewer.service';
+import { ViewerModule } from './viewer/viewer.module';
+import { ProfileModule } from './viewer/profile/profile.module';
  
 
 @NgModule({
@@ -80,6 +82,7 @@ import { ProfileViewerService } from './services/profile-viewer.service';
   CommonModule,
   ThemeModule,
   NgSelectModule,
+  ProfileModule,
   //MDBBootstrapModule.forRoot(),
 	AppRoutingModule,
 	ReactiveFormsModule,

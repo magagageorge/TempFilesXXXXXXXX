@@ -9,9 +9,13 @@ export class WorkExperience {
             startyear:string;
             endmonth:string;
             endyear:string;
+            from_to:string;
             current_here:string;
             description:string;
             constructor(){
-                
+                this.startmonth='';
+                this.startyear='';
+                this.endmonth='';
+                this.endyear='';                  
             }
 }

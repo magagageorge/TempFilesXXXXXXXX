@@ -1,13 +1,19 @@
-<div class="card m-0">
-    <div class="card-header py-1">
-        <span>About <span>{{urlviwerService.PPVIEWER.profile.firstname}}</span></span>
+<div class="card m-0 p-0">
+    <div class="card-header p-0">
+        <div class="d-block w-100 m-0 p-0">
+            <div class="row my-2 mx-0 p-0">
+                <div class="col-12">
+                    <span>About <span>{{urlviwerService.PPVIEWER.profile.firstname}}</span></span>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="card-body p-1">
+    <div class="card-body p-0">
         <ng-container>
 
-            <div class="d-block w-100">
+            <div class="d-block w-100 m-0 p-0">
                 <div *ngIf="urlviwerService.loading_viewer==true || (urlviwerService.PPVIEWER.profile.about!='' && urlviwerService.PPVIEWER.profile.about!=null) || urlviwerService.PPVIEWER.profile.my_profile==true"
-                    class="row my-2 mx-0">
+                    class="row my-1 mx-0 p-0">
 
                     <div *ngIf="urlviwerService.PPVIEWER.profile.about!='' && urlviwerService.PPVIEWER.profile.about!=null"
                         class="col-12">
@@ -26,9 +32,9 @@
             </div>
 
             <ng-container *ngIf="urlviwerService.PPVIEWER.profile.experiences.length">
-                <div class="d-block w-100 m-0 p-1">
+                <div class="d-block w-100 m-0 px-2">
                     <ng-container *ngFor="let experience of urlviwerService.PPVIEWER.profile.experiences;let i=index">
-                        <div *ngIf="i==0" class="d-block">
+                        <div *ngIf="i==0" class="d-block p-1">
                             <span class="fa fa-briefcase"></span>
                             <span *ngIf="experience.position=='' || experience.position=='-'"><span>&nbsp;</span><span
                                     i18n>Worked at</span></span>
@@ -42,9 +48,9 @@
             </ng-container>
 
             <ng-container *ngIf="urlviwerService.PPVIEWER.profile.educations.length">
-                <div class="d-block w-100 m-0 p-1">
+                <div class="d-block w-100 m-0 px-2">
                     <ng-container *ngFor="let education of urlviwerService.PPVIEWER.profile.educations;let i=index">
-                        <div *ngIf="i==0" class="d-block">
+                        <div *ngIf="i==0" class="d-block p-1">
                             <span class="fa fa-graduation-cap"></span>
                             <span *ngIf="education.major=='' || education.major=='-'"><span>&nbsp;</span><span i18n>Went
                                     to </span></span>
@@ -55,14 +61,8 @@
                     </ng-container>
                 </div>
             </ng-container>
-            <ng-container *ngIf="urlviwerService.PPVIEWER.profile.location!=''">
-                <div class="d-block w-100 m-0 p-1">
-                    <span
-                        class="fa fa-map-marker"></span><span>&nbsp;</span><span>{{urlviwerService.PPVIEWER.profile.location}}</span>
-                </div>
-            </ng-container>
             <ng-container *ngIf="urlviwerService.PPVIEWER.profile.dealing.length">
-                <div class="d-block w-100 m-0 p-1">
+                <div class="d-block w-100 m-0 py-1 px-3">
                     <span class="font-weight-bold">Deals with</span>
                     <ng-container *ngFor="let deal of urlviwerService.PPVIEWER.profile.dealing;let i = index">
                         <ng-container *ngIf="i<5">
@@ -74,7 +74,7 @@
                 </div>
             </ng-container>
             <ng-container *ngIf="urlviwerService.PPVIEWER.profile.skills.length">
-                <div class="d-block w-100 m-0 p-1">
+                <div class="d-block w-100 m-0 py-1 px-3">
                     <span class="font-weight-bold">Knows</span>
                     <ng-container *ngFor="let skill of urlviwerService.PPVIEWER.profile.skills;let i = index">
                         <ng-container *ngIf="i<5">

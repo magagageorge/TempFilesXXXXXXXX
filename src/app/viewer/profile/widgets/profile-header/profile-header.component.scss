@@ -8,7 +8,7 @@
 
 .wf-profile-cover .profile-cover-upload {
   position: absolute;
-  bottom: 20px;
+  top: 20px;
   right: 20px;
   box-shadow: 2px 0px 17px -1px rgba(161,157,157,1);
   -webkit-box-shadow: 2px 0px 17px -1px rgba(161,157,157,1);
@@ -30,8 +30,8 @@
 
 .wf-profile-image-container .profile-avatar-upload {
   position: absolute;
-  top: 50%;
-  right: -10px;
+  top: -5px;
+  left: 42%;
 }
 .wf-profile-image-container .profile-avatar-upload .fa {
   font-size: 130%;

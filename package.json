@@ -1,8 +1,8 @@
 {
   "name": "wfmobile",
-  "displayName": "Windoface",
+  "displayName": "Woorbi",
   "version": "1.0.0",
-  "description": "Windoface,a socila networking site.",
+  "description": "Woorbi,a socila networking site.",
   "main": "index.js",
   "scripts": {
     "ng": "ng",

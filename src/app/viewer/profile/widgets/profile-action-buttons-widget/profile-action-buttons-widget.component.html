@@ -1,9 +1,3 @@
-<div class="d-block">
-  <ng-container *ngIf="urlviwerService.PPVIEWER.profile.my_profile==true">
-    <button class="btn btn-primary btn-sm btn-rounded waves-effect"><span class="fa fa-pencil"></span>
-      <ng-container i18n> <span>&nbsp;</span>Edit</ng-container>
-    </button>
-  </ng-container>
   <ng-container *ngIf="urlviwerService.PPVIEWER.profile.my_profile!=true">
     <button *ngIf="urlviwerService.PPVIEWER.profile.connectStatus.connected==true"
       class="btn btn-outline-primary btn-sm btn-rounded waves-effect"><span
@@ -41,4 +35,3 @@
       </button>
     </ng-container>
   </ng-container>
-</div>

@@ -1,0 +1,48 @@
+<div class="card p-1">
+    <div class="card-body p-0">
+        <div class="d-block w-100">
+            <div class="row my-2 mx-0">
+                <div class="col-10">
+                    <h5>Education Background</h5>
+                </div>
+                <div class="col-2 pull-right">
+                    <span *ngIf="urlViewerService.PPVIEWER.profile.my_profile==true" class="pull-right"
+                        style="font-size: 150%;cursor: pointer;" (click)="editProfileService.AddProfileEducation()">
+                        <span class="fa fa-plus-circle"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="d-block  w-100">
+            <div *ngIf="urlViewerService.PPVIEWER.profile.educations.length" class="d-block">
+                <div *ngFor="let education of urlViewerService.PPVIEWER.profile.educations;let i=index;"
+                    class="row px-0 w-100 mx-0 p-0">
+                    <div class="col-2 col-md-1 col-lg-1 mx-0" style="font-size: 200%;">
+                        <span class="fa fa-graduation-cap"></span>
+                    </div>
+                    <div class="col-10 col-md-11 col-lg-11 mx-0 p-0">
+                        <div class="row px-0 mx-0">
+                            <div class="col-10 col-md-11 col-lg-11 col-xl-11 p-1">
+                                <div class="w-100 font-weight-bold">{{education.institution_name}}</div>
+                                <div class="w-100">{{education.major}}</div>
+                                <div class="w-100">{{education.from_to}}</div>
+                            </div>
+                            <div class="col-2 col-md-1 col-lg-1 col-xl-1">
+                                <span *ngIf="urlViewerService.PPVIEWER.profile.my_profile==true" class="pull-right p-1"
+                                    style="cursor: pointer;"
+                                    (click)="editProfileService.EditProfileEducation(education)">
+                                    <span class="fa fa-pencil"></span>
+                                </span>
+                            </div>
+                            <div class="col-12 p-1">
+                                <div class="w-100">
+                                    <p>{{education.description}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
