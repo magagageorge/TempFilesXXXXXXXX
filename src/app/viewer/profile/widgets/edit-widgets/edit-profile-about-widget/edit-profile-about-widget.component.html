@@ -2,8 +2,34 @@
     <div class="col-12 col-md-6 col-lg-6 mx-auto px-0 h-100 align-items-center d-flex" #OvelayViewProfilePicture>
         <div class="d-block align-self-center w-100 mx-auto my-auto">
 
-            <div class="card w-100 mx-auto my-auto" id="profile-about-form">
-                <div class="card-header"><span class="font-weight-bold">Edit About</span></div>
+            <div class="card w-100 mx-auto my-auto overlay-modal-form-card">
+                <div class="card-header">
+                    <div class="row px-0 mx-0">
+                        <div class="col-2 d-md-none d-lg-none d-xl-none">
+                            <span class="pull-left" (click)="editProfileService.cancelEditProfile()"
+                                style="font-size: 130%;cursor: pointer;">
+                                <span class="fa fa-close"></span>
+                            </span>
+                        </div>
+                        <div class="col-7 col-md-10 col-lg-10 col-xl-10">
+                            <span *ngIf="profileService.MYPROFILE.about!='' && profileService.MYPROFILE.about!=null"
+                                class="font-weight-bold">Edit Summary</span>
+                            <span *ngIf="profileService.MYPROFILE.about=='' || profileService.MYPROFILE.about==null"
+                                class="font-weight-bold">Add Summary</span>
+                        </div>
+                        <div class="col-3 d-md-none d-lg-none d-xl-none">
+                            <div class="d-block pull-right font-weight-bold">
+                                <span class="cursor-pointer  pull-right" (click)="save()"> <span>Save</span> </span>
+                            </div>
+                        </div>
+                        <div class="col-2 d-none d-md-block d-lg-block d-xl-block">
+                            <span class="pull-right" (click)="editProfileService.cancelEditProfile()"
+                                style="font-size: 130%;cursor: pointer;">
+                                <span class="fa fa-close"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
                 <div class="card-body" style="overflow-y: scroll;">
                     <form [formGroup]="profileGroup" (ngSubmit)="save()" class="p-1">
                         <div class="form">
@@ -28,10 +54,7 @@
 
 
                 </div>
-                <div class="card-footer p-0">
-                    <button class="btn btn-sm btn-rounded pull-left"
-                        (click)="editProfileService.cancelEditProfile()">Cancel</button>
-
+                <div class="card-footer p-0  d-none d-md-block d-lg-block d-xl-block">
                         <button class="btn btn-sm btn-rounded btn-primary pull-right"
                         (click)="save()">Save</button>
                 </div>

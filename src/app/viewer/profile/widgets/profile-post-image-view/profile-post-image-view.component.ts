@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, HostListener } from '@angular/core';
 import { ProfilePhotosService } from '@app/services/profile-photos.service';
+import { ImageIconsService } from '@app/services/image-icons.service';
 
 @Component({
   selector: 'app-profile-post-image-view',
@@ -11,8 +12,10 @@ export class ProfilePostImageViewComponent implements AfterViewInit {
   @ViewChild("OvelayViewProfilePicture", { static: false })
   OvelayViewProfilePicture: ElementRef;
   profilePhotosService: ProfilePhotosService;
-  constructor(profilePhotosService: ProfilePhotosService) {
+  imageIconsService:ImageIconsService;
+  constructor(profilePhotosService: ProfilePhotosService,imageIconsService:ImageIconsService) {
     this.profilePhotosService = profilePhotosService;
+    this.imageIconsService=imageIconsService;
   }
 
   ngAfterViewInit() {

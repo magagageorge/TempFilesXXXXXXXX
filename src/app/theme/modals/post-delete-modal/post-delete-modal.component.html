@@ -11,5 +11,5 @@
 <div class="modal-footer p-1">
   <button type="button" class="btn btn-outline-secondary btn-sm pull-left" (click)="modal.dismiss('cancel click')" i18n>Cancel</button>
   <button type="button" class="btn btn-outline-secondary btn-sm pull-right" (click)="modal.dismiss('cancel click')" i18n>Edit</button>
-  <button type="button" class="btn btn-danger btn-sm pull-right" (click)="feedService.deletePost(feedId)" i18n>Delete</button>
+  <button type="button" class="btn btn-danger btn-sm pull-right" (click)="appModalService.feedService.deletePost(feedId)" i18n>Delete</button>
 </div>

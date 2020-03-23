@@ -1,0 +1,37 @@
+<app-wf-navbar class="d-none d-md-block d-lg-block"></app-wf-navbar>
+<app-chat-thread-mobile-head-widget [chatroom]="messengerService.CURRENT_MESSENGER_CHATROOM">
+</app-chat-thread-mobile-head-widget>
+<app-wb-messages-content>
+    <div class="d-block messaging-module-container-fluid w-100">
+        <div class="d-block messaging-module-container">
+            <div class="row mx-0 p-0 h-100">
+                <div class="pull-left col-12 col-md-3 col-lg-3 d-none d-md-block d-lg-block p-0">
+                    <app-chat-rooms-widget></app-chat-rooms-widget>
+                </div>
+                <div class="col-12 col-md-5 col-lg-5 p-0 h-100">
+                    <ng-container
+                        *ngIf="loading_thread==false || messengerService.CURRENT_MESSENGER_CHATROOM.isNew==false">
+                        <app-chat-thread-widget [chatroom]="messengerService.CURRENT_MESSENGER_CHATROOM">
+                        </app-chat-thread-widget>
+                    </ng-container>
+
+                    <ng-container
+                        *ngIf="loading_thread==true && messengerService.CURRENT_MESSENGER_CHATROOM.isNew==true">
+                        <div class="f-flex align-items-center justify-content-center h-100">
+                            <div class="row mx-0  h-100">
+                                <div class="col align-items-center d-flex">
+                                    <span class="mx-auto my-auto">Loading...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+                <div class="col-12 col-md-4 col-lg-4  d-none d-md-block d-lg-block pull-right">
+                    <app-wf-right-sidebar></app-wf-right-sidebar>
+                </div>
+            </div>
+        </div>
+    </div>
+</app-wb-messages-content>
+<!--Main layout-->
+<app-wf-footer></app-wf-footer>

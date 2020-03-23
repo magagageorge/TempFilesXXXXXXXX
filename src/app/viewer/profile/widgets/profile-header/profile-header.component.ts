@@ -3,6 +3,7 @@ import { UrlViewerService } from '@app/services/url-viewer.service';
 import { ConnectionsService } from '@app/services/connections.service';
 import { EditProfileService } from '@app/services/edit-profile.service';
 import { ProfileViewerService } from '@app/services/profile-viewer.service';
+import { ProfilePhotosService } from '@app/services/profile-photos.service';
 
 @Component({
   selector: 'app-profile-header',
@@ -20,11 +21,13 @@ export class ProfileHeaderComponent implements AfterViewInit {
   connectionsService: ConnectionsService;
   editProfileService: EditProfileService;
   profileViewerService: ProfileViewerService;
-  constructor(urlviewerService: UrlViewerService, profileViewerService: ProfileViewerService, connectionsService: ConnectionsService, editProfileService: EditProfileService) {
+  profilePhotoService:ProfilePhotosService;
+  constructor(urlviewerService: UrlViewerService,profilePhotoService:ProfilePhotosService, profileViewerService: ProfileViewerService, connectionsService: ConnectionsService, editProfileService: EditProfileService) {
     this.urlviewerService = urlviewerService;
     this.connectionsService = connectionsService;
     this.editProfileService = editProfileService;
     this.profileViewerService=profileViewerService;
+    this.profilePhotoService=profilePhotoService;
   }
 
   ngAfterViewInit() {

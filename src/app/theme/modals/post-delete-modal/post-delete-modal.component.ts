@@ -1,6 +1,7 @@
 import { Component, OnInit,Input } from '@angular/core';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FeedService } from '@app/services/feed.service';
+import { AppModalService } from '@app/services/app-modal.service';
 
 @Component({
   selector: 'app-post-delete-modal',
@@ -10,9 +11,18 @@ import { FeedService } from '@app/services/feed.service';
 export class PostDeleteModalComponent implements OnInit {
 
   @Input() feedId:number;
-  constructor(public modal: NgbActiveModal,public feedService:FeedService) {}
-
+  modal: NgbActiveModal;
+  appModalService:AppModalService;
+  constructor(modal: NgbActiveModal,appModalService:AppModalService) {
+    this.appModalService=appModalService;
+    this.modal=modal;
+  }
+  public setFeedId(id:number){
+    this.feedId=id;
+  } 
   ngOnInit() {
   }
+
+
 
 }

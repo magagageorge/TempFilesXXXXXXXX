@@ -71,7 +71,7 @@ export class ProfileTopCardWidgetComponent implements OnInit {
     this.datePicker = new CalenderLib();
     this.datePicker.selected_day = this.profileService.MYPROFILE.birth_date.day;
     this.datePicker.selected_month = this.profileService.MYPROFILE.birth_date.month;
-    this.datePicker.selected_year  = this.profileService.MYPROFILE.birth_date.year;  
+    this.datePicker.selected_year = this.profileService.MYPROFILE.birth_date.year;
     this.fillForm();
   }
 
@@ -95,29 +95,33 @@ export class ProfileTopCardWidgetComponent implements OnInit {
     if (this.profileGroup.invalid) {
       return;
     }
-    this.profileModel.birthday=this.datePicker.getDate();
-    this.editProfileService.saveProfileInfo(this.profileModel);
+    this.profileModel.birthday = this.datePicker.getDate();
+    this.editProfileService.saveProfileInfo(this.profileModel).subscribe(response => {
+    });
     this.editProfileService.cancelEditTopProfileCard();
   }
 
   switchLocation(id: any) {
     var _this = this;
     this.filterCountry(id).subscribe((country: Country) => {
-      _this.selectedLocation = country;
-      if (_this.profileService.MYPROFILE.city_id != '') {
-        _this.searchCityInSelectedCountry(Number(_this.profileService.MYPROFILE.city_id)).subscribe(city => {
-          if (city) {
-            _this.profileModel.city_id = _this.profileService.MYPROFILE.city_id;
-          } else {
-            _this.profileModel.city_id = '';
-          }
-        });
+      if (country) {
+        _this.selectedLocation = country;
+        if (_this.profileService.MYPROFILE.city_id != '') {
+          _this.searchCityInSelectedCountry(Number(_this.profileService.MYPROFILE.city_id)).subscribe(city => {
+            if (city) {
+              _this.profileModel.city_id = _this.profileService.MYPROFILE.city_id;
+            } else {
+              _this.profileModel.city_id = '';
+            }
+          });
+        }
       }
     });
   }
 
   filterCountry(id: any): Observable<Country> {
-    return of(this.countries.find((country: Country) => country.id == id));
+    var _this = this;
+    return of(_this.countries.find((country: Country) => country.id === id));
   }
 
   loadCountries() {
@@ -129,7 +133,8 @@ export class ProfileTopCardWidgetComponent implements OnInit {
   }
 
   searchCityInSelectedCountry(id: number): Observable<City> {
-    return of(this.selectedLocation.cities.find((city: City) => city.id == id));
+    var _this = this;
+    return of(_this.selectedLocation.cities.find((city: City) => city.id === id));
   }
 
 }

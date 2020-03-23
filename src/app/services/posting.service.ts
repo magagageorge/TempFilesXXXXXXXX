@@ -12,6 +12,7 @@ import { cruddefaultSettings, CrudOptions, CRUD_OPTIONS, CRUD_USER_OPTIONS, CRUD
 import { CrudProvider } from '@app/@crud/providers/crud.provider';
 import { FeedService } from '@app/services/feed.service';
 import { WfLinkPreviewService } from '@app/libs/wf-link-preview/services/wf-link-preview.service';
+import { LoadSubmitProgressService } from './load-submit-progress.service';
 
 
 export interface PreviewPicture {
@@ -19,6 +20,12 @@ export interface PreviewPicture {
   width: number;
   height: number;
   file: File;
+}
+
+export class SharePostModel {
+  inShareMode: boolean;
+  sharePost: Feed;
+  postingShare: boolean;
 }
 
 
@@ -30,6 +37,7 @@ export class PostingService {
   feedService: FeedService;
   crudprovider: CrudProvider;
   linkPreviewService: WfLinkPreviewService;
+  loadSubmitProgressService:LoadSubmitProgressService;
   protected crudconfig: {};
   protected router: Router;
   redirectDelay: number;
@@ -47,6 +55,7 @@ export class PostingService {
   file_preview_urls: PreviewPicture[] = [];
   posted_images_in_edit: PreviewPicture[] = [];
   show_input_buttons: boolean = false;
+  sharePostModel: SharePostModel = new SharePostModel();
   size: any;
   width: number;
   height: number;
@@ -54,12 +63,13 @@ export class PostingService {
   loadedImage: any;
   fileReader: any;
 
-  constructor(service: CrudService, feedService: FeedService, @Inject(CRUD_OPTIONS) CRUD_OPTIONS: CrudOptions, private _modalService: NgbModal, router: Router, linkPreviewService: WfLinkPreviewService) {
+  constructor(service: CrudService, feedService: FeedService,loadSubmitProgressService:LoadSubmitProgressService, @Inject(CRUD_OPTIONS) CRUD_OPTIONS: CrudOptions, private _modalService: NgbModal, router: Router, linkPreviewService: WfLinkPreviewService) {
     this.service = service;
     this.feedService = feedService;
     this.crudconfig = CRUD_OPTIONS;
     this.router = router;
     this.linkPreviewService = linkPreviewService;
+    this.loadSubmitProgressService=loadSubmitProgressService;
   }
 
   onSelectFile(event) {
@@ -117,7 +127,7 @@ export class PostingService {
     const files: Array<File> = this.filesToUpload;
     this.provider = this.getConfigValue('forms.getall.provider');
     this.service.getProvider(this.provider).crudconfig.route_url = 'feed/p/';
-    if (this.feed_input_model.message.trim() == '' && files.length < 1 && this.file_preview_urls.length < 1) {
+    if (this.feed_input_model.message.trim() == '' && files.length < 1 && this.file_preview_urls.length < 1 && (this.sharePostModel.inShareMode == false || this.sharePostModel.sharePost == null)) {
       return false;
     }
 
@@ -127,17 +137,22 @@ export class PostingService {
       }
       formData.append("edited_pictures", JSON.stringify(this.posted_images_in_edit));
     } else {
+      this.linkPreviewService.link_Preview.code = "";
       formData.append("link", JSON.stringify(this.linkPreviewService.link_Preview));
     }
     formData.append("isNew", this.feed_input_model.isNew);
     formData.append("visibility", this.feed_input_model.visibility);
     formData.append("message", this.feed_input_model.message.trim());
+    if (this.sharePostModel.inShareMode) {
+      formData.append("original_id", this.sharePostModel.sharePost.id);
+    }
     if (this.submitted === false) {
       this.feedService.loading_new_post = true;
       let feed_card_elem: HTMLElement = document.querySelector('#wffeed-post-card');
-      feed_card_elem.style.opacity = '0.5';
+      //feed_card_elem.style.opacity = '0.5';
       //feed_card_elem.setAttribute('disabled','true');
       this.submitted = true;
+      this.loadSubmitProgressService.submittingData=true;
       if (this.feed_input_model.isNew) {
         this.service.create(this.provider, formData, {}).subscribe(function (result) {
           _this.submitted = false;
@@ -153,7 +168,12 @@ export class PostingService {
           } else {
             _this.errors = result.getErrors();
           }
+          if (_this.sharePostModel.inShareMode) {
+            _this.sharePostModel.inShareMode = false;
+            _this.sharePostModel.sharePost = null;
+          }
           _this.feedService.loading_new_post = false;
+          _this.loadSubmitProgressService.submittingData=false;
         });
       } else {
         this.service.update(this.provider, formData, { 'id': _this.feed_input_model.id }).subscribe(function (result) {
@@ -167,13 +187,16 @@ export class PostingService {
               _this.feed_input_model = new Post();
               _this.filesToUpload = [];
               _this.file_preview_urls = [];
-            } {
-
             }
           } else {
             _this.errors = result.getErrors();
           }
+          if (_this.sharePostModel.inShareMode) {
+            _this.sharePostModel.inShareMode = false;
+            _this.sharePostModel.sharePost = null;
+          }
           _this.feedService.loading_new_post = false;
+          _this.loadSubmitProgressService.submittingData=false;
         });
       }
       _this.feed_input_model = new Post();
@@ -181,7 +204,7 @@ export class PostingService {
       _this.file_preview_urls = [];
       this.linkPreviewService.links = [];
       this.messageBlur();
-      feed_card_elem.style.opacity = '1';
+      //feed_card_elem.style.opacity = '1';
     }
   }
 
@@ -201,6 +224,11 @@ export class PostingService {
       if (feedd) {
         feedd.edit_mode = true;
       }
+
+      if(feed.original_post!=null){
+        this.shareThisPost(feed);
+      }
+
       if (feed.images.length) {
         feed.images.forEach(picture => {
           _this.file_preview_urls.push({ url: picture.data.url, width: picture.data.width, height: picture.data.height, file: null });
@@ -254,17 +282,35 @@ export class PostingService {
   }
 
   messageBlur() {
-    this.focus_on_message_input = false;
-    if (this.feed_input_model.message != '') {
-      this.show_upload_img = false;
+    if (this.sharePostModel.inShareMode) {
+      this.sharePostModel.inShareMode = false;
+      this.sharePostModel.sharePost = null;
+      this.feed_input_model.message = '';
+      this.messageBlur();
     } else {
-      this.show_upload_img = true;
+      this.focus_on_message_input = false;
+      if (this.feed_input_model.message != '') {
+        this.show_upload_img = false;
+      } else {
+        this.show_upload_img = true;
+      }
+      this.show_input_buttons = false;
+      this.CancelPostEdit();
     }
-    this.show_input_buttons = false;
   }
   messageFocus() {
     this.focus_on_message_input = true;
     this.show_hide_inputs();
+  }
+
+  shareThisPost(post: Feed) {
+    if (post.original_post != null) {
+      this.sharePostModel.sharePost = post.original_post;
+    } else {
+      this.sharePostModel.sharePost = post;
+    }
+    this.sharePostModel.inShareMode = true;
+    this.messageFocus();
   }
 
   getConfigValue(key: string): any {

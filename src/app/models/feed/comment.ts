@@ -1,13 +1,14 @@
 import { WindoTime } from "@app/models/windo-time";
 import { CommentReply} from './comment-reply';
 import { PreviewPicture } from "@app/services/posting.service";
+import { Profile } from "../profile/profile";
 
 export class Comment {
     id:number;
     message:string;
     object_model:string;
     object_id:string;
-    profile:any;
+    profile:Profile;
     pictures:any[];
     upload_files:Array<File>;
     preview_pictures:PreviewPicture[];

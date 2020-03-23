@@ -1,0 +1,112 @@
+<div class="card m-0 chat-thread-widget">
+    <div class="card-header msg_head">
+        <ng-container *ngIf="chatroom.isNew==true">
+            <app-chat-search-people-widget [chatroom]="chatroom"></app-chat-search-people-widget>
+        </ng-container>
+        <ng-container *ngIf="chatroom.isNew==false">
+            <app-chat-thread-head-widget [chatroom]="chatroom"></app-chat-thread-head-widget>
+        </ng-container>
+    </div>
+    <div class="card-body msg_card_body p-1 border-top border-light" #messagesContainer infiniteScroll
+        [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolledUp)="onScrollUp()" [scrollWindow]="false"
+        id="scroller">
+
+        <ng-container *ngIf="messengerService.loading_thread_messages || loading_messages==true">
+            <div class="d-block m-2 d-flex justify-content-center">
+                <span> <span class="fa fa-1x fa-circle-o-notch fa-spin"></span> </span>
+            </div>
+        </ng-container>
+
+        <ng-container *ngIf="chatroom.messages.length>0">
+            <ng-container *ngFor="let message of chatroom.messages">
+                <ng-container *ngIf="message.my_message==false">
+                    <div class="d-flex justify-content-start mx-2">
+                        <div class="message received">
+                            {{message.messageBody.message}}
+                            <span class="metadata">
+                                <span class="time">{{message.sent_at.date}}</span>
+                            </span>
+                        </div>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="message.my_message==true">
+                    <div class="d-flex justify-content-end mx-2">
+                        <div class="message sent text-white">
+                            {{message.messageBody.message}}
+                            <span class="metadata">
+                                <span class="time">{{message.sent_at.date}}</span>
+                            </span>
+                        </div>
+                    </div>
+                </ng-container>
+            </ng-container>
+        </ng-container>
+        <div class="d-block w-100 p-2">&nbsp;</div>
+    </div>
+    <div class="card-footer p-0">
+
+        <ng-container *ngIf="chatroom.form!=null">
+            <div class="d-block w-100 messageInputBoxBlock bg-white" style="position: relative;">
+                <div class="bg-white border-top border-light py-2"
+                    style="position: absolute; right:0px;left:0px;bottom:0px;">
+                    <div class="row m-0 p-0 content-inputs-container" id="chatformcontentcontainer">
+                        <div class="col-10 col-md-12 col-lg-12 col-xl-12 p-0 m-0">
+                            <div appWfLinkPreview class="h-100 align-middle bg-white p-2 messageInputBox" #messageInput
+                                (change)="messageFocus()" (blur)="OnBlurMessageBox()" (focus)="messageFocus()"
+                                [(ngModel)]="chatroom.form.message" #ctrl="ngModel" name="message"
+                                contenteditable="true" data-text="Write your Message here">
+                            </div>
+                            <div class="mobile-attach-buttons  py-2">
+                                <span class="d-inline-block pull-right" class="p-0 m-2 text-primary"
+                                    style="cursor: pointer;">
+                                    <span class="fa fa-paperclip" style="font-size:140%;"></span>
+                                </span>
+
+                                <ng-container *ngIf="chatroom.form.message==''">
+                                    <span class="d-inline-block pull-right" class="p-0 m-2 text-primary"
+                                        style="cursor: pointer;">
+                                        <span class="fa fa-camera" style="font-size:140%;"></span>
+                                    </span>
+                                </ng-container>
+                            </div>
+
+                        </div>
+                        <div class="col-2 d-block d-md-none d-lg-none d-xl-none p-0 m-0">
+                            <div class="d-block w-100 h-100" style="position: relative;">
+                                <div class="d-block" style="position: absolute;bottom:-3px;right:1px;">
+                                    <button class="btn-circle btn-sm btn-outline-primary d-inline-block"
+                                        (click)="pushMessage()">
+                                        <span class="fa fa-send align-middle" style="font-size:120%;"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-none d-md-block d-lg-block d-xl-block w-100 bg-light messageInputButtons px-2">
+                <div class="row mx-0 my-1">
+                    <div class="col-9 p-0 d-flex align-items-center">
+                        <span class="p-2 text-primary" style="cursor: pointer;font-size: 120%">
+                            <span class="fa fa-camera"></span>
+                        </span>
+                        <span class="p-2 text-primary" style="cursor: pointer;font-size: 120%">
+                            <span class="fa fa-paperclip"></span>
+                        </span>
+                    </div>
+                    <div class="col-3 p-0 d-flex align-items-center">
+                        <div class="d-flex justify-content-end w-100" style="position: relative;">
+                            <span class="btn btn-sm btn-primary px-2 py-1" (click)="pushMessage()">
+                                <span>Send</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </ng-container>
+
+
+
+    </div>
+</div>

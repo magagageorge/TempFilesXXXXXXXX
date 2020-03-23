@@ -1,0 +1,26 @@
+
+.messaging-module-container-fluid{
+  min-height: 90vh;
+  height: 100%;
+  position: relative;
+}
+
+.messaging-module-container{
+  height: 90vh;
+  overflow: hidden;
+  position:absolute;
+  bottom: 0px;
+  left: 0px;
+  right:0px;
+}
+
+
+@media (max-width:767px){
+  .messaging-module-container-fluid{
+      height: 90vh;
+    }    
+  .messaging-module-container{
+    height: 90vh;
+  }
+
+}

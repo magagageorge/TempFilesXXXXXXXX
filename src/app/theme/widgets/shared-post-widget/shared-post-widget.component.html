@@ -1,0 +1,53 @@
+<div class="d-block m-1 p-0" #sharePostContainer>
+    <div class="card windo-post-card" id="post_item_{{post.id}}">
+        <ng-container *ngIf="post.hidden_post!=true">
+            <div class="card-header with-border p-2">
+                <div class="user-block">
+                    <a routerLink="/{{post.profile.url}}" (mouseover)="hovercardService.OnHover($event,post.profile)"
+                        (click)="hovercardService.OnMouseOut($event);urlViewerService.setProfile(post.profile);"
+                        (mouseleave)="hovercardService.OnMouseOut($event)"><img class="rounded-circle img-fluid"
+                            src="{{post.profile.avatar.face}}" alt=""></a>
+
+                    <span class="username mr-4">
+                        <a class="w-100 d-block text-truncate"
+                            (mouseover)="hovercardService.OnHover($event,post.profile)"
+                            (click)="hovercardService.OnMouseOut($event);urlViewerService.setProfile(post.profile);"
+                            (mouseleave)="hovercardService.OnMouseOut($event)"
+                            routerLink="/{{post.profile.url}}">{{post.profile.name}} <span
+                                class="url-tag">@{{post.profile.url}}</span></a>
+                    </span>
+
+                    <span class="description">
+                        <span class="d-block text-truncate">{{post.profile.title}}</span>
+                        <span class="d-block text-truncate"><a href="javascript:void(0)" title="Everyone"><i
+                                    class="fa fa-globe"></i></a> <a routerLink="#" onclick="return false;"
+                                title="{{post.updated_at.title}}">{{post.updated_at.date}} <i
+                                    *ngIf="post.updated_at.title!=post.created_at.title" i18n>Edited</i></a></span>
+                    </span>
+
+                </div>
+            </div>
+
+            <div class="card-body" style="overflow:hidden;">
+                <ng-container *ngIf="post.message!=''">
+                    <p [innerHTML]="post.message | wfLinkify" class="p-2 feed-text-content" id="post-content-container">
+                    </p>
+                </ng-container>
+
+                <div *ngIf="post.images && post.images.length>0" class="w-100"
+                    style="padding-left:-1px;padding-right:-1px;">
+                    <app-feed-image-view-widget [container_width]="container_width"
+                        [container_height]="max_post_images_height" [feedPost]="post" [IMAGES]="post.images">
+                    </app-feed-image-view-widget>
+                </div>
+                <div *ngIf="post.links.length" class="w-100">
+                    <div *ngFor="let link of post.links" class="w-100">
+                        <app-link-preview-widget [link]="link"></app-link-preview-widget>
+                    </div>
+
+                </div>
+
+            </div>
+        </ng-container>
+    </div>
+</div>

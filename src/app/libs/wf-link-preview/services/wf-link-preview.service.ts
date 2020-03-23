@@ -31,6 +31,7 @@ export class WfLinkPreviewService {
         if (link.type == 'url') {
           this.searchLink(this.links, link.value).subscribe(lin => {
             if (!lin) {
+              var tmplink=link;
               this.links.push(link);
             }
           });

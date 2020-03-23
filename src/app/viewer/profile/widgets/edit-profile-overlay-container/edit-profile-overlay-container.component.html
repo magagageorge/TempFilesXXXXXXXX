@@ -3,13 +3,13 @@
 
         <div class="container-fluid" style="padding:0px;">
             <div style="position: absolute;top:0px;bottom:0px;left:0px;right:0px;">
-                <div class="d-block h-100 w-100">
+                <div class="d-block h-100 w-100 m-0 p-0">
                     <ng-container *ngIf="editProfileService.editMode.currentEditing=='profileCover'">
                         <ng-container *ngIf="editProfileService.editMode.coverEdit.selectOptions==true">
                             <app-edit-cover-options-widget></app-edit-cover-options-widget>
                         </ng-container>
                         <ng-container
-                            *ngIf="editProfileService.editMode.coverEdit.selectOptions==false && (editProfileService.editMode.coverEdit.selectedOption=='UploadCover' || editProfileService.editMode.coverEdit.selectedOption=='RepositionCover')">
+                            *ngIf="editProfileService.editMode.coverEdit.selectOptions==false && (editProfileService.editMode.coverEdit.selectedOption=='UploadCover' || editProfileService.editMode.coverEdit.selectedOption=='RepositionCover') && editProfileService.cover_preview_info.file!=null">
                             <app-crop-cover-widget></app-crop-cover-widget>
                         </ng-container>
                     </ng-container>
@@ -19,7 +19,7 @@
                             <app-edit-avatar-options-widget></app-edit-avatar-options-widget>
                         </ng-container>
                         <ng-container
-                            *ngIf="editProfileService.editMode.avatarEdit.selectOptions==false && (editProfileService.editMode.avatarEdit.selectedOption=='UploadAvatar' || editProfileService.editMode.avatarEdit.selectedOption=='RepositionAvatar')">
+                            *ngIf="editProfileService.editMode.avatarEdit.selectOptions==false && (editProfileService.editMode.avatarEdit.selectedOption=='UploadAvatar' || editProfileService.editMode.avatarEdit.selectedOption=='RepositionAvatar') && editProfileService.avatar_preview_info.file!=null">
                             <app-crop-avatar-widget></app-crop-avatar-widget>
                         </ng-container>
                     </ng-container>
@@ -53,8 +53,6 @@
                         *ngIf="editProfileService.editMode.inEdit==true && editProfileService.editMode.currentEditing=='ProfileSkills'">
                         <app-edit-profile-skills-widget></app-edit-profile-skills-widget>
                     </ng-container>
-
-
 
                 </div>
             </div>

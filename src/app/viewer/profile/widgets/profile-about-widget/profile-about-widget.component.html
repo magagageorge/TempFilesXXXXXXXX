@@ -1,18 +1,21 @@
-<div class="card p-1">
-  <div class="card-body p-0">
-    <div class="d-block w-100">
+<ng-container
+  *ngIf="(urlviwerService.PPVIEWER.profile.about!='' && urlviwerService.PPVIEWER.profile.about!=null) || urlviwerService.PPVIEWER.profile.my_profile==true">
+  <div class="card p-1">
+    <div class="card-body p-0">
+      <div class="d-block w-100">
         <div class="row my-2 mx-0">
           <div class="col-10">
-                  <h5>About Summary</h5>
+            <h5>About Summary</h5>
           </div>
           <div class="col-2 pull-right">
-             <span *ngIf="urlviwerService.PPVIEWER.profile.my_profile==true" class="pull-right" style="font-size: 150%;cursor: pointer;" (click)="editProfileService.EditProfileAbout()">
+            <span *ngIf="urlviwerService.PPVIEWER.profile.my_profile==true" class="pull-right"
+              style="font-size: 150%;cursor: pointer;" (click)="editProfileService.EditProfileAbout()">
               <span class="fa fa-pencil"></span>
-             </span>            
+            </span>
           </div>
         </div>
-    </div>
-    <div class="d-block  w-100">
+      </div>
+      <div class="d-block  w-100">
         <div
           *ngIf="urlviwerService.loading_viewer==true || (urlviwerService.PPVIEWER.profile.about!='' && urlviwerService.PPVIEWER.profile.about!=null) || urlviwerService.PPVIEWER.profile.my_profile==true"
           class="row mx-0">
@@ -23,7 +26,22 @@
               {{urlviwerService.PPVIEWER.profile.about}}
             </p>
           </div>
+          <ng-container
+            *ngIf="urlviwerService.PPVIEWER.profile.my_profile==true && (urlviwerService.PPVIEWER.profile.about=='' || urlviwerService.PPVIEWER.profile.about==null)">
+            <div class="col-12 mx-0">
+              <div class="list-group w-100 p-0 mx-0">
+                <span class="list-group-item w-100" (click)="editProfileService.EditProfileAbout()" style="cursor: pointer;">
+                  <span style="font-size:110%;">
+                    <span class="fa fa-book"></span></span>
+                  <span class="p-1">Add a summary to tell people about your
+                    working expertise and interests. (<span style="color: darkgray;">It is the first
+                      thing people look when Visiting your profile</span>)</span> <span class="fa fa-plus"></span>
+                </span>
+              </div>
+            </div>
+          </ng-container>
         </div>
       </div>
+    </div>
   </div>
-</div>
+</ng-container>

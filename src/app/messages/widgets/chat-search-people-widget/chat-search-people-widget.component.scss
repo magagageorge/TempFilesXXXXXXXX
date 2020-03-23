@@ -1,0 +1,21 @@
+.messenger-search-people-input{
+    border:1px solid transparent;
+    padding:3px;
+}
+
+.messenger-search-people-results{
+    position: absolute;
+    left:0px;right:0px;top:5px;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: #ffffff;
+}
+
+.messenger-search-people-input:focus{
+    border:1px solid transparent; 
+    outline: -webkit-focus-ring-color auto 0px;
+}
+
+.search-result-profile-card{
+    font-size: 90%;
+}

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { AuthService } from '@app/auth';
+import { Title, Meta } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-welcome',
@@ -14,6 +15,7 @@ export class WelcomeComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router
+    ,private title: Title, private meta: Meta
   ) {}
 
   Redirect(): Observable<boolean> {
@@ -30,6 +32,7 @@ export class WelcomeComponent implements OnInit {
       )
   } 
   ngOnInit() {
+    this.title.setTitle('Woorbi - Sign In or Join Now!');
     this.Redirect().subscribe();
   }
 

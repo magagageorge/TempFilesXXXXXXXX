@@ -16,4 +16,9 @@ export class DeleteProfileExperienceWidgetComponent implements OnInit {
   ngOnInit() {
   }
 
+  delete(){
+   this.editProfileService.deleteWorkExperience(this.editProfileService.deleteMode.experience.inDeleteData.id); 
+   this.editProfileService.cancelDeleteProfile();
+   this.editProfileService.cancelEditProfile();
+  }
 }

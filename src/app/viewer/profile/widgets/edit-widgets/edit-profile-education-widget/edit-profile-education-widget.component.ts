@@ -38,7 +38,7 @@ export class EditProfileEducationWidgetComponent implements OnInit {
       startmonth: ['', [Validators.required]],
       endyear: ['', []],
       endmonth: ['', []],
-      description: ['', [Validators.required]],
+      description: ['', []],
       current_here: ['', []],
     });
     this.startDate = new CalenderLib();
@@ -80,8 +80,8 @@ export class EditProfileEducationWidgetComponent implements OnInit {
     this.editProfileService.cancelEditProfile();
   }
 
-  delete(){
-    this.editProfileService.DeleteProfileEducation(this.editProfileService.editMode.education.inEditData);
+  delete() {
+    this.editProfileService.ConfirmDeleteProfileEducation(this.editProfileService.editMode.education.inEditData);
   }
 
   handleFormChanges() {

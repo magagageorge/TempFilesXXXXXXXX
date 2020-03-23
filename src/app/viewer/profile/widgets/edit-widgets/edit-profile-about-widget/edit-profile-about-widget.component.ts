@@ -29,7 +29,7 @@ export class EditProfileAboutWidgetComponent implements OnInit {
   ngOnInit() {
     var __this = this;
     this.profileGroup = this.formBuilder.group({
-      about: ['', [Validators.required]],
+      about: ['', []],
     });
     this.fillForm();
   }
@@ -47,7 +47,6 @@ export class EditProfileAboutWidgetComponent implements OnInit {
     }
     this.editProfileService.saveProfileInfo(this.profileModel).subscribe(result=>{
         console.log(result);
-        alert();
     });
     this.editProfileService.cancelEditTopProfileCard();
   }

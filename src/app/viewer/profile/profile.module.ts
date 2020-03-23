@@ -56,6 +56,7 @@ import { EditProfileIndustriesWidgetComponent } from './widgets/edit-widgets/edi
 import { DeleteProfileExperienceWidgetComponent } from './widgets/delete-widgets/delete-profile-experience-widget/delete-profile-experience-widget.component';
 import { DeleteProfileEducationWidgetComponent } from './widgets/delete-widgets/delete-profile-education-widget/delete-profile-education-widget.component';
 import { DeleteProfileOverlayContainerComponent } from './widgets/delete-profile-overlay-container/delete-profile-overlay-container.component';
+import { ProcessUploadImagesProgressWidgetComponent } from '../../theme/widgets/process-upload-images-progress-widget/process-upload-images-progress-widget.component';
 
 @NgModule({
   imports: [

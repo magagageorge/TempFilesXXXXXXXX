@@ -43,6 +43,22 @@
                     </div>
                 </div>
             </div>
+
+            <div *ngIf="urlViewerService.PPVIEWER.profile.my_profile==true && urlViewerService.PPVIEWER.profile.experiences.length==0" class="d-block">
+                <div class="row px-0 w-100 mx-0 p-0">
+                    <div class="col-12 mx-0" style="font-size: 110%;">
+                        <div class="list-group w-100 p-0 mx-0">
+                            <span class="list-group-item w-100" (click)="editProfileService.AddProfileExperience()" style="cursor: pointer;">
+                                <span style="font-size:110%;">
+                                    <span class="fa fa-building-o"></span></span>
+                                <span class="p-1">Add your work background,experience and expertise. </span> <span
+                                    class="fa fa-plus"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>   
+            </div>
+
         </div>
     </div>
 </div>

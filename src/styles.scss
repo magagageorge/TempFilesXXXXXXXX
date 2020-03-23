@@ -75,3 +75,30 @@ border-radius: 1.2rem;
 .cursor-pointer{
   cursor: pointer;
 }
+
+
+
+.feed-text-content a{
+  font-weight: bold;
+  color:#06274d;
+}
+
+.feed-comment-text-content a{
+  font-weight: bold;
+  color:#06274d;
+}
+
+.share-img-icon{
+  width:20px;
+  height: 20px;
+}
+/* STYLING FOR OVERLAY FORMS MODALS*/
+.overlay-modal-form-card{
+  max-height: 100vh;
+}
+
+@media (max-width:767px){
+  .overlay-modal-form-card{
+    height: 100vh;
+  }
+}

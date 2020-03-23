@@ -1,0 +1,63 @@
+<div class="d-block w-100">
+    <div class="d-none d-md-block d-lg-block d-xl-block w-100">
+        <div class="d-flex justify-content-center border-bottom border-light w-100 py-1">
+            <span class="font-weight-bold">New Message</span>
+        </div>
+    </div>
+    <div class="d-block d-flex justify-content-start p-2">
+        <ng-container *ngIf="chatroom.profiles.length>0">
+            <ng-container *ngFor="let profile of chatroom.profiles">
+                <span class="chip" style="margin:1px;"><span>{{profile.name}}</span> <span>&nbsp;</span>
+                    <span (click)="removeFromChat(profile)"><span class="fa fa-close"></span></span> </span>
+            </ng-container>
+        </ng-container>
+        <ng-container *ngIf="chatroom.profiles.length<1">
+            <input type="search" class="messenger-search-people-input" (keyup)="search()" placeholder="Type a name"
+                [(ngModel)]="search_query">
+        </ng-container>
+    </div>
+    <div class="d-block w-100" style="position: relative;">
+        <ng-container *ngIf="search_query.trim().length>2">
+            <div class="messenger-search-people-results border border-light">
+                <div *ngIf="loading_search" class="d-block text-center p-1">
+                    <span class="fa fa-circle-o-notch fa-spin"></span>
+                </div>
+                <div *ngIf="searchedPeopleList.length" class="d-block p-0">
+                    <ng-container *ngFor="let profile of searchedPeopleList">
+                        <div class="row m-0 border-bottom border-light search-result-profile-card cursor-pointer"
+                            (click)="addToChat(profile);">
+                            <div class="col-12 p-0 m-0 align-middle">
+                                <div class="h-100 w-100 m-0 p-0">
+                                    <div *ngIf="profile" class="d-block h-100 p-1 m-0 align-middle">
+                                        <div class="row h-100 m-0 p-0">
+                                            <div class="col-2 col-md-1 col-lg-1 p-0">
+                                                <img src="{{profile.avatar}}" class="img-fluid rounded-circle m-0"
+                                                    style="max-height:60px;">
+                                            </div>
+                                            <div class="col-10  col-md-11 col-lg-11 py-auto px-1 align-middle">
+                                                <span
+                                                    class="d-block w-100 text-truncate"><strong>{{profile.name}}</strong></span>
+                                                <span class="d-block w-100 text-truncate">{{profile.title}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+                <div *ngIf="!searchedPeopleList.length && search_query.trim().length>2 && loading_search==false"
+                    class="d-block p-0">
+                    <div class="row m-0">
+                        <div class="col-12 text-center">
+                            <h6>
+                                <ng-container i18n>No results found</ng-container>
+                            </h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </ng-container>
+    </div>
+</div>

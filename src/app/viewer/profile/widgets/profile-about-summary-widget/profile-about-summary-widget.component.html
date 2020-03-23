@@ -23,40 +23,90 @@
                     </div>
 
                     <div *ngIf="urlviwerService.PPVIEWER.profile.my_profile==true && (urlviwerService.PPVIEWER.profile.about=='' || urlviwerService.PPVIEWER.profile.about==null)"
-                        class="col-12">
-                        <a routerLink="/{{urlviwerService.PPVIEWER.profile.url}}/about"><span
-                                class="fa fa-plus-o"></span> <span>Add a short summary to tell people about you,your
-                                working capabilities and interests.</span></a>
+                        class="col-12 px-2">
+                        <div class="list-group w-100 p-0 mx-0">
+                            <a routerLink="/{{urlviwerService.PPVIEWER.profile.url}}/about"
+                                (click)="editProfileService.EditProfileAbout()" class="list-group-item">
+                                <span class="d-block w-100 p-0">
+                                    <span style="font-size:110%;">
+                                        <span class="fa fa-book"></span></span>
+                                    <span class="p-1">Add a summary to tell people about your
+                                        working expertise and interests. (<span style="color: darkgray;">It is the first
+                                            thing people look when Visiting your profile</span>)</span> <span
+                                        class="fa fa-plus"></span>
+                                </span></a>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <ng-container *ngIf="urlviwerService.PPVIEWER.profile.experiences.length">
+            <ng-container
+                *ngIf="urlviwerService.PPVIEWER.profile.experiences.length || urlviwerService.PPVIEWER.profile.my_profile==true">
                 <div class="d-block w-100 m-0 px-2">
-                    <ng-container *ngFor="let experience of urlviwerService.PPVIEWER.profile.experiences;let i=index">
-                        <div *ngIf="i==0" class="d-block p-1">
-                            <span class="fa fa-briefcase"></span>
-                            <span *ngIf="experience.position=='' || experience.position=='-'"><span>&nbsp;</span><span
-                                    i18n>Worked at</span></span>
-                            <span
-                                *ngIf="experience.position!='' && experience.position!='-'"><span>&nbsp;</span><span>{{experience.position}}</span></span>
-                            <span>&nbsp;</span><span i18n>at</span>
-                            <span>&nbsp;</span><span>{{experience.company_name}}</span>
+                    <ng-container *ngIf="urlviwerService.PPVIEWER.profile.experiences.length">
+                        <ng-container
+                            *ngFor="let experience of urlviwerService.PPVIEWER.profile.experiences;let i=index">
+                            <div *ngIf="i==0" class="d-block p-1">
+                                <span class="fa fa-briefcase"></span>
+                                <span
+                                    *ngIf="experience.position=='' || experience.position=='-'"><span>&nbsp;</span><span
+                                        i18n>Worked at</span></span>
+                                <span
+                                    *ngIf="experience.position!='' && experience.position!='-'"><span>&nbsp;</span><span>{{experience.position}}</span></span>
+                                <span>&nbsp;</span><span i18n>at</span>
+                                <span>&nbsp;</span><span>{{experience.company_name}}</span>
+                            </div>
+                        </ng-container>
+                    </ng-container>
+                    <ng-container
+                        *ngIf="urlviwerService.PPVIEWER.profile.my_profile==true && urlviwerService.PPVIEWER.profile.experiences.length==0">
+                        <div class="d-block px-0">
+                            <div class="list-group w-100 p-0 mx-0 my-1">
+                                <a routerLink="/{{urlviwerService.PPVIEWER.profile.url}}/about"
+                                    (click)="editProfileService.AddProfileExperience()" class="list-group-item">
+                                    <span class="d-block w-100 p-0">
+                                        <span style="font-size:110%;">
+                                            <span class="fa fa-briefcase"></span></span>
+                                        <span class="p-1">Add your work background and experience. </span> <span
+                                            class="fa fa-plus"></span>
+                                    </span>
+                                </a>
+                            </div>
                         </div>
                     </ng-container>
                 </div>
             </ng-container>
 
-            <ng-container *ngIf="urlviwerService.PPVIEWER.profile.educations.length">
+            <ng-container
+                *ngIf="urlviwerService.PPVIEWER.profile.educations.length || urlviwerService.PPVIEWER.profile.my_profile==true">
                 <div class="d-block w-100 m-0 px-2">
-                    <ng-container *ngFor="let education of urlviwerService.PPVIEWER.profile.educations;let i=index">
-                        <div *ngIf="i==0" class="d-block p-1">
-                            <span class="fa fa-graduation-cap"></span>
-                            <span *ngIf="education.major=='' || education.major=='-'"><span>&nbsp;</span><span i18n>Went
-                                    to </span></span>
-                            <span
-                                *ngIf="education.major!='' && education.major!='-'"><span>&nbsp;</span><span>{{education.major}}</span></span>
-                            <span>&nbsp;</span><span>{{education.institution_name}}</span>
+                    <ng-container *ngIf="urlviwerService.PPVIEWER.profile.educations.length">
+                        <ng-container *ngFor="let education of urlviwerService.PPVIEWER.profile.educations;let i=index">
+                            <div *ngIf="i==0" class="d-block p-1">
+                                <span class="fa fa-graduation-cap"></span>
+                                <span *ngIf="education.major=='' || education.major=='-'"><span>&nbsp;</span><span
+                                        i18n>Went
+                                        to </span></span>
+                                <span
+                                    *ngIf="education.major!='' && education.major!='-'"><span>&nbsp;</span><span>{{education.major}}</span></span>
+                                <span>&nbsp;</span><span>{{education.institution_name}}</span>
+                            </div>
+                        </ng-container>
+                    </ng-container>
+                    <ng-container
+                        *ngIf="urlviwerService.PPVIEWER.profile.my_profile==true && urlviwerService.PPVIEWER.profile.educations.length==0">
+                        <div class="d-block px-0">
+                            <div class="list-group w-100 p-0 mx-0 my-1">
+                                <a routerLink="/{{urlviwerService.PPVIEWER.profile.url}}/about"
+                                    (click)="editProfileService.AddProfileEducation()" class="list-group-item">
+                                    <span class="d-block w-100 p-0">
+                                        <span style="font-size:110%;">
+                                            <span class="fa fa-graduation-cap"></span></span>
+                                        <span class="p-1">Add your Education background </span> <span
+                                            class="fa fa-plus"></span>
+                                    </span>
+                                </a>
+                            </div>
                         </div>
                     </ng-container>
                 </div>

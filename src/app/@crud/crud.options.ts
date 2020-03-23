@@ -50,6 +50,14 @@ export  const cruddefaultSettings: any= {
                 error: true,
             },
         },
+        messenger: {
+            redirectDelay: 10,
+            provider: 'messenger',
+            showMessages: {
+                success: true,
+                error: true,
+            },
+        },        
     },
 };
 

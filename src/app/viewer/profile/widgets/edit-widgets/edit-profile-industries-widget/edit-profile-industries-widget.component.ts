@@ -35,9 +35,13 @@ export class EditProfileIndustriesWidgetComponent implements OnInit {
     if (this.submitted) {
       return false;
     }
+
     this.submitted = true;
-    if (this.industriesPicker.selectedItemsList.length > 0) {
+    if (this.editProfileService.editMode.industries.action == 'addIndustries' && this.industriesPicker.selectedItemsList.length > 0) {
       this.editProfileService.saveProfileIndustries(this.industriesPicker.selectedItemsList);
+    }
+    if (this.editProfileService.editMode.industries.action == 'editIndustries' && this.inEditindustriesPicker.selectedItemsList.length > 0) {
+      this.editProfileService.deleteProfileIndustries(this.inEditindustriesPicker.selectedItemsList);
     }
     this.editProfileService.cancelEditProfile();
   }

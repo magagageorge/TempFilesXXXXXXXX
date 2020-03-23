@@ -9,5 +9,5 @@
   </div>
   <div class="modal-footer p-1">
     <button type="button" class="btn btn-outline-secondary btn-sm pull-left" (click)="modal.dismiss('cancel click')" i18n>Cancel</button>
-    <button type="button" class="btn btn-danger btn-sm pull-right" (click)="commentService.deleteCommentReply(comment,commentReply)" i18n>Delete</button>
+    <button type="button" class="btn btn-danger btn-sm pull-right" (click)="appModalService.commentsService.deleteCommentReply(comment,commentReply)" i18n>Delete</button>
   </div>

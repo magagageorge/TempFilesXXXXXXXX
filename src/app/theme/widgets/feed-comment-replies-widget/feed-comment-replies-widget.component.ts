@@ -1,20 +1,15 @@
-import { Component, OnInit, Input, Injectable, Inject } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Component, OnInit, Input} from '@angular/core';
 import { Router } from '@angular/router';
-import { Locations } from '@app/@crud/models/locations';
 import { Comment } from '@models/feed/comment';
 import { CommentReply } from '@models/feed/comment-reply';
-import * as cloneDeep from 'lodash/cloneDeep';
-import { getDeepFromObject } from '@app/@crud/helpers';
-import { CrudService } from '@app/@crud/services/crud.service';
-import { cruddefaultSettings, CrudOptions, CRUD_OPTIONS, CRUD_USER_OPTIONS, CRUD_PROVIDERS, CRUD_INTERCEPTOR_HEADER } from '@app/@crud/crud.options';
-import { CrudProvider } from '@app/@crud/providers/crud.provider';
-
 import { CommentsService } from '@app/services/comments.service';
 import { FeedService } from '@app/services/feed.service';
 import { ProfileService } from '@app/services/profile.service';
 import { HoverCardService } from '@app/libs/wf-hover-card/services/hover-card.service';
 import { UrlViewerService } from '@app/services/url-viewer.service';
+import { AppModalService } from '@app/services/app-modal.service';
+import { CommentReplyDeleteModalComponent } from '@app/theme/modals/comment-reply-delete-modal/comment-reply-delete-modal.component';
+import { ReportContentModalComponent } from '@app/theme/modals/report-content-modal/report-content-modal.component';
 
 @Component({
   selector: 'app-feed-comment-replies-widget',
@@ -28,13 +23,10 @@ export class FeedCommentRepliesWidgetComponent implements OnInit {
   @Input() commentReplies: CommentReply[];
   commentService: CommentsService
   feedService: FeedService;
+  appModalService:AppModalService;
   hovercardService: HoverCardService;
   urlViewerService: UrlViewerService;
   profileService: ProfileService;
-  service: CrudService;
-  crudprovider: CrudProvider;
-  protected crudconfig: {};
-  protected router: Router;
   redirectDelay: number;
   showMessages: any;
   provider: string;
@@ -42,23 +34,33 @@ export class FeedCommentRepliesWidgetComponent implements OnInit {
   errors: string[];
   messages: string[];
 
-  constructor(service: CrudService,commentService:CommentsService, @Inject(CRUD_OPTIONS) CRUD_OPTIONS: CrudOptions, feedService: FeedService, profileService: ProfileService, router: Router, urlViewerService: UrlViewerService, hovercardService: HoverCardService, ) {
+  constructor(appModalService:AppModalService,commentService:CommentsService,feedService: FeedService, profileService: ProfileService, router: Router, urlViewerService: UrlViewerService, hovercardService: HoverCardService, ) {
     this.hovercardService = hovercardService;
     this.urlViewerService = urlViewerService;
     this.profileService = profileService;
     this.feedService = feedService;
     this.profileService = profileService;
     this.commentService=commentService;
-    this.crudconfig = CRUD_OPTIONS;
-    this.router = router;
     this.submitted = false;
+    this.appModalService=appModalService;
   }
 
   ngOnInit() {
   }
 
   delete() { }
-  getConfigValue(key: string): any {
-    return getDeepFromObject(this.crudconfig, key, null);
-  };
+
+  confirmDeleteCommentReply(comment: Comment, reply: CommentReply) {
+    this.appModalService.modalRef = this.appModalService._modalService.open(CommentReplyDeleteModalComponent, { centered: true });
+    this.appModalService.modalRef.componentInstance.commentReply = reply;
+    this.appModalService.modalRef.componentInstance.comment = comment;
+  }
+
+  reportCommentContentReply(post_id: number) {
+    this.appModalService.modalRef = this.appModalService._modalService.open(ReportContentModalComponent, { centered: true });
+    this.appModalService.modalRef.componentInstance.setModel(post_id, 'CommentReply');
+  }
+
+
+
 }

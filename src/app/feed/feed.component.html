@@ -19,7 +19,9 @@
 <!--Main layout-->
 <app-wf-footer></app-wf-footer>
 <app-feed-images-overlay-view></app-feed-images-overlay-view>
+<app-overlay-load-submit-process-data-widget></app-overlay-load-submit-process-data-widget>
 <app-faint-body-overlay *ngIf="postingService.show_input_buttons" (click)="postingService.messageBlur()"></app-faint-body-overlay>
 <app-mobile-overlay-post-form *ngIf="postingService.show_input_buttons"></app-mobile-overlay-post-form>
+<app-share-post-form-container-widget *ngIf="postingService.sharePostModel.inShareMode==true"></app-share-post-form-container-widget>
 <app-hover-card-container></app-hover-card-container>
 <app-edit-profile-overlay-container></app-edit-profile-overlay-container>

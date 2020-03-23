@@ -1,0 +1,172 @@
+<ng-container *ngIf="IMAGES.length==1">
+    <div *ngFor="let feed_image of IMAGES"
+      [ngStyle]="{'background-image':'url(' + imageIconsService.loadingPictureImage + ')','min-height':''+getPictureHeight(feed_image.data.width,feed_image.data.height)+'px'}"
+      (click)="feedService.viewPostPhotoInModal(feedPost,0)" class="w-100"
+      style="background-size: 100%;background-repeat: no-repeat;border-radius:0px;cursor: pointer;">
+      <img [src]="IMAGES[0].data.url" class='w-100'>
+    </div>
+  </ng-container>
+  
+  
+  <ng-container *ngIf="IMAGES.length==2">
+    <div class="row m-0 p-0" [ngStyle]="{'min-height':''+two_imgs_height+'px'}">
+      <div
+        [ngStyle]="{'height':''+two_imgs_height+'px','width':''+halfwidth+'px','background-image':'url('+imageIconsService.loadingPictureImage+')'}"
+        class="col-6 p-0 mx-0"
+        [ngClass]="((IMAGES[0].data.width>IMAGES[0].data.height && halfwidth<=IMAGES[0].data.wh_ratio*two_imgs_height) || (IMAGES[0].data.height>IMAGES[0].data.width && two_imgs_height > halfwidth/IMAGES[0].data.wh_ratio) || IMAGES[0].data.width==IMAGES[0].data.height)?'d-flex d-flex-row justify-content-center':''"
+        (click)="feedService.viewPostPhotoInModal(feedPost,0)"
+        style="background-size: 100%;background-repeat: no-repeat;border-radius:0px;overflow:hidden;border-right:1px solid #ffffff;cursor: pointer;">
+        <img [src]="IMAGES[0].data.url"
+          [ngClass]="((IMAGES[0].data.width>IMAGES[0].data.height && halfwidth<=IMAGES[0].data.wh_ratio*two_imgs_height) || (IMAGES[0].data.height>IMAGES[0].data.width && two_imgs_height > halfwidth/IMAGES[0].data.wh_ratio) || IMAGES[0].data.width==IMAGES[0].data.height) ?'h-100':'w-100'">
+      </div>
+      <div
+        [ngStyle]="{'height':''+two_imgs_height+'px','width':''+halfwidth+'px','background-image':'url('+imageIconsService.loadingPictureImage+')'}"
+        class="col-6 p-0 mx-0"
+        [ngClass]="((IMAGES[1].data.width>IMAGES[1].data.height && halfwidth<=IMAGES[1].data.wh_ratio*two_imgs_height) || (IMAGES[1].data.height>IMAGES[1].data.width && two_imgs_height > halfwidth/IMAGES[1].data.wh_ratio) || IMAGES[1].data.width==IMAGES[1].data.height)?'d-flex d-flex-row justify-content-center':''"
+        (click)="feedService.viewPostPhotoInModal(feedPost,1)"
+        style="background-size: 100%;background-repeat: no-repeat;border-radius:0px;overflow:hidden;border-left:1px solid #ffffff;cursor: pointer;">
+        <img [src]="IMAGES[1].data.url"
+          [ngClass]="((IMAGES[1].data.width>IMAGES[1].data.height && halfwidth<=IMAGES[1].data.wh_ratio*two_imgs_height) || (IMAGES[1].data.height>IMAGES[1].data.width && two_imgs_height > halfwidth/IMAGES[1].data.wh_ratio) || IMAGES[1].data.width==IMAGES[1].data.height) ?'h-100':'w-100'">
+      </div>
+    </div>
+  </ng-container>
+  
+  
+  <ng-container *ngIf="IMAGES.length==3">
+    <div class="row m-0 p-0" [ngStyle]="{'min-height':''+three_imgs_height_one+'px'}">
+      <div
+        [ngStyle]="{'height':''+three_imgs_height_one+'px','width':''+container_width+'px','background-image':'url('+imageIconsService.loadingPictureImage+')'}"
+        class="col-12 p-0 mx-0"
+        [ngClass]="((IMAGES[0].data.width>IMAGES[0].data.height && container_width<=IMAGES[0].data.wh_ratio*three_imgs_height_one) || (IMAGES[0].data.height>IMAGES[0].data.width && three_imgs_height_one > container_width/IMAGES[0].data.wh_ratio) || IMAGES[0].data.width==IMAGES[0].data.height)?'d-flex d-flex-row justify-content-center':''"
+        (click)="feedService.viewPostPhotoInModal(feedPost,0)"
+        style="background-size: 100%;background-repeat: no-repeat;border-radius:0px;overflow:hidden;border-bottom:1px solid #ffffff;cursor: pointer;">
+        <img [src]="IMAGES[0].data.url"
+          [ngClass]="((IMAGES[0].data.width>IMAGES[0].data.height && container_width<=IMAGES[0].data.wh_ratio*three_imgs_height_one) || (IMAGES[0].data.height>IMAGES[0].data.width && three_imgs_height_one > container_width/IMAGES[0].data.wh_ratio) || IMAGES[0].data.width==IMAGES[0].data.height) ?'h-100':'w-100'">
+      </div>
+    </div>
+    <div class="row m-0 p-0" [ngStyle]="{'min-height':''+three_imgs_height_two+'px'}">
+      <div
+        [ngStyle]="{'height':''+three_imgs_height_two+'px','width':''+halfwidth+'px','background-image':'url('+imageIconsService.loadingPictureImage+')'}"
+        class="col-6 p-0 mx-0"
+        [ngClass]="((IMAGES[1].data.width>IMAGES[1].data.height && halfwidth<=IMAGES[1].data.wh_ratio*three_imgs_height_two) || (IMAGES[1].data.height>IMAGES[1].data.width && three_imgs_height_two > halfwidth/IMAGES[1].data.wh_ratio) || IMAGES[1].data.width==IMAGES[1].data.height)?'d-flex d-flex-row justify-content-center':''"
+        (click)="feedService.viewPostPhotoInModal(feedPost,1)"
+        style="background-size: 100%;background-repeat: no-repeat;border-radius:0px;overflow:hidden;border-right:1px solid #ffffff;border-top:1px solid #ffffff;cursor: pointer;">
+        <img [src]="IMAGES[1].data.url"
+          [ngClass]="((IMAGES[1].data.width>IMAGES[1].data.height && halfwidth<=IMAGES[1].data.wh_ratio*three_imgs_height_two) || (IMAGES[1].data.height>IMAGES[1].data.width && three_imgs_height_two > halfwidth/IMAGES[1].data.wh_ratio) || IMAGES[1].data.width==IMAGES[1].data.height) ?'h-100':'w-100'">
+      </div>
+      <div
+        [ngStyle]="{'height':''+three_imgs_height_two+'px','width':''+halfwidth+'px','background-image':'url('+imageIconsService.loadingPictureImage+')'}"
+        class="col-6 p-0 mx-0"
+        [ngClass]="((IMAGES[2].data.width>IMAGES[2].data.height && halfwidth<=IMAGES[2].data.wh_ratio*three_imgs_height_two) || (IMAGES[2].data.height>IMAGES[2].data.width && three_imgs_height_two > halfwidth/IMAGES[2].data.wh_ratio) || IMAGES[2].data.width==IMAGES[2].data.height)?'d-flex d-flex-row justify-content-center':''"
+        (click)="feedService.viewPostPhotoInModal(feedPost,2)"
+        style="background-size: 100%;background-repeat: no-repeat;border-radius:0px;overflow:hidden;border-left:1px solid #ffffff;border-top:1px solid #ffffff;cursor: pointer;">
+        <img [src]="IMAGES[2].data.url"
+          [ngClass]="((IMAGES[2].data.width>IMAGES[2].data.height && halfwidth<=IMAGES[2].data.wh_ratio*three_imgs_height_two) || (IMAGES[2].data.height>IMAGES[2].data.width && three_imgs_height_two > halfwidth/IMAGES[2].data.wh_ratio) || IMAGES[2].data.width==IMAGES[2].data.height) ?'h-100':'w-100'">
+      </div>
+    </div>
+  </ng-container>
+  
+  
+  <ng-container *ngIf="IMAGES.length==4">
+    <div class="row m-0 p-0" [ngStyle]="{'min-height':''+four_imgs_height_one+'px'}">
+      <div
+        [ngStyle]="{'height':''+four_imgs_height_one+'px','width':''+container_width+'px','background-image':'url('+imageIconsService.loadingPictureImage+')'}"
+        class="col-12 p-0 mx-0"
+        [ngClass]="((IMAGES[0].data.width>IMAGES[0].data.height && container_width<=IMAGES[0].data.wh_ratio*four_imgs_height_one) || (IMAGES[0].data.height>IMAGES[0].data.width && four_imgs_height_one > container_width/IMAGES[0].data.wh_ratio) || IMAGES[0].data.width==IMAGES[0].data.height)?'d-flex d-flex-row justify-content-center':''"
+        (click)="feedService.viewPostPhotoInModal(feedPost,0)"
+        style="background-size: 100%;background-repeat: no-repeat;border-radius:0px;overflow:hidden;border-bottom:1px solid #ffffff;cursor: pointer;">
+        <img [src]="IMAGES[0].data.url"
+          [ngClass]="((IMAGES[0].data.width>IMAGES[0].data.height && container_width<=IMAGES[0].data.wh_ratio*four_imgs_height_one) || (IMAGES[0].data.height>IMAGES[0].data.width && four_imgs_height_one > container_width/IMAGES[0].data.wh_ratio) || IMAGES[0].data.width==IMAGES[0].data.height) ?'h-100':'w-100'">
+      </div>
+    </div>
+    <div class="row m-0 p-0" [ngStyle]="{'min-height':''+four_imgs_height_two+'px'}">
+      <div
+        [ngStyle]="{'height':''+four_imgs_height_two+'px','width':''+one_third_width+'px','background-image':'url('+imageIconsService.loadingPictureImage+')'}"
+        class="col-4 p-0 mx-0"
+        [ngClass]="((IMAGES[1].data.width>IMAGES[1].data.height && one_third_width<=IMAGES[1].data.wh_ratio*four_imgs_height_two) || (IMAGES[1].data.height>IMAGES[1].data.width && four_imgs_height_two > one_third_width/IMAGES[1].data.wh_ratio) || IMAGES[1].data.width==IMAGES[1].data.height)?'d-flex d-flex-row justify-content-center':''"
+        (click)="feedService.viewPostPhotoInModal(feedPost,1)"
+        style="background-size: 100%;background-repeat: no-repeat;border-radius:0px;overflow:hidden;border-right:1px solid #ffffff;border-top:1px solid #ffffff;cursor: pointer;">
+        <img [src]="IMAGES[1].data.url"
+          [ngClass]="((IMAGES[1].data.width>IMAGES[1].data.height && one_third_width<=IMAGES[1].data.wh_ratio*four_imgs_height_two) || (IMAGES[1].data.height>IMAGES[1].data.width && four_imgs_height_two > one_third_width/IMAGES[1].data.wh_ratio) || IMAGES[1].data.width==IMAGES[1].data.height) ?'h-100':'w-100'">
+      </div>
+      <div
+        [ngStyle]="{'height':''+four_imgs_height_two+'px','width':''+one_third_width+'px','background-image':'url('+imageIconsService.loadingPictureImage+')'}"
+        class="col-4 p-0 mx-0"
+        [ngClass]="((IMAGES[2].data.width>IMAGES[2].data.height && one_third_width<=IMAGES[2].data.wh_ratio*four_imgs_height_two) || (IMAGES[2].data.height>IMAGES[2].data.width && four_imgs_height_two > one_third_width/IMAGES[2].data.wh_ratio) || IMAGES[2].data.width==IMAGES[2].data.height)?'d-flex d-flex-row justify-content-center':''"
+        (click)="feedService.viewPostPhotoInModal(feedPost,2)"
+        style="background-size: 100%;background-repeat: no-repeat;border-radius:0px;overflow:hidden;border-right:1px solid #ffffff;border-left:1px solid #ffffff;border-top:1px solid #ffffff;cursor: pointer;">
+        <img [src]="IMAGES[2].data.url"
+          [ngClass]="((IMAGES[2].data.width>IMAGES[2].data.height && one_third_width<=IMAGES[2].data.wh_ratio*four_imgs_height_two) || (IMAGES[2].data.height>IMAGES[2].data.width && four_imgs_height_two > one_third_width/IMAGES[2].data.wh_ratio) || IMAGES[2].data.width==IMAGES[2].data.height) ?'h-100':'w-100'">
+      </div>
+      <div
+        [ngStyle]="{'height':''+four_imgs_height_two+'px','width':''+one_third_width+'px','background-image':'url('+imageIconsService.loadingPictureImage+')'}"
+        class="col-4 p-0 mx-0"
+        [ngClass]="((IMAGES[3].data.width>IMAGES[3].data.height && one_third_width<=IMAGES[3].data.wh_ratio*four_imgs_height_two) || (IMAGES[3].data.height>IMAGES[3].data.width && four_imgs_height_two > one_third_width/IMAGES[3].data.wh_ratio) || IMAGES[3].data.width==IMAGES[3].data.height)?'d-flex d-flex-row justify-content-center':''"
+        (click)="feedService.viewPostPhotoInModal(feedPost,3)"
+        style="background-size: 100%;background-repeat: no-repeat;border-radius:0px;overflow:hidden;border-left:1px solid #ffffff;border-top:1px solid #ffffff;cursor: pointer;">
+        <img [src]="IMAGES[3].data.url"
+          [ngClass]="((IMAGES[3].data.width>IMAGES[3].data.height && one_third_width<=IMAGES[3].data.wh_ratio*four_imgs_height_two) || (IMAGES[3].data.height>IMAGES[3].data.width && four_imgs_height_two > one_third_width/IMAGES[3].data.wh_ratio) || IMAGES[3].data.width==IMAGES[3].data.height) ?'h-100':'w-100'">
+      </div>
+    </div>
+  </ng-container>
+  
+  
+  <ng-container *ngIf="IMAGES.length>=5">
+    <div class="row m-0 p-0" [ngStyle]="{'min-height':''+four_imgs_height_one+'px'}">
+      <div
+        [ngStyle]="{'height':''+four_imgs_height_one+'px','width':''+halfwidth+'px','background-image':'url('+imageIconsService.loadingPictureImage+')'}"
+        class="col-6 p-0 mx-0"
+        [ngClass]="((IMAGES[0].data.width>IMAGES[0].data.height && halfwidth<=IMAGES[0].data.wh_ratio*four_imgs_height_one) || (IMAGES[0].data.height>IMAGES[0].data.width && four_imgs_height_one > halfwidth/IMAGES[0].data.wh_ratio) || IMAGES[0].data.width==IMAGES[0].data.height)?'d-flex d-flex-row justify-content-center':''"
+        (click)="feedService.viewPostPhotoInModal(feedPost,0)"
+        style="background-size: 100%;background-repeat: no-repeat;border-radius:0px;overflow:hidden;border-right:1px solid #ffffff;border-bottom:1px solid #ffffff;cursor: pointer;">
+        <img [src]="IMAGES[0].data.url"
+          [ngClass]="((IMAGES[0].data.width>IMAGES[0].data.height && halfwidth<=IMAGES[0].data.wh_ratio*four_imgs_height_one) || (IMAGES[0].data.height>IMAGES[0].data.width && four_imgs_height_one > halfwidth/IMAGES[0].data.wh_ratio) || IMAGES[0].data.width==IMAGES[0].data.height) ?'h-100':'w-100'">
+      </div>
+      <div
+        [ngStyle]="{'height':''+four_imgs_height_one+'px','width':''+halfwidth+'px','background-image':'url('+imageIconsService.loadingPictureImage+')'}"
+        class="col-6 p-0 mx-0"
+        [ngClass]="((IMAGES[1].data.width>IMAGES[1].data.height && halfwidth<=IMAGES[1].data.wh_ratio*four_imgs_height_one) || (IMAGES[1].data.height>IMAGES[1].data.width && four_imgs_height_one > halfwidth/IMAGES[1].data.wh_ratio) || IMAGES[1].data.width==IMAGES[1].data.height)?'d-flex d-flex-row justify-content-center':''"
+        (click)="feedService.viewPostPhotoInModal(feedPost,1)"
+        style="background-size: 100%;background-repeat: no-repeat;border-radius:0px;overflow:hidden;border-left:1px solid #ffffff;border-bottom:1px solid #ffffff;cursor: pointer;">
+        <img [src]="IMAGES[1].data.url"
+          [ngClass]="((IMAGES[1].data.width>IMAGES[1].data.height && halfwidth<=IMAGES[1].data.wh_ratio*four_imgs_height_one) || (IMAGES[1].data.height>IMAGES[1].data.width && four_imgs_height_one > halfwidth/IMAGES[1].data.wh_ratio) || IMAGES[1].data.width==IMAGES[1].data.height) ?'h-100':'w-100'">
+      </div>
+    </div>
+  
+    <div class="row m-0 p-0" [ngStyle]="{'min-height':''+four_imgs_height_two+'px'}">
+      <div
+        [ngStyle]="{'height':''+four_imgs_height_two+'px','width':''+one_third_width+'px','background-image':'url('+imageIconsService.loadingPictureImage+')'}"
+        class="col-4 p-0 mx-0"
+        [ngClass]="((IMAGES[2].data.width>IMAGES[2].data.height && one_third_width<=IMAGES[2].data.wh_ratio*four_imgs_height_two) || (IMAGES[2].data.height>IMAGES[2].data.width && four_imgs_height_two > one_third_width/IMAGES[2].data.wh_ratio) || IMAGES[2].data.width==IMAGES[2].data.height)?'d-flex d-flex-row justify-content-center':''"
+        (click)="feedService.viewPostPhotoInModal(feedPost,2)"
+        style="background-size: 100%;background-repeat: no-repeat;border-radius:0px;overflow:hidden;border-right:1px solid #ffffff;border-top:1px solid #ffffff;cursor: pointer;">
+        <img [src]="IMAGES[2].data.url"
+          [ngClass]="((IMAGES[2].data.width>IMAGES[2].data.height && one_third_width<=IMAGES[2].data.wh_ratio*four_imgs_height_two) || (IMAGES[2].data.height>IMAGES[2].data.width && four_imgs_height_two > one_third_width/IMAGES[2].data.wh_ratio) || IMAGES[2].data.width==IMAGES[2].data.height) ?'h-100':'w-100'">
+      </div>
+      <div
+        [ngStyle]="{'height':''+four_imgs_height_two+'px','width':''+one_third_width+'px','background-image':'url('+imageIconsService.loadingPictureImage+')'}"
+        class="col-4 p-0 mx-0"
+        [ngClass]="((IMAGES[3].data.width>IMAGES[3].data.height && one_third_width<=IMAGES[3].data.wh_ratio*four_imgs_height_two) || (IMAGES[3].data.height>IMAGES[3].data.width && four_imgs_height_two > one_third_width/IMAGES[3].data.wh_ratio) || IMAGES[3].data.width==IMAGES[3].data.height)?'d-flex d-flex-row justify-content-center':''"
+        (click)="feedService.viewPostPhotoInModal(feedPost,3)"
+        style="background-size: 100%;background-repeat: no-repeat;border-radius:0px;overflow:hidden;border-left:1px solid #ffffff;border-right:1px solid #ffffff;border-top:1px solid #ffffff;cursor: pointer;">
+        <img [src]="IMAGES[3].data.url"
+          [ngClass]="((IMAGES[3].data.width>IMAGES[3].data.height && one_third_width<=IMAGES[3].data.wh_ratio*four_imgs_height_two) || (IMAGES[3].data.height>IMAGES[3].data.width && four_imgs_height_two > one_third_width/IMAGES[3].data.wh_ratio) || IMAGES[3].data.width==IMAGES[3].data.height) ?'h-100':'w-100'">
+      </div>
+      <div
+        [ngStyle]="{'height':''+four_imgs_height_two+'px','width':''+one_third_width+'px','background-image':'url('+imageIconsService.loadingPictureImage+')'}"
+        class="col-4 p-0 mx-0"
+        [ngClass]="((IMAGES[4].data.width>IMAGES[4].data.height && one_third_width<=IMAGES[4].data.wh_ratio*four_imgs_height_two) || (IMAGES[4].data.height>IMAGES[4].data.width && four_imgs_height_two > one_third_width/IMAGES[4].data.wh_ratio) || IMAGES[4].data.width==IMAGES[4].data.height)?'d-flex d-flex-row justify-content-center':''"
+        (click)="feedService.viewPostPhotoInModal(feedPost,4)"
+        style="background-size: 100%;background-repeat: no-repeat;border-radius:0px;overflow:hidden;border-left:1px solid #ffffff;border-top:1px solid #ffffff;cursor: pointer;">
+        <img [src]="IMAGES[4].data.url"
+          [ngClass]="((IMAGES[4].data.width>IMAGES[4].data.height && one_third_width<=IMAGES[4].data.wh_ratio*four_imgs_height_two) || (IMAGES[4].data.height>IMAGES[4].data.width && four_imgs_height_two > one_third_width/IMAGES[4].data.wh_ratio) || IMAGES[4].data.width==IMAGES[4].data.height) ?'h-100':'w-100'">
+        <span *ngIf="IMAGES.length>5"
+          style="position:absolute;top:0px;bottom:0px;left:0px;right:0px;color:#ffffff;background-color: #0000;opacity: 0.6;"
+          class="d-flex justify-content-center py-auto">
+          <span class="align-middle my-auto" style="font-size: 130%;"><span class="fa fa-plus"></span><span>&nbsp;</span><span>{{IMAGES.length-5}}</span></span>
+        </span>
+      </div>
+  
+    </div>
+  
+  </ng-container>

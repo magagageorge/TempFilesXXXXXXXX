@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, HostListener } from '@angular/core';
 import { UrlViewerService } from '@app/services/url-viewer.service';
 import { ProfilePhotosService } from '@app/services/profile-photos.service';
+import { ViewPortDimensions } from '@app/libs/view-port-dimensions';
 
 @Component({
   selector: 'app-profile-photos-widget',
@@ -15,6 +16,7 @@ export class ProfilePhotosWidgetComponent implements AfterViewInit {
   containerWidth: number = 200;
   imageWidth: number = 80;
   profilePhotosService: ProfilePhotosService;
+  vpDim:ViewPortDimensions=new ViewPortDimensions();
   constructor(urlviwerService: UrlViewerService, profilePhotosService: ProfilePhotosService) {
     this.urlviwerService = urlviwerService;
     this.profilePhotosService = profilePhotosService;
@@ -27,7 +29,14 @@ export class ProfilePhotosWidgetComponent implements AfterViewInit {
   }
 
   calculatePictureWidth() {
+    var vp_dimen=this.vpDim.getViewport();
     this.containerWidth = this.imageContainer.nativeElement.clientWidth;
+    if(vp_dimen.width>=768){
+      this.imageWidth = this.containerWidth / 4;
+    }else{
+      this.imageWidth = this.containerWidth / 3;
+    }
+    /*
     if (this.containerWidth > 500) {
       this.imageWidth = this.containerWidth / 4;
     } else if (this.containerWidth > 300) {
@@ -35,6 +44,7 @@ export class ProfilePhotosWidgetComponent implements AfterViewInit {
     } else {
       this.imageWidth = this.containerWidth / 3;
     }
+    */
   }
 
   @HostListener('window:resize', ['$event'])

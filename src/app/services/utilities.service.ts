@@ -7,6 +7,7 @@ import { getDeepFromObject } from '@app/@crud/helpers';
 import { CrudService } from '@app/@crud/services/crud.service';
 import { cruddefaultSettings, CrudOptions, CRUD_OPTIONS, CRUD_USER_OPTIONS, CRUD_PROVIDERS, CRUD_INTERCEPTOR_HEADER } from '@app/@crud/crud.options';
 import { CrudProvider } from '@app/@crud/providers/crud.provider';
+import { ReportContentType } from '@app/models/report-content-type';
 
 
 @Injectable()
@@ -25,13 +26,20 @@ export class UtilitiesService {
     questions: Question[];
     SuggestedSkills: any[] = [];
     SuggestedIndutries: any[] = [];
-
+    report_types: ReportContentType[] = [];
     constructor(service: CrudService, @Inject(CRUD_OPTIONS) CRUD_OPTIONS: CrudOptions, router: Router) {
         this.service = service;
         this.crudconfig = CRUD_OPTIONS;
         this.router = router;
         this.loadSuggestedIndustries();
         this.loadSuggestedSkills();
+        this.loadReportTypes();
+    }
+
+    loadReportTypes() {
+        this.ReportTypes().subscribe(results => {
+            this.report_types = results.getResultData();
+        });
     }
 
     loadSuggestedSkills() {
@@ -44,6 +52,12 @@ export class UtilitiesService {
         this.getIndustries({}).subscribe(results => {
             this.SuggestedIndutries = results.getResultData();
         });
+    }
+
+    ReportTypes(params?: {}) {
+        this.provider = this.getConfigValue('forms.getall.provider');
+        this.service.getProvider(this.provider).crudconfig.route_url = 'feed/content-report-types/';
+        return this.service.getall(this.provider, params);
     }
 
     getLocations(): any {

@@ -1,11 +1,11 @@
 {
   "background_color": "#FFF",
   "display": "standalone",
-  "name": "Windoface",
-  "short_name": "Windoface",
-  "version": "io.windoface.apprelease",
-  "description": "Windoface is an online social platform where you discover and unlock the power of your potential and exploring career and business Opportunities while staying connected and engaged.",
-  "author": "Windoface Team",
+  "name": "Woorbi",
+  "short_name": "Woorbi",
+  "version": "com.woorbi.main",
+  "description": "A sample Apache Cordova application that responds to the deviceready event.",
+  "author": "Apache Cordova Team",
   "icons": [],
   "start_url": "index.html"
 }

@@ -4,7 +4,7 @@ export class ProfileCover{
     org_picture:string;
     width:string;
     height:string;
-    wh_ration:number;
+    wh_ratio:number;
     show_alert:boolean;
     size:number;
 }

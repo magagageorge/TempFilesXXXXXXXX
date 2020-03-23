@@ -1,25 +1,61 @@
-
 <div class="card m-2 p-0">
-  <div class="card-body p-0" >
-    <a href="{{link.url}}"  target="_blank" class="d-block m-0 p-0" >
-      <span *ngIf="link.image!=''" class="d-block row m-0">
-     <span class="d-inline-block col-3 p-0 lnk-pre-imageContainer" style="float:left;overflow-y:hidden;vertical-align: middle;">
-      <img src="{{link.image}}" class="img-fluid" style="max-height:200px;width:100%;">
+  <div class="card-body p-0">
+    <a href="{{link.url}}" target="_blank" class="d-block m-0 p-0">
 
-     </span>
-     <span class="d-inline-block col-9 p-2 cut-text"  style="float:left;max-height:200px;">
-        <h5 class="d-block">{{link.title}}</h5>
-         <p class="cut-text">{{link.description}}</p>
-         <span *ngIf="link.canonicalUrl!=''">{{link.canonicalUrl}}</span>
-    </span>
-     </span>
-     <span *ngIf="link.image==''" class="d-block row m-0">
-        <span class="d-inline-block col-12 col-md-12 col-lg-12 p-2"  style="float:left;">
+      <ng-container *ngIf="link.linkImage==null">
+        <span class="d-block row m-0 px-0">
+          <span class="d-inline-block col-12 p-2 cut-text" style="float:left;max-height:200px;">
             <h5 class="d-block">{{link.title}}</h5>
-             <p class="cut-text">{{link.description}}</p>
-             <span *ngIf="link.canonicalUrl!=''">{{link.canonicalUrl}}</span>
+            <p class="cut-text">{{link.description}}</p>
+            <span *ngIf="link.url!=''">{{link.url}}</span>
+          </span>
         </span>
-     </span>
+      </ng-container>
+      <ng-container *ngIf="link.linkImage!=null">
+
+        <ng-container *ngIf="link.linkImage.wh_ratio < 1.3 && link.linkImage.wh_ratio > 0.8">
+          <span class="d-block row m-0 px-0">
+            <span class="d-inline-block col-3 p-0 lnk-pre-imageContainer"
+              style="float:left;overflow-y:hidden;vertical-align: middle;">
+              <img src="{{link.image}}" class="img-fluid" style="max-height:200px;width:100%;">
+
+            </span>
+            <span class="d-inline-block col-9 p-2 cut-text" style="float:left;max-height:200px;">
+              <h5 class="d-block">{{link.title}}</h5>
+              <p class="cut-text">{{link.description}}</p>
+              <span *ngIf="link.url!=''">{{link.url}}</span>
+            </span>
+          </span>
+
+        </ng-container>
+
+        <ng-container
+          *ngIf="link.linkImage.width >= 200 && (link.linkImage.wh_ratio >= 1.3 || link.linkImage.wh_ratio <= 0.8)">
+          <span class="d-block row m-0 px-0">
+            <span class="d-inline-block col-12 p-0 lnk-pre-imageContainer"
+              style="float:left;overflow-y:hidden;vertical-align: middle;">
+              <img src="{{link.image}}" class="img-fluid" style="max-height:250px;width:100%;">
+
+            </span>
+            <span class="d-inline-block col-12 p-2 cut-text" style="float:left;max-height:200px;">
+              <h5 class="d-block">{{link.title}}</h5>
+              <span *ngIf="link.url!=''">{{link.url}}</span>
+            </span>
+          </span>
+        </ng-container>
+
+        <ng-container
+          *ngIf="link.linkImage.width < 200 && (link.linkImage.wh_ratio >= 1.3 || link.linkImage.wh_ratio <= 0.8)">
+          <span class="d-block row m-0 px-0">
+            <span class="d-inline-block col-12 p-2 cut-text" style="float:left;max-height:200px;">
+              <h5 class="d-block">{{link.title}}</h5>
+              <p class="cut-text">{{link.description}}</p>
+              <span *ngIf="link.url!=''">{{link.url}}</span>
+            </span>
+          </span>
+        </ng-container>
+      </ng-container>
+
     </a>
   </div>
 </div>

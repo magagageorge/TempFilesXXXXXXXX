@@ -1,0 +1,98 @@
+<ng-container *ngIf="messengerService.CHATROOMS.length==0 && messengerService.loading_chatrooms==false">
+    <div class="contacts_card chat-rooms-widget d-block h-100">
+        <div class="row mx-0  h-100">
+            <div class="col align-items-center d-flex">
+                <div class="d-block w-100">
+                    <h5>It seems you are new here or you have not started any conversation</h5>
+                    <br>
+                    <div class="w-100 d-flex justify-content-center">
+                        <a routerLink="/messages/thread/new" class="btn btn-sm btn-outline-primary">Start New
+                            Conversation</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>
+
+<ng-container *ngIf="messengerService.CHATROOMS.length>0 || messengerService.FILTERED_CHATROOMS.length > 0">
+    <div class="card p-0 m-0 contacts_card chat-rooms-widget">
+        <div class="card-header p-0 border-bottom border-light">
+
+            <div class="d-none d-md-block d-lg-block d-xl-block">
+                <div class="row mx-0">
+                    <div
+                        class="col-2 d-block d-md-none d-lg-none d-xl-none d-flex justify-content-center align-items-center">
+                        <a routerLink="/feed" class="text-primary">
+                            <span class="p-1 m-1"> <span class="fa fa-arrow-left"></span></span>
+                        </a>
+                    </div>
+                    <div class="col-8 col-md-10 col-lg-10 col-xl-10 d-flex justify-content-start">
+                        <span class="p-1 text-primary"> <span class="font-weight-bold">Messaging</span> </span>
+                    </div>
+                    <div class="col-2 d-flex justify-content-center align-items-center">
+                        <a routerLink="/messages/thread/new" class="text-primary">
+                            <span class="p-1 m-1"> <span class="fa fa-user-plus"></span> </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-block w-100  border-top border-bottom border-light">
+                <div class="input-group p-1">
+                    <input type="text" (keyup)="search()" [(ngModel)]="search_query" placeholder="Search..." name=""
+                        class="form-control search">
+                    <div class="input-group-append bg-white">
+                        <span class="input-group-text search_btn bg-white text-black" (click)="clearSearch()"> <span>&nbsp;</span> <span
+                                *ngIf="search_query!=''">x</span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body p-0">
+            <ul class="contacts contacts_body" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
+                (scrolled)="onScrollDown()" [scrollWindow]="false" id="scroller">
+                <ng-container *ngIf="search_query==''">
+                    <app-chat-rooms-room-widget [activeThreadId]="messengerService.CURRENT_MESSENGER_CHATROOM.id" [chatrooms]="messengerService.CHATROOMS">
+                    </app-chat-rooms-room-widget>
+                </ng-container>
+                <ng-container *ngIf="search_query!=''">
+                    <ng-container *ngIf="messengerService.FILTERED_CHATROOMS.length>0">
+                        <app-chat-rooms-room-widget [activeThreadId]="messengerService.CURRENT_MESSENGER_CHATROOM.id" [chatrooms]="messengerService.FILTERED_CHATROOMS">
+                        </app-chat-rooms-room-widget>
+                    </ng-container>
+                    <ng-container *ngIf="messengerService.FILTERED_CHATROOMS.length==0">
+                        <div class="row mx-0  h-100">
+                            <div class="col align-items-center d-flex">
+                                <span class="mx-auto my-auto">No Results Found</span>
+                            </div>
+                        </div>
+                    </ng-container>
+
+                </ng-container>
+                <ng-container *ngIf="messengerService.loading_more_chatrooms==true">
+                    <li>
+                        <div class="row mx-0 my-2">
+                            <div class="col align-items-center d-flex">
+                                <span class="mx-auto my-auto">
+                                    <span class="fa fa-1x fa-circle-o-notch fa-spin"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </li>
+                </ng-container>
+            </ul>
+        </div>
+        <div class="card-footer"></div>
+    </div>
+</ng-container>
+
+<ng-container *ngIf="messengerService.CHATROOMS.length < 1 && messengerService.loading_chatrooms==true">
+    <div class="f-flex align-items-center justify-content-center h-100">
+        <div class="row mx-0  h-100">
+            <div class="col align-items-center d-flex">
+                <span class="mx-auto my-auto">Loading...</span>
+            </div>
+        </div>
+    </div>
+</ng-container>

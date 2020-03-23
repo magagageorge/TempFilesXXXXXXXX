@@ -1,0 +1,55 @@
+<div class="d-block w-100 bd-highlight p-0 m-0">
+    <div class="row mx-0">
+        <div class="col-2 col-md-1 col-lg-1 col-xl-1 p-1 img_cont d-flex justify-content-center align-items-center">
+            <img src="https://2.bp.blogspot.com/-8ytYF7cfPkQ/WkPe1-rtrcI/AAAAAAAAGqU/FGfTDVgkcIwmOTtjLka51vineFBExJuSACLcBGAs/s320/31.jpg"
+                class="img-fluid rounded-circle m-0" style="max-height: 50px;">
+            <span class="online_icon offline"></span>
+        </div>
+        <div class="col-10  col-md-11 col-lg-11 col-xl-11 p-1">
+            <div class="row mx-0 w-100">
+                <div class="col-12 col-md-11 col-lg-11 col-xl-11 p-0">
+                    <span class="name m-0 d-block w-100">
+                        <ng-container *ngIf="chatroom.profiles.length>0">
+                            <ng-container *ngFor="let user of chatroom.profiles;let i=index">
+                                <ng-container *ngIf="user.profile.my_profile==false">
+
+                                    <ng-container *ngIf="chatroom.profiles.length<3">
+                                        <span class="d-block font-weight-bold">{{user.profile.name}}</span>
+                                        <span class="d-block">{{user.profile.title}}</span>
+                                    </ng-container>
+                                    <ng-container *ngIf="chatroom.profiles.length>2">
+                                        <span class="d-block">
+                                            {{user.profile.name}}
+                                            <ng-container *ngIf="i<(chatroom.profiles.length-1)">
+                                                <span>,</span>
+                                            </ng-container>
+                                        </span>
+                                    </ng-container>
+                                </ng-container>
+                            </ng-container>
+                        </ng-container>
+                    </span>
+                </div>
+                <div ngbDropdown placement="bottom-right"
+                    class="col-1 d-none d-md-block d-lg-block d-xl-block p-0 dropdown">
+                    <div class="w-100 h-100 d-flex justify-content-center align-items-center dropdown-toggle"
+                        data-toggle="dropdown" ngbDropdownToggle>
+                        <span id="action_menu_btn p-1 cursor-pointer"><i class="fa fa-ellipsis-h"></i></span>
+                    </div>
+                    <div class="dropdown-menu dropdown-menu-righ" style="width:300px;" ngbDropdownMenu>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item p-0">
+                                <span class="dropdown-item cursor-pointer"
+                                    (click)="confirmDeleteConversation(chatroom.id)">Delete Conversation</span>
+                            </li>
+                            <li class="list-group-item p-0">
+                                <span class="dropdown-item cursor-pointer"
+                                    (click)="reportMessengerContent(chatroom.id)">Report</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

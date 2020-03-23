@@ -48,10 +48,12 @@ export class ProfileViewer {
     dealing:ProfileIndustry[];
     experiences:WorkExperience[];
     educations:ProfileEducation[];
+    mutualConnections:any[];
     constructor(){
         this.skills=[];
         this.dealing=[];
         this.educations=[];
         this.experiences=[];
+        this.mutualConnections=[];
     }    
 }

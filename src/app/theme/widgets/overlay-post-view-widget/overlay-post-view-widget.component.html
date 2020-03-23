@@ -1,0 +1,49 @@
+<ng-container *ngIf="feedService.OVERLAY_FEED.visible==true">
+    <app-overlay-modal-container>
+        <div class="row m-0 px-0 h-100 align-items-center">
+            <div class="col-12 col-md-5 col-lg-5  col-xl-5 mx-auto px-0 h-100 align-items-center d-flex">
+                <div class="d-block align-self-center w-100 mx-auto h-100 overlaypostcontainer" #OverlayfeedContainer>
+                    <div class="d-block w-100">
+                       <div class="w-100 d-none d-md-block d-lg-block d-xl-block">
+                        <div class="row px-0 mx-0">
+                            <div class="col-8 py-auto">
+                                <span class="pull-left font-weight-bold my-auto p-2">Post</span>
+                            </div>
+                            <div class="col-4 py-auto">
+                                <span class="pull-right my-auto p-2" (click)="feedService.closeOverlayPost()"
+                                    style="font-size: 130%;cursor: pointer;">
+                                    <span class="fa fa-close"></span>
+                                </span>
+                            </div>
+                        </div>
+                       </div>
+                       <div class="w-100 d-block d-md-none d-lg-none d-xl-none">
+                        <div class="row px-0 mx-0">
+                            <div class="col-3 py-auto">
+                                <span class="w-100 p-2 pull-left cursor-pointer"  (click)="feedService.closeOverlayPost()">
+                                    <span class="fa fa-arrow-left"></span>
+                                </span>
+                            </div>
+                            <div class="col-9 py-auto">
+                                <span class="pull-right my-auto p-2">
+                                    <span class="font-weight-bold">Post</span>
+                                </span>
+                            </div>
+                        </div>
+                       </div>                       
+                    </div>
+                    <div class="d-block overlaypost-content">
+                        <app-loading-new-post-widget *ngIf="feedService.OVERLAY_FEED.loadingFeed">
+                        </app-loading-new-post-widget>
+                        <ng-container
+                            *ngIf="feedService.OVERLAY_FEED.loadingFeed!=true && feedService.OVERLAY_FEED.feed!=null">
+                            <app-post-card-widget [feed]="feedService.OVERLAY_FEED.feed"
+                                [container_width]="container_width" [max_post_images_height]="max_post_images_height">
+                            </app-post-card-widget>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </app-overlay-modal-container>
+</ng-container>

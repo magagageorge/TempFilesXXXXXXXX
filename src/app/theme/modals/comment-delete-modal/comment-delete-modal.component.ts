@@ -1,7 +1,7 @@
 import { Component, OnInit,Input } from '@angular/core';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { CommentsService } from '@app/services/comments.service';
+import { NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import { Comment } from '@app/models/feed/comment';
+import { AppModalService } from '@app/services/app-modal.service';
 
 @Component({
   selector: 'app-comment-delete-modal',
@@ -11,7 +11,7 @@ import { Comment } from '@app/models/feed/comment';
 export class CommentDeleteModalComponent implements OnInit {
 
   @Input() comment:Comment;
-  constructor(public modal: NgbActiveModal,public commentService:CommentsService) {}
+  constructor(public modal: NgbActiveModal,public appModalService:AppModalService) {}
 
   ngOnInit() {
   }

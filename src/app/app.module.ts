@@ -9,9 +9,6 @@ import { ThemeModule } from './theme/theme.module';
 import { NgSelectModule } from '@ng-select/ng-select';
 import {NgxImageCompressService} from 'ngx-image-compress';
 
-
-
-
 import { AUTH_TOKEN_CLASS, AuthJWTToken,AuthModule } from './auth';
 import { EmailPassAuthProvider } from './auth/providers';
 import { SocialAuthProvider } from './auth/providers';
@@ -21,8 +18,6 @@ import { NotificationsService } from './services/notifications.service';
 import { UtilitiesService } from './services/utilities.service';
 import { FeedService } from './services/feed.service';
 import { PostingService } from '@app/services/posting.service';
-
-
 
 import { deepExtend } from './@crud/helpers';
 import { CrudModule } from './@crud/crud.module';
@@ -59,7 +54,14 @@ import { EditProfileService } from './services/edit-profile.service';
 import { ProfileViewerService } from './services/profile-viewer.service';
 import { ViewerModule } from './viewer/viewer.module';
 import { ProfileModule } from './viewer/profile/profile.module';
- 
+import { LoadSubmitProgressService } from './services/load-submit-progress.service';
+import { NavigationService } from './services/navigation.service';
+import { MessengerProvider } from './@crud';
+import { MessengerService } from './messages/services/messenger.service'; 
+import { MessengerModalsService } from './messages/services/messenger-modals.service';
+import { ConfirmDeleteContentModalComponent } from './messages/modals/confirm-delete-content-modal/confirm-delete-content-modal.component';
+import { ReportMessengerContentModalComponent } from './messages/modals/report-messenger-content-modal/report-messenger-content-modal.component';
+import { AppModalService } from './services/app-modal.service';
 
 @NgModule({
   declarations: [
@@ -75,7 +77,7 @@ import { ProfileModule } from './viewer/profile/profile.module';
     WelcomeComponent,
     TosComponent
   ],
-  entryComponents:[PostDeleteModalComponent,CommentDeleteModalComponent,ReportContentModalComponent,LikesModalComponent,CommentReplyDeleteModalComponent],
+  entryComponents:[PostDeleteModalComponent,CommentDeleteModalComponent,ReportContentModalComponent,LikesModalComponent,CommentReplyDeleteModalComponent,ConfirmDeleteContentModalComponent,ReportMessengerContentModalComponent],
   imports: [
   BrowserModule,
   NgbModule.forRoot(),
@@ -99,6 +101,14 @@ import { ProfileModule } from './viewer/profile/profile.module';
                },
              },
            },
+           messenger: {
+            service: MessengerProvider,
+            config: {
+              token: {
+                key: 'token', // this parameter tells Nebular where to look for the token
+              },
+            },
+          },           
          },
        }),
     AuthModule.forRoot({
@@ -123,7 +133,7 @@ import { ProfileModule } from './viewer/profile/profile.module';
          },
        }),	
   ],
-  providers: [AuthGuard,UrlViewerService,ProfileService,PostingService,UtilitiesService,FeedService,ProfileFeedService,ProfilePhotosService,ProfileConnectionsService,CommentsService,NotificationsService,ConnectionsService,ImageIconsService,EditProfileService,ProfileViewerService, NgxImageCompressService],
+  providers: [AuthGuard,UrlViewerService,ProfileService,PostingService,UtilitiesService,FeedService,ProfileFeedService,ProfilePhotosService,ProfileConnectionsService,CommentsService,NotificationsService,ConnectionsService,ImageIconsService,EditProfileService,ProfileViewerService,MessengerService,AppModalService, MessengerModalsService, LoadSubmitProgressService,NavigationService, NgxImageCompressService],
   schemas: [ NO_ERRORS_SCHEMA ],
   bootstrap: [AppComponent]
 })

@@ -38,9 +38,14 @@ export class EditProfileSkillsWidgetComponent implements OnInit {
     }
 
     this.submitted = true;
-    if (this.skillsPicker.selectedItemsList.length > 0) {
+    if (this.editProfileService.editMode.skills.action=='addSkills' && this.skillsPicker.selectedItemsList.length > 0) {
       this.editProfileService.saveProfileSkills(this.skillsPicker.selectedItemsList);
     }
+
+    if (this.editProfileService.editMode.skills.action=='editSkills' && this.inEditskillsPicker.selectedItemsList.length > 0) {
+      this.editProfileService.deleteProfileSkills(this.inEditskillsPicker.selectedItemsList);
+    }
+
     this.editProfileService.cancelEditProfile();
   }
 

@@ -13,6 +13,8 @@ import { ReportContentModalComponent } from '@app/theme/modals/report-content-mo
 import { LikesModalComponent } from '@app/theme/modals/likes-modal/likes-modal.component';
 import { Comment } from '@app/models/feed/comment';
 import { PostPhoto } from '@app/models/post-photo';
+import { ProfileCover } from '@app/models/profile/profile-cover';
+import { ProfileAvatar } from '@app/models/profile/profile-avatar';
 
 const MODALS = {
   deletePost: PostDeleteModalComponent,
@@ -47,7 +49,7 @@ export class ProfilePhotosService {
   currentViewImageIndex: any = -1;
   viewerHeight: number = 0;
   viewerWidth: number = 0;
-  reached_end_of_feed:boolean=false;
+  reached_end_of_feed: boolean = false;
 
   constructor(service: CrudService, @Inject(CRUD_OPTIONS) CRUD_OPTIONS: CrudOptions, private _modalService: NgbModal, router: Router) {
     this.next_feed_page = 1;
@@ -63,7 +65,7 @@ export class ProfilePhotosService {
   }
 
   public onScrollDown(): void {
-    if(this.reached_end_of_feed){
+    if (this.reached_end_of_feed) {
       return;
     }
     if (this.loading_feeds == false) {
@@ -132,17 +134,38 @@ export class ProfilePhotosService {
     this.currentViewImageIndex = index;
   }
 
+  viewCoverInModal(photo: ProfileCover) {
+    if (photo.org_picture == null || photo.org_picture == '') {
+      return;
+    }
+    var cover = new PostPhoto();
+    cover.data = { url: photo.org_picture, width: photo.width, height: photo.height, wh_ratio: photo.wh_ratio }
+    this.currentViewImage = cover;
+    this.currentViewImageIndex = -1;
+  }
+
+  viewAvatarInModal(photo: ProfileAvatar) {
+    if (photo.org_face == null || photo.org_face == '') {
+      return;
+    }
+    var cover = new PostPhoto();
+    cover.data = { url: photo.org_face, width: photo.width, height: photo.height, wh_ratio: photo.wh_ratio }
+    this.currentViewImage = cover;
+    this.currentViewImageIndex = -2;
+  }
+
+
   /* Navigate the Next Picture in Array when user click right-arrow/Next button from view modal*/
   viewNextPhotoInModal() {
-    if (this.profilePhotos.length && this.profilePhotos.length > (this.currentViewImageIndex+1)) {
-     this.viewPhotoInModal(this.profilePhotos[this.currentViewImageIndex+1],Number(this.currentViewImageIndex+1));
+    if (this.profilePhotos.length && this.profilePhotos.length > (this.currentViewImageIndex + 1)) {
+      this.viewPhotoInModal(this.profilePhotos[this.currentViewImageIndex + 1], Number(this.currentViewImageIndex + 1));
     }
   }
 
   /* Navigate the Previous Picture in Array when user click left-arrow/Previous button from view modal*/
   viewPreviousPhotoInModal() {
-    if(this.currentViewImageIndex>0){
-      this.viewPhotoInModal(this.profilePhotos[this.currentViewImageIndex-1],Number(this.currentViewImageIndex-1));
+    if (this.currentViewImageIndex > 0) {
+      this.viewPhotoInModal(this.profilePhotos[this.currentViewImageIndex - 1], Number(this.currentViewImageIndex - 1));
     }
   }
 

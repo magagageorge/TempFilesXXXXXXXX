@@ -14,6 +14,7 @@ import { PageViewer } from '@app/models/page-viewer';
 import { ProfileFeedService } from './profile-feed.service';
 import { ProfilePhotosService } from './profile-photos.service';
 import { ProfileConnectionsService } from './profile-connections.service';
+import { Title, Meta } from '@angular/platform-browser';
 
 
 @Injectable({
@@ -43,7 +44,7 @@ export class UrlViewerService {
   profilePhotosService:ProfilePhotosService;
   profileConnectionsService:ProfileConnectionsService;
 
-  constructor(service: CrudService,profileFeedService:ProfileFeedService,profilePhotosService:ProfilePhotosService,profileConnectionsService:ProfileConnectionsService, @Inject(CRUD_OPTIONS) CRUD_OPTIONS: CrudOptions, router: Router) {
+  constructor(service: CrudService,profileFeedService:ProfileFeedService,profilePhotosService:ProfilePhotosService,profileConnectionsService:ProfileConnectionsService, @Inject(CRUD_OPTIONS) CRUD_OPTIONS: CrudOptions, router: Router,private title: Title, private meta: Meta) {
     this.service = service;
     this.crudconfig = CRUD_OPTIONS;
     this.router = router;
@@ -75,6 +76,7 @@ export class UrlViewerService {
       if (_this.PPVIEWER.type == '' || (_this.PPVIEWER.type == 'profile' && (_this.PPVIEWER.profile.url == results.profile.url)) || (_this.PPVIEWER.type == 'page' && (_this.PPVIEWER.page.url == results.page.url))) {
         _this.loading_viewer = false;
         _this.PPVIEWER = results as PageProfileViewer;
+        _this.meta.updateTag({ name: 'description', content: _this.PPVIEWER.profile.title}); 
       }
     });
   }
@@ -95,7 +97,9 @@ export class UrlViewerService {
       return false;
     }
       this.PPVIEWER = { type: 'profile', profile: new ProfileViewer, page: new PageViewer };
-      //this.PPVIEWER.profile=profile;      
+      //this.PPVIEWER.profile=profile;  
+      this.title.setTitle(''+profile.name+' | Woorbi');
+      this.meta.updateTag({ name: 'description', content: profile.title});    
       this.PPVIEWER.profile.name = profile.name;
       this.PPVIEWER.profile.url = profile.url;
       this.PPVIEWER.profile.firstname = profile.firstname;

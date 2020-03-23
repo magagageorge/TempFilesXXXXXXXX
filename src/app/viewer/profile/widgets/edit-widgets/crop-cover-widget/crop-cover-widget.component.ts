@@ -23,7 +23,7 @@ export class CropCoverWidgetComponent implements OnInit {
   ngOnInit() {
   }
 
-  SaveCroppedCover(){
+  SaveCroppedCover() {
     this.editProfileService.saveProfileCover(this.croppedImage);
   }
 
@@ -34,20 +34,20 @@ export class CropCoverWidgetComponent implements OnInit {
 
   imageCropped(event: ImageCroppedEvent) {
     this.croppedImage = event.base64;
-    console.log(event);
+    //console.log(event);
   }
 
   imageLoaded() {
     this.showCropper = true;
-    console.log('Image loaded');
+    //console.log('Image loaded');
   }
 
   cropperReady() {
-    console.log('Cropper ready');
+    //console.log('Cropper ready');
   }
 
   loadImageFailed() {
-    console.log('Load failed');
+    //console.log('Load failed');
   }
 
   rotateLeft() {

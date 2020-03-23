@@ -14,6 +14,7 @@ import { Observable, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { UrlViewerService } from '@app/services/url-viewer.service';
 import { Profile } from '@app/models/profile/profile';
+import { NavigationService } from '@app/services/navigation.service';
 
 @Component({
   selector: 'app-wf-navbar',
@@ -23,7 +24,7 @@ import { Profile } from '@app/models/profile/profile';
 export class WfNavbarComponent implements OnInit {
 
   public profileService: ProfileService;
-  urlViewerService:UrlViewerService;
+  urlViewerService: UrlViewerService;
   public is_authenticated: boolean = true;
   public myProfile: Profile;
   public hideSideNav: boolean = true;
@@ -32,21 +33,29 @@ export class WfNavbarComponent implements OnInit {
 
   private router: Router;
   private route: ActivatedRoute;
+  navigationService: NavigationService;
   constructor(public authService: AuthService,
     public authGuard: AuthGuard, profileService: ProfileService,
-    public utilities: UtilitiesService,urlViewerService:UrlViewerService, public menuservice: MenuService, public notificationService: NotificationsService, router: Router,route: ActivatedRoute) {
+    public utilities: UtilitiesService, urlViewerService: UrlViewerService, navigationService: NavigationService, public menuservice: MenuService, public notificationService: NotificationsService, router: Router, route: ActivatedRoute) {
     this.profileService = profileService;
-    this.urlViewerService=urlViewerService;
-    this.route=route;
-    this.router=router;
+    this.urlViewerService = urlViewerService;
+    this.navigationService = navigationService;
+    this.route = route;
+    this.router = router;
   }
 
   ngOnInit() {
-    this.myProfile=(this.profileService.MYPROFILE as any) as Profile;
+    this.myProfile = (this.profileService.MYPROFILE as any) as Profile;
     this.authService.isAuthenticated().subscribe((authenticated: any) => {
       this.is_authenticated = authenticated;
     });
   }
+
+
+  getMyProfile(): Profile {
+    return (this.profileService.MYPROFILE as any) as Profile;
+  }
+
 
   toogleSideBar() {
     this.menuservice.toogleSideBar();

@@ -1,9 +1,10 @@
-import {Component, Input, ElementRef, OnInit, ViewChild, AfterViewInit, HostListener  } from '@angular/core';
+import { Component, Input, ElementRef, OnInit, ViewChild, AfterViewInit, HostListener } from '@angular/core';
 import { FeedService } from '@app/services/feed.service';
 import { PostingService } from '@app/services/posting.service';
 import { CommentsService } from "@services/comments.service";
 import { HoverCardService } from '@app/libs/wf-hover-card/services/hover-card.service';
 import { UrlViewerService } from '@app/services/url-viewer.service';
+import { ImageIconsService } from '@app/services/image-icons.service';
 
 @Component({
   selector: 'app-feed-widget',
@@ -11,22 +12,17 @@ import { UrlViewerService } from '@app/services/url-viewer.service';
   styleUrls: ['./feed-widget.component.scss']
 })
 export class FeedWidgetComponent implements AfterViewInit {
-  @Input() profile:any;
-  @ViewChild("feedContainer",{static: false})
+  @Input() profile: any;
+  @ViewChild("feedContainer", { static: false })
   feedContainer: ElementRef;
-  container_width:number;
+  container_width: number;
+  max_post_images_height: number;
 
-  feedService:FeedService;
-  postingService:PostingService;
-  commentService:CommentsService;
-  hovercardService:HoverCardService;
-  urlViewerService:UrlViewerService;
-  constructor(feedService:FeedService,postingService:PostingService,commentService:CommentsService,urlViewerService:UrlViewerService,hovercardService:HoverCardService) { 
-    this.feedService=feedService;
-    this.postingService=postingService;
-    this.commentService=commentService;
-    this.hovercardService=hovercardService;
-    this.urlViewerService=urlViewerService;
+  feedService: FeedService;
+  commentService: CommentsService;
+  constructor(feedService: FeedService, postingService: PostingService, commentService: CommentsService, imageIconsService: ImageIconsService, urlViewerService: UrlViewerService, hovercardService: HoverCardService) {
+    this.feedService = feedService;
+    this.commentService = commentService;
   }
 
   ngAfterViewInit() {
@@ -36,23 +32,13 @@ export class FeedWidgetComponent implements AfterViewInit {
   }
 
   getDimensions() {
-    this.container_width=this.feedContainer.nativeElement.clientWidth*0.98;
-    this.commentService.feedContainerWidth=this.feedContainer.nativeElement.clientWidth;
+    this.container_width = this.feedContainer.nativeElement.clientWidth * 0.98;
+    this.commentService.feedContainerWidth = this.feedContainer.nativeElement.clientWidth;
+    //this.max_post_images_height=window.innerHeight * 0.8;
+    this.max_post_images_height = this.container_width * 1;
   }
 
-  delete(){
-  }
-
-  getPictureHeight(width:number,height:number){
-    let ratio=width/height;
-    let new_height=this.container_width/ratio;
-    return new_height;
-  }
-
-  getPictureRowHeight(width:number,height:number,container_width:number){
-    let ratio=width/height;
-    let new_height=container_width/ratio;
-    return new_height;
+  delete() {
   }
 
   @HostListener('window:resize', ['$event'])

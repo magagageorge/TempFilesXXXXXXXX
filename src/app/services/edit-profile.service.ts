@@ -14,6 +14,10 @@ import { UrlViewerService } from './url-viewer.service';
 import { ProfileService } from './profile.service';
 import { ProfileEducation } from '@app/models/profile/profile-education';
 import { WorkExperience } from '@app/models/profile/work-experience';
+import { LoadSubmitProgressService } from './load-submit-progress.service';
+import { ProfileIndustry } from '@app/models/profile-industry';
+import { ProfileSkill } from '@app/models/profile-skill';
+import { HttpClient } from '@angular/common/http';
 
 export interface EditMode {
   inEdit: boolean;
@@ -90,6 +94,8 @@ export class EditProfileService {
   crudprovider: CrudProvider;
   urlViewerService: UrlViewerService;
   profileService: ProfileService;
+  loadProcessService: LoadSubmitProgressService;
+  httpClient: HttpClient;
   protected crudconfig: {};
   protected router: Router;
   redirectDelay: number;
@@ -103,17 +109,22 @@ export class EditProfileService {
   loading_profile: boolean = false;
   cover_preview_info: PreviewPicture = { url: '', width: 0, height: 0, file: null, isNew: true };
   avatar_preview_info: PreviewPicture = { url: '', width: 0, height: 0, file: null, isNew: true };
-  editMode: EditMode = { inEdit: false, currentEditing: '', coverEdit: { selectOptions: false, selectedOption: '', processingCover: false }, avatarEdit: { selectOptions: false, selectedOption: '', processingAvatar: false }, education: { action: '', processingEducation: false, inEditData: new ProfileEducation() }, experience: { action: '', processingExperience: false, inEditData: new WorkExperience() },skills:{action:'',processingSkills:false},industries:{action:'',processingIndustries:false} }
-  deleteMode: DeleteMode = { inDelete: false, currentDeleting: '',education: { action: '', processingEducation: false, inDeleteData: new ProfileEducation() }, experience: { action: '', processingExperience: false, inDeleteData: new WorkExperience() },skills:{action:'',processingSkills:false},industries:{action:'',processingIndustries:false} }
+  editMode: EditMode = { inEdit: false, currentEditing: '', coverEdit: { selectOptions: false, selectedOption: '', processingCover: false }, avatarEdit: { selectOptions: false, selectedOption: '', processingAvatar: false }, education: { action: '', processingEducation: false, inEditData: new ProfileEducation() }, experience: { action: '', processingExperience: false, inEditData: new WorkExperience() }, skills: { action: '', processingSkills: false }, industries: { action: '', processingIndustries: false } };
+  deleteMode: DeleteMode = { inDelete: false, currentDeleting: '', education: { action: '', processingEducation: false, inDeleteData: new ProfileEducation() }, experience: { action: '', processingExperience: false, inDeleteData: new WorkExperience() }, skills: { action: '', processingSkills: false }, industries: { action: '', processingIndustries: false } };
+  uploadingImage:boolean=false;
+  processingImage:boolean=false;
+  loadingImage:boolean=false;
 
 
-  constructor(service: CrudService, profileService: ProfileService, urlViewerService: UrlViewerService, imageCompress: NgxImageCompressService, @Inject(CRUD_OPTIONS) CRUD_OPTIONS: CrudOptions, router: Router) {
+  constructor(service: CrudService, profileService: ProfileService, urlViewerService: UrlViewerService, loadProcessService: LoadSubmitProgressService, imageCompress: NgxImageCompressService, @Inject(CRUD_OPTIONS) CRUD_OPTIONS: CrudOptions, router: Router, httpClient: HttpClient) {
     this.service = service;
     this.crudconfig = CRUD_OPTIONS;
     this.router = router;
+    this.httpClient = httpClient;
     this.imageCompress = imageCompress;
     this.urlViewerService = urlViewerService;
     this.profileService = profileService;
+    this.loadProcessService = loadProcessService;
   }
 
 
@@ -146,12 +157,12 @@ export class EditProfileService {
 
   saveProfileCover(base64CoverUri: any) {
     var _this = this;
+    this.uploadingImage=true;
     var cropped_image = this.DataUrlToFile(base64CoverUri);
     this.errors = this.messages = [];
     const formData: any = new FormData();
     this.provider = this.getConfigValue('forms.update.provider');
     this.service.getProvider(this.provider).crudconfig.route_url = 'profile/my-profile-cover/';
-
     if (this.cover_preview_info.isNew == true && this.cover_preview_info.file != null) {
       formData.append("ProfileCoverForm[org_image]", this.cover_preview_info.file);
     }
@@ -163,13 +174,14 @@ export class EditProfileService {
       if (result.isSuccess()) {
         _this.messages = result.getMessages();
         var data = result.getResultData();
-        console.log(data);
         _this.profileService.MYPROFILE.cover.picture = base64CoverUri;
         _this.profileService.MYPROFILE.cover.show_alert = false;
         _this.urlViewerService.PPVIEWER.profile.cover.picture = base64CoverUri;
+        _this.cover_preview_info = { url: '', width: 0, height: 0, file: null, isNew: true };
       } else {
         _this.errors = result.getErrors();
       }
+      _this.uploadingImage=false;
     });
 
     this.cancelEditCover();
@@ -177,6 +189,7 @@ export class EditProfileService {
 
   saveProfileAvatar(base64AvatarUri: any) {
     var _this = this;
+    this.uploadingImage=true;
     var cropped_image = this.DataUrlToFile(base64AvatarUri);
     this.errors = this.messages = [];
     const formData: any = new FormData();
@@ -197,9 +210,11 @@ export class EditProfileService {
         _this.profileService.MYPROFILE.avatar.face = base64AvatarUri;
         _this.profileService.MYPROFILE.avatar.show_alert = false;
         _this.urlViewerService.PPVIEWER.profile.avatar.face = base64AvatarUri;
+        _this.avatar_preview_info = { url: '', width: 0, height: 0, file: null, isNew: true };
       } else {
         _this.errors = result.getErrors();
       }
+      _this.uploadingImage=false;
     });
 
     this.cancelEditAvatar();
@@ -281,23 +296,23 @@ export class EditProfileService {
   }
 
   UploadCoverFile() {
+    var _this=this;
     this.imageCompress.uploadFile().then(({ image, orientation }) => {
-      //this.imgResultBeforeCompress = image;
-      //console.warn('Size in bytes was:', this.imageCompress.byteCount(image));
+      _this.processingImage=true;
       this.imageCompress.compressFile(image, orientation, 50, 50).then(
         result => {
-          this.editMode.coverEdit.selectOptions = false;
-          this.editMode.coverEdit.selectedOption = 'UploadCover';
-          this.PreviewCompressedCover(result, 'base64');
-          //this.PreviewCover(this.DataUrlToFile(result));
-          //this.imgResultAfterCompress = result;
-          //console.warn('Size in bytes is now:', this.imageCompress.byteCount(result));
+          _this.cover_preview_info = { url: '', width: 0, height: 0, file: null, isNew: true };
+          _this.editMode.coverEdit.selectOptions = false;
+          _this.editMode.coverEdit.selectedOption = 'UploadCover';
+          _this.processingImage=false;
+          _this.PreviewCompressedCover(result, 'base64');
         }
       );
     });
   }
 
   RepositionProfileCover(ImgUrl: string) {
+    this.cover_preview_info = { url: '', width: 0, height: 0, file: null, isNew: true };
     this.editMode.coverEdit.selectOptions = false;
     this.editMode.coverEdit.selectedOption = 'RepositionCover';
     this.PreviewCompressedCover(ImgUrl, 'url');
@@ -305,17 +320,16 @@ export class EditProfileService {
 
 
   UploadAvatarFile() {
+    var _this=this;
     this.imageCompress.uploadFile().then(({ image, orientation }) => {
-      //this.imgResultBeforeCompress = image;
-      //console.warn('Size in bytes was:', this.imageCompress.byteCount(image));
+      _this.processingImage=true;
       this.imageCompress.compressFile(image, orientation, 50, 50).then(
         result => {
-          this.editMode.avatarEdit.selectOptions = false;
-          this.editMode.avatarEdit.selectedOption = 'UploadAvatar';
-          this.PreviewCompressedAvatar(result, 'base64');
-          //this.PreviewCover(this.DataUrlToFile(result));
-          //this.imgResultAfterCompress = result;
-          //console.warn('Size in bytes is now:', this.imageCompress.byteCount(result));
+          _this.avatar_preview_info = { url: '', width: 0, height: 0, file: null, isNew: true };
+          _this.editMode.avatarEdit.selectOptions = false;
+          _this.editMode.avatarEdit.selectedOption = 'UploadAvatar';
+          _this.processingImage=false;
+          _this.PreviewCompressedAvatar(result, 'base64');
         }
       );
     });
@@ -323,6 +337,7 @@ export class EditProfileService {
 
 
   RepositionProfileAvatar(ImgUrl: string) {
+    this.avatar_preview_info = { url: '', width: 0, height: 0, file: null, isNew: true };
     this.editMode.avatarEdit.selectOptions = false;
     this.editMode.avatarEdit.selectedOption = 'RepositionAvatar';
     this.PreviewCompressedAvatar(ImgUrl, 'url');
@@ -331,7 +346,9 @@ export class EditProfileService {
 
 
   PreviewCompressedCover(loadedUrl: string, urlType: string) {
+    var _this = this;
     if (loadedUrl != '') {
+      this.loadingImage=true;
       this.editMode.coverEdit.processingCover = true;
       var loadedImage = new Image();
       loadedImage.setAttribute('crossorigin', 'anonymous'); // works for me
@@ -341,14 +358,17 @@ export class EditProfileService {
           if (urlType == 'base64') {
             var imgFile = this.DataUrlToFile(loadedUrl);
             base64Url = loadedUrl;
+            _this.cover_preview_info = { url: base64Url, width: loadedImage.width, height: loadedImage.height, file: imgFile, isNew: true };
+            _this.loadingImage=false;
           } else {
-            var canvas = document.createElement('canvas');
-            canvas.getContext('2d').drawImage(loadedImage, 0, 0);
-            var extension = loadedUrl.substring(loadedUrl.lastIndexOf('.') + 1);
-            base64Url = canvas.toDataURL('image/' + extension + '');
-            var imgFile = this.DataUrlToFile(base64Url);
+            this.ImageUrlToBlob(loadedUrl).subscribe(blob => {
+              _this.BlobtoDataURL(blob).then(base64Url => {
+                var imgFile = this.DataUrlToFile(base64Url);
+                _this.cover_preview_info = { url: base64Url, width: loadedImage.width, height: loadedImage.height, file: imgFile, isNew: true };
+                _this.loadingImage=false;
+              });
+            });
           }
-          this.cover_preview_info = { url: base64Url, width: loadedImage.width, height: loadedImage.height, file: imgFile, isNew: true };
         }
       }
       loadedImage.src = loadedUrl;
@@ -358,7 +378,9 @@ export class EditProfileService {
 
 
   PreviewCompressedAvatar(loadedUrl: string, urlType: string) {
+    var _this = this;
     if (loadedUrl != '') {
+      this.loadingImage=true;
       this.editMode.avatarEdit.processingAvatar = true;
       var loadedImage = new Image();
       loadedImage.setAttribute('crossorigin', 'anonymous'); // works for me
@@ -368,14 +390,17 @@ export class EditProfileService {
           if (urlType == 'base64') {
             var imgFile = this.DataUrlToFile(loadedUrl);
             base64Url = loadedUrl;
+            _this.avatar_preview_info = { url: base64Url, width: loadedImage.width, height: loadedImage.height, file: imgFile, isNew: true };
+            _this.loadingImage=false;
           } else {
-            var canvas = document.createElement('canvas');
-            canvas.getContext('2d').drawImage(loadedImage, 0, 0);
-            var extension = loadedUrl.substring(loadedUrl.lastIndexOf('.') + 1);
-            base64Url = canvas.toDataURL('image/' + extension + '');
-            var imgFile = this.DataUrlToFile(base64Url);
+            this.ImageUrlToBlob(loadedUrl).subscribe(blob => {
+              _this.BlobtoDataURL(blob).then(base64Url => {
+                var imgFile = this.DataUrlToFile(base64Url);
+                _this.avatar_preview_info = { url: base64Url, width: loadedImage.width, height: loadedImage.height, file: imgFile, isNew: true };
+                _this.loadingImage=false;
+              });
+            });
           }
-          this.avatar_preview_info = { url: base64Url, width: loadedImage.width, height: loadedImage.height, file: imgFile, isNew: true };
         }
       }
       loadedImage.src = loadedUrl;
@@ -425,7 +450,6 @@ export class EditProfileService {
     }
     // Replace extension according to your media type
     const imageName = date + '-' + text + '.' + contentType.split("/")[1];
-    console.log('File Name is ' + imageName);
     //contentType = 'image/jpeg';
 
     // Convert it to a blob
@@ -513,12 +537,14 @@ export class EditProfileService {
     });
     */
     return Observable.create((observer) => {
-      this.service.update(this.provider, profileModel, {}).subscribe(result => {
+      this.loadProcessService.submittingData = true;
+      return this.service.update(this.provider, profileModel, {}).subscribe(result => {
+        _this.loadProcessService.submittingData = false;
         if (result.isSuccess()) {
           _this.messages = result.getMessages();
           var data = result.getResultData();
           if (data.done) {
-            _this.profileService.MYPROFILE = data.profile;
+            _this.UpdateLocalProfileInfo(data.profile as MyProfile);
           }
         } else {
           _this.errors = result.getErrors();
@@ -540,8 +566,8 @@ export class EditProfileService {
   }
 
   cancelDeleteProfile() {
-    this.deleteMode.inDelete=false;
-    this.deleteMode.currentDeleting='';
+    this.deleteMode.inDelete = false;
+    this.deleteMode.currentDeleting = '';
   }
 
   AddProfileEducation() {
@@ -557,11 +583,11 @@ export class EditProfileService {
     this.editMode.inEdit = true;
   }
 
-  DeleteProfileEducation(education: ProfileEducation) {
-    this.deleteMode.currentDeleting='education';
-    this.deleteMode.education.inDeleteData=education;
-    this.deleteMode.education.action='delete';
-    this.deleteMode.inDelete=true;
+  ConfirmDeleteProfileEducation(education: ProfileEducation) {
+    this.deleteMode.currentDeleting = 'education';
+    this.deleteMode.education.inDeleteData = education;
+    this.deleteMode.education.action = 'delete';
+    this.deleteMode.inDelete = true;
   }
 
 
@@ -578,34 +604,34 @@ export class EditProfileService {
     this.editMode.inEdit = true;
   }
 
-  DeleteProfileExperience(experience: WorkExperience) {
-    this.deleteMode.currentDeleting='experience';
-    this.deleteMode.experience.inDeleteData=experience;
-    this.deleteMode.experience.action='delete';
-    this.deleteMode.inDelete=true;
+  ConfirmDeleteProfileExperience(experience: WorkExperience) {
+    this.deleteMode.currentDeleting = 'experience';
+    this.deleteMode.experience.inDeleteData = experience;
+    this.deleteMode.experience.action = 'delete';
+    this.deleteMode.inDelete = true;
   }
 
   EditProfileDealingWith() {
     this.editMode.currentEditing = 'ProfileIndustries';
-    this.editMode.industries.action='editIndustries';
+    this.editMode.industries.action = 'editIndustries';
     this.editMode.inEdit = true;
   }
 
   AddProfileDealingWith() {
     this.editMode.currentEditing = 'ProfileIndustries';
-    this.editMode.industries.action='addIndustries';
+    this.editMode.industries.action = 'addIndustries';
     this.editMode.inEdit = true;
   }
 
   EditProfileSkills() {
     this.editMode.currentEditing = 'ProfileSkills';
-    this.editMode.skills.action='editSkills';
+    this.editMode.skills.action = 'editSkills';
     this.editMode.inEdit = true;
   }
 
   AddProfileSkills() {
     this.editMode.currentEditing = 'ProfileSkills';
-    this.editMode.skills.action='addSkills';
+    this.editMode.skills.action = 'addSkills';
     this.editMode.inEdit = true;
   }
 
@@ -613,10 +639,16 @@ export class EditProfileService {
     var _this = this;
     this.provider = this.getConfigValue('forms.update.provider');
     this.service.getProvider(this.provider).crudconfig.route_url = 'profile/my-profile-education/';
+    this.loadProcessService.submittingData = true;
     this.service.create(this.provider, educationModel, {}).subscribe(function (result) {
+      _this.loadProcessService.submittingData = false;
       if (result.isSuccess()) {
         _this.messages = result.getMessages();
-        var data = result.getResultData();
+        var resp = result.getResultData();
+        if (_this.isMyProfileInEdit()) {
+          _this.urlViewerService.PPVIEWER.profile.educations.push(resp.data as ProfileEducation);
+        }
+        _this.profileService.MYPROFILE.educations.push(resp.data as ProfileEducation);
       } else {
         _this.errors = result.getErrors();
       }
@@ -627,10 +659,37 @@ export class EditProfileService {
     var _this = this;
     this.provider = this.getConfigValue('forms.update.provider');
     this.service.getProvider(this.provider).crudconfig.route_url = 'profile/my-profile-education/';
-    this.service.update(this.provider, educationModel, {id:educationModel.id}).subscribe(function (result) {
+    this.loadProcessService.submittingData = true;
+    this.service.update(this.provider, educationModel, { id: educationModel.id }).subscribe(function (result) {
+      _this.loadProcessService.submittingData = false;
       if (result.isSuccess()) {
         _this.messages = result.getMessages();
-        var data = result.getResultData();
+        var resp = result.getResultData();
+        if (_this.isMyProfileInEdit()) {
+          _this.urlViewerService.PPVIEWER.profile.educations = _this.urlViewerService.PPVIEWER.profile.educations.filter((x: ProfileEducation) => x.id !== educationModel.id);
+          _this.urlViewerService.PPVIEWER.profile.educations.unshift(resp.data as ProfileEducation);
+        }
+        _this.profileService.MYPROFILE.educations = _this.profileService.MYPROFILE.educations.filter((x: ProfileEducation) => x.id !== educationModel.id);
+        _this.profileService.MYPROFILE.educations.unshift(resp.data as ProfileEducation);
+      } else {
+        _this.errors = result.getErrors();
+      }
+    });
+  }
+
+  deleteProfileEducation(Id: number) {
+    var _this = this;
+    this.provider = this.getConfigValue('forms.update.provider');
+    this.service.getProvider(this.provider).crudconfig.route_url = 'profile/my-profile-education/';
+    this.loadProcessService.processingRequest = true;
+    this.service.delete(this.provider, { id: Id }).subscribe(function (result) {
+      _this.loadProcessService.processingRequest = false;
+      if (result.isSuccess()) {
+        _this.messages = result.getMessages();
+        if (_this.isMyProfileInEdit()) {
+          _this.urlViewerService.PPVIEWER.profile.educations = _this.urlViewerService.PPVIEWER.profile.educations.filter((x: ProfileEducation) => x.id !== Id);
+        }
+        _this.profileService.MYPROFILE.educations = _this.profileService.MYPROFILE.educations.filter((x: ProfileEducation) => x.id !== Id);
       } else {
         _this.errors = result.getErrors();
       }
@@ -641,10 +700,16 @@ export class EditProfileService {
     var _this = this;
     this.provider = this.getConfigValue('forms.update.provider');
     this.service.getProvider(this.provider).crudconfig.route_url = 'profile/my-profile-experience/';
+    this.loadProcessService.submittingData = true;
     this.service.create(this.provider, experienceModel, {}).subscribe(function (result) {
+      _this.loadProcessService.submittingData = false;
       if (result.isSuccess()) {
         _this.messages = result.getMessages();
-        var data = result.getResultData();
+        var resp = result.getResultData();
+        if (_this.isMyProfileInEdit()) {
+          _this.urlViewerService.PPVIEWER.profile.experiences.push(resp.data as WorkExperience);
+        }
+        _this.profileService.MYPROFILE.experiences.push(resp.data as WorkExperience);
       } else {
         _this.errors = result.getErrors();
       }
@@ -655,10 +720,38 @@ export class EditProfileService {
     var _this = this;
     this.provider = this.getConfigValue('forms.update.provider');
     this.service.getProvider(this.provider).crudconfig.route_url = 'profile/my-profile-experience/';
+    this.loadProcessService.submittingData = true;
     this.service.update(this.provider, experienceModel, { id: experienceModel.id }).subscribe(function (result) {
+      _this.loadProcessService.submittingData = false;
       if (result.isSuccess()) {
         _this.messages = result.getMessages();
-        var data = result.getResultData();
+        var resp = result.getResultData();
+        if (_this.isMyProfileInEdit()) {
+          _this.urlViewerService.PPVIEWER.profile.experiences = _this.urlViewerService.PPVIEWER.profile.experiences.filter((x: WorkExperience) => x.id !== experienceModel.id);
+          _this.urlViewerService.PPVIEWER.profile.experiences.unshift(resp.data as WorkExperience);
+        }
+        _this.profileService.MYPROFILE.experiences = _this.profileService.MYPROFILE.experiences.filter((x: WorkExperience) => x.id !== experienceModel.id);
+        _this.profileService.MYPROFILE.experiences.unshift(resp.data as WorkExperience);
+
+      } else {
+        _this.errors = result.getErrors();
+      }
+    });
+  }
+
+  deleteWorkExperience(Id: number) {
+    var _this = this;
+    this.provider = this.getConfigValue('forms.update.provider');
+    this.service.getProvider(this.provider).crudconfig.route_url = 'profile/my-profile-experience/';
+    this.loadProcessService.processingRequest = true;
+    this.service.delete(this.provider, { id: Id }).subscribe(function (result) {
+      _this.loadProcessService.processingRequest = false;
+      if (result.isSuccess()) {
+        _this.messages = result.getMessages();
+        if (_this.isMyProfileInEdit()) {
+          _this.urlViewerService.PPVIEWER.profile.experiences = _this.urlViewerService.PPVIEWER.profile.experiences.filter((x: WorkExperience) => x.id !== Id);
+        }
+        _this.profileService.MYPROFILE.experiences = _this.profileService.MYPROFILE.experiences.filter((x: WorkExperience) => x.id !== Id);
       } else {
         _this.errors = result.getErrors();
       }
@@ -671,10 +764,42 @@ export class EditProfileService {
     this.provider = this.getConfigValue('forms.update.provider');
     this.service.getProvider(this.provider).crudconfig.route_url = 'profile/my-profile-skills/';
     formData.append("profile_skills", JSON.stringify(skills));
-    this.service.update(this.provider, formData, {}).subscribe(function (result) {
+    this.loadProcessService.submittingData = true;
+    this.service.create(this.provider, formData, {}).subscribe(function (result) {
+      _this.loadProcessService.submittingData = false;
       if (result.isSuccess()) {
         _this.messages = result.getMessages();
-        var data = result.getResultData();
+        var resp = result.getResultData();
+        if (_this.isMyProfileInEdit()) {
+          _this.urlViewerService.PPVIEWER.profile.skills = resp.data as ProfileSkill[];
+        }
+        _this.profileService.MYPROFILE.skills = resp.data as ProfileSkill[];
+      } else {
+        _this.errors = result.getErrors();
+      }
+    });
+  }
+
+  deleteProfileSkills(skills: any[]) {
+    var _this = this;
+    const formData: any = new FormData();
+    this.provider = this.getConfigValue('forms.update.provider');
+    this.service.getProvider(this.provider).crudconfig.route_url = 'profile/my-profile-skills/';
+    formData.append("profile_skills", JSON.stringify(skills));
+    this.loadProcessService.submittingData = true;
+    this.service.update(this.provider, formData, {}).subscribe(function (result) {
+      _this.loadProcessService.submittingData = false;
+      if (result.isSuccess()) {
+        _this.messages = result.getMessages();
+        if (_this.isMyProfileInEdit()) {
+          skills.forEach(skill => {
+            _this.urlViewerService.PPVIEWER.profile.skills = _this.urlViewerService.PPVIEWER.profile.skills.filter((x: any) => x.id !== skill.id);
+          });
+        }
+        skills.forEach(skill => {
+          _this.profileService.MYPROFILE.skills = _this.profileService.MYPROFILE.skills.filter((x: any) => x.id !== skill.id);
+        });
+
       } else {
         _this.errors = result.getErrors();
       }
@@ -687,14 +812,106 @@ export class EditProfileService {
     this.provider = this.getConfigValue('forms.update.provider');
     this.service.getProvider(this.provider).crudconfig.route_url = 'profile/my-profile-industries/';
     formData.append("profile_industries", JSON.stringify(industries));
-    this.service.update(this.provider, formData, {}).subscribe(function (result) {
+    this.loadProcessService.submittingData = true;
+    this.service.create(this.provider, formData, {}).subscribe(function (result) {
+      _this.loadProcessService.submittingData = false;
       if (result.isSuccess()) {
         _this.messages = result.getMessages();
-        var data = result.getResultData();
+        var resp = result.getResultData();
+        if (_this.isMyProfileInEdit()) {
+          _this.urlViewerService.PPVIEWER.profile.dealing = resp.data as ProfileIndustry[];
+        }
+        _this.profileService.MYPROFILE.dealing = resp.data as ProfileIndustry[];
+
       } else {
         _this.errors = result.getErrors();
       }
     });
+  }
+
+  deleteProfileIndustries(industries: any[]) {
+    var _this = this;
+    const formData: any = new FormData();
+    this.provider = this.getConfigValue('forms.update.provider');
+    this.service.getProvider(this.provider).crudconfig.route_url = 'profile/my-profile-industries/';
+    formData.append("profile_industries", JSON.stringify(industries));
+    this.loadProcessService.submittingData = true;
+    this.service.update(this.provider, formData, {}).subscribe(function (result) {
+      _this.loadProcessService.submittingData = false;
+      if (result.isSuccess()) {
+        _this.messages = result.getMessages();
+        if (_this.isMyProfileInEdit()) {
+          industries.forEach(industry => {
+            _this.urlViewerService.PPVIEWER.profile.dealing = _this.urlViewerService.PPVIEWER.profile.dealing.filter((x: any) => x.id !== industry.id);
+          });
+        }
+        industries.forEach(industry => {
+          _this.profileService.MYPROFILE.dealing = _this.profileService.MYPROFILE.dealing.filter((x: any) => x.id !== industry.id);
+        });
+
+      } else {
+        _this.errors = result.getErrors();
+      }
+    });
+  }
+
+  isMyProfileInEdit(): boolean {
+    if (this.urlViewerService.PPVIEWER.profile && (this.urlViewerService.PPVIEWER.profile.url == this.profileService.MYPROFILE.url)) {
+      return true;
+    }
+    return false;
+  }
+
+  UpdateLocalProfileInfo(profile: MyProfile) {
+    if (this.isMyProfileInEdit()) {
+      this.urlViewerService.PPVIEWER.profile.firstname = profile.firstname
+      this.urlViewerService.PPVIEWER.profile.lastname = profile.lastname;
+      this.urlViewerService.PPVIEWER.profile.title = profile.title;
+      this.urlViewerService.PPVIEWER.profile.url = profile.url;
+      this.urlViewerService.PPVIEWER.profile.city = profile.city;
+      this.urlViewerService.PPVIEWER.profile.country = profile.country;
+      this.urlViewerService.PPVIEWER.profile.gender = profile.gender;
+      this.urlViewerService.PPVIEWER.profile.language = profile.language;
+      this.urlViewerService.PPVIEWER.profile.location = profile.location;
+      this.urlViewerService.PPVIEWER.profile.name = profile.name;
+      this.urlViewerService.PPVIEWER.profile.timezone = profile.timezone;
+      this.urlViewerService.PPVIEWER.profile.about = profile.about;
+      this.urlViewerService.PPVIEWER.profile.mobile = profile.mobile;
+    }
+    this.profileService.MYPROFILE.firstname = profile.firstname
+    this.profileService.MYPROFILE.lastname = profile.lastname;
+    this.profileService.MYPROFILE.title = profile.title;
+    this.profileService.MYPROFILE.url = profile.url;
+    this.profileService.MYPROFILE.city = profile.city;
+    this.profileService.MYPROFILE.country = profile.country;
+    this.profileService.MYPROFILE.gender = profile.gender;
+    this.profileService.MYPROFILE.language = profile.language;
+    this.profileService.MYPROFILE.location = profile.location;
+    this.profileService.MYPROFILE.name = profile.name;
+    this.profileService.MYPROFILE.timezone = profile.timezone;
+    this.profileService.MYPROFILE.about = profile.about;
+    this.profileService.MYPROFILE.mobile = profile.mobile;
+    this.profileService.MYPROFILE.birth_date = profile.birth_date;
+    this.profileService.MYPROFILE.birthday = profile.birthday;
+    this.profileService.MYPROFILE.city_id = profile.city_id;
+  }
+
+
+  BlobtoDataURL(blob: Blob): Promise<any> {
+    var reader = new FileReader();
+    return new Promise((resolve, reject) => {
+      reader.onload = function () {
+        resolve(reader.result);
+      }
+      reader.readAsDataURL(blob);
+    });
+  }
+
+  ImageUrlToBlob(url: string): Observable<Blob> {
+    return this.httpClient
+      .get(`${url}`, {
+        responseType: "blob"
+      });
   }
 
   getConfigValue(key: string): any {

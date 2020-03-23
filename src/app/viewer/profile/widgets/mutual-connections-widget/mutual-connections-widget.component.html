@@ -1,5 +1,46 @@
 <div class="d-block w-100">
     <div class="d-none d-md-block d-lg-block"><br></div>
-    <h6 class="font-weight-bold">Mutual Connections</h6>
-    <p>You and {{urlviewerService.PPVIEWER.profile.name}} both know Gaojki WANG,WIL WNAGLO AND 234 OTHERS.</p>
+    <ng-container
+        *ngIf="urlviewerService.PPVIEWER.profile && urlviewerService.PPVIEWER.profile.my_profile!=true && urlviewerService.PPVIEWER.profile.mutualConnections.length>0">
+        <h6 class="font-weight-bold">
+            <span>{{urlviewerService.PPVIEWER.profile.mutualConnections.length}}</span><span>&nbsp;</span>
+            <ng-container *ngIf="urlviewerService.PPVIEWER.profile.mutualConnections.length>1">
+                <span>Mutual Connections</span>
+            </ng-container>
+            <ng-container *ngIf="urlviewerService.PPVIEWER.profile.mutualConnections.length==1">
+                <span>Mutual Connection</span>
+            </ng-container>
+        </h6>
+        <p>You and {{urlviewerService.PPVIEWER.profile.name}} both know
+            <a routerLink="/{{urlviewerService.PPVIEWER.profile.mutualConnections[0].url}}" class="font-weight-bold"
+                (click)="urlviewerService.setProfile(urlviewerService.PPVIEWER.profile.mutualConnections[0]);">{{urlviewerService.PPVIEWER.profile.mutualConnections[0].name}}</a>
+            <ng-container *ngIf="urlviewerService.PPVIEWER.profile.mutualConnections.length>1">
+                <ng-container *ngIf="urlviewerService.PPVIEWER.profile.mutualConnections.length>2">
+                    <span>,</span>
+                </ng-container>
+                <ng-container *ngIf="urlviewerService.PPVIEWER.profile.mutualConnections.length==2">
+                    <span>&nbsp;</span>
+                    <span>and</span>
+                    <span>&nbsp;</span>
+                </ng-container>
+                <a routerLink="/{{urlviewerService.PPVIEWER.profile.mutualConnections[1].url}}" class="font-weight-bold"
+                    (click)="urlviewerService.setProfile(urlviewerService.PPVIEWER.profile.mutualConnections[1]);">{{urlviewerService.PPVIEWER.profile.mutualConnections[1].name}}</a>
+            </ng-container>
+            <ng-container *ngIf="urlviewerService.PPVIEWER.profile.mutualConnections.length>2">
+                <span>&nbsp;</span>
+                <span>and</span>
+                <span>&nbsp;</span>
+                <span>{{urlviewerService.PPVIEWER.profile.mutualConnections.length-2}}</span>
+                <span>&nbsp;</span>
+                <span>
+                    <ng-container *ngIf="(urlviewerService.PPVIEWER.profile.mutualConnections.length-2)==1">
+                        more person.
+                    </ng-container>
+                    <ng-container *ngIf="(urlviewerService.PPVIEWER.profile.mutualConnections.length-2)>1">
+                        others.
+                    </ng-container>
+                </span>
+            </ng-container>
+        </p>
+    </ng-container>
 </div>

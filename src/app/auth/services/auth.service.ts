@@ -112,7 +112,6 @@ export class AuthService {
      * @returns {Observable<AuthResult>}
      */
 	 
-    
     logout(provider: string): Observable<AuthResult>{
         var _this = this;
         return this.getProvider(provider).logout()

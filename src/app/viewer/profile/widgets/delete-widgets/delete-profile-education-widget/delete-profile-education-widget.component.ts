@@ -14,6 +14,13 @@ export class DeleteProfileEducationWidgetComponent implements OnInit {
   }
 
   ngOnInit() {
+
+  }
+
+  delete(){
+    this.editProfileService.deleteProfileEducation(this.editProfileService.deleteMode.education.inDeleteData.id);
+    this.editProfileService.cancelDeleteProfile();
+    this.editProfileService.cancelEditProfile();
   }
 
 }

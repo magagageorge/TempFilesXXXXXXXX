@@ -1,0 +1,50 @@
+<header class="container-fluid px-0 d-block d-md-none d-lg-none d-xl-none">
+    <nav class="navbar fixed-top px-0 px-md-5 px-lg-5 m-0 py-0">
+        <div class="d-block w-100" style="border:3px solid transparent">
+            <div class="row mx-0 py-0">
+                <div
+                    class="col-2 d-block d-md-none d-lg-none d-xl-none d-flex justify-content-center align-items-center">
+                    <a routerLink="/messages" class="navbar-brand text-white">
+                        <span class="p-1"> <span class="fa fa-arrow-left"></span></span>
+                    </a>
+                </div>
+                <div class="col-8 col-md-10 col-lg-10 col-xl-10 d-flex align-items-center justify-content-start">
+                    <ng-container *ngIf="chatroom.isNew==false && chatroom.profiles.length>0">
+                        <span class="name m-0 d-block w-100 p-1">
+                            <ng-container *ngFor="let user of chatroom.profiles;let i=index">
+                                <ng-container *ngIf="user.profile && user.profile.my_profile==false">
+                                    <ng-container *ngIf="chatroom.profiles.length<3">
+                                        <span class="d-block font-weight-bold">{{user.profile.name}}</span>
+                                    </ng-container>
+                                </ng-container>
+                            </ng-container>
+                        </span>
+                    </ng-container>
+                    <ng-container *ngIf="chatroom.isNew==true">
+                        <span class="p-1 navbar-brand text-white"> <span class="font-weight-bold">New Message</span>
+                        </span>
+                    </ng-container>
+                </div>
+                <div ngbDropdown placement="bottom-right" *ngIf="chatroom.isNew!=true"
+                    class="col-2 d-flex justify-content-center align-items-center dropdown">
+                    <div class="w-100 h-100 d-flex justify-content-center align-items-center dropdown-toggle"
+                        data-toggle="dropdown" ngbDropdownToggle>
+                        <span id="action_menu_btn p-1 cursor-pointer"><i class="fa fa-ellipsis-h"></i></span>
+                    </div>
+                    <div class="dropdown-menu dropdown-menu-righ" style="width:300px;" ngbDropdownMenu>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item p-0">
+                                <span class="dropdown-item cursor-pointer"
+                                    (click)="confirmDeleteConversation(chatroom.id)">Delete Conversation</span>
+                            </li>
+                            <li class="list-group-item p-0">
+                                <span class="dropdown-item cursor-pointer"
+                                    (click)="reportMessengerContent(chatroom.id)">Report</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>

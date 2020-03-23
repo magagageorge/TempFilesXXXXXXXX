@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title, Meta } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-login',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-    constructor() { }
+  constructor(private title: Title, private meta: Meta) { }
 
-    ngOnInit() {}
+  ngOnInit() {
+    this.title.setTitle('Woorbi - Sign In');
+  }
 }

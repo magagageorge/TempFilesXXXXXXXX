@@ -39,8 +39,10 @@ export class Profile {
     my_profile:boolean;
     short_info:string;
     summary_info:string;
+    mutualConnections:any[];
     constructor() {
         this.avatar = new ProfileAvatar();
         this.cover = new ProfileCover();
+        this.mutualConnections=[];
     }
 }

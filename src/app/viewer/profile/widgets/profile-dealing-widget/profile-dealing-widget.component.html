@@ -8,21 +8,19 @@
                         <h5>Dealing with</h5>
                     </div>
                     <div class="col-2 pull-right">
-                        <ng-container  *ngIf="urlViewerService.PPVIEWER.profile.my_profile==true">
+                        <ng-container *ngIf="urlViewerService.PPVIEWER.profile.my_profile==true">
                             <ng-container *ngIf="urlViewerService.PPVIEWER.profile.dealing.length>0">
-                                <span class="pull-right"
-                                style="font-size: 150%;cursor: pointer;"
-                                (click)="editProfileService.EditProfileDealingWith()">
-                                <span class="fa fa-pencil"></span>
-                            </span>
+                                <span class="pull-right" style="font-size: 150%;cursor: pointer;"
+                                    (click)="editProfileService.EditProfileDealingWith()">
+                                    <span class="fa fa-pencil"></span>
+                                </span>
                             </ng-container>
                             <ng-container *ngIf="urlViewerService.PPVIEWER.profile.dealing.length==0">
-                                <span class="pull-right"
-                                style="font-size: 150%;cursor: pointer;"
-                                (click)="editProfileService.AddProfileDealingWith()">
-                                <span class="fa fa-plus"></span>
-                            </span>
-                            </ng-container>                            
+                                <span class="pull-right" style="font-size: 150%;cursor: pointer;"
+                                    (click)="editProfileService.AddProfileDealingWith()">
+                                    <span class="fa fa-plus"></span>
+                                </span>
+                            </ng-container>
                         </ng-container>
                     </div>
                 </div>
@@ -34,11 +32,18 @@
                             <span class="chip m-1">{{deal.i_name}}</span>
                         </ng-container>
                     </div>
-                    <div class="col-12">
-                        <div *ngIf="(!urlViewerService.PPVIEWER.profile.dealing.length || urlViewerService.PPVIEWER.profile.dealing.length==0) && urlViewerService.PPVIEWER.profile.my_profile==true"
-                            class="d-block">
-                            <p>Let others know the industries or businesses you are dealing with. </p>
+                    <div *ngIf="(!urlViewerService.PPVIEWER.profile.dealing.length || urlViewerService.PPVIEWER.profile.dealing.length==0) && urlViewerService.PPVIEWER.profile.my_profile==true"
+                        class="col-12 mx-0">
+                        <div class="list-group w-100 p-0 mx-0">
+                            <span class="list-group-item w-100" (click)="editProfileService.AddProfileDealingWith()"
+                                style="cursor: pointer;">
+                                <span style="font-size:110%;">
+                                    <span class="fa fa-book"></span></span>
+                                <span class="p-1">Let others know the industries or businesses you are dealing with.
+                                </span> <span class="fa fa-plus"></span> <span class="p-1">Add</span>
+                            </span>
                         </div>
+
                     </div>
                 </div>
             </div>

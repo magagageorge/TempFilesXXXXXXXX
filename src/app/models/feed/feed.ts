@@ -3,6 +3,22 @@ import { Profile } from "@models/profile/profile";
 import { FeedLink } from "../feed-link";
 import { PreviewPicture } from "@app/services/posting.service";
 
+export class PostImageData{
+    url:string;
+    wh_ratio:number;
+    width:number;
+    height:number;
+    mime_type:string;
+}
+
+export class PostImage{
+     id:number;
+     data:PostImageData;
+     created_at:string;
+     updated_at:string;
+}
+
+
 export class Feed {
     id:string;
     original_id:string;
@@ -17,8 +33,9 @@ export class Feed {
     post_type:string;
     comments:Comment[];
     profile:Profile;
-    images:any[];
+    images:PostImage[];
     links:FeedLink[];
+    original_post:Feed;
     published:string;
     created_at:WindoTime;
     updated_at:WindoTime;

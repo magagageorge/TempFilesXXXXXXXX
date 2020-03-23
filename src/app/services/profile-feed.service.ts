@@ -8,18 +8,6 @@ import { getDeepFromObject } from '@app/@crud/helpers';
 import { CrudService } from '@app/@crud/services/crud.service';
 import { cruddefaultSettings, CrudOptions, CRUD_OPTIONS, CRUD_USER_OPTIONS, CRUD_PROVIDERS, CRUD_INTERCEPTOR_HEADER } from '@app/@crud/crud.options';
 import { CrudProvider } from '@app/@crud/providers/crud.provider';
-import { PostDeleteModalComponent } from '@app/theme/modals/post-delete-modal/post-delete-modal.component';
-import { ReportContentModalComponent } from '@app/theme/modals/report-content-modal/report-content-modal.component';
-import { LikesModalComponent } from '@app/theme/modals/likes-modal/likes-modal.component';
-import { Comment } from '@app/models/feed/comment';
-
-const MODALS = {
-  deletePost: PostDeleteModalComponent,
-  reportContent: ReportContentModalComponent,
-  postLikes: LikesModalComponent
-
-};
-
 
 @Injectable({
   providedIn: 'root'
@@ -120,23 +108,6 @@ export class ProfileFeedService {
         feed.hidden_post = true;
       }
     });
-    this.service.getProvider(this.provider).crudconfig.route_url = 'feed/feed-hide/';
-    this.service.create(this.provider, { object_id: post_id }, {}).subscribe(function (result) {
-      if (result.isSuccess()) {
-        var data = result.getResultData();
-        if (data != true) {
-          _this.searchFeed(id).subscribe(feed => {
-            if (feed) {
-              feed.hidden_post = false;
-            }
-          });
-        }
-      }
-      else {
-        _this.errors = result.getErrors();
-
-      }
-    });
   }
 
   unhidePost(post_id: number) {
@@ -145,64 +116,8 @@ export class ProfileFeedService {
     let id = String(post_id);
     this.searchFeed(id).subscribe(feed => {
       if (feed) {
-        feed.unhidding_post = true;
-      }
-    });
-    this.service.getProvider(this.provider).crudconfig.route_url = 'feed/feed-hide/';
-    this.service.delete(this.provider, { id: post_id }).subscribe(function (result) {
-      if (result.isSuccess()) {
-        var data = result.getResultData();
-        if (data == true) {
-          let id = String(post_id);
-          _this.searchFeed(id).subscribe(feed => {
-            if (feed) {
-              feed.unhidding_post = false;
-              feed.hidden_post = false;
-            }
-          });
-        } else {
-
-        }
-      } else {
-        _this.errors = result.getErrors();
-      }
-    });
-  }
-
-  confirmDeletePost(post_id: number) {
-    this.modalRef = this._modalService.open(MODALS['deletePost'], { centered: true });
-    this.modalRef.componentInstance.feedId = post_id;
-  }
-
-  reportPostContent(post_id: number) {
-    this.modalRef = this._modalService.open(MODALS['reportContent'], { centered: true });
-    this.modalRef.componentInstance.setModel(post_id, 'Post');
-  }
-
-  showPostLikes(post_id: number, no_likes: any) {
-    this.modalRef = this._modalService.open(MODALS['postLikes'], { centered: true });
-    this.modalRef.componentInstance.setModel(post_id, 'Post', no_likes);
-  }
-
-  deletePost(id: number) {
-    //let elem:Element = document.getElementById("comment_item_"+comment.object_id+"_"+comment.id);
-    let elem: HTMLElement = document.querySelector("#feed_item_" + id);
-    elem.style.opacity = '0.6';
-    this.clearFeed(id);
-    var _this = this;
-    this.errors = this.messages = [];
-    this.modalRef.close();
-    this.service.getProvider(this.provider).crudconfig.route_url = 'feed/p/';
-    this.service.delete(this.provider, { id: id }).subscribe(function (result) {
-      if (result.isSuccess()) {
-        var data = result.getResultData();
-        if (data == true) {
-        } else {
-          elem.style.opacity = '1';
-        }
-      } else {
-        _this.errors = result.getErrors();
-        elem.style.opacity = '1';
+        feed.unhidding_post = false;
+        feed.hidden_post = false;
       }
     });
   }
@@ -210,7 +125,6 @@ export class ProfileFeedService {
   clearFeed(feed_id: number) {
     this.feeds = this.feeds.filter((x: any) => x.id !== feed_id);
   }
-
 
   prependFeed(feed: Feed) {
     this.feeds.unshift(feed);

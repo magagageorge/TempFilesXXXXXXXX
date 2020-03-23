@@ -1,0 +1,52 @@
+<ng-container *ngFor="let chatroom of chatrooms">
+    <ng-container *ngIf="chatroom">
+        <li [class.bg-light]="activeThreadId==chatroom.id">
+            <a routerLink="/messages/thread/{{chatroom.id}}" class="d-block p-0 m-0 chatroom-list-items"
+                style="text-decoration: none;">
+                <div class="d-block w-100 bd-highlight">
+                    <div class="row mx-0">
+                        <div class="col-2  col-md-2 col-lg-2 p-1 img_cont d-flex align-items-center">
+                            <img src="https://2.bp.blogspot.com/-8ytYF7cfPkQ/WkPe1-rtrcI/AAAAAAAAGqU/FGfTDVgkcIwmOTtjLka51vineFBExJuSACLcBGAs/s320/31.jpg"
+                                class="img-fluid rounded-circle m-0">
+                            <span class="online_icon offline"></span>
+                        </div>
+                        <div class="col-10  col-md-10 col-lg-10 p-1 border-bottom border-light">
+                            <div class="row mx-0 w-100">
+                                <div class="col-8 p-0">
+                                    <span class="name m-0">
+                                        <ng-container *ngIf="chatroom.profiles && chatroom.profiles.length>0">
+                                            <ng-container *ngFor="let user of chatroom.profiles;let i=index">
+                                                <ng-container *ngIf="user.profile && user.profile.my_profile==false">
+                                                    {{user.profile.name}}
+                                                </ng-container>
+                                            </ng-container>
+                                        </ng-container>
+                                    </span>
+                                </div>
+                                <div class="col-4 p-0 d-flex justify-content-end">
+                                    <ng-container *ngIf="chatroom.lastMessage">
+                                        <p class="my-0">
+                                            {{chatroom.lastMessage.sent_at.date}}</p>
+                                    </ng-container>
+                                </div>
+                            </div>
+                            <div class="row mx-0 w-100">
+                                <div class="col-12 p-0">
+                                    <ng-container *ngIf="chatroom.lastMessage">
+                                        <span class="d-block w-100 text-truncate">
+                                            <ng-container *ngIf="chatroom.lastMessage.my_message==true">
+                                                <span>You:</span>
+                                            </ng-container>
+
+                                            <span>{{chatroom.lastMessage.messageBody.message}}</span>
+                                        </span>
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </li>
+    </ng-container>
+</ng-container>

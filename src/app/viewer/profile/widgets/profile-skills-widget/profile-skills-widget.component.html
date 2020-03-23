@@ -28,13 +28,21 @@
             <div class="d-block">
                 <div class="row px-0 mx-0">
                     <div *ngIf="urlViewerService.PPVIEWER.profile.skills.length" class="col-12">
-                        <ng-container *ngFor="let deal of urlViewerService.PPVIEWER.profile.skills">
-                            <span class="chip m-1">{{deal.s_name}}</span>
+                        <ng-container *ngFor="let skill of urlViewerService.PPVIEWER.profile.skills">
+                            <span class="chip m-1">{{skill.s_name}}</span>
                         </ng-container>
                     </div>
                     <div *ngIf="(!urlViewerService.PPVIEWER.profile.skills.length || urlViewerService.PPVIEWER.profile.skills.length==0) && urlViewerService.PPVIEWER.profile.my_profile==true"
-                        class="col-12">
-                        <p>What skills do you have, tell others what you can do. </p>
+                        class="col-12 mx-0">
+                        <div class="list-group w-100 p-0 mx-0">
+                            <span class="list-group-item w-100" (click)="editProfileService.AddProfileSkills()"
+                                style="cursor: pointer;">
+                                <span style="font-size:110%;">
+                                    <span class="fa fa-book"></span></span>
+                                <span class="p-1">What skills do you have, tell others about what you can do. </span> <span
+                                    class="fa fa-plus"></span> <span class="p-1">Add</span>
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>

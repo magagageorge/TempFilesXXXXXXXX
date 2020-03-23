@@ -1,26 +1,15 @@
-import { Component, OnInit, Injectable, Inject } from '@angular/core';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {  Injectable, Inject } from '@angular/core';
+import {  NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
 import { Feed } from '@models/feed/feed';
-import { Post } from '@models/post';
 import { getDeepFromObject } from '@app/@crud/helpers';
 import { CrudService } from '@app/@crud/services/crud.service';
 import { cruddefaultSettings, CrudOptions, CRUD_OPTIONS, CRUD_USER_OPTIONS, CRUD_PROVIDERS, CRUD_INTERCEPTOR_HEADER } from '@app/@crud/crud.options';
 import { CrudProvider } from '@app/@crud/providers/crud.provider';
-import { PostDeleteModalComponent } from '@app/theme/modals/post-delete-modal/post-delete-modal.component';
-import { ReportContentModalComponent } from '@app/theme/modals/report-content-modal/report-content-modal.component';
-import { LikesModalComponent } from '@app/theme/modals/likes-modal/likes-modal.component';
-import { Comment } from '@app/models/feed/comment';
 import { PostPhoto } from '@app/models/post-photo';
-
-const MODALS = {
-  deletePost: PostDeleteModalComponent,
-  reportContent: ReportContentModalComponent,
-  postLikes: LikesModalComponent
-
-};
-
+import { ProfileFeedService } from './profile-feed.service';
+import { OverlayPost } from '@app/models/feed/overlay-post';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +18,7 @@ export class FeedService {
   feeds: Feed[] = [];
   service: CrudService;
   crudprovider: CrudProvider;
+  profileFeedService: ProfileFeedService;
   protected crudconfig: {};
   protected router: Router;
   redirectDelay: number;
@@ -46,13 +36,17 @@ export class FeedService {
   currentViewImageIndex: any = -1;
   viewerHeight: number = 0;
   viewerWidth: number = 0;
-  reached_end_of_feed:boolean=false;
+  reached_end_of_feed: boolean = false;
+  OVERLAY_FEED: OverlayPost;
 
-  constructor(service: CrudService, @Inject(CRUD_OPTIONS) CRUD_OPTIONS: CrudOptions, private _modalService: NgbModal, router: Router) {
+
+  constructor(service: CrudService, profileFeedService: ProfileFeedService, @Inject(CRUD_OPTIONS) CRUD_OPTIONS: CrudOptions, private _modalService: NgbModal, router: Router) {
     this.next_feed_page = 1;
     this.service = service;
+    this.profileFeedService = profileFeedService;
     this.crudconfig = CRUD_OPTIONS;
     this.router = router;
+    this.OVERLAY_FEED = new OverlayPost();
     this.loadFeed({ page: this.next_feed_page });
   }
 
@@ -65,7 +59,7 @@ export class FeedService {
   public onScrollDown(): void {
     if (this.reached_end_of_feed) {
       return;
-    }    
+    }
     if (this.loading_feeds == false) {
       this.loadFeed({ page: this.next_feed_page });
     }
@@ -172,21 +166,6 @@ export class FeedService {
     });
   }
 
-  confirmDeletePost(post_id: number) {
-    this.modalRef = this._modalService.open(MODALS['deletePost'], { centered: true });
-    this.modalRef.componentInstance.feedId = post_id;
-  }
-
-  reportPostContent(post_id: number) {
-    this.modalRef = this._modalService.open(MODALS['reportContent'], { centered: true });
-    this.modalRef.componentInstance.setModel(post_id, 'Post');
-  }
-
-  showPostLikes(post_id: number, no_likes: any) {
-    this.modalRef = this._modalService.open(MODALS['postLikes'], { centered: true });
-    this.modalRef.componentInstance.setModel(post_id, 'Post', no_likes);
-  }
-
   deletePost(id: number) {
     //let elem:Element = document.getElementById("comment_item_"+comment.object_id+"_"+comment.id);
     let elem: HTMLElement = document.querySelector("#feed_item_" + id);
@@ -211,6 +190,7 @@ export class FeedService {
   }
 
   clearFeed(feed_id: number) {
+    this.profileFeedService.clearFeed(feed_id);
     this.feeds = this.feeds.filter((x: any) => x.id !== feed_id);
   }
 
@@ -223,6 +203,12 @@ export class FeedService {
   }
 
   pushComment(feedId, comment: any) {
+    /* check and update comment in overlay post in case it is open */
+    if (this.OVERLAY_FEED.feed != null && feedId == this.OVERLAY_FEED.feed.id) {
+      this.OVERLAY_FEED.feed.comments.unshift(comment);
+      this.OVERLAY_FEED.feed.no_comments = Number(this.OVERLAY_FEED.feed.no_comments) + 1;
+    }
+    this.profileFeedService.pushComment(feedId, comment);
     this.searchFeed(feedId).subscribe(feed => {
       if (feed) {
         feed.comments.unshift(comment);
@@ -232,6 +218,11 @@ export class FeedService {
   }
 
   pushComments(feedId: any, comments: []) {
+    /* check and update comment in overlay post in case it is open */
+    if (this.OVERLAY_FEED.feed != null && feedId == this.OVERLAY_FEED.feed.id) {
+      this.OVERLAY_FEED.feed.comments = this.OVERLAY_FEED.feed.comments.concat(comments);
+    }    
+    this.profileFeedService.pushComments(feedId, comments);
     this.searchFeed(String(feedId)).subscribe((feed: Feed) => {
       if (feed) {
         feed.comments = feed.comments.concat(comments);
@@ -244,6 +235,7 @@ export class FeedService {
       return;
     }
     this.updateFeedLike(feed, action);
+    this.profileFeedService.updateFeedLike(feed, action);
     var _this = this;
     this.errors = this.messages = [];
     this.service.getProvider(this.provider).crudconfig.route_url = 'feed/feed-like/';
@@ -256,11 +248,13 @@ export class FeedService {
           var data = result.getResultData();
           if (data != true) {
             _this.updateFeedLike(feed, 'unlike');
+            _this.profileFeedService.updateFeedLike(feed, 'unlike');
           }
         }
         else {
           _this.errors = result.getErrors();
           _this.updateFeedLike(feed, 'unlike');
+          _this.profileFeedService.updateFeedLike(feed, 'unlike');
         }
       });
     } else {
@@ -270,16 +264,33 @@ export class FeedService {
           var data = result.getResultData();
           if (data != true) {
             _this.updateFeedLike(feed, 'like');
+            _this.profileFeedService.updateFeedLike(feed, 'like');
           }
         } else {
           _this.errors = result.getErrors();
           _this.updateFeedLike(feed, 'like');
+          _this.profileFeedService.updateFeedLike(feed, 'like');
         }
       });
     }
   }
 
   updateFeedLike(feed: Feed, action: string) {
+
+    /* Update date post status in overlay or single post in case is open and is the one one being liked */
+    if (this.OVERLAY_FEED.feed != null && feed.id == this.OVERLAY_FEED.feed.id) {
+      if (action == 'like') {
+        this.OVERLAY_FEED.feed.no_likes = Number(this.OVERLAY_FEED.feed.no_likes) + 1;
+        this.OVERLAY_FEED.feed.i_like = true;
+      } else {
+        if (Number(this.OVERLAY_FEED.feed.no_likes) > 0) {
+          this.OVERLAY_FEED.feed.no_likes = Number(this.OVERLAY_FEED.feed.no_likes) - 1;
+          this.OVERLAY_FEED.feed.i_like = false;
+        }
+      }
+    }
+
+    /* update post status in feed */
     this.searchFeed(feed.id).subscribe((feed: Feed) => {
       if (feed) {
         if (action == 'like') {
@@ -294,7 +305,6 @@ export class FeedService {
       }
     });
   }
-
 
   /* Functions to view Post Image in Modal */
 
@@ -336,9 +346,40 @@ export class FeedService {
   closePhotoViewModal() {
     this.currentViewImage = null;
     this.currentViewImageIndex = -1;
-    this.feedPhotos=[];
+    this.feedPhotos = [];
   }
   /*------------------------ */
+
+
+  loadOverlayPost(params?: {}): any {
+    this.loading_feeds = true;
+    this.provider = this.getConfigValue('forms.getall.provider');
+    this.service.getProvider(this.provider).crudconfig.route_url = 'feed/feed/';
+    var _this = this;
+    this.OVERLAY_FEED.loadingFeed = true;
+    return this.service.getone(this.provider, params).subscribe(results => {
+      _this.OVERLAY_FEED.loadingFeed = false;
+      if (results.isSuccess()) {
+        var post = results.getResultData() as Feed;
+        if (post) {
+          _this.OVERLAY_FEED.feed = post;
+        } else {
+          _this.closeOverlayPost();
+        }
+      }
+    });
+  }
+
+  OpenOverlayPost(postId: number) {
+    this.loadOverlayPost({ id: postId });
+    this.OVERLAY_FEED.visible = true;
+  }
+
+  closeOverlayPost() {
+    this.OVERLAY_FEED.visible = false;
+    this.OVERLAY_FEED.feed = null;
+  }
+
 
   getConfigValue(key: string): any {
     return getDeepFromObject(this.crudconfig, key, null);

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 //import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
@@ -48,20 +48,32 @@ import { FeedPostImageViewComponent } from './components/feed-post-image-view/fe
 import { FeedImagesOverlayViewComponent } from './components/feed-images-overlay-view/feed-images-overlay-view.component';
 import { AddProfilePhotoAlertWidgetComponent } from './widgets/add-profile-photo-alert-widget/add-profile-photo-alert-widget.component';
 import { OverlayModalContainerComponent } from './modals/overlay-modal-container/overlay-modal-container.component';
+import { LoadSubmitProcessDataModalComponent } from './modals/load-submit-process-data-modal/load-submit-process-data-modal.component';
+import { OverlayLoadSubmitProcessDataWidgetComponent } from './widgets/overlay-load-submit-process-data-widget/overlay-load-submit-process-data-widget.component';
+import { NavigationWatchComponent } from './components/navigation-watch/navigation-watch.component';
+import { ProcessUploadImagesProgressWidgetComponent } from './widgets/process-upload-images-progress-widget/process-upload-images-progress-widget.component';
+import { ProfileFeedImageViewWidgetComponent } from './widgets/profile-feed-image-view-widget/profile-feed-image-view-widget.component';
+import { WfLinkifyModule } from '@app/libs/wf-linkify';
+import { SharePostFormContainerWidgetComponent } from './widgets/share-post-form-container-widget/share-post-form-container-widget.component';
+import { SharedPostWidgetComponent } from './widgets/shared-post-widget/shared-post-widget.component';
+import { OverlayPostViewWidgetComponent } from './widgets/overlay-post-view-widget/overlay-post-view-widget.component';
+import { PostCardWidgetComponent } from './widgets/post-card-widget/post-card-widget.component';
+import { WbMessagesContentComponent } from './components/wb-messages-content/wb-messages-content.component';
 
 @NgModule({
   imports: [
-   CommonModule,
-   FormsModule,
-   ReactiveFormsModule,
-   NgbModule,
-   NgbModalModule,
-   InfiniteScrollModule,
-   RouterModule,
-   WfLinkPreviewModule.forRoot()
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgbModule,
+    NgbModalModule,
+    InfiniteScrollModule,
+    RouterModule,
+    WfLinkifyModule,
+    WfLinkPreviewModule.forRoot()
   ],
-  providers:[MenuService,sAuthService,WfLinkPreviewService],
-  declarations: [WfNavbarComponent, WfSideNavComponent, WfNavbarEmptyComponent, WfFooterComponent, WfMainContentComponent, WfLeftSideBarComponent, WfRightSidebarComponent, PostFormComponent,ContentEditableFormDirective, FeedWidgetComponent, LoadingPostWidgetComponent, FeedCommentsWidgetComponent, PostDeleteModalComponent, ReportContentModalComponent, LoadingNewPostWidgetComponent, CommentDeleteModalComponent, LikesModalComponent, LinkPreviewWidgetComponent, RyouMayknowWidgetComponent, ProfileCardWidgetComponent, SearchFormWidgetComponent, MobileSearchFormWidgetComponent, QuickSearchResultsWidgetComponent,SimpleFeedCardWidgetComponent, WelcomePageComponent, WfNavbarSummaryComponent, WfSocialHeaderComponent,WfSocialHeaderComponent, FaintBodyOverlayComponent, MobileOverlayPostFormComponent, FeedCommentRepliesWidgetComponent, CommentReplyDeleteModalComponent, FeedImageViewWidgetComponent, ProfileFeedWidgetComponent, PostImageOverlayViewComponent, FeedPostImageViewComponent, FeedImagesOverlayViewComponent, AddProfilePhotoAlertWidgetComponent, OverlayModalContainerComponent],
-  exports: [WfNavbarComponent, WfSideNavComponent, WfNavbarEmptyComponent, WfFooterComponent, WfMainContentComponent, WfLeftSideBarComponent, WfRightSidebarComponent,PostFormComponent,ContentEditableFormDirective, FeedWidgetComponent, LoadingPostWidgetComponent, FeedCommentsWidgetComponent, PostDeleteModalComponent, ReportContentModalComponent, LoadingNewPostWidgetComponent,CommentDeleteModalComponent, LikesModalComponent, LinkPreviewWidgetComponent, RyouMayknowWidgetComponent, ProfileCardWidgetComponent, SearchFormWidgetComponent, MobileSearchFormWidgetComponent, QuickSearchResultsWidgetComponent,SimpleFeedCardWidgetComponent, WelcomePageComponent, WfNavbarSummaryComponent,WfSocialHeaderComponent,FaintBodyOverlayComponent,MobileOverlayPostFormComponent,FeedCommentRepliesWidgetComponent,CommentReplyDeleteModalComponent, FeedImageViewWidgetComponent, ProfileFeedWidgetComponent, PostImageOverlayViewComponent, FeedPostImageViewComponent, FeedImagesOverlayViewComponent, AddProfilePhotoAlertWidgetComponent, OverlayModalContainerComponent]  
+  providers: [MenuService, sAuthService, WfLinkPreviewService],
+  declarations: [WfNavbarComponent, WfSideNavComponent, WfNavbarEmptyComponent, WfFooterComponent, WfMainContentComponent, WfLeftSideBarComponent, WfRightSidebarComponent, PostFormComponent, ContentEditableFormDirective, FeedWidgetComponent, LoadingPostWidgetComponent, FeedCommentsWidgetComponent, PostDeleteModalComponent, ReportContentModalComponent, LoadingNewPostWidgetComponent, CommentDeleteModalComponent, LikesModalComponent, LinkPreviewWidgetComponent, RyouMayknowWidgetComponent, ProfileCardWidgetComponent, SearchFormWidgetComponent, MobileSearchFormWidgetComponent, QuickSearchResultsWidgetComponent, SimpleFeedCardWidgetComponent, WelcomePageComponent, WfNavbarSummaryComponent, WfSocialHeaderComponent, WfSocialHeaderComponent, FaintBodyOverlayComponent, MobileOverlayPostFormComponent, FeedCommentRepliesWidgetComponent, CommentReplyDeleteModalComponent, FeedImageViewWidgetComponent, ProfileFeedWidgetComponent, PostImageOverlayViewComponent, FeedPostImageViewComponent, FeedImagesOverlayViewComponent, AddProfilePhotoAlertWidgetComponent, OverlayModalContainerComponent, LoadSubmitProcessDataModalComponent, OverlayLoadSubmitProcessDataWidgetComponent, NavigationWatchComponent, ProcessUploadImagesProgressWidgetComponent, ProfileFeedImageViewWidgetComponent, SharePostFormContainerWidgetComponent, SharedPostWidgetComponent, OverlayPostViewWidgetComponent, PostCardWidgetComponent, WbMessagesContentComponent],
+  exports: [WfNavbarComponent, WfSideNavComponent, WfNavbarEmptyComponent, WfFooterComponent, WfMainContentComponent, WfLeftSideBarComponent, WfRightSidebarComponent, PostFormComponent, ContentEditableFormDirective, FeedWidgetComponent, LoadingPostWidgetComponent, FeedCommentsWidgetComponent, PostDeleteModalComponent, ReportContentModalComponent, LoadingNewPostWidgetComponent, CommentDeleteModalComponent, LikesModalComponent, LinkPreviewWidgetComponent, RyouMayknowWidgetComponent, ProfileCardWidgetComponent, SearchFormWidgetComponent, MobileSearchFormWidgetComponent, QuickSearchResultsWidgetComponent, SimpleFeedCardWidgetComponent, WelcomePageComponent, WfNavbarSummaryComponent, WfSocialHeaderComponent, FaintBodyOverlayComponent, MobileOverlayPostFormComponent, FeedCommentRepliesWidgetComponent, CommentReplyDeleteModalComponent, FeedImageViewWidgetComponent, ProfileFeedWidgetComponent, PostImageOverlayViewComponent, FeedPostImageViewComponent, FeedImagesOverlayViewComponent, AddProfilePhotoAlertWidgetComponent, OverlayModalContainerComponent, LoadSubmitProcessDataModalComponent, OverlayLoadSubmitProcessDataWidgetComponent, ProcessUploadImagesProgressWidgetComponent, ProfileFeedImageViewWidgetComponent, SharePostFormContainerWidgetComponent, SharedPostWidgetComponent, OverlayPostViewWidgetComponent, PostCardWidgetComponent, WbMessagesContentComponent]
 })
 export class ThemeModule { }

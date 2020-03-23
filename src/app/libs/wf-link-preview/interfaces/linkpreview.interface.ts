@@ -3,4 +3,5 @@ export interface LinkPreview {
     description: string;
     image: string;
     url: string;
+    code:string;
 }

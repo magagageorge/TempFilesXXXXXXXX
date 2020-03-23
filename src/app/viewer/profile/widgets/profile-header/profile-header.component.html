@@ -3,20 +3,22 @@
     <div class="card-body m-0 p-0">
       <div class="d-block wf-profile-hearder" [ngStyle]="{'height':''+profileViewerService.profileCoverHeaderHeight+'px'}">
         <div [ngStyle]="{'height':''+profileViewerService.profileCoverHeight+'px'}" class="d-block wf-profile-cover" #profileCoverElm>
+           <div class="d-block w-100 h-100 p-0 m-0"  (click)="profilePhotoService.viewCoverInModal(urlviewerService.PPVIEWER.profile.cover)">
+            <img src="{{urlviewerService.PPVIEWER.profile.cover.picture}}" class="img-fluid w-100 z-depth-2"
+            style="overflow:hidden;">
+           </div>
           <div *ngIf="urlviewerService.PPVIEWER.profile.my_profile==true" class="d-block profile-cover-upload" (click)="editProfileService.editCover()" title="Update Cover Photo" style="cursor: pointer;">
             <span class="d-inline-block text-default"><span class="fa fa-camera"></span></span>
           </div>
-          <img src="{{urlviewerService.PPVIEWER.profile.cover.picture}}" class="img-fluid w-100 z-depth-2"
-            style="overflow:hidden;">
         </div>
         <div class="wf-profile-image-container">
           <div class="d-block wf-profile-img  w-100 h-100 m-0 p-0">
-            <div class="d-block w-100 h-100 m-0 p-0">
+            <div class="d-block w-100 h-100 m-0 p-0" (click)="profilePhotoService.viewAvatarInModal(urlviewerService.PPVIEWER.profile.avatar)">
                 <img src="{{urlviewerService.PPVIEWER.profile.avatar.face}}" class="img-fluid rounded-circle img-thumbnail">
-                <div *ngIf="urlviewerService.PPVIEWER.profile.my_profile==true" class="d-block profile-avatar-upload" (click)="editProfileService.editAvatar()" title="Update Profile Photo" style="cursor: pointer;">
-                  <span class="d-inline-block text-default"><span class="fa fa-camera"></span></span>
-                </div>
             </div>
+            <div *ngIf="urlviewerService.PPVIEWER.profile.my_profile==true" class="d-block profile-avatar-upload" (click)="editProfileService.editAvatar()" title="Update Profile Photo" style="cursor: pointer;">
+              <span class="d-inline-block text-default"><span class="fa fa-camera"></span></span>
+            </div>            
           </div>
         </div>
         <div class="wf-profile-title-buttons p-0 d-block">
