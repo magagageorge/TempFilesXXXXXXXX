@@ -1,0 +1,35 @@
+<ng-container *ngIf="!this.linkPreview && this.showLoadingsProgress;then fetch else preview">
+</ng-container>
+<ng-template #preview>
+  <ng-container *ngIf="linkPreview!=null">
+    <div class="card border-0 bg-light">
+      <div class="card-body wf-card-content p-0 m-0" class="cut-text">
+        <div style="position: absolute;right:-2px;top:-2px;z-index: 1000;padding:2px;" class="round-btn"
+          (click)="clearLinksPreview()"><span class="fa fa-close"></span></div>
+        <div *ngIf="linkPreview.image!=''" class="row m-0 p-1 w-100">
+          <div [ngStyle]="{'height':'80px','max-width':'80px'}" class="col p-0 mx-0"
+            [ngClass]="((linkPreview.imageWidth>linkPreview.imageHeight && 150<=linkPreview.image_wh_ratio*150) || (linkPreview.imageHeight>linkPreview.imageWidth && 150 > 150/linkPreview.image_wh_ratio) || linkPreview.imageWidth==linkPreview.imageHeight)?'d-flex d-flex-row justify-content-center':''"
+            style="background-size: 100%;background-repeat: no-repeat;border-radius:5px;overflow:hidden;border:1px solid transparent; cursor: pointer;">
+            <img [src]="linkPreview?.image"
+              [ngClass]="((linkPreview.imageWidth>linkPreview.imageHeight && 150<=linkPreview.image_wh_ratio*150) || (linkPreview.imageHeight>linkPreview.imageWidth && 150 > 150/linkPreview.image_wh_ratio) || linkPreview.imageWidth==linkPreview.imageHeight) ?'h-100':'w-100'">
+          </div>
+          <div class="col mx-0" style="max-height: 80px;width: calc(100% - 80px);">
+            <div class="font-weight-bold text-truncate">{{linkPreview?.title}}</div>
+            <p>{{linkPreview?.description}}</p>
+          </div>
+        </div>
+        <div *ngIf="linkPreview.image==''" class="row m-0 p-0">
+          <div class="col-12" style="max-height: 80px;">
+            <div class="d-block font-weight-bold text-truncate">{{linkPreview?.title}}</div>
+            <div class="card-title">{{linkPreview?.description}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</ng-template>
+<ng-template #fetch>
+  <div class="d-block text-center" *ngIf="!this.hasError">
+    <span class="">Loading Preview...</span>
+  </div>
+</ng-template>

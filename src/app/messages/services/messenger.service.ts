@@ -6,6 +6,7 @@ import { CrudService, CRUD_OPTIONS, CrudOptions } from '@app/@crud';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, of } from 'rxjs';
 import { MessageForm } from '../models/message-form';
+import { MessageBodyMedia } from '../models/message-body-media';
 
 
 @Injectable({
@@ -26,6 +27,12 @@ export class MessengerService {
   loading_more_chatrooms: boolean;
   reached_end_of_chatrooms: boolean;
   loading_thread_messages: boolean = false;
+
+  messagePhotos: MessageBodyMedia[] = [];
+  currentViewImage: MessageBodyMedia = null;
+  currentViewImageIndex: any = -1;
+  viewerHeight: number = 0;
+  viewerWidth: number = 0;
 
   constructor(service: CrudService, @Inject(CRUD_OPTIONS) CRUD_OPTIONS: CrudOptions, private _modalService: NgbModal, router: Router) {
     this.next_chatrooms_page = 1;
@@ -108,6 +115,53 @@ export class MessengerService {
       }
     })
   }
+
+  public static getFileExtension(filename: string): null|string {
+    if (filename.indexOf('.') === -1) {
+      return null;
+    }
+    return filename.split('.').pop();
+  }
+
+  /** Message Images  */
+    /* Functions to view Post Image in Modal */
+    viewMessagePhotoInModal(medias: MessageBodyMedia[], index: number) {
+      var _this = this;
+      var i = 0;
+      medias.forEach(photo => {
+        _this.messagePhotos.push(photo);
+        if (index == i) {
+          this.viewPhotoInModal(photo, index);
+        }
+        i++;
+      });
+    }
+  
+    viewPhotoInModal(photo: MessageBodyMedia, index: Number) {
+      this.currentViewImage = photo;
+      this.currentViewImageIndex = index;
+    }
+  
+    /* Navigate the Next Picture in Array when user click right-arrow/Next button from view modal*/
+    viewNextPhotoInModal() {
+      if (this.messagePhotos.length && this.messagePhotos.length > (this.currentViewImageIndex + 1)) {
+        this.viewPhotoInModal(this.messagePhotos[this.currentViewImageIndex + 1], Number(this.currentViewImageIndex + 1));
+      }
+    }
+  
+    /* Navigate the Previous Picture in Array when user click left-arrow/Previous button from view modal*/
+    viewPreviousPhotoInModal() {
+      if (this.currentViewImageIndex > 0) {
+        this.viewPhotoInModal(this.messagePhotos[this.currentViewImageIndex - 1], Number(this.currentViewImageIndex - 1));
+      }
+    }
+  
+    closePhotoViewModal() {
+      this.currentViewImage = null;
+      this.currentViewImageIndex = -1;
+      this.messagePhotos = [];
+    }
+    /*------------------------ */
 
   getConfigValue(key: string): any {
     return getDeepFromObject(this.crudconfig, key, null);

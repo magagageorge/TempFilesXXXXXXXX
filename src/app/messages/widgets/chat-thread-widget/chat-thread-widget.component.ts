@@ -1,11 +1,32 @@
-import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit, HostListener, EventEmitter } from '@angular/core';
 import { MessengerService } from '@app/messages/services/messenger.service';
 import { ChatRoom } from '@app/messages/models/chat-room';
-import { Observable, of } from 'rxjs';
+import { Observable, of, fromEvent, Subscription } from 'rxjs';
 import { Message } from '@app/messages/models/message';
 import { Router } from '@angular/router';
 import { Profile } from '@app/models/profile/profile';
 import { MessageForm } from '@app/messages/models/message-form';
+import { MathService } from '@app/services/math.service';
+import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+import { Link, WfLinkifyService } from '@app/libs/wf-linkify';
+import { WfLinkPreviewService } from '@app/libs/wf-link-preview/services/wf-link-preview.service';
+import { LinkPreview } from '@app/libs/wf-link-preview';
+
+
+export interface PreviewPicture {
+  url: string;
+  width: number;
+  height: number;
+  file: File;
+}
+
+export interface PreviewFile {
+  name: string;
+  size: string;
+  extention: string;
+  file: File;
+}
+
 
 @Component({
   selector: 'app-chat-thread-widget',
@@ -25,25 +46,46 @@ export class ChatThreadWidgetComponent implements AfterViewInit {
   next_messages_page: number;
   messageInputHeight: number = 0;
   messageInputWidth: number = 0;
-  filesToUpload: File[];
+  messagesBoxWidth: number = 0;
+  maxMessageImageWidth: number = 0;
   errors: any[];
   messages: any[];
   router: Router;
   submitted: boolean = false;
-  picture_preview_urls: any[] = [];
   link_preview_info: any;
   pushing_message: boolean = false;
   recipients: any[] = [];
-  constructor(messengerService: MessengerService, router: Router) {
+  filesToUpload: Array<File> = [];
+  image_preview_urls: PreviewPicture[] = [];
+  file_preview_list: PreviewFile[] = [];
+  allowedExtensions: string[] = ['doc', 'docx', 'csv', 'xls', 'xlsx', 'pdf', 'txt', 'png', 'jpg', 'gif', 'jpeg'];
+  extentionIcons: any = { 'doc': 'fa fa-file-word-o', 'docx': 'fa fa-file-word-o', 'pdf': 'fa fa-file-pdf-o', 'csv': 'fa fa-file-o', 'xls': 'fa fa-file-excel-o', 'xlsx': 'fa fa-file-excel-o', 'txt': 'fa fa-file-text-o' };
+
+  onLinkFound: EventEmitter<Array<Link>> = new EventEmitter<Array<Link>>();
+
+  links: Link[] = [];
+  mentions: Link[] = [];
+  hashtags: Link[] = [];
+  linkPreview: LinkPreview=null;
+
+  constructor(messengerService: MessengerService, public linkifyService: WfLinkifyService,
+    public linkPreviewService: WfLinkPreviewService, router: Router) {
     this.messengerService = messengerService;
     this.router = router;
   }
 
-
   ngAfterViewInit() {
-    this.messageInputWidth = this.messageInput.nativeElement.clientWidth;
-    this.messageInputHeight = this.messageInput.nativeElement.clientHeight;
+    setTimeout(() => {
+      this.getDimensions();
+    }, 0);
+    this._init();
     this.next_messages_page = 2;
+  }
+
+  getDimensions() {
+    this.messagesBoxWidth = this.messageInputWidth = this.messageInput.nativeElement.clientWidth;
+    this.maxMessageImageWidth = Math.round(this.messagesBoxWidth * 0.83);
+    this.messageInputHeight = this.messageInput.nativeElement.clientHeight;
   }
 
   scrollMessagesToBottom() {
@@ -55,15 +97,15 @@ export class ChatThreadWidgetComponent implements AfterViewInit {
   }
 
   messageFocus() {
-     if(this.chatroom.form.message.trim()==''){
-      this.chatroom.form.message=" ";
-     }
+    if (this.chatroom.form.message.trim() == '') {
+      this.chatroom.form.message = " ";
+    }
   }
 
-  OnBlurMessageBox(){
-    if(this.chatroom.form.message.trim()==''){
-      this.chatroom.form.message='';
-     }   
+  OnBlurMessageBox() {
+    if (this.chatroom.form.message.trim() == '') {
+      this.chatroom.form.message = '';
+    }
   }
 
   pushMessage() {
@@ -77,22 +119,20 @@ export class ChatThreadWidgetComponent implements AfterViewInit {
     }
 
     this.messengerService.service.getProvider(this.messengerService.provider).crudconfig.route_url = 'ms/chat/';
-    if (this.chatroom.form.message == '' && files.length < 1 && this.picture_preview_urls.length < 1) {
+    if (this.chatroom.form.message == '' && files.length < 1 && this.image_preview_urls.length < 1) {
       return false;
     }
 
     if (files && files.length > 0) {
       for (let i = 0; i < files.length; i++) {
-        formData.append("ChatForm[upload_files][]", files[i], files[i]['name']);
+        formData.append("ChatMessageForm[upload_files][]", files[i], files[i]['name']);
       }
     }
 
-    /*
-    if (this.link_preview_info !== null) {
-      this.link_preview_info.code = "";
-      formData.append("link", JSON.stringify(this.link_preview_info));
+    if (this.linkPreview !== null) {
+      this.linkPreview.code = "";
+      formData.append("link", JSON.stringify(this.linkPreview));
     }
-    */
 
     formData.append("roomId", this.chatroom.id);
     formData.append("isNewCR", this.chatroom.isNew);
@@ -117,7 +157,7 @@ export class ChatThreadWidgetComponent implements AfterViewInit {
           if (data.done == true) {
             //_this.messengerService.service.prependFeed(data.data);
             _this.filesToUpload = [];
-            _this.picture_preview_urls = [];
+            _this.image_preview_urls = [];
             if (_this.chatroom.isNew && data_chatroom != null) {
               data_chatroom.form = new MessageForm();
               if (_this.router.url == '/messages/thread/new') {
@@ -137,7 +177,8 @@ export class ChatThreadWidgetComponent implements AfterViewInit {
         _this.pushing_message = false;
       });
       _this.filesToUpload = [];
-      _this.picture_preview_urls = [];
+      _this.image_preview_urls = [];
+      _this.file_preview_list = [];
       this.clearMessageForm();
     }
   }
@@ -145,7 +186,6 @@ export class ChatThreadWidgetComponent implements AfterViewInit {
   clearMessageForm() {
     this.chatroom.form = new MessageForm();
   }
-
 
   onScrollUp() {
     this.loadThreadMessages({ room: this.chatroom.id, page: this.next_messages_page });
@@ -193,6 +233,132 @@ export class ChatThreadWidgetComponent implements AfterViewInit {
 
   searchMessage(id: number): Observable<Message> {
     return of(this.chatroom.messages.find((message: Message) => message.id == id));
+  }
+
+  onSelectFile(event) {
+    if (event.target.files && event.target.files[0]) {
+      //this.filesToUpload = this.filesToUpload.concat(<Array<File>>event.target.files);
+      var filesAmount = event.target.files.length;
+      let files = event.target.files;
+      for (let i = 0; i < filesAmount; i++) {
+        var f = files[i];
+        if (this.validateFile(f)) {
+          // Process Valid Files.
+          if (f.type.match('image.*')) {
+            this.PushPreviewImages(<File>f);
+          } else {
+            this.file_preview_list.push({ name: f.name, size: MathService.BitesToSize(f.size), extention: MessengerService.getFileExtension(f.name), file: f });
+          }
+          this.filesToUpload.push(<File>f);
+        } else {
+          continue;
+        }
+      }
+    }
+  }
+
+  PushPreviewImages(f: File) {
+    var fileReader = new FileReader();
+    var i_url;
+    fileReader.onload = (e) => {
+      if (e) {
+        i_url = (<FileReader>e.target).result;
+        var loadedImage = new Image();
+        loadedImage.onload = (event) => {
+          if (event) {
+            this.image_preview_urls.push({ url: i_url, width: loadedImage.width, height: loadedImage.height, file: <File>f });
+          }
+        }
+        loadedImage.src = i_url;
+      }
+    }
+    fileReader.readAsDataURL(<File>f);
+  }
+
+  RemovePreviewImage(preview: PreviewPicture) {
+    this.image_preview_urls = this.image_preview_urls.filter((x: PreviewPicture) => x.url !== preview.url);
+    if (preview.file !== null) {
+      this.filesToUpload = this.filesToUpload.filter((x: File) => x !== <File>preview.file);
+    }
+  }
+
+  RemoveFilePreview(file_preview: PreviewFile) {
+    this.file_preview_list = this.file_preview_list.filter((x: PreviewFile) => x.file !== file_preview.file);
+    if (file_preview.file !== null) {
+      this.filesToUpload = this.filesToUpload.filter((x: File) => x !== <File>(file_preview.file));
+    }
+  }
+
+  SelectUploadAttachment(): void {
+    var elem: HTMLElement = document.querySelector('#message_upload_input_id');
+    if (elem != null) {
+      elem.click();
+    }
+  }
+
+  validateFile(file: File): Boolean {
+    if (this.allowedExtensions.length !== 0 && file instanceof File) {
+      const ext = MessengerService.getFileExtension(file.name);
+      if (this.allowedExtensions.indexOf(ext) !== -1) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.getDimensions();
+  }
+
+  private _init() {
+    fromEvent(document, 'input')
+      .pipe(
+        debounceTime(2000),
+        distinctUntilChanged(),
+        map(event => {
+          const data = event.target['innerHTML'];
+          const links: Link[] = this.linkifyService.find(data);
+          //console.log('data: ', data);
+          //console.log('links: ', links);
+          //event.target['innerHTML'] = this.linkifyService.linkify(data);
+          return links;
+        })).subscribe((links) => {
+          this.onLinkFound.emit(links);
+        });
+
+    this.onLinkFound.subscribe((links: Array<Link>) => {
+      this.links = [];
+      links.forEach(link => {
+        if (link.type == 'url') {
+          this.linkPreviewService.searchLink(this.links, link.value).subscribe(lin => {
+            if (!lin) {
+              this.links.push(link);
+            }
+          });
+        }
+        if (link.type == 'mention') {
+          this.linkPreviewService.searchLink(this.mentions, link.value).subscribe(lin => {
+            if (!lin) {
+              this.mentions.push(link);
+            }
+          });
+        }
+        if (link.type == 'hashtag') {
+          this.linkPreviewService.searchLink(this.hashtags, link.value).subscribe(lin => {
+            if (!lin) {
+              this.hashtags.push(link);
+            }
+          });
+        }
+      });
+    });
+
+  }
+
+  updateLinkPreview(prev:LinkPreview){
+     console.log(prev);
+    this.linkPreview=prev;
   }
 
 }

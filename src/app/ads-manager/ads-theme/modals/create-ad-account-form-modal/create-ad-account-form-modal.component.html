@@ -1,0 +1,50 @@
+<div class="modal-header">
+    <h6 class="modal-title" id="modal-title" i18n>Create Ad Account</h6>
+</div>
+<div class="modal-body">
+    <form [formGroup]="frm_gGroup" (ngSubmit)="create()" #adAccountForm="ngForm">
+
+        <div class="form-row">
+            <div class="form-group col-12">
+                <label class="pull-left" i18n>Ad Account Name </label>
+                <input type="text" formControlName="acc_name" [(ngModel)]="ad_account_model.name"
+                    class="form-control form-rounded" placeholder="Ad Account Name"
+                    [ngClass]="{ 'is-invalid': submitted && ac.acc_name.errors }" />
+                <div *ngIf="submitted && ac.acc_name.errors"
+                    class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                    <div *ngIf="ac.acc_name.errors.required">required</div>
+                </div>
+            </div>
+            <div class="form-group col-12">
+                <label class="pull-left" i18n>Currency</label>
+                <select id="inputCurrency" formControlName="currency" [(ngModel)]="ad_account_model.currency"
+                    [ngClass]="{ 'is-invalid': submitted && ac.currency.errors }" name="currency"
+                    class="form-control form-rounded">
+                    <option value="" i18n>Currency</option>
+                    <option *ngFor="let currency of utilitiesService.currencies" value="{{currency.iso}}">
+                        {{currency.name}}({{currency.iso}})</option>
+                </select>
+                <div *ngIf="utilitiesService.currencies.length<1" class="w-100 text-center">
+                    <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                    <span class="sr-only">Loading...</span>
+                  </div> 
+                <div *ngIf="submitted && ac.currency.errors"
+                    class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                    <div *ngIf="ac.currency.errors.required">required</div>
+                </div>
+                {{ad_account_model.currency}}
+            </div>
+        </div>
+
+    </form>
+
+    <div class="w-100 align-middel text-center">
+
+        <span class="fa fa-check-circle"></span> <span>Thanks for letting us know! We will work on your information and
+            act accordingly.</span>
+    </div>
+</div>
+<div class="modal-footer p-1">
+    <button type="button" [disabled]="this.frm_gGroup.invalid" class="btn btn-primary btn-sm pull-right"
+        (click)="create()" i18n>Save</button>
+</div>

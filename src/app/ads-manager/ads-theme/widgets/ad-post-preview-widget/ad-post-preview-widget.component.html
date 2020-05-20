@@ -1,0 +1,112 @@
+<div class="card windo-ad-post-card" style="max-width: 500px;" #AdPostContainer>
+    <ng-container>
+        <div class="card-header p-2">
+            <div class="user-block">
+                <a routerLink="/pages/woorbi">
+                    <img class="rounded-circle img-fluid"
+                        src="http://app.woorbi.com/content/photos/face/2368faceDuTwWJjc0ylCGXCfRdSxKsPuO0X-vzp-.jpeg"
+                        alt="">
+                </a>
+                <span class="username mr-4">
+                    <a class="w-100 d-block text-truncate" routerLink="/pages/woorbi">Woorbi</a>
+                </span>
+                <span class="description">
+                    <span class="text-truncate text-muted">Sponsored</span>
+                    <span>&nbsp;</span>
+                    <span>
+                        <a href="javascript:void(0)" title="Everyone"><i class="fa fa-globe"></i></a>
+                    </span>
+                </span>
+            </div>
+        </div>
+
+        <div class="card-body p-0" style="overflow:hidden;">
+            <ng-container *ngIf="ad_model.introduction!='' && ad_model.introduction!=null">
+                <p [innerHTML]="ad_model.introduction | wfLinkify" class="px-2 py-0 m-0 feed-text-content"
+                    id="post-content-container"></p>
+            </ng-container>
+
+            <div *ngIf="ad_model.cards && ad_model.cards.length>0" class="w-100 py-0 m-0"
+                style="padding-left:-1px;padding-right:-1px;">
+
+                <ng-container *ngIf="ad_model.cards.length==1">
+
+
+                    <ng-container *ngIf="ad_model.cards[0].media!=null">
+                        <div [ngStyle]="{'background-image':'url(' + imageIconsService.loadingPictureImage + ')','min-height':''+getPictureHeight(ad_model.cards[0].media_width,ad_model.cards[0].media_height)+'px'}"
+                            class="w-100 p-0"
+                            style="background-size: 100%;background-repeat: no-repeat;border-radius:0px;cursor: pointer;">
+                            <img [src]="ad_model.cards[0].media" class='w-100'>
+                        </div>
+                    </ng-container>
+                    <ng-container *ngIf="ad_model.destination_url!='' && ad_model.destination_url!=null">
+                        <div class="d-block bg-light w-100 px-0 py-2">
+                            <div class="row mx-0 p-0">
+                                <div class="col-12 text-truncate">
+                                    <span class="ad-url text-uppercase">
+                                        {{removeLinkProtocol(ad_model.destination_url)}}
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-row justify-content-between mx-0 p-0 w-100">
+                                <div class="p-0">
+                                    <div class="row mx-0 p-0">
+                                        <div class="col-12">
+                                            <span class="wb-max-ln-1 font-weight-bold">{{ad_model.cards[0].headline}}</span>
+                                        </div>
+                                        <div class="col-12 wb-max-ln-1">{{ad_model.cards[0].description}}</div>
+                                    </div>
+                                </div>
+                                <div class="p-0 pull-right d-flex flex-row justify-content-end">
+                                    <ng-container *ngIf="ad_model.selectedCTA!=null">
+                                        <div class="d-block">
+                                            <div
+                                                class="btn btn-sm btn-outline-primary btn-rounded pull-right font-weight-bold text-nowrap">
+                                                {{ad_model.selectedCTA.name}}
+                                            </div>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                </ng-container>
+
+                <ng-container *ngIf="ad_model.cards.length>1">
+
+                    <app-ad-post-catalog-widget [cards]="ad_model.cards" [selectedCTA]="ad_model.selectedCTA" 
+                    [dispayContainer]="AdPostContainerWidth">
+                    </app-ad-post-catalog-widget>
+
+                </ng-container>
+
+
+
+
+            </div>
+            <div class="card-footer px-0">
+                <div class="row actions">
+                    <div class="col-4 text-center px-0">
+                        <span style="cursor: pointer;">
+                            <span class="fa fa-heart-o"></span><span>&nbsp;</span>
+                            <span i18n>Love</span>
+                        </span>
+                    </div>
+
+                    <div class="col-4 text-center px-0">
+                        <a href="javascript:void(0);"><i class="fa fa-comment-o"></i><span>&nbsp;</span>
+                            <span i18n>Comment</span></a>
+                    </div>
+
+                    <div class="col-4 text-center px-0">
+                        <a href="javascript:void(0);">
+                            <img [src]="imageIconsService.shareIcon" class="share-img-icon"><span>&nbsp;</span>
+                            <span i18n>Share</span>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </ng-container>
+</div>

@@ -30,6 +30,7 @@
               "node_modules/font-awesome/scss/font-awesome.scss",
               "src/assets/md/scss/bootstrap/bootstrap.scss",
               "src/assets/md/scss/mdb-pro.scss",
+              "src/assets/wb-icons.scss",
 			        "src/styles.scss"
             ],
             "scripts": []

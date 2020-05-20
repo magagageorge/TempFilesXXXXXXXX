@@ -57,12 +57,20 @@ export  const cruddefaultSettings: any= {
                 success: true,
                 error: true,
             },
-        },        
+        },  
+        ads: {
+            redirectDelay: 10,
+            provider: 'ads',
+            showMessages: {
+                success: true,
+                error: true,
+            },
+        },              
     },
 };
 
-export  const CRUD_CONFIG=new InjectionToken<any>('LawRahisi Crud Configurations');
-export  const CRUD_PROVIDERS=new InjectionToken<CrudProviders>('LawRahisi Crud Providers');
-export  const CRUD_OPTIONS=new InjectionToken<CrudOptions>('LawRahisi Crud Options');
-export  const CRUD_USER_OPTIONS=new InjectionToken<CrudOptions>('LawRahisi Crud User Options');
-export  const CRUD_INTERCEPTOR_HEADER=new InjectionToken<CrudProviders>('LawRahisi Simple Interceptor Header');
+export  const CRUD_CONFIG=new InjectionToken<any>('Woorbi Crud Configurations');
+export  const CRUD_PROVIDERS=new InjectionToken<CrudProviders>('Woorbi Crud Providers');
+export  const CRUD_OPTIONS=new InjectionToken<CrudOptions>('Woorbi Crud Options');
+export  const CRUD_USER_OPTIONS=new InjectionToken<CrudOptions>('Woorbi Crud User Options');
+export  const CRUD_INTERCEPTOR_HEADER=new InjectionToken<CrudProviders>('Woorbi Simple Interceptor Header');

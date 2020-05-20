@@ -1,0 +1,107 @@
+<ng-container *ngIf="IMAGES.length==1">
+    <div [ngStyle]="{'height':''+max_picture_width+'px','width':''+max_picture_width+'px','background-image':'url('+imageIconsService.loadingPictureImage+')'}"
+        class="col-12 p-0 mx-0"
+        [ngClass]="((IMAGES[0].width>IMAGES[0].height && max_picture_width<=IMAGES[0].wh_ratio*max_picture_width) || (IMAGES[0].height>IMAGES[0].width && max_picture_width > max_picture_width/IMAGES[0].wh_ratio) || IMAGES[0].width==IMAGES[0].height)?'d-flex d-flex-row justify-content-center':''"
+        (click)="messengerService.viewMessagePhotoInModal(IMAGES,0)"
+        style="background-size: 100%;background-repeat: no-repeat;border-radius:5px;overflow:hidden;border:1px solid transparent; cursor: pointer;">
+        <img [src]="IMAGES[0].url"
+            [ngClass]="((IMAGES[0].width>IMAGES[0].height && max_picture_width<=IMAGES[0].wh_ratio*max_picture_width) || (IMAGES[0].height>IMAGES[0].width && max_picture_width > max_picture_width/IMAGES[0].wh_ratio) || IMAGES[0].width==IMAGES[0].height) ?'h-100':'w-100'">
+    </div>
+</ng-container>
+
+<ng-container *ngIf="IMAGES.length==2">
+    <div class="row m-0 p-0" [ngStyle]="{'min-height':''+halfwidth+'px'}">
+        <div [ngStyle]="{'height':''+halfwidth+'px','width':''+halfwidth+'px','background-image':'url('+imageIconsService.loadingPictureImage+')'}"
+            class="col-6 p-0 mx-0"
+            [ngClass]="((IMAGES[0].width>IMAGES[0].height && halfwidth<=IMAGES[0].wh_ratio*halfwidth) || (IMAGES[0].height>IMAGES[0].width && halfwidth > halfwidth/IMAGES[0].wh_ratio) || IMAGES[0].width==IMAGES[0].height)?'d-flex d-flex-row justify-content-center':''"
+            (click)="messengerService.viewMessagePhotoInModal(IMAGES,0)"
+            style="background-size: 100%;background-repeat: no-repeat;border-radius:5px;overflow:hidden;border:1px solid transparent; cursor: pointer;">
+            <img [src]="IMAGES[0].url"
+                [ngClass]="((IMAGES[0].width>IMAGES[0].height && halfwidth<=IMAGES[0].wh_ratio*halfwidth) || (IMAGES[0].height>IMAGES[0].width && halfwidth > halfwidth/IMAGES[0].wh_ratio) || IMAGES[0].width==IMAGES[0].height) ?'h-100':'w-100'">
+        </div>
+        <div [ngStyle]="{'height':''+halfwidth+'px','width':''+halfwidth+'px','background-image':'url('+imageIconsService.loadingPictureImage+')'}"
+            class="col-6 p-0 mx-0"
+            [ngClass]="((IMAGES[1].width>IMAGES[1].height && halfwidth<=IMAGES[1].wh_ratio*halfwidth) || (IMAGES[1].height>IMAGES[1].width && halfwidth > halfwidth/IMAGES[1].wh_ratio) || IMAGES[1].width==IMAGES[1].height)?'d-flex d-flex-row justify-content-center':''"
+            (click)="messengerService.viewMessagePhotoInModal(IMAGES,1)"
+            style="background-size: 100%;background-repeat: no-repeat;border-radius:5px;overflow:hidden;border:1px solid transparent; cursor: pointer;">
+            <img [src]="IMAGES[1].url"
+                [ngClass]="((IMAGES[1].width>IMAGES[1].height && halfwidth<=IMAGES[1].wh_ratio*halfwidth) || (IMAGES[1].height>IMAGES[1].width && halfwidth > halfwidth/IMAGES[1].wh_ratio) || IMAGES[1].width==IMAGES[1].height) ?'h-100':'w-100'">
+        </div>
+    </div>
+</ng-container>
+
+<ng-container *ngIf="IMAGES.length==3">
+    <div class="row m-0 p-0" [ngStyle]="{'min-height':''+three_imgs_height_one+'px'}">
+        <div [ngStyle]="{'height':''+three_imgs_height_one+'px','width':''+container_width+'px','background-image':'url('+imageIconsService.loadingPictureImage+')'}"
+            class="col-12 p-0 mx-0"
+            [ngClass]="((IMAGES[0].width>IMAGES[0].height && container_width<=IMAGES[0].wh_ratio*three_imgs_height_one) || (IMAGES[0].height>IMAGES[0].width && three_imgs_height_one > container_width/IMAGES[0].wh_ratio) || IMAGES[0].width==IMAGES[0].height)?'d-flex d-flex-row justify-content-center':''"
+            (click)="messengerService.viewMessagePhotoInModal(IMAGES,0)"
+            style="background-size: 100%;background-repeat: no-repeat;border-radius:5px;overflow:hidden;border:1px solid transparent; cursor: pointer;">
+            <img [src]="IMAGES[0].url"
+                [ngClass]="((IMAGES[0].width>IMAGES[0].height && container_width<=IMAGES[0].wh_ratio*three_imgs_height_one) || (IMAGES[0].height>IMAGES[0].width && three_imgs_height_one > container_width/IMAGES[0].wh_ratio) || IMAGES[0].width==IMAGES[0].height) ?'h-100':'w-100'">
+        </div>
+    </div>
+    <div class="row m-0 p-0" [ngStyle]="{'min-height':''+three_imgs_height_two+'px'}">
+        <div [ngStyle]="{'height':''+three_imgs_height_two+'px','width':''+halfwidth+'px','background-image':'url('+imageIconsService.loadingPictureImage+')'}"
+            class="col-6 p-0 mx-0"
+            [ngClass]="((IMAGES[1].width>IMAGES[1].height && halfwidth<=IMAGES[1].wh_ratio*three_imgs_height_two) || (IMAGES[1].height>IMAGES[1].width && three_imgs_height_two > halfwidth/IMAGES[1].wh_ratio) || IMAGES[1].width==IMAGES[1].height)?'d-flex d-flex-row justify-content-center':''"
+            (click)="messengerService.viewMessagePhotoInModal(IMAGES,1)"
+            style="background-size: 100%;background-repeat: no-repeat;border-radius:5px;overflow:hidden;border-right:1px solid transparent;border:1px solid transparent; cursor: pointer;">
+            <img [src]="IMAGES[1].url"
+                [ngClass]="((IMAGES[1].width>IMAGES[1].height && halfwidth<=IMAGES[1].wh_ratio*three_imgs_height_two) || (IMAGES[1].height>IMAGES[1].width && three_imgs_height_two > halfwidth/IMAGES[1].wh_ratio) || IMAGES[1].width==IMAGES[1].height) ?'h-100':'w-100'">
+        </div>
+        <div [ngStyle]="{'height':''+three_imgs_height_two+'px','width':''+halfwidth+'px','background-image':'url('+imageIconsService.loadingPictureImage+')'}"
+            class="col-6 p-0 mx-0"
+            [ngClass]="((IMAGES[2].width>IMAGES[2].height && halfwidth<=IMAGES[2].wh_ratio*three_imgs_height_two) || (IMAGES[2].height>IMAGES[2].width && three_imgs_height_two > halfwidth/IMAGES[2].wh_ratio) || IMAGES[2].width==IMAGES[2].height)?'d-flex d-flex-row justify-content-center':''"
+            (click)="messengerService.viewMessagePhotoInModal(IMAGES,2)"
+            style="background-size: 100%;background-repeat: no-repeat;border-radius:5px;overflow:hidden;border-left:1px solid transparent;border:1px solid transparent; cursor: pointer;">
+            <img [src]="IMAGES[2].url"
+                [ngClass]="((IMAGES[2].width>IMAGES[2].height && halfwidth<=IMAGES[2].wh_ratio*three_imgs_height_two) || (IMAGES[2].height>IMAGES[2].width && three_imgs_height_two > halfwidth/IMAGES[2].wh_ratio) || IMAGES[2].width==IMAGES[2].height) ?'h-100':'w-100'">
+        </div>
+    </div>
+</ng-container>
+
+<ng-container *ngIf="IMAGES.length>=4">
+    <div class="row m-0 p-0" [ngStyle]="{'min-height':''+halfwidth+'px'}">
+        <div [ngStyle]="{'height':''+halfwidth+'px','width':''+halfwidth+'px','background-image':'url('+imageIconsService.loadingPictureImage+')'}"
+            class="col-6 p-0 mx-0"
+            [ngClass]="((IMAGES[0].width>IMAGES[0].height && halfwidth<=IMAGES[0].wh_ratio*halfwidth) || (IMAGES[0].height>IMAGES[0].width && halfwidth > halfwidth/IMAGES[0].wh_ratio) || IMAGES[0].width==IMAGES[0].height)?'d-flex d-flex-row justify-content-center':''"
+            (click)="messengerService.viewMessagePhotoInModal(IMAGES,0)"
+            style="background-size: 100%;background-repeat: no-repeat;border-radius:5px;overflow:hidden;border:1px solid transparent; cursor: pointer;">
+            <img [src]="IMAGES[0].url"
+                [ngClass]="((IMAGES[0].width>IMAGES[0].height && halfwidth<=IMAGES[0].wh_ratio*halfwidth) || (IMAGES[0].height>IMAGES[0].width && halfwidth > halfwidth/IMAGES[0].wh_ratio) || IMAGES[0].width==IMAGES[0].height) ?'h-100':'w-100'">
+        </div>
+        <div [ngStyle]="{'height':''+halfwidth+'px','width':''+halfwidth+'px','background-image':'url('+imageIconsService.loadingPictureImage+')'}"
+            class="col-6 p-0 mx-0"
+            [ngClass]="((IMAGES[1].width>IMAGES[1].height && halfwidth<=IMAGES[1].wh_ratio*halfwidth) || (IMAGES[1].height>IMAGES[1].width && halfwidth > halfwidth/IMAGES[1].wh_ratio) || IMAGES[1].width==IMAGES[1].height)?'d-flex d-flex-row justify-content-center':''"
+            (click)="messengerService.viewMessagePhotoInModal(IMAGES,1)"
+            style="background-size: 100%;background-repeat: no-repeat;border-radius:5px;overflow:hidden;border:1px solid transparent; cursor: pointer;">
+            <img [src]="IMAGES[1].url"
+                [ngClass]="((IMAGES[1].width>IMAGES[1].height && halfwidth<=IMAGES[1].wh_ratio*halfwidth) || (IMAGES[1].height>IMAGES[1].width && halfwidth > halfwidth/IMAGES[1].wh_ratio) || IMAGES[1].width==IMAGES[1].height) ?'h-100':'w-100'">
+        </div>
+    </div>
+    <div class="row m-0 p-0" [ngStyle]="{'min-height':''+halfwidth+'px'}">
+        <div [ngStyle]="{'height':''+halfwidth+'px','width':''+halfwidth+'px','background-image':'url('+imageIconsService.loadingPictureImage+')'}"
+            class="col-6 p-0 mx-0"
+            [ngClass]="((IMAGES[2].width>IMAGES[2].height && halfwidth<=IMAGES[2].wh_ratio*halfwidth) || (IMAGES[2].height>IMAGES[2].width && halfwidth > halfwidth/IMAGES[2].wh_ratio) || IMAGES[2].width==IMAGES[2].height)?'d-flex d-flex-row justify-content-center':''"
+            (click)="messengerService.viewMessagePhotoInModal(IMAGES,2)"
+            style="background-size: 100%;background-repeat: no-repeat;border-radius:5px;overflow:hidden;border:1px solid transparent;cursor: pointer;">
+            <img [src]="IMAGES[2].url"
+                [ngClass]="((IMAGES[2].width>IMAGES[2].height && halfwidth<=IMAGES[2].wh_ratio*halfwidth) || (IMAGES[2].height>IMAGES[2].width && halfwidth > halfwidth/IMAGES[2].wh_ratio) || IMAGES[2].width==IMAGES[2].height) ?'h-100':'w-100'">
+        </div>
+        <div [ngStyle]="{'height':''+halfwidth+'px','width':''+halfwidth+'px','background-image':'url('+imageIconsService.loadingPictureImage+')'}"
+            class="col-6 p-0 mx-0"
+            [ngClass]="((IMAGES[3].width>IMAGES[3].height && halfwidth<=IMAGES[3].wh_ratio*halfwidth) || (IMAGES[3].height>IMAGES[3].width && halfwidth > halfwidth/IMAGES[3].wh_ratio) || IMAGES[3].width==IMAGES[3].height)?'d-flex d-flex-row justify-content-center':''"
+            (click)="messengerService.viewMessagePhotoInModal(IMAGES,3)"
+            style="background-size: 100%;background-repeat: no-repeat;border-radius:5px;overflow:hidden;border:1px solid transparent;cursor: pointer;">
+            <img [src]="IMAGES[3].url"
+                [ngClass]="((IMAGES[3].width>IMAGES[3].height && halfwidth<=IMAGES[3].wh_ratio*halfwidth) || (IMAGES[3].height>IMAGES[3].width && halfwidth > halfwidth/IMAGES[3].wh_ratio) || IMAGES[3].width==IMAGES[3].height) ?'h-100':'w-100'">
+            <span *ngIf="IMAGES.length>4"
+                style="position:absolute;z-index: 1;top:0px;bottom:0px;left:0px;right:0px;color:#ffffff;background-color: #0000;opacity: 0.7;"
+                class="d-flex justify-content-center py-auto">
+                <span class="align-middle my-auto" style="font-size: 130%;"><span
+                        class="fa fa-plus"></span><span>&nbsp;</span><span>{{IMAGES.length-4}}</span></span>
+            </span>
+        </div>
+    </div>
+</ng-container>

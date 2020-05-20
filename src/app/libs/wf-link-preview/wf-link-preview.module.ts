@@ -9,6 +9,7 @@ import {WfLinkPreviewContainerComponent} from './components/wf-link-preview-cont
 import {WfLinkifyModule,WfLinkifyService } from '../wf-linkify';
 import { WfHashtagPreviewComponent } from './components/wf-hashtag-preview/wf-hashtag-preview.component';
 import { WfMentionPreviewComponent } from './components/wf-mention-preview/wf-mention-preview.component';
+import { WbLinksPreviewComponent } from './components/wb-links-preview/wb-links-preview.component';
 
 // Export module's public API
 export {LinkPreview} from './interfaces/linkpreview.interface'
@@ -22,8 +23,8 @@ export {WfLinkPreviewDirective} from './directives/wf-link-preview.directive';
     HttpClientModule,
     WfLinkifyModule,
   ],
-  exports: [WfLinkPreviewComponent, WfLinkPreviewContainerComponent, WfLinkPreviewDirective],
-  declarations: [WfLinkPreviewComponent, WfLinkPreviewContainerComponent, WfLinkPreviewDirective, WfHashtagPreviewComponent, WfMentionPreviewComponent]
+  exports: [WfLinkPreviewComponent, WfLinkPreviewContainerComponent, WfLinkPreviewDirective, WbLinksPreviewComponent],
+  declarations: [WfLinkPreviewComponent, WfLinkPreviewContainerComponent, WfLinkPreviewDirective, WfHashtagPreviewComponent, WfMentionPreviewComponent, WbLinksPreviewComponent]
 
 })
 export class WfLinkPreviewModule {

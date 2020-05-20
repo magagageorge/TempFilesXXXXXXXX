@@ -1,11 +1,11 @@
 [
     {
-        "merged": "D:\\Projects\\Woorbi\\platforms\\android\\app\\build\\intermediates\\res\\merged\\release\\drawable-port-hdpi_screen.png.flat",
-        "source": "D:\\Projects\\Woorbi\\platforms\\android\\app\\src\\main\\res\\drawable-port-hdpi\\screen.png"
-    },
-    {
         "merged": "D:\\Projects\\Woorbi\\platforms\\android\\app\\build\\intermediates\\res\\merged\\release\\xml_config.xml.flat",
         "source": "D:\\Projects\\Woorbi\\platforms\\android\\app\\src\\main\\res\\xml\\config.xml"
+    },
+    {
+        "merged": "D:\\Projects\\Woorbi\\platforms\\android\\app\\build\\intermediates\\res\\merged\\release\\drawable-port-hdpi_screen.png.flat",
+        "source": "D:\\Projects\\Woorbi\\platforms\\android\\app\\src\\main\\res\\drawable-port-hdpi\\screen.png"
     },
     {
         "merged": "D:\\Projects\\Woorbi\\platforms\\android\\app\\build\\intermediates\\res\\merged\\release\\mipmap-mdpi_ic_launcher.png.flat",

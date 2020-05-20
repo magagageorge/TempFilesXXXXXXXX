@@ -62,6 +62,10 @@ import { MessengerModalsService } from './messages/services/messenger-modals.ser
 import { ConfirmDeleteContentModalComponent } from './messages/modals/confirm-delete-content-modal/confirm-delete-content-modal.component';
 import { ReportMessengerContentModalComponent } from './messages/modals/report-messenger-content-modal/report-messenger-content-modal.component';
 import { AppModalService } from './services/app-modal.service';
+import { MathService } from './services/math.service';
+import { AdsProvider } from './@crud/providers/ads.provider';
+import { AdsService } from './ads-manager/services/ads.service';
+import { CreateAdAccountFormModalComponent } from './ads-manager/ads-theme/modals/create-ad-account-form-modal/create-ad-account-form-modal.component';
 
 @NgModule({
   declarations: [
@@ -77,7 +81,7 @@ import { AppModalService } from './services/app-modal.service';
     WelcomeComponent,
     TosComponent
   ],
-  entryComponents:[PostDeleteModalComponent,CommentDeleteModalComponent,ReportContentModalComponent,LikesModalComponent,CommentReplyDeleteModalComponent,ConfirmDeleteContentModalComponent,ReportMessengerContentModalComponent],
+  entryComponents:[PostDeleteModalComponent,CommentDeleteModalComponent,ReportContentModalComponent,LikesModalComponent,CommentReplyDeleteModalComponent,ConfirmDeleteContentModalComponent,ReportMessengerContentModalComponent,CreateAdAccountFormModalComponent],
   imports: [
   BrowserModule,
   NgbModule.forRoot(),
@@ -108,7 +112,15 @@ import { AppModalService } from './services/app-modal.service';
                 key: 'token', // this parameter tells Nebular where to look for the token
               },
             },
-          },           
+          },  
+          ads: {
+            service: AdsProvider,
+            config: {
+              token: {
+                key: 'token', // this parameter tells Nebular where to look for the token
+              },
+            },
+          },                    
          },
        }),
     AuthModule.forRoot({
@@ -133,7 +145,7 @@ import { AppModalService } from './services/app-modal.service';
          },
        }),	
   ],
-  providers: [AuthGuard,UrlViewerService,ProfileService,PostingService,UtilitiesService,FeedService,ProfileFeedService,ProfilePhotosService,ProfileConnectionsService,CommentsService,NotificationsService,ConnectionsService,ImageIconsService,EditProfileService,ProfileViewerService,MessengerService,AppModalService, MessengerModalsService, LoadSubmitProgressService,NavigationService, NgxImageCompressService],
+  providers: [AuthGuard,UrlViewerService,ProfileService,PostingService,UtilitiesService,FeedService,ProfileFeedService,ProfilePhotosService,ProfileConnectionsService,CommentsService,NotificationsService,ConnectionsService,ImageIconsService,EditProfileService,ProfileViewerService,MessengerService,AppModalService, MessengerModalsService, LoadSubmitProgressService,NavigationService, NgxImageCompressService,MathService,AdsService],
   schemas: [ NO_ERRORS_SCHEMA ],
   bootstrap: [AppComponent]
 })

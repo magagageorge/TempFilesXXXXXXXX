@@ -20,9 +20,13 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReportMessengerContentModalComponent } from './modals/report-messenger-content-modal/report-messenger-content-modal.component';
 import { ConfirmDeleteContentModalComponent } from './modals/confirm-delete-content-modal/confirm-delete-content-modal.component';
 import { ResizableModule } from 'angular-resizable-element';
+import { MessageImagesWidgetComponent } from './widgets/message-images-widget/message-images-widget.component';
+import { MessageImageModalViewComponent } from './modals/message-image-modal-view/message-image-modal-view.component';
+import { MessageImageViewWidgetComponent } from './widgets/message-image-view-widget/message-image-view-widget.component';
+import { MessageLinkViewWidgetComponent } from './widgets/message-link-view-widget/message-link-view-widget.component';
 
 @NgModule({
-  declarations: [...routedComponents, ChatRoomsWidgetComponent, ChatThreadWidgetComponent, ChatFormWidgetComponent, ChatSearchPeopleWidgetComponent, ChatThreadHeadWidgetComponent, ChatThreadMobileHeadWidgetComponent, ChatRoomsMobileHeadWidgetComponent, ChatRoomsRoomWidgetComponent, ReportMessengerContentModalComponent, ConfirmDeleteContentModalComponent],
+  declarations: [...routedComponents, ChatRoomsWidgetComponent, ChatThreadWidgetComponent, ChatFormWidgetComponent, ChatSearchPeopleWidgetComponent, ChatThreadHeadWidgetComponent, ChatThreadMobileHeadWidgetComponent, ChatRoomsMobileHeadWidgetComponent, ChatRoomsRoomWidgetComponent, ReportMessengerContentModalComponent, ConfirmDeleteContentModalComponent, MessageImagesWidgetComponent, MessageImageModalViewComponent, MessageImageViewWidgetComponent, MessageLinkViewWidgetComponent],
   imports: [
     CommonModule,
     MessagesRoutingModule,
@@ -35,6 +39,6 @@ import { ResizableModule } from 'angular-resizable-element';
     WfLinkifyModule,
     WfLinkPreviewModule.forRoot()
   ],
-  exports:[ChatRoomsWidgetComponent, ChatThreadWidgetComponent, ChatFormWidgetComponent, ChatSearchPeopleWidgetComponent,ChatThreadMobileHeadWidgetComponent, ChatRoomsMobileHeadWidgetComponent , ChatRoomsRoomWidgetComponent]
+  exports:[ChatRoomsWidgetComponent, ChatThreadWidgetComponent, ChatFormWidgetComponent, ChatSearchPeopleWidgetComponent,ChatThreadMobileHeadWidgetComponent, ChatRoomsMobileHeadWidgetComponent , ChatRoomsRoomWidgetComponent, MessageImagesWidgetComponent,MessageImageModalViewComponent, MessageImageViewWidgetComponent, MessageLinkViewWidgetComponent]
 })
 export class MessagesModule { }

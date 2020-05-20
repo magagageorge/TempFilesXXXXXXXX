@@ -98,7 +98,7 @@ export class AuthRequestPasswordComponent implements OnInit {
         this.service.requestPassword(this.provider, this.model).subscribe(function (result) {
             _this.submitted = false;
             _this.processing_request=false;
-			var res_data=result.getResponse();
+            var res_data=result.getResponse();
             if (result.isSuccess()){
 				if(res_data.ok==true){
 					_this.messages=[];

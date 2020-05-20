@@ -1,0 +1,17 @@
+.btn-remove-card{
+    position: absolute;
+    top:8px;
+    right:-5px;
+    background-color: #ffffff;
+    z-index: 2101;
+    border-radius: 50%;
+    font-size: 120%;
+    color:#000000;
+    text-align: center;
+    width: 25px;
+    height: 25px;
+}
+
+.btn-remove-card:hover{
+    background-color: transparentize($color: #000000, $amount: 0.9);
+}

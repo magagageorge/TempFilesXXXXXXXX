@@ -1,0 +1,19 @@
+    <div class="faint-body-overlay d-block">
+
+        <div class="container-fluid" style="padding:0px;">
+            <div class="border" style="position: absolute;top:0px;height:50px;left:0px;right:0px;">
+                <div class="row mx-0" >
+                    <div class="col-12" >
+                        <div class="d-block overlay-close-btn pull-right align-middle"
+                            (click)="adsService.closeAdContentFormModal()" style="cursor: pointer;"> <span
+                                class="fa fa-close" style="font-size: 120%;vertical-align: middle;"></span></div>
+                    </div>
+                </div>
+            </div>
+            <div style="position: absolute;top:50px;bottom:0px;left:0px;right:0px;height:calc(100vh - 50px);overflow-y: auto;">
+                <div class="d-block h-100 w-100">                    
+                    <ng-content></ng-content>     
+                </div>
+            </div>
+        </div>
+    </div>

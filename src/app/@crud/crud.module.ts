@@ -8,6 +8,7 @@ import { CrudJWTInterceptor } from './services/interceptors/jwt-interceptor';
 import { TokenService } from 'app/auth/services/token/token.service';
 import { CrudOptions,cruddefaultSettings,CRUD_CONFIG, CRUD_OPTIONS,CRUD_USER_OPTIONS, CRUD_PROVIDERS, CRUD_INTERCEPTOR_HEADER } from './crud.options';
 import { MessengerProvider } from './providers';
+import { AdsProvider } from './providers/ads.provider';
 
 export function crudServiceFactory(crudconfig: any, tokenService: TokenService, injector: Injector): CrudService {
     var providers = crudconfig.providers || {};
@@ -45,7 +46,8 @@ export class CrudModule {
 	  { provide: HTTP_INTERCEPTORS, useClass: CrudJWTInterceptor, multi: true},
       TokenService,
       CrudProvider,
-      MessengerProvider	  
+      MessengerProvider,
+      AdsProvider	  
 	  ]
     };
   }

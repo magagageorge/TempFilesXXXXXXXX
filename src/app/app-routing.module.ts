@@ -55,6 +55,11 @@ const routes: Routes = [
     loadChildren: './messages/messages.module#MessagesModule'
   },
   {
+    path:'adsmanager',
+    canActivate:[AuthGuard],
+    loadChildren:'./ads-manager/ads-manager.module#AdsManagerModule'
+   },
+  {
     path: ':url/:url_page',
     canActivate: [AuthGuard], // here we tell Angular to check the access with our AuthGuard
     loadChildren: './viewer/viewer.module#ViewerModule',

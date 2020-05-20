@@ -22,17 +22,71 @@
                 <ng-container *ngIf="message.my_message==false">
                     <div class="d-flex justify-content-start mx-2">
                         <div class="message received">
-                            {{message.messageBody.message}}
+                            <ng-container *ngIf="message.messageBody.links!=null && message.messageBody.links.length>0">
+                                <app-message-link-view-widget [link]="message.messageBody.links[0]"></app-message-link-view-widget>
+                            </ng-container>
+
+                            <ng-container *ngIf="message.messageBody.medias!=null && maxMessageImageWidth">
+                                <div class="d-block w-100">
+                                    <app-message-images-widget [IMAGES]="message.messageBody.medias"
+                                        [max_picture_width]="maxMessageImageWidth"></app-message-images-widget>
+                                </div>
+                            </ng-container>
+                            <ng-container *ngIf="message.messageBody.files!=null">
+                                <div class="d-block w-100">
+                                    <ng-container *ngFor="let m_file of message.messageBody.files">
+                                        <div class="row mx-0 alert alert-info" style="cursor: pointer;">
+                                            <div class="col-2 p-2">
+                                                <span class="{{extentionIcons[m_file.extension]}}"
+                                                    style="font-size: 120%;"></span>
+                                            </div>
+                                            <div class="col-10 p-2 text-truncate">
+                                                <span>{{m_file.title}}</span>
+                                            </div>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </ng-container>
+                            <ng-container *ngIf="message.messageBody.message!=''">
+                                <span>{{message.messageBody.message}}</span>
+                            </ng-container>
                             <span class="metadata">
                                 <span class="time">{{message.sent_at.date}}</span>
                             </span>
                         </div>
                     </div>
                 </ng-container>
+
                 <ng-container *ngIf="message.my_message==true">
                     <div class="d-flex justify-content-end mx-2">
                         <div class="message sent text-white">
-                            {{message.messageBody.message}}
+                            <ng-container *ngIf="message.messageBody.links!=null && message.messageBody.links.length>0">
+                                <app-message-link-view-widget [link]="message.messageBody.links[0]"></app-message-link-view-widget>
+                            </ng-container>                            
+                            <ng-container *ngIf="message.messageBody.medias!=null && maxMessageImageWidth">
+                                <div class="d-block w-100">
+                                    <app-message-images-widget [IMAGES]="message.messageBody.medias"
+                                        [max_picture_width]="maxMessageImageWidth"></app-message-images-widget>
+                                </div>
+                            </ng-container>
+                            <ng-container *ngIf="message.messageBody.files!=null">
+                                <div class="d-block w-100">
+                                    <ng-container *ngFor="let m_file of message.messageBody.files">
+                                        <div class="row mx-0 p-0 alert alert-info" style="cursor: pointer;">
+                                            <div class="col-2 p-2">
+                                                <span class="{{extentionIcons[m_file.extension]}}"
+                                                    style="font-size: 120%;"></span>
+                                            </div>
+                                            <div class="col-10 p-2 text-truncate">
+                                                <span>{{m_file.title}}</span>
+                                            </div>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </ng-container>
+                            <ng-container *ngIf="message.messageBody.message!=''">
+                                <span>{{message.messageBody.message}}</span>
+                            </ng-container>
                             <span class="metadata">
                                 <span class="time">{{message.sent_at.date}}</span>
                             </span>
@@ -41,35 +95,104 @@
                 </ng-container>
             </ng-container>
         </ng-container>
+
         <div class="d-block w-100 p-2">&nbsp;</div>
     </div>
     <div class="card-footer p-0">
 
         <ng-container *ngIf="chatroom.form!=null">
             <div class="d-block w-100 messageInputBoxBlock bg-white" style="position: relative;">
+                <input class="d-none" type='file' id="message_upload_input_id" name="upload_files"
+                    (change)="onSelectFile($event)" multiple #message_upload_input_id>
                 <div class="bg-white border-top border-light py-2"
                     style="position: absolute; right:0px;left:0px;bottom:0px;">
+
+                    <ng-container *ngIf="image_preview_urls.length">
+                        <div class="d-block w-100">
+                            <div class="row mx-0">
+                                <div class="col-12 p-1 w-100" style="max-height: 320px; overflow-y: auto;">
+                                    <div *ngFor="let img_preview of image_preview_urls"
+                                        class="pull-left m-1 d-block post-image-preview-item"
+                                        style="position:relative;width:100px;height:100px;">
+                                        <span (click)="RemovePreviewImage(img_preview)" class="round-btn" title="Remove"
+                                            style="z-index:3001; width:20px;height:20px;padding:1px;cursor:pointer;position:absolute;top:-5px;right:-5px;">
+                                            <span class="fa fa-close"></span>
+                                        </span>
+                                        <div class="h-100 w-100 p-0" style="overflow:hidden;">
+                                            <img [src]="img_preview.url" class="rounded m-0"
+                                                [class.w-100]="img_preview.width<=img_preview.height"
+                                                [class.h-100]="img_preview.width>=img_preview.height">
+                                        </div>
+                                        <div class="img-preview-overlay"> &nbsp;</div>
+                                    </div>
+                                    <div *ngIf="image_preview_urls.length && image_preview_urls.length < 12"
+                                        (click)="message_upload_input_id.click()"
+                                        class="pull-left m-1 d-block post-image-preview-item align-middle text-center"
+                                        title="Upload more Images"
+                                        style="position:relative;width:100px;height:100px;font-size:200%;border:2px dashed gray;cursor: pointer;">
+                                        <span style="position:absolute;top:30px;bottom:30px;left:30px;right:30px;">
+                                            <span class="fa fa-plus"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+
+                    <ng-container *ngIf="file_preview_list.length">
+                        <div class="d-block">
+                            <ng-container *ngFor="let file_preview of file_preview_list">
+                                <div class="row mx-0">
+                                    <div class="col-2 d-flex align-items-center">
+                                        <div class="d-block">
+                                            <span class="{{extentionIcons[file_preview.extention]}}"
+                                                style="font-size: 120%;"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-10"
+                                        style="position: relative;border-bottom: 1px dotted gray; font-size: 90%;">
+                                        <div class="d-block w-100"><span class="d-inline-block text-truncate"
+                                                style="max-width: 80%;">{{file_preview.name}}</span>
+                                            <span class="d-inline-block"><span>&nbsp;</span>
+                                                {{file_preview.size}}</span></div>
+                                        <div class="d-block w-100"><i>Attached</i></div>
+                                        <span (click)="RemoveFilePreview(file_preview)" class="round-btn" title="Remove"
+                                            style="z-index:3001; width:20px;height:20px;padding:1px;cursor:pointer;position:absolute;top:0px;bottom:0px;right:3px;">
+                                            <span class="fa fa-close"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </ng-container>
+                        </div>
+
+                    </ng-container>
+
                     <div class="row m-0 p-0 content-inputs-container" id="chatformcontentcontainer">
                         <div class="col-10 col-md-12 col-lg-12 col-xl-12 p-0 m-0">
+
+                            <ng-container *ngIf="links.length>0">
+                                <app-wb-links-preview [link]="links[0]" (linkPreviewEmit)="updateLinkPreview($event)">
+                                </app-wb-links-preview>
+                            </ng-container>
+                                                        
                             <div appWfLinkPreview class="h-100 align-middle bg-white p-2 messageInputBox" #messageInput
                                 (change)="messageFocus()" (blur)="OnBlurMessageBox()" (focus)="messageFocus()"
                                 [(ngModel)]="chatroom.form.message" #ctrl="ngModel" name="message"
                                 contenteditable="true" data-text="Write your Message here">
                             </div>
-                            <div class="mobile-attach-buttons  py-2">
-                                <span class="d-inline-block pull-right" class="p-0 m-2 text-primary"
-                                    style="cursor: pointer;">
+                            <div class="mobile-attach-buttons  py-0">
+                                <span (click)="SelectUploadAttachment()"
+                                    class="d-inline-block pull-right p-0 m-2 text-primary" style="cursor: pointer;">
                                     <span class="fa fa-paperclip" style="font-size:140%;"></span>
                                 </span>
 
                                 <ng-container *ngIf="chatroom.form.message==''">
-                                    <span class="d-inline-block pull-right" class="p-0 m-2 text-primary"
-                                        style="cursor: pointer;">
+                                    <span (click)="SelectUploadAttachment()"
+                                        class="d-inline-block pull-right p-0 m-2 text-primary" style="cursor: pointer;">
                                         <span class="fa fa-camera" style="font-size:140%;"></span>
                                     </span>
                                 </ng-container>
                             </div>
-
                         </div>
                         <div class="col-2 d-block d-md-none d-lg-none d-xl-none p-0 m-0">
                             <div class="d-block w-100 h-100" style="position: relative;">
@@ -87,10 +210,12 @@
             <div class="d-none d-md-block d-lg-block d-xl-block w-100 bg-light messageInputButtons px-2">
                 <div class="row mx-0 my-1">
                     <div class="col-9 p-0 d-flex align-items-center">
-                        <span class="p-2 text-primary" style="cursor: pointer;font-size: 120%">
+                        <span (click)="SelectUploadAttachment()" class="p-2 text-primary"
+                            style="cursor: pointer;font-size: 120%">
                             <span class="fa fa-camera"></span>
                         </span>
-                        <span class="p-2 text-primary" style="cursor: pointer;font-size: 120%">
+                        <span (click)="SelectUploadAttachment()" class="p-2 text-primary"
+                            style="cursor: pointer;font-size: 120%">
                             <span class="fa fa-paperclip"></span>
                         </span>
                     </div>

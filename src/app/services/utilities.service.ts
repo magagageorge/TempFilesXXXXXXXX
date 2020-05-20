@@ -8,6 +8,7 @@ import { CrudService } from '@app/@crud/services/crud.service';
 import { cruddefaultSettings, CrudOptions, CRUD_OPTIONS, CRUD_USER_OPTIONS, CRUD_PROVIDERS, CRUD_INTERCEPTOR_HEADER } from '@app/@crud/crud.options';
 import { CrudProvider } from '@app/@crud/providers/crud.provider';
 import { ReportContentType } from '@app/models/report-content-type';
+import { Currency } from '@app/models/currency';
 
 
 @Injectable()
@@ -27,6 +28,7 @@ export class UtilitiesService {
     SuggestedSkills: any[] = [];
     SuggestedIndutries: any[] = [];
     report_types: ReportContentType[] = [];
+    currencies:Currency[]=[];
     constructor(service: CrudService, @Inject(CRUD_OPTIONS) CRUD_OPTIONS: CrudOptions, router: Router) {
         this.service = service;
         this.crudconfig = CRUD_OPTIONS;
@@ -34,6 +36,7 @@ export class UtilitiesService {
         this.loadSuggestedIndustries();
         this.loadSuggestedSkills();
         this.loadReportTypes();
+        this.loadCurrencies();
     }
 
     loadReportTypes() {
@@ -51,6 +54,12 @@ export class UtilitiesService {
     loadSuggestedIndustries() {
         this.getIndustries({}).subscribe(results => {
             this.SuggestedIndutries = results.getResultData();
+        });
+    }
+
+    loadCurrencies() {
+        this.getCurrencies({}).subscribe(results => {
+            this.currencies = results.getResultData();
         });
     }
 
@@ -77,6 +86,13 @@ export class UtilitiesService {
     getCountries(params: {}): any {
         this.provider = this.getConfigValue('forms.getall.provider');
         this.service.getProvider(this.provider).crudconfig.route_url = 'utilities/countries/';
+        var _this = this;
+        return this.service.getall(this.provider, params);
+    }
+
+    getCurrencies(params: {}): any {
+        this.provider = this.getConfigValue('forms.getall.provider');
+        this.service.getProvider(this.provider).crudconfig.route_url = 'utilities/currencies/';
         var _this = this;
         return this.service.getall(this.provider, params);
     }

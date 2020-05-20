@@ -1,0 +1,29 @@
+
+  <ng-container *ngIf="link!=null">
+    
+    <div class="card border-0 bg-light">
+      <div class="card-body wf-card-content p-0 m-0" class="cut-text">
+          <a href="{{link.url}}" target="_blank" class="w-100 m-0 p-0 text-black">
+            <div *ngIf="link.image!=''" class="row m-0 p-1 w-100">
+                <div [ngStyle]="{'height':'80px','max-width':'80px'}" class="col p-0 mx-0"
+                  [ngClass]="((link.width>link.height && 150<=link.wh_ratio*150) || (link.height>link.width && 150 > 150/link.wh_ratio) || link.width==link.height)?'d-flex d-flex-row justify-content-center':''"
+                  style="background-size: 100%;background-repeat: no-repeat;border-radius:5px;overflow:hidden;border:1px solid transparent; cursor: pointer;">
+                  <img [src]="link?.image"
+                    [ngClass]="((link.width>link.height && 150<=link.wh_ratio*150) || (link.height>link.width && 150 > 150/link.wh_ratio) || link.width==link.height) ?'h-100':'w-100'">
+                </div>
+                <div class="col mx-0" style="max-height: 80px;width: calc(100% - 80px);">
+                  <div class="font-weight-bold text-truncate">{{link?.title}}</div>
+                  <p>{{link?.description}}</p>
+                </div>
+              </div>
+              <div *ngIf="link.image==''" class="row m-0 p-0">
+                <div class="col-12" style="max-height: 80px;">
+                  <div class="d-block font-weight-bold text-truncate">{{link?.title}}</div>
+                  <div class="card-title">{{link?.description}}</div>
+                </div>
+              </div>
+          </a>
+      </div>
+    </div>
+
+  </ng-container>

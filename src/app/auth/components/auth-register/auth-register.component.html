@@ -1,71 +1,86 @@
+<div class="container-fluid d-flex align-items-center" style="padding:0px;min-height: 90vh;">
+    <div class="row w-100  mx-auto">
+        <div class="col-xs-14 col-sm-10 col-lg-4 col-lg-4 mx-auto" style="padding:0px;">
+            <div class="card1">
+                <div class="card-body">
+                    <form [formGroup]="formGroup" (ngSubmit)="register()" class="text-center p-1">
 
-    <div class="container-fluid"  style="padding:0px;">
-        <div class="row w-100  mx-auto">
-          <div class="col-xs-14 col-sm-10 col-lg-4 col-lg-4 mx-auto" style="padding:0px;">
-		  <div class="card1">
-		  <div class="card-body">
-                <form [formGroup]="formGroup" (ngSubmit)="register()" class="text-center p-1">
-                    
-              <h4>New to Woorbi?</h4>
-              <h6 class="font-weight-light">Signing up is easy. It only takes a few steps</h6>
-                   <div *ngIf="showMessages.error && errors && errors.length > 0 && !submitted"  class="alert alert-info text-danger" role="alert"> 
-				   <div *ngFor="let error of errors">{{ error }}</div>
-				   </div>
-				   <div *ngIf="showMessages.success && messages && messages.length > 0 && !submitted"   class="alert alert-success" role="alert"> 
-				     <div><strong>Hooray!</strong></div> 
-					 <div *ngFor="let message of messages">{{ message }}</div>
-                   </div>
-                   <div *ngIf="service.processing_request" class="d-block text-center color-primary">
-                    <i class="fa fa-spinner fa-pulse fa-3x fa-fw color-primary"></i>
-                    <span class="sr-only color-primary">Loading...</span>
-                   </div>                   					
-					<div class="form-group">
-                        <input type="text" formControlName="fullName" [(ngModel)]="model.fullName" class="form-control form-rounded" placeholder="Full Name" [ngClass]="{ 'is-invalid': submitted && f.fullName.errors }" />
-                        <div *ngIf="submitted && f.fullName.errors" class="invalid-feedback text-danger text-right form-text text-muted mb-1">
-                            <div *ngIf="f.fullName.errors.required">Fullname is required</div>
+                        <h4>New to Woorbi?</h4>
+                        <h6 class="font-weight-light">Signing up is easy. It only takes a few steps</h6>
+                        <div *ngIf="showMessages.error && errors && errors.length > 0 && !submitted"
+                            class="alert alert-info text-danger" role="alert">
+                            <div *ngFor="let error of errors">{{ error }}</div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" formControlName="email" [(ngModel)]="model.email" class="form-control form-rounded" placeholder="Email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
-                        <div *ngIf="submitted && f.email.errors" class="invalid-feedback text-danger text-right form-text text-muted mb-1">
-                            <div *ngIf="f.email.errors.required">Email is required</div>
-                            <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                        <div *ngIf="showMessages.success && messages && messages.length > 0 && !submitted"
+                            class="alert alert-success" role="alert">
+                            <div><strong>Hooray!</strong></div>
+                            <div *ngFor="let message of messages">{{ message }}</div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <input type="password" formControlName="password"  [(ngModel)]="model.password" class="form-control form-rounded" placeholder="Password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-                        <div *ngIf="submitted && f.password.errors" class="invalid-feedback text-danger text-right form-text text-muted mb-1">
-                            <div *ngIf="f.password.errors.required">Password is required</div>
-                            <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+                        <div *ngIf="service.processing_request" class="d-block text-center color-primary">
+                            <i class="fa fa-spinner fa-pulse fa-3x fa-fw color-primary"></i>
+                            <span class="sr-only color-primary">Loading...</span>
                         </div>
-                    </div>
-    <!-- Sign up button -->
-    <button class="btn btn-primary btn-rounded btn-block my-4 waves-effect z-depth-0">Join Woorbi</button>
-      <!-- Register -->
-      <p class="w-100 pull-right text-right">Have an Account?
-        <a routerLink="/login">Login Now</a>
-      </p>
-            <!-- Social register -->
-            <p>or sign up with:</p>
+                        <div class="form-group">
+                            <input type="text" formControlName="fullName" [(ngModel)]="model.fullName"
+                                class="form-control form-rounded" placeholder="Full Name"
+                                [ngClass]="{ 'is-invalid': submitted && f.fullName.errors }" />
+                            <div *ngIf="submitted && f.fullName.errors"
+                                class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                                <div *ngIf="f.fullName.errors.required">Fullname is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" formControlName="email" [(ngModel)]="model.email"
+                                class="form-control form-rounded" placeholder="Email"
+                                [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                            <div *ngIf="submitted && f.email.errors"
+                                class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                                <div *ngIf="f.email.errors.required">Email is required</div>
+                                <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" formControlName="password" [(ngModel)]="model.password"
+                                class="form-control form-rounded" placeholder="Password"
+                                [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                            <div *ngIf="submitted && f.password.errors"
+                                class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                                <div *ngIf="f.password.errors.required">Password is required</div>
+                                <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+                            </div>
+                        </div>
+                        <!-- Sign up button -->
+                        <button class="btn btn-primary btn-rounded btn-block my-4 waves-effect z-depth-0">Join
+                            Woorbi</button>
+                        <!-- Register -->
+                        <p class="w-100 pull-right text-right">Have an Account?
+                            <a routerLink="/login">Login Now</a>
+                        </p>
+                        <!-- Social register -->
+                        <p>or sign up with:</p>
 
-            <a type="button" (click)="signInWithGoogle()" class="btn-floating btn-danger btn-sm" title="Google Account">
-                <i class="fa fa-google"></i>
-              </a>
-              <a type="button" (click)="signInWithFB()" class="btn-floating btn-fb btn-sm" title="Facebook Account">
-                  <i class="fa fa-facebook"></i>
-              </a>
-              <a type="button" (click)="signInWithLinkedIn()" class="btn-floating btn-li btn-sm" title="Linkedin Account">
-                  <i class="fa fa-linkedin"></i>
-              </a>
+                        <a type="button" (click)="signInWithGoogle()" class="btn-floating btn-danger btn-sm"
+                            title="Google Account">
+                            <i class="fa fa-google"></i>
+                        </a>
+                        <a type="button" (click)="signInWithFB()" class="btn-floating btn-fb btn-sm"
+                            title="Facebook Account">
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                        <a type="button" (click)="signInWithLinkedIn()" class="btn-floating btn-li btn-sm"
+                            title="Linkedin Account">
+                            <i class="fa fa-linkedin"></i>
+                        </a>
 
-            <hr>
-    <!-- Terms of service -->
-    <p>By Joining <em>Woorbi</em>, you agree to it's
-        <a routerLink="/tos">Terms of Service</a>,<a routerLink="/privacy">Privacy Policy</a>, and <a routerLink="/cookies">Cookie Policy</a></p>
+                        <hr>
+                        <!-- Terms of service -->
+                        <p>By Joining <em>Woorbi</em>, you agree to it's
+                            <a routerLink="/tos">Terms of Service</a>,<a routerLink="/privacy">Privacy Policy</a>, and
+                            <a routerLink="/cookies">Cookie Policy</a></p>
 
-                </form>		  
+                    </form>
+                </div>
             </div>
-			</div>
-          </div>
         </div>
     </div>
+</div>

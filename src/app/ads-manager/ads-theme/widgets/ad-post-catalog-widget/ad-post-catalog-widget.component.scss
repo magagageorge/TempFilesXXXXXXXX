@@ -1,0 +1,13 @@
+
+.ad-card-view-controls {
+	position: absolute;
+	top: 44%;
+    border: 2px solid transparent;
+    left:2px;
+    right:2px;
+}
+
+.ad-card-view-controls .action-btn{
+ color: #000000;
+ background-color: transparentize($color: #ffffff, $amount: 0.6);
+}

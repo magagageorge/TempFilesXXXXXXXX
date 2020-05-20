@@ -1,0 +1,19 @@
+.navbar-ads-nav{
+    background-color: transparent;
+}
+
+.navbar-ads-nav .nav-item{
+    border-bottom: 3px solid transparent;
+}
+
+.navbar-ads-nav .nav-item:hover{
+    border-bottom: 3px solid #cfa9f1;
+}
+
+.navbar-ads-nav .nav-item.active{
+    border-bottom: 3px solid #06274d;
+}
+
+.navbar-ads-nav .nav-item.active:hover{
+    border-bottom: 3px solid #06274d;
+}

@@ -1,13 +1,13 @@
 -- Merging decision tree log ---
 manifest
-ADDED from D:\Projects\Woorbi\platforms\android\app\src\main\AndroidManifest.xml:2:1-13:12
-INJECTED from D:\Projects\Woorbi\platforms\android\app\src\main\AndroidManifest.xml:2:1-13:12
-INJECTED from D:\Projects\Woorbi\platforms\android\app\src\main\AndroidManifest.xml:2:1-13:12
-INJECTED from D:\Projects\Woorbi\platforms\android\app\src\main\AndroidManifest.xml:2:1-13:12
+ADDED from D:\Projects\Woorbi\platforms\android\app\src\main\AndroidManifest.xml:2:1-21:12
+INJECTED from D:\Projects\Woorbi\platforms\android\app\src\main\AndroidManifest.xml:2:1-21:12
+INJECTED from D:\Projects\Woorbi\platforms\android\app\src\main\AndroidManifest.xml:2:1-21:12
+INJECTED from D:\Projects\Woorbi\platforms\android\app\src\main\AndroidManifest.xml:2:1-21:12
 MERGED from [:CordovaLib] D:\Projects\Woorbi\platforms\android\CordovaLib\build\intermediates\library_manifest\release\AndroidManifest.xml:20:1-27:12
-INJECTED from D:\Projects\Woorbi\platforms\android\app\src\main\AndroidManifest.xml:2:1-13:12
-INJECTED from D:\Projects\Woorbi\platforms\android\app\src\main\AndroidManifest.xml:2:1-13:12
-INJECTED from D:\Projects\Woorbi\platforms\android\app\src\main\AndroidManifest.xml:2:1-13:12
+INJECTED from D:\Projects\Woorbi\platforms\android\app\src\main\AndroidManifest.xml:2:1-21:12
+INJECTED from D:\Projects\Woorbi\platforms\android\app\src\main\AndroidManifest.xml:2:1-21:12
+INJECTED from D:\Projects\Woorbi\platforms\android\app\src\main\AndroidManifest.xml:2:1-21:12
 	package
 		ADDED from D:\Projects\Woorbi\platforms\android\app\src\main\AndroidManifest.xml:2:102-127
 		INJECTED from D:\Projects\Woorbi\platforms\android\app\src\main\AndroidManifest.xml
@@ -78,6 +78,38 @@ category#android.intent.category.LAUNCHER
 ADDED from D:\Projects\Woorbi\platforms\android\app\src\main\AndroidManifest.xml:9:17-77
 	android:name
 		ADDED from D:\Projects\Woorbi\platforms\android\app\src\main\AndroidManifest.xml:9:27-74
+uses-permission#android.permission.READ_CONTACTS
+ADDED from D:\Projects\Woorbi\platforms\android\app\src\main\AndroidManifest.xml:13:5-72
+	android:name
+		ADDED from D:\Projects\Woorbi\platforms\android\app\src\main\AndroidManifest.xml:13:22-69
+uses-permission#android.permission.CAMERA
+ADDED from D:\Projects\Woorbi\platforms\android\app\src\main\AndroidManifest.xml:14:5-65
+	android:name
+		ADDED from D:\Projects\Woorbi\platforms\android\app\src\main\AndroidManifest.xml:14:22-62
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from D:\Projects\Woorbi\platforms\android\app\src\main\AndroidManifest.xml:15:5-80
+	android:name
+		ADDED from D:\Projects\Woorbi\platforms\android\app\src\main\AndroidManifest.xml:15:22-77
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from D:\Projects\Woorbi\platforms\android\app\src\main\AndroidManifest.xml:16:5-81
+	android:name
+		ADDED from D:\Projects\Woorbi\platforms\android\app\src\main\AndroidManifest.xml:16:22-78
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from D:\Projects\Woorbi\platforms\android\app\src\main\AndroidManifest.xml:17:5-81
+	android:name
+		ADDED from D:\Projects\Woorbi\platforms\android\app\src\main\AndroidManifest.xml:17:22-78
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from D:\Projects\Woorbi\platforms\android\app\src\main\AndroidManifest.xml:18:5-79
+	android:name
+		ADDED from D:\Projects\Woorbi\platforms\android\app\src\main\AndroidManifest.xml:18:22-76
+uses-feature#android.hardware.location.gps
+ADDED from D:\Projects\Woorbi\platforms\android\app\src\main\AndroidManifest.xml:19:5-66
+	android:name
+		ADDED from D:\Projects\Woorbi\platforms\android\app\src\main\AndroidManifest.xml:19:19-63
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from D:\Projects\Woorbi\platforms\android\app\src\main\AndroidManifest.xml:20:5-79
+	android:name
+		ADDED from D:\Projects\Woorbi\platforms\android\app\src\main\AndroidManifest.xml:20:22-76
 uses-sdk
 INJECTED from D:\Projects\Woorbi\platforms\android\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from D:\Projects\Woorbi\platforms\android\app\src\main\AndroidManifest.xml

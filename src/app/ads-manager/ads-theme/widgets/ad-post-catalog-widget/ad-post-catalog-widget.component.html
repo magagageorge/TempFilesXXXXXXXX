@@ -1,0 +1,72 @@
+<div class="w-100" [ngStyle]="{'height':''+(boxWidth + 100)+'px'}" style="position: relative; overflow-x: hidden;" #dispayContainer>
+    <div style="position: absolute;" [ngStyle]="{'left':''+positionLeft+'px'}">
+        <div class="d-flex d-flex-row mx-0"
+            [ngStyle]="{'width':''+cardsContainerWidth()+'px','padding-left':'10px','padding-right':'10px'}">
+            <ng-container *ngFor="let card of cards">
+                <div class="p-0" [ngStyle]="{'width':''+boxWidth+'px','margin':'5px'}">
+                    <div class="card m-0 p-0 shadow-sm">
+                        <div class="card-body p-0 overflow-hidden">
+                            <div [ngStyle]="{'height':''+(boxWidth-2)+'px','width':''+(boxWidth-2)+'px'}" style="overflow: hidden;">
+                                <ng-container *ngIf="card.media_file!=null">
+                                    <div [ngStyle]="{'height':''+(boxWidth-2)+'px','width':''+(boxWidth-2)+'px','background-image':'url('+imageIconsService.loadingPictureImage+')'}"
+                                        class="p-0 mx-0"
+                                        [ngClass]="((card.media_width>card.media_height && boxWidth<=card.media_wh_ratio*boxWidth) || (card.media_height>card.media_width && boxWidth > boxWidth/card.media_wh_ratio) || card.media_width==card.media_height)?'d-flex d-flex-row justify-content-center':''"
+                                        style="background-size: 100%;background-repeat: no-repeat;overflow:hidden; cursor: pointer;">
+                                        <img [src]="card.media"
+                                            [ngClass]="((card.media_width>card.media_height && boxWidth<=card.media_wh_ratio*boxWidth) || (card.media_height>card.media_width && boxWidth > boxWidth/card.media_wh_ratio) || card.media_width==card.media_height) ?'h-100':'w-100'">
+                                    </div>
+                                </ng-container>
+                            </div>
+                            <div class="d-block w-100 px-0 py-2">
+                                <div class="d-flex flex-row justify-content-between mx-0 p-0 w-100">
+                                    <div class="p-0">
+                                        <div class="row mx-0 p-0">
+                                            <div class="col-12">
+                                                <span class="wb-max-ln-1 font-weight-bold">{{getHeadLine(card)}}</span>
+                                            </div>
+                                            <div class="col-12 wb-max-ln-1">{{card.description}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="p-0 pull-right d-flex flex-row justify-content-end">
+                                        <ng-container *ngIf="selectedCTA!=null">
+                                            <div class="d-block">
+                                                <div
+                                                    class="btn btn-sm btn-outline-primary btn-rounded pull-right font-weight-bold text-nowrap">
+                                                    {{selectedCTA.name}}
+                                                </div>
+                                            </div>
+                                        </ng-container>
+                                        <ng-container *ngIf="selectedCTA==null">
+                                            <div class="d-block">
+                                                <div
+                                                    class="btn btn-sm btn-outline-primary btn-rounded pull-right font-weight-bold text-nowrap">
+                                                    [ ACTION ]
+                                                </div>
+                                            </div>
+                                        </ng-container>                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+
+    <div class="ad-card-view-controls">
+        <div class="row mx-0">
+          <div class="col-12 mx-auto p-0">
+            <div class="d-block w-100">
+              <div *ngIf="currentViewCardIndex>0"  (click)="viewPreviousCard()" class="d-flex justify-content-center align-items-center btn-circle pull-left action-btn border"  style="cursor: pointer;">
+                <span class="fa fa-arrow-left m-auto"></span>
+              </div>
+  
+              <div *ngIf="cards.length > (currentViewCardIndex+1)" (click)="viewNextCard()" class="d-flex justify-content-center align-items-center btn-circle pull-right action-btn border" style="cursor: pointer;">
+                <span class="fa fa-arrow-right m-auto"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
