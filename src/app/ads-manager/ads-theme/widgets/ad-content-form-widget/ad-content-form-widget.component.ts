@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, HostListener, AfterViewInit, Input } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 import { AdsService } from '@app/ads-manager/services/ads.service';
 import { AdContentForm, AdContentCard, AdContentCardForm } from '@app/ads-manager/models/ad-content';
 import { CallToAction, call_to_actions } from '@app/ads-manager/models/call-to-action';
@@ -24,6 +24,7 @@ export class AdContentFormWidgetComponent implements OnInit, AfterViewInit {
   AdCardsContainer: ElementRef;
   @Input() compaign: AdCompaignForm;
   frm_adGroup: FormGroup;
+  adGroup: FormGroup;
   ad_model: AdContentForm;
   submitted: boolean = false;
   callActions: CallToAction[];
@@ -38,17 +39,16 @@ export class AdContentFormWidgetComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.loadCards();
     this.frm_adGroup = this.formBuilder.group(
       {
         name: [],
         introduction: ['', Validators.required],
-        description: [],
         destination_url: ['', [Validators.required, Validators.pattern(URL_REGEXP)]],
-        headline: ['', Validators.required],
         call_to_action: ['', Validators.required],
         one_destination: [],
+        cards: this.formBuilder.array([])
       });
+    this.loadCards();
   }
 
   ngAfterViewInit() {
@@ -69,6 +69,10 @@ export class AdContentFormWidgetComponent implements OnInit, AfterViewInit {
 
   get a() { return this.frm_adGroup.controls; }
 
+  getCardGroup(i: any) {
+    return this.frm_adGroup.get('cards').get
+  }
+
   saveAd() {
     if (this.submitted) {
       return;
@@ -78,11 +82,11 @@ export class AdContentFormWidgetComponent implements OnInit, AfterViewInit {
 
   crawlLink() {
     var _this = this;
-    if (this.a.destination_url.invalid == false) {
+    if (this.a.destination_url.invalid == false && _this.ad_model.cards.length == 1) {
       this.linkPreviewService.fetchLink(this.ad_model.destination_url.trim()).subscribe((lPreview: LinkPreview) => {
         if (lPreview) {
-          this.ad_model.cards[0].headline = lPreview.title;
-          this.ad_model.cards[0].description = lPreview.description;
+          _this.ad_model.cards[0].headline = lPreview.title;
+          _this.ad_model.cards[0].description = lPreview.description;
           if (lPreview.image.trim() != '') {
             var loadedImage = new Image();
             loadedImage.setAttribute('crossorigin', 'anonymous'); // works for me
@@ -106,17 +110,36 @@ export class AdContentFormWidgetComponent implements OnInit, AfterViewInit {
         }
       });
     }
+
+    if (_this.ad_model.cards.length > 1 && ((_this.ad_model.destination_url.trim() != '' && this.a.destination_url.invalid == false) || _this.ad_model.destination_url.trim() == '')) {
+      if (_this.ad_model.one_destination == true) {
+        _this.ad_model.cards.forEach(card => {
+          card.destination_url = _this.ad_model.destination_url;
+        });
+      }
+    }
+  }
+
+  oneDestChanged() {
+    var _this = this;
+    if (_this.ad_model.cards.length > 1 && ((_this.ad_model.destination_url.trim() != '' && this.a.destination_url.invalid == false) || _this.ad_model.destination_url.trim() == '')) {
+      _this.ad_model.cards.forEach(card => {
+        if (_this.ad_model.one_destination == true) {
+          card.destination_url = _this.ad_model.destination_url;
+        } else {
+          card.destination_url = '';;
+        }
+      });
+    }
   }
 
   loadCards() {
     this.loadCallToActions();
     this.ad_model = new AdContentForm();
     var no_cards = 1;
-
     if (this.compaign.ad_format == 'CAROUSEL_IMAGE') {
       no_cards = 2;
     }
-
     for (var i = 1; i <= no_cards; i++) {
       this.ad_model.cards.push(this.createCardForm(i));
     }
@@ -127,7 +150,32 @@ export class AdContentFormWidgetComponent implements OnInit, AfterViewInit {
     var newcard = new AdContentCardForm();
     newcard.id = parseInt(id);
     newcard.media_file = null;
+    if (this.ad_model.one_destination && this.ad_model.destination_url.trim() != '') {
+      newcard.destination_url = this.ad_model.destination_url.trim();
+    }
+    this.cardFormGroup(id);
     return newcard;
+  }
+
+  cardFormGroup(id: any) {
+    const cards = this.formBuilder.group({
+      headline: this.formBuilder.control('', Validators.required),
+      description: this.formBuilder.control(''),
+      destination_url: this.formBuilder.control('', [Validators.required, Validators.pattern(URL_REGEXP)])
+    });
+    this.FBuilderCards.push(cards);
+  }
+
+  get FBuilderCards() {
+    return this.frm_adGroup.get('cards') as FormArray;
+  }
+
+  get cards() {
+    return this.frm_adGroup.get('cards') as FormArray;
+  }
+
+  testCards() {
+
   }
 
   showBlocks() {
@@ -162,7 +210,8 @@ export class AdContentFormWidgetComponent implements OnInit, AfterViewInit {
     }
   }
 
-  removeCard(card: AdContentCardForm) {
+  removeCard(card: AdContentCardForm, index: number) {
+    this.cards.removeAt(index);
     this.ad_model.cards = this.ad_model.cards.filter((c: AdContentCardForm) => c.id !== card.id);
   }
 
