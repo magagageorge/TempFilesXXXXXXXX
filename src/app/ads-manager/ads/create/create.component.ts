@@ -2,13 +2,24 @@ import { Component, OnInit } from '@angular/core';
 import { AdsService } from '@app/ads-manager/services/ads.service';
 import { AdObjective } from '@app/ads-manager/models/ad-objective';
 import { AdCompaignForm } from '@app/ads-manager/models/ad-compaign-form';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { AdFormat, WB_AD_FORMATS } from '@app/ads-manager/models/ad-format';
+import { GeoLocation, GeoLocationShort } from '@app/models/location';
+import { UtilitiesService } from '@app/services/utilities.service';
+import { Observable, of } from 'rxjs';
+import { ArrayValidators } from '@app/libs/utilities/array.validators';
+import { PageService } from '@app/services/page.service';
+import { PageSummary } from '@app/models/page/page.model';
+import { DatePipe } from '@angular/common';
+import { SysFunctions } from '@app/libs/utilities/common-functions';
+import { AdCompaign } from '@app/ads-manager/models/ad-compaign';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-create',
   templateUrl: './create.component.html',
-  styleUrls: ['./create.component.scss']
+  styleUrls: ['./create.component.scss'],
+  providers: [DatePipe]
 })
 export class CreateComponent implements OnInit {
 
@@ -20,15 +31,24 @@ export class CreateComponent implements OnInit {
   frm_audienceGroup: FormGroup;
   frm_budgetscheduleGroup: FormGroup;
   frm_adformatGroup: FormGroup;
+  frm_identityGroup: FormGroup;
   money_placeholder: string = 'xxx';
-  constructor(public adsService: AdsService, private formBuilder: FormBuilder) {
+  location_search_query: string = '';
+  loading_location_search: boolean = false;
+  searchedLocationsList: GeoLocation[] = [];
+  audience_submitted: boolean = false;
+  identity_submitted: boolean = false;
+  budgetschedule_submitted: boolean = false;
+  objective_submitted: boolean = false;
+  show_aud_loc_search: boolean = false;
+  loading_compaign: boolean;
+  constructor(public adsService: AdsService, public pageService: PageService, public utilitiesService: UtilitiesService, private formBuilder: FormBuilder, private datePipe: DatePipe, protected router: Router, protected route: ActivatedRoute) {
     var _this = this;
     this.getAges();
     this.adsService.isAccountLoaded().subscribe((accountLoaded) => {
       if (accountLoaded) {
         if (_this.adsService.ad_account != null) {
           _this.money_placeholder = _this.adsService.ad_account.currency + 'xxx';
-          console.log(_this.money_placeholder);
         }
       }
     });
@@ -38,30 +58,171 @@ export class CreateComponent implements OnInit {
     var _this = this;
     this.fillDefaultForm();
     this.setNextForm();
+
+    this.frm_objectiveGroup = this.formBuilder.group(
+      {
+        objective: ['', Validators.required],
+        compaign_name: ['', Validators.required]
+      });
+
+    this.frm_identityGroup = this.formBuilder.group(
+      {
+        page_id: ['', Validators.required]
+      });
+
     this.frm_audienceGroup = this.formBuilder.group(
       {
-        locations: ['', Validators.required],
         age_min: ['', Validators.required],
         age_max: ['', Validators.required],
         gender: ['', Validators.required],
+        location_search_query: [],
+        locations: this.formBuilder.array([], ArrayValidators.minLength(1))
+      });
+
+    this.frm_identityGroup = this.formBuilder.group(
+      {
+        page_id: ['', Validators.required]
       });
 
     this.frm_budgetscheduleGroup = this.formBuilder.group(
       {
         budget_type: ['', Validators.required],
-        daily_budget: ['', Validators.required],
-        total_budget: ['', Validators.required],
+        daily_budget: [''],
+        total_budget: [''],
         start_date: ['', Validators.required],
-        end_date: ['', Validators.required],
+        end_date: [''],
         date_schedule: ['', Validators.required],
       });
+
     this.frm_adformatGroup = this.formBuilder.group(
       {
         ad_format: ['', Validators.required],
       });
+
+    this.handleFormChanges();
+    /* Check for Ads Account and load if not loaded* */
+    this.adsService.isAccountLoaded().subscribe((accountLoaded) => {
+      if (accountLoaded) { } else {
+        if (this.adsService.loading_ads_manager == false && this.adsService.ad_account == null) {
+          this.adsService.loadAdsAccount({});
+        }
+      }
+    });
+    this.loadCompaign();
   }
 
+  get obj() { return this.frm_objectiveGroup.controls; }
+
   get aud() { return this.frm_audienceGroup.controls; }
+
+  get ident() { return this.frm_identityGroup.controls; }
+
+  get budSche() { return this.frm_budgetscheduleGroup.controls; }
+
+  get getFormLocations() {
+    return this.frm_audienceGroup.get('locations') as FormArray;
+  }
+  get BudgetType() {
+    return this.frm_budgetscheduleGroup.get('budget_type');
+  }
+  get DailyBudget() {
+    return this.frm_budgetscheduleGroup.get('daily_budget');
+  }
+  get TotalBudget() {
+    return this.frm_budgetscheduleGroup.get('total_budget');
+  }
+  get StartDate() {
+    return this.frm_budgetscheduleGroup.get('start_date');
+  }
+  get EndDate() {
+    return this.frm_budgetscheduleGroup.get('end_date');
+  }
+  get DateSchedule() {
+    return this.frm_budgetscheduleGroup.get('date_schedule');
+  }
+
+  get isObjValid() {
+    if (this.obj.objective.errors || this.obj.compaign_name.errors) {
+      return false;
+    }
+    return true;
+  }
+
+  get isAudValid() {
+    if (this.getFormLocations.errors || (this.compaign_model.aud_age_min > this.compaign_model.aud_age_max)) {
+      return false;
+    }
+    return true;
+  }
+
+  get isBudScheValid() {
+    var valid = true;
+    if (this.BudgetType.errors || this.DailyBudget.errors || this.DateSchedule.errors || this.TotalBudget.errors || this.StartDate.errors || this.EndDate.errors || this.isStartEndDatesValid == false) {
+      valid = false;
+    }
+    return valid;
+  }
+
+  get isStartEndDatesValid() {
+    if (this.EndDate.value != '' && this.EndDate.value != undefined) {
+      if (this.DateSchedule.value == 'start_end' && this.StartDate.value != '' && this.StartDate.value != undefined) {
+        var Start_Date = this.datePipe.transform(SysFunctions.dateDMY_to_MDY(this.StartDate.value, "-"), "dd-MM-yyyy");
+        var End_Date = this.datePipe.transform(SysFunctions.dateDMY_to_MDY(this.EndDate.value, "-"), "dd-MM-yyyy");
+        if (Start_Date > End_Date) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  handleFormChanges() {
+    this.BudgetType.valueChanges.subscribe(
+      budget_type => {
+        if (budget_type === 'daily') {
+          this.DailyBudget.setValidators([Validators.required]);
+          this.TotalBudget.clearValidators();
+        } else if (budget_type === 'total') {
+          this.TotalBudget.setValidators([Validators.required]);
+          this.DailyBudget.clearValidators();
+        } else {
+        }
+        this.DailyBudget.updateValueAndValidity();
+        this.TotalBudget.updateValueAndValidity();
+      }
+    );
+
+    this.DateSchedule.valueChanges.subscribe(
+      date_schedule => {
+        if (date_schedule === 'continuous') {
+          this.EndDate.clearValidators();
+        } else if (date_schedule === 'start_end') {
+          this.EndDate.setValidators([Validators.required]);
+        } else {
+        }
+        this.EndDate.updateValueAndValidity();
+      }
+    );
+
+  }
+
+  createLocationGroup(key: any) {
+    const loc = this.formBuilder.group({
+      key: this.formBuilder.control(key),
+    });
+    this.getFormLocations.push(loc);
+  }
+
+  removeSelectedLocation(location: GeoLocationShort) {
+    var index = this.compaign_model.aud_locations.findIndex((l: GeoLocationShort) => l.key == location.key);
+    this.getFormLocations.removeAt(index);
+    this.compaign_model.aud_locations = this.compaign_model.aud_locations.filter((loc: GeoLocationShort) => loc.key !== location.key);
+    this.searchInSearchedLocations(location.key).subscribe(locn => {
+      if (locn) {
+        locn.selected = false;
+      }
+    });
+  }
 
   countAdsInType(typeCode: string) {
     var items = this.adsService.filterObjectiveByType(typeCode);
@@ -69,9 +230,13 @@ export class CreateComponent implements OnInit {
   }
 
   selectObjective(objective: AdObjective) {
+    /* Set Default Compaign Name */
+    if (this.compaign_model.id == null && (this.selectedObjective == null || (this.selectedObjective != null && objective.code != this.selectedObjective.code))) {
+      this.compaign_model.compaign_name = objective.name;
+    }
     this.adsService.unSelectAllObjectives();
-    objective.selected = true;
-    this.compaign_model.objective = objective.type_code;
+    this.adsService.SelectObjective(objective.code);
+    this.compaign_model.objective = objective.code;
     this.selectedObjective = objective;
     this.getAdFormats();
   }
@@ -85,6 +250,8 @@ export class CreateComponent implements OnInit {
       } else if (this.compaign_model.currentForm == 'Audience') {
         this.compaign_model.currentForm = 'BudgetSchedule';
       } else if (this.compaign_model.currentForm == 'BudgetSchedule') {
+        this.compaign_model.currentForm = 'AdIdentity';
+      } else if (this.compaign_model.currentForm == 'AdIdentity') {
         this.compaign_model.currentForm = 'AdFormat';
       } else if (this.compaign_model.currentForm == 'AdFormat') {
         this.compaign_model.currentForm = 'AdContent';
@@ -109,7 +276,45 @@ export class CreateComponent implements OnInit {
     this.compaign_model.aud_age_max = 65;
     this.compaign_model.aud_age_min = 15;
     this.compaign_model.budget_type = 'daily';
-    this.compaign_model.date_schedule = 'continuous'
+    this.compaign_model.date_schedule = 'continuous';
+  }
+
+  fillForm(compaign: AdCompaign) {
+    this.compaign_model = new AdCompaignForm();
+    this.compaign_model.id = compaign.id;
+    this.compaign_model.account_id = compaign.account_id;
+    this.compaign_model.objective = compaign.objective.code;
+    this.selectObjective(compaign.objective);
+    this.compaign_model.compaign_name = compaign.compaign_name;
+    this.compaign_model.gender = compaign.aud_gender;
+    this.compaign_model.aud_age_max = compaign.aud_age_max;
+    this.compaign_model.aud_age_min = compaign.aud_age_min;
+    this.compaign_model.gender = compaign.aud_gender;
+    this.compaign_model.aud_locations = compaign.aud_locations;
+    compaign.aud_locations.forEach((loc: GeoLocationShort) => {
+      this.createLocationGroup(loc.key);
+    });
+    if (compaign.budget_schedule != null) {
+      this.compaign_model.budget_type = compaign.budget_schedule.budget_type;
+      if (compaign.budget_schedule.budget_type == 'total') {
+        this.compaign_model.total_budget = compaign.budget_schedule.total_budget;
+        this.compaign_model.daily_budget = '';
+      } else {
+        this.compaign_model.daily_budget = compaign.budget_schedule.daily_budget;
+        this.compaign_model.total_budget = '';
+      }
+      if (compaign.budget_schedule.end_date != null && compaign.budget_schedule.end_date != '') {
+        this.compaign_model.date_schedule = 'start_end';
+      } else {
+        this.compaign_model.date_schedule = 'continuous';
+      }
+      this.compaign_model.start_date = compaign.budget_schedule.start_date;
+      this.compaign_model.end_date = compaign.budget_schedule.end_date;
+    } else {
+      this.compaign_model.budget_type = 'daily';
+      this.compaign_model.date_schedule = 'continuous';
+    }
+    this.setNextForm();
   }
 
   setAdGender(gender: string) {
@@ -120,7 +325,7 @@ export class CreateComponent implements OnInit {
     var _this = this;
     this.ad_formats = [];
     WB_AD_FORMATS.forEach((ad_format: AdFormat) => {
-      if (this.selectedObjective != null && ad_format.active==true) {
+      if (this.selectedObjective != null && ad_format.active == true) {
         if (ad_format.id == 'SINGLE_IMAGE' && (this.selectedObjective.code == 'APP_INSTALL' ||
           this.selectedObjective.code == 'BRAND_AWARE' ||
           this.selectedObjective.code == 'CONVERSION' ||
@@ -211,16 +416,182 @@ export class CreateComponent implements OnInit {
     this.compaign_model.ad_format = format.id;
   }
 
+  saveObjective() {
+    this.objective_submitted = true;
+    if (this.isObjValid == false) {
+      return;
+    }
+    this.saveCompaign();
+    this.setNextForm();
+  }
+
   saveAudience() {
+    this.audience_submitted = true;
+    if (this.isAudValid == false) {
+      return;
+    }
+    this.saveCompaign();
+    this.setNextForm();
+  }
+
+  setSelectedPage(page: PageSummary) {
+    this.compaign_model.selected_page = page;
+    this.compaign_model.page_id = page.id;
+  }
+
+  ShowLocationSearch() {
+    this.show_aud_loc_search = true;
+  }
+
+  clearLocationSearchBox() {
+    this.location_search_query = '';
+    this.searchLocation();
+  }
+
+  searchLocatoinFor(q: string) {
+    this.location_search_query = q;
+    this.searchLocation();
+  }
+
+  AgeRangeChanged() {
 
   }
 
-  saveBudgetSchedule() {
+  saveAdIdentity() {
+    this.identity_submitted = true;
+    if (this.ident.page_id.errors) {
+      return;
+    }
+    this.setNextForm();
+  }
 
+  saveBudgetSchedule() {
+    this.budgetschedule_submitted = true;
+    if (this.isBudScheValid == false) {
+      return;
+    }
+    this.saveCompaign();
+    this.setNextForm();
   }
 
   saveAdFormat() {
 
+  }
+
+  addRemoveLocation(searchedLocation: GeoLocation) {
+    var _this = this;
+    this.searchInSelectedLocations(searchedLocation.key).subscribe((loc: GeoLocationShort) => {
+      if (loc) {
+        _this.removeSelectedLocation(loc);
+      } else {
+        searchedLocation.selected = true;
+        _this.compaign_model.aud_locations.push({ key: searchedLocation.key, name: searchedLocation.name, type: searchedLocation.type });
+        _this.createLocationGroup(searchedLocation.key);
+      }
+    });
+  }
+
+  searchInSelectedLocations(key: string): Observable<GeoLocationShort> {
+    return of(this.compaign_model.aud_locations.find((loc: GeoLocationShort) => loc.key === key));
+  }
+
+  searchInSearchedLocations(key: string): Observable<GeoLocation> {
+    return of(this.searchedLocationsList.find((loc: GeoLocation) => loc.key === key));
+  }
+
+  searchLocation(): any {
+    var _this = this;
+    if (this.location_search_query.trim().length > 2) {
+      this.loading_location_search = true;
+      this.utilitiesService.service.getProvider(this.utilitiesService.provider).crudconfig.route_url = 'utilities/locations/';
+      return this.utilitiesService.service.getall(this.utilitiesService.provider, { q: this.location_search_query.trim() }).subscribe(results => {
+        _this.loading_location_search = false;
+        if (results.isSuccess()) {
+          _this.searchedLocationsList = results.getResultData() as GeoLocation[];
+          _this.autoCheckPreSelectedLocations();
+        }
+      });
+    } else {
+      _this.searchedLocationsList = [];
+    }
+  }
+
+  autoCheckPreSelectedLocations() {
+    var _this = this;
+    if (this.compaign_model.aud_locations.length > 0) {
+      this.compaign_model.aud_locations.forEach((s_loc: GeoLocation) => {
+        _this.searchInSearchedLocations(s_loc.key).subscribe((loc: GeoLocation) => {
+          if (loc) {
+            loc.selected = true;
+          }
+        });
+      });
+    }
+  }
+
+  saveCompaign(): any {
+    var _this = this;
+    this.loading_compaign = true;
+    /* Check for compaing-Account association,if not associated assign account to compaign */
+    if (this.compaign_model.account_id == null) {
+      this.compaign_model.account_id = this.adsService.ad_account.id;
+    }
+
+    const formData: any = new FormData();
+    formData.append("account_id", _this.compaign_model.account_id);
+    formData.append("aud_age_max", _this.compaign_model.aud_age_max);
+    formData.append("aud_age_min", _this.compaign_model.aud_age_min);
+    formData.append("compaign_name", _this.compaign_model.compaign_name);
+    formData.append("objective", _this.compaign_model.objective);
+    formData.append("aud_locations", JSON.stringify(_this.compaign_model.aud_locations));
+    formData.append("aud_gender", _this.compaign_model.gender);
+
+    formData.append("budget_type", _this.compaign_model.budget_type);
+    formData.append("daily_budget", _this.compaign_model.daily_budget);
+    formData.append("total_budget", _this.compaign_model.total_budget);
+    formData.append("start_date", _this.compaign_model.start_date);
+    formData.append("end_date", _this.compaign_model.end_date);
+
+    this.adsService.service.getProvider(this.adsService.provider).crudconfig.route_url = 'ads/compaign/';
+    this.route.params.subscribe(params => {
+      if (this.compaign_model.id > 0 && params.creation != undefined && params.creation > 0) {
+        return this.adsService.service.update(this.adsService.provider, formData, { id: this.compaign_model.id }).subscribe(results => {
+          _this.loading_compaign = false;
+          if (results.isSuccess()) {
+            var data = results.getResultData();
+          }
+        });
+      } else {
+        return this.adsService.service.create(this.adsService.provider, formData).subscribe(results => {
+          _this.loading_compaign = false;
+          if (results.isSuccess()) {
+            var data = results.getResultData();
+            if (data.done == true && data.compaign != null) {
+              _this.router.navigateByUrl('adsmanager/compaigns/create/' + data.compaign.id);
+            }
+          }
+        });
+      }
+    });
+  }
+
+  loadCompaign(): any {
+    var _this = this;
+    this.loading_compaign = true;
+    this.adsService.service.getProvider(this.adsService.provider).crudconfig.route_url = 'ads/compaign/';
+    this.route.params.subscribe(params => {
+      if (params.creation != undefined && params.creation > 0) {
+        return this.adsService.service.getone(this.adsService.provider, { id: params.creation }).subscribe(results => {
+          _this.loading_compaign = false;
+          if (results.isSuccess()) {
+            var data = results.getResultData() as AdCompaign;
+            if (data != null) {
+              this.fillForm(data);
+            }
+          }
+        });
+      }
+    });
   }
 
 

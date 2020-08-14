@@ -11,6 +11,8 @@ import { URL_REGEXP } from '@app/libs/utilities/wb-utilities';
 import { WfLinkPreviewService } from '@app/libs/wf-link-preview/services/wf-link-preview.service';
 import { LinkPreview } from '@app/libs/wf-link-preview';
 import { SysFunctions } from '@app/libs/utilities/common-functions';
+import { Router } from '@angular/router';
+
 
 
 @Component({
@@ -35,26 +37,44 @@ export class AdContentFormWidgetComponent implements OnInit, AfterViewInit {
   show_call_to_action: boolean = false;
   show_card_description: boolean = false;
   media_upload_to_card: AdContentCardForm = null;
-  constructor(public adsService: AdsService, private formBuilder: FormBuilder, public imageIconsService: ImageIconsService, public linkPreviewService: WfLinkPreviewService) {
+  saving_ad: boolean;
+  constructor(public adsService: AdsService, private formBuilder: FormBuilder, public imageIconsService: ImageIconsService, public linkPreviewService: WfLinkPreviewService, public router: Router) {
   }
 
   ngOnInit() {
     this.frm_adGroup = this.formBuilder.group(
       {
         name: [],
-        introduction: ['', Validators.required],
-        destination_url: ['', [Validators.required, Validators.pattern(URL_REGEXP)]],
+        introduction: [''],
+        destination_url: [''],
         call_to_action: ['', Validators.required],
         one_destination: [],
         cards: this.formBuilder.array([])
       });
     this.loadCards();
+    this.checkFormValidations();
   }
 
   ngAfterViewInit() {
     setTimeout(() => {
       this.getDimensions();
     }, 0);
+  }
+
+  get AdName() {
+    return this.frm_adGroup.get('name');
+  }
+
+  get AdIntroduction() {
+    return this.frm_adGroup.get('introduction');
+  }
+
+  get AdDestinationUrl() {
+    return this.frm_adGroup.get('destination_url');
+  }
+
+  get AdCallToAction() {
+    return this.frm_adGroup.get('call_to_action');
   }
 
   getDimensions() {
@@ -70,14 +90,55 @@ export class AdContentFormWidgetComponent implements OnInit, AfterViewInit {
   get a() { return this.frm_adGroup.controls; }
 
   getCardGroup(i: any) {
-    return this.frm_adGroup.get('cards').get
+    return this.frm_adGroup.get('cards').get(i);
   }
 
   saveAd() {
-    if (this.submitted) {
+    this.checkFormValidations();
+    this.submitted = true;
+    if(this.saving_ad){
       return;
     }
-    this.submitted = true;
+    if(this.frm_adGroup.invalid){
+      alert();
+      return;
+    }
+    var _this = this;
+    const formData: any = new FormData();
+    formData.append("compaign_id", _this.compaign.id);
+    formData.append("name", _this.ad_model.name);
+    formData.append("introduction", _this.ad_model.introduction);
+    formData.append("destination_url", _this.ad_model.destination_url);
+    formData.append("one_destination", _this.ad_model.one_destination);
+    formData.append("ad_cards", JSON.stringify(_this.ad_model.cards));
+    formData.append("call_to_action", _this.ad_model.call_to_action);
+
+    formData.append("ad_format", _this.compaign.ad_format);
+    formData.append("page_id", _this.compaign.page_id);
+    _this.saving_ad = true;
+    _this.submitted = false;
+
+    this.adsService.service.getProvider(this.adsService.provider).crudconfig.route_url = 'ads/ad/';
+    if (this.ad_model.id > 0) {
+      return this.adsService.service.update(this.adsService.provider, formData, { id: this.ad_model.id }).subscribe(results => {
+        _this.saving_ad = false;
+        _this.submitted = false;
+        if (results.isSuccess()) {
+          var data = results.getResultData();
+        }
+      });
+    } else {
+      return this.adsService.service.create(this.adsService.provider, formData).subscribe(results => {
+        _this.saving_ad = false;
+        _this.submitted = false;
+        if (results.isSuccess()) {
+          var data = results.getResultData();
+          if (data.done == true && data.compaign != null) {
+            //_this.router.navigateByUrl('adsmanager/compaigns/create/' + data.compaign.id);
+          }
+        }
+      });
+    }
   }
 
   crawlLink() {
@@ -90,7 +151,6 @@ export class AdContentFormWidgetComponent implements OnInit, AfterViewInit {
           if (lPreview.image.trim() != '') {
             var loadedImage = new Image();
             loadedImage.setAttribute('crossorigin', 'anonymous'); // works for me
-            var base64Url = '';
             loadedImage.onload = (event) => {
               if (event) {
                 SysFunctions.ImageUrlToBlob(lPreview.image.trim()).subscribe(blob => {
@@ -98,9 +158,10 @@ export class AdContentFormWidgetComponent implements OnInit, AfterViewInit {
                     var imgFile = SysFunctions.DataUrlToFile(base64Url);
                     _this.ad_model.cards[0].media = base64Url;
                     _this.ad_model.cards[0].media_file = imgFile;
-                    _this.ad_model.cards[0].media_height = lPreview.imageHeight;
-                    _this.ad_model.cards[0].media_width = lPreview.imageWidth;
-                    _this.ad_model.cards[0].media_wh_ratio = lPreview.image_wh_ratio;
+                    _this.ad_model.cards[0].media_height = loadedImage.height;
+                    _this.ad_model.cards[0].media_width = loadedImage.width;
+                    _this.ad_model.cards[0].media_wh_ratio = loadedImage.width / loadedImage.height;
+                    console.log(_this.ad_model.cards[0]);
                   });
                 });
               }
@@ -144,16 +205,17 @@ export class AdContentFormWidgetComponent implements OnInit, AfterViewInit {
       this.ad_model.cards.push(this.createCardForm(i));
     }
     this.showBlocks();
+    this.checkFormValidations();
   }
 
-  createCardForm(id: any): AdContentCardForm {
+  createCardForm(sn: any): AdContentCardForm {
     var newcard = new AdContentCardForm();
-    newcard.id = parseInt(id);
+    newcard.sn = parseInt(sn);
     newcard.media_file = null;
     if (this.ad_model.one_destination && this.ad_model.destination_url.trim() != '') {
       newcard.destination_url = this.ad_model.destination_url.trim();
     }
-    this.cardFormGroup(id);
+    this.cardFormGroup(sn);
     return newcard;
   }
 
@@ -173,6 +235,7 @@ export class AdContentFormWidgetComponent implements OnInit, AfterViewInit {
   get cards() {
     return this.frm_adGroup.get('cards') as FormArray;
   }
+
 
   testCards() {
 
@@ -203,16 +266,51 @@ export class AdContentFormWidgetComponent implements OnInit, AfterViewInit {
     return false;
   }
 
+  checkFormValidations(){
+    if (this.compaign.ad_format == 'SINGLE_IMAGE') {
+      this.AdIntroduction.setValidators([Validators.required]);
+      this.AdDestinationUrl.setValidators([Validators.required, Validators.pattern(URL_REGEXP)]);
+      this.AdCallToAction.setValidators([Validators.required]); 
+      for(var i=0;i<this.cards.length;i++){
+        this.cards.controls[i].get('destination_url').clearValidators();
+      }           
+    } else if (this.compaign.ad_format == 'CAROUSEL_IMAGE') {
+      this.AdIntroduction.setValidators([Validators.required]);
+      this.AdDestinationUrl.setValidators([Validators.required, Validators.pattern(URL_REGEXP)]);
+      this.AdCallToAction.setValidators([Validators.required]); 
+      for(var i=0;i<this.cards.length;i++){
+        this.cards.controls[i].get('destination_url').setValidators([Validators.required, Validators.pattern(URL_REGEXP)]);
+      }       
+    } else if (this.compaign.ad_format == 'TEXT_AD') {
+      this.AdIntroduction.clearValidators();
+      this.AdDestinationUrl.clearValidators();
+      this.AdCallToAction.clearValidators();  
+        for(var i=0;i<this.cards.length;i++){
+          this.cards.controls[i].get('destination_url').setValidators([Validators.required, Validators.pattern(URL_REGEXP)]);
+        }
+
+    } else { }
+
+    this.AdIntroduction.updateValueAndValidity();
+    this.AdDestinationUrl.updateValueAndValidity();
+    this.AdCallToAction.updateValueAndValidity();
+    for(var i=0;i<this.cards.length;i++){
+      this.cards.controls[i].get('destination_url').updateValueAndValidity();
+    }  
+  }
+
+
+
   adMoreCard() {
     if (this.ad_model.cards.length < 10) {
-      var id = this.ad_model.cards[this.ad_model.cards.length - 1].id + 1;
-      this.ad_model.cards.push(this.createCardForm(id));
+      var sn = this.ad_model.cards[this.ad_model.cards.length - 1].sn + 1;
+      this.ad_model.cards.push(this.createCardForm(sn));
     }
   }
 
   removeCard(card: AdContentCardForm, index: number) {
     this.cards.removeAt(index);
-    this.ad_model.cards = this.ad_model.cards.filter((c: AdContentCardForm) => c.id !== card.id);
+    this.ad_model.cards = this.ad_model.cards.filter((c: AdContentCardForm) => c.sn !== card.sn);
   }
 
   removeCardImage(card: AdContentCardForm) {
@@ -304,7 +402,7 @@ export class AdContentFormWidgetComponent implements OnInit, AfterViewInit {
   }
 
   searchAdCard(card: AdContentCardForm): Observable<AdContentCardForm> {
-    return of(this.ad_model.cards.find((c: AdContentCardForm) => c.id === card.id));
+    return of(this.ad_model.cards.find((c: AdContentCardForm) => c.sn === card.sn));
   }
 
 }

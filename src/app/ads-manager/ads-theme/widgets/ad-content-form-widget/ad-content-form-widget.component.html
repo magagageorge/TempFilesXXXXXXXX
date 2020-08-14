@@ -189,13 +189,12 @@
                                                     <div class="row m-0 p-0">
                                                         <div class="col-12 p-0 m-0">
                                                             <div class="pull-left px-2 font-weight-bold"><span> Card
-                                                                    {{i+1}}-{{card.id}}</span>
+                                                                    {{i+1}}-{{card.sn}}</span>
                                                             </div>
                                                         </div>
                                                         <div class="col-12 m-0 p-0">
                                                             <div class="d-block border border-rounded bg-light m-0 p-0"
                                                                 [ngStyle]="{'height':''+cardImageWidth+'px','width':''+cardImageWidth+'px'}">
-
                                                                 <ng-container *ngIf="card.media_file!=null">
                                                                     <div [ngStyle]="{'height':''+cardImageWidth+'px','width':''+cardImageWidth+'px','background-image':'url('+imageIconsService.loadingPictureImage+')'}"
                                                                         class="p-0 mx-0"
@@ -375,7 +374,6 @@
                     <ng-container *ngIf="compaign.ad_format=='TEXT_AD'">
                         <app-ad-text-preview-widget [ad_model]="ad_model"></app-ad-text-preview-widget>
                     </ng-container>
-
                 </div>
             </div>
         </div>

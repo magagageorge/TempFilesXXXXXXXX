@@ -3,9 +3,9 @@ import { HttpClient, HttpXhrBackend } from "@angular/common/http";
 
 export class SysFunctions {
 
-    private static httpClient: HttpClient=new HttpClient(new HttpXhrBackend({ build: () => new XMLHttpRequest() }));
+    private static httpClient: HttpClient = new HttpClient(new HttpXhrBackend({ build: () => new XMLHttpRequest() }));
 
-    constructor() {}
+    constructor() { }
 
     public static BlobtoDataURL(blob: Blob): Promise<any> {
         var reader = new FileReader();
@@ -73,37 +73,53 @@ export class SysFunctions {
         return new Blob([ab], { type: mimeString });
     }
 
-
-    public static removeLinkProtocol(link:string):string{
-       return link.replace('http://','').replace('https://','');
+    public static removeLinkProtocol(link: string): string {
+        return link.replace('http://', '').replace('https://', '');
     }
 
-
-      /*
-  public static b64toBlob(b64Data, contentType) {
-    contentType = contentType || '';
-    var sliceSize = 512;
-
-    var byteCharacters = atob(b64Data);
-    var byteArrays = [];
-
-    for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
-      var slice = byteCharacters.slice(offset, offset + sliceSize);
-
-      var byteNumbers = new Array(slice.length);
-      for (var i = 0; i < slice.length; i++) {
-        byteNumbers[i] = slice.charCodeAt(i);
-      }
-
-      var byteArray = new Uint8Array(byteNumbers);
-
-      byteArrays.push(byteArray);
+    public static insertLinkProtocol(link: string): string {
+        var http = 'http://';
+        var https = 'https://';
+        if (link.indexOf('http://') === -1 && link.indexOf('https://') === -1) {
+            return http + '' + link;
+        }
+        return link;
     }
 
-    var blob = new Blob(byteArrays, { type: contentType });
-    return blob;
+    public static dateDMY_to_MDY(value: string, delimeter: string) {
+        console.log(value);
+        let date = value.split(delimeter);
+        var day = date[0];
+        var month = date[1];
+        var year = date[2];
+        return '' + month + '/' + day + '/' + year + '';
+    }
+
+    /*
+public static b64toBlob(b64Data, contentType) {
+  contentType = contentType || '';
+  var sliceSize = 512;
+
+  var byteCharacters = atob(b64Data);
+  var byteArrays = [];
+
+  for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+    var slice = byteCharacters.slice(offset, offset + sliceSize);
+
+    var byteNumbers = new Array(slice.length);
+    for (var i = 0; i < slice.length; i++) {
+      byteNumbers[i] = slice.charCodeAt(i);
+    }
+
+    var byteArray = new Uint8Array(byteNumbers);
+
+    byteArrays.push(byteArray);
   }
-  */
+
+  var blob = new Blob(byteArrays, { type: contentType });
+  return blob;
+}
+*/
 
 
 

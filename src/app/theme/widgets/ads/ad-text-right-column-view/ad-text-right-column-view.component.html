@@ -1,0 +1,48 @@
+<ng-container *ngIf="showAdsService.loading_ads || showAdsService.TEXT_ADS.length>0">
+    <div class="card" style="max-width: 400px;margin:2px;">
+        <div class="card-body p-0">
+            <div class="row mx-0">
+                <div class="col-12 p-2">
+                    <span class="pull-left text-muted">Sponsored</span>
+                    <span class="pull-right"><span class="fa fa-ellipsis-h"></span></span>
+                </div>
+                
+                <ng-container *ngFor="let ad_content of showAdsService.TEXT_ADS;let i=index">
+                    <div *ngIf="i<4" class="col-12 p-0 ad_sm">
+                        <a href="{{linkProcessingService.insertLinkProtocol(ad_content.cards[0].destination_url)}}" class="d-block w-100 p-0 m-0" target="_blank">
+                            <div class="row mx-0 p-2">
+                                <div class="col-3 p-0 d-flex justify-content-center align-items-center"
+                                style="overflow: hidden;"
+                                [ngStyle]="{'height':''+(imageWidthHeight - 10)+'px','width':''+(imageWidthHeight-10)+'px'}">
+                                    
+                                        <img src="{{ad_content.cards[0].media}}"
+                                            [ngClass]="((ad_content.cards[0].media_width>ad_content.cards[0].media_height) || ad_content.cards[0].media_width==ad_content.cards[0].media_height) ?'h-100':'w-100'"
+                                            class="">
+                                    
+                                </div>
+                                <div class="col-9 p-1">
+                                    <div class="w-100 font-weight-bold">
+                                        {{ad_content.cards[0].headline}}
+                                    </div>
+                                    <div class="w-100">
+                                        <p>
+                                            {{ad_content.cards[0].description}}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </ng-container>
+                <!-- The following column should be kept for the sake of detecting left column width for rendering Ad Image-->
+                <div class="col-12 p-0" style="height:0px;overflow:hidden;">
+                    <div class="row mx-0 p-2">
+                        <div class="col-3 p-0" #imageWidthElem>&nbsp;</div>
+                        <div class="col-9 p-1">&nbsp;</div>
+                    </div>
+                </div>
+                <!-- End Image Width detecting block-->
+            </div>
+        </div>
+    </div>
+</ng-container>

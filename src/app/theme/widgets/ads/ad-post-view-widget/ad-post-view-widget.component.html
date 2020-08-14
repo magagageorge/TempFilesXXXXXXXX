@@ -1,0 +1,116 @@
+<div class="card windo-ad-post-card" #AdPostContainer>
+    <ng-container>
+        <div class="card-header p-2">
+            <ng-container *ngIf="ad_content.page!=null">
+                <div class="user-block">
+                    <a routerLink="/{{ad_content.page.url}}">
+                        <img class="rounded-circle img-fluid" src="{{ad_content.page.picture.face}}" alt="">
+                    </a>
+                    <span class="username mr-4">
+                        <a class="w-100 d-block text-truncate"
+                            routerLink="/{{ad_content.page.url}}">{{ad_content.page.name}}</a>
+                    </span>
+                    <span class="description">
+                        <span class="text-truncate text-muted">Sponsored</span>
+                        <span>&nbsp;</span>
+                        <span>
+                            <a href="javascript:void(0)" title="Everyone"><i class="fa fa-globe"></i></a>
+                        </span>
+                    </span>
+                </div>
+
+            </ng-container>
+        </div>
+
+        <div class="card-body p-0" style="overflow:hidden;">
+            <ng-container *ngIf="ad_content.introduction!='' && ad_content.introduction!=null">
+                <p [innerHTML]="ad_content.introduction | wfLinkify" class="px-2 py-0 m-0 feed-text-content"
+                    id="post-content-container"></p>
+            </ng-container>
+
+            <div *ngIf="ad_content.cards && ad_content.cards.length>0" class="w-100 py-0 m-0"
+                style="padding-left:-1px;padding-right:-1px;">
+
+                <ng-container *ngIf="ad_content.cards.length==1">
+
+                    <ng-container *ngIf="ad_content.cards[0].media!=null">
+                        <a href="{{linkProcessingService.insertLinkProtocol(ad_content.destination_url)}}" class="d-block w-100 p-0 m-0" target="_blank">
+                            <div [ngStyle]="{'background-image':'url(' + imageIconsService.loadingPictureImage + ')','min-height':''+getPictureHeight(ad_content.cards[0].media_width,ad_content.cards[0].media_height)+'px'}"
+                                class="w-100 p-0"
+                                style="background-size: 100%;background-repeat: no-repeat;border-radius:0px;cursor: pointer;">
+                                <img [src]="ad_content.cards[0].media" class='w-100'>
+                            </div>
+                        </a>
+                    </ng-container>
+                    <ng-container *ngIf="ad_content.destination_url!='' && ad_content.destination_url!=null">
+                        <div class="d-block bg-light w-100 px-0 py-2">
+                            <a href="{{linkProcessingService.insertLinkProtocol(ad_content.destination_url)}}" class="d-block w-100 p-0 m-0" target="_blank">
+                                <div class="row mx-0 p-0">
+                                    <div class="col-12 text-truncate">
+                                        <span class="ad-url text-uppercase">
+                                            {{linkProcessingService.removeLinkProtocol(ad_content.destination_url)}}
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row justify-content-between mx-0 p-0 w-100">
+                                    <div class="p-0">
+                                        <div class="row mx-0 p-0">
+                                            <div class="col-12">
+                                                <span
+                                                    class="wb-max-ln-1 font-weight-bold">{{ad_content.cards[0].headline}}</span>
+                                            </div>
+                                            <div class="col-12 wb-max-ln-1">{{ad_content.cards[0].description}}</div>
+                                        </div>
+
+                                    </div>
+                                    <div class="p-0 pull-right d-flex flex-row justify-content-end">
+
+                                        <ng-container *ngIf="ad_content.call_to_action!=null">
+                                            <div class="d-block">
+                                                <div
+                                                    class="btn btn-sm btn-outline-primary btn-rounded pull-right font-weight-bold text-nowrap">
+                                                    {{ad_content.call_to_action}}
+                                                </div>
+                                            </div>
+                                        </ng-container>
+
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </ng-container>
+                </ng-container>
+
+                <ng-container *ngIf="ad_content.cards.length>1">
+                    <app-ad-view-post-catalog-widget [cards]="ad_content.cards"
+                        [call_to_action]="ad_content.call_to_action" [dispayContainer]="AdPostContainerWidth">
+                    </app-ad-view-post-catalog-widget>
+                </ng-container>
+
+            </div>
+            <div class="card-footer px-0" style="pointer-events: none;">
+                <div class="row actions">
+                    <div class="col-4 text-center px-0">
+                        <span style="cursor: pointer;">
+                            <span class="fa fa-heart-o"></span><span>&nbsp;</span>
+                            <span i18n>Love</span>
+                        </span>
+                    </div>
+
+                    <div class="col-4 text-center px-0">
+                        <a href="javascript:void(0);"><i class="fa fa-comment-o"></i><span>&nbsp;</span>
+                            <span i18n>Comment</span></a>
+                    </div>
+
+                    <div class="col-4 text-center px-0">
+                        <a href="javascript:void(0);">
+                            <img [src]="imageIconsService.shareIcon" class="share-img-icon"><span>&nbsp;</span>
+                            <span i18n>Share</span>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </ng-container>
+</div>

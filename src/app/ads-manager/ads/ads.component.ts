@@ -17,7 +17,7 @@ export class AdsComponent implements OnInit {
     this.adsService.isAccountLoaded().subscribe((accountLoaded) => {
       if (accountLoaded) {
         if (this.adsService.ad_account !== null && this.adsService.ad_account.compaings.length < 1) {
-           this.router.navigateByUrl('adsmanager/ads/create');
+           this.router.navigateByUrl('adsmanager/compaigns/create');
         }
       } else {
         if (this.adsService.loading_ads_manager == false && this.adsService.ad_account == null) {

@@ -2,11 +2,15 @@
 <div class="col-xs-14 col-sm-14 col-md-14 col-md-14 p-0" #feedContainer>
     <div class="w-100 h-100 m-0 p-0" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
         (scrolled)="feedService.onScrollDown()" [scrollWindow]="true" id="scroller">
-        <ng-container *ngFor="let feed of feedService.feeds">
+        <ng-container *ngFor="let feed of feedService.feeds;let i=index">
             <ng-container *ngIf="feed.edit_mode!=true">
                 <app-post-card-widget [feed]="feed" [container_width]="container_width"
                     [max_post_images_height]="max_post_images_height"></app-post-card-widget>
             </ng-container>
+            <ng-container *ngIf="showAdsService.POST_ADS.length>0 && ( i % 5)==0">
+                <app-ad-post-view-widget [ad_content]="showAdsService.POST_ADS[nextAddIndex(i)]">
+                </app-ad-post-view-widget>
+            </ng-container>            
         </ng-container>
     </div>
 </div>

@@ -9,7 +9,7 @@
                 <div class="d-block w-100">
 
                     <div class="d-block">
-                        <a routerLink="/adsmanager/ads/create" class="btn btn-sm btn-outline-primary">Create Ad</a>
+                        <a routerLink="/adsmanager/compaigns/create" class="btn btn-sm btn-outline-primary">Create Ad</a>
                     </div>
 
 
@@ -29,121 +29,47 @@
                                         <tr role="row">
                                             <th class="sorting_desc" tabindex="0" aria-controls="example" rowspan="1"
                                                 colspan="1" aria-label="Name: activate to sort column ascending"
-                                                style="width: 52px;" aria-sort="descending">Ad Name</th>
+                                                style="width: 52px;" aria-sort="descending">Compaign Name</th>
                                             <th class="sorting" tabindex="0" aria-controls="example" rowspan="1"
                                                 colspan="1" aria-label="Position: activate to sort column ascending"
                                                 style="width: 68px;">Status</th>
                                             <th class="sorting" tabindex="0" aria-controls="example" rowspan="1"
                                                 colspan="1" aria-label="Office: activate to sort column ascending"
-                                                style="width: 45px;">Spent</th>
+                                                style="width: 45px;">Starts</th>
                                             <th class="sorting" tabindex="0" aria-controls="example" rowspan="1"
                                                 colspan="1" aria-label="Age: activate to sort column ascending"
-                                                style="width: 26px;">Impressions</th>
+                                                style="width: 26px;">End</th>
                                             <th class="sorting" tabindex="0" aria-controls="example" rowspan="1"
                                                 colspan="1" aria-label="Start date: activate to sort column ascending"
-                                                style="width: 54px;">Start date</th>
+                                                style="width: 54px;">Budget</th>
                                             <th class="sorting" tabindex="0" aria-controls="example" rowspan="1"
                                                 colspan="1" aria-label="Salary: activate to sort column ascending"
                                                 style="width: 55px;">Salary</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <ng-container *ngFor="let compaign of adsService.ad_account.compaings">
 
-                                        <tr role="row" class="odd">
-                                            <td class="sorting_1">Zorita Serrano</td>
-                                            <td>Software Engineer</td>
-                                            <td>San Francisco</td>
-                                            <td>56</td>
-                                            <td>2012/06/01</td>
-                                            <td>$115,000</td>
-                                        </tr>
-                                        <tr role="row" class="even">
-                                            <td class="sorting_1">Zenaida Frank</td>
-                                            <td>Software Engineer</td>
-                                            <td>New York</td>
-                                            <td>63</td>
-                                            <td>2010/01/04</td>
-                                            <td>$125,250</td>
-                                        </tr>
-                                        <tr role="row" class="odd">
-                                            <td class="sorting_1">Yuri Berry</td>
-                                            <td>Chief Marketing Officer (CMO)</td>
-                                            <td>New York</td>
-                                            <td>40</td>
-                                            <td>2009/06/25</td>
-                                            <td>$675,000</td>
-                                        </tr>
-                                        <tr role="row" class="even">
-                                            <td class="sorting_1">Vivian Harrell</td>
-                                            <td>Financial Controller</td>
-                                            <td>San Francisco</td>
-                                            <td>62</td>
-                                            <td>2009/02/14</td>
-                                            <td>$452,500</td>
-                                        </tr>
-                                        <tr role="row" class="odd">
-                                            <td class="sorting_1">Unity Butler</td>
-                                            <td>Marketing Designer</td>
-                                            <td>San Francisco</td>
-                                            <td>47</td>
-                                            <td>2009/12/09</td>
-                                            <td>$85,675</td>
-                                        </tr>
-                                        <tr role="row" class="even">
-                                            <td class="sorting_1">Timothy Mooney</td>
-                                            <td>Office Manager</td>
-                                            <td>London</td>
-                                            <td>37</td>
-                                            <td>2008/12/11</td>
-                                            <td>$136,200</td>
-                                        </tr>
-                                        <tr role="row" class="odd">
-                                            <td class="sorting_1">Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
-                                        </tr>
-                                        <tr role="row" class="even">
-                                            <td class="sorting_1">Thor Walton</td>
-                                            <td>Developer</td>
-                                            <td>New York</td>
-                                            <td>61</td>
-                                            <td>2013/08/11</td>
-                                            <td>$98,540</td>
-                                        </tr>
-                                        <tr role="row" class="odd">
-                                            <td class="sorting_1">Tatyana Fitzpatrick</td>
-                                            <td>Regional Director</td>
-                                            <td>London</td>
-                                            <td>19</td>
-                                            <td>2010/03/17</td>
-                                            <td>$385,750</td>
-                                        </tr>
-                                        <tr role="row" class="even">
-                                            <td class="sorting_1">Suki Burks</td>
-                                            <td>Developer</td>
-                                            <td>London</td>
-                                            <td>53</td>
-                                            <td>2009/10/22</td>
-                                            <td>$114,500</td>
-                                        </tr>
+                                            <tr role="row" class="odd">
+                                                <td class="sorting_1">
+                                                    {{compaign.compaign_name}}
+                                                    <br>
+                                                    <a routerLink="/adsmanager/compaigns/create/{{compaign.id}}" class="text-primary pull-right" style="font-size: 90%;"><span class="fa fa-pencil"></span> Edit</a>
+                                                </td>
+                                                <td>Software Engineer</td>
+                                                <td>San Francisco</td>
+                                                <td>56</td>
+                                                <td>2012/06/01</td>
+                                                <td>$115,000</td>
+                                            </tr>
+
+                                        </ng-container>
+
                                     </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th rowspan="1" colspan="1">Name</th>
-                                            <th rowspan="1" colspan="1">Position</th>
-                                            <th rowspan="1" colspan="1">Office</th>
-                                            <th rowspan="1" colspan="1">Age</th>
-                                            <th rowspan="1" colspan="1">Start date</th>
-                                            <th rowspan="1" colspan="1">Salary</th>
-                                        </tr>
-                                    </tfoot>
                                 </table>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row hidden">
                             <div class="col-sm-12 col-md-5">
                                 <div class="dataTables_info" id="example_info" role="status" aria-live="polite">Showing
                                     1 to 10 of 57 entries</div>

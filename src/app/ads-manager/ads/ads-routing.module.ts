@@ -8,6 +8,7 @@ import { EditComponent } from './edit/edit.component';
 const routes: Routes = [
   { path: '', component: AdsComponent },
   { path: 'create', component: CreateComponent },
+  { path: 'create/:creation', component: CreateComponent },  
   { path: 'edit/:id', component: EditComponent }
 ];
 

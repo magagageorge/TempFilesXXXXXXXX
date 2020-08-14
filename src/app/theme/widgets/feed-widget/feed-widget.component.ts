@@ -5,6 +5,7 @@ import { CommentsService } from "@services/comments.service";
 import { HoverCardService } from '@app/libs/wf-hover-card/services/hover-card.service';
 import { UrlViewerService } from '@app/services/url-viewer.service';
 import { ImageIconsService } from '@app/services/image-icons.service';
+import { ShowAdsService } from '@app/services/show-ads.service';
 
 @Component({
   selector: 'app-feed-widget',
@@ -20,7 +21,7 @@ export class FeedWidgetComponent implements AfterViewInit {
 
   feedService: FeedService;
   commentService: CommentsService;
-  constructor(feedService: FeedService, postingService: PostingService, commentService: CommentsService, imageIconsService: ImageIconsService, urlViewerService: UrlViewerService, hovercardService: HoverCardService) {
+  constructor(feedService: FeedService, public showAdsService: ShowAdsService, postingService: PostingService, commentService: CommentsService, imageIconsService: ImageIconsService, urlViewerService: UrlViewerService, hovercardService: HoverCardService) {
     this.feedService = feedService;
     this.commentService = commentService;
   }
@@ -36,6 +37,17 @@ export class FeedWidgetComponent implements AfterViewInit {
     this.commentService.feedContainerWidth = this.feedContainer.nativeElement.clientWidth;
     //this.max_post_images_height=window.innerHeight * 0.8;
     this.max_post_images_height = this.container_width * 1;
+  }
+
+  nextAddIndex(post_index: number) {
+    var index = 0;
+    var k = post_index / 5;
+    if (k < this.showAdsService.POST_ADS.length) {
+      var index = k;
+    } else {
+      index = (k % this.showAdsService.POST_ADS.length);
+    }
+    return index;
   }
 
   delete() {

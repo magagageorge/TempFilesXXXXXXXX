@@ -3,7 +3,7 @@
     <div class="container-fluid px-0" style="min-height: 100%;">
         <div class="row mx-0" style="min-height: 80vh;">
             <div class="pull-left d-none d-md-block d-lg-block col-md-3 col-lg-3 col-xl-3" style="min-height:80vh;">
-                <div class="card">
+                <div class="card m-0">
                     <div class="card-body p-0">
 
                         <div class="d-block w-100 border-bottom p-3">
@@ -18,9 +18,11 @@
                                             [class.text-primary]="compaign_model.currentForm=='Objective'"
                                             (click)="setCurrentForm('Objective')">Objective</li>
                                         <li class="cursor-pointer"
+                                            [ngClass]="[(selectedObjective!=null)?'':'disabled text-muted']"
                                             [class.text-primary]="compaign_model.currentForm=='Audience'"
                                             (click)="setCurrentForm('Audience')">Audience</li>
                                         <li class="cursor-pointer"
+                                            [ngClass]="[(isAudValid==true)?'':'disabled text-muted']"
                                             [class.text-primary]="compaign_model.currentForm=='BudgetSchedule'"
                                             (click)="setCurrentForm('BudgetSchedule')">Budget & Schedule</li>
                                     </ul>
@@ -37,9 +39,15 @@
                                 <div class="col-12 pl-2">
                                     <ul>
                                         <li class="cursor-pointer"
+                                            [ngClass]="[(isBudScheValid==true)?'':'disabled text-muted']"
+                                            [class.text-primary]="compaign_model.currentForm=='AdIdentity'"
+                                            (click)="setCurrentForm('AdIdentity')">Ad Identity</li>
+                                        <li class="cursor-pointer"
+                                            [ngClass]="[(compaign_model.selected_page!=null)?'':'disabled text-muted']"
                                             [class.text-primary]="compaign_model.currentForm=='AdFormat'"
                                             (click)="setCurrentForm('AdFormat')">Ad Format</li>
                                         <li class="cursor-pointer"
+                                            [ngClass]="[(compaign_model.ad_format!='' && compaign_model.selected_page!=null)?'':'disabled text-muted']"
                                             [class.text-primary]="compaign_model.currentForm=='AdContent'"
                                             (click)="setCurrentForm('AdContent')">Ad Content</li>
                                     </ul>
@@ -53,96 +61,129 @@
             <div class="col-12 col-md-9 col-lg-9 col-xl-9 p-0">
 
                 <ng-container *ngIf="compaign_model.currentForm=='Objective'">
-                    <div class="card">
+                    <div class="card m-0">
                         <div class="card-header">
                             <span class="font-weight-bold">What is your Marketing Objective?</span>
                         </div>
                         <div class="card-body p-0">
-
-                            <div class="d-block border m-1">
-                                <div class="row mx-0 w-100">
-                                    <ng-container *ngFor="let ad_type of adsService.ADS_OBJECTIVES_TYPES">
-                                        <ng-container *ngIf="countAdsInType(ad_type.code)>0">
-                                            <div class="col-12 col-md-4 col-lg-4 col-xl-4 border p-2">
-                                                <div class="d-block m-2"><span
-                                                        style="font-size: 120%;">{{ad_type.name}}</span>
-                                                </div>
-                                                <div class="d-block">
-                                                    <ng-container
-                                                        *ngFor="let objective of adsService.filterObjectiveByType(ad_type.code)">
-                                                        <div (click)="selectObjective(objective)"
-                                                            class="d-block w-100 border p-3"
-                                                            [class.text-primary]="objective.selected"
-                                                            style="cursor: pointer;">
-                                                            <span>
-                                                                <ng-container *ngIf="objective.selected">
-                                                                    <span style="font-size: 130%;"
-                                                                        class="fa fa-check-circle"></span>
-                                                                </ng-container>
-
-                                                                <ng-container *ngIf="objective.selected==false">
-                                                                    <span style="font-size: 120%;"
-                                                                        class="{{objective.icon}}"></span>
-                                                                </ng-container>
-                                                            </span>
-                                                            <span>&nbsp;</span>
-                                                            <span>
-                                                                {{objective.name}}
-                                                            </span>
-                                                            <span class="pull-right" title="{{objective.description}}">
-                                                                <i class="fa fa-info-circle" aria-hidden="true"></i>
-                                                            </span>
+                            <form [formGroup]="frm_objectiveGroup" (ngSubmit)="saveObjective()" #objectiveForm="ngForm">
+                                <div class="d-block border m-1">
+                                    <div class="row mx-0 w-100">
+                                        <ng-container *ngIf="adsService.ADS_OBJECTIVES_TYPES.length>0">
+                                            <ng-container *ngFor="let ad_type of adsService.ADS_OBJECTIVES_TYPES">
+                                                <ng-container *ngIf="countAdsInType(ad_type.code)>0">
+                                                    <div class="col-12 col-md-4 col-lg-4 col-xl-4 border p-2">
+                                                        <div class="d-block m-2"><span
+                                                                style="font-size: 120%;">{{ad_type.name}}</span>
                                                         </div>
-                                                    </ng-container>
-                                                </div>
+                                                        <div class="d-block">
+                                                            <ng-container
+                                                                *ngFor="let objective of adsService.filterObjectiveByType(ad_type.code)">
+                                                                <div (click)="selectObjective(objective)"
+                                                                    class="d-block w-100 border p-3"
+                                                                    [class.text-primary]="objective.selected"
+                                                                    style="cursor: pointer;">
+                                                                    <span>
+                                                                        <ng-container *ngIf="objective.selected">
+                                                                            <span style="font-size: 130%;"
+                                                                                class="fa fa-check-circle"></span>
+                                                                        </ng-container>
+
+                                                                        <ng-container *ngIf="objective.selected==false">
+                                                                            <span style="font-size: 120%;"
+                                                                                class="{{objective.icon}}"></span>
+                                                                        </ng-container>
+                                                                    </span>
+                                                                    <span>&nbsp;</span>
+                                                                    <span>
+                                                                        {{objective.name}}
+                                                                    </span>
+                                                                    <span class="pull-right"
+                                                                        title="{{objective.description}}">
+                                                                        <i class="fa fa-info-circle"
+                                                                            aria-hidden="true"></i>
+                                                                    </span>
+                                                                </div>
+                                                            </ng-container>
+                                                        </div>
+                                                    </div>
+                                                </ng-container>
+                                            </ng-container>
+                                        </ng-container>
+
+                                        <ng-container *ngIf="adsService.loading_ads_objectives">
+                                            <div class="d-flex justify-content-center align-items-center w-100"
+                                                style="height: 50vh;font-size: 130%;">
+                                                <i class="fa fa-circle-o-notch fa-spin fa-2x" aria-hidden="true"></i>
                                             </div>
                                         </ng-container>
-                                    </ng-container>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <ng-container *ngIf="selectedObjective!=null">
-                                <div class="d-flex justify-content-center w-100 p-3">
-                                    <div class="row mx-0 d-flex justify-content-center">
-                                        <div
-                                            class="col-12 col-md-10 col-lg-10 col-xl-10 d-flex justify-content-center text-primary">
-                                            <span style="font-size: 180%;" class="{{selectedObjective.icon}}">
-                                            </span>
+                                <ng-container *ngIf="selectedObjective!=null">
+                                    <div class="d-flex justify-content-center w-100 p-3">
+                                        <div class="row mx-0 d-flex justify-content-center">
+                                            <div
+                                                class="col-12 col-md-10 col-lg-10 col-xl-10 d-flex justify-content-center text-primary">
+                                                <span style="font-size: 180%;" class="{{selectedObjective.icon}}">
+                                                </span>
+                                            </div>
+                                            <div
+                                                class="col-12 col-md-10 col-lg-10 col-xl-10  d-flex justify-content-center font-weight-bold">
+                                                <span style="font-size: 120%;">{{selectedObjective.name}}</span>
+                                            </div>
+                                            <div
+                                                class="col-12 col-md-10 col-lg-10 col-xl-10  d-flex justify-content-center">
+                                                <p>{{selectedObjective.description}}</p>
+                                            </div>
                                         </div>
-                                        <div
-                                            class="col-12 col-md-10 col-lg-10 col-xl-10  d-flex justify-content-center font-weight-bold">
-                                            <span style="font-size: 120%;">{{selectedObjective.name}}</span>
+                                    </div>
+
+                                    <div class="d-block w-100">
+                                        <div class="form-row mx-auto">
+                                            <div class="col-12 d-flex justify-content-center">
+                                                <label class="font-weight-bold">Compaign Name</label>
+                                            </div>
+                                            <div class="col-12 d-flex justify-content-center">
+                                                <input type="text" name="compaign_name" style="max-width: 400px;"
+                                                    class="form-control" formControlName="compaign_name"
+                                                    [(ngModel)]="compaign_model.compaign_name"
+                                                    placeholder="Compaign Name">
+                                                <input type="hidden" formControlName="objective" [(ngModel)]="compaign_model.objective">
+                                            </div>
+                                            <div class="col-12 d-flex justify-content-center">
+                                                <div *ngIf="objective_submitted && obj.compaign_name.errors"
+                                                    class="text-danger  form-text">
+                                                    <div *ngIf="obj.compaign_name.errors.required" class="error">
+                                                        <span class="fa fa-exclamation-circle" style></span>
+                                                        <span class="px-1 py-2">Required</span>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div
-                                            class="col-12 col-md-10 col-lg-10 col-xl-10  d-flex justify-content-center">
-                                            <p>{{selectedObjective.description}}</p>
+                                    </div>
+                                </ng-container>
+
+                                <div *ngIf="selectedObjective!=null" class="d-block w-100">
+                                    <div class="row mx-0">
+                                        <div class="col-12 d-flex justify-content-center">
+                                            <button type="submit" class="btn btn-sm btn-outline-primary">Continue</button>
                                         </div>
                                     </div>
                                 </div>
-                            </ng-container>
-
-                            <div *ngIf="selectedObjective!=null" class="d-block w-100">
-                                <div class="row mx-0">
-                                    <div class="col-12 d-flex justify-content-center">
-                                        <button (click)="setNextForm()" class="btn btn-sm btn-outline-primary">
-                                            Continue
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
+                            </form>
                         </div>
                     </div>
                 </ng-container>
 
                 <ng-container *ngIf="compaign_model.currentForm=='Audience'">
 
-                    <div class="d-block w-100 m-0">
+                    <div class="d-block w-100 m-0 p-0">
 
                         <div class="row mx-0">
-                            <div class="col-12 col-md-8 col-lg-8 col-xl-8">
+                            <div class="col-12 col-md-8 col-lg-8 col-xl-8 p-0">
 
-                                <div class="card">
+                                <div class="card m-0">
                                     <div class="card-header">
                                         <span class="font-weight-bold">Audience</span>
                                         <p>Define who you want to see your ads</p>
@@ -166,7 +207,154 @@
                                                                 location/s.</p>
                                                         </div>
                                                         <div class="d-block w-100">
-                                                            <input type="text" placeholder="Search">
+                                                            <ng-container *ngIf="compaign_model.aud_locations.length>0">
+                                                                <ng-container
+                                                                    *ngFor="let location of compaign_model.aud_locations;let i=index">
+                                                                    <span class="chip chip-primary m-1">
+                                                                        <span>{{location.name}}</span>
+                                                                        <span>&nbsp;</span>
+                                                                        <span (click)="removeSelectedLocation(location)"
+                                                                            class="p-1">
+                                                                            <span class="fa fa-close"></span>
+                                                                        </span>
+                                                                    </span>
+                                                                </ng-container>
+                                                            </ng-container>
+                                                            <span *ngIf="show_aud_loc_search!=true"
+                                                                (click)="ShowLocationSearch()"
+                                                                class="chip chip-primary m-1">
+                                                                <span class="fa fa-plus"></span>
+                                                                <span>&nbsp;</span>
+                                                                <span>Add Location</span>
+                                                            </span>
+
+                                                            <div *ngIf="audience_submitted && getFormLocations.errors"
+                                                                class="w-100  text-danger  form-text m-0 p-0">
+                                                                <div *ngIf="getFormLocations.errors.minLength"
+                                                                    class="error">
+                                                                    <span class="fa fa-exclamation-circle" style></span>
+                                                                    <span class="px-1 py-2">Please add at Least one
+                                                                        Location to proceed.</span>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div *ngIf="show_aud_loc_search==true" class="d-block w-100">
+                                                            <div class="row mx-0 w-100">
+                                                                <div class="col-12 px-0 py-1">
+                                                                    <div class="w-100"
+                                                                        style="position: relative;max-width: 180px;">
+                                                                        <input type="search" (keyup)="searchLocation()"
+                                                                            class="w-100"
+                                                                            formControlName="location_search_query"
+                                                                            [(ngModel)]="location_search_query"
+                                                                            placeholder="Search">
+                                                                        <div *ngIf="location_search_query!=''"
+                                                                            class="d-flex justify-content-center align-items-center text-primary cursor-pointer"
+                                                                            (click)="clearLocationSearchBox()"
+                                                                            style="position: absolute;top:0px;bottom: 0px;right:0px;padding-left: 5px;padding-right: 5px;">
+                                                                            <span class="fa fa-close"></span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12 border p-1" style="height: 150px;">
+                                                                    <ng-container *ngIf="location_search_query==''">
+                                                                        <div
+                                                                            class="d-flex justify-content-center align-items-center">
+                                                                            <div class="row mx-0">
+                                                                                <div class="col-12 d-flex justify-content-center text-primary p-3"
+                                                                                    style="font-size: 130%;">
+                                                                                    <span class="fa fa-search"></span>
+                                                                                </div>
+                                                                                <div
+                                                                                    class="col-12 d-flex justify-content-center px-0 py-2">
+                                                                                    <span>Start searching for Locations
+                                                                                        above. For example, you can
+                                                                                        search for:</span>
+                                                                                </div>
+                                                                                <div
+                                                                                    class="col-12 d-flex justify-content-center  px-0 py-2">
+                                                                                    <div>
+                                                                                        <span
+                                                                                            (click)="searchLocatoinFor('Tanzania')"
+                                                                                            class="text-primary cursor-pointer">Tanzania</span>
+                                                                                        <span>&nbsp;</span>
+                                                                                        <span
+                                                                                            (click)="searchLocatoinFor('Nigeria')"
+                                                                                            class="text-primary cursor-pointer">Nigeria</span>
+                                                                                        <span>&nbsp;</span>
+                                                                                        <span
+                                                                                            (click)="searchLocatoinFor('Kenya')"
+                                                                                            class="text-primary cursor-pointer">Kenya</span>
+                                                                                        <span>&nbsp;</span>
+                                                                                        <span
+                                                                                            (click)="searchLocatoinFor('South Africa')"
+                                                                                            class="text-primary cursor-pointer">South
+                                                                                            Africa</span>
+                                                                                        <span>&nbsp;</span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </ng-container>
+                                                                    <ng-container *ngIf="loading_location_search">
+                                                                        <div
+                                                                            style="position: absolute; top:0px;right:0px;left:0px;bottom:0px;">
+                                                                            <div
+                                                                                class="d-flex justify-content-center align-items-center w-100 h-100">
+                                                                                <span class="fa fa-spinner"
+                                                                                    style="font-size: 130%;"
+                                                                                    aria-hidden="true"
+                                                                                    style="font-size: larger;"></span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </ng-container>
+                                                                    <ng-container
+                                                                        *ngIf="loading_location_search==false && searchedLocationsList.length>0">
+                                                                        <div
+                                                                            style="position: absolute; top:0px;right:0px;left:0px;bottom:0px;overflow-y: auto;">
+                                                                            <ng-container
+                                                                                *ngFor="let searchedLocation of searchedLocationsList;let i=index">
+                                                                                <div class="row m-0 border-bottom border-light cursor-pointer"
+                                                                                    (click)="addRemoveLocation(searchedLocation)">
+                                                                                    <div
+                                                                                        class="col-12 p-0 m-0 align-middle">
+                                                                                        <div
+                                                                                            class="h-100 w-100 m-0 p-0">
+                                                                                            <div
+                                                                                                class="d-block h-100 p-1 m-0 align-middle">
+                                                                                                <div
+                                                                                                    class="row h-100 m-0 p-0">
+                                                                                                    <div
+                                                                                                        class="col-2 p-0">
+                                                                                                        <input
+                                                                                                            type="checkbox"
+                                                                                                            class="form-check-input"
+                                                                                                            [checked]="(searchedLocation.selected==true)?'checked':''"
+                                                                                                            name="loc_{{searchedLocation.key}}"
+                                                                                                            id="loc_{{searchedLocation.key}}">
+                                                                                                        <label
+                                                                                                            class="m-0 p-0"
+                                                                                                            for="{{searchedLocation.key}}"></label>
+                                                                                                    </div>
+                                                                                                    <div
+                                                                                                        class="col-10 py-auto px-1 align-middle">
+                                                                                                        <span
+                                                                                                            class="pull-left">{{searchedLocation.name}}</span>
+                                                                                                        <span
+                                                                                                            class="pull-right">{{searchedLocation.type}}</span>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </ng-container>
+                                                                        </div>
+                                                                    </ng-container>
+
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -191,6 +379,7 @@
                                                                 <div class="col-6">
                                                                     Minimum
                                                                     <select name="age_min" formControlName="age_min"
+                                                                        (changed)="AgeRangeChanged()"
                                                                         [(ngModel)]="compaign_model.aud_age_min">
                                                                         <ng-container *ngFor="let age of aud_ages">
                                                                             <option value="{{age.key}}">{{age.value}}
@@ -207,6 +396,17 @@
                                                                             </option>
                                                                         </ng-container>
                                                                     </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="d-block w-100">
+                                                            <div *ngIf="compaign_model.aud_age_min > compaign_model.aud_age_max"
+                                                                class="w-100  text-danger  form-text m-0 p-0">
+                                                                <div class="error">
+                                                                    <span class="fa fa-exclamation-circle" style></span>
+                                                                    <span class="px-1 py-2">Minimum age should not be
+                                                                        greater that maximum age.</span>
+
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -232,12 +432,15 @@
                                                             <div class="btn-group" role="group">
                                                                 <button type="button" (click)="setAdGender('All')"
                                                                     class="btn btn-sm"
+                                                                    [class.btn-outline-primary]="compaign_model.gender!='All'"
                                                                     [class.btn-primary]="compaign_model.gender=='All'">All</button>
                                                                 <button type="button" (click)="setAdGender('Men')"
                                                                     class="btn btn-sm"
+                                                                    [class.btn-outline-primary]="compaign_model.gender!='Men'"
                                                                     [class.btn-primary]="compaign_model.gender=='Men'">Men</button>
                                                                 <button type="button" (click)="setAdGender('Women')"
                                                                     class="btn btn-sm"
+                                                                    [class.btn-outline-primary]="compaign_model.gender!='Women'"
                                                                     [class.btn-primary]="compaign_model.gender=='Women'">Women</button>
                                                             </div>
                                                         </div>
@@ -245,7 +448,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="d-block w-100 p-2">
+                                            <div class="d-none w-100 p-2">
                                                 <div class="row mx-0">
                                                     <div class="col-12 col-md-3 col-lg-3 col-xl-3">
                                                         <span class="">Language</span>
@@ -270,8 +473,7 @@
 
                                             <div class="row mx-0">
                                                 <div class="col-12 d-flex justify-content-center">
-                                                    <button (click)="setNextForm()"
-                                                        class="btn btn-sm btn-outline-primary">
+                                                    <button class="btn btn-sm btn-outline-primary">
                                                         Continue
                                                     </button>
                                                 </div>
@@ -292,36 +494,23 @@
 
                 </ng-container>
 
-
-
-
-
                 <ng-container *ngIf="compaign_model.currentForm=='BudgetSchedule'">
 
-                    <div class="d-block w-100 m-0">
+                    <div class="d-block w-100 m-0 p-0">
 
                         <div class="row mx-0">
-                            <div class="col-12 col-md-8 col-lg-8 col-xl-8">
+                            <div class="col-12 col-md-8 col-lg-8 col-xl-8 p-0">
 
-                                <div class="card">
+                                <div class="card m-0">
                                     <div class="card-header">
                                         <span class="font-weight-bold">Budget and Schedule</span>
                                         <p>Define how much you'd like to spend, and when you'd like your ads to appear.
                                         </p>
                                     </div>
                                     <div class="card-body p-0">
-
-
-
-
-
                                         <form [formGroup]="frm_budgetscheduleGroup" (ngSubmit)="saveBudgetSchedule()"
                                             #audienceForm="ngForm">
                                             <div class="d-block w-100 p-2">
-
-
-
-
                                                 <div class="row mx-0">
                                                     <div class="col-12 col-md-3 col-lg-3 col-xl-3">
                                                         <span class="">Budget</span>
@@ -332,9 +521,8 @@
                                                     </div>
                                                     <div class="col-12 col-md-9 col-lg-9 col-xl-9">
                                                         <div class="d-block w-100">
-                                                            <p>Show this Ad to people who lives,travel or works to the
-                                                                following
-                                                                location/s.</p>
+                                                            <p>Set your daily or lifetime budget that you want to spend
+                                                                on this ad set.</p>
                                                         </div>
                                                         <div class="d-block w-100">
                                                             <div class="row mx-0">
@@ -355,6 +543,16 @@
                                                                             formControlName="daily_budget"
                                                                             [(ngModel)]="compaign_model.daily_budget"
                                                                             placeholder="{{money_placeholder}}">
+                                                                        <div class="w-100">&nbsp;</div>
+                                                                        <div *ngIf="budgetschedule_submitted && budSche.daily_budget.errors"
+                                                                            class="d-block w-100  text-danger  form-text m-0 p-0">
+                                                                            <div *ngIf="budSche.daily_budget.errors.required"
+                                                                                class="error">
+                                                                                <span class="fa fa-exclamation-circle"
+                                                                                    style></span>
+                                                                                <span class="px-1 py-2">Required</span>
+                                                                            </div>
+                                                                        </div>
                                                                     </ng-container>
                                                                     <ng-container
                                                                         *ngIf="compaign_model.budget_type=='total'">
@@ -362,6 +560,16 @@
                                                                             formControlName="total_budget"
                                                                             [(ngModel)]="compaign_model.total_budget"
                                                                             placeholder="{{money_placeholder}}">
+                                                                        <div class="w-100">&nbsp;</div>
+                                                                        <div *ngIf="budgetschedule_submitted && budSche.total_budget.errors"
+                                                                            class="d-block w-100  text-danger  form-text m-0 p-0">
+                                                                            <div *ngIf="budSche.total_budget.errors.required"
+                                                                                class="error">
+                                                                                <span class="fa fa-exclamation-circle"
+                                                                                    style></span>
+                                                                                <span class="px-1 py-2">Required</span>
+                                                                            </div>
+                                                                        </div>
                                                                     </ng-container>
                                                                 </div>
                                                             </div>
@@ -382,10 +590,8 @@
                                                         <div class="row mx-0">
                                                             <div class="col-12">
                                                                 <div class="d-block w-100">
-                                                                    <p>Show this Ad to people who lives,travel or works
-                                                                        to the
-                                                                        following
-                                                                        location/s.</p>
+                                                                    <p>Set how you want your Compaign to start,either
+                                                                        immediately or withing a date range.</p>
                                                                 </div>
                                                             </div>
                                                             <div class="col-12">
@@ -430,21 +636,60 @@
                                                                         <div class="col-6">
                                                                             <span>Start Date</span>
                                                                             <input type="text" name="start_date"
+                                                                                maxlength="10"
                                                                                 formControlName="start_date"
-                                                                                name="start_date"
+                                                                                name="start_date" ngbDatepicker
+                                                                                #start_date="ngbDatepicker"
+                                                                                (focus)="start_date.toggle()"
                                                                                 [(ngModel)]="compaign_model.start_date">
+                                                                            <div *ngIf="budgetschedule_submitted && budSche.start_date.errors"
+                                                                                class="w-100  text-danger  form-text m-0 p-0">
+                                                                                <div *ngIf="budSche.start_date.errors.required"
+                                                                                    class="error">
+                                                                                    <span
+                                                                                        class="fa fa-exclamation-circle"
+                                                                                        style></span>
+                                                                                    <span class="px-1 py-2">Plese
+                                                                                        Enter Start Date</span>
+                                                                                </div>
+                                                                            </div>
                                                                         </div>
                                                                         <div class="col-6">
                                                                             <ng-container
                                                                                 *ngIf="compaign_model.date_schedule=='start_end'">
                                                                                 <span>End Date</span>
                                                                                 <input type="text" name="end_date"
+                                                                                    maxlength="10"
                                                                                     formControlName="end_date"
-                                                                                    name="end_date"
+                                                                                    name="end_date" ngbDatepicker
+                                                                                    #end_date="ngbDatepicker"
+                                                                                    (focus)="end_date.toggle()"
                                                                                     [(ngModel)]="compaign_model.end_date">
+
+                                                                                <div *ngIf="budgetschedule_submitted && budSche.end_date.errors"
+                                                                                    class="w-100  text-danger  form-text m-0 p-0">
+                                                                                    <div *ngIf="budSche.end_date.errors.required"
+                                                                                        class="error">
+                                                                                        <span
+                                                                                            class="fa fa-exclamation-circle"
+                                                                                            style></span>
+                                                                                        <span class="px-1 py-2">Plese
+                                                                                            Enter End Date</span>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div *ngIf="budgetschedule_submitted && isStartEndDatesValid===false"
+                                                                                    class="w-100  text-danger  form-text m-0 p-0">
+                                                                                    <div class="error">
+                                                                                        <span
+                                                                                            class="fa fa-exclamation-circle"
+                                                                                            style></span>
+                                                                                        <span class="px-1 py-2">End Date
+                                                                                            Should be Greater the Start
+                                                                                            Date</span>
+                                                                                    </div>
+                                                                                </div>
                                                                             </ng-container>
-
-
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -452,8 +697,7 @@
                                                             <div class="col-12">
                                                                 <div class="row mx-0">
                                                                     <div class="col-12 d-flex justify-content-center">
-                                                                        <button (click)="setNextForm()"
-                                                                            class="btn btn-sm btn-outline-primary">
+                                                                        <button class="btn btn-sm btn-outline-primary">
                                                                             Continue
                                                                         </button>
                                                                     </div>
@@ -474,15 +718,165 @@
                     </div>
                 </ng-container>
 
+                <ng-container *ngIf="compaign_model.currentForm=='AdIdentity'">
+                    <div class="d-block w-100 m-0 p-0">
+                        <div class="row mx-0">
+                            <div class="col-12 col-md-8 col-lg-8 col-xl-8 p-0">
+                                <div class="card m-0">
+                                    <div class="card-header">
+                                        <span class="font-weight-bold">Identity</span>
+                                        <p>Choose how you want your business to be represented in your ad.
+                                        </p>
+                                    </div>
+                                    <div class="card-body p-0">
+                                        <div class="w-100 p-1">
+                                            <span>Your Woorbi Page represents your business in ads.</span>
+                                            <span> You can also <a href="javascript:void()"
+                                                    (click)="pageService.createPageOnFly()" class="text-primary">Create
+                                                    a Woorbi Page</a></span>
+                                        </div>
+                                        <form [formGroup]="frm_identityGroup" (ngSubmit)="saveAdIdentity()"
+                                            #identityForm="ngForm">
+                                            <div class="d-block w-100 p-2">
+
+                                                <div class="row mx-0">
+                                                    <div class="col-12 col-md-9 col-lg-9 col-xl-9">
+                                                        <div class="d-block w-100">
+                                                            <div class="row mx-0">
+                                                                <div class="col-12 dropdown d-block identity-dropdown p-0"
+                                                                    ngbDropdown placement="bottom-left"
+                                                                    style="min-width: 250px;">
+                                                                    <a class="dropdown-toggle border border-light d-block m-0"
+                                                                        style="max-width: 300px;"
+                                                                        [ngStyle]="{'pointer-events': (pageService.MYPAGES.length>0) ? 'auto' : 'none' }"
+                                                                        data-toggle="dropdown" aria-expanded="false"
+                                                                        ngbDropdownToggle>
+                                                                        <ng-container
+                                                                            *ngIf="pageService.MYPAGES.length>0">
+                                                                            <ng-container
+                                                                                *ngIf="compaign_model.selected_page!=null">
+                                                                                <span class="row mx-0">
+                                                                                    <span class="col-3 p-0">
+                                                                                        <img style="max-height:50px;"
+                                                                                            src="{{compaign_model.selected_page.picture.face}}"
+                                                                                            class="img-fluid rounded-circle z-depth-0 m-0">
+                                                                                    </span>
+                                                                                    <span
+                                                                                        class="col-8 p-0 d-flex align-items-center">
+                                                                                        <span
+                                                                                            class="d-inline-block w-100 m-0 p-0 font-weight-bold text-truncate">
+                                                                                            {{compaign_model.selected_page.name}}
+                                                                                        </span>
+                                                                                    </span>
+                                                                                    <span
+                                                                                        class="col-1 p-0 d-flex align-items-center"
+                                                                                        style="font-size: 120%;">
+                                                                                        <i class="fa fa-caret-down"
+                                                                                            aria-hidden="true"></i>
+                                                                                    </span>
+                                                                                </span>
+                                                                            </ng-container>
+
+                                                                            <ng-container
+                                                                                *ngIf="compaign_model.selected_page==null && pageService.MYPAGES[0]!=null">
+                                                                                <span class="row mx-0">
+                                                                                    <span
+                                                                                        class="col-11 p-0 d-flex align-items-center">
+                                                                                        <span
+                                                                                            class="d-inline-block w-100 m-0 p-0 font-weight-bold text-truncate">
+                                                                                            - Select Page -
+                                                                                        </span>
+                                                                                    </span>
+                                                                                    <span
+                                                                                        class="col-1 p-0 d-flex align-items-center"
+                                                                                        style="font-size: 120%;">
+                                                                                        <i class="fa fa-caret-down"
+                                                                                            aria-hidden="true"></i>
+                                                                                    </span>
+                                                                                </span>
+                                                                            </ng-container>
+                                                                        </ng-container>
+                                                                    </a>
+                                                                    <div class="dropdown-menu dropdown-menu-right"
+                                                                        style="width:300px;" ngbDropdownMenu>
+                                                                        <ul class="list-group list-group-flush">
+                                                                            <ng-container
+                                                                                *ngFor="let mypage of pageService.MYPAGES">
+                                                                                <li class="list-group-item px-0 py-1">
+                                                                                    <a href="javascript:void()"
+                                                                                        (click)="setSelectedPage(mypage);"
+                                                                                        class="p-0 m-0 text-decoration-none"
+                                                                                        style="text-decoration: none;">
+                                                                                        <div class="row p-0 m-0">
+                                                                                            <div class="col-3 p-0">
+                                                                                                <img style="max-height:50px;"
+                                                                                                    src="{{mypage.picture.face}}"
+                                                                                                    class="img-fluid rounded-circle z-depth-0 m-0">
+                                                                                            </div>
+                                                                                            <div
+                                                                                                class="col-9 p-0 d-flex align-items-center">
+                                                                                                <div
+                                                                                                    class="d-inline-block w-100 m-0 p-0 font-weight-bold text-truncate">
+                                                                                                    {{mypage.name}}
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </a>
+                                                                                </li>
+
+                                                                            </ng-container>
+
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mx-0">
+                                                    <div class="col-12">
+                                                        <input type="hidden" formControlName="page_id"
+                                                            [(ngModel)]="compaign_model.page_id">
+                                                        <div *ngIf="identity_submitted && ident.page_id.errors"
+                                                            class="w-100  text-danger  form-text m-0 p-0">
+                                                            <div *ngIf="ident.page_id.errors.required" class="error">
+                                                                <span class="fa fa-exclamation-circle" style></span>
+                                                                <span class="px-1 py-2">Please add Ad Identity by
+                                                                    Selecting a Page or Create a New Page.</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <div class="row mx-0">
+                                                        <div class="col-12 d-flex justify-content-center">
+                                                            <button type="submit"
+                                                                class="btn btn-sm btn-outline-primary">
+                                                                Continue
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
 
                 <ng-container *ngIf="compaign_model.currentForm=='AdFormat'">
 
-                    <div class="d-block w-100 m-0">
+                    <div class="d-block w-100 m-0 p-0">
 
                         <div class="row mx-0">
-                            <div class="col-12 col-md-8 col-lg-8 col-xl-8">
+                            <div class="col-12 col-md-8 col-lg-8 col-xl-8 p-0">
 
-                                <div class="card">
+                                <div class="card m-0">
                                     <div class="card-header">
                                         <span class="font-weight-bold">Ad Format</span>
                                         <p>Choose your ad format.
@@ -550,10 +944,10 @@
 
                 <ng-container *ngIf="compaign_model.currentForm=='AdContent'">
 
-                    <div class="d-block w-100 m-0">
+                    <div class="d-block w-100 m-0 p-0">
                         <div class="row mx-0">
-                            <div class="col-12 col-md-8 col-lg-8 col-xl-8">
-                                <div class="card">
+                            <div class="col-12 col-md-8 col-lg-8 col-xl-8 p-0">
+                                <div class="card m-0">
                                     <div class="card-header">
                                         <span class="font-weight-bold">Create Ad Content</span>
                                     </div>

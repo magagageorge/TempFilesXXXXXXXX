@@ -1,23 +1,24 @@
 <div class="card windo-ad-post-card" style="max-width: 500px;" #AdPostContainer>
     <ng-container>
-        <div class="card-header p-2">
-            <div class="user-block">
-                <a routerLink="/pages/woorbi">
-                    <img class="rounded-circle img-fluid"
-                        src="http://app.woorbi.com/content/photos/face/2368faceDuTwWJjc0ylCGXCfRdSxKsPuO0X-vzp-.jpeg"
-                        alt="">
-                </a>
-                <span class="username mr-4">
-                    <a class="w-100 d-block text-truncate" routerLink="/pages/woorbi">Woorbi</a>
-                </span>
-                <span class="description">
-                    <span class="text-truncate text-muted">Sponsored</span>
-                    <span>&nbsp;</span>
-                    <span>
-                        <a href="javascript:void(0)" title="Everyone"><i class="fa fa-globe"></i></a>
+        <div class="card-header p-2" style="pointer-events: none;">
+            <ng-container *ngIf="compaign.selected_page!=null">
+                <div class="user-block">
+                    <a routerLink="/{{compaign.selected_page.url}}">
+                        <img class="rounded-circle img-fluid" src="{{compaign.selected_page.picture.face}}" alt="">
+                    </a>
+                    <span class="username mr-4">
+                        <a class="w-100 d-block text-truncate" routerLink="/{{compaign.selected_page.url}}">{{compaign.selected_page.name}}</a>
                     </span>
-                </span>
-            </div>
+                    <span class="description">
+                        <span class="text-truncate text-muted">Sponsored</span>
+                        <span>&nbsp;</span>
+                        <span>
+                            <a href="javascript:void(0)" title="Everyone"><i class="fa fa-globe"></i></a>
+                        </span>
+                    </span>
+                </div>
+
+            </ng-container>
         </div>
 
         <div class="card-body p-0" style="overflow:hidden;">
@@ -30,7 +31,6 @@
                 style="padding-left:-1px;padding-right:-1px;">
 
                 <ng-container *ngIf="ad_model.cards.length==1">
-
 
                     <ng-container *ngIf="ad_model.cards[0].media!=null">
                         <div [ngStyle]="{'background-image':'url(' + imageIconsService.loadingPictureImage + ')','min-height':''+getPictureHeight(ad_model.cards[0].media_width,ad_model.cards[0].media_height)+'px'}"
@@ -80,11 +80,8 @@
 
                 </ng-container>
 
-
-
-
             </div>
-            <div class="card-footer px-0">
+            <div class="card-footer px-0" style="pointer-events: none;">
                 <div class="row actions">
                     <div class="col-4 text-center px-0">
                         <span style="cursor: pointer;">

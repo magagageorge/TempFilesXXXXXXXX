@@ -1,0 +1,211 @@
+{
+    "metadata": {
+        "trackingId": "J2P­iªO¾VË}+l"
+    },
+    "elements": [
+        {
+            "urn": "urn:li:geo:104604145",
+            "facetUrn": "urn:li:adTargetingFacet:locations",
+            "ancestorUrns": [
+                "urn:li:geo:103537801"
+            ],
+            "name": "Tanzania",
+            "targetable": true
+        },
+        {
+            "urn": "urn:li:geo:100811890",
+            "facetUrn": "urn:li:adTargetingFacet:locations",
+            "ancestorUrns": [
+                "urn:li:geo:104604145",
+                "urn:li:geo:103537801"
+            ],
+            "name": "Dar es Salaam, Tanzania",
+            "targetable": true
+        },
+        {
+            "urn": "urn:li:geo:102702728",
+            "facetUrn": "urn:li:adTargetingFacet:locations",
+            "ancestorUrns": [
+                "urn:li:geo:104604145",
+                "urn:li:geo:103537801"
+            ],
+            "name": "Arusha, Tanzania",
+            "targetable": true
+        },
+        {
+            "urn": "urn:li:geo:102017446",
+            "facetUrn": "urn:li:adTargetingFacet:locations",
+            "ancestorUrns": [
+                "urn:li:geo:104604145",
+                "urn:li:geo:103537801"
+            ],
+            "name": "Mwanza, Tanzania",
+            "targetable": true
+        },
+        {
+            "urn": "urn:li:geo:105182629",
+            "facetUrn": "urn:li:adTargetingFacet:locations",
+            "ancestorUrns": [
+                "urn:li:geo:104604145",
+                "urn:li:geo:103537801"
+            ],
+            "name": "Tanga, Tanzania",
+            "targetable": true
+        },
+        {
+            "urn": "urn:li:geo:104157603",
+            "facetUrn": "urn:li:adTargetingFacet:locations",
+            "ancestorUrns": [
+                "urn:li:geo:104604145",
+                "urn:li:geo:103537801"
+            ],
+            "name": "Dodoma, Tanzania",
+            "targetable": true
+        },
+        {
+            "urn": "urn:li:geo:105718577",
+            "facetUrn": "urn:li:adTargetingFacet:locations",
+            "ancestorUrns": [
+                "urn:li:geo:104604145",
+                "urn:li:geo:103537801"
+            ],
+            "name": "Morogoro, Tanzania",
+            "targetable": true
+        },
+        {
+            "urn": "urn:li:geo:102757214",
+            "facetUrn": "urn:li:adTargetingFacet:locations",
+            "ancestorUrns": [
+                "urn:li:geo:104604145",
+                "urn:li:geo:103537801"
+            ],
+            "name": "Mbeya, Tanzania",
+            "targetable": true
+        },
+        {
+            "urn": "urn:li:geo:104530898",
+            "facetUrn": "urn:li:adTargetingFacet:locations",
+            "ancestorUrns": [
+                "urn:li:geo:104604145",
+                "urn:li:geo:103537801"
+            ],
+            "name": "Mjini Magharibi, Tanzania",
+            "targetable": true
+        },
+        {
+            "urn": "urn:li:geo:105749227",
+            "facetUrn": "urn:li:adTargetingFacet:locations",
+            "ancestorUrns": [
+                "urn:li:geo:104604145",
+                "urn:li:geo:103537801"
+            ],
+            "name": "Kilimanjaro, Tanzania",
+            "targetable": true
+        },
+        {
+            "urn": "urn:li:geo:104039345",
+            "facetUrn": "urn:li:adTargetingFacet:locations",
+            "ancestorUrns": [
+                "urn:li:geo:104604145",
+                "urn:li:geo:103537801"
+            ],
+            "name": "Iringa, Tanzania",
+            "targetable": true
+        },
+        {
+            "urn": "urn:li:geo:101565441",
+            "facetUrn": "urn:li:adTargetingFacet:locations",
+            "ancestorUrns": [
+                "urn:li:geo:104604145",
+                "urn:li:geo:103537801"
+            ],
+            "name": "Tabora, Tanzania",
+            "targetable": true
+        },
+        {
+            "urn": "urn:li:geo:104849296",
+            "facetUrn": "urn:li:adTargetingFacet:locations",
+            "ancestorUrns": [
+                "urn:li:geo:104604145",
+                "urn:li:geo:103537801"
+            ],
+            "name": "Shinyanga, Tanzania",
+            "targetable": true
+        },
+        {
+            "urn": "urn:li:geo:102248314",
+            "facetUrn": "urn:li:adTargetingFacet:locations",
+            "ancestorUrns": [
+                "urn:li:geo:104604145",
+                "urn:li:geo:103537801"
+            ],
+            "name": "Kigoma, Tanzania",
+            "targetable": true
+        },
+        {
+            "urn": "urn:li:geo:103461127",
+            "facetUrn": "urn:li:adTargetingFacet:locations",
+            "ancestorUrns": [
+                "urn:li:geo:104604145",
+                "urn:li:geo:103537801"
+            ],
+            "name": "Mtwara, Tanzania",
+            "targetable": true
+        },
+        {
+            "urn": "urn:li:geo:101134585",
+            "facetUrn": "urn:li:adTargetingFacet:locations",
+            "ancestorUrns": [
+                "urn:li:geo:104604145",
+                "urn:li:geo:103537801"
+            ],
+            "name": "Mara, Tanzania",
+            "targetable": true
+        },
+        {
+            "urn": "urn:li:geo:102691587",
+            "facetUrn": "urn:li:adTargetingFacet:locations",
+            "ancestorUrns": [
+                "urn:li:geo:104604145",
+                "urn:li:geo:103537801"
+            ],
+            "name": "Pwani, Tanzania",
+            "targetable": true
+        },
+        {
+            "urn": "urn:li:geo:106088801",
+            "facetUrn": "urn:li:adTargetingFacet:locations",
+            "ancestorUrns": [
+                "urn:li:geo:104604145",
+                "urn:li:geo:103537801"
+            ],
+            "name": "Kagera, Tanzania",
+            "targetable": true
+        },
+        {
+            "urn": "urn:li:geo:104844762",
+            "facetUrn": "urn:li:adTargetingFacet:locations",
+            "ancestorUrns": [
+                "urn:li:geo:104604145",
+                "urn:li:geo:103537801"
+            ],
+            "name": "Singida, Tanzania",
+            "targetable": true
+        },
+        {
+            "urn": "urn:li:geo:101605249",
+            "facetUrn": "urn:li:adTargetingFacet:locations",
+            "ancestorUrns": [
+                "urn:li:geo:104604145",
+                "urn:li:geo:103537801"
+            ],
+            "name": "Geita, Tanzania",
+            "targetable": true
+        }
+    ],
+    "paging": {
+        "count": 10,
+        "start": 0,
+        "links": []
+    }
+}

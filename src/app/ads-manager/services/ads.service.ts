@@ -27,10 +27,11 @@ export class AdsService {
   next_ads_page: number;
   loading_ads: boolean;
   loading_ads_manager: boolean = false;
-  ad_form_open:boolean=false;
+  loading_ads_objectives: boolean = false;
+  ad_form_open: boolean = false;
   private add_account_loaded: BehaviorSubject<boolean>;
   allowedExtensions: string[] = ['png', 'jpg', 'gif', 'jpeg'];
-  
+
 
   constructor(service: CrudService, public profileService: ProfileService, @Inject(CRUD_OPTIONS) CRUD_OPTIONS: CrudOptions, private _modalService: NgbModal, router: Router) {
     this.next_ads_page = 1;
@@ -61,7 +62,9 @@ export class AdsService {
         var data = results.getResultData();
         _this.ad_account = data.ad_acc as AdsAccount;
         if (data.ad_acc != null) {
-          _this.router.navigateByUrl('adsmanager/ads');
+          if (this.router.url == '/adsmanager') {
+            _this.router.navigateByUrl('adsmanager/compaigns');
+          }
         } else {
           _this.router.navigateByUrl('adsmanager/accounts');
         }
@@ -70,7 +73,7 @@ export class AdsService {
     });
   }
 
-  public  validateFile(file: File): Boolean {
+  public validateFile(file: File): Boolean {
     if (this.allowedExtensions.length !== 0 && file instanceof File) {
       const ext = AdsService.getFileExtension(file.name);
       if (this.allowedExtensions.indexOf(ext) !== -1) {
@@ -83,7 +86,9 @@ export class AdsService {
   loadAdObjectives(params?: {}): any {
     var _this = this;
     this.service.getProvider(this.provider).crudconfig.route_url = 'ads/objectives/';
+    this.loading_ads_objectives = true;
     return this.service.getall(this.provider, params).subscribe(results => {
+      _this.loading_ads_objectives = false;
       if (results.isSuccess()) {
         var data = results.getResultData();
         _this.ADS_OBJECTIVES = data.objectives;
@@ -96,22 +101,32 @@ export class AdsService {
     return this.ADS_OBJECTIVES.filter((x: AdObjective) => x.type_code === type);
   }
 
-  unSelectAllObjectives(){
+  unSelectAllObjectives() {
     this.ADS_OBJECTIVES.forEach(objective => {
-      objective.selected=false;
+      objective.selected = false;
     });
   }
 
-  closeAdContentFormModal(){
-    this.ad_form_open=false;
+  SelectObjective(code: string) {
+    this.ADS_OBJECTIVES.forEach((obj: AdObjective) => {
+      if (obj.code == code) {
+        obj.selected = true;
+      } else {
+        obj.selected = false;
+      }
+    });
+  }
+
+  closeAdContentFormModal() {
+    this.ad_form_open = false;
   }
 
 
-  openAdContentFormModal(){
-    this.ad_form_open=true;
+  openAdContentFormModal() {
+    this.ad_form_open = true;
   }
 
-  public static getFileExtension(filename: string): null|string {
+  public static getFileExtension(filename: string): null | string {
     if (filename.indexOf('.') === -1) {
       return null;
     }

@@ -1,0 +1,205 @@
+<div class="card p-0 bg-light border">
+    <div class="card-body p-0" style="min-height: 50vh;">
+        <div class="row mx-0 ">
+
+            <div class="col-12 p-0">
+
+                <ng-container *ngIf="selectedShowType!=null">
+
+                    <div class="d-flex justify-content-center align-items-center w-100"
+                        style="min-height: 50vh;overflow-x: auto;">
+
+                        <ng-container *ngIf="selectedShowType.code=='TBS'">
+                            <a href="{{getUrl(ad_model.cards[0])}}" target="_blank" class="font-weight-bold"><span
+                                    class="text-primary">{{getHeadLine(ad_model.cards[0])}} <span>&nbsp;</span>
+                                    <span>-</span><span>&nbsp;</span></span><span>{{getDescription(ad_model.cards[0])}}</span></a>
+                            <span><span>&nbsp;&nbsp;&nbsp;Ad&nbsp;</span><span class="fa fa-ellipsis-h"></span></span>
+
+                        </ng-container>
+
+
+                        <ng-container *ngIf="selectedShowType.code=='TBL'">
+                            <div class="card" style="max-width: 800px;">
+                                <div class="card-body p-0">
+                                    <div class="row mx-0">
+                                        <div class="col-12 p-1">
+                                            <span class="pull-left text-muted">Sponsored</span>
+                                            <span class="pull-right"><span class="fa fa-ellipsis-h"></span></span>
+                                        </div>
+                                        <div class="col-6 p-0 ad_sm">
+                                            <a href="{{getUrl(ad_model.cards[0])}}" class="d-block w-100 p-0 m-0"
+                                                target="_blank">
+                                                <div class="row mx-0 p-0">
+                                                    <div class="col-3 p-0">
+                                                        <img src="{{getImage(ad_model.cards[0])}}"
+                                                            class="img-fluid w-100">
+                                                    </div>
+                                                    <div class="col-9 py-1 px-0">
+                                                        <div class="w-100 font-weight-bold">
+                                                            {{getHeadLine(ad_model.cards[0])}}
+                                                        </div>
+                                                        <div class="w-100">
+                                                            <p>
+                                                                {{getDescription(ad_model.cards[0])}}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="col-6 p-0 ad_sm">
+                                            <a routerLink="/adsmanager/ads" class="d-block w-100 p-0 m-0"
+                                                target="_blank">
+                                                <div class="row mx-0 p-0">
+                                                    <div class="col-3 p-0">
+                                                        <img src="{{imageIconsService.woorbi_logo}}" class="img-fluid">
+                                                    </div>
+                                                    <div class="col-9 p-0">
+                                                        <div class="w-100 font-weight-bold">
+                                                            Invitation from Woorbi.
+                                                        </div>
+                                                        <div class="w-100">
+                                                            <p>
+                                                                Place Ads on Woorbi.Acquire new customers for your
+                                                                business.Try it now.
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-container>
+
+                        <ng-container *ngIf="selectedShowType.code=='RC'">
+                            <div class="card" style="max-width: 400px;">
+                                <div class="card-body p-0">
+                                    <div class="row mx-0">
+                                        <div class="col-12 p-2">
+                                            <span class="pull-left text-muted">Sponsored</span>
+                                            <span class="pull-right"><span class="fa fa-ellipsis-h"></span></span>
+                                        </div>
+                                        <div class="col-12 px-0 ad_sm">
+                                            <a href="{{getUrl(ad_model.cards[0])}}" class="d-block w-100 p-0 m-0"
+                                                target="_blank">
+                                                <div class="row mx-0 p-0">
+                                                    <div class="col-3">
+                                                        <img src="{{getImage(ad_model.cards[0])}}"
+                                                            class="img-fluid w-100">
+                                                    </div>
+                                                    <div class="col-9 py-1">
+                                                        <div class="w-100 font-weight-bold">
+                                                            {{getHeadLine(ad_model.cards[0])}}
+                                                        </div>
+                                                        <div class="w-100">
+                                                            <p>
+                                                                {{getDescription(ad_model.cards[0])}}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="col-12 p-0 ad_sm">
+                                            <a routerLink="/adsmanager/ads" class="d-block w-100 p-0 m-0"
+                                                target="_blank">
+                                                <div class="row mx-0 p-0">
+                                                    <div class="col-3">
+                                                        <img src="{{imageIconsService.woorbi_logo}}" class="img-fluid">
+                                                    </div>
+                                                    <div class="col-9">
+                                                        <div class="w-100 font-weight-bold">
+                                                            Invitation from Woorbi.
+                                                        </div>
+                                                        <div class="w-100">
+                                                            <p>
+                                                                Place Ads on Woorbi.Acquire new customers for your
+                                                                business.Try it now.
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="col-12 p-0 ad_sm">
+                                            <a routerLink="/adsmanager/ads" class="d-block w-100 p-0 m-0"
+                                                target="_blank">
+                                                <div class="row mx-0 p-0">
+                                                    <div class="col-3">
+                                                        <img src="{{imageIconsService.woorbi_logo}}" class="img-fluid">
+                                                    </div>
+                                                    <div class="col-9">
+                                                        <div class="w-100 font-weight-bold">
+                                                            Invitation from Woorbi.
+                                                        </div>
+                                                        <div class="w-100">
+                                                            <p>
+                                                                Place Ads on Woorbi.Acquire new customers for your
+                                                                business.Try it now.
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-container>
+
+
+                        <ng-container *ngIf="selectedShowType.code=='IFB'">
+                            <div class="card" style="max-width: 400px;">
+                                <div class="card-body p-0">
+                                    <div class="row mx-0">
+                                        <div class="col-12 p-2">
+                                            <span class="pull-left text-muted">Sponsored</span>
+                                            <span class="pull-right"><span class="fa fa-ellipsis-h"></span></span>
+                                        </div>
+                                        <div class="col-12 px-0 ad_sm">
+                                            <a href="{{getUrl(ad_model.cards[0])}}" class="d-block w-100 p-0 m-0"
+                                                target="_blank">
+                                                <div class="row mx-0 p-0">
+                                                    <div class="col-3">
+                                                        <img src="{{getImage(ad_model.cards[0])}}"
+                                                            class="img-fluid w-100">
+                                                    </div>
+                                                    <div class="col-9 py-1">
+                                                        <div class="w-100 font-weight-bold">
+                                                            {{getHeadLine(ad_model.cards[0])}}
+                                                        </div>
+                                                        <div class="w-100">
+                                                            <p>
+                                                                {{getDescription(ad_model.cards[0])}}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-container>
+
+
+
+                    </div>
+
+
+
+
+
+
+
+                </ng-container>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,15 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 //import { MDBBootstrapModule } from 'angular-bootstrap-md';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbDateAdapter, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { ThemeModule } from './theme/theme.module';
 import { NgSelectModule } from '@ng-select/ng-select';
-import {NgxImageCompressService} from 'ngx-image-compress';
+import { NgxImageCompressService } from 'ngx-image-compress';
 
-import { AUTH_TOKEN_CLASS, AuthJWTToken,AuthModule } from './auth';
+import { AUTH_TOKEN_CLASS, AuthJWTToken, AuthModule } from './auth';
 import { EmailPassAuthProvider } from './auth/providers';
 import { SocialAuthProvider } from './auth/providers';
 import { AuthGuard } from './services/auth-guard.service';
@@ -57,7 +57,7 @@ import { ProfileModule } from './viewer/profile/profile.module';
 import { LoadSubmitProgressService } from './services/load-submit-progress.service';
 import { NavigationService } from './services/navigation.service';
 import { MessengerProvider } from './@crud';
-import { MessengerService } from './messages/services/messenger.service'; 
+import { MessengerService } from './messages/services/messenger.service';
 import { MessengerModalsService } from './messages/services/messenger-modals.service';
 import { ConfirmDeleteContentModalComponent } from './messages/modals/confirm-delete-content-modal/confirm-delete-content-modal.component';
 import { ReportMessengerContentModalComponent } from './messages/modals/report-messenger-content-modal/report-messenger-content-modal.component';
@@ -66,6 +66,10 @@ import { MathService } from './services/math.service';
 import { AdsProvider } from './@crud/providers/ads.provider';
 import { AdsService } from './ads-manager/services/ads.service';
 import { CreateAdAccountFormModalComponent } from './ads-manager/ads-theme/modals/create-ad-account-form-modal/create-ad-account-form-modal.component';
+import { CustomAdapter, CustomDateParserFormatter } from './libs/date/datepicker.adapter';
+import { PageService } from './services/page.service';
+import { ShowAdsService } from './services/show-ads.service';
+import { LinkProcessingService } from './services/link-processing.service';
 
 @NgModule({
   declarations: [
@@ -81,72 +85,74 @@ import { CreateAdAccountFormModalComponent } from './ads-manager/ads-theme/modal
     WelcomeComponent,
     TosComponent
   ],
-  entryComponents:[PostDeleteModalComponent,CommentDeleteModalComponent,ReportContentModalComponent,LikesModalComponent,CommentReplyDeleteModalComponent,ConfirmDeleteContentModalComponent,ReportMessengerContentModalComponent,CreateAdAccountFormModalComponent],
+  entryComponents: [PostDeleteModalComponent, CommentDeleteModalComponent, ReportContentModalComponent, LikesModalComponent, CommentReplyDeleteModalComponent, ConfirmDeleteContentModalComponent, ReportMessengerContentModalComponent, CreateAdAccountFormModalComponent],
   imports: [
-  BrowserModule,
-  NgbModule.forRoot(),
-  CommonModule,
-  ThemeModule,
-  NgSelectModule,
-  ProfileModule,
-  //MDBBootstrapModule.forRoot(),
-	AppRoutingModule,
-	ReactiveFormsModule,
-  FormsModule,
-  WfHoverCardModule.forRoot(),
-  DeviceDetectorModule.forRoot(),
-	CrudModule.forRoot({
-         providers: {
-           crud: {
-             service: CrudProvider,
-             config: {
-               token: {
-                 key: 'token', // this parameter tells Nebular where to look for the token
-               },
-             },
-           },
-           messenger: {
-            service: MessengerProvider,
-            config: {
-              token: {
-                key: 'token', // this parameter tells Nebular where to look for the token
-              },
-            },
-          },  
-          ads: {
-            service: AdsProvider,
-            config: {
-              token: {
-                key: 'token', // this parameter tells Nebular where to look for the token
-              },
-            },
-          },                    
-         },
-       }),
-    AuthModule.forRoot({
-         providers: {
-          social: {
-            service: SocialAuthProvider,
-            config: {
-              token: {
-                key: 'token', // this parameter tells Nebular where to look for the token
-              },
+    BrowserModule,
+    NgbModule.forRoot(),
+    CommonModule,
+    ThemeModule,
+    NgSelectModule,
+    ProfileModule,
+    //MDBBootstrapModule.forRoot(),
+    AppRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
+    WfHoverCardModule.forRoot(),
+    DeviceDetectorModule.forRoot(),
+    CrudModule.forRoot({
+      providers: {
+        crud: {
+          service: CrudProvider,
+          config: {
+            token: {
+              key: 'token', // this parameter tells Nebular where to look for the token
             },
           },
-          email: {
-             service: EmailPassAuthProvider,
-             config: {
-               token: {
-                 key: 'token', // this parameter tells Nebular where to look for the token
-               },
-             },
-           },
-           
-         },
-       }),	
+        },
+        messenger: {
+          service: MessengerProvider,
+          config: {
+            token: {
+              key: 'token', // this parameter tells Nebular where to look for the token
+            },
+          },
+        },
+        ads: {
+          service: AdsProvider,
+          config: {
+            token: {
+              key: 'token', // this parameter tells Nebular where to look for the token
+            },
+          },
+        },
+      },
+    }),
+    AuthModule.forRoot({
+      providers: {
+        social: {
+          service: SocialAuthProvider,
+          config: {
+            token: {
+              key: 'token', // this parameter tells Nebular where to look for the token
+            },
+          },
+        },
+        email: {
+          service: EmailPassAuthProvider,
+          config: {
+            token: {
+              key: 'token', // this parameter tells Nebular where to look for the token
+            },
+          },
+        },
+
+      },
+    }),
   ],
-  providers: [AuthGuard,UrlViewerService,ProfileService,PostingService,UtilitiesService,FeedService,ProfileFeedService,ProfilePhotosService,ProfileConnectionsService,CommentsService,NotificationsService,ConnectionsService,ImageIconsService,EditProfileService,ProfileViewerService,MessengerService,AppModalService, MessengerModalsService, LoadSubmitProgressService,NavigationService, NgxImageCompressService,MathService,AdsService],
-  schemas: [ NO_ERRORS_SCHEMA ],
+  providers: [AuthGuard, UrlViewerService, ProfileService,PageService, PostingService, UtilitiesService, FeedService, ProfileFeedService, ProfilePhotosService, ProfileConnectionsService, CommentsService, NotificationsService, ConnectionsService, ImageIconsService, EditProfileService, ProfileViewerService, MessengerService, AppModalService, MessengerModalsService, LoadSubmitProgressService, NavigationService, NgxImageCompressService, MathService, AdsService,ShowAdsService,LinkProcessingService,
+    { provide: NgbDateAdapter, useClass: CustomAdapter },
+    { provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter }],
+  schemas: [NO_ERRORS_SCHEMA],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

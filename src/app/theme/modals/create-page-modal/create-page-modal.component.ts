@@ -1,0 +1,100 @@
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { PageService } from '@app/services/page.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { PageCategory, PageMainCategory } from '@app/models/page/page.cagegory';
+import { PageModel } from '@app/models/page/page.model';
+import { ImageCropperComponent, ImageCroppedEvent } from '@app/libs/wb-image-cropper';
+
+@Component({
+  selector: 'app-create-page-modal',
+  templateUrl: './create-page-modal.component.html',
+  styleUrls: ['./create-page-modal.component.scss']
+})
+export class CreatePageModalComponent implements OnInit {
+
+  public frm_pageGroup: FormGroup;
+  submitted: boolean = false;
+  @ViewChild(ImageCropperComponent, { static: true }) imageCropper: ImageCropperComponent;
+  imageChangedEvent: any = '';
+  croppedImage: any = '';
+  showCropper = false;
+  containWithinAspectRatio = false;
+
+  constructor(public pageService: PageService, private fb: FormBuilder) {
+  }
+
+  fileChangeEvent(event: any): void {
+    this.imageChangedEvent = event;
+  }
+
+  imageCropped(event: ImageCroppedEvent) {
+    this.pageService.model.croppedImage = event.base64;
+  }
+
+  imageLoaded() {
+    this.showCropper = true;
+    //console.log('Image loaded');
+  }
+
+  cropperReady() {
+    //console.log('Cropper ready');
+  }
+
+  loadImageFailed() {
+    //console.log('Load failed');
+  }
+
+  rotateLeft() {
+    this.imageCropper.rotateLeft();
+  }
+
+  rotateRight() {
+    this.imageCropper.rotateRight();
+  }
+
+  flipHorizontal() {
+    this.imageCropper.flipHorizontal();
+  }
+
+  flipVertical() {
+    this.imageCropper.flipVertical();
+  }
+
+  resetImage() {
+    this.imageCropper.resetImage();
+  }
+
+  toggleContainWithinAspectRatio() {
+    this.containWithinAspectRatio = !this.containWithinAspectRatio;
+  }
+
+
+
+
+  ngOnInit() {
+    this.frm_pageGroup = this.fb.group({
+      name: ['', Validators.required],
+      category: [],
+      subcategory: ['', Validators.required],
+      picture: ['']
+    });
+  }
+
+  savePage() {
+    if(this.pageService.submitted){
+      return false;
+    }
+    this.pageService.savePage();
+  }
+
+  get form() {
+    return this.frm_pageGroup.value;
+  }
+
+  get a() { return this.frm_pageGroup.controls; }
+
+  selectCategory(cat: PageMainCategory) {
+    this.pageService.model.main_category = cat;
+  }
+
+}

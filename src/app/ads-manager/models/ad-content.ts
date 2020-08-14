@@ -5,6 +5,7 @@ export class AdContent {
     compaign_id: number;
     name: string;
     introduction: string;
+    cards:AdContentCard[];
     destination_url: string;
     one_destination: string;
     call_to_action: string;
@@ -45,6 +46,7 @@ export class AdContentCard {
 
 export class AdContentCardForm {
     id: number;
+    sn:number;
     headline: string;
     description: string;
     destination_url: string;
@@ -60,5 +62,6 @@ export class AdContentCardForm {
         this.description='';
         this.destination_url='';
         this.media='';
+        this.id=null;
     }
 }
