@@ -370,7 +370,6 @@ export class EditProfileService {
     this.editMode.coverEdit.processingCover = false;
   }
 
-
   PreviewCompressedAvatar(loadedUrl: string, urlType: string) {
     var _this = this;
     if (loadedUrl != '') {
@@ -402,7 +401,6 @@ export class EditProfileService {
     this.editMode.avatarEdit.processingAvatar = false;
   }
 
-
   PreviewCover(f: File) {
     var fileReader = new FileReader();
     var i_url;
@@ -424,7 +422,6 @@ export class EditProfileService {
   }
 
   /* Top Profile Card */
-
   EditTopProfileCard() {
     this.editMode.currentEditing = 'topProfileCard'
     this.editMode.inEdit = true;
@@ -469,8 +466,6 @@ export class EditProfileService {
         }
       });
     })
-
-
   }
 
   EditProfileAbout() {

@@ -9,6 +9,7 @@ import { UtilitiesService } from '@app/services/utilities.service';
 import { MenuService } from '@app/theme/services/menu.service';
 import { NotificationsService } from '@app/services/notifications.service';
 import { AuthService } from '@app/auth';
+import { AdsService } from '@app/ads-manager/services/ads.service';
 
 @Component({
   selector: 'app-ads-nav-bar',
@@ -27,7 +28,7 @@ export class AdsNavBarComponent implements OnInit {
   private router: Router;
   private route: ActivatedRoute;
   navigationService: NavigationService;
-  constructor(public authService: AuthService,
+  constructor(public authService: AuthService,public adsService:AdsService,
     public authGuard: AuthGuard, profileService: ProfileService,
     public utilities: UtilitiesService, urlViewerService: UrlViewerService, navigationService: NavigationService, public menuservice: MenuService, public notificationService: NotificationsService, router: Router, route: ActivatedRoute) {
     this.profileService = profileService;

@@ -28,7 +28,7 @@ export class UtilitiesService {
     SuggestedSkills: any[] = [];
     SuggestedIndutries: any[] = [];
     report_types: ReportContentType[] = [];
-    currencies:Currency[]=[];
+    currencies: Currency[] = [];
     constructor(service: CrudService, @Inject(CRUD_OPTIONS) CRUD_OPTIONS: CrudOptions, router: Router) {
         this.service = service;
         this.crudconfig = CRUD_OPTIONS;
@@ -125,48 +125,12 @@ export class UtilitiesService {
         return this.service.getall(this.provider, params);
     }
 
-    getMyquestions(params?: {}): any {
-        this.provider = this.getConfigValue('forms.getall.provider');
-        this.service.getProvider(this.provider).crudconfig.route_url = 'my-questions/';
-        var _this = this;
-        return this.service.getall(this.provider, params);
-    }
-
-    getQuestion(params: {}): any {
-        this.provider = this.getConfigValue('forms.getone.provider');
-        this.service.getProvider(this.provider).crudconfig.route_url = 'questions/';
-        var _this = this;
-        return this.service.getone(this.provider, params);
-    }
-
-    getQuestions(params: {}): any {
-        this.provider = this.getConfigValue('forms.getall.provider');
-        this.service.getProvider(this.provider).crudconfig.route_url = 'questions/';
-        var _this = this;
-        return this.service.getall(this.provider, params);
-    }
-
-    getAnsweredQuestion(params?: {}): any {
-        this.provider = this.getConfigValue('forms.getone.provider');
-        this.service.getProvider(this.provider).crudconfig.route_url = 'answered-questions/';
-        var _this = this;
-        return this.service.getall(this.provider, params);
-    }
-
-    getRecommendedQuestions(params: {}): any {
-        this.provider = this.getConfigValue('forms.getall.provider');
-        this.service.getProvider(this.provider).crudconfig.route_url = 'lawyer/recommended-questions/';
-        var _this = this;
-        return this.service.getall(this.provider, params);
-    }
-
     getMyProfile(params?: {}): any {
         this.provider = this.getConfigValue('forms.getone.provider');
         this.service.getProvider(this.provider).crudconfig.route_url = 'my-profile/';
         var _this = this;
         return this.service.getone(this.provider, params);
     }
-
 
     getProfile(params?: {}): any {
         this.provider = this.getConfigValue('forms.getone.provider');
@@ -180,52 +144,6 @@ export class UtilitiesService {
         this.service.getProvider(this.provider).crudconfig.route_url = 'start/';
         var _this = this;
         return this.service.getone(this.provider, params);
-    }
-
-    getMybookings(params?: {}): any {
-        this.provider = this.getConfigValue('forms.getall.provider');
-        this.service.getProvider(this.provider).crudconfig.route_url = 'client/my-bookings/';
-        var _this = this;
-        return this.service.getall(this.provider, params);
-    }
-
-    getMybooking(params?: {}): any {
-        this.provider = this.getConfigValue('forms.getone.provider');
-        this.service.getProvider(this.provider).crudconfig.route_url = 'client/my-bookings/';
-        var _this = this;
-        return this.service.getone(this.provider, params);
-    }
-
-
-    getConsultations(params?: {}): any {
-        this.provider = this.getConfigValue('forms.getall.provider');
-        this.service.getProvider(this.provider).crudconfig.route_url = 'lawyer/my-consultations/';
-        var _this = this;
-        return this.service.getall(this.provider, params);
-    }
-
-
-    getConfirmBooking(params?: {}): any {
-        this.provider = this.getConfigValue('forms.getone.provider');
-        this.service.getProvider(this.provider).crudconfig.route_url = 'confirm-booking/';
-        var _this = this;
-        return this.service.getone(this.provider, params);
-    }
-
-
-
-    getBids(params?: {}): any {
-        this.provider = this.getConfigValue('forms.getall.provider');
-        this.service.getProvider(this.provider).crudconfig.route_url = 'client/bids/';
-        var _this = this;
-        return this.service.getall(this.provider, params);
-    }
-
-    getOpportunities(params?: {}): any {
-        this.provider = this.getConfigValue('forms.getall.provider');
-        this.service.getProvider(this.provider).crudconfig.route_url = 'lawyer/opportunities/';
-        var _this = this;
-        return this.service.getall(this.provider, params);
     }
 
     getNotifications(params?: {}): any {
@@ -247,7 +165,6 @@ export class UtilitiesService {
         var _this = this;
         return this.service.getall(this.provider, params);
     }
-
 
     getConfigValue(key: string): any {
         return getDeepFromObject(this.crudconfig, key, null);

@@ -51,7 +51,7 @@ export class NotificationsService {
   }
 
   loadNotification(params?: {}): any {
-    if(this.notification_end_reached==true){
+    if (this.notification_end_reached == true) {
       return;
     }
     this.loading_notifications = true;
@@ -61,8 +61,8 @@ export class NotificationsService {
     return this.service.getall(this.provider, params).subscribe(results => {
       _this.loading_notifications = false;
       if (results.isSuccess()) {
-        var new_notifications =results.getResultData() as Notification[];
-        if(new_notifications.length){
+        var new_notifications = results.getResultData() as Notification[];
+        if (new_notifications.length) {
           _this.searchNotification(new_notifications[0].id).subscribe(notification => {
             if (notification) {
               _this.notification_end_reached = true;
@@ -71,13 +71,12 @@ export class NotificationsService {
               _this.NOTIFICATIONS = _this.NOTIFICATIONS.concat(results.getResultData());
             }
           });
-        }else{
-         _this.notification_end_reached=true; 
+        } else {
+          _this.notification_end_reached = true;
         }
       }
     });
   }
-
 
   searchNotification(id: number): Observable<Notification> {
     return of(this.NOTIFICATIONS.find((notification: Notification) => notification.id == id));
@@ -114,7 +113,6 @@ export class NotificationsService {
     this.service.getProvider(this.provider).crudconfig.route_url = 'notifications/';
     return this.service.getall(this.provider, params);
   }
-
 
   markNotificationsAsRead(params?: {}): any {
     this.provider = this.getConfigValue('forms.update.provider');

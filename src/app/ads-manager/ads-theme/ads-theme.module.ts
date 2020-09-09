@@ -15,10 +15,11 @@ import { AdPostPreviewWidgetComponent } from './widgets/ad-post-preview-widget/a
 import { WfLinkifyModule } from '@app/libs/wf-linkify';
 import { AdPostCatalogWidgetComponent } from './widgets/ad-post-catalog-widget/ad-post-catalog-widget.component';
 import { AdTextPreviewWidgetComponent } from './widgets/ad-text-preview-widget/ad-text-preview-widget.component';
+import { AdsProcessingRequestOverlayComponent } from './widgets/ads-processing-request-overlay/ads-processing-request-overlay.component';
 
 
 @NgModule({
-  declarations: [AdsNavBarComponent, AdsMainContentComponent, AdsNavTabsWidgetComponent, CreateAdAccountFormModalComponent, OverlayContentModalComponent, AdContentFormWidgetComponent, AdPreviewWidgetComponent, AdPostPreviewWidgetComponent, AdPostCatalogWidgetComponent, AdTextPreviewWidgetComponent],
+  declarations: [AdsNavBarComponent, AdsMainContentComponent, AdsNavTabsWidgetComponent, CreateAdAccountFormModalComponent, OverlayContentModalComponent, AdContentFormWidgetComponent, AdPreviewWidgetComponent, AdPostPreviewWidgetComponent, AdPostCatalogWidgetComponent, AdTextPreviewWidgetComponent, AdsProcessingRequestOverlayComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -29,6 +30,6 @@ import { AdTextPreviewWidgetComponent } from './widgets/ad-text-preview-widget/a
     ReactiveFormsModule,
     WfLinkifyModule
   ],
-  exports: [AdsNavBarComponent, AdsMainContentComponent,AdsNavTabsWidgetComponent, CreateAdAccountFormModalComponent, OverlayContentModalComponent, AdContentFormWidgetComponent, AdPreviewWidgetComponent, AdPostPreviewWidgetComponent, AdPostCatalogWidgetComponent, AdTextPreviewWidgetComponent],
+  exports: [AdsNavBarComponent, AdsMainContentComponent,AdsNavTabsWidgetComponent, CreateAdAccountFormModalComponent, OverlayContentModalComponent, AdContentFormWidgetComponent, AdPreviewWidgetComponent, AdPostPreviewWidgetComponent, AdPostCatalogWidgetComponent, AdTextPreviewWidgetComponent, AdsProcessingRequestOverlayComponent],
 })
 export class AdsThemeModule { }

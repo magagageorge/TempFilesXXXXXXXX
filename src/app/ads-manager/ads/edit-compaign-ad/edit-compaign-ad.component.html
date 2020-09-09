@@ -1,0 +1,364 @@
+<app-ads-nav-bar></app-ads-nav-bar>
+<app-ads-main-content>
+
+    <div class="d-block ads-module-container-fluid w-100">
+        <div class="d-block ads-module-container">
+            <div class="row mx-0 p-0 h-100">
+                <div
+                    class="pull-left col-12 col-md-3 col-lg-3 col-xl-3 d-none d-md-block d-lg-block d-xl-block p-0 h-100">
+
+                    <app-edit-compaign-left [compaign_model]="compaign_model" [child]="true"
+                        [active_id]="(ad_content_model)?ad_content_model.id:null"></app-edit-compaign-left>
+
+                </div>
+                <div class="col-12 col-md-9 col-lg-9 col-xl-9 d-block border p-0" style="height:100%;">
+
+                    <div style="position: absolute;top: 0;left: 0;right: 0;bottom:80px;overflow-y: auto;">
+                        <ng-container *ngIf="loading_ad_forms==false">
+                            <div class="row mx-0 h-100 w-100">
+                                <div class="col-12 col-md-6 col-lg-6 col-xl-6">
+
+                                    <div class="card m-1" [class.woorbi-disabled-block]="isThisEditable==false">
+                                        <div class="card-header p-2">
+                                            <span class="font-weight-bold">Ad Name</span>
+                                        </div>
+                                        <div class="card-body p-0">
+                                            <div class="w-100 p-1">
+
+                                                <div class="form-row p-0 m-0">
+                                                    <div class="form-group col-12 p-0 mb-1">
+                                                        <input type="text" [(ngModel)]="ad_content_model.name"
+                                                            class="form-control" placeholder="Ad Name" />
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card m-1" [class.woorbi-disabled-block]="isThisEditable==false">
+                                        <div class="card-header p-2">
+                                            <span class="font-weight-bold">Identity</span>
+                                            <div>Choose how you want your business to be represented in your ad.
+                                            </div>
+                                        </div>
+                                        <div class="card-body p-0">
+                                            <div class="w-100 p-1">
+                                                <span>Your Woorbi Page represents your business in ads.</span>
+                                                <span> You can also <a href="javascript:void(0)"
+                                                        (click)="pageService.createPageOnFly()"
+                                                        class="text-primary">Create
+                                                        a Woorbi Page</a></span>
+                                            </div>
+                                            <form [formGroup]="frm_identityGroup" (ngSubmit)="saveAdIdentity()"
+                                                #identityForm="ngForm">
+                                                <div class="d-block w-100 p-2">
+
+                                                    <div class="row mx-0">
+                                                        <div class="col-12 col-md-9 col-lg-9 col-xl-9">
+                                                            <div class="d-block w-100">
+                                                                <div class="row mx-0">
+                                                                    <div class="col-12 dropdown d-block identity-dropdown p-0"
+                                                                        ngbDropdown placement="bottom-left"
+                                                                        style="min-width: 250px;">
+                                                                        <a class="dropdown-toggle border border-light d-block m-0"
+                                                                            style="max-width: 300px;"
+                                                                            [ngStyle]="{'pointer-events': (pageService.MYPAGES.length>0) ? 'auto' : 'none' }"
+                                                                            data-toggle="dropdown" aria-expanded="false"
+                                                                            ngbDropdownToggle>
+                                                                            <ng-container
+                                                                                *ngIf="pageService.MYPAGES.length>0">
+                                                                                <ng-container
+                                                                                    *ngIf="ad_content_model.selected_page!=null">
+                                                                                    <span class="row mx-0">
+                                                                                        <span class="col-3 p-0">
+                                                                                            <img style="max-height:50px;"
+                                                                                                src="{{ad_content_model.selected_page.picture.face}}"
+                                                                                                class="img-fluid rounded-circle z-depth-0 m-0">
+                                                                                        </span>
+                                                                                        <span
+                                                                                            class="col-8 p-0 d-flex align-items-center">
+                                                                                            <span
+                                                                                                class="d-inline-block w-100 m-0 p-0 font-weight-bold text-truncate">
+                                                                                                {{ad_content_model.selected_page.name}}
+                                                                                            </span>
+                                                                                        </span>
+                                                                                        <span
+                                                                                            class="col-1 p-0 d-flex align-items-center"
+                                                                                            style="font-size: 120%;">
+                                                                                            <i class="fa fa-caret-down"
+                                                                                                aria-hidden="true"></i>
+                                                                                        </span>
+                                                                                    </span>
+                                                                                </ng-container>
+
+                                                                                <ng-container
+                                                                                    *ngIf="ad_content_model.selected_page==null && pageService.MYPAGES[0]!=null">
+                                                                                    <span class="row mx-0">
+                                                                                        <span
+                                                                                            class="col-11 p-0 d-flex align-items-center">
+                                                                                            <span
+                                                                                                class="d-inline-block w-100 m-0 p-0 font-weight-bold text-truncate">
+                                                                                                - Select Page -
+                                                                                            </span>
+                                                                                        </span>
+                                                                                        <span
+                                                                                            class="col-1 p-0 d-flex align-items-center"
+                                                                                            style="font-size: 120%;">
+                                                                                            <i class="fa fa-caret-down"
+                                                                                                aria-hidden="true"></i>
+                                                                                        </span>
+                                                                                    </span>
+                                                                                </ng-container>
+                                                                            </ng-container>
+                                                                        </a>
+                                                                        <div class="dropdown-menu dropdown-menu-right"
+                                                                            style="width:300px;" ngbDropdownMenu>
+                                                                            <ul class="list-group list-group-flush">
+                                                                                <ng-container
+                                                                                    *ngFor="let mypage of pageService.MYPAGES">
+                                                                                    <li
+                                                                                        class="list-group-item px-0 py-1">
+                                                                                        <a href="javascript:void(0)"
+                                                                                            (click)="setSelectedPage(mypage);"
+                                                                                            class="p-0 m-0 text-decoration-none"
+                                                                                            style="text-decoration: none;">
+                                                                                            <div class="row p-0 m-0">
+                                                                                                <div class="col-3 p-0">
+                                                                                                    <ng-container
+                                                                                                        *ngIf="mypage.picture!=null">
+                                                                                                        <img style="max-height:50px;"
+                                                                                                            src="{{mypage.picture.face}}"
+                                                                                                            class="img-fluid rounded-circle z-depth-0 m-0">
+                                                                                                    </ng-container>
+                                                                                                </div>
+                                                                                                <div
+                                                                                                    class="col-9 p-0 d-flex align-items-center">
+                                                                                                    <div
+                                                                                                        class="d-inline-block w-100 m-0 p-0 font-weight-bold text-truncate">
+                                                                                                        {{mypage.name}}
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </a>
+                                                                                    </li>
+
+                                                                                </ng-container>
+
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mx-0">
+                                                        <div class="col-12">
+                                                            <input type="hidden" formControlName="page_id"
+                                                                [(ngModel)]="ad_content_model.page_id">
+                                                            <div *ngIf="identity_submitted && ident.page_id.errors"
+                                                                class="w-100  text-danger  form-text m-0 p-0">
+                                                                <div *ngIf="ident.page_id.errors.required"
+                                                                    class="error">
+                                                                    <span class="fa fa-exclamation-circle" style></span>
+                                                                    <span class="px-1 py-2">Please add Ad
+                                                                        Identity by
+                                                                        Selecting a Page or Create a New
+                                                                        Page.</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                    <div class="card m-1" [class.woorbi-disabled-block]="isThisEditable==false">
+                                        <div class="card-header p-2">
+                                            <span class="font-weight-bold">Ad Format</span>
+                                            <div>Choose your ad format.
+                                            </div>
+                                        </div>
+                                        <div class="card-body p-0">
+                                            <form [formGroup]="frm_adformatGroup" (ngSubmit)="saveAdFormat()"
+                                                #audienceForm="ngForm">
+                                                <div class="d-block w-100 p-1">
+                                                    <div class="row mx-0">
+                                                        <div class="col-12 p-0">
+                                                            <ng-container *ngIf="ad_formats.length>0">
+                                                                <div class="row mx-0">
+                                                                    <ng-container *ngFor="let format of ad_formats">
+                                                                        <div
+                                                                            class="col-12 col-md-4 col-lg-4 col-xl-4 p-0 border">
+                                                                            <div class="d-flex justify-content-center align-items-center w-100 h-100 m-0 p-0"
+                                                                                (click)="setAdFormat(format.id)"
+                                                                                [class.wb-ad-icon-active-container]="format.selected==true"
+                                                                                style="cursor: pointer;min-height:150px;">
+                                                                                <div class="row mx-0 h-100">
+                                                                                    <div class="col-12 h-75">
+                                                                                        <div
+                                                                                            class="d-flex justify-content-center align-items-center w-100 h-100">
+                                                                                            <img src="assets/img/wb-icons/{{format.image}}"
+                                                                                                [class.wb-ad-icon-active]="format.selected==true"
+                                                                                                [class.wb-ad-icon]="format.selected!=true"
+                                                                                                class="img-fluid m-0 m-3"
+                                                                                                style="min-height: 70px;">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div
+                                                                                        class="col-12 h-25 d-flex justify-content-center align-items-top p-0">
+                                                                                        <span>{{format.name}}</span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </ng-container>
+                                                                </div>
+                                                            </ng-container>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                    <div *ngIf="ad_content_model.page_id!=null && ad_content_model.ad_format!=''"
+                                        class="card m-1" [class.woorbi-disabled-block]="isThisEditable==false">
+                                        <div class="card-header p-2">
+                                            <span class="font-weight-bold">Create Ad Content</span>
+                                        </div>
+                                        <div class="card-body p-0" style="height: 30vh;">
+                                            <div class="row mx-0 h-100">
+                                                <div class="col-12 h-100 p-0">
+                                                    <div
+                                                        class="d-flex justify-content-center align-items-center w-100 h-100 border">
+                                                        <button (click)="adsService.openAdContentFormModal()"
+                                                            class="btn btn-sm btn-outline-primary">
+                                                            <span class="fa fa-edit"></span>
+                                                            <span>&nbsp;</span>
+                                                            <span>Edit Ad Content</span>
+                                                        </button>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-12 col-md-6 col-lg-6 col-xl-6 p-1">
+
+                                    <div class="d-block w-100">
+                                        <span class="text-muted">Ad Preview</span>
+                                        <div class="d-block border p-3">
+                                            <ng-container *ngIf="ad_content_model.ad_format!='TEXT_AD'">
+                                                <app-ad-post-preview-widget [ad_model]="ad_content_model">
+                                                </app-ad-post-preview-widget>
+                                            </ng-container>
+
+                                            <ng-container *ngIf="ad_content_model.ad_format=='TEXT_AD'">
+                                                <app-ad-text-preview-widget [ad_model]="ad_content_model">
+                                                </app-ad-text-preview-widget>
+                                            </ng-container>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </ng-container>
+
+                        <ng-container *ngIf="loading_ad_forms==true">
+                            <div class="d-flex justify-content-center align-items-center w-100 h-100"
+                                style="font-size: 130%;">
+                                <i class="fa fa-circle-o-notch fa-spin fa-2x" aria-hidden="true"></i>
+                            </div>
+                        </ng-container>
+
+                    </div>
+
+                    <div class="border-top" style="position: absolute;height:80px;left: 0;right: 0;bottom:0;">
+                        <div class="row mx-0 h-100">
+                            <div class="col-4 d-flex align-items-center">
+                                <span *ngIf="compaign_model" class="pull-left d-flex align-items-center m-2">
+                                    <a routerLink="/adsmanager/compaigns/edit/{{compaign_model.id}}"
+                                        class="btn btn-sm btn-secondary pull-left text-decoration-none">Close</a>
+                                </span>
+
+                                <span class="pull-right d-block m-2">
+                                    <ng-container *ngIf="saving_changes==false">
+                                        <span class="text-success d-block">
+                                            <span class="fa fa-check"></span>
+                                            <span>&nbsp;</span>
+                                            <span>All edits Saved</span>
+                                        </span>
+                                    </ng-container>
+                                    <ng-container *ngIf="saving_changes==true">
+                                        <span class="text-dark d-flex align-items-center">
+                                            <span class="fa fa-circle-o-notch fa-spin fa-2x" aria-hidden="true"></span>
+                                            <span>&nbsp;</span>
+                                            <span>Saving Changes</span>
+                                        </span>
+                                    </ng-container>
+                                </span>
+
+                            </div>
+                            <div class="col-8 d-flex align-items-center justify-content-end">
+                                <div class="pull-right d-block m-2">
+                                    <ng-container
+                                        *ngIf="ad_content_model.id!=null && ad_content_model.status!='Published'">
+                                        <button (click)="PublishAd()" class="btn btn-sm btn-success d-block pull-right">
+                                            <span>Publish</span>
+                                        </button>
+                                    </ng-container>
+                                    <ng-container *ngIf="ad_content_model.status=='Draft'">
+                                        <button (click)="wantToDiscardAd(true)"
+                                            class="btn btn-sm btn-warning pull-right">
+                                            <span>Discard Draft</span>
+                                        </button>
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <ng-container *ngIf="want_to_discard_ad==true">
+        <app-in-page-content-modal>
+            <div class="card m-0">
+                <div class="card-header">
+                    <span class="font-weight-bold pull-left">Discard Ad Draft!</span>
+                </div>
+                <div class="card-body p-3">
+                    <div class="d-block w-100">
+                        <p>Are your sure you want to Discard this Ad? <br>Once you do this,you will not be able to Undo.
+                        </p>
+                    </div>
+                    <div class="d-block w-100">
+                        <button (click)="wantToDiscardAd(false)"
+                            class="btn btn-sm btn-default pull-left">Cancel</button>
+                        <button (click)="DiscardDraft()" class="btn btn-sm btn-primary pull-right">Discard</button>
+                    </div>
+                </div>
+            </div>
+        </app-in-page-content-modal>
+
+    </ng-container>
+
+
+    <ng-container *ngIf="adsService.ad_form_open">
+        <app-ad-content-form-widget [compaign]="compaign_model" [ad_model]="ad_content_model"
+            (adEditedEmit)="updateAdContentModel($event)"></app-ad-content-form-widget>
+    </ng-container>
+</app-ads-main-content>

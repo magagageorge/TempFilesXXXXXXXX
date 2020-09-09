@@ -2,7 +2,7 @@
     <ng-container *ngFor="let ad_content of showAdsService.TEXT_ADS;let i=index">
         <ng-container *ngIf="i<1">
             <div class="w-100 d-flex justify-content-center align-items-center pb-1">
-                <a href="{{linkProcessingService.insertLinkProtocol(ad_content.cards[0].destination_url)}}" target="_blank" class="font-weight-bold"><span
+                <a href="{{linkProcessingService.insertLinkProtocol(ad_content.cards[0].redirect_url)}}" target="_blank" class="font-weight-bold"><span
                         class="text-primary">{{ad_content.cards[0].headline}}
                         <span>&nbsp;</span>
                         <span>-</span><span>&nbsp;</span></span><span>{{ad_content.cards[0].description}}</span></a>

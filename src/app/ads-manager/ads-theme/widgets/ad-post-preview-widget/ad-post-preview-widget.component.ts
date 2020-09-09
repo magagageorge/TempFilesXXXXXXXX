@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, HostListener, AfterViewInit } from '@angular/core';
 import { AdContentForm } from '@app/ads-manager/models/ad-content';
 import { ImageIconsService } from '@app/services/image-icons.service';
-import { AdCompaignForm } from '@app/ads-manager/models/ad-compaign-form';
 import { SysFunctions } from '@app/libs/utilities/common-functions';
 
 @Component({
@@ -9,14 +8,13 @@ import { SysFunctions } from '@app/libs/utilities/common-functions';
   templateUrl: './ad-post-preview-widget.component.html',
   styleUrls: ['./ad-post-preview-widget.component.scss']
 })
-export class AdPostPreviewWidgetComponent implements OnInit,AfterViewInit {
+export class AdPostPreviewWidgetComponent implements OnInit, AfterViewInit {
 
   @ViewChild("AdPostContainer", { static: false })
   AdPostContainer: ElementRef;
-  @Input() ad_model:AdContentForm;
-  @Input() compaign:AdCompaignForm;
-  AdPostContainerWidth:number;
-  constructor(public imageIconsService:ImageIconsService) { }
+  @Input() ad_model: AdContentForm;
+  AdPostContainerWidth: number;
+  constructor(public imageIconsService: ImageIconsService) { }
 
   ngOnInit() {
   }
@@ -42,7 +40,7 @@ export class AdPostPreviewWidgetComponent implements OnInit,AfterViewInit {
     return new_height;
   }
 
-  removeLinkProtocol(url:string){
+  removeLinkProtocol(url: string) {
     return SysFunctions.removeLinkProtocol(url);
   }
 

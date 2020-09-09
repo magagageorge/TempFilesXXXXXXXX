@@ -3,5 +3,5 @@ export class AdsAccount {
     name:string;
     created_at:string;
     currency:string;
-    compaings:any[];
+    compaigns:any[];
 }

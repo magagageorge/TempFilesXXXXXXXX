@@ -43,11 +43,11 @@
                                             [class.text-primary]="compaign_model.currentForm=='AdIdentity'"
                                             (click)="setCurrentForm('AdIdentity')">Ad Identity</li>
                                         <li class="cursor-pointer"
-                                            [ngClass]="[(compaign_model.selected_page!=null)?'':'disabled text-muted']"
+                                            [ngClass]="[(ad_model.selected_page!=null)?'':'disabled text-muted']"
                                             [class.text-primary]="compaign_model.currentForm=='AdFormat'"
                                             (click)="setCurrentForm('AdFormat')">Ad Format</li>
                                         <li class="cursor-pointer"
-                                            [ngClass]="[(compaign_model.ad_format!='' && compaign_model.selected_page!=null)?'':'disabled text-muted']"
+                                            [ngClass]="[(ad_model.ad_format!='' && ad_model.selected_page!=null)?'':'disabled text-muted']"
                                             [class.text-primary]="compaign_model.currentForm=='AdContent'"
                                             (click)="setCurrentForm('AdContent')">Ad Content</li>
                                     </ul>
@@ -62,7 +62,7 @@
 
                 <ng-container *ngIf="compaign_model.currentForm=='Objective'">
                     <div class="card m-0">
-                        <div class="card-header">
+                        <div class="card-header p-2">
                             <span class="font-weight-bold">What is your Marketing Objective?</span>
                         </div>
                         <div class="card-body p-0">
@@ -149,7 +149,8 @@
                                                     class="form-control" formControlName="compaign_name"
                                                     [(ngModel)]="compaign_model.compaign_name"
                                                     placeholder="Compaign Name">
-                                                <input type="hidden" formControlName="objective" [(ngModel)]="compaign_model.objective">
+                                                <input type="hidden" formControlName="objective"
+                                                    [(ngModel)]="compaign_model.objective">
                                             </div>
                                             <div class="col-12 d-flex justify-content-center">
                                                 <div *ngIf="objective_submitted && obj.compaign_name.errors"
@@ -167,7 +168,8 @@
                                 <div *ngIf="selectedObjective!=null" class="d-block w-100">
                                     <div class="row mx-0">
                                         <div class="col-12 d-flex justify-content-center">
-                                            <button type="submit" class="btn btn-sm btn-outline-primary">Continue</button>
+                                            <button type="submit"
+                                                class="btn btn-sm btn-outline-primary">Continue</button>
                                         </div>
                                     </div>
                                 </div>
@@ -184,9 +186,9 @@
                             <div class="col-12 col-md-8 col-lg-8 col-xl-8 p-0">
 
                                 <div class="card m-0">
-                                    <div class="card-header">
+                                    <div class="card-header p-2">
                                         <span class="font-weight-bold">Audience</span>
-                                        <p>Define who you want to see your ads</p>
+                                        <div>Define who you want to see your ads</div>
                                     </div>
                                     <div class="card-body p-0">
                                         <form [formGroup]="frm_audienceGroup" (ngSubmit)="saveAudience()"
@@ -211,6 +213,8 @@
                                                                 <ng-container
                                                                     *ngFor="let location of compaign_model.aud_locations;let i=index">
                                                                     <span class="chip chip-primary m-1">
+                                                                        <span class="fa fa-map-marker"></span>
+                                                                        <span>&nbsp;</span>
                                                                         <span>{{location.name}}</span>
                                                                         <span>&nbsp;</span>
                                                                         <span (click)="removeSelectedLocation(location)"
@@ -502,10 +506,11 @@
                             <div class="col-12 col-md-8 col-lg-8 col-xl-8 p-0">
 
                                 <div class="card m-0">
-                                    <div class="card-header">
+                                    <div class="card-header p-2">
                                         <span class="font-weight-bold">Budget and Schedule</span>
-                                        <p>Define how much you'd like to spend, and when you'd like your ads to appear.
-                                        </p>
+                                        <div>Define how much you'd like to spend, and when you'd like your ads to
+                                            appear.
+                                        </div>
                                     </div>
                                     <div class="card-body p-0">
                                         <form [formGroup]="frm_budgetscheduleGroup" (ngSubmit)="saveBudgetSchedule()"
@@ -638,7 +643,7 @@
                                                                             <input type="text" name="start_date"
                                                                                 maxlength="10"
                                                                                 formControlName="start_date"
-                                                                                name="start_date" ngbDatepicker
+                                                                                ngbDatepicker
                                                                                 #start_date="ngbDatepicker"
                                                                                 (focus)="start_date.toggle()"
                                                                                 [(ngModel)]="compaign_model.start_date">
@@ -661,7 +666,7 @@
                                                                                 <input type="text" name="end_date"
                                                                                     maxlength="10"
                                                                                     formControlName="end_date"
-                                                                                    name="end_date" ngbDatepicker
+                                                                                    ngbDatepicker
                                                                                     #end_date="ngbDatepicker"
                                                                                     (focus)="end_date.toggle()"
                                                                                     [(ngModel)]="compaign_model.end_date">
@@ -723,22 +728,21 @@
                         <div class="row mx-0">
                             <div class="col-12 col-md-8 col-lg-8 col-xl-8 p-0">
                                 <div class="card m-0">
-                                    <div class="card-header">
+                                    <div class="card-header p-2">
                                         <span class="font-weight-bold">Identity</span>
-                                        <p>Choose how you want your business to be represented in your ad.
-                                        </p>
+                                        <div>Choose how you want your business to be represented in your ad.
+                                        </div>
                                     </div>
                                     <div class="card-body p-0">
                                         <div class="w-100 p-1">
                                             <span>Your Woorbi Page represents your business in ads.</span>
-                                            <span> You can also <a href="javascript:void()"
+                                            <span> You can also <a href="javascript:void(0)"
                                                     (click)="pageService.createPageOnFly()" class="text-primary">Create
                                                     a Woorbi Page</a></span>
                                         </div>
                                         <form [formGroup]="frm_identityGroup" (ngSubmit)="saveAdIdentity()"
                                             #identityForm="ngForm">
                                             <div class="d-block w-100 p-2">
-
                                                 <div class="row mx-0">
                                                     <div class="col-12 col-md-9 col-lg-9 col-xl-9">
                                                         <div class="d-block w-100">
@@ -754,18 +758,18 @@
                                                                         <ng-container
                                                                             *ngIf="pageService.MYPAGES.length>0">
                                                                             <ng-container
-                                                                                *ngIf="compaign_model.selected_page!=null">
+                                                                                *ngIf="ad_model.selected_page!=null">
                                                                                 <span class="row mx-0">
                                                                                     <span class="col-3 p-0">
                                                                                         <img style="max-height:50px;"
-                                                                                            src="{{compaign_model.selected_page.picture.face}}"
+                                                                                            src="{{ad_model.selected_page.picture.face}}"
                                                                                             class="img-fluid rounded-circle z-depth-0 m-0">
                                                                                     </span>
                                                                                     <span
                                                                                         class="col-8 p-0 d-flex align-items-center">
                                                                                         <span
                                                                                             class="d-inline-block w-100 m-0 p-0 font-weight-bold text-truncate">
-                                                                                            {{compaign_model.selected_page.name}}
+                                                                                            {{ad_model.selected_page.name}}
                                                                                         </span>
                                                                                     </span>
                                                                                     <span
@@ -778,7 +782,7 @@
                                                                             </ng-container>
 
                                                                             <ng-container
-                                                                                *ngIf="compaign_model.selected_page==null && pageService.MYPAGES[0]!=null">
+                                                                                *ngIf="ad_model.selected_page==null && pageService.MYPAGES[0]!=null">
                                                                                 <span class="row mx-0">
                                                                                     <span
                                                                                         class="col-11 p-0 d-flex align-items-center">
@@ -803,15 +807,18 @@
                                                                             <ng-container
                                                                                 *ngFor="let mypage of pageService.MYPAGES">
                                                                                 <li class="list-group-item px-0 py-1">
-                                                                                    <a href="javascript:void()"
-                                                                                        (click)="setSelectedPage(mypage);"
+                                                                                    <a href="javascript:void(0)"
+                                                                                        (click)="setSelectedPage(mypage)"
                                                                                         class="p-0 m-0 text-decoration-none"
                                                                                         style="text-decoration: none;">
                                                                                         <div class="row p-0 m-0">
                                                                                             <div class="col-3 p-0">
-                                                                                                <img style="max-height:50px;"
-                                                                                                    src="{{mypage.picture.face}}"
-                                                                                                    class="img-fluid rounded-circle z-depth-0 m-0">
+                                                                                                <ng-container
+                                                                                                    *ngIf="mypage.picture!=null">
+                                                                                                    <img style="max-height:50px;"
+                                                                                                        src="{{mypage.picture.face}}"
+                                                                                                        class="img-fluid rounded-circle z-depth-0 m-0">
+                                                                                                </ng-container>
                                                                                             </div>
                                                                                             <div
                                                                                                 class="col-9 p-0 d-flex align-items-center">
@@ -836,7 +843,7 @@
                                                 <div class="row mx-0">
                                                     <div class="col-12">
                                                         <input type="hidden" formControlName="page_id"
-                                                            [(ngModel)]="compaign_model.page_id">
+                                                            [(ngModel)]="ad_model.page_id">
                                                         <div *ngIf="identity_submitted && ident.page_id.errors"
                                                             class="w-100  text-danger  form-text m-0 p-0">
                                                             <div *ngIf="ident.page_id.errors.required" class="error">
@@ -877,10 +884,10 @@
                             <div class="col-12 col-md-8 col-lg-8 col-xl-8 p-0">
 
                                 <div class="card m-0">
-                                    <div class="card-header">
+                                    <div class="card-header p-2">
                                         <span class="font-weight-bold">Ad Format</span>
-                                        <p>Choose your ad format.
-                                        </p>
+                                        <div>Choose your ad format.
+                                        </div>
                                     </div>
                                     <div class="card-body p-0">
                                         <form [formGroup]="frm_adformatGroup" (ngSubmit)="saveAdFormat()"
@@ -894,7 +901,7 @@
                                                                     <div
                                                                         class="col-12 col-md-4 col-lg-4 col-xl-4 p-0 border">
                                                                         <div class="d-flex justify-content-center align-items-center w-100 h-100 m-0 p-0"
-                                                                            (click)="setAdFormat(format)"
+                                                                            (click)="setAdFormat(format.id)"
                                                                             [class.wb-ad-icon-active-container]="format.selected==true"
                                                                             style="cursor: pointer;min-height:150px;">
                                                                             <div class="row mx-0 h-100">
@@ -941,14 +948,13 @@
                     </div>
                 </ng-container>
 
-
                 <ng-container *ngIf="compaign_model.currentForm=='AdContent'">
 
                     <div class="d-block w-100 m-0 p-0">
                         <div class="row mx-0">
                             <div class="col-12 col-md-8 col-lg-8 col-xl-8 p-0">
                                 <div class="card m-0">
-                                    <div class="card-header">
+                                    <div class="card-header p-2">
                                         <span class="font-weight-bold">Create Ad Content</span>
                                     </div>
                                     <div class="card-body p-0" style="height: 70vh;">
@@ -974,12 +980,10 @@
                     </div>
                 </ng-container>
 
-
-
             </div>
         </div>
     </div>
     <ng-container *ngIf="adsService.ad_form_open">
-        <app-ad-content-form-widget [compaign]="compaign_model"></app-ad-content-form-widget>
+        <app-ad-content-form-widget [compaign]="compaign_model" [ad_model]="ad_model"></app-ad-content-form-widget>
     </ng-container>
 </app-ads-main-content>

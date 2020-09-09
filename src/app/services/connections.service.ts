@@ -251,7 +251,6 @@ export class ConnectionsService {
     });
   }
 
-
   IgnoreById(profielId: number): void {
     var _this = this;
     this.searchSuggestions(String(profielId)).subscribe(suggestion => {
@@ -293,8 +292,6 @@ export class ConnectionsService {
       }
     });
   }
-
-
 
   loadSuggestions(params?: {}): any {
     this.loading_suggestions = true;
@@ -361,7 +358,6 @@ export class ConnectionsService {
     var n_id = Number(id);
     return of(this.CONNECT_SUGGESTIONS.find((suggestion: Profile) => suggestion.user_id == n_id));
   }
-
 
   clearSuggestion(profile: Profile) {
     this.CONNECT_SUGGESTIONS = this.CONNECT_SUGGESTIONS.filter((x: any) => x.user_id !== profile.user_id);
@@ -452,7 +448,6 @@ export class ConnectionsService {
         }
       });
     });
-
 
   }
 

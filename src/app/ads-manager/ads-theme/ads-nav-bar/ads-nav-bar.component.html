@@ -17,9 +17,40 @@
                 </a>
             </li>
 
-            <li *ngIf="is_authenticated==true;" class="nav-item d-block float-left ml-1 d-flex justify-content-start" style="max-width: 150px;border:1px solid red;">
-                <span class="nav-link waves-effect waves-light"> <span class="clearfix d-none d-sm-inline-block">Ads
-                        Manager</span></span>
+            <li *ngIf="is_authenticated==true && adsService.ad_account!=null"
+                class="nav-item d-block pull-left ml-1 d-flex justify-content-start"
+                style="max-width: 150px;">
+                <span class="nav-link waves-effect waves-light" title="Ad Account">
+                    <span
+                        class="clearfix d-block">{{adsService.ad_account.name}}({{adsService.ad_account.id}})</span></span>
+            </li>
+            <li *ngIf="is_authenticated==true" class="nav-item d-none d-md-block d-lg-block d-xl-block pull-left ml-1"
+                style="max-width: 150px;">
+            </li>
+            <li *ngIf="is_authenticated==true" class="nav-item  d-none d-md-block d-lg-block d-xl-block pull-left ml-1"
+                style="max-width: 150px;">
+            </li>
+            <li *ngIf="is_authenticated==true" class="nav-item d-none d-md-block d-lg-block d-xl-block pull-left ml-1"
+                style="max-width: 150px;">
+            </li>
+            <li *ngIf="is_authenticated==true" class="nav-item  d-none d-md-block d-lg-block d-xl-block pull-left ml-1"
+                style="max-width: 150px;">
+            </li>
+            <li *ngIf="is_authenticated==true" class="nav-item d-none d-md-block d-lg-block d-xl-block pull-left ml-1"
+                style="max-width: 150px;">
+            </li>            
+            <li *ngIf="is_authenticated==true" class="nav-item d-none d-md-block d-lg-block d-xl-block pull-left ml-1"
+                style="max-width: 150px;">
+            </li>
+            <li *ngIf="is_authenticated==true" class="nav-item d-none d-md-block d-lg-block d-xl-block pull-left ml-1"
+                style="max-width: 150px;">
+            </li>
+
+            <li *ngIf="is_authenticated==true;" class="nav-item d-block float-left ml-1 d-flex justify-content-start"
+                style="max-width: 150px;">
+                <a routerLink="/adsmanager/compaigns" class="nav-link waves-effect waves-light" style="color:#fff;">
+                    <i class="fa fa-bars"></i><span>&nbsp;</span><span>Ads Manager</span>
+                </a>
             </li>
 
             <li *ngIf="is_authenticated==true;" class="nav-item d-md-none d-lg-none float-right">

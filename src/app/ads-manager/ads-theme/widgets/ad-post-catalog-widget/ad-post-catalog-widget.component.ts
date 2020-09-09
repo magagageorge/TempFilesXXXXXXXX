@@ -28,7 +28,6 @@ export class AdPostCatalogWidgetComponent implements OnInit {
     }
   }
 
-
   getHeadLine(card: AdContentCardForm) {
     if (card && card.headline.trim() != '') {
       return card.headline;

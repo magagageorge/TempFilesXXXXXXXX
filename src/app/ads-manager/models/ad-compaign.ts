@@ -11,4 +11,10 @@ export class AdCompaign {
     aud_age_max:number;
     aud_locations:GeoLocationShort[];
     budget_schedule:any;
+    current_form:string;
+    status:string;
+    ads:any;
+    reach:string;
+    clicks:string;
+    unique_clicks:string;
 }

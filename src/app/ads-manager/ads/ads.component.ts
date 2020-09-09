@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { AdsService } from '../services/ads.service';
 import { Router } from '@angular/router';
+import { SysFunctions } from '@app/libs/utilities/common-functions';
 
 @Component({
   selector: 'app-ads',
@@ -16,7 +17,7 @@ export class AdsComponent implements OnInit {
     this.title.setTitle('Ads Manager | Woorbi');
     this.adsService.isAccountLoaded().subscribe((accountLoaded) => {
       if (accountLoaded) {
-        if (this.adsService.ad_account !== null && this.adsService.ad_account.compaings.length < 1) {
+        if (this.adsService.ad_account != null && this.adsService.ad_account.compaigns.length < 1) {
            this.router.navigateByUrl('adsmanager/compaigns/create');
         }
       } else {
@@ -25,6 +26,14 @@ export class AdsComponent implements OnInit {
         }
       }
     });
+  }
+
+  ucwords(str:string){
+    return SysFunctions.ucwords(str);
+  }
+
+  UpdateSelectedCompaign(event:any){
+    
   }
 
 }

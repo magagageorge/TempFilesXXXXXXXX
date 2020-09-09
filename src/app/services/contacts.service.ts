@@ -47,7 +47,6 @@ export class ContactsService {
     this.router = router;
   }
 
-
   loadInviteContacts(params?: {}): any {
     this.loading_invite_contacts = true;
     this.provider = this.getConfigValue('forms.getall.provider');
@@ -167,7 +166,6 @@ export class ContactsService {
     });
     this.SELECTED_CONTACTS = [];
   }
-
 
   inviteContacts() {
     var _this = this;

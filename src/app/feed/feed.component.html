@@ -1,27 +1,30 @@
-<app-wf-navbar></app-wf-navbar>   
+<app-wf-navbar></app-wf-navbar>
 <app-wf-main-content>
-<div class="container-fluid px-md-5 px-lg-5" style="min-height: 100%;">
-<div class="row" style="min-height: 80vh;">
-<div class="pull-left d-none d-md-block d-lg-block col-md-3 col-lg-3" style="min-height:80vh;">
-<app-wf-left-side-bar></app-wf-left-side-bar>
-</div>
-<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 p-0">
-<app-add-profile-photo-alert-widget *ngIf="profileService.MYPROFILE.avatar.show_alert==true"></app-add-profile-photo-alert-widget>
-<app-post-form></app-post-form>
-<app-feed-widget></app-feed-widget>
-</div>
-<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4  d-none d-md-block d-lg-block pull-right">
-<app-wf-right-sidebar></app-wf-right-sidebar>
-</div>
-</div>
-</div>
+    <div class="container-fluid px-md-5 px-lg-5" style="min-height: 100%;">
+        <div class="row" style="min-height: 80vh;">
+            <div class="pull-left d-none d-md-block d-lg-block col-md-3 col-lg-3" style="min-height:80vh;">
+                <app-wf-left-side-bar></app-wf-left-side-bar>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 p-0">
+                <app-add-profile-photo-alert-widget *ngIf="profileService.MYPROFILE.avatar.show_alert==true">
+                </app-add-profile-photo-alert-widget>
+                <app-post-form></app-post-form>
+                <app-feed-widget></app-feed-widget>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 p-0 d-none d-md-block d-lg-block pull-right">
+                <app-wf-right-sidebar></app-wf-right-sidebar>
+            </div>
+        </div>
+    </div>
 </app-wf-main-content>
 <!--Main layout-->
 <app-wf-footer></app-wf-footer>
 <app-feed-images-overlay-view></app-feed-images-overlay-view>
 <app-overlay-load-submit-process-data-widget></app-overlay-load-submit-process-data-widget>
-<app-faint-body-overlay *ngIf="postingService.show_input_buttons" (click)="postingService.messageBlur()"></app-faint-body-overlay>
+<app-faint-body-overlay *ngIf="postingService.show_input_buttons" (click)="postingService.messageBlur()">
+</app-faint-body-overlay>
 <app-mobile-overlay-post-form *ngIf="postingService.show_input_buttons"></app-mobile-overlay-post-form>
-<app-share-post-form-container-widget *ngIf="postingService.sharePostModel.inShareMode==true"></app-share-post-form-container-widget>
+<app-share-post-form-container-widget *ngIf="postingService.sharePostModel.inShareMode==true">
+</app-share-post-form-container-widget>
 <app-hover-card-container></app-hover-card-container>
 <app-edit-profile-overlay-container></app-edit-profile-overlay-container>

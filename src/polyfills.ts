@@ -75,6 +75,8 @@ import 'zone.js/dist/zone';  // Included with Angular CLI.
 
 
 
+import 'intersection-observer';
+
 /***************************************************************************************************
  * APPLICATION IMPORTS
  */

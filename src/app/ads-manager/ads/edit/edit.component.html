@@ -1,11 +1,897 @@
 <app-ads-nav-bar></app-ads-nav-bar>
 <app-ads-main-content>
-    <div class="container-fluid px-md-5 px-lg-5" style="min-height: 100%;">
-        <div class="row" style="min-height: 80vh;">
-            <div class="col-12 p-0">
 
-                Loading...
+    <div class="d-block ads-module-container-fluid w-100">
+        <div class="d-block ads-module-container">
+            <div class="row mx-0 p-0 h-100">
+                <div
+                    class="pull-left col-12 col-md-3 col-lg-3 col-xl-3 d-none d-md-block d-lg-block d-xl-block p-0 h-100">
+                    <app-edit-compaign-left [compaign_model]="compaign_model" [child]="false"
+                        [active_id]="compaign_model.id">
+                    </app-edit-compaign-left>
+                </div>
+                <div class="col-12 col-md-9 col-lg-9 col-xl-9 d-block border p-0" style="height:100%;">
+                    <div style="position: absolute;top: 0;left: 0;right: 0;bottom:80px;overflow-y: auto;">
+                        <ng-container *ngIf="loading_ad_forms==true">
+                            <div class="d-flex justify-content-center align-items-center w-100 h-100"
+                                style="font-size: 130%;">
+                                <i class="fa fa-circle-o-notch fa-spin fa-2x" aria-hidden="true"></i>
+                            </div>
+                        </ng-container>
+                        <ng-container *ngIf="loading_ad_forms==false">
+                            <div class="row mx-0 h-100 w-100">
+                                <div class="col-12 col-md-8 col-lg-8 col-xl-8">
+                                    <div class="card m-1" [class.woorbi-disabled-block]="isThisEditable==false">
+                                        <div class="card-header p-2">
+                                            <span class="font-weight-bold">Compaign Name</span>
+                                        </div>
+                                        <div class="card-body p-2">
+                                            <div class="d-block w-100">
+                                                <div class="row mx-0">
+                                                    <div class="col-12 p-1 d-block">
+                                                        <div class="d-block w-100">
+                                                            <form [formGroup]="frm_nameGroup" (ngSubmit)="saveName()"
+                                                                #nameForm="ngForm">
+                                                                <div class="form-row mx-auto">
+                                                                    <div class="col-12 d-flex justify-content-center">
+                                                                        <input type="text" name="compaign_name"
+                                                                            (change)="saveName()"
+                                                                            style="max-width: 600px;"
+                                                                            class="form-control"
+                                                                            formControlName="compaign_name"
+                                                                            [(ngModel)]="compaign_model.compaign_name"
+                                                                            placeholder="Compaign Name">
+                                                                    </div>
+                                                                    <div class="col-12 d-flex justify-content-end">
+                                                                        <div *ngIf="name_submitted && cname.compaign_name.errors"
+                                                                            class="text-danger  form-text">
+                                                                            <div *ngIf="cname.compaign_name.errors.required"
+                                                                                class="error">
+                                                                                <span class="fa fa-exclamation-circle"
+                                                                                    style></span>
+                                                                                <span class="px-1 py-2">Required</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card m-1" [class.woorbi-disabled-block]="isThisEditable==false">
+                                        <div class="card-header p-2">
+                                            <span class="font-weight-bold">Compaign Objective</span>
+                                        </div>
+                                        <div class="card-body p-2">
+                                            <div class="d-block w-100">
+                                                <div class="row mx-0">
+                                                    <div class="col-9 p-1 d-block">
+                                                        <form [formGroup]="frm_objectiveGroup"
+                                                            (ngSubmit)="saveObjective()" #objectiveForm="ngForm">
+                                                            <div class="border border-light d-block m-1"
+                                                                style="max-width: 300px;">
+
+                                                                <ng-container
+                                                                    *ngIf="compaign_model.selected_objective!=null">
+                                                                    <span class="row mx-0">
+                                                                        <span class="col-3 p-1">
+                                                                            <span style="font-size: 180%;"
+                                                                                class="{{compaign_model.selected_objective.icon}}">
+                                                                            </span>
+                                                                        </span>
+                                                                        <span
+                                                                            class="col-8 p-1 d-flex align-items-center">
+                                                                            <span
+                                                                                class="d-inline-block w-100 m-0 p-0 font-weight-bold text-truncate">
+                                                                                {{compaign_model.selected_objective.name}}
+                                                                            </span>
+                                                                        </span>
+                                                                        <span
+                                                                            class="col-1 p-0 d-flex align-items-center text-primary"
+                                                                            style="font-size: 120%;">
+                                                                            <span style="font-size: 130%;"
+                                                                                class="fa fa-check-circle"></span>
+                                                                        </span>
+                                                                    </span>
+                                                                </ng-container>
+
+                                                                <ng-container
+                                                                    *ngIf="compaign_model.selected_objective==null">
+                                                                    <span class="row mx-0">
+                                                                        <span
+                                                                            class="col-12 p-1 d-flex align-items-center">
+                                                                            <span class="fa fa-plus-circle"
+                                                                                style="font-size: large;"></span>
+                                                                            <span
+                                                                                class="d-inline-block w-100 m-0 p-0 font-weight-bold text-truncate">
+                                                                                Add Objective
+                                                                            </span>
+                                                                        </span>
+                                                                    </span>
+                                                                </ng-container>
+                                                            </div>
+                                                            <div class="d-block w-100 m-1 p-1"
+                                                                *ngIf="compaign_model.selected_objective!=null">
+                                                                <p>
+                                                                    <span class="pull-left">
+                                                                        <i class="fa fa-info-circle"
+                                                                            aria-hidden="true"></i>
+                                                                    </span>
+                                                                    <span
+                                                                        class="m-2">{{compaign_model.selected_objective.description}}</span>
+                                                                </p>
+                                                                <input type="hidden" (change)="saveObjective()"
+                                                                    formControlName="objective"
+                                                                    [(ngModel)]="compaign_model.objective">
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                    <div class="col-3 p-0 d-flex align-items-center">
+                                                        <span class="chip chip-primary" (click)="ChangeObjective()">
+                                                            <i class="fa fa-edit"></i>
+                                                            <span>&nbsp;</span>
+                                                            <span>Change</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card m-1" [class.woorbi-disabled-block]="isThisEditable==false">
+                                        <div class="card-header p-2">
+                                            <span class="font-weight-bold">Audience</span>
+                                        </div>
+                                        <div class="card-body p-0">
+                                            <form [formGroup]="frm_audienceGroup" (ngSubmit)="saveAudience()"
+                                                #audienceForm="ngForm">
+                                                <div class="d-block w-100 p-2">
+                                                    <div class="row mx-0">
+                                                        <div class="col-12 col-md-3 col-lg-3 col-xl-3">
+                                                            <span class="">Locations</span>
+                                                            <span class="pull-right"
+                                                                title="Enter one or more global regions, countries, counties/regions/states, cities.">
+                                                                <i class="fa fa-info-circle" aria-hidden="true"></i>
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-12 col-md-9 col-lg-9 col-xl-9">
+                                                            <div class="d-block w-100">
+                                                                <p>Show this Ad to people who lives,travel or works
+                                                                    to the
+                                                                    following
+                                                                    location/s.</p>
+                                                            </div>
+                                                            <div class="d-block w-100">
+                                                                <ng-container
+                                                                    *ngIf="compaign_model.aud_locations.length>0">
+                                                                    <ng-container
+                                                                        *ngFor="let location of compaign_model.aud_locations;let i=index">
+                                                                        <span class="chip chip-primary m-1">
+                                                                            <span class="fa fa-map-marker"></span>
+                                                                            <span>&nbsp;</span>
+                                                                            <span>{{location.name}}</span>
+                                                                            <span>&nbsp;</span>
+                                                                            <span
+                                                                                (click)="removeSelectedLocation(location)"
+                                                                                class="p-1">
+                                                                                <span class="fa fa-close"></span>
+                                                                            </span>
+                                                                        </span>
+                                                                    </ng-container>
+                                                                </ng-container>
+                                                                <span *ngIf="show_aud_loc_search!=true"
+                                                                    (click)="ShowLocationSearch()"
+                                                                    class="chip chip-primary m-1">
+                                                                    <span class="fa fa-plus"></span>
+                                                                    <span>&nbsp;</span>
+                                                                    <span>Add Location</span>
+                                                                </span>
+
+                                                                <div *ngIf="audience_submitted && getFormLocations.errors"
+                                                                    class="w-100  text-danger  form-text m-0 p-0">
+                                                                    <div *ngIf="getFormLocations.errors.minLength"
+                                                                        class="error">
+                                                                        <span class="fa fa-exclamation-circle"
+                                                                            style></span>
+                                                                        <span class="px-1 py-2">Please add at Least
+                                                                            one
+                                                                            Location to proceed.</span>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="d-block w-100 p-2">
+                                                    <div class="row mx-0">
+                                                        <div class="col-12 col-md-3 col-lg-3 col-xl-3">
+                                                            <span class="">Age</span>
+                                                            <span class="pull-right"
+                                                                title="Select the minimum and maximum age of the people who will find your ad relevant.">
+                                                                <i class="fa fa-info-circle" aria-hidden="true"></i>
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-12 col-md-9 col-lg-9 col-xl-9">
+                                                            <div class="d-block w-100">
+                                                                <p>Select the minimum and maximum age of the people
+                                                                    who will
+                                                                    find your ad relevant.</p>
+                                                            </div>
+                                                            <div class="d-block w-100">
+                                                                <div class="row mx-0">
+                                                                    <div class="col-6">
+                                                                        Minimum
+                                                                        <select name="age_min" formControlName="age_min"
+                                                                            (change)="AgeRangeChanged()"
+                                                                            [(ngModel)]="compaign_model.aud_age_min">
+                                                                            <ng-container *ngFor="let age of aud_ages">
+                                                                                <option value="{{age.key}}">
+                                                                                    {{age.value}}
+                                                                                </option>
+                                                                            </ng-container>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="col-6">
+                                                                        Maximum
+                                                                        <select name="age_max" formControlName="age_max"
+                                                                            (change)="AgeRangeChanged()"
+                                                                            [(ngModel)]="compaign_model.aud_age_max">
+                                                                            <ng-container *ngFor="let age of aud_ages">
+                                                                                <option value="{{age.key}}">
+                                                                                    {{age.value}}
+                                                                                </option>
+                                                                            </ng-container>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="d-block w-100">
+                                                                <div *ngIf="compaign_model.aud_age_min > compaign_model.aud_age_max"
+                                                                    class="w-100  text-danger  form-text m-0 p-0">
+                                                                    <div class="error">
+                                                                        <span class="fa fa-exclamation-circle"
+                                                                            style></span>
+                                                                        <span class="px-1 py-2">Minimum age should
+                                                                            not be
+                                                                            greater that maximum age.</span>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="d-block w-100 p-2">
+                                                    <div class="row mx-0">
+                                                        <div class="col-12 col-md-3 col-lg-3 col-xl-3">
+                                                            <span class="">Gender</span>
+                                                            <span class="pull-right"
+                                                                title="Show your ads to either men or women, or select 'All' for both.">
+                                                                <i class="fa fa-info-circle" aria-hidden="true"></i>
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-12 col-md-9 col-lg-9 col-xl-9">
+                                                            <div class="d-block w-100">
+                                                                <p>Show your ads to either men or women, or select
+                                                                    "All" for
+                                                                    both.</p>
+                                                            </div>
+                                                            <div class="d-block w-100">
+                                                                <div class="btn-group" role="group">
+                                                                    <button type="button" (click)="setAdGender('All')"
+                                                                        class="btn btn-sm"
+                                                                        [class.btn-outline-primary]="compaign_model.gender!='All'"
+                                                                        [class.btn-primary]="compaign_model.gender=='All'">All</button>
+                                                                    <button type="button" (click)="setAdGender('Men')"
+                                                                        class="btn btn-sm"
+                                                                        [class.btn-outline-primary]="compaign_model.gender!='Men'"
+                                                                        [class.btn-primary]="compaign_model.gender=='Men'">Men</button>
+                                                                    <button type="button" (click)="setAdGender('Women')"
+                                                                        class="btn btn-sm"
+                                                                        [class.btn-outline-primary]="compaign_model.gender!='Women'"
+                                                                        [class.btn-primary]="compaign_model.gender=='Women'">Women</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="d-none w-100 p-2">
+                                                    <div class="row mx-0">
+                                                        <div class="col-12 col-md-3 col-lg-3 col-xl-3">
+                                                            <span class="">Language</span>
+                                                            <span class="pull-right"
+                                                                title="Enter a language to show your ads to people who use a language that isn't common to your location. Otherwise, leave this blank.">
+                                                                <i class="fa fa-info-circle" aria-hidden="true"></i>
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-12 col-md-9 col-lg-9 col-xl-9">
+                                                            <div class="d-block w-100">
+                                                                <p>Enter a language to show your ads to people who
+                                                                    use a
+                                                                    language that isn't common to your location.
+                                                                    Otherwise,
+                                                                    leave this blank.</p>
+                                                            </div>
+                                                            <div class="d-block w-100">
+                                                                <input type="text" placeholder="Ente Location">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </form>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="card m-1" [class.woorbi-disabled-block]="isThisEditable==false">
+                                        <div class="card-header p-2">
+                                            <span class="font-weight-bold">Budget and Schedule</span>
+                                        </div>
+                                        <div class="card-body p-0">
+                                            <form [formGroup]="frm_budgetscheduleGroup"
+                                                (ngSubmit)="saveBudgetSchedule()" #audienceForm="ngForm">
+                                                <div class="d-block w-100 p-2">
+                                                    <div class="row mx-0">
+                                                        <div class="col-12 col-md-3 col-lg-3 col-xl-3">
+                                                            <span class="">Budget</span>
+                                                            <span class="pull-right"
+                                                                title="Your ad set budget is the daily or lifetime amount that you want to spend on this ad set. A daily budget is the average that you'll spend every day. A lifetime budget is the maximum that you'll spend during the lifetime of your ad set">
+                                                                <i class="fa fa-info-circle" aria-hidden="true"></i>
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-12 col-md-9 col-lg-9 col-xl-9">
+                                                            <div class="d-block w-100">
+                                                                <p>Set your daily or lifetime budget that you want
+                                                                    to spend
+                                                                    on this ad set.</p>
+                                                            </div>
+                                                            <div class="d-block w-100">
+                                                                <div class="row mx-0">
+                                                                    <div class="col">
+                                                                        <select name="budget_type" class="p-2"
+                                                                            (change)="saveBudgetSchedule()"
+                                                                            formControlName="budget_type"
+                                                                            [(ngModel)]="compaign_model.budget_type">
+                                                                            <option value="daily">Daily Budget
+                                                                            </option>
+                                                                            <option value="total">Total Budget
+                                                                            </option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="col d-flex justify-content-start">
+                                                                        <ng-container
+                                                                            *ngIf="compaign_model.budget_type=='daily'">
+                                                                            <input type="text" name="daily_budget"
+                                                                                formControlName="daily_budget"
+                                                                                (change)="saveBudgetSchedule()"
+                                                                                [(ngModel)]="compaign_model.daily_budget"
+                                                                                placeholder="{{money_placeholder}}">
+                                                                            <div class="w-100">&nbsp;</div>
+                                                                            <div *ngIf="budgetschedule_submitted && budSche.daily_budget.errors"
+                                                                                class="d-block w-100  text-danger  form-text m-0 p-0">
+                                                                                <div *ngIf="budSche.daily_budget.errors.required"
+                                                                                    class="error">
+                                                                                    <span
+                                                                                        class="fa fa-exclamation-circle"
+                                                                                        style></span>
+                                                                                    <span
+                                                                                        class="px-1 py-2">Required</span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </ng-container>
+                                                                        <ng-container
+                                                                            *ngIf="compaign_model.budget_type=='total'">
+                                                                            <input type="text" name="total_budget"
+                                                                                formControlName="total_budget"
+                                                                                (change)="saveBudgetSchedule()"
+                                                                                [(ngModel)]="compaign_model.total_budget"
+                                                                                placeholder="{{money_placeholder}}">
+                                                                            <div class="w-100">&nbsp;</div>
+                                                                            <div *ngIf="budgetschedule_submitted && budSche.total_budget.errors"
+                                                                                class="d-block w-100  text-danger  form-text m-0 p-0">
+                                                                                <div *ngIf="budSche.total_budget.errors.required"
+                                                                                    class="error">
+                                                                                    <span
+                                                                                        class="fa fa-exclamation-circle"
+                                                                                        style></span>
+                                                                                    <span
+                                                                                        class="px-1 py-2">Required</span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </ng-container>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row mx-0">
+                                                        <div class="col-12 col-md-3 col-lg-3 col-xl-3">
+                                                            <span class="">Schedule</span>
+                                                            <span class="pull-right"
+                                                                title="Based on your selection, your campaign will either start immediately or within a date range you select.">
+                                                                <i class="fa fa-info-circle" aria-hidden="true"></i>
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-12 col-md-9 col-lg-9 col-xl-9">
+
+                                                            <div class="row mx-0">
+                                                                <div class="col-12">
+                                                                    <div class="d-block w-100">
+                                                                        <p>Set how you want your Compaign to
+                                                                            start,either
+                                                                            immediately or withing a date range.</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12">
+                                                                    <div class="d-block w-100">
+                                                                        <div class="d-block">
+                                                                            <div
+                                                                                class="custom-control custom-radio custom-control-inline pull-left w-100">
+                                                                                <input type="radio"
+                                                                                    class="custom-control-input"
+                                                                                    formControlName="date_schedule"
+                                                                                    name="date_schedule"
+                                                                                    [(ngModel)]="compaign_model.date_schedule"
+                                                                                    (change)="saveBudgetSchedule()"
+                                                                                    [checked]="compaign_model.date_schedule==='continuous'"
+                                                                                    id="date_schedule_continuous"
+                                                                                    name="date_schedule"
+                                                                                    value="continuous">
+                                                                                <label
+                                                                                    class="custom-control-label w-100"
+                                                                                    for="date_schedule_continuous"
+                                                                                    i18n>Run
+                                                                                    campaign continuously from a
+                                                                                    start
+                                                                                    date</label>
+                                                                            </div>
+                                                                            <div
+                                                                                class="custom-control custom-radio custom-control-inline pull-left w-100">
+                                                                                <input type="radio"
+                                                                                    class="custom-control-input"
+                                                                                    formControlName="date_schedule"
+                                                                                    name="date_schedule"
+                                                                                    [(ngModel)]="compaign_model.date_schedule"
+                                                                                    (change)="saveBudgetSchedule()"
+                                                                                    [checked]="compaign_model.date_schedule==='start_end'"
+                                                                                    id="date_schedule_start_end"
+                                                                                    name="date_schedule"
+                                                                                    value="start_end">
+                                                                                <label
+                                                                                    class="custom-control-label w-100"
+                                                                                    for="date_schedule_start_end"
+                                                                                    i18n>Set a
+                                                                                    start and end date</label>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12">
+                                                                    <div class="d-block w-100">
+                                                                        <div class="row mx-0">
+                                                                            <div class="col-6">
+                                                                                <span>Start Date</span>
+                                                                                <input type="text" name="start_date"
+                                                                                    maxlength="10"
+                                                                                    formControlName="start_date"
+                                                                                    ngbDatepicker
+                                                                                    #start_date="ngbDatepicker"
+                                                                                    (ngModelChange)="saveBudgetSchedule()"
+                                                                                    (focus)="start_date.toggle()"
+                                                                                    [(ngModel)]="compaign_model.start_date">
+                                                                                <div *ngIf="budgetschedule_submitted && budSche.start_date.errors"
+                                                                                    class="w-100  text-danger  form-text m-0 p-0">
+                                                                                    <div *ngIf="budSche.start_date.errors.required"
+                                                                                        class="error">
+                                                                                        <span
+                                                                                            class="fa fa-exclamation-circle"
+                                                                                            style></span>
+                                                                                        <span class="px-1 py-2">Plese
+                                                                                            Enter Start Date</span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-6">
+                                                                                <ng-container
+                                                                                    *ngIf="compaign_model.date_schedule=='start_end'">
+                                                                                    <span>End Date</span>
+                                                                                    <input type="text" name="end_date"
+                                                                                        maxlength="10"
+                                                                                        formControlName="end_date"
+                                                                                        (ngModelChange)="saveBudgetSchedule()"
+                                                                                        ngbDatepicker
+                                                                                        #end_date="ngbDatepicker"
+                                                                                        (focus)="end_date.toggle()"
+                                                                                        [(ngModel)]="compaign_model.end_date">
+
+                                                                                    <div *ngIf="budgetschedule_submitted && budSche.end_date.errors"
+                                                                                        class="w-100  text-danger  form-text m-0 p-0">
+                                                                                        <div *ngIf="budSche.end_date.errors.required"
+                                                                                            class="error">
+                                                                                            <span
+                                                                                                class="fa fa-exclamation-circle"
+                                                                                                style></span>
+                                                                                            <span
+                                                                                                class="px-1 py-2">Plese
+                                                                                                Enter End
+                                                                                                Date</span>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <div *ngIf="budgetschedule_submitted && isStartEndDatesValid===false"
+                                                                                        class="w-100  text-danger  form-text m-0 p-0">
+                                                                                        <div class="error">
+                                                                                            <span
+                                                                                                class="fa fa-exclamation-circle"
+                                                                                                style></span>
+                                                                                            <span class="px-1 py-2">End
+                                                                                                Date
+                                                                                                Should be Greater
+                                                                                                the Start
+                                                                                                Date</span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </ng-container>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-12 col-md-4 col-lg-4 col-xl-4 p-1">
+
+                                    <div class="card mx-0 p-0">
+                                        <div class="card-header p-2">
+                                            <span class="font-weight-bold">Audience Definition</span>
+                                        </div>
+                                        <div class="card-body p-1 text-info">
+                                            <div class="row mx-0">
+                                                <div class="col-7">
+                                                    <img src="http://ads.woorbi.com/img/audience-gauge.png"
+                                                        class="img-fluid">
+                                                </div>
+                                                <div class="col-5">
+                                                    <p>Your audience selection is fairly broad.</p>
+                                                </div>
+                                            </div>
+                                            <div class="row mx-0 border-top">
+                                                <div class="col-12">
+                                                    Potential reach :2,400 people.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </ng-container>
+
+                    </div>
+
+                    <div class="border-top" style="position: absolute;height:80px;left: 0;right: 0;bottom:0;">
+                        <div class="row mx-0 h-100">
+                            <div class="col-4 d-flex align-items-center">
+                                <span class="pull-left d-flex align-items-center m-2">
+                                    <a routerLink="/adsmanager/compaigns/"
+                                        class="btn btn-sm btn-secondary pull-left text-decoration-none">Close</a>
+                                </span>
+
+                                <span class="pull-right d-block m-2">
+                                    <ng-container *ngIf="form_has_changes==true && saving_changes==false">
+                                        <span class="text-success d-block">
+                                            <span class="fa fa-check"></span>
+                                            <span>&nbsp;</span>
+                                            <span>All edits Saved</span>
+                                        </span>
+                                    </ng-container>
+                                    <ng-container *ngIf="saving_changes==true">
+                                        <span class="text-dark d-flex align-items-center">
+                                            <span class="fa fa-circle-o-notch fa-spin fa-2x" aria-hidden="true"></span>
+                                            <span>&nbsp;</span>
+                                            <span>Saving Changes</span>
+                                        </span>
+                                    </ng-container>
+                                </span>
+
+                            </div>
+                            <div class="col-8 d-flex align-items-center justify-content-end">
+                                <div class="pull-right d-block m-2">
+                                    <ng-container *ngIf="compaign_model.status=='Draft' && compaign_model.ads.length>0">
+                                        <button (click)="LaunchCompaign('a')"
+                                            class="btn btn-sm btn-success d-block pull-right">
+                                            <span>Launch Compaign</span>
+                                        </button>
+                                    </ng-container>
+
+                                    <ng-container
+                                        *ngIf="compaign_model.status=='Paused' && compaign_model.ads.length>0">
+                                        <button (click)="LaunchCompaign('a')"
+                                            class="btn btn-sm btn-success d-block pull-right">
+                                            <span>Reactivate</span>
+                                        </button>
+                                    </ng-container>
+
+                                    <ng-container *ngIf="compaign_model.status=='Draft'">
+                                        <button (click)="wantToDiscardCompaign(true)"
+                                            class="btn btn-sm btn-warning pull-right">
+                                            <span>Discard Draft</span>
+                                        </button>
+                                    </ng-container>
+
+                                    <ng-container *ngIf="compaign_model.status=='Active'">
+                                        <button (click)="LaunchCompaign('p')" class="btn btn-sm btn-warning pull-right">
+                                            <span>Pause Compaign</span>
+                                        </button>
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>
+
+
+
+    <ng-container *ngIf="show_aud_loc_search==true">
+        <app-in-page-content-modal>
+
+            <div class="card w-100">
+                <div class="card-body">
+                    <div class="d-block w-100">
+                        <div class="row mx-0 w-100">
+                            <div class="col-12 px-0 p-1">
+                                <div class="d-block overlay-close-btn pull-right align-middle"
+                                    (click)="CloseLocationSearch()" style="cursor: pointer;">
+                                    <span class="fa fa-close" style="font-size: 120%;vertical-align: middle;"></span>
+                                </div>
+                            </div>
+                            <div class="col-12 px-0 py-1">
+                                <div class="w-100" style="position: relative;max-width: 180px;">
+                                    <form [formGroup]="frm_locationSearchGroup" #locationSearchForm="ngForm">
+                                        <input type="search" (keyup)="searchLocation()" class="w-100"
+                                            formControlName="location_search_query" [(ngModel)]="location_search_query"
+                                            placeholder="Search">
+                                        <div *ngIf="location_search_query!=''"
+                                            class="d-flex justify-content-center align-items-center text-primary cursor-pointer"
+                                            (click)="clearLocationSearchBox()"
+                                            style="position: absolute;top:0px;bottom: 0px;right:0px;padding-left: 5px;padding-right: 5px;">
+                                            <span class="fa fa-close"></span>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col-12 border p-1" style="min-height: 150px;">
+                                <ng-container *ngIf="location_search_query==''">
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <div class="row mx-0">
+                                            <div class="col-12 d-flex justify-content-center text-primary p-3"
+                                                style="font-size: 130%;">
+                                                <span class="fa fa-search"></span>
+                                            </div>
+                                            <div class="col-12 d-flex justify-content-center px-0 py-2">
+                                                <span>Start
+                                                    searching for
+                                                    Locations
+                                                    above. For
+                                                    example, you
+                                                    can
+                                                    search
+                                                    for:</span>
+                                            </div>
+                                            <div class="col-12 d-flex justify-content-center  px-0 py-2">
+                                                <div>
+                                                    <span (click)="searchLocatoinFor('Tanzania')"
+                                                        class="text-primary cursor-pointer">Tanzania</span>
+                                                    <span>&nbsp;</span>
+                                                    <span (click)="searchLocatoinFor('Nigeria')"
+                                                        class="text-primary cursor-pointer">Nigeria</span>
+                                                    <span>&nbsp;</span>
+                                                    <span (click)="searchLocatoinFor('Kenya')"
+                                                        class="text-primary cursor-pointer">Kenya</span>
+                                                    <span>&nbsp;</span>
+                                                    <span (click)="searchLocatoinFor('South Africa')"
+                                                        class="text-primary cursor-pointer">South
+                                                        Africa</span>
+                                                    <span>&nbsp;</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                                <div class="d-flex justify-content-center align-items-center">
+                                    <ng-container *ngIf="loading_location_search">
+
+                                        <div class="row mx-0">
+                                            <div class="col-12 d-flex justify-content-center text-primary p-3"
+                                                style="max-height:50vh;">
+                                                <span class="fa fa-spinner" style="font-size: 130%;" aria-hidden="true"
+                                                    style="font-size: larger;"></span>
+                                            </div>
+                                        </div>
+
+                                    </ng-container>
+                                    <ng-container
+                                        *ngIf="loading_location_search==false && searchedLocationsList.length>0">
+                                        <div class="d-block w-100" style="max-height:50vh;overflow-y: auto;">
+                                            <ng-container
+                                                *ngFor="let searchedLocation of searchedLocationsList;let i=index">
+                                                <div class="row m-0 border-bottom border-light cursor-pointer"
+                                                    (click)="addRemoveLocation(searchedLocation)">
+                                                    <div class="col-12 p-0 m-0 align-middle">
+                                                        <div class="h-100 w-100 m-0 p-0">
+                                                            <div class="d-block h-100 p-1 m-0 align-middle">
+                                                                <div class="row h-100 m-0 p-0">
+                                                                    <div class="col-2 p-0">
+                                                                        <input type="checkbox" class="form-check-input"
+                                                                            [checked]="(searchedLocation.selected==true)?'checked':''"
+                                                                            name="loc_{{searchedLocation.key}}"
+                                                                            id="loc_{{searchedLocation.key}}">
+                                                                        <label class="m-0 p-0"
+                                                                            for="{{searchedLocation.key}}"></label>
+                                                                    </div>
+                                                                    <div class="col-10 py-auto px-1 align-middle">
+                                                                        <span
+                                                                            class="pull-left">{{searchedLocation.name}}</span>
+                                                                        <span
+                                                                            class="pull-right">{{searchedLocation.type}}</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </ng-container>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </app-in-page-content-modal>
+    </ng-container>
+
+    <ng-container *ngIf="editing_objective==true">
+        <app-in-page-content-modal>
+            <div class="card m-0">
+                <div class="card-header p-2">
+                    <span class="font-weight-bold pull-left">Choose your Marketing Objective</span>
+                    <div class="d-block overlay-close-btn pull-right align-middle" (click)="DoneChangeObjective()"
+                        style="cursor: pointer;">
+                        <span class="fa fa-close" style="font-size: 120%;vertical-align: middle;"></span>
+                    </div>
+                </div>
+                <div class="card-body p-0">
+                    <form [formGroup]="frm_objectiveGroup" (ngSubmit)="saveObjective()" #objectiveForm="ngForm">
+                        <div class="d-block border m-1">
+                            <div class="row mx-0 w-100">
+                                <ng-container *ngIf="adsService.ADS_OBJECTIVES_TYPES.length>0">
+                                    <ng-container *ngFor="let ad_type of adsService.ADS_OBJECTIVES_TYPES">
+                                        <ng-container *ngIf="countAdsInType(ad_type.code)>0">
+                                            <div class="col-12 col-md-4 col-lg-4 col-xl-4 border p-2">
+                                                <div class="d-block m-2"><span
+                                                        style="font-size: 120%;">{{ad_type.name}}</span>
+                                                </div>
+                                                <div class="d-block">
+                                                    <ng-container
+                                                        *ngFor="let objective of adsService.filterObjectiveByType(ad_type.code)">
+                                                        <div (click)="selectObjective(objective,true)"
+                                                            class="d-block w-100 border p-3"
+                                                            [class.text-primary]="objective.selected"
+                                                            style="cursor: pointer;">
+                                                            <span>
+                                                                <ng-container *ngIf="objective.selected">
+                                                                    <span style="font-size: 130%;"
+                                                                        class="fa fa-check-circle"></span>
+                                                                </ng-container>
+
+                                                                <ng-container *ngIf="objective.selected==false">
+                                                                    <span style="font-size: 120%;"
+                                                                        class="{{objective.icon}}"></span>
+                                                                </ng-container>
+                                                            </span>
+                                                            <span>&nbsp;</span>
+                                                            <span>
+                                                                {{objective.name}}
+                                                            </span>
+                                                            <span class="pull-right" title="{{objective.description}}">
+                                                                <i class="fa fa-info-circle" aria-hidden="true"></i>
+                                                            </span>
+                                                        </div>
+                                                    </ng-container>
+                                                </div>
+                                            </div>
+                                        </ng-container>
+                                    </ng-container>
+                                </ng-container>
+
+                                <ng-container *ngIf="adsService.loading_ads_objectives">
+                                    <div class="d-flex justify-content-center align-items-center w-100"
+                                        style="height: 50vh;font-size: 130%;">
+                                        <i class="fa fa-circle-o-notch fa-spin fa-2x" aria-hidden="true"></i>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+
+                        <ng-container *ngIf="selectedObjective!=null">
+                            <div class="d-flex justify-content-center w-100 p-3">
+                                <div class="row mx-0 d-flex justify-content-center">
+                                    <div
+                                        class="col-12 col-md-10 col-lg-10 col-xl-10 d-flex justify-content-center text-primary">
+                                        <span style="font-size: 180%;" class="{{selectedObjective.icon}}">
+                                        </span>
+                                    </div>
+                                    <div
+                                        class="col-12 col-md-10 col-lg-10 col-xl-10  d-flex justify-content-center font-weight-bold">
+                                        <span style="font-size: 120%;">{{selectedObjective.name}}</span>
+                                    </div>
+                                    <div class="col-12 col-md-10 col-lg-10 col-xl-10  d-flex justify-content-center">
+                                        <p>{{selectedObjective.description}}</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </ng-container>
+                    </form>
+                </div>
+            </div>
+        </app-in-page-content-modal>
+
+    </ng-container>
+
+
+    <ng-container *ngIf="want_to_discard_compaign==true">
+        <app-in-page-content-modal>
+            <div class="card m-0">
+                <div class="card-header">
+                    <span class="font-weight-bold pull-left">Discard Compaign Draft!</span>
+                </div>
+                <div class="card-body p-3">
+                    <div class="d-block w-100">
+                        <p>Are your sure you want to Discard this Compaign? <br>Once you do this,you will not be able to
+                            Undo.</p>
+                    </div>
+                    <div class="d-block w-100">
+                        <button (click)="wantToDiscardCompaign(false)"
+                            class="btn btn-sm btn-default pull-left">Cancel</button>
+                        <button (click)="DiscardDraft()" class="btn btn-sm btn-primary pull-right">Discard</button>
+                    </div>
+
+                </div>
+            </div>
+        </app-in-page-content-modal>
+
+    </ng-container>
+
+
+
+
 </app-ads-main-content>

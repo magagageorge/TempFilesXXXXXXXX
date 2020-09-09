@@ -3,25 +3,26 @@
         <div class="col-12 col-md-6 col-lg-6 col-xl-6 mx-0 px-md-5 px-lg-5 px-xl-5 py-2">
             <form [formGroup]="frm_adGroup" (ngSubmit)="saveAd()" #adForm="ngForm">
 
-                <ng-container *ngIf="show_block_one==true">
-                    <div class="d-block">
-                        <div class="form-row p-0 m-0">
-                            <div class="form-group col-12 p-0 mb-1">
-                                <label class="pull-left m-0" i18n>Ad Name(Optional) </label>
-                                <input type="text" formControlName="name" [(ngModel)]="ad_model.name"
-                                    class="form-control" placeholder="Ad Name"
-                                    [ngClass]="{ 'is-invalid': submitted && a.name.errors }" />
-                                <div *ngIf="submitted && a.name.errors"
-                                    class="invalid-feedback text-danger text-right form-text text-muted m-0 p-0">
-                                    <div *ngIf="a.name.errors.required">Required</div>
-                                </div>
+                <div class="d-block">
+                    
+                    <div class="form-row p-0 m-0">
+                        <div class="form-group col-12 p-0 mb-1">
+                            <label class="pull-left m-0" i18n>Ad Name</label>
+                            <input type="text" formControlName="name" [(ngModel)]="ad_draft_model.name"
+                                class="form-control" placeholder="Ad Name"
+                                [ngClass]="{ 'is-invalid': submitted && a.name.errors }" />
+                            <div *ngIf="submitted && a.name.errors"
+                                class="invalid-feedback text-danger text-right form-text text-muted m-0 p-0">
+                                <div *ngIf="a.name.errors.required">Required</div>
                             </div>
                         </div>
+                    </div>
 
+                    <ng-container *ngIf="show_block_one==true">
                         <div class="form-row p-0 m-0">
                             <div class="form-group col-12 p-0 mb-1">
                                 <label class="pull-left m-0" i18n>Introduction </label>
-                                <textarea formControlName="introduction" [(ngModel)]="ad_model.introduction"
+                                <textarea formControlName="introduction" [(ngModel)]="ad_draft_model.introduction"
                                     class="form-control" placeholder="Introduction"
                                     [ngClass]="{ 'is-invalid': submitted && a.introduction.errors }"
                                     maxlength="600"></textarea>
@@ -36,8 +37,8 @@
                             <div class="form-group col-12 p-0 mb-1">
                                 <label class="pull-left m-0" i18n>Destination Url </label>
                                 <input type="text" formControlName="destination_url"
-                                    [(ngModel)]="ad_model.destination_url" class="form-control" (blur)="crawlLink()"
-                                    placeholder="http://www.example.com"
+                                    [(ngModel)]="ad_draft_model.destination_url" class="form-control"
+                                    (change)="crawlLink()" placeholder="http://www.example.com"
                                     [ngClass]="{ 'is-invalid': submitted && a.destination_url.errors }" />
                                 <div *ngIf="submitted && a.destination_url.errors"
                                     class="invalid-feedback text-danger text-right form-text text-muted m-0 p-0">
@@ -46,126 +47,131 @@
                                 </div>
                             </div>
 
-                            <ng-container *ngIf="ad_model.cards.length>1">
-                                <div class="form-group col-12 p-0 mb-1">
-                                    <div class="form-check m-0 p-0">
-                                        <input type="checkbox" [(ngModel)]="ad_model.one_destination"
-                                            formControlName="one_destination" class="form-check-input"
-                                            id="one_destination" (change)="oneDestChanged()">
-                                        <label for="one_destination">Use Destination URL as
-                                            destination for all cards</label>
-                                    </div>
+                            <div [ngClass]="[(ad_draft_model.ad_format=='SINGLE_IMAGE')?'d-none':'']"
+                                class="form-group col-12 p-0 mb-1">
+                                <div class="form-check m-0 p-0">
+                                    <input type="checkbox" [(ngModel)]="ad_draft_model.one_destination"
+                                        formControlName="one_destination" class="form-check-input" id="one_destination"
+                                        (change)="oneDestChanged()">
+                                    <label for="one_destination">Use Destination URL as
+                                        destination for all cards</label>
                                 </div>
-                            </ng-container>
+                            </div>
+
                         </div>
-                    </div>
-                </ng-container>
+                    </ng-container>
+                </div>
 
                 <ng-container *ngIf="show_block_two==true">
                     <div class="d-block border p-3">
-
-
-                        <ng-container *ngIf="show_block_one==true && ad_model.cards.length==1">
+                        <ng-container *ngIf="show_block_one==true && ad_draft_model.ad_format=='SINGLE_IMAGE'">
                             <div class="d-block w-100">
                                 <span class="fa fa-info-circle"></span><span>You must have a valid destination URL to
                                     add a
                                     headline, description, and CTA to your ad</span>
                             </div>
                         </ng-container>
-
                         <input class="d-none" type='file' id="media_upload_input_id" name="upload_file"
                             (change)="onSelectFile($event)" #media_upload_input_id>
                         <div class="d-block w-100" #AdCardsContainer>
                             <ng-container formArrayName="cards">
-                                <ng-container *ngFor="let card of ad_model.cards;let i=index;">
+                                <ng-container *ngFor="let card of ad_draft_model.cards;let i=index;">
                                     <ng-container [formGroupName]="i">
-                                        <ng-container *ngIf="ad_model.cards.length==1">
-                                            <div class="row mx-0 my-2 p-0">
-                                                <div class="col-12 p-0">
-                                                    <label class="pull-left w-100 font-weight-bold" i18n>Ad Image
-                                                    </label>
-                                                </div>
-                                                <div class="col-12 p-0">
-                                                    <div class="d-block w-100 border border-rounded bg-light m-0 p-0">
+                                        <ng-container
+                                            *ngIf="ad_draft_model.ad_format=='TEXT_AD' || ad_draft_model.ad_format=='SINGLE_IMAGE'">
 
-                                                        <ng-container *ngIf="card.media_file!=null">
-                                                            <div [ngStyle]="{'height':'80px','width':'80px','background-image':'url('+imageIconsService.loadingPictureImage+')'}"
-                                                                class="p-0 mx-0"
-                                                                [ngClass]="((card.media_width>card.media_height && 80<=card.media_wh_ratio*80) || (card.media_height>card.media_width && 80 > 80/card.media_wh_ratio) || card.media_width==card.media_height)?'d-flex d-flex-row justify-content-center':''"
-                                                                (click)="messengerService.viewMessagePhotoInModal(IMAGES,0)"
-                                                                style="background-size: 100%;background-repeat: no-repeat;border-radius:5px;overflow:hidden;border:1px solid transparent; cursor: pointer;">
-                                                                <img [src]="card.media"
-                                                                    [ngClass]="((card.media_width>card.media_height && 80<=card.media_wh_ratio*80) || (card.media_height>card.media_width && 80 > 80/card.media_wh_ratio) || card.media_width==card.media_height) ?'h-100':'w-100'">
-                                                            </div>
+                                            <ng-container *ngIf="i < 1">
 
-                                                            <div class="border d-flex justify-content-center align-items-center"
-                                                                (click)="removeCardImage(card)"
-                                                                style="position: absolute;top:30px;bottom:30px;right:5px;background-color: #fff;border-radius: 50%;width:20px;height:20px;cursor: pointer;">
-                                                                <span class="fa fa-close"></span>
-                                                            </div>
-                                                        </ng-container>
-                                                        <ng-container *ngIf="card.media_file==null">
-                                                            <div class="row mx-0">
-                                                                <div class="col-8 d-flex align-items-center">Image must
-                                                                    be JPG
-                                                                    or
-                                                                    PNG,Up
-                                                                    to
-                                                                    5MB.</div>
-                                                                <div class="col-4">
-                                                                    <div (click)="SelectMediaUpload(card)"
-                                                                        class="btn btn-sm btn-outline-primary px-2 py-1 pull-right">
-                                                                        Upload</div>
-                                                                </div>
-                                                            </div>
-                                                        </ng-container>
+                                                <div class="row mx-0 my-2 p-0">
+                                                    <div class="col-12 p-0">
+                                                        <label class="pull-left w-100 font-weight-bold" i18n>Ad Image
+                                                        </label>
                                                     </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-row p-0 m-0">
-                                                <div class="form-group col-12 p-0 mb-1">
-                                                    <label class="pull-left m-0" i18n>Headline </label>
-                                                    <input type="text" formControlName="headline"
-                                                        [(ngModel)]="ad_model.cards[i].headline" class="form-control"
-                                                        placeholder="Your Ad Headline" [class.disabled]="checkDestUrl()"
-                                                        [ngClass]="{ 'is-invalid': submitted && cards.controls[i].get('headline').errors }"
-                                                        maxlength="200" />
-                                                    <div *ngIf="(submitted && cards.controls[i].get('headline').errors)"
-                                                        class="invalid-feedback text-danger text-right form-text text-muted m-0 p-0">
+                                                    <div class="col-12 p-0">
                                                         <div
-                                                            *ngIf="(cards.controls[i].get('headline').errors.required)">
-                                                            Required
+                                                            class="d-block w-100 border border-rounded bg-light m-0 p-0">
+
+                                                            <ng-container *ngIf="card.media!=''">
+                                                                <div [ngStyle]="{'height':'80px','width':'80px','background-image':'url('+imageIconsService.loadingPictureImage+')'}"
+                                                                    class="p-0 mx-0"
+                                                                    [ngClass]="((card.media_width>card.media_height && 80<=card.media_wh_ratio*80) || (card.media_height>card.media_width && 80 > 80/card.media_wh_ratio) || card.media_width==card.media_height)?'d-flex d-flex-row justify-content-center':''"
+                                                                    (click)="messengerService.viewMessagePhotoInModal(IMAGES,0)"
+                                                                    style="background-size: 100%;background-repeat: no-repeat;border-radius:5px;overflow:hidden;border:1px solid transparent; cursor: pointer;">
+                                                                    <img [src]="card.media"
+                                                                        [ngClass]="((card.media_width>card.media_height && 80<=card.media_wh_ratio*80) || (card.media_height>card.media_width && 80 > 80/card.media_wh_ratio) || card.media_width==card.media_height) ?'h-100':'w-100'">
+                                                                </div>
+
+                                                                <div class="border d-flex justify-content-center align-items-center"
+                                                                    (click)="removeCardImage(card)"
+                                                                    style="position: absolute;top:30px;bottom:30px;right:5px;background-color: #fff;border-radius: 50%;width:20px;height:20px;cursor: pointer;">
+                                                                    <span class="fa fa-close"></span>
+                                                                </div>
+                                                            </ng-container>
+                                                            <ng-container
+                                                                *ngIf="card.media_file==null && card.media==''">
+                                                                <div class="row mx-0">
+                                                                    <div class="col-8 d-flex align-items-center">Image
+                                                                        must
+                                                                        be JPG
+                                                                        or
+                                                                        PNG,Up
+                                                                        to
+                                                                        5MB.</div>
+                                                                    <div class="col-4">
+                                                                        <div (click)="SelectMediaUpload(card)"
+                                                                            class="btn btn-sm btn-outline-primary px-2 py-1 pull-right">
+                                                                            Upload</div>
+                                                                    </div>
+                                                                </div>
+                                                            </ng-container>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-row p-0 m-0">
-                                                <div class="form-group col-12 p-0 mb-1">
-                                                    <label class="pull-left m-0" i18n>Description </label>
-                                                    <textarea formControlName="description"
-                                                        [(ngModel)]="ad_model.cards[i].description" class="form-control"
-                                                        placeholder="Ad Description"
-                                                        [ngClass]="{ 'is-invalid': submitted && cards.controls[i].get('description').errors }"
-                                                        [class.disabled]="checkDestUrl()" maxlength="=300"></textarea>
-                                                    <div *ngIf="(submitted && cards.controls[i].get('description').errors)"
-                                                        class="invalid-feedback text-danger text-right form-text text-muted m-0 p-0">
-                                                        <div
-                                                            *ngIf="(cards.controls[i].get('description').errors.required)">
-                                                            Required</div>
+
+                                                <div class="form-row p-0 m-0">
+                                                    <div class="form-group col-12 p-0 mb-1">
+                                                        <label class="pull-left m-0" i18n>Headline </label>
+                                                        <input type="text" formControlName="headline"
+                                                            [(ngModel)]="ad_draft_model.cards[i].headline"
+                                                            class="form-control" placeholder="Your Ad Headline"
+                                                            [class.disabled]="checkDestUrl()"
+                                                            [ngClass]="{ 'is-invalid': submitted && cards.controls[i].get('headline').errors }"
+                                                            maxlength="200" />
+                                                        <div *ngIf="(submitted && cards.controls[i].get('headline').errors)"
+                                                            class="invalid-feedback text-danger text-right form-text text-muted m-0 p-0">
+                                                            <div
+                                                                *ngIf="(cards.controls[i].get('headline').errors.required)">
+                                                                Required
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-
-                                            <ng-container
-                                                *ngIf="compaign.ad_format!='SINGLE_IMAGE' && compaign.ad_format!='CAROUSEL_IMAGE'">
                                                 <div class="form-row p-0 m-0">
+                                                    <div class="form-group col-12 p-0 mb-1">
+                                                        <label class="pull-left m-0" i18n>Description </label>
+                                                        <textarea formControlName="description"
+                                                            [(ngModel)]="ad_draft_model.cards[i].description"
+                                                            class="form-control" placeholder="Ad Description"
+                                                            [ngClass]="{ 'is-invalid': submitted && cards.controls[i].get('description').errors }"
+                                                            [class.disabled]="checkDestUrl()"
+                                                            maxlength="=300"></textarea>
+                                                        <div *ngIf="(submitted && cards.controls[i].get('description').errors)"
+                                                            class="invalid-feedback text-danger text-right form-text text-muted m-0 p-0">
+                                                            <div
+                                                                *ngIf="(cards.controls[i].get('description').errors.required)">
+                                                                Required</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div [ngClass]="[(ad_draft_model.ad_format=='SINGLE_IMAGE')?'d-none':'']"
+                                                    class="form-row p-0 m-0">
                                                     <div class="form-group col-12 p-0 mb-1">
                                                         <label class="pull-left m-0" i18n><span>Destination
                                                                 URL</span><span>&nbsp;</span><span
                                                                 title="Website URL or Your Page where people will visit after clicking your ad."></span></label>
                                                         <input type="text" formControlName="destination_url"
-                                                            [(ngModel)]="ad_model.cards[i].destination_url"
+                                                            [(ngModel)]="ad_draft_model.cards[i].destination_url"
                                                             class="form-control" placeholder="http://www.example.com"
                                                             [ngClass]="{ 'is-invalid': submitted && cards.controls[i].get('destination_url').errors }" />
                                                         <div *ngIf="(submitted && cards.controls[i].get('destination_url').errors)"
@@ -183,7 +189,7 @@
                                             </ng-container>
                                         </ng-container>
 
-                                        <ng-container *ngIf="ad_model.cards.length>1">
+                                        <ng-container *ngIf="ad_draft_model.ad_format=='CAROUSEL_IMAGE'">
                                             <div class="row mx-0">
                                                 <div class="col-3 py-2 px-1">
                                                     <div class="row m-0 p-0">
@@ -195,7 +201,7 @@
                                                         <div class="col-12 m-0 p-0">
                                                             <div class="d-block border border-rounded bg-light m-0 p-0"
                                                                 [ngStyle]="{'height':''+cardImageWidth+'px','width':''+cardImageWidth+'px'}">
-                                                                <ng-container *ngIf="card.media_file!=null">
+                                                                <ng-container *ngIf="card.media!=''">
                                                                     <div [ngStyle]="{'height':''+cardImageWidth+'px','width':''+cardImageWidth+'px','background-image':'url('+imageIconsService.loadingPictureImage+')'}"
                                                                         class="p-0 mx-0"
                                                                         [ngClass]="((card.media_width>card.media_height && cardImageWidth<=card.media_wh_ratio*cardImageWidth) || (card.media_height>card.media_width && cardImageWidth > cardImageWidth/card.media_wh_ratio) || card.media_width==card.media_height)?'d-flex d-flex-row justify-content-center':''"
@@ -211,7 +217,8 @@
                                                                     </div>
                                                                 </ng-container>
 
-                                                                <ng-container *ngIf="card.media_file==null">
+                                                                <ng-container
+                                                                    *ngIf="card.media_file==null && card.media==''">
                                                                     <div class="row mx-0">
                                                                         <div class="col-12 p-0 d-flex justify-content-center align-items-center"
                                                                             style="height: 100px;">
@@ -237,7 +244,8 @@
                                                 </div>
                                                 <div class="col-9 p-1">
 
-                                                    <ng-container *ngIf="(i>1) || (i < 2 && ad_model.cards.length > 2)">
+                                                    <ng-container
+                                                        *ngIf="(i>1) || (i < 2 && ad_draft_model.cards.length > 2)">
                                                         <div class="btn-remove-card d-flex justify-content-center align-items-center"
                                                             (click)="removeCard(card,i)" style="cursor: pointer;">
                                                             <span class="fa fa-trash"></span>
@@ -248,7 +256,7 @@
                                                         <div class="form-group col-12 p-0 mb-1">
                                                             <label class="pull-left m-0" i18n>Headline</label>
                                                             <input type="text" formControlName="headline"
-                                                                [(ngModel)]="ad_model.cards[i].headline"
+                                                                [(ngModel)]="ad_draft_model.cards[i].headline"
                                                                 class="form-control" placeholder="Your Ad Headline"
                                                                 [ngClass]="{ 'is-invalid': submitted && cards.controls[i].get('headline').errors }"
                                                                 maxlength="200" />
@@ -266,7 +274,7 @@
                                                             <div class="form-group col-12 p-0 mb-1">
                                                                 <label class="pull-left m-0" i18n>Description </label>
                                                                 <textarea formControlName="description"
-                                                                    [(ngModel)]="ad_model.cards[i].description"
+                                                                    [(ngModel)]="ad_draft_model.cards[i].description"
                                                                     class="form-control" placeholder="Ad Description"
                                                                     [ngClass]="{ 'is-invalid': submitted && cards.controls[i].get('description').errors }"
                                                                     maxlength="=300"></textarea>
@@ -288,10 +296,10 @@
                                                                     class="fa fa-info-circle"
                                                                     title="The landing page where people are directed when they click on this individual card in your carousel."></span></label>
                                                             <input type="text" formControlName="destination_url"
-                                                                [(ngModel)]="ad_model.cards[i].destination_url"
+                                                                [(ngModel)]="ad_draft_model.cards[i].destination_url"
                                                                 class="form-control"
                                                                 placeholder="http://www.example.com"
-                                                                [class.disabled]="ad_model.one_destination"
+                                                                [class.disabled]="ad_draft_model.one_destination"
                                                                 [ngClass]="{ 'is-invalid': submitted && cards.controls[i].get('destination_url').errors }" />
                                                             <div *ngIf="(submitted && cards.controls[i].get('destination_url').errors)"
                                                                 class="invalid-feedback text-danger text-right form-text text-muted m-0 p-0">
@@ -319,11 +327,12 @@
                                         <label class="pull-left m-0" i18n>Call-to-action <span><span
                                                     class="fa fa-info-circle"
                                                     title="Choose an Action to drive your ad."></span></span></label>
-                                        <select formControlName="call_to_action" [(ngModel)]="ad_model.call_to_action"
-                                            class="form-control" (ngModelChange)="newCalltoAction()"
+                                        <select formControlName="call_to_action"
+                                            [(ngModel)]="ad_draft_model.call_to_action" class="form-control"
+                                            (ngModelChange)="newCalltoAction()"
                                             [ngClass]="{ 'is-invalid': submitted && a.call_to_action.errors }">
                                             <option value="">Select Option</option>
-                                            <ng-container *ngFor="let action of callActions">
+                                            <ng-container *ngFor="let action of adsService.callActions">
                                                 <option value="{{action.code}}">{{action.name}}</option>
                                             </ng-container>
                                         </select>
@@ -335,13 +344,14 @@
                                 </div>
                             </ng-container>
 
-                            <ng-container *ngIf="compaign.ad_format=='CAROUSEL_IMAGE' && (ad_model.cards.length < 10)">
+                            <ng-container
+                                *ngIf="ad_draft_model.ad_format=='CAROUSEL_IMAGE' && (ad_draft_model.cards.length < 10)">
                                 <div class="row mx-0 my-2">
                                     <div class="col-12 p-0">
                                         <div (click)="adMoreCard()" class="btn btn-sm btn-primary w-100">
                                             <span>Add More Cards</span>
                                             <span>&nbsp;</span>
-                                            <span>({{ad_model.cards.length}}/10)</span>
+                                            <span>({{ad_draft_model.cards.length}}/10)</span>
                                         </div>
                                     </div>
                                 </div>
@@ -366,13 +376,13 @@
             <div class="d-block w-100">
                 <span class="text-muted">Ad Preview</span>
                 <div class="d-block border p-3">
-                    <ng-container *ngIf="compaign.ad_format!='TEXT_AD'">
-                        <app-ad-post-preview-widget [compaign]="compaign" [ad_model]="ad_model">
+                    <ng-container *ngIf="ad_draft_model.ad_format!='TEXT_AD'">
+                        <app-ad-post-preview-widget [ad_model]="ad_draft_model">
                         </app-ad-post-preview-widget>
                     </ng-container>
 
-                    <ng-container *ngIf="compaign.ad_format=='TEXT_AD'">
-                        <app-ad-text-preview-widget [ad_model]="ad_model"></app-ad-text-preview-widget>
+                    <ng-container *ngIf="ad_draft_model.ad_format=='TEXT_AD'">
+                        <app-ad-text-preview-widget [ad_model]="ad_draft_model"></app-ad-text-preview-widget>
                     </ng-container>
                 </div>
             </div>

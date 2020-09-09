@@ -1,5 +1,5 @@
-import {  Injectable, Inject } from '@angular/core';
-import {  NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Injectable, Inject } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
 import { Feed } from '@models/feed/feed';
@@ -221,7 +221,7 @@ export class FeedService {
     /* check and update comment in overlay post in case it is open */
     if (this.OVERLAY_FEED.feed != null && feedId == this.OVERLAY_FEED.feed.id) {
       this.OVERLAY_FEED.feed.comments = this.OVERLAY_FEED.feed.comments.concat(comments);
-    }    
+    }
     this.profileFeedService.pushComments(feedId, comments);
     this.searchFeed(String(feedId)).subscribe((feed: Feed) => {
       if (feed) {

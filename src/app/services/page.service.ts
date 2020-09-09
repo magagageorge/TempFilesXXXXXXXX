@@ -54,7 +54,6 @@ export class PageService {
     return this.service.getall(this.provider, params);
   }
 
-
   getMyPages(params?: {}) {
     this.provider = this.getConfigValue('forms.getall.provider');
     this.service.getProvider(this.provider).crudconfig.route_url = 'page/my-page/';
@@ -74,12 +73,12 @@ export class PageService {
     //formData.append("name",_this.model.name);
 
     if (_this.model.picture_preview_info.isNew == true && _this.model.picture_preview_info.file != null) {
-      formData.append("PagePictureForm[org_image]", _this.model.picture_preview_info.file);
+      formData.append("PagePictureForm[org_image]", _this.model.picture_preview_info.file,_this.model.picture_preview_info.file['name']);
     }
 
     if(_this.model.croppedImage!=''){
       var cropped_image = SysFunctions.DataUrlToFile(_this.model.croppedImage);
-      formData.append("PagePictureForm[image]", cropped_image);
+      formData.append("PagePictureForm[image]", cropped_image,cropped_image['name']);
       formData.append("wh_ratio", 0);
     }
 
@@ -95,10 +94,8 @@ export class PageService {
       }
       //_this.uploadingImage = false;
     });
-
     //this.cancelEditAvatar();
   }
-
 
   UploadPictureFile() {
     var _this = this;
@@ -146,8 +143,6 @@ export class PageService {
     }
     //this.editMode.avatarEdit.processingAvatar = false;
   }
-
-
 
   createPageOnFly() {
     this.creating_page_onfly = true;

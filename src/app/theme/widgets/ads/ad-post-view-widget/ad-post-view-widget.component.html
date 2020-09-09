@@ -1,4 +1,5 @@
-<div class="card windo-ad-post-card" #AdPostContainer>
+<div class="card windo-ad-post-card" inViewport [inViewportOptions]="{ threshold: [0] }"
+(inViewportAction)="showAdService.onPostAdInViewPort(ad_content)" #AdPostContainer>
     <ng-container>
         <div class="card-header p-2">
             <ng-container *ngIf="ad_content.page!=null">
@@ -18,7 +19,6 @@
                         </span>
                     </span>
                 </div>
-
             </ng-container>
         </div>
 
@@ -34,7 +34,8 @@
                 <ng-container *ngIf="ad_content.cards.length==1">
 
                     <ng-container *ngIf="ad_content.cards[0].media!=null">
-                        <a href="{{linkProcessingService.insertLinkProtocol(ad_content.destination_url)}}" class="d-block w-100 p-0 m-0" target="_blank">
+                        <a href="{{linkProcessingService.insertLinkProtocol(ad_content.redirect_url)}}"
+                            class="d-block w-100 p-0 m-0" target="_blank">
                             <div [ngStyle]="{'background-image':'url(' + imageIconsService.loadingPictureImage + ')','min-height':''+getPictureHeight(ad_content.cards[0].media_width,ad_content.cards[0].media_height)+'px'}"
                                 class="w-100 p-0"
                                 style="background-size: 100%;background-repeat: no-repeat;border-radius:0px;cursor: pointer;">
@@ -44,7 +45,8 @@
                     </ng-container>
                     <ng-container *ngIf="ad_content.destination_url!='' && ad_content.destination_url!=null">
                         <div class="d-block bg-light w-100 px-0 py-2">
-                            <a href="{{linkProcessingService.insertLinkProtocol(ad_content.destination_url)}}" class="d-block w-100 p-0 m-0" target="_blank">
+                            <a href="{{linkProcessingService.insertLinkProtocol(ad_content.redirect_url)}}"
+                                class="d-block w-100 p-0 m-0" target="_blank">
                                 <div class="row mx-0 p-0">
                                     <div class="col-12 text-truncate">
                                         <span class="ad-url text-uppercase">
@@ -81,7 +83,7 @@
                     </ng-container>
                 </ng-container>
 
-                <ng-container *ngIf="ad_content.cards.length>1">
+                <ng-container *ngIf="ad_content.cards.length>1 && AdPostContainerWidth>0">
                     <app-ad-view-post-catalog-widget [cards]="ad_content.cards"
                         [call_to_action]="ad_content.call_to_action" [dispayContainer]="AdPostContainerWidth">
                     </app-ad-view-post-catalog-widget>

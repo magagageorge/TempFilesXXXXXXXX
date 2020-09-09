@@ -7,7 +7,7 @@
                     <div class="card m-0 p-0 shadow-sm">
                         <div class="card-body p-0 overflow-hidden">
                             <div [ngStyle]="{'height':''+(boxWidth-2)+'px','width':''+(boxWidth-2)+'px'}" style="overflow: hidden;">
-                                <ng-container *ngIf="card.media_file!=null">
+                                <ng-container *ngIf="card.media!=''">
                                     <div [ngStyle]="{'height':''+(boxWidth-2)+'px','width':''+(boxWidth-2)+'px','background-image':'url('+imageIconsService.loadingPictureImage+')'}"
                                         class="p-0 mx-0"
                                         [ngClass]="((card.media_width>card.media_height && boxWidth<=card.media_wh_ratio*boxWidth) || (card.media_height>card.media_width && boxWidth > boxWidth/card.media_wh_ratio) || card.media_width==card.media_height)?'d-flex d-flex-row justify-content-center':''"

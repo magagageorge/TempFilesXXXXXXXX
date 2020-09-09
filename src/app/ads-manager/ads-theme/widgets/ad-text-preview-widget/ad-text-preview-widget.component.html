@@ -23,9 +23,7 @@
                 </ng-container>
             </div>
             <div class="col-12 p-0">
-
-                <ng-container *ngIf="selectedShowType!=null">
-
+                <ng-container *ngIf="selectedShowType!=null && ad_model.cards.length>0">
                     <div class="d-flex justify-content-center align-items-center w-100"
                         style="min-height: 50vh;overflow-x: auto;">
 
@@ -36,7 +34,6 @@
                             <span><span>&nbsp;&nbsp;&nbsp;Ad&nbsp;</span><span class="fa fa-ellipsis-h"></span></span>
 
                         </ng-container>
-
 
                         <ng-container *ngIf="selectedShowType.code=='TBL'">
                             <div class="card" style="max-width: 800px;">
@@ -92,8 +89,6 @@
                                 </div>
                             </div>
                         </ng-container>
-
-
 
                         <ng-container *ngIf="selectedShowType.code=='RC'">
                             <div class="card" style="max-width: 400px;">
@@ -172,7 +167,6 @@
                             </div>
                         </ng-container>
 
-
                         <ng-container *ngIf="selectedShowType.code=='IFB'">
                             <div class="card" style="max-width: 400px;">
                                 <div class="card-body p-0">
@@ -206,21 +200,8 @@
                                 </div>
                             </div>
                         </ng-container>
-
-
-
                     </div>
-
-
-
-
-
-
-
                 </ng-container>
-
-
-
             </div>
         </div>
     </div>

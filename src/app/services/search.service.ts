@@ -59,7 +59,6 @@ export class SearchService {
     }
   }
 
-
   public onPeopleScrollDown(): void {
     if (this.loading_people == false) {
       this.loadPeople({ page: this.next_people_page });
@@ -140,7 +139,6 @@ export class SearchService {
       this.router.navigateByUrl('/search/top/' + this.search_query.trim());
     }
   }
-
 
   clearQuery() {
     this.search_query = "";

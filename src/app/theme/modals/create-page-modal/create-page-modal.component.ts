@@ -80,10 +80,20 @@ export class CreatePageModalComponent implements OnInit {
     });
   }
 
+  get pageFr() {
+    return this.frm_pageGroup.controls;
+  }
+
+
   savePage() {
-    if(this.pageService.submitted){
+    if (this.submitted) {
       return false;
     }
+    this.submitted = true;
+    if (this.pageFr.name.errors || this.pageFr.subcategory.errors) {
+      return false;
+    }
+
     this.pageService.savePage();
   }
 

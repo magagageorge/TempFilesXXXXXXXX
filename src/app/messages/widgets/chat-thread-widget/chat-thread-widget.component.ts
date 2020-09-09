@@ -357,7 +357,6 @@ export class ChatThreadWidgetComponent implements AfterViewInit {
   }
 
   updateLinkPreview(prev:LinkPreview){
-     console.log(prev);
     this.linkPreview=prev;
   }
 

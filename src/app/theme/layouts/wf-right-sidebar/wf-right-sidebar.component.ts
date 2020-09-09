@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, HostListener, Inject, Renderer2 } from '@angular/core';
 import { DeviceDetectorService } from '@app/libs/device-detector';
 
 @Component({
@@ -8,9 +8,9 @@ import { DeviceDetectorService } from '@app/libs/device-detector';
 })
 export class WfRightSidebarComponent implements OnInit {
 
-  deviceService:DeviceDetectorService;
-  constructor(deviceService:DeviceDetectorService) {
-    this.deviceService=deviceService;
+  deviceService: DeviceDetectorService;
+  constructor(deviceService: DeviceDetectorService) {
+    this.deviceService = deviceService;
   }
 
   ngOnInit() {

@@ -6,10 +6,12 @@ export class ShowAdContent {
     introduction: string;
     cards:ShowAdContentCard[];
     destination_url: string;
+    redirect_url: string;
     one_destination: string;
     call_to_action: string;
     ad_format:string;
     page:any;
+    seen:boolean;
 }
 
 
@@ -19,6 +21,7 @@ export class ShowAdContentCard {
     headline: string;
     description: string;
     destination_url: string;
+    redirect_url: string;
     media: string;
     media_width: number;
     media_height: number;

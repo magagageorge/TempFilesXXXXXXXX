@@ -9,7 +9,7 @@
                         <div class="card-body p-0 overflow-hidden">
                             <div [ngStyle]="{'height':''+(boxWidth-2)+'px','width':''+(boxWidth-2)+'px'}"
                                 style="overflow: hidden;">
-                                <a href="{{linkProcessingService.insertLinkProtocol(card.destination_url)}}"
+                                <a href="{{linkProcessingService.insertLinkProtocol(card.redirect_url)}}"
                                     class="d-block w-100 p-0 m-0" target="_blank">
                                     <ng-container *ngIf="card.media!=null">
                                         <div [ngStyle]="{'height':''+(boxWidth-2)+'px','width':''+(boxWidth-2)+'px','background-image':'url('+imageIconsService.loadingPictureImage+')'}"
@@ -23,7 +23,7 @@
                                 </a>
                             </div>
                             <div class="d-block w-100 px-0 py-2">
-                                <a href="{{linkProcessingService.insertLinkProtocol(card.destination_url)}}"
+                                <a href="{{linkProcessingService.insertLinkProtocol(card.redirect_url)}}"
                                     class="d-block w-100 p-0 m-0" target="_blank">
                                     <div class="d-flex flex-row justify-content-between mx-0 p-0 w-100">
                                         <div class="p-0">

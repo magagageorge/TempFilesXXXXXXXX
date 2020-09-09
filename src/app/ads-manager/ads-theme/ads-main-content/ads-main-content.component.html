@@ -1,5 +1,8 @@
-<main class="content container-fluid px-md-5 px-lg-5 p-0">
+<main class="content container-fluid px-md-0 px-lg-0 p-0">
     <ng-content></ng-content>
 </main>
 <app-create-page-modal></app-create-page-modal>
+<ng-container *ngIf="adsService.wait_processing_request==true">
+    <app-ads-processing-request-overlay [message]="adsService.wait_processing_request_message"></app-ads-processing-request-overlay>
+</ng-container>
 <app-navigation-watch></app-navigation-watch>

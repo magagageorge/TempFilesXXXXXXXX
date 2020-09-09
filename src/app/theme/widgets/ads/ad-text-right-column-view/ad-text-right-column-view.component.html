@@ -9,7 +9,7 @@
                 
                 <ng-container *ngFor="let ad_content of showAdsService.TEXT_ADS;let i=index">
                     <div *ngIf="i<4" class="col-12 p-0 ad_sm">
-                        <a href="{{linkProcessingService.insertLinkProtocol(ad_content.cards[0].destination_url)}}" class="d-block w-100 p-0 m-0" target="_blank">
+                        <a href="{{linkProcessingService.insertLinkProtocol(ad_content.cards[0].redirect_url)}}" class="d-block w-100 p-0 m-0" target="_blank">
                             <div class="row mx-0 p-2">
                                 <div class="col-3 p-0 d-flex justify-content-center align-items-center"
                                 style="overflow: hidden;"

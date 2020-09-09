@@ -9,6 +9,7 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbdDatepickerAdapterModule } from '@app/libs/date/datepicker-adpater.module';
 import { ValidateDateDirective } from '@app/libs/date/validateDate.directive';
+import { EditCompaignLeftComponent } from './widgets/edit-compaign-left/edit-compaign-left.component';
 
 
 @NgModule({
@@ -23,6 +24,6 @@ import { ValidateDateDirective } from '@app/libs/date/validateDate.directive';
     NgbModule,
     NgbdDatepickerAdapterModule
   ],
-  declarations: [...routedComponents,ValidateDateDirective],
+  declarations: [...routedComponents,ValidateDateDirective, EditCompaignLeftComponent],
 })
 export class AdsModule { }

@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewChild, ElementRef, HostListener, AfterViewInit, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, HostListener, AfterViewInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 import { AdsService } from '@app/ads-manager/services/ads.service';
 import { AdContentForm, AdContentCard, AdContentCardForm } from '@app/ads-manager/models/ad-content';
 import { CallToAction, call_to_actions } from '@app/ads-manager/models/call-to-action';
 import { AdCompaignForm } from '@app/ads-manager/models/ad-compaign-form';
 import { Observable, of } from 'rxjs';
+import * as cloneDeep from 'lodash/cloneDeep';
 import { ImageIconsService } from '@app/services/image-icons.service';
 import { CommentDeleteModalComponent } from '@app/theme/modals/comment-delete-modal/comment-delete-modal.component';
 import { URL_REGEXP } from '@app/libs/utilities/wb-utilities';
@@ -12,8 +13,6 @@ import { WfLinkPreviewService } from '@app/libs/wf-link-preview/services/wf-link
 import { LinkPreview } from '@app/libs/wf-link-preview';
 import { SysFunctions } from '@app/libs/utilities/common-functions';
 import { Router } from '@angular/router';
-
-
 
 @Component({
   selector: 'app-ad-content-form-widget',
@@ -25,9 +24,11 @@ export class AdContentFormWidgetComponent implements OnInit, AfterViewInit {
   @ViewChild("AdCardsContainer", { static: false })
   AdCardsContainer: ElementRef;
   @Input() compaign: AdCompaignForm;
+  @Input() ad_model: AdContentForm;
+  @Output() adEditedEmit = new EventEmitter<AdContentForm>();
+  ad_draft_model: AdContentForm = new AdContentForm();
   frm_adGroup: FormGroup;
   adGroup: FormGroup;
-  ad_model: AdContentForm;
   submitted: boolean = false;
   callActions: CallToAction[];
   AdCardsContainerWidth: number;
@@ -44,13 +45,14 @@ export class AdContentFormWidgetComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.frm_adGroup = this.formBuilder.group(
       {
-        name: [],
+        name: ['', Validators.required],
         introduction: [''],
         destination_url: [''],
         call_to_action: ['', Validators.required],
         one_destination: [],
         cards: this.formBuilder.array([])
       });
+    this.ad_draft_model = cloneDeep(this.ad_model);
     this.loadCards();
     this.checkFormValidations();
   }
@@ -96,72 +98,83 @@ export class AdContentFormWidgetComponent implements OnInit, AfterViewInit {
   saveAd() {
     this.checkFormValidations();
     this.submitted = true;
-    if(this.saving_ad){
+    if (this.saving_ad) {
       return;
     }
-    if(this.frm_adGroup.invalid){
-      alert();
+    if (this.frm_adGroup.invalid) {
       return;
     }
     var _this = this;
     const formData: any = new FormData();
     formData.append("compaign_id", _this.compaign.id);
-    formData.append("name", _this.ad_model.name);
-    formData.append("introduction", _this.ad_model.introduction);
-    formData.append("destination_url", _this.ad_model.destination_url);
-    formData.append("one_destination", _this.ad_model.one_destination);
-    formData.append("ad_cards", JSON.stringify(_this.ad_model.cards));
-    formData.append("call_to_action", _this.ad_model.call_to_action);
-
-    formData.append("ad_format", _this.compaign.ad_format);
-    formData.append("page_id", _this.compaign.page_id);
+    formData.append("name", _this.ad_draft_model.name);
+    if(_this.ad_draft_model.id!=null){
+      formData.append("id", _this.ad_draft_model.id);
+    }
+    formData.append("introduction", _this.ad_draft_model.introduction);
+    formData.append("destination_url", _this.ad_draft_model.destination_url);
+    formData.append("one_destination", _this.ad_draft_model.one_destination);
+    formData.append("ad_cards", JSON.stringify(_this.ad_draft_model.cards));
+    formData.append("call_to_action", _this.ad_draft_model.call_to_action);
+    formData.append("ad_format", _this.ad_draft_model.ad_format);
+    formData.append("page_id", _this.ad_draft_model.page_id);
     _this.saving_ad = true;
     _this.submitted = false;
 
     this.adsService.service.getProvider(this.adsService.provider).crudconfig.route_url = 'ads/ad/';
-    if (this.ad_model.id > 0) {
-      return this.adsService.service.update(this.adsService.provider, formData, { id: this.ad_model.id }).subscribe(results => {
+    if (this.ad_draft_model.id > 0) {
+      this.adsService.WaitProcessingRequest(true,'Saving Changes!');
+      return this.adsService.service.update(this.adsService.provider, formData, { id: _this.ad_draft_model.id }).subscribe(results => {
         _this.saving_ad = false;
         _this.submitted = false;
+        _this.adsService.WaitProcessingRequest(false,'');
         if (results.isSuccess()) {
           var data = results.getResultData();
+          if (data.done == true && data.adcontent != null) {
+            _this.adEditedEmit.emit(_this.adsService.setAdContentForm(data.adcontent));
+            _this.adsService.ad_form_open = false;
+          }
         }
       });
     } else {
+      this.adsService.WaitProcessingRequest(true,'Saving Your Ad!');
       return this.adsService.service.create(this.adsService.provider, formData).subscribe(results => {
         _this.saving_ad = false;
         _this.submitted = false;
+        _this.adsService.WaitProcessingRequest(false,'');
         if (results.isSuccess()) {
           var data = results.getResultData();
-          if (data.done == true && data.compaign != null) {
-            //_this.router.navigateByUrl('adsmanager/compaigns/create/' + data.compaign.id);
+          if (data.done == true && data.adcontent != null) {
+            _this.adsService.CompaingInEdit.ads.push(_this.adsService.setAdContentForm(data.adcontent));
+            _this.router.navigateByUrl('adsmanager/compaigns/edit/' + data.adcontent.compaign_id + '/ad/' + data.adcontent.id);
+            _this.adsService.ad_form_open = false;
           }
         }
       });
     }
   }
 
+  /* Function to fetch the ad url information and automatically fill the form inputs */
   crawlLink() {
     var _this = this;
-    if (this.a.destination_url.invalid == false && _this.ad_model.cards.length == 1) {
-      this.linkPreviewService.fetchLink(this.ad_model.destination_url.trim()).subscribe((lPreview: LinkPreview) => {
+    if (this.a.destination_url.invalid == false && _this.ad_draft_model.cards.length == 1) {
+      this.linkPreviewService.fetchLink(this.ad_draft_model.destination_url.trim()).subscribe((lPreview: LinkPreview) => {
         if (lPreview) {
-          _this.ad_model.cards[0].headline = lPreview.title;
-          _this.ad_model.cards[0].description = lPreview.description;
-          if (lPreview.image.trim() != '') {
+          _this.ad_draft_model.cards[0].headline = lPreview.title;
+          _this.ad_draft_model.cards[0].description = lPreview.description;
+          if (lPreview.image!=null && lPreview.image.trim() != '') {
             var loadedImage = new Image();
-            loadedImage.setAttribute('crossorigin', 'anonymous'); // works for me
+            loadedImage.setAttribute('crossorigin', 'anonymous');
             loadedImage.onload = (event) => {
               if (event) {
                 SysFunctions.ImageUrlToBlob(lPreview.image.trim()).subscribe(blob => {
                   SysFunctions.BlobtoDataURL(blob).then(base64Url => {
                     var imgFile = SysFunctions.DataUrlToFile(base64Url);
-                    _this.ad_model.cards[0].media = base64Url;
-                    _this.ad_model.cards[0].media_file = imgFile;
-                    _this.ad_model.cards[0].media_height = loadedImage.height;
-                    _this.ad_model.cards[0].media_width = loadedImage.width;
-                    _this.ad_model.cards[0].media_wh_ratio = loadedImage.width / loadedImage.height;
-                    console.log(_this.ad_model.cards[0]);
+                    _this.ad_draft_model.cards[0].media = base64Url;
+                    _this.ad_draft_model.cards[0].media_file = imgFile;
+                    _this.ad_draft_model.cards[0].media_height = loadedImage.height;
+                    _this.ad_draft_model.cards[0].media_width = loadedImage.width;
+                    _this.ad_draft_model.cards[0].media_wh_ratio = loadedImage.width / loadedImage.height;
                   });
                 });
               }
@@ -172,10 +185,10 @@ export class AdContentFormWidgetComponent implements OnInit, AfterViewInit {
       });
     }
 
-    if (_this.ad_model.cards.length > 1 && ((_this.ad_model.destination_url.trim() != '' && this.a.destination_url.invalid == false) || _this.ad_model.destination_url.trim() == '')) {
-      if (_this.ad_model.one_destination == true) {
-        _this.ad_model.cards.forEach(card => {
-          card.destination_url = _this.ad_model.destination_url;
+    if (_this.ad_draft_model.cards.length > 0 && ((_this.ad_draft_model.destination_url.trim() != '' && this.a.destination_url.invalid == false) || _this.ad_draft_model.destination_url.trim() == '')) {
+      if (_this.ad_draft_model.one_destination == true) {
+        _this.ad_draft_model.cards.forEach(card => {
+          card.destination_url = _this.ad_draft_model.destination_url;
         });
       }
     }
@@ -183,10 +196,10 @@ export class AdContentFormWidgetComponent implements OnInit, AfterViewInit {
 
   oneDestChanged() {
     var _this = this;
-    if (_this.ad_model.cards.length > 1 && ((_this.ad_model.destination_url.trim() != '' && this.a.destination_url.invalid == false) || _this.ad_model.destination_url.trim() == '')) {
-      _this.ad_model.cards.forEach(card => {
-        if (_this.ad_model.one_destination == true) {
-          card.destination_url = _this.ad_model.destination_url;
+    if (_this.ad_draft_model.cards.length > 0 && ((_this.ad_draft_model.destination_url.trim() != '' && this.a.destination_url.invalid == false) || _this.ad_draft_model.destination_url.trim() == '')) {
+      _this.ad_draft_model.cards.forEach(card => {
+        if (_this.ad_draft_model.one_destination == true) {
+          card.destination_url = _this.ad_draft_model.destination_url;
         } else {
           card.destination_url = '';;
         }
@@ -195,14 +208,18 @@ export class AdContentFormWidgetComponent implements OnInit, AfterViewInit {
   }
 
   loadCards() {
-    this.loadCallToActions();
-    this.ad_model = new AdContentForm();
     var no_cards = 1;
-    if (this.compaign.ad_format == 'CAROUSEL_IMAGE') {
-      no_cards = 2;
-    }
-    for (var i = 1; i <= no_cards; i++) {
-      this.ad_model.cards.push(this.createCardForm(i));
+    if (this.ad_draft_model.cards.length > 0) {
+      for (var i = 1; i <= this.ad_draft_model.cards.length; i++) {
+        this.cardFormGroup(i);
+      }
+    } else {
+      if (this.ad_draft_model.ad_format == 'CAROUSEL_IMAGE') {
+        no_cards = 2;
+      }
+      for (var i = 1; i <= no_cards; i++) {
+        this.ad_draft_model.cards.push(this.createCardForm(i));
+      }
     }
     this.showBlocks();
     this.checkFormValidations();
@@ -212,8 +229,8 @@ export class AdContentFormWidgetComponent implements OnInit, AfterViewInit {
     var newcard = new AdContentCardForm();
     newcard.sn = parseInt(sn);
     newcard.media_file = null;
-    if (this.ad_model.one_destination && this.ad_model.destination_url.trim() != '') {
-      newcard.destination_url = this.ad_model.destination_url.trim();
+    if (this.ad_draft_model.one_destination && this.ad_draft_model.destination_url.trim() != '') {
+      newcard.destination_url = this.ad_draft_model.destination_url.trim();
     }
     this.cardFormGroup(sn);
     return newcard;
@@ -242,15 +259,17 @@ export class AdContentFormWidgetComponent implements OnInit, AfterViewInit {
   }
 
   showBlocks() {
-    if (this.compaign.ad_format == 'SINGLE_IMAGE') {
+    if (this.ad_draft_model.ad_format == 'SINGLE_IMAGE') {
       this.show_block_one = true;
       this.show_block_two = true;
       this.show_call_to_action = true;
-    } else if (this.compaign.ad_format == 'CAROUSEL_IMAGE') {
+      this.ad_draft_model.one_destination = true;
+      this.oneDestChanged();
+    } else if (this.ad_draft_model.ad_format == 'CAROUSEL_IMAGE') {
       this.show_block_one = true;
       this.show_block_two = true;
       this.show_call_to_action = true;
-    } else if (this.compaign.ad_format == 'TEXT_AD') {
+    } else if (this.ad_draft_model.ad_format == 'TEXT_AD') {
       this.show_block_one = false;
       this.show_block_two = true;
       this.show_call_to_action = false;
@@ -258,81 +277,95 @@ export class AdContentFormWidgetComponent implements OnInit, AfterViewInit {
   }
 
   checkDestUrl(): boolean {
-    if (this.show_block_one == true && this.ad_model.cards.length == 1) {
-      if (this.ad_model.destination_url.trim() == '') {
+    if (this.show_block_one == true && this.ad_draft_model.cards.length == 1) {
+      if (this.ad_draft_model.destination_url.trim() == '') {
         return true;
       }
     }
     return false;
   }
 
-  checkFormValidations(){
-    if (this.compaign.ad_format == 'SINGLE_IMAGE') {
+  checkFormValidations() {
+    if (this.ad_draft_model.ad_format == 'SINGLE_IMAGE') {
       this.AdIntroduction.setValidators([Validators.required]);
       this.AdDestinationUrl.setValidators([Validators.required, Validators.pattern(URL_REGEXP)]);
-      this.AdCallToAction.setValidators([Validators.required]); 
-      for(var i=0;i<this.cards.length;i++){
-        this.cards.controls[i].get('destination_url').clearValidators();
-      }           
-    } else if (this.compaign.ad_format == 'CAROUSEL_IMAGE') {
+      this.AdCallToAction.setValidators([Validators.required]);
+      for (var i = 0; i < this.cards.length; i++) {
+        if (i == 0) {
+          this.cards.controls[i].get('headline').setValidators([Validators.required]);
+          this.cards.controls[i].get('description').clearValidators();
+          this.cards.controls[i].get('destination_url').clearValidators();
+        } else {
+          this.cards.controls[i].get('headline').clearValidators();
+          this.cards.controls[i].get('description').clearValidators();
+          this.cards.controls[i].get('destination_url').clearValidators();
+        }
+      }
+    } else if (this.ad_draft_model.ad_format == 'CAROUSEL_IMAGE') {
       this.AdIntroduction.setValidators([Validators.required]);
       this.AdDestinationUrl.setValidators([Validators.required, Validators.pattern(URL_REGEXP)]);
-      this.AdCallToAction.setValidators([Validators.required]); 
-      for(var i=0;i<this.cards.length;i++){
+      this.AdCallToAction.setValidators([Validators.required]);
+      for (var i = 0; i < this.cards.length; i++) {
+        this.cards.controls[i].get('headline').setValidators([Validators.required]);
+        this.cards.controls[i].get('description').clearValidators();
         this.cards.controls[i].get('destination_url').setValidators([Validators.required, Validators.pattern(URL_REGEXP)]);
-      }       
-    } else if (this.compaign.ad_format == 'TEXT_AD') {
+      }
+    } else if (this.ad_draft_model.ad_format == 'TEXT_AD') {
       this.AdIntroduction.clearValidators();
       this.AdDestinationUrl.clearValidators();
-      this.AdCallToAction.clearValidators();  
-        for(var i=0;i<this.cards.length;i++){
-          this.cards.controls[i].get('destination_url').setValidators([Validators.required, Validators.pattern(URL_REGEXP)]);
+      this.AdCallToAction.clearValidators();
+      for (var i = 0; i < this.cards.length; i++) {
+        if(i==0){
+          this.cards.controls[i].get('headline').setValidators([Validators.required]);
+          this.cards.controls[i].get('description').setValidators([Validators.required]);
+          this.cards.controls[i].get('destination_url').setValidators([Validators.required, Validators.pattern(URL_REGEXP)]);  
+        }else{
+          this.cards.controls[i].get('headline').clearValidators();
+          this.cards.controls[i].get('description').clearValidators();
+          this.cards.controls[i].get('destination_url').clearValidators();
         }
+      }
 
     } else { }
 
     this.AdIntroduction.updateValueAndValidity();
     this.AdDestinationUrl.updateValueAndValidity();
     this.AdCallToAction.updateValueAndValidity();
-    for(var i=0;i<this.cards.length;i++){
+    for (var i = 0; i < this.cards.length; i++) {
+      this.cards.controls[i].get('headline').updateValueAndValidity();
+      this.cards.controls[i].get('description').updateValueAndValidity();
       this.cards.controls[i].get('destination_url').updateValueAndValidity();
-    }  
+    }
   }
 
-
-
   adMoreCard() {
-    if (this.ad_model.cards.length < 10) {
-      var sn = this.ad_model.cards[this.ad_model.cards.length - 1].sn + 1;
-      this.ad_model.cards.push(this.createCardForm(sn));
+    if (this.ad_draft_model.cards.length < 10) {
+      var sn = this.ad_draft_model.cards[this.ad_draft_model.cards.length - 1].sn + 1;
+      this.ad_draft_model.cards.push(this.createCardForm(sn));
     }
   }
 
   removeCard(card: AdContentCardForm, index: number) {
     this.cards.removeAt(index);
-    this.ad_model.cards = this.ad_model.cards.filter((c: AdContentCardForm) => c.sn !== card.sn);
+    this.ad_draft_model.cards = this.ad_draft_model.cards.filter((c: AdContentCardForm) => c.sn !== card.sn);
   }
 
   removeCardImage(card: AdContentCardForm) {
     if (card) {
       card.media_file = null;
-      card.media = null;
+      card.media = '';
       card.media_width = null;
       card.media_height = null;
       card.media_wh_ratio = 0;
     }
   }
 
-  loadCallToActions() {
-    this.callActions = call_to_actions;
-  }
-
   newCalltoAction() {
-    this.searchCTA().subscribe((cta: CallToAction) => {
+    this.adsService.searchCTA(this.ad_draft_model.call_to_action).subscribe((cta: CallToAction) => {
       if (cta) {
-        this.ad_model.selectedCTA = cta;
+        this.ad_draft_model.selectedCTA = cta;
       } else {
-        this.ad_model.selectedCTA = null;
+        this.ad_draft_model.selectedCTA = null;
       }
     });
   }
@@ -346,10 +379,6 @@ export class AdContentFormWidgetComponent implements OnInit, AfterViewInit {
     if (card != null) {
       this.media_upload_to_card = card;
     }
-  }
-
-  searchCTA(): Observable<CallToAction> {
-    return of(this.callActions.find((cta: CallToAction) => cta.code === this.ad_model.call_to_action));
   }
 
   onSelectFile(event) {
@@ -382,11 +411,11 @@ export class AdContentFormWidgetComponent implements OnInit, AfterViewInit {
         var loadedImage = new Image();
         loadedImage.onload = (event) => {
           if (event) {
-            //this.image_preview_urls.push({ url: i_url, width: loadedImage.width, height: loadedImage.height, file: <File>f });
             this.searchAdCard(this.media_upload_to_card).subscribe((card: AdContentCardForm) => {
               if (card) {
                 card.media_file = f;
                 card.media = i_url;
+                card.upload_media = true;
                 card.media_width = loadedImage.width;
                 card.media_height = loadedImage.height;
                 card.media_wh_ratio = card.media_width / card.media_height;
@@ -402,7 +431,7 @@ export class AdContentFormWidgetComponent implements OnInit, AfterViewInit {
   }
 
   searchAdCard(card: AdContentCardForm): Observable<AdContentCardForm> {
-    return of(this.ad_model.cards.find((c: AdContentCardForm) => c.sn === card.sn));
+    return of(this.ad_draft_model.cards.find((c: AdContentCardForm) => c.sn === card.sn));
   }
 
 }

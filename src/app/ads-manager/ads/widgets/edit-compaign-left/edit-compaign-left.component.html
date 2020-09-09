@@ -1,0 +1,47 @@
+<div class="card m-0 h-100">
+    <div class="card-body p-0">
+        <div class="d-block w-100 border-bottom p-0">
+            <ng-container *ngIf="compaign_model==null || compaign_model==undefined">
+                <div class="d-flex justify-content-center align-items-center w-100 h-100"
+                style="font-size: 130%;">
+                <i class="fa fa-circle-o-notch fa-spin fa-2x" aria-hidden="true"></i>
+            </div>
+            </ng-container>
+            <ng-container *ngIf="compaign_model!=null && compaign_model!=undefined">
+                <ul class="list-group">
+                    <li class="list-group-item pl-2" [ngClass]="{ 'list-group-item-info': (child==false) }">
+                        <a routerLink="/adsmanager/compaigns/edit/{{compaign_model.id}}"
+                            class="d-block m-0 p-2">
+                            <span class="fa fa-folder"></span>
+                            <span>&nbsp;</span>
+                            <span>{{compaign_model.compaign_name}}</span>
+                        </a>
+                    </li>
+                    <ng-container *ngFor="let ad_item of compaign_model.ads">
+                        <li class="list-group-item pl-4 py-1" [ngClass]="{ 'list-group-item-info': (child==true &&  active_id==ad_item.id) }">
+                            <a routerLink="/adsmanager/compaigns/edit/{{compaign_model.id}}/ad/{{ad_item.id}}"
+                                class="d-block m-0 p-2">
+                                <span class="fa fa-bullhorn"></span>
+                                <span>&nbsp;</span>
+                                <span>{{ad_item.name}}</span>
+                            </a>
+                        </li>
+                    </ng-container>
+                </ul>
+
+               <ng-container *ngIf="child==false">
+                   <div class="d-flex justify-content-center p-4">
+                       <a  routerLink="/adsmanager/compaigns/edit/{{compaign_model.id}}/ad" class="btn btn-sm btn-outline-secondary">
+                           <span calss="fa fa-plus"></span>
+                           <span>&nbsp;</span>
+                           <span>Create Ad</span>
+                       </a>
+                   </div>
+
+               </ng-container>
+
+            </ng-container>
+
+        </div>
+    </div>
+</div>

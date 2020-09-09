@@ -1,13 +1,14 @@
 <div class="card windo-ad-post-card" style="max-width: 500px;" #AdPostContainer>
     <ng-container>
         <div class="card-header p-2" style="pointer-events: none;">
-            <ng-container *ngIf="compaign.selected_page!=null">
+            <ng-container *ngIf="ad_model.selected_page!=null">
                 <div class="user-block">
-                    <a routerLink="/{{compaign.selected_page.url}}">
-                        <img class="rounded-circle img-fluid" src="{{compaign.selected_page.picture.face}}" alt="">
+                    <a routerLink="/{{ad_model.selected_page.url}}">
+                        <img class="rounded-circle img-fluid" src="{{ad_model.selected_page.picture.face}}" alt="">
                     </a>
                     <span class="username mr-4">
-                        <a class="w-100 d-block text-truncate" routerLink="/{{compaign.selected_page.url}}">{{compaign.selected_page.name}}</a>
+                        <a class="w-100 d-block text-truncate"
+                            routerLink="/{{ad_model.selected_page.url}}">{{ad_model.selected_page.name}}</a>
                     </span>
                     <span class="description">
                         <span class="text-truncate text-muted">Sponsored</span>
@@ -30,7 +31,7 @@
             <div *ngIf="ad_model.cards && ad_model.cards.length>0" class="w-100 py-0 m-0"
                 style="padding-left:-1px;padding-right:-1px;">
 
-                <ng-container *ngIf="ad_model.cards.length==1">
+                <ng-container *ngIf="ad_model.ad_format=='SINGLE_IMAGE'">
 
                     <ng-container *ngIf="ad_model.cards[0].media!=null">
                         <div [ngStyle]="{'background-image':'url(' + imageIconsService.loadingPictureImage + ')','min-height':''+getPictureHeight(ad_model.cards[0].media_width,ad_model.cards[0].media_height)+'px'}"
@@ -52,7 +53,8 @@
                                 <div class="p-0">
                                     <div class="row mx-0 p-0">
                                         <div class="col-12">
-                                            <span class="wb-max-ln-1 font-weight-bold">{{ad_model.cards[0].headline}}</span>
+                                            <span
+                                                class="wb-max-ln-1 font-weight-bold">{{ad_model.cards[0].headline}}</span>
                                         </div>
                                         <div class="col-12 wb-max-ln-1">{{ad_model.cards[0].description}}</div>
                                     </div>
@@ -72,10 +74,10 @@
                     </ng-container>
                 </ng-container>
 
-                <ng-container *ngIf="ad_model.cards.length>1">
+                <ng-container *ngIf="ad_model.ad_format=='CAROUSEL_IMAGE'">
 
-                    <app-ad-post-catalog-widget [cards]="ad_model.cards" [selectedCTA]="ad_model.selectedCTA" 
-                    [dispayContainer]="AdPostContainerWidth">
+                    <app-ad-post-catalog-widget [cards]="ad_model.cards" [selectedCTA]="ad_model.selectedCTA"
+                        [dispayContainer]="AdPostContainerWidth">
                     </app-ad-post-catalog-widget>
 
                 </ng-container>

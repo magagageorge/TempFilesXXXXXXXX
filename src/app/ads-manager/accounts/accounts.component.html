@@ -1,16 +1,62 @@
 <app-ads-nav-bar></app-ads-nav-bar>
 <app-ads-main-content>
-    <div class="container-fluid px-md-5 px-lg-5" style="min-height: 100%;">
-        <div class="row" style="min-height: 80vh;">
+    <div class="container-fluid px-md-2 px-lg-2" style="min-height: 100%;">
+
+        <div class="row mx-0" style="min-height: 80vh;">
             <div class="col-12 p-0">
 
-                <div class="d-block w-100">
-                    <app-ads-nav-tabs-widget [tab]='tabname'></app-ads-nav-tabs-widget>
-                </div>
-                <div class="d-block w-100">
 
+                <div class="d-block w-100">
+                    <div class="card p-0">
+                        <div class="card-body p-0">
+                            <div class="d-block w-100">
+                                <app-ads-nav-tabs-widget [tab]='tabname'></app-ads-nav-tabs-widget>
+                            </div>
+                            <div class="d-block w-100 border">
+                                <div class="row mx-0">
+                                    <div class="col-12 p-0 m-0" style="width:100%;overflow-x: auto;">
+
+                                        <table class="table table-striped table-bordered fixed_header">
+                                            <thead>
+                                                <tr>
+                                                    <th class="p-1" colspan="1" style="white-space:nowrap;">
+                                                        Account Name
+                                                    </th>
+                                                    <th class="p-1" colspan="1" style="white-space:nowrap;">Status</th>
+                                                    <th class="p-1" colspan="1" style="white-space:nowrap;">Created Date
+                                                    </th>
+                                                    <th class="p-1" colspan="1" style="white-space:nowrap;">Currency</th>
+                                                    <th class="p-1 text-center" colspan="1" style="white-space:nowrap;">
+                                                        Spent
+                                                    </th>
+                                                    <th class="p-1 text-center" colspan="1" style="white-space:nowrap;">
+                                                        compaigns
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr role="row" class="odd">
+                                                    <td class="p-1">
+                                                        <div class="d-block w-100">{{adsService.ad_account.name}} (<span>Account ID</span><span>&nbsp;</span>{{adsService.ad_account.id}})</div>
+                                                    </td>
+                                                    <td class="p-1">-</td>
+                                                    <td class="p-1">{{adsService.ad_account.created_at}}</td>
+                                                    <td class="p-1">{{adsService.ad_account.currency}}</td>
+                                                    <td class="p-1 text-center">-</td>
+                                                    <td class="p-1 text-center">{{adsService.ad_account.compaigns.length}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+
+
+
     </div>
 </app-ads-main-content>

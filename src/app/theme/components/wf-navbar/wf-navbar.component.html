@@ -34,6 +34,20 @@
                             id="notification_count">{{notificationService.new_notifications}}</span></span> <span
                         class="clearfix d-none d-sm-inline-block">Notifications</span></a>
             </li>
+
+            <li *ngIf="is_authenticated==true" class="nav-item d-none d-md-block d-lg-block d-xl-block pull-left ml-1"
+                style="max-width: 150px;">
+            </li>
+            <li *ngIf="is_authenticated==true" class="nav-item  d-none d-md-block d-lg-block d-xl-block pull-left ml-1"
+                style="max-width: 150px;">
+            </li>
+            <li *ngIf="is_authenticated==true" class="nav-item d-none d-md-block d-lg-block d-xl-block pull-left ml-1"
+                style="max-width: 150px;">
+            </li>            
+            <li *ngIf="is_authenticated==true" class="nav-item d-none d-md-block d-lg-block d-xl-block pull-left ml-1"
+                style="max-width: 150px;">
+            </li>   
+
             <li *ngIf="is_authenticated==true;" class="nav-item d-sm-none">
                 <a routerLink="/search" class="nav-link waves-effect waves-light"><span class="fa fa-search"></span></a>
             </li>

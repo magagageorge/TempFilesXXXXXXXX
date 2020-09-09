@@ -221,8 +221,8 @@ export class EmailPassAuthProvider extends AbstractAuthProvider {
         }), catchError(function(res){
             var errors = [];
             if (res instanceof HttpErrorResponse) {
-                //errors = __this.getConfigValue('errors.getter')('login', res);
-                errors.push(res.error);
+                errors = __this.getConfigValue('errors.getter')('login', res);
+                //errors.push(res.error);
             }
             else {
                 errors.push('Something went wrong,please check your Internet Connection.');

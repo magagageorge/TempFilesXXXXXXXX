@@ -95,6 +95,13 @@ export class SysFunctions {
         return '' + month + '/' + day + '/' + year + '';
     }
 
+
+
+    public static ucwords(str: string) {
+       var  text = str.toLowerCase();
+        return text.charAt(0).toUpperCase() + text.slice(1);
+    }
+
     /*
 public static b64toBlob(b64Data, contentType) {
   contentType = contentType || '';

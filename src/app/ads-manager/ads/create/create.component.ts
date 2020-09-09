@@ -14,6 +14,7 @@ import { DatePipe } from '@angular/common';
 import { SysFunctions } from '@app/libs/utilities/common-functions';
 import { AdCompaign } from '@app/ads-manager/models/ad-compaign';
 import { Router, ActivatedRoute } from '@angular/router';
+import { AdContentForm } from '@app/ads-manager/models/ad-content';
 
 @Component({
   selector: 'app-create',
@@ -24,6 +25,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class CreateComponent implements OnInit {
 
   compaign_model: AdCompaignForm;
+  ad_model: AdContentForm;
   selectedObjective: AdObjective = null;
   aud_ages: any[] = [];
   ad_formats: AdFormat[] = [];
@@ -52,6 +54,7 @@ export class CreateComponent implements OnInit {
         }
       }
     });
+    this.ad_model = new AdContentForm();
   }
 
   ngOnInit() {
@@ -140,7 +143,6 @@ export class CreateComponent implements OnInit {
   get DateSchedule() {
     return this.frm_budgetscheduleGroup.get('date_schedule');
   }
-
   get isObjValid() {
     if (this.obj.objective.errors || this.obj.compaign_name.errors) {
       return false;
@@ -257,6 +259,7 @@ export class CreateComponent implements OnInit {
         this.compaign_model.currentForm = 'AdContent';
       } else { }
     }
+    this.adsService.setCompaingInEdit(this.compaign_model);
   }
 
   setCurrentForm(form: string) {
@@ -280,41 +283,13 @@ export class CreateComponent implements OnInit {
   }
 
   fillForm(compaign: AdCompaign) {
-    this.compaign_model = new AdCompaignForm();
-    this.compaign_model.id = compaign.id;
-    this.compaign_model.account_id = compaign.account_id;
-    this.compaign_model.objective = compaign.objective.code;
+    this.compaign_model = this.adsService.setCompaignModelForm(compaign);
     this.selectObjective(compaign.objective);
-    this.compaign_model.compaign_name = compaign.compaign_name;
-    this.compaign_model.gender = compaign.aud_gender;
-    this.compaign_model.aud_age_max = compaign.aud_age_max;
-    this.compaign_model.aud_age_min = compaign.aud_age_min;
-    this.compaign_model.gender = compaign.aud_gender;
-    this.compaign_model.aud_locations = compaign.aud_locations;
     compaign.aud_locations.forEach((loc: GeoLocationShort) => {
       this.createLocationGroup(loc.key);
     });
-    if (compaign.budget_schedule != null) {
-      this.compaign_model.budget_type = compaign.budget_schedule.budget_type;
-      if (compaign.budget_schedule.budget_type == 'total') {
-        this.compaign_model.total_budget = compaign.budget_schedule.total_budget;
-        this.compaign_model.daily_budget = '';
-      } else {
-        this.compaign_model.daily_budget = compaign.budget_schedule.daily_budget;
-        this.compaign_model.total_budget = '';
-      }
-      if (compaign.budget_schedule.end_date != null && compaign.budget_schedule.end_date != '') {
-        this.compaign_model.date_schedule = 'start_end';
-      } else {
-        this.compaign_model.date_schedule = 'continuous';
-      }
-      this.compaign_model.start_date = compaign.budget_schedule.start_date;
-      this.compaign_model.end_date = compaign.budget_schedule.end_date;
-    } else {
-      this.compaign_model.budget_type = 'daily';
-      this.compaign_model.date_schedule = 'continuous';
-    }
     this.setNextForm();
+    this.adsService.setCompaingInEdit(this.compaign_model);
   }
 
   setAdGender(gender: string) {
@@ -322,98 +297,26 @@ export class CreateComponent implements OnInit {
   }
 
   getAdFormats() {
-    var _this = this;
-    this.ad_formats = [];
-    WB_AD_FORMATS.forEach((ad_format: AdFormat) => {
-      if (this.selectedObjective != null && ad_format.active == true) {
-        if (ad_format.id == 'SINGLE_IMAGE' && (this.selectedObjective.code == 'APP_INSTALL' ||
-          this.selectedObjective.code == 'BRAND_AWARE' ||
-          this.selectedObjective.code == 'CONVERSION' ||
-          this.selectedObjective.code == 'ENGAGE' ||
-          this.selectedObjective.code == 'LEAD' ||
-          this.selectedObjective.code == 'REACH' ||
-          this.selectedObjective.code == 'TRAFFIC')
-        ) {
-          this.ad_formats.push(ad_format);
-        } else if (ad_format.id == 'CAROUSEL_IMAGE' && (this.selectedObjective.code == 'APP_INSTALL' ||
-          this.selectedObjective.code == 'BRAND_AWARE' ||
-          this.selectedObjective.code == 'CONVERSION' ||
-          this.selectedObjective.code == 'ENGAGE' ||
-          this.selectedObjective.code == 'LEAD' ||
-          this.selectedObjective.code == 'REACH' ||
-          this.selectedObjective.code == 'TRAFFIC' ||
-          this.selectedObjective.code == 'SELL_RENT')
-        ) {
-          this.ad_formats.push(ad_format);
-        } else if (ad_format.id == 'MESSAGE_AD' && (this.selectedObjective.code == 'APP_INSTALL' ||
-          this.selectedObjective.code == 'BRAND_AWARE' ||
-          this.selectedObjective.code == 'CONVERSION' ||
-          this.selectedObjective.code == 'ENGAGE' ||
-          this.selectedObjective.code == 'LEAD' ||
-          this.selectedObjective.code == 'REACH' ||
-          this.selectedObjective.code == 'TRAFFIC' ||
-          this.selectedObjective.code == 'SELL_RENT')
-        ) {
-          this.ad_formats.push(ad_format);
-        } else if (ad_format.id == 'TEXT_AD' && (this.selectedObjective.code == 'APP_INSTALL' ||
-          this.selectedObjective.code == 'BRAND_AWARE' ||
-          this.selectedObjective.code == 'CONVERSION' ||
-          this.selectedObjective.code == 'ENGAGE' ||
-          this.selectedObjective.code == 'LEAD' ||
-          this.selectedObjective.code == 'REACH' ||
-          this.selectedObjective.code == 'TRAFFIC' ||
-          this.selectedObjective.code == 'SELL_RENT')
-        ) {
-          this.ad_formats.push(ad_format);
-        } else if (ad_format.id == 'SPOTLIGHT_AD' && (this.selectedObjective.code == 'APP_INSTALL' ||
-          this.selectedObjective.code == 'BRAND_AWARE' ||
-          this.selectedObjective.code == 'CONVERSION' ||
-          this.selectedObjective.code == 'ENGAGE' ||
-          this.selectedObjective.code == 'LEAD' ||
-          this.selectedObjective.code == 'REACH' ||
-          this.selectedObjective.code == 'TRAFFIC' ||
-          this.selectedObjective.code == 'SELL_RENT')
-        ) {
-          this.ad_formats.push(ad_format);
-        } else if (ad_format.id == 'FOLLOWER_AD' && (this.selectedObjective.code == 'APP_INSTALL' ||
-          this.selectedObjective.code == 'BRAND_AWARE' ||
-          this.selectedObjective.code == 'CONVERSION' ||
-          this.selectedObjective.code == 'ENGAGE' ||
-          this.selectedObjective.code == 'LEAD' ||
-          this.selectedObjective.code == 'REACH' ||
-          this.selectedObjective.code == 'TRAFFIC' ||
-          this.selectedObjective.code == 'SELL_RENT')
-        ) {
-          this.ad_formats.push(ad_format);
-        } else if (ad_format.id == 'VIDEO_AD' && (this.selectedObjective.code == 'APP_INSTALL' ||
-          this.selectedObjective.code == 'BRAND_AWARE' ||
-          this.selectedObjective.code == 'CONVERSION' ||
-          this.selectedObjective.code == 'ENGAGE' ||
-          this.selectedObjective.code == 'LEAD' ||
-          this.selectedObjective.code == 'REACH' ||
-          this.selectedObjective.code == 'TRAFFIC' ||
-          this.selectedObjective.code == 'SELL_RENT' ||
-          this.selectedObjective.code == 'VIDEO_VIEWS')
-        ) {
-          this.ad_formats.push(ad_format);
-        } else { }
-      }
-    });
-
+    this.ad_formats = this.adsService.getAdFormats(this.selectedObjective);
     if (this.ad_formats.length > 0) {
-      this.setAdFormat(this.ad_formats[0]);
+      this.setAdFormat(this.ad_formats[0].id);
     }
   }
 
-  setAdFormat(format: AdFormat) {
-    this.ad_formats.forEach((f: AdFormat) => {
-      if (format.id == f.id) {
-        f.selected = true;
-      } else {
-        f.selected = false;
-      }
-    });
-    this.compaign_model.ad_format = format.id;
+  setAdFormat(code: string) {
+    if (code != null && code != '') {
+      this.ad_formats.forEach((f: AdFormat) => {
+        if (code == f.id) {
+          f.selected = true;
+        } else {
+          f.selected = false;
+        }
+      });
+    } else {
+      code = this.ad_formats[0].id;
+      this.setAdFormat(code);
+    }
+    this.ad_model.ad_format = code;
   }
 
   saveObjective() {
@@ -435,8 +338,8 @@ export class CreateComponent implements OnInit {
   }
 
   setSelectedPage(page: PageSummary) {
-    this.compaign_model.selected_page = page;
-    this.compaign_model.page_id = page.id;
+    this.ad_model.selected_page = page;
+    this.ad_model.page_id = page.id;
   }
 
   ShowLocationSearch() {
@@ -545,12 +448,13 @@ export class CreateComponent implements OnInit {
     formData.append("objective", _this.compaign_model.objective);
     formData.append("aud_locations", JSON.stringify(_this.compaign_model.aud_locations));
     formData.append("aud_gender", _this.compaign_model.gender);
+    formData.append("current_form", _this.compaign_model.currentForm);
 
     formData.append("budget_type", _this.compaign_model.budget_type);
     formData.append("daily_budget", _this.compaign_model.daily_budget);
     formData.append("total_budget", _this.compaign_model.total_budget);
-    formData.append("start_date", _this.compaign_model.start_date);
-    formData.append("end_date", _this.compaign_model.end_date);
+    formData.append("start_date", _this.StartDate.value);
+    formData.append("end_date", _this.EndDate.value);
 
     this.adsService.service.getProvider(this.adsService.provider).crudconfig.route_url = 'ads/compaign/';
     this.route.params.subscribe(params => {

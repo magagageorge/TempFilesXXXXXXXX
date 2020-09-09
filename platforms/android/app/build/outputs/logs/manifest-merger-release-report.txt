@@ -45,13 +45,15 @@ ADDED from D:\Projects\Woorbi\platforms\android\app\src\main\AndroidManifest.xml
 application
 ADDED from D:\Projects\Woorbi\platforms\android\app\src\main\AndroidManifest.xml:5:5-12:19
 	android:supportsRtl
-		ADDED from D:\Projects\Woorbi\platforms\android\app\src\main\AndroidManifest.xml:5:121-147
+		ADDED from D:\Projects\Woorbi\platforms\android\app\src\main\AndroidManifest.xml:5:182-208
 	android:label
 		ADDED from D:\Projects\Woorbi\platforms\android\app\src\main\AndroidManifest.xml:5:88-120
 	android:hardwareAccelerated
 		ADDED from D:\Projects\Woorbi\platforms\android\app\src\main\AndroidManifest.xml:5:18-52
 	android:icon
 		ADDED from D:\Projects\Woorbi\platforms\android\app\src\main\AndroidManifest.xml:5:53-87
+	android:networkSecurityConfig
+		ADDED from D:\Projects\Woorbi\platforms\android\app\src\main\AndroidManifest.xml:5:121-181
 activity#com.woorbi.main.MainActivity
 ADDED from D:\Projects\Woorbi\platforms\android\app\src\main\AndroidManifest.xml:6:9-11:20
 	android:label

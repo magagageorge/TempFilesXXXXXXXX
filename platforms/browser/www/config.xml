@@ -1,12 +1,14 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.woorbi.main" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Woorbi</name>
+<widget id="com.woorbi.main" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>
+		Woorbi
+	</name>
     <description>
-        A service that brands your career and social identity,then unlock the power of your knowledge,skills,experience and open the door to unlimited number of business and career opportunities around you.
-    </description>
+		A service that brands your career and social identity,then unlock the power of your knowledge,skills,experience and open the door to unlimited number of business and career opportunities around you.
+	</description>
     <author email="team@woorbi.com" href="http://www.woorbi.com">
-        Woorbi Team
-    </author>
+		Woorbi Team
+	</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-navigation href="*" />

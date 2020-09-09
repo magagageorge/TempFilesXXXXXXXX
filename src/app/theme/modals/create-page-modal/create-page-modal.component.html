@@ -1,107 +1,159 @@
 <ng-container *ngIf="pageService.creating_page_onfly">
     <app-overlay-modal-container>
         <div class="row mx-0 px-0 h-100 w-100 my-auto">
-            <div class="col-12 col-md-6 col-lg-6 col-xl-6 mx-auto px-md-5 px-lg-5 px-xl-5 py-2 bg-white">
+            <div class="col-12 col-md-6 col-lg-6 col-xl-6 mx-auto px-md-5 px-lg-5 px-xl-5 py-2">
 
 
                 <form [formGroup]="frm_pageGroup" (ngSubmit)="savePage()" #pageForm="ngForm">
-
-                    <ng-container *ngIf="pageService.model.main_category==null">
-                        <div class="d-block">
-                            <div class="row mx-0">
-                                <div *ngFor="let category of pageService.pageCategories" class="col-12 p-1">
-                                    <div class="row mx-0 m-1 border" (click)="selectCategory(category)"
-                                        style="cursor: pointer;">
-                                        <div class="col-3"></div>
-                                        <div class="col-9 d-flex justify-content-left align-items-center p-3">
-                                            <span>{{category.category}}</span>
+                    <div class="card p-0" [class.d-none]="pageService.model.main_category!=null">
+                        <div class="card-header">
+                            <span>Select Page Category</span>
+                            <button type="button" class="close btn-sm pull-right" aria-describedby="modal-title"
+                                (click)="pageService.cancelCreateOnlyPage()">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-block">
+                                <div class="row mx-0">
+                                    <div *ngFor="let category of pageService.pageCategories" class="col-12 p-1">
+                                        <div class="row mx-0 m-1 border" (click)="selectCategory(category)"
+                                            style="cursor: pointer;">
+                                            <div class="col-3"></div>
+                                            <div class="col-9 d-flex justify-content-left align-items-center p-3">
+                                                <span>{{category.category}}</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </ng-container>
 
-                    <ng-container *ngIf="pageService.model.main_category!=null">
-                        <div class="d-block">
-                            <div class="form-row p-0 m-0">
-                                <div class="form-group col-12 p-0 mb-1">
-                                    <label class="pull-left m-0" i18n>Page Name </label>
-                                    <input type="text" formControlName="name" [(ngModel)]="pageService.model.name"
-                                        class="form-control" placeholder="Page Name"
-                                        [ngClass]="{ 'is-invalid': submitted && a.name.errors }" />
-                                    <div *ngIf="submitted && a.name.errors"
-                                        class="invalid-feedback text-danger text-right form-text text-muted m-0 p-0">
-                                        <div *ngIf="a.name.errors.required">Required</div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-row p-0 m-0">
-                                <div class="form-group col-12 p-0 mb-1">
-                                    <label class="pull-left m-0" i18n>Category </label>
-                                    <select formControlName="subcategory" [(ngModel)]="pageService.model.category_id"
-                                        class="form-control"
-                                        [ngClass]="{ 'is-invalid': submitted && a.subcategory.errors }">
-                                        <option value="">-Category-</option>
-                                        <ng-container *ngIf="pageService.model.main_category.sub_categories.length">
-                                            <option *ngFor="let cat of pageService.model.main_category.sub_categories"
-                                                value="{{cat.item.id}}">
-                                                {{cat.item.category}}</option>
-                                        </ng-container>
-                                    </select>
-                                    <div *ngIf="submitted && a.subcategory.errors"
-                                        class="invalid-feedback text-danger text-right form-text text-muted m-0 p-0">
-                                        <div *ngIf="a.subcategory.errors.required">Required</div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="form-row p-0 m-0">
-                                <div
-                                    class="form-group col-12 col-md-6 col-lg-6 col-xl-6 d-flex justify-content-center align-items-center">
-                                    <div class="d-block border p-0" style="width:180px;height:180px;">
-                                        <image-cropper [imageChangedEvent]="imageChangedEvent"
-                                            [imageFileChangedEvent]="pageService.model.picture_preview_info.file"
-                                            [maintainAspectRatio]="true"
-                                            [containWithinAspectRatio]="containWithinAspectRatio" [aspectRatio]="1 / 1"
-                                            [resizeToWidth]="180" [cropperMinWidth]="180" [onlyScaleDown]="true"
-                                            [roundCropper]="false" format="jpg" outputType="base64"
-                                            (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()"
-                                            (cropperReady)="cropperReady()" (loadImageFailed)="loadImageFailed()"
-                                            [style.display]="showCropper ? null : 'none'" [alignImage]="'center'">
-                                        </image-cropper>
-
-                                    </div>
-                                </div>
-                                <div
-                                    class="form-group col-12 col-md-6 col-lg-6 col-xl-6 d-flex justify-content-center align-items-center">
-                                    <span class="btn btn-sm btn-success" (click)="pageService.UploadPictureFile()">
-                                        <span class="fa fa-pictures"></span> <span>&nbsp;</span>
-                                        <span>Browse Pictures</span>
-                                    </span>
-                                </div>
-                            </div>
-
-
-                        </div>
-                    </ng-container>
-
-                    <div class="d-block">
-                        <div class="form-row p-0 m-0">
-                            <div class="form-group col-12 p-0 mb-1">
-                                <span class="btn btn-sm btn-default pull-left"
-                                    (click)="pageService.cancelCreateOnlyPage()">
-                                    <span>Cancel</span>
-                                </span>
-                                <button type="submit" class="btn btn-sm btn-primary pull-right">
-                                    <span>Create Page</span>
-                                </button>
-                            </div>
-                        </div>
                     </div>
 
+                    <ng-container *ngIf="pageService.model.main_category!=null">
+                        <div class="card p-0">
+                            <div class="card-header">
+                                <span>Create Page</span>
+                                <button type="button" class="close btn-sm pull-right" aria-describedby="modal-title"
+                                    (click)="pageService.cancelCreateOnlyPage()">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="card-body">
+
+                                <div class="d-block">
+                                    <div class="form-row p-0 m-0">
+                                        <div class="form-group col-12 p-0 mb-1">
+                                            <label class="pull-left m-0" i18n>Page Name </label>
+                                            <input type="text" formControlName="name"
+                                                [(ngModel)]="pageService.model.name" class="form-control"
+                                                placeholder="Page Name"
+                                                [ngClass]="{ 'is-invalid': submitted && a.name.errors }" />
+                                            <div *ngIf="submitted && a.name.errors"
+                                                class="invalid-feedback text-danger text-right form-text text-muted m-0 p-0">
+                                                <div *ngIf="a.name.errors.required">Required</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row p-0 m-0">
+                                        <div class="form-group col-12 p-0 mb-1">
+                                            <label class="pull-left m-0" i18n>Category </label>
+                                            <select formControlName="subcategory"
+                                                [(ngModel)]="pageService.model.category_id" class="form-control"
+                                                [ngClass]="{ 'is-invalid': submitted && a.subcategory.errors }">
+                                                <option value="">-Category-</option>
+                                                <ng-container
+                                                    *ngIf="pageService.model.main_category.sub_categories.length">
+                                                    <option
+                                                        *ngFor="let cat of pageService.model.main_category.sub_categories"
+                                                        value="{{cat.item.id}}">
+                                                        {{cat.item.category}}</option>
+                                                </ng-container>
+                                            </select>
+                                            <div *ngIf="submitted && a.subcategory.errors"
+                                                class="invalid-feedback text-danger text-right form-text text-muted m-0 p-0">
+                                                <div *ngIf="a.subcategory.errors.required">Required</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-row p-0 m-0">
+                                        <div
+                                            class="form-group col-12 col-md-6 col-lg-6 col-xl-6 d-flex justify-content-center align-items-center">
+                                            <div class="d-block border p-0" style="width:180px;height:180px;">
+
+
+                                                <ng-container *ngIf="pageService.model.picture_preview_info.file==null">
+                                                    <div class="row m-0 h-100">
+                                                        <div class="col-12 p-0 d-flex justify-content-center align-items-center">
+                                                            <div class="row m-0 p-0">
+                                                                <div
+                                                                    class="col-12 p-0 m-0 d-flex justify-content-center">
+                                                                    Picture
+                                                                </div>
+                                                                <div
+                                                                    class="col-12 p-0 m-0 d-flex justify-content-center">
+                                                                    <div (click)="pageService.UploadPictureFile()"
+                                                                        class="btn btn-sm btn-outline-primary px-2 py-1 pull-right">
+                                                                        Upload</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </ng-container>
+
+
+
+                                                <image-cropper [imageChangedEvent]="imageChangedEvent"
+                                                    [imageFileChangedEvent]="pageService.model.picture_preview_info.file"
+                                                    [maintainAspectRatio]="true"
+                                                    [containWithinAspectRatio]="containWithinAspectRatio"
+                                                    [aspectRatio]="1 / 1" [resizeToWidth]="180" [cropperMinWidth]="180"
+                                                    [onlyScaleDown]="true" [roundCropper]="false" format="jpg"
+                                                    outputType="base64" (imageCropped)="imageCropped($event)"
+                                                    (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady()"
+                                                    (loadImageFailed)="loadImageFailed()"
+                                                    [style.display]="showCropper ? null : 'none'"
+                                                    [alignImage]="'center'">
+                                                </image-cropper>
+
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="form-group col-12 col-md-6 col-lg-6 col-xl-6 d-flex justify-content-center align-items-center">
+                                            <span class="btn btn-sm btn-success"
+                                                (click)="pageService.UploadPictureFile()">
+                                                <span class="fa fa-pictures"></span> <span>&nbsp;</span>
+                                                <span>Browse Pictures</span>
+                                            </span>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+                            <div class="card-footer">
+                                <div class="d-block">
+                                    <div class="form-row p-0 m-0">
+                                        <div class="form-group col-12 p-0 mb-1">
+                                            <span class="btn btn-sm btn-default pull-left"
+                                                (click)="pageService.cancelCreateOnlyPage()">
+                                                <span>Cancel</span>
+                                            </span>
+                                            <button type="submit" class="btn btn-sm btn-primary pull-right">
+                                                <span>Create Page</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </ng-container>
 
                 </form>
 

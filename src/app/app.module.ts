@@ -70,6 +70,7 @@ import { CustomAdapter, CustomDateParserFormatter } from './libs/date/datepicker
 import { PageService } from './services/page.service';
 import { ShowAdsService } from './services/show-ads.service';
 import { LinkProcessingService } from './services/link-processing.service';
+import { WbWindowService } from './services/wb-window.service';
 
 @NgModule({
   declarations: [
@@ -149,8 +150,9 @@ import { LinkProcessingService } from './services/link-processing.service';
       },
     }),
   ],
-  providers: [AuthGuard, UrlViewerService, ProfileService,PageService, PostingService, UtilitiesService, FeedService, ProfileFeedService, ProfilePhotosService, ProfileConnectionsService, CommentsService, NotificationsService, ConnectionsService, ImageIconsService, EditProfileService, ProfileViewerService, MessengerService, AppModalService, MessengerModalsService, LoadSubmitProgressService, NavigationService, NgxImageCompressService, MathService, AdsService,ShowAdsService,LinkProcessingService,
+  providers: [AuthGuard, UrlViewerService, ProfileService, PageService, PostingService, UtilitiesService, FeedService, ProfileFeedService, ProfilePhotosService, ProfileConnectionsService, CommentsService, NotificationsService, ConnectionsService, ImageIconsService, EditProfileService, ProfileViewerService, MessengerService, AppModalService, MessengerModalsService, LoadSubmitProgressService, NavigationService, NgxImageCompressService, MathService, AdsService, ShowAdsService, LinkProcessingService,WbWindowService,
     { provide: NgbDateAdapter, useClass: CustomAdapter },
+   /* { provide: Window, useValue: window },*/
     { provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter }],
   schemas: [NO_ERRORS_SCHEMA],
   bootstrap: [AppComponent]

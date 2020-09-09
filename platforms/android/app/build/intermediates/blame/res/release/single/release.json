@@ -20,6 +20,10 @@
         "source": "D:\\Projects\\Woorbi\\platforms\\android\\app\\src\\main\\res\\mipmap-ldpi\\ic_launcher.png"
     },
     {
+        "merged": "D:\\Projects\\Woorbi\\platforms\\android\\app\\build\\intermediates\\res\\merged\\release\\xml_network_security_config.xml.flat",
+        "source": "D:\\Projects\\Woorbi\\platforms\\android\\app\\src\\main\\res\\xml\\network_security_config.xml"
+    },
+    {
         "merged": "D:\\Projects\\Woorbi\\platforms\\android\\app\\build\\intermediates\\res\\merged\\release\\drawable-port-mdpi_screen.png.flat",
         "source": "D:\\Projects\\Woorbi\\platforms\\android\\app\\src\\main\\res\\drawable-port-mdpi\\screen.png"
     },

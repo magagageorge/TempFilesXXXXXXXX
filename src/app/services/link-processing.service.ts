@@ -8,8 +8,6 @@ export class LinkProcessingService {
 
   constructor() { }
 
-
-
   removeLinkProtocol(url:string){
     return SysFunctions.removeLinkProtocol(url);
   }

@@ -1,0 +1,25 @@
+.fixed_header tbody {
+    display: block;
+    width: 100%;
+    overflow-y: auto;
+    max-height: 60vh;
+}
+
+.fixed_header thead tr th {
+    font-weight: bold;
+}
+
+.fixed_header thead,
+.fixed_header tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.fixed_header thead {
+    width: calc(100% - 17px); /* scrollbar is average 1em/16px width, remove it from thead width */
+}
+
+.fixed_header {
+    min-width: 1200px;
+}

@@ -1,14 +1,19 @@
 import { CallToAction } from "./call-to-action";
+import { PageSummary } from "@app/models/page/page.model";
 
 export class AdContent {
     id: number;
     compaign_id: number;
     name: string;
     introduction: string;
-    cards:AdContentCard[];
+    cards: AdContentCard[];
     destination_url: string;
-    one_destination: string;
+    one_destination: boolean;
     call_to_action: string;
+    status:string;
+    page_id: number;
+    ad_format: string;
+    page: PageSummary;
 }
 
 export class AdContentForm {
@@ -20,14 +25,18 @@ export class AdContentForm {
     one_destination: boolean;
     call_to_action: string;
     cards: AdContentCardForm[];
-    selectedCTA:CallToAction;
-    constructor(){
+    selectedCTA: CallToAction;
+    selected_page: PageSummary;
+    page_id: number;
+    ad_format: string;
+    status:string;
+    constructor() {
         this.cards = [];
         this.call_to_action = '';
         this.selectedCTA = null;
-        this.destination_url='';
-        this.introduction='';
-        this.one_destination=false;
+        this.destination_url = '';
+        this.introduction = '';
+        this.one_destination = false;
     }
 }
 
@@ -46,22 +55,24 @@ export class AdContentCard {
 
 export class AdContentCardForm {
     id: number;
-    sn:number;
+    sn: number;
     headline: string;
     description: string;
     destination_url: string;
     media: string;
-    media_file:File;
+    media_file: File;
+    upload_media: boolean;
     media_width: number;
     media_height: number;
-    media_wh_ratio:number;
+    media_wh_ratio: number;
     media_size: number;
     media_ext: string;
-    constructor(){
-        this.headline='';
-        this.description='';
-        this.destination_url='';
-        this.media='';
-        this.id=null;
+    constructor() {
+        this.headline = '';
+        this.description = '';
+        this.destination_url = '';
+        this.media = '';
+        this.id = null;
+        this.upload_media = false;
     }
 }

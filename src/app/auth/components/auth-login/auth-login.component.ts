@@ -83,11 +83,9 @@ export class AuthLoginComponent implements OnInit {
             if (result.isSuccess()) {
                 _this.messages = result.getMessages();
                 window.location.reload();
-            }
-            else {
+            } else {
                 _this.errors = result.getErrors();
-                console.log(res_data);
-            }
+            }         
 
             var redirect = result.getRedirect();
             if (redirect) {

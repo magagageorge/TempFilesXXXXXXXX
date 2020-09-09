@@ -1,5 +1,7 @@
-<div *ngIf="deviceService.isDesktop" class="d-block w-100 h-100  sticky-top">
-    <app-ad-text-right-column-view></app-ad-text-right-column-view>
-    <app-ryou-mayknow-widget></app-ryou-mayknow-widget>
+<div *ngIf="deviceService.isDesktop" class="d-block w-100 h-100">
+    <app-right-sidebar-container>
+        <app-ad-text-right-column-view></app-ad-text-right-column-view>
+        <app-ryou-mayknow-widget></app-ryou-mayknow-widget>
+    </app-right-sidebar-container>
 </div>
 
