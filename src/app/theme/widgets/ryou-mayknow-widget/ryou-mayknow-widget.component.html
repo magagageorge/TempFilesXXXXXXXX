@@ -41,7 +41,7 @@
     <div *ngIf="connectionsService.CONNECT_SUGGESTIONS.length" class="card-body py-1">
 
         <ng-container *ngFor="let suggestion of connectionsService.CONNECT_SUGGESTIONS;let i=index;">
-            <div *ngIf="i<3" class="row">
+            <div *ngIf="i<3" class="row mx-0">
                 <div class="col-2 p-1">
                     <a class="w-100 h-100" (mouseover)="hovercardService.OnHover($event,suggestion)"
                         (click)="hovercardService.OnMouseOut($event);urlViewerService.setProfile(suggestion);"

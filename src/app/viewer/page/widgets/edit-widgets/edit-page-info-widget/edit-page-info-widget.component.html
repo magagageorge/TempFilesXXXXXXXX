@@ -1,0 +1,249 @@
+<div class="row m-0 px-0 h-100 align-items-center">
+    <div class="col-12 col-md-6 col-lg-6 col-xl-6 mx-auto px-0 h-100 align-items-center d-flex">
+        <div class="d-block align-self-center w-100 mx-auto my-auto">
+            <div class="card w-100 mx-auto my-auto overlay-modal-form-card">
+                <div class="card-header">
+                    <div class="row px-0 mx-0">
+                        <div class="col-10">
+                            <span class="font-weight-bold">Edit Page Info</span>
+                        </div>
+                        <div class="col-2">
+                            <span class="pull-right" (click)="editPageService.cancelEditPage()"
+                                style="font-size: 130%;cursor: pointer;">
+                                <span class="fa fa-close"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body p-0">
+                    <div class="d-block" style="height:80vh;overflow-y: auto;">
+                        <div class="row mx-0">
+                            <div class="col-12">
+                                <!-- Navbar -->
+                                <nav class="navbar navbar-page-nav m-0 w-100 p-0">
+                                    <ul class="nav navbar-nav nav-flex-icons container-fluid p-0 m-0">
+                                        <li class="nav-item d-inline-flex" (click)="activateTab('general')"
+                                            [class.active]="active_tab=='general'">
+                                            <a href="javascript:void(0)"
+                                                class="nav-link waves-effect waves-light w-100 text-center m-0">
+                                                <span class="fa fa-info-circle m-1"></span>
+                                                <span class="clearfix font-weight-bold">General</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item d-inline-flex" (click)="activateTab('contacts')"
+                                            [class.active]="active_tab=='contacts'">
+                                            <a href="javascript:void(0)"
+                                                class="nav-link waves-effect waves-light w-100 text-center m-0">
+                                                <span class="fa fa-address-card m-1"></span>
+                                                <span class="clearfix font-weight-bold">Contacts </span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item d-inline-flex" (click)="activateTab('location')"
+                                            [class.active]="active_tab=='location'">
+                                            <a href="javascript:void(0)"
+                                                class="nav-link waves-effect waves-light w-100 text-center m-0">
+                                                <span class="fa fa-location-arrow m-1"></span>
+                                                <span class="clearfix font-weight-bold">Location </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                            <div class="col-12">
+
+                                <ng-container *ngIf="active_tab=='general'">
+
+                                    <form [formGroup]="frm_general" (ngSubmit)="saveGeneral()" class="p-1">
+                                        <div class="form">
+
+                                            <div class="d-block">
+                                                <div class="row align-middle py-2">
+                                                    <div class="col-12">
+                                                        <label class="py-0 m-0">Name</label>
+                                                        <input type="text" class="form-control" name="name"
+                                                            formControlName="name" (change)="saveGeneral()"
+                                                            [ngClass]="{ 'is-invalid': general_submitted && fg.name.errors }"
+                                                            [(ngModel)]="pageModel.name">
+                                                        <div *ngIf="general_submitted && fg.name.errors"
+                                                            class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                                                            <div *ngIf="fg.name.errors.required" i18n>Required</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row align-middle py-2">
+                                                    <div class="col-12">
+                                                        <label class="py-0 m-0">Page Url</label>
+                                                        <input type="text" class="form-control" name="url"
+                                                            formControlName="url" (change)="saveGeneral()"
+                                                            [ngClass]="{ 'is-invalid': general_submitted && fg.url.errors }"
+                                                            [(ngModel)]="pageModel.url">
+                                                        <div *ngIf="general_submitted && fg.url.errors"
+                                                            class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                                                            <div *ngIf="fg.url.errors.required" i18n>Required</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row align-middle py-2">
+                                                    <div class="col-12">
+                                                        <label class="py-0 m-0">Description</label>
+                                                        <textarea class="form-control" name="about" rows="8"
+                                                            formControlName="about" (change)="saveGeneral()"
+                                                            [ngClass]="{ 'is-invalid': general_submitted && fg.about.errors }"
+                                                            [(ngModel)]="pageModel.about"></textarea>
+                                                        <div *ngIf="general_submitted && fg.about.errors"
+                                                            class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                                                            <div *ngIf="fg.about.errors.required" i18n>Required</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </form>
+
+
+                                </ng-container>
+
+                                <ng-container *ngIf="active_tab=='contacts'">
+
+                                    <form [formGroup]="frm_contacts" (ngSubmit)="saveContacts()" class="p-1">
+                                        <div class="form">
+
+                                            <div class="d-block">
+                                                <div class="row align-middle py-2">
+                                                    <div class="col-12">
+                                                        <label class="py-0 m-0">Phone Number</label>
+                                                        <input type="text" class="form-control" name="phone_number"
+                                                            formControlName="phone_number" (change)="saveContacts()"
+                                                            [ngClass]="{ 'is-invalid': contacts_submitted && fc.phone_number.errors }"
+                                                            [(ngModel)]="pageModel.phone">
+                                                        <div *ngIf="contacts_submitted && fc.phone_number.errors"
+                                                            class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                                                            <div *ngIf="fc.phone_number.errors.required" i18n>Required
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row align-middle py-2">
+                                                    <div class="col-12">
+                                                        <label class="py-0 m-0">Email Address</label>
+                                                        <input type="text" class="form-control" name="email"
+                                                            formControlName="email" (change)="saveContacts()"
+                                                            [ngClass]="{ 'is-invalid': contacts_submitted && fc.email.errors }"
+                                                            [(ngModel)]="pageModel.email">
+                                                        <div *ngIf="contacts_submitted && fc.email.errors"
+                                                            class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                                                            <div *ngIf="fc.email.errors.required" i18n>Required</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row align-middle py-2">
+                                                    <div class="col-12">
+                                                        <label class="py-0 m-0">Website</label>
+                                                        <input type="text" class="form-control" name="website"
+                                                            formControlName="website" (change)="saveContacts()"
+                                                            [ngClass]="{ 'is-invalid': contacts_submitted && fc.website.errors }"
+                                                            [(ngModel)]="pageModel.website">
+                                                        <div *ngIf="contacts_submitted && fc.website.errors"
+                                                            class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                                                            <div *ngIf="fc.website.errors.required" i18n>Required</div>
+                                                            <div *ngIf="fc.website.errors.pattern">Invalid Url</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </form>
+
+
+                                </ng-container>
+
+                                <ng-container *ngIf="active_tab=='location'">
+
+                                    <form [formGroup]="frm_location" (ngSubmit)="saveLocation()" class="p-1">
+                                        <div class="form">
+
+                                            <div class="d-block">
+                                                <div class="row align-middle py-2">
+                                                    <div class="col-12">
+                                                        <label class="py-0 m-0">Address</label>
+                                                        <textarea class="form-control" name="address" rows="2"
+                                                            formControlName="address" (change)="saveLocation()"
+                                                            [ngClass]="{ 'is-invalid': location_submitted && fl.address.errors }"
+                                                            [(ngModel)]="pageModel.address"></textarea>
+                                                        <div *ngIf="location_submitted && fl.address.errors"
+                                                            class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                                                            <div *ngIf="fl.address.errors.required" i18n>Required</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row align-middle py-2">
+                                                    <div class="col-12 col-md-6 col-lg-6 col-xl-6">
+                                                        <label class="py-0 m-0">Country</label>
+                                                        <select id="inputcountry" formControlName="country_code" (change)="saveLocation()"
+                                                            [ngClass]="{ 'is-invalid': submitted && fl.country_code.errors }"
+                                                            [(ngModel)]="pageModel.country_code"
+                                                            (ngModelChange)="switchLocation(pageModel.country_code)"
+                                                            name="country" class="form-control form-rounded">
+                                                            <option value="" i18n>-Select Country -</option>
+                                                            <option *ngFor="let country of utilityService.COUNTRIES"
+                                                                value="{{country.code}}">
+                                                                {{country.name}}
+                                                            </option>
+                                                        </select>
+                                                        <div *ngIf="location_submitted && fl.country_code.errors"
+                                                            class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                                                            <div *ngIf="fl.country_code.errors.required" i18n>Required
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-md-6 col-lg-6 col-xl-6">
+                                                        <label class="py-0 m-0">City</label>
+                                                        <select id="inputCity" formControlName="city_id" (change)="saveLocation()"
+                                                            [(ngModel)]="pageModel.city_id"
+                                                            [ngClass]="{ 'is-invalid': submitted && fl.city_id.errors }"
+                                                            name="city_id" class="form-control form-rounded">
+                                                            <option value="" i18n>- City/Town -</option>
+                                                            <option *ngFor="let city of selectedLocation.cities"
+                                                                value="{{city.id}}">
+                                                                {{city.name}}
+                                                            </option>
+                                                        </select>
+                                                        <div *ngIf="location_submitted && fl.city_id.errors"
+                                                            class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                                                            <div *ngIf="fl.city_id.errors.required" i18n>Required</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row align-middle py-2">
+                                                    <div class="col-12">
+                                                        <label class="py-0 m-0">Zip/Postal Code</label>
+                                                        <input type="text" class="form-control" name="zip"
+                                                            formControlName="zip" (change)="saveLocation()"
+                                                            [ngClass]="{ 'is-invalid': location_submitted && fl.zip.errors }"
+                                                            [(ngModel)]="pageModel.zip">
+                                                        <div *ngIf="location_submitted && fl.zip.errors"
+                                                            class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                                                            <div *ngIf="fl.zip.errors.required" i18n>Required</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </form>
+
+
+                                </ng-container>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

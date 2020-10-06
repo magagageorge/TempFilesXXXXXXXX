@@ -9,6 +9,7 @@ import { AppModalService } from '@app/services/app-modal.service';
 import { ReportContentModalComponent } from '@app/theme/modals/report-content-modal/report-content-modal.component';
 import { PostDeleteModalComponent } from '@app/theme/modals/post-delete-modal/post-delete-modal.component';
 import { LikesModalComponent } from '@app/theme/modals/likes-modal/likes-modal.component';
+import { VISIBILITY_ICONS } from '@app/data/visibilities';
 
 @Component({
   selector: 'app-post-card-widget',
@@ -28,6 +29,7 @@ export class PostCardWidgetComponent implements OnInit {
   urlViewerService: UrlViewerService;
   imageIconsService: ImageIconsService;
   appModalService:AppModalService;
+  VISIBILITY_ICONS:any = VISIBILITY_ICONS;
   constructor(feedService: FeedService, postingService: PostingService, commentService: CommentsService,appModalService:AppModalService, imageIconsService: ImageIconsService, urlViewerService: UrlViewerService, hovercardService: HoverCardService) {
     this.feedService = feedService;
     this.postingService = postingService;

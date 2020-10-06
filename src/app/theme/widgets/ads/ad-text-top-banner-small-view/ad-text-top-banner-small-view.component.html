@@ -1,12 +1,15 @@
 <ng-container *ngIf="showAdsService.TEXT_ADS.length>0">
     <ng-container *ngFor="let ad_content of showAdsService.TEXT_ADS;let i=index">
         <ng-container *ngIf="i<1">
-            <div class="w-100 d-flex justify-content-center align-items-center pb-1">
-                <a href="{{linkProcessingService.insertLinkProtocol(ad_content.cards[0].redirect_url)}}" target="_blank" class="font-weight-bold"><span
-                        class="text-primary">{{ad_content.cards[0].headline}}
-                        <span>&nbsp;</span>
-                        <span>-</span><span>&nbsp;</span></span><span>{{ad_content.cards[0].description}}</span></a>
-                <span><span>&nbsp;&nbsp;&nbsp;Ad&nbsp;</span><span class="fa fa-ellipsis-h"></span></span>
+            <div class="w-100 d-none d-md-block d-lg-block d-xl-block m-0 p-0">
+                <div class="w-100 d-flex justify-content-center align-items-center pb-1">
+                    <a href="{{linkProcessingService.insertLinkProtocol(ad_content.cards[0].redirect_url)}}"
+                        target="_blank" class="font-weight-bold"><span
+                            class="text-primary">{{ad_content.cards[0].headline}}
+                            <span>&nbsp;</span>
+                            <span>-</span><span>&nbsp;</span></span><span>{{ad_content.cards[0].description}}</span></a>
+                    <span><span>&nbsp;&nbsp;&nbsp;Ad&nbsp;</span><span class="fa fa-ellipsis-h"></span></span>
+                </div>
             </div>
         </ng-container>
     </ng-container>

@@ -176,7 +176,7 @@ document.getElementById(id).style.display = 'none';
       <span class="mdl-layout-title">Lint Report: 12 errors</span>
       <div class="mdl-layout-spacer"></div>
       <nav class="mdl-navigation mdl-layout--large-screen-only">
-Check performed at Sat Aug 22 11:30:12 EAT 2020      </nav>
+Check performed at Mon Oct 05 20:32:59 EAT 2020      </nav>
     </div>
   </header>
   <div class="mdl-layout__drawer">
@@ -201,7 +201,7 @@ Check performed at Sat Aug 22 11:30:12 EAT 2020      </nav>
 <tr>
 <td class="countColumn">12</td><td class="issueColumn"><i class="material-icons error-icon">error</i>
 <a href="#MissingDefaultResource">MissingDefaultResource</a>: Missing Default</td></tr>
-<tr><td></td><td class="categoryColumn"><a href="#MissingIssues">Disabled Checks (306)</a>
+<tr><td></td><td class="categoryColumn"><a href="#MissingIssues">Disabled Checks (331)</a>
 </td></tr></table>
 <br/>              </div>
               <div class="mdl-card__actions mdl-card--border">
@@ -279,6 +279,16 @@ because the check is not enabled by default, or because
 it was disabled with a command line flag or via one or 
 more <code>lint.xml</code> configuration files in the project directories.
 <div id="SuppressedIssues" style="display: none;"><br/><br/><div class="issue">
+<div class="id">AcceptsUserCertificates<div class="issueSeparator"></div>
+</div>
+<div class="metadata">Disabled By: Project lint.xml file<br/>
+<div class="explanation">
+Allowing user certificates could allow eavesdroppers to intercept data sent by your app, 'which could impact the privacy of your users. Consider nesting your app's <code>trust-anchors</code> inside a <code>&lt;debug-overrides></code> element to make sure they are only available when <code>android:debuggable</code> is set to <code>"true"</code>.<br/><div class="moreinfo">More info: <a href="https://developer.android.com/training/articles/security-config#TrustingDebugCa">https://developer.android.com/training/articles/security-config#TrustingDebugCa</a>
+</div>To suppress this error, use the issue id "AcceptsUserCertificates" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
+<br/></div>
+</div>
+</div>
+<div class="issue">
 <div class="id">AccidentalOctal<div class="issueSeparator"></div>
 </div>
 <div class="metadata">Disabled By: Project lint.xml file<br/>
@@ -332,11 +342,9 @@ This check looks for use of HostnameVerifier implementations whose <code>verify<
 <div class="explanation">
 The <code>allowBackup</code> attribute determines if an application's data can be backed up and restored. It is documented at <a href="http://developer.android.com/reference/android/R.attr.html#allowBackup">http://developer.android.com/reference/android/R.attr.html#allowBackup</a><br/>
 <br/>
-By default, this flag is set to <code>true</code>. When this flag is set to <code>true</code>, application data can be backed up and restored by the user using <code>adb backup</code> and <code>adb restore</code>.<br/>
+By default, this flag is set to <code>true</code> which means application data can be backed up and restored by the OS. Setting <code>allowBackup="false"</code> opts the application out of being backed up and so users can't restore data related to it when they go through the device setup wizard.<br/>
 <br/>
-This may have security consequences for an application. <code>adb backup</code> allows users who have enabled USB debugging to copy application data off of the device. Once backed up, all application data can be read by the user. <code>adb restore</code> allows creation of application data from a source specified by the user. Following a restore, applications should not assume that the data, file permissions, and directory permissions were created by the application itself.<br/>
-<br/>
-Setting <code>allowBackup="false"</code> opts an application out of both backup and restore.<br/>
+Allowing backups may have security consequences for an application. Currently <code>adb backup</code> allows users who have enabled USB debugging to copy application data off of the device. Once backed up, all application data can be read by the user. <code>adb restore</code> allows creation of application data from a source specified by the user. Following a restore, applications should not assume that the data, file permissions, and directory permissions were created by the application itself.<br/>
 <br/>
 To fix this warning, decide whether your application should support backup, and explicitly set <code>android:allowBackup=(true|false)"</code>.<br/>
 <br/>
@@ -375,13 +383,25 @@ To suppress this error, use the issue id "AnimatorKeep" as explained in the <a h
 </div>
 </div>
 <div class="issue">
+<div class="id">AnnotationProcessorOnCompilePath<div class="issueSeparator"></div>
+</div>
+<div class="metadata">Disabled By: Project lint.xml file<br/>
+<div class="explanation">
+This dependency is identified as an annotation processor. Consider adding it to the processor path using <code>annotationProcessor</code> instead of including it to the<br/>
+compile path.<br/>Note: This issue has an associated quickfix operation in Android Studio and IntelliJ IDEA.<br>
+To suppress this error, use the issue id "AnnotationProcessorOnCompilePath" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
+<br/></div>
+</div>
+</div>
+<div class="issue">
 <div class="id">AppCompatCustomView<div class="issueSeparator"></div>
 </div>
 <div class="metadata">Disabled By: Project lint.xml file<br/>
 <div class="explanation">
 In order to support features such as tinting, the appcompat library will automatically load special appcompat replacements for the builtin widgets. However, this does not work for your own custom views.<br/>
 <br/>
-Instead of extending the <code>android.widget</code> classes directly, you should instead extend one of the delegate classes in <code>android.support.v7.widget.AppCompat</code>.<br/>Note: This issue has an associated quickfix operation in Android Studio and IntelliJ IDEA.<br>
+Instead of extending the <code>android.widget</code> classes directly, you should instead extend one of the delegate classes in<br/>
+<code>androidx.appcompat.widget.AppCompatTextView</code>.<br/>Note: This issue has an associated quickfix operation in Android Studio and IntelliJ IDEA.<br>
 To suppress this error, use the issue id "AppCompatCustomView" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
 <br/></div>
 </div>
@@ -465,12 +485,24 @@ To suppress this error, use the issue id "ApplySharedPref" as explained in the <
 </div>
 <div class="metadata">Disabled By: Project lint.xml file<br/>
 <div class="explanation">
-Assertions are not checked at runtime. There are ways to request that they be used by Dalvik (<code>adb shell setprop debug.assert 1</code>), but note that this is not implemented in ART (the newer runtime), and even in Dalvik the property is ignored in many places and can not be relied upon. Instead, perform conditional checking inside <code>if (BuildConfig.DEBUG) { }</code> blocks. That constant is a static final boolean which is true in debug builds and false in release builds, and the Java compiler completely removes all code inside the if-body from the app.<br/>
+Assertions will never be turned on in Android. (It was possible to enable it in Dalvik with <code>adb shell setprop debug.assert 1</code>, but it is not implemented in ART, the runtime for Android 5.0 and later.)<br/>
 <br/>
-For example, you can replace <code>assert speed > 0</code> with <code>if (BuildConfig.DEBUG &amp;&amp; !(speed > 0)) { throw new AssertionError() }</code>.<br/>
+This means that the assertion will never catch mistakes, and you should not use assertions from Java or Kotlin for debug build checking.<br/>
 <br/>
-(Note: This lint check does not flag assertions purely asserting nullness or non-nullness; these are typically more intended for tools usage than runtime checks.)<br/><div class="moreinfo">More info: <a href="https://code.google.com/p/android/issues/detail?id=65183">https://code.google.com/p/android/issues/detail?id=65183</a>
-</div>To suppress this error, use the issue id "Assert" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
+Instead, perform conditional checking inside <code>if (BuildConfig.DEBUG) { }</code> blocks. That constant is a static final boolean which will be true only in debug builds, and false in release builds, and the compiler will completely remove all code inside the <code>if</code>-body from the app.<br/>
+<br/>
+For example, you can replace
+<pre>
+    assert(speed > 0, { "Message" })    // Kotlin
+    assert speed > 0 : "Message"        // Java
+</pre>
+with
+<pre>
+    if (BuildConfig.DEBUG &amp;&amp; !(speed > 0)) {
+        throw new AssertionError("Message")
+    }
+</pre>
+(Note: This lint check does not flag assertions purely asserting nullness or non-nullness in Java code; these are typically more intended for tools usage than runtime checks.)<br/>To suppress this error, use the issue id "Assert" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
 <br/></div>
 </div>
 </div>
@@ -528,7 +560,7 @@ This issue flags code that either<br/>
 * negatively affects battery life, or<br/>
 * uses APIs that have recently changed behavior to prevent background tasks from consuming memory and battery excessively.<br/>
 <br/>
-Generally, you should be using <code>JobScheduler</code> or <code>GcmNetworkManager</code> instead.<br/>
+Generally, you should be using <code>WorkManager</code> instead.<br/>
 <br/>
 For more details on how to update your code, please see <a href="http://developer.android.com/preview/features/background-optimization.html">http://developer.android.com/preview/features/background-optimization.html</a><br/><div class="moreinfo">More info: <a href="http://developer.android.com/preview/features/background-optimization.html">http://developer.android.com/preview/features/background-optimization.html</a>
 </div>To suppress this error, use the issue id "BatteryLife" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
@@ -541,6 +573,27 @@ For more details on how to update your code, please see <a href="http://develope
 <div class="metadata">Disabled By: Project lint.xml file<br/>
 <div class="explanation">
 The <code>BottomAppBar</code> widget must be placed within a <code>CoordinatorLayout</code>.<br/>To suppress this error, use the issue id "BottomAppBar" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
+<br/></div>
+</div>
+</div>
+<div class="issue">
+<div class="id">BrokenIterator<div class="issueSeparator"></div>
+</div>
+<div class="metadata">Disabled By: Project lint.xml file<br/>
+<div class="explanation">
+<b>For LinkedHashMap:</b><br/>
+<br/>
+The spliterators returned by <code>LinkedHashMap</code> in Android Nougat (API levels 24 and 25) use the wrong order (inconsistent with the iterators, which use the correct order), despite reporting <code>Spliterator.ORDERED</code>. You may use the following code fragments to obtain a correctly ordered <code>Spliterator</code> on API level 24 and 25:<br/>
+<br/>
+For a Collection view <code>c = lhm.entrySet()</code>, <code>c = lhm.keySet()</code> or <code>c = lhm.values()</code>, use <code>java.util.Spliterators.spliterator(c, c.spliterator().characteristics())</code> instead of <code>c.spliterator()</code>.<br/>
+<br/>
+Instead of <code>c.stream()</code> or <code>c.parallelStream()</code>, use <code>java.util.stream.StreamSupport.stream(spliterator, false)</code> to construct a<br/>
+(nonparallel) Stream from such a <code>Spliterator</code>.<br/>
+<br/>
+<b>For Vector:</b><br/>
+<br/>
+The <code>listIterator()</code> returned for a <code>Vector</code> has a broken <code>add()</code> implementation on Android N (API level 24). Consider switching to <code>ArrayList</code> and if necessary adding synchronization.<br/><div class="moreinfo">More info: <a href="https://developer.android.com/reference/java/util/LinkedHashMap">https://developer.android.com/reference/java/util/LinkedHashMap</a>
+</div>To suppress this error, use the issue id "BrokenIterator" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
 <br/></div>
 </div>
 </div>
@@ -608,7 +661,7 @@ You should only use Canvas state to adjust how much you draw, such as a quick-re
 </div>
 <div class="metadata">Disabled By: Project lint.xml file<br/>
 <div class="explanation">
-Some methods have no side effects, an calling them without doing something without the result is suspicious.<br/>Note: This issue has an associated quickfix operation in Android Studio and IntelliJ IDEA.<br>
+Some methods have no side effects, and calling them without doing something without the result is suspicious.<br/>Note: This issue has an associated quickfix operation in Android Studio and IntelliJ IDEA.<br>
 To suppress this error, use the issue id "CheckResult" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
 <br/></div>
 </div>
@@ -712,6 +765,16 @@ Note that this check is disabled be default, because ART (the successor to Dalvi
 </div>
 </div>
 <div class="issue">
+<div class="id">DataBindingWithoutKapt<div class="issueSeparator"></div>
+</div>
+<div class="metadata">Disabled By: Project lint.xml file<br/>
+<div class="explanation">
+Apps that use Kotlin and data binding should also apply the kotlin-kapt plugin. <br/><div class="moreinfo">More info: <a href="https://kotlinlang.org/docs/reference/kapt.html">https://kotlinlang.org/docs/reference/kapt.html</a>
+</div>To suppress this error, use the issue id "DataBindingWithoutKapt" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
+<br/></div>
+</div>
+</div>
+<div class="issue">
 <div class="id">DefaultLocale<div class="issueSeparator"></div>
 </div>
 <div class="metadata">Disabled By: Project lint.xml file<br/>
@@ -772,11 +835,23 @@ In recent versions of the IDE and the Gradle plugin, the IDE automatically passe
 <div class="explanation">
 If you register a broadcast receiver which acts as a device admin, you must also register an <code>&lt;intent-filter></code> for the action <code>android.app.action.DEVICE_ADMIN_ENABLED</code>, without any <code>&lt;data></code>, such that the device admin can be activated/deactivated.<br/>
 <br/>
-To do this, add<br/>
-<code>&lt;intent-filter></code><br/>
-    <code>&lt;action android:name="android.app.action.DEVICE_ADMIN_ENABLED" /></code><br/>
-<code>&lt;/intent-filter></code><br/>
+To do this, add
+<pre>
+`&lt;intent-filter>`
+    `&lt;action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />`
+`&lt;/intent-filter>`
+</pre>
 to your <code>&lt;receiver></code>.<br/>To suppress this error, use the issue id "DeviceAdmin" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
+<br/></div>
+</div>
+</div>
+<div class="issue">
+<div class="id">DiffUtilEquals<div class="issueSeparator"></div>
+</div>
+<div class="metadata">Disabled By: Project lint.xml file<br/>
+<div class="explanation">
+<code>areContentsTheSame</code> is used by <code>DiffUtil</code> to produce diffs. If the method is implemented incorrectly, such as using identity equals instead of equals, or calling equals on a class that has not implemented it, weird visual artifacts can occur.<br/><div class="moreinfo">More info: <a href="https://issuetracker.google.com/116789824">https://issuetracker.google.com/116789824</a>
+</div>To suppress this error, use the issue id "DiffUtilEquals" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
 <br/></div>
 </div>
 </div>
@@ -787,6 +862,16 @@ to your <code>&lt;receiver></code>.<br/>To suppress this error, use the issue id
 <div class="explanation">
 When a LinearLayout is used to distribute the space proportionally between nested layouts, the baseline alignment property should be turned off to make the layout computation faster.<br/>Note: This issue has an associated quickfix operation in Android Studio and IntelliJ IDEA.<br>
 To suppress this error, use the issue id "DisableBaselineAlignment" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
+<br/></div>
+</div>
+</div>
+<div class="issue">
+<div class="id">DiscouragedPrivateApi<div class="issueSeparator"></div>
+</div>
+<div class="metadata">Disabled By: Project lint.xml file<br/>
+<div class="explanation">
+Usage of restricted non-SDK interface may throw an exception at runtime. Accessing non-SDK methods or fields through reflection has a high likelihood to break your app between versions, and is being restricted to facilitate future app compatibility.<br/><div class="moreinfo">More info: <a href="https://developer.android.com/preview/restrictions-non-sdk-interfaces">https://developer.android.com/preview/restrictions-non-sdk-interfaces</a>
+</div>To suppress this error, use the issue id "DiscouragedPrivateApi" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
 <br/></div>
 </div>
 </div>
@@ -892,6 +977,41 @@ The <code>android.media.ExifInterface</code> implementation has some known secur
 </div>
 </div>
 <div class="issue">
+<div class="id">ExpensiveAssertion<div class="issueSeparator"></div>
+</div>
+<div class="metadata">Disabled By: Default<br/>
+<div class="explanation">
+In Kotlin, assertions are not handled the same way as from the Java programming language. In particular, they're just implemented as a library call, and inside the library call the error is only thrown if assertions are enabled.<br/>
+<br/>
+This means that the arguments to the <code>assert</code> call will <b>always</b> be evaluated. If you're doing any computation in the expression being asserted, that computation will unconditionally be performed whether or not assertions are turned on. This typically turns into wasted work in release builds.<br/>
+<br/>
+This check looks for cases where the assertion condition is nontrivial, e.g. it is performing method calls or doing more work than simple comparisons on local variables or fields.<br/>
+<br/>
+You can work around this by writing your own inline assert method instead:<br/>
+
+<pre>
+@Suppress("INVISIBLE_REFERENCE", "INVISIBLE_MEMBER")
+inline fun assert(condition: () -> Boolean) {
+    if (_Assertions.ENABLED &amp;&amp; !condition()) {
+        throw AssertionError()
+    }
+}
+</pre>
+<br/>
+In Android, because assertions are not enforced at runtime, instead use this:<br/>
+
+<pre>
+inline fun assert(condition: () -> Boolean) {
+    if (BuildConfig.DEBUG &amp;&amp; !condition()) {
+        throw AssertionError()
+    }
+}
+</pre>
+<br/>To suppress this error, use the issue id "ExpensiveAssertion" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
+<br/></div>
+</div>
+</div>
+<div class="issue">
 <div class="id">ExpiringTargetSdkVersion<div class="issueSeparator"></div>
 </div>
 <div class="metadata">Disabled By: Project lint.xml file<br/>
@@ -983,16 +1103,6 @@ To suppress this error, use the issue id "FindViewByIdCast" as explained in the 
 </div>
 </div>
 <div class="issue">
-<div class="id">FloatMath<div class="issueSeparator"></div>
-</div>
-<div class="metadata">Disabled By: Project lint.xml file<br/>
-<div class="explanation">
-In older versions of Android, using <code>android.util.FloatMath</code> was recommended for performance reasons when operating on floats. However, on modern hardware doubles are just as fast as float (though they take more memory), and in recent versions of Android, <code>FloatMath</code> is actually slower than using <code>java.lang.Math</code> due to the way the JIT optimizes <code>java.lang.Math</code>. Therefore, you should use <code>Math</code> instead of <code>FloatMath</code> if you are only targeting Froyo and above.<br/><div class="moreinfo">More info: <a href="http://developer.android.com/guide/practices/design/performance.html#avoidfloat">http://developer.android.com/guide/practices/design/performance.html#avoidfloat</a>
-</div>To suppress this error, use the issue id "FloatMath" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
-<br/></div>
-</div>
-</div>
-<div class="issue">
 <div class="id">FontValidationError<div class="issueSeparator"></div>
 </div>
 <div class="metadata">Disabled By: Project lint.xml file<br/>
@@ -1065,7 +1175,7 @@ To suppress this error, use the issue id "GoogleAppIndexingApiWarning" as explai
 <div class="issue">
 <div class="id">GoogleAppIndexingWarning<div class="issueSeparator"></div>
 </div>
-<div class="metadata">Disabled By: Project lint.xml file<br/>
+<div class="metadata">Disabled By: Default<br/>
 <div class="explanation">
 Adds URLs to get your app into the Google index, to get installs and traffic to your app from Google Search.<br/><div class="moreinfo">More info: <a href="https://g.co/AppIndexing/AndroidStudio">https://g.co/AppIndexing/AndroidStudio</a>
 </div>Note: This issue has an associated quickfix operation in Android Studio and IntelliJ IDEA.<br>
@@ -1090,6 +1200,17 @@ To suppress this error, use the issue id "GradleDependency" as explained in the 
 <div class="explanation">
 This detector looks for deprecated Gradle constructs which currently work but will likely stop working in a future update.<br/>Note: This issue has an associated quickfix operation in Android Studio and IntelliJ IDEA.<br>
 To suppress this error, use the issue id "GradleDeprecated" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
+<br/></div>
+</div>
+</div>
+<div class="issue">
+<div class="id">GradleDeprecatedConfiguration<div class="issueSeparator"></div>
+</div>
+<div class="metadata">Disabled By: Project lint.xml file<br/>
+<div class="explanation">
+Some Gradle configurations have been deprecated since Android Gradle Plugin 3.0.0 and will be removed in a future version of the Android Gradle Plugin.<br/><div class="moreinfo">More info: <a href="https://d.android.com/r/tools/update-dependency-configurations">https://d.android.com/r/tools/update-dependency-configurations</a>
+</div>Note: This issue has an associated quickfix operation in Android Studio and IntelliJ IDEA.<br>
+To suppress this error, use the issue id "GradleDeprecatedConfiguration" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
 <br/></div>
 </div>
 </div>
@@ -1342,11 +1463,30 @@ If a drawable resource appears as an <code>.xml</code> file in the <code>drawabl
 </div>
 </div>
 <div class="issue">
+<div class="id">IgnoreWithoutReason<div class="issueSeparator"></div>
+</div>
+<div class="metadata">Disabled By: Project lint.xml file<br/>
+<div class="explanation">
+Ignoring a test without a reason makes it difficult to figure out the problem later.<br/>
+Please define an explicit reason why it is ignored, and when it can be resolved.<br/>To suppress this error, use the issue id "IgnoreWithoutReason" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
+<br/></div>
+</div>
+</div>
+<div class="issue">
 <div class="id">IllegalResourceRef<div class="issueSeparator"></div>
 </div>
 <div class="metadata">Disabled By: Project lint.xml file<br/>
 <div class="explanation">
 For the <code>versionCode</code> attribute, you have to specify an actual integer literal; you cannot use an indirection with a <code>@dimen/name</code> resource. Similarly, the <code>versionName</code> attribute should be an actual string, not a string resource url.<br/>To suppress this error, use the issue id "IllegalResourceRef" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
+<br/></div>
+</div>
+</div>
+<div class="issue">
+<div class="id">ImplicitSamInstance<div class="issueSeparator"></div>
+</div>
+<div class="metadata">Disabled By: Default<br/>
+<div class="explanation">
+Kotlin's support for SAM (single accessor method) interfaces lets you pass a lambda to the interface. This will create a new instance on the fly even though there is no explicit constructor call. If you pass one of these lambdas or method references into a method which (for example) stores or compares the object identity, unexpected results may happen.<br/>To suppress this error, use the issue id "ImplicitSamInstance" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
 <br/></div>
 </div>
 </div>
@@ -1458,6 +1598,7 @@ When inflating a layout, avoid passing in null as the parent view, since otherwi
 This check scans through all the Android API field references in the application and flags certain constants, such as static final integers and Strings, which were introduced in later versions. These will actually be copied into the class files rather than being referenced, which means that the value is available even when running on older devices. In some cases that's fine, and in other cases it can result in a runtime crash or incorrect behavior. It depends on the context, so consider the code carefully and decide whether it's safe and can be suppressed or whether the code needs to be guarded.<br/>
 <br/>
 If you really want to use this API and don't need to support older devices just set the <code>minSdkVersion</code> in your <code>build.gradle</code> or <code>AndroidManifest.xml</code> files.<br/>
+<br/>
 If your code is <b>deliberately</b> accessing newer APIs, and you have ensured (e.g. with conditional execution) that this code will only ever be called on a supported platform, then you can annotate your class or method with the <code>@TargetApi</code> annotation specifying the local minimum SDK to apply, such as <code>@TargetApi(11)</code>, such that this check considers 11 rather than your manifest file's minimum SDK as the required API level.<br/>Note: This issue has an associated quickfix operation in Android Studio and IntelliJ IDEA.<br>
 To suppress this error, use the issue id "InlinedApi" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
 <br/></div>
@@ -1472,6 +1613,16 @@ When you reference an inner class in a manifest file, you must use '$' instead o
 <br/>
 (If you get this warning for a class which is not actually an inner class, it's because you are using uppercase characters in your package name, which is not conventional.)<br/>Note: This issue has an associated quickfix operation in Android Studio and IntelliJ IDEA.<br>
 To suppress this error, use the issue id "InnerclassSeparator" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
+<br/></div>
+</div>
+</div>
+<div class="issue">
+<div class="id">InsecureBaseConfiguration<div class="issueSeparator"></div>
+</div>
+<div class="metadata">Disabled By: Project lint.xml file<br/>
+<div class="explanation">
+Permitting cleartext traffic could allow eavesdroppers to intercept data sent by your app, which impacts the privacy of your users. Consider only allowing encrypted traffic by setting the <code>cleartextTrafficPermitted</code> tag to <code>"false"</code>.<br/><div class="moreinfo">More info: <a href="https://developer.android.com/preview/features/security-config.html">https://developer.android.com/preview/features/security-config.html</a>
+</div>To suppress this error, use the issue id "InsecureBaseConfiguration" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
 <br/></div>
 </div>
 </div>
@@ -1525,7 +1676,7 @@ All <code>&lt;navigation></code> elements must have a start destination specifie
 <div class="issue">
 <div class="id">InvalidPackage<div class="issueSeparator"></div>
 </div>
-<div class="metadata">Disabled By: Project lint.xml file<br/>
+<div class="metadata">Disabled By: Default<br/>
 <div class="explanation">
 This check scans through libraries looking for calls to APIs that are not included in Android.<br/>
 <br/>
@@ -1670,6 +1821,27 @@ parameter types eligible for SAM conversion should be last.<br/><div class="more
 </div>
 </div>
 <div class="issue">
+<div class="id">LifecycleAnnotationProcessorWithJava8<div class="issueSeparator"></div>
+</div>
+<div class="metadata">Disabled By: Project lint.xml file<br/>
+<div class="explanation">
+For faster incremental build, switch to the Lifecycle Java 8 API with these steps:<br/>
+<br/>
+First replace
+<pre>
+annotationProcessor "androidx.lifecycle:lifecycle-compiler:*version*"
+kapt "androidx.lifecycle:lifecycle-compiler:*version*"
+</pre>
+with
+<pre>
+implementation "androidx.lifecycle:lifecycle-common-java8:*version*"
+</pre>
+Then remove any <code>OnLifecycleEvent</code> annotations from <code>Observer</code> classes and make them implement the <code>DefaultLifecycleObserver</code> interface.<br/><div class="moreinfo">More info: <a href="https://d.android.com/r/studio-ui/lifecycle-release-notes">https://d.android.com/r/studio-ui/lifecycle-release-notes</a>
+</div>To suppress this error, use the issue id "LifecycleAnnotationProcessorWithJava8" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
+<br/></div>
+</div>
+</div>
+<div class="issue">
 <div class="id">LocalSuppress<div class="issueSeparator"></div>
 </div>
 <div class="metadata">Disabled By: Project lint.xml file<br/>
@@ -1690,6 +1862,16 @@ Because of this, if you add your localized resources in for example <code>values
 <br/>
 To work around this, place your resources in a <code>values</code> folder using the deprecated language code instead.<br/><div class="moreinfo">More info: <a href="http://developer.android.com/reference/java/util/Locale.html">http://developer.android.com/reference/java/util/Locale.html</a>
 </div>To suppress this error, use the issue id "LocaleFolder" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
+<br/></div>
+</div>
+</div>
+<div class="issue">
+<div class="id">LockedOrientationActivity<div class="issueSeparator"></div>
+</div>
+<div class="metadata">Disabled By: Default<br/>
+<div class="explanation">
+The <code>&lt;activity></code> element should not be locked to any orientation so that users can take advantage of the multi-window environments and larger screens on Chrome OS. To fix the issue, consider declaring the corresponding activity element with `screenOrientation="unspecified"<code>or </code>"fullSensor"` attribute.<br/><div class="moreinfo">More info: <a href="https://developer.android.com/topic/arc/window-management">https://developer.android.com/topic/arc/window-management</a>
+</div>To suppress this error, use the issue id "LockedOrientationActivity" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
 <br/></div>
 </div>
 </div>
@@ -1826,6 +2008,17 @@ It is highly recommended to declare a backup <code>&lt;pin></code> element. Not 
 </div>
 </div>
 <div class="issue">
+<div class="id">MissingClass<div class="issueSeparator"></div>
+</div>
+<div class="metadata">Disabled By: Project lint.xml file<br/>
+<div class="explanation">
+If a class is referenced in the manifest or in a layout file, it must also exist in the project (or in one of the libraries included by the project. This check helps uncover typos in registration names, or attempts to rename or move classes without updating the XML references <br/>
+properly.<br/><div class="moreinfo">More info: <a href="http://developer.android.com/guide/topics/manifest/manifest-intro.html">http://developer.android.com/guide/topics/manifest/manifest-intro.html</a>
+</div>To suppress this error, use the issue id "MissingClass" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
+<br/></div>
+</div>
+</div>
+<div class="issue">
 <div class="id">MissingConstraints<div class="issueSeparator"></div>
 </div>
 <div class="metadata">Disabled By: Project lint.xml file<br/>
@@ -1839,7 +2032,7 @@ The layout editor allows you to place widgets anywhere on the canvas, and it rec
 </div>
 <div class="metadata">Disabled By: Project lint.xml file<br/>
 <div class="explanation">
-Apps that check the Firebase Instance ID should usually implement the FirebaseInstanceIdService#onTokenRefresh() callback in order to observe changes.<br/><div class="moreinfo">More info: <a href="https://firebase.google.com/docs/cloud-messaging/android/client#monitor-token-generation">https://firebase.google.com/docs/cloud-messaging/android/client#monitor-token-generation</a>
+Apps that use Firebase Cloud Messaging should implement the <code>FirebaseMessagingService#onNewToken()</code> callback in order to observe token changes.<br/><div class="moreinfo">More info: <a href="https://firebase.google.com/docs/cloud-messaging/android/client#monitor-token-generation">https://firebase.google.com/docs/cloud-messaging/android/client#monitor-token-generation</a>
 </div>To suppress this error, use the issue id "MissingFirebaseInstanceTokenRefresh" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
 <br/></div>
 </div>
@@ -1867,10 +2060,12 @@ To suppress this error, use the issue id "MissingId" as explained in the <a href
 <div class="metadata">Disabled By: Project lint.xml file<br/>
 <div class="explanation">
 To support voice searches on Android Auto, you should also register an <code>intent-filter</code> for the action <code>android.media.action.MEDIA_PLAY_FROM_SEARCH</code>.<br/>
-To do this, add<br/>
-<code>&lt;intent-filter></code><br/>
-    <code>&lt;action android:name="android.media.action.MEDIA_PLAY_FROM_SEARCH" /></code><br/>
-<code>&lt;/intent-filter></code><br/>
+To do this, add
+<pre>
+`&lt;intent-filter>`
+    `&lt;action android:name="android.media.action.MEDIA_PLAY_FROM_SEARCH" />`
+`&lt;/intent-filter>`
+</pre>
 to your <code>&lt;activity></code> or <code>&lt;service></code>.<br/><div class="moreinfo">More info: <a href="https://developer.android.com/training/auto/audio/index.html#support_voice">https://developer.android.com/training/auto/audio/index.html#support_voice</a>
 </div>To suppress this error, use the issue id "MissingIntentFilterForMediaSearch" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
 <br/></div>
@@ -1892,8 +2087,10 @@ An application intended to run on TV devices must declare a launcher activity fo
 <div class="metadata">Disabled By: Project lint.xml file<br/>
 <div class="explanation">
 The manifest should declare the use of the Leanback user interface required by Android TV.<br/>
-To fix this, add<br/>
-<code>&lt;uses-feature android:name="android.software.leanback"   android:required="false" /></code><br/>
+To fix this, add
+<pre>
+`&lt;uses-feature android:name="android.software.leanback"   android:required="false" />`
+</pre>
 to your manifest.<br/><div class="moreinfo">More info: <a href="https://developer.android.com/training/tv/start/start.html#leanback-req">https://developer.android.com/training/tv/start/start.html#leanback-req</a>
 </div>Note: This issue has an associated quickfix operation in Android Studio and IntelliJ IDEA.<br>
 To suppress this error, use the issue id "MissingLeanbackSupport" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
@@ -1906,11 +2103,13 @@ To suppress this error, use the issue id "MissingLeanbackSupport" as explained i
 <div class="metadata">Disabled By: Project lint.xml file<br/>
 <div class="explanation">
 An Automotive Media App requires an exported service that extends <code>android.service.media.MediaBrowserService</code> with an <code>intent-filter</code> for the action <code>android.media.browse.MediaBrowserService</code> to be able to browse and play media.<br/>
-To do this, add<br/>
-<code>&lt;intent-filter></code><br/>
-    <code>&lt;action android:name="android.media.browse.MediaBrowserService" /></code><br/>
-<code>&lt;/intent-filter></code><br/>
- to the service that extends <code>android.service.media.MediaBrowserService</code><br/><div class="moreinfo">More info: <a href="https://developer.android.com/training/auto/audio/index.html#config_manifest">https://developer.android.com/training/auto/audio/index.html#config_manifest</a>
+To do this, add
+<pre>
+`&lt;intent-filter>`
+    `&lt;action android:name="android.media.browse.MediaBrowserService" />`
+`&lt;/intent-filter>`
+</pre>
+to the service that extends <code>android.service.media.MediaBrowserService</code><br/><div class="moreinfo">More info: <a href="https://developer.android.com/training/auto/audio/index.html#config_manifest">https://developer.android.com/training/auto/audio/index.html#config_manifest</a>
 </div>To suppress this error, use the issue id "MissingMediaBrowserServiceIntentFilter" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
 <br/></div>
 </div>
@@ -1964,16 +2163,6 @@ For example, an English translation must provide a string for <code>quantity="on
 </div>
 </div>
 <div class="issue">
-<div class="id">MissingRegistered<div class="issueSeparator"></div>
-</div>
-<div class="metadata">Disabled By: Default<br/>
-<div class="explanation">
-If a class is referenced in the manifest or in a layout file, it must also exist in the project (or in one of the libraries included by the project. This check helps uncover typos in registration names, or attempts to rename or move classes without updating the manifest file properly.<br/><div class="moreinfo">More info: <a href="http://developer.android.com/guide/topics/manifest/manifest-intro.html">http://developer.android.com/guide/topics/manifest/manifest-intro.html</a>
-</div>To suppress this error, use the issue id "MissingRegistered" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
-<br/></div>
-</div>
-</div>
-<div class="issue">
 <div class="id">MissingSuperCall<div class="issueSeparator"></div>
 </div>
 <div class="metadata">Disabled By: Project lint.xml file<br/>
@@ -2017,6 +2206,26 @@ You should define the version information for your application.<br/>
 <code>android:versionName</code>: A string value that represents the release version of the application code, as it should be shown to users.<br/><div class="moreinfo">More info: <a href="http://developer.android.com/tools/publishing/versioning.html#appversioning">http://developer.android.com/tools/publishing/versioning.html#appversioning</a>
 </div>Note: This issue has an associated quickfix operation in Android Studio and IntelliJ IDEA.<br>
 To suppress this error, use the issue id "MissingVersion" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
+<br/></div>
+</div>
+</div>
+<div class="issue">
+<div class="id">MotionLayoutInvalidSceneFileReference<div class="issueSeparator"></div>
+</div>
+<div class="metadata">Disabled By: Project lint.xml file<br/>
+<div class="explanation">
+A motion scene file specifies the animations used in a MotionLayout.<br/>
+The layoutDescription is required to specify a valid motion scene file.<br/>To suppress this error, use the issue id "MotionLayoutInvalidSceneFileReference" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
+<br/></div>
+</div>
+</div>
+<div class="issue">
+<div class="id">MotionSceneFileValidationError<div class="issueSeparator"></div>
+</div>
+<div class="metadata">Disabled By: Project lint.xml file<br/>
+<div class="explanation">
+A motion scene file specifies the animations used in a MotionLayout.<br/>
+This check performs various serious correctness checks in a motion scene file.<br/>To suppress this error, use the issue id "MotionSceneFileValidationError" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
 <br/></div>
 </div>
 </div>
@@ -2089,6 +2298,16 @@ For example, Mockito&#8217;s <code>when</code> function requires backticks when 
     val callable = Mockito.mock(Callable::class.java)<br/>
     Mockito.`when`(callable.call()).thenReturn(/* &#8230; */)<br/><div class="moreinfo">More info: <a href="https://android.github.io/kotlin-guides/interop.html#no-hard-keywords">https://android.github.io/kotlin-guides/interop.html#no-hard-keywords</a>
 </div>To suppress this error, use the issue id "NoHardKeywords" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
+<br/></div>
+</div>
+</div>
+<div class="issue">
+<div class="id">NonResizeableActivity<div class="issueSeparator"></div>
+</div>
+<div class="metadata">Disabled By: Default<br/>
+<div class="explanation">
+The <code>&lt;activity></code> element should be allowed to be resized to allow users to take advantage of the multi-window environment on Chrome OS To fix the issue, consider declaring the corresponding activity element with <code>resizableActivity="true"</code> attribute.<br/><div class="moreinfo">More info: <a href="https://developer.android.com/topic/arc/window-management">https://developer.android.com/topic/arc/window-management</a>
+</div>To suppress this error, use the issue id "NonResizeableActivity" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
 <br/></div>
 </div>
 </div>
@@ -2314,13 +2533,17 @@ Ensures that the <code>expiration</code> attribute of the <code>&lt;pin-set></co
 <div class="explanation">
 This lint check looks for potential errors in internationalization where you have translated a message which involves a quantity and it looks like other parts of the string may need grammatical changes.<br/>
 <br/>
-For example, rather than something like this:<br/>
-  &lt;string name="try_again">Try again in %d seconds.&lt;/string><br/>
-you should be using a plural:<br/>
-   &lt;plurals name="try_again"><br/>
-        &lt;item quantity="one">Try again in %d second&lt;/item><br/>
-        &lt;item quantity="other">Try again in %d seconds&lt;/item><br/>
-    &lt;/plurals><br/>
+For example, rather than something like this:
+<pre>
+  &lt;string name="try_again">Try again in %d seconds.&lt;/string>
+</pre>
+you should be using a plural:
+<pre>
+   &lt;plurals name="try_again">
+        &lt;item quantity="one">Try again in %d second&lt;/item>
+        &lt;item quantity="other">Try again in %d seconds&lt;/item>
+    &lt;/plurals>
+</pre>
 This will ensure that in other languages the right set of translations are provided for the different quantity classes.<br/>
 <br/>
 (This check depends on some heuristics, so it may not accurately determine whether a string really should be a quantity. You can use tools:ignore to filter out false positives.<br/><div class="moreinfo">More info: <a href="http://developer.android.com/guide/topics/resources/string-resource.html#Plurals">http://developer.android.com/guide/topics/resources/string-resource.html#Plurals</a>
@@ -2333,7 +2556,8 @@ This will ensure that in other languages the right set of translations are provi
 </div>
 <div class="metadata">Disabled By: Project lint.xml file<br/>
 <div class="explanation">
-Using reflection to access hidden/private Android APIs is not safe; it will often not work on devices from other vendors, and it may suddenly stop working (if the API is removed) or crash spectacularly (if the API behavior changes, since there are no guarantees for compatibility).<br/>To suppress this error, use the issue id "PrivateApi" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
+Using reflection to access hidden/private Android APIs is not safe; it will often not work on devices from other vendors, and it may suddenly stop working (if the API is removed) or crash spectacularly (if the API behavior changes, since there are no guarantees for compatibility).<br/><div class="moreinfo">More info: <a href="https://developer.android.com/preview/restrictions-non-sdk-interfaces">https://developer.android.com/preview/restrictions-non-sdk-interfaces</a>
+</div>To suppress this error, use the issue id "PrivateApi" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
 <br/></div>
 </div>
 </div>
@@ -2437,6 +2661,15 @@ If you need the position of an item later on (e.g. in a click listener), use <co
 </div>
 </div>
 <div class="issue">
+<div class="id">RedundantNamespace<div class="issueSeparator"></div>
+</div>
+<div class="metadata">Disabled By: Project lint.xml file<br/>
+<div class="explanation">
+In Android XML documents, only specify the namespace on the root/document element. Namespace declarations elsewhere in the document are typically accidental leftovers from copy/pasting XML from other files or documentation.<br/>To suppress this error, use the issue id "RedundantNamespace" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
+<br/></div>
+</div>
+</div>
+<div class="issue">
 <div class="id">Registered<div class="issueSeparator"></div>
 </div>
 <div class="metadata">Disabled By: Default<br/>
@@ -2460,7 +2693,7 @@ If relative layout has text or button items aligned to left and right sides they
 <div class="issue">
 <div class="id">RequiredSize<div class="issueSeparator"></div>
 </div>
-<div class="metadata">Disabled By: Default<br/>
+<div class="metadata">Disabled By: Project lint.xml file<br/>
 <div class="explanation">
 All views must specify an explicit <code>layout_width</code> and <code>layout_height</code> attribute. There is a runtime check for this, so if you fail to specify a size, an exception is thrown at runtime.<br/>
 <br/>
@@ -2554,7 +2787,7 @@ If you have started adding RTL attributes, but have not yet finished the migrati
 <div class="explanation">
 Using <code>Gravity#LEFT</code> and <code>Gravity#RIGHT</code> can lead to problems when a layout is rendered in locales where text flows from right to left. Use <code>Gravity#START</code> and <code>Gravity#END</code> instead. Similarly, in XML <code>gravity</code> and <code>layout_gravity</code> attributes, use <code>start</code> rather than <code>left</code>.<br/>
 <br/>
-For XML attributes such as paddingLeft and <code>layout_marginLeft</code>, use <code>paddingStart</code> and <code>layout_marginStart</code>. <b>NOTE</b>: If your <code>minSdkVersion</code> is less than 17, you should add <b>both</b> the older left/right attributes <b>as well as</b> the new start/right attributes. On older platforms, where RTL is not supported and the start/right attributes are unknown and therefore ignored, you need the older left/right attributes. There is a separate lint check which catches that type of error.<br/>
+For XML attributes such as paddingLeft and <code>layout_marginLeft</code>, use <code>paddingStart</code> and <code>layout_marginStart</code>. <b>NOTE</b>: If your <code>minSdkVersion</code> is less than 17, you should add <b>both</b> the older left/right attributes <b>as well as</b> the new start/end attributes. On older platforms, where RTL is not supported and the start/end attributes are unknown and therefore ignored, you need the older left/right attributes. There is a separate lint check which catches that type of error.<br/>
 <br/>
 (Note: For <code>Gravity#LEFT</code> and <code>Gravity#START</code>, you can use these constants even when targeting older platforms, because the <code>start</code> bitmask is a superset of the <code>left</code> bitmask. Therefore, you can use <code>gravity="start"</code> rather than <code>gravity="left|start"</code>.)<br/>Note: This issue has an associated quickfix operation in Android Studio and IntelliJ IDEA.<br>
 To suppress this error, use the issue id "RtlHardcoded" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
@@ -2777,6 +3010,30 @@ on best practices.<br/>To suppress this error, use the issue id "Slices" as expl
 <div class="metadata">Disabled By: Project lint.xml file<br/>
 <div class="explanation">
 Avoid using sizes smaller than 12sp.<br/>To suppress this error, use the issue id "SmallSp" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
+<br/></div>
+</div>
+</div>
+<div class="issue">
+<div class="id">SoonBlockedPrivateApi<div class="issueSeparator"></div>
+</div>
+<div class="metadata">Disabled By: Project lint.xml file<br/>
+<div class="explanation">
+Usage of restricted non-SDK interface will throw an exception at runtime. Accessing non-SDK methods or fields through reflection has a high likelihood to break your app between versions, and is being restricted to facilitate future app compatibility.<br/><div class="moreinfo">More info: <a href="https://developer.android.com/preview/restrictions-non-sdk-interfaces">https://developer.android.com/preview/restrictions-non-sdk-interfaces</a>
+</div>To suppress this error, use the issue id "SoonBlockedPrivateApi" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
+<br/></div>
+</div>
+</div>
+<div class="issue">
+<div class="id">SourceLockedOrientationActivity<div class="issueSeparator"></div>
+</div>
+<div class="metadata">Disabled By: Default<br/>
+<div class="explanation">
+The <code>Activity</code> should not be locked to any orientation so that users<br/>
+can take advantage of the multi-window environments and larger screens<br/>
+available on Chrome OS. To fix the issue, consider calling <code>setRequestedOrientation</code><br/>
+with the <code>ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR</code> or<br/>
+<code>ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED</code> options or removing the call<br/>
+all together.<br/>To suppress this error, use the issue id "SourceLockedOrientationActivity" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
 <br/></div>
 </div>
 </div>
@@ -3182,6 +3439,18 @@ BroadcastReceivers that declare an intent-filter for a protected-broadcast actio
 </div>
 </div>
 <div class="issue">
+<div class="id">UnsupportedChromeOsCameraSystemFeature<div class="issueSeparator"></div>
+</div>
+<div class="metadata">Disabled By: Default<br/>
+<div class="explanation">
+You should look for the <code>FEATURE_CAMERA_ANY</code> features to include all<br/>
+possible cameras that may be on the device. Looking for <code>FEATURE_CAMERA</code><br/>
+only looks for a rear facing camera, which certain tablets or Chrome OS<br/>
+devices don't have. To fix the issue, look for <code>FEATURE_CAMERA_ANY</code> instead.<br/>To suppress this error, use the issue id "UnsupportedChromeOsCameraSystemFeature" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
+<br/></div>
+</div>
+</div>
+<div class="issue">
 <div class="id">UnsupportedChromeOsHardware<div class="issueSeparator"></div>
 </div>
 <div class="metadata">Disabled By: Default<br/>
@@ -3252,6 +3521,16 @@ Unused namespace declarations take up space and require processing that is not n
 </div>
 </div>
 <div class="issue">
+<div class="id">UnusedNavigation<div class="issueSeparator"></div>
+</div>
+<div class="metadata">Disabled By: Project lint.xml file<br/>
+<div class="explanation">
+Navigation resource files must be referenced from a <code>NavHostFragment</code> in a layout in order to be relevant.<br/><div class="moreinfo">More info: <a href="https://developer.android.com/topic/libraries/architecture/navigation/navigation-implementing#Modify-activity">https://developer.android.com/topic/libraries/architecture/navigation/navigation-implementing#Modify-activity</a>
+</div>To suppress this error, use the issue id "UnusedNavigation" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
+<br/></div>
+</div>
+</div>
+<div class="issue">
 <div class="id">UnusedQuantity<div class="issueSeparator"></div>
 </div>
 <div class="metadata">Disabled By: Project lint.xml file<br/>
@@ -3276,6 +3555,19 @@ The unused resource check can ignore tests. If you want to include resources tha
 <br/>
 You can include test sources in the unused resource check by setting the system property lint.unused-resources.include-tests=true, and to exclude them (usually for performance reasons), use lint.unused-resources.exclude-tests=true.<br/>Note: This issue has an associated quickfix operation in Android Studio and IntelliJ IDEA.<br>
 To suppress this error, use the issue id "UnusedResources" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
+<br/></div>
+</div>
+</div>
+<div class="issue">
+<div class="id">UsableSpace<div class="issueSeparator"></div>
+</div>
+<div class="metadata">Disabled By: Project lint.xml file<br/>
+<div class="explanation">
+When you need to allocate disk space for large files, consider using the new <code>allocateBytes(FileDescriptor, long)</code> API, which will automatically clear cached files belonging to other apps (as needed) to meet your request.<br/>
+<br/>
+When deciding if the device has enough disk space to hold your new data, call <code>getAllocatableBytes(UUID)</code> instead of using <code>getUsableSpace()</code>, since the former will consider any cached data that the system is willing to clear on your behalf.<br/>
+<br/>
+Note that these methods require API level 26. If your app is running on older devices, you will probably need to use both APIs, conditionally switching on <code>Build.VERSION.SDK_INT</code>. Lint only looks in the same compilation unit to see if you are already using both APIs, so if it warns even though you are already using the new API, consider moving the calls to the same file or suppressing the warning.<br/>To suppress this error, use the issue id "UsableSpace" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
 <br/></div>
 </div>
 </div>
@@ -3379,7 +3671,7 @@ The manifest should contain a <code>&lt;uses-sdk></code> element which defines t
 </div>
 <div class="metadata">Disabled By: Project lint.xml file<br/>
 <div class="explanation">
-The C2DM library does not work on Android P or newer devices;             you should migrate to Firebase Cloud Messaging to ensure reliable message delivery.<br/><div class="moreinfo">More info: <a href="https://developers.google.com/cloud-messaging/c2dm">https://developers.google.com/cloud-messaging/c2dm</a>
+The C2DM library does not work on Android P or newer devices; you should migrate to Firebase Cloud Messaging to ensure reliable message delivery.<br/><div class="moreinfo">More info: <a href="https://developers.google.com/cloud-messaging/c2dm">https://developers.google.com/cloud-messaging/c2dm</a>
 </div>To suppress this error, use the issue id "UsingC2DM" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
 <br/></div>
 </div>
@@ -3395,12 +3687,23 @@ To suppress this error, use the issue id "UsingHttp" as explained in the <a href
 </div>
 </div>
 <div class="issue">
+<div class="id">ValidActionsXml<div class="issueSeparator"></div>
+</div>
+<div class="metadata">Disabled By: Default<br/>
+<div class="explanation">
+Ensures that an actions XML file is properly formed<br/>To suppress this error, use the issue id "ValidActionsXml" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
+<br/></div>
+</div>
+</div>
+<div class="issue">
 <div class="id">ValidFragment<div class="issueSeparator"></div>
 </div>
 <div class="metadata">Disabled By: Project lint.xml file<br/>
 <div class="explanation">
 From the Fragment documentation:<br/>
-<b>Every</b> fragment must have an empty constructor, so it can be instantiated when restoring its activity's state. It is strongly recommended that subclasses do not have other constructors with parameters, since these constructors will not be called when the fragment is re-instantiated; instead, arguments can be supplied by the caller with <code>setArguments(Bundle)</code> and later retrieved by the Fragment with <code>getArguments()</code>.<br/><div class="moreinfo">More info: <a href="http://developer.android.com/reference/android/app/Fragment.html#Fragment()">http://developer.android.com/reference/android/app/Fragment.html#Fragment()</a>
+<b>Every</b> fragment must have an empty constructor, so it can be instantiated when restoring its activity's state. It is strongly recommended that subclasses do not have other constructors with parameters, since these constructors will not be called when the fragment is re-instantiated; instead, arguments can be supplied by the caller with <code>setArguments(Bundle)</code> and later retrieved by the Fragment with <code>getArguments()</code>.<br/>
+<br/>
+Note that this is no longer true when you are using <code>androidx.fragment.app.Fragment</code>; with the <code>FragmentFactory</code> you can supply any arguments you want (as of version androidx version 1.1).<br/><div class="moreinfo">More info: <a href="http://developer.android.com/reference/android/app/Fragment.html#Fragment()">http://developer.android.com/reference/android/app/Fragment.html#Fragment()</a>
 </div>To suppress this error, use the issue id "ValidFragment" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
 <br/></div>
 </div>
@@ -3519,11 +3822,24 @@ To suppress this error, use the issue id "WakelockTimeout" as explained in the <
 </div>
 <div class="metadata">Disabled By: Project lint.xml file<br/>
 <div class="explanation">
-Wearable apps should specify whether they can work standalone, without a phone app.Add a valid meta-data entry for <code>com.google.android.wearable.standalone</code> to your application element and set the value to <code>true</code> or <code>false</code>.<br/>
-<code>&lt;meta-data android:name="com.google.android.wearable.standalone"<br/>
-            android:value="true"/></code><br/><div class="moreinfo">More info: <a href="https://developer.android.com/training/wearables/apps/packaging.html">https://developer.android.com/training/wearables/apps/packaging.html</a>
+Wearable apps should specify whether they can work standalone, without a phone app. Add a valid meta-data entry for <code>com.google.android.wearable.standalone</code> to your application element and set the value to <code>true</code> or <code>false</code>.
+<pre>
+&lt;meta-data android:name="com.google.android.wearable.standalone"
+           android:value="true"/>`
+</pre>
+<br/><div class="moreinfo">More info: <a href="https://developer.android.com/training/wearables/apps/packaging.html">https://developer.android.com/training/wearables/apps/packaging.html</a>
 </div>Note: This issue has an associated quickfix operation in Android Studio and IntelliJ IDEA.<br>
 To suppress this error, use the issue id "WearStandaloneAppFlag" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
+<br/></div>
+</div>
+</div>
+<div class="issue">
+<div class="id">WebViewApiAvailability<div class="issueSeparator"></div>
+</div>
+<div class="metadata">Disabled By: Project lint.xml file<br/>
+<div class="explanation">
+The <code>androidx.webkit</code> library is a static library you can add to your Android application allowing you to use new APIs on older platform versions, targeting more devices.<br/><div class="moreinfo">More info: <a href="https://developer.android.com/reference/androidx/webkit/package-summary">https://developer.android.com/reference/androidx/webkit/package-summary</a>
+</div>To suppress this error, use the issue id "WebViewApiAvailability" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
 <br/></div>
 </div>
 </div>
@@ -3543,6 +3859,18 @@ The WebView implementation has certain performance optimizations which will not 
 <div class="explanation">
 The WebP format requires Android 4.0 (API 15). Certain features, such as lossless encoding and transparency, requires Android 4.2.1 (API 18; API 17 is 4.2.0.)<br/>Note: This issue has an associated quickfix operation in Android Studio and IntelliJ IDEA.<br>
 To suppress this error, use the issue id "WebpUnsupported" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
+<br/></div>
+</div>
+</div>
+<div class="issue">
+<div class="id">WeekBasedYear<div class="issueSeparator"></div>
+</div>
+<div class="metadata">Disabled By: Default<br/>
+<div class="explanation">
+The <code>DateTimeFormatter</code> pattern <code>YYYY</code> returns the <i>week</i> based year, not the era-based year. This means that 12/29/2019 will format to 2019, but 12/30/2019 will format to 2020!<br/>
+<br/>
+If you expected this to format as 2019, you should use the pattern <code>yyyy</code> instead.<br/><div class="moreinfo">More info: <a href="https://stackoverflow.com/questions/46847245/using-datetimeformatter-on-january-first-cause-an-invalid-year-value">https://stackoverflow.com/questions/46847245/using-datetimeformatter-on-january-first-cause-an-invalid-year-value</a>
+</div>To suppress this error, use the issue id "WeekBasedYear" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
 <br/></div>
 </div>
 </div>
@@ -3647,6 +3975,15 @@ Keeps track of the view types associated with ids and if it finds a usage of the
 <br/></div>
 </div>
 </div>
+<div class="issue">
+<div class="id">XmlEscapeNeeded<div class="issueSeparator"></div>
+</div>
+<div class="metadata">Disabled By: Project lint.xml file<br/>
+<div class="explanation">
+When a string contains characters that have special usage in XML, you must escape the characters.<br/>To suppress this error, use the issue id "XmlEscapeNeeded" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
+<br/></div>
+</div>
+</div>
 </div>              </div>
               <div class="mdl-card__actions mdl-card--border">
 <button class="mdl-button mdl-js-button mdl-js-ripple-effect" id="SuppressedIssuesLink" onclick="reveal('SuppressedIssues');">
@@ -3679,44 +4016,48 @@ To suppress a lint warning in an XML file, add a <code>tools:ignore="id"</code> 
 <code>xmlns:tools="http://schemas.android.com/tools"</code><br/>
 <br/>
 To suppress a lint warning in a <code>build.gradle</code> file, add a section like this:<br/>
-<br/>
-android {<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;lintOptions {<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;disable 'TypographyFractions','TypographyQuotes'<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-}<br/>
+
+<pre>
+android {
+    lintOptions {
+        disable 'TypographyFractions','TypographyQuotes'
+    }
+}
+</pre>
 <br/>
 Here we specify a comma separated list of issue id's after the disable command. You can also use <code>warning</code> or <code>error</code> instead of <code>disable</code> to change the severity of issues.<br/>
 <br/>
 To suppress lint warnings with a configuration XML file, create a file named <code>lint.xml</code> and place it at the root directory of the module in which it applies.<br/>
 <br/>
 The format of the <code>lint.xml</code> file is something like the following:<br/>
-<br/>
-&lt;?xml version="1.0" encoding="UTF-8"?><br/>
-&lt;lint><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;!-- Ignore everything in the test source set --><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;issue id="all"><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;ignore path="*/test/*" /><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;/issue><br/>
-<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;!-- Disable this given check in this project --><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;issue id="IconMissingDensityFolder" severity="ignore" /><br/>
-<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;!-- Ignore the ObsoleteLayoutParam issue in the given files --><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;issue id="ObsoleteLayoutParam"><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;ignore path="res/layout/activation.xml" /><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;ignore path="res/layout-xlarge/activation.xml" /><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;ignore regexp="(foo|bar).java" /><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;/issue><br/>
-<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;!-- Ignore the UselessLeaf issue in the given file --><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;issue id="UselessLeaf"><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;ignore path="res/layout/main.xml" /><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;/issue><br/>
-<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;!-- Change the severity of hardcoded strings to "error" --><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;issue id="HardcodedText" severity="error" /><br/>
-&lt;/lint><br/>
+
+<pre>
+&lt;?xml version="1.0" encoding="UTF-8"?>
+&lt;lint>
+    &lt;!-- Ignore everything in the test source set -->
+    &lt;issue id="all">
+        &lt;ignore path="\*/test/\*" />
+    &lt;/issue>
+
+    &lt;!-- Disable this given check in this project -->
+    &lt;issue id="IconMissingDensityFolder" severity="ignore" />
+
+    &lt;!-- Ignore the ObsoleteLayoutParam issue in the given files -->
+    &lt;issue id="ObsoleteLayoutParam">
+        &lt;ignore path="res/layout/activation.xml" />
+        &lt;ignore path="res/layout-xlarge/activation.xml" />
+        &lt;ignore regexp="(foo|bar)\.java" />
+    &lt;/issue>
+
+    &lt;!-- Ignore the UselessLeaf issue in the given file -->
+    &lt;issue id="UselessLeaf">
+        &lt;ignore path="res/layout/main.xml" />
+    &lt;/issue>
+
+    &lt;!-- Change the severity of hardcoded strings to "error" -->
+    &lt;issue id="HardcodedText" severity="error" />
+&lt;/lint>
+</pre>
 <br/>
 To suppress lint checks from the command line, pass the --ignore flag with a comma separated list of ids to be suppressed, such as:<br/>
 <code>$ lint --ignore UnusedResources,UselessLeaf /my/project/path</code><br/>

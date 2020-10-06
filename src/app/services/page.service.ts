@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { getDeepFromObject } from '@app/@crud/helpers';
 import { SysFunctions } from '@app/libs/utilities/common-functions';
 import { NgxImageCompressService } from 'ngx-image-compress';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +27,7 @@ export class PageService {
   uploadingImage: boolean = false;
   processingImage: boolean = false;
   loadingImage: boolean = false;
+  loading_my_pages:boolean = false;
   MYPAGES:PageSummary[]=[];
 
   constructor(public service: CrudService, @Inject(CRUD_OPTIONS) CRUD_OPTIONS: CrudOptions,public imageCompress: NgxImageCompressService, router: Router) {
@@ -43,7 +45,10 @@ export class PageService {
   }
 
   loadMyPages() {
+    var _this=this;
+    this.loading_my_pages=true;
     this.getMyPages().subscribe(results => {
+      this.loading_my_pages=false;
       this.MYPAGES = results.getResultData();
     });
   }
@@ -156,6 +161,10 @@ export class PageService {
   doneCreateOnlyPage() {
     this.creating_page_onfly = false;
     this.model=new PageForm();
+  }
+
+  getPage(page_id:number):Observable<PageSummary>{
+    return of(this.MYPAGES.find((p:PageSummary)=>p.id==page_id));
   }
 
   getConfigValue(key: string): any {

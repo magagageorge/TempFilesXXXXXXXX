@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Post } from '../models/post';
 import { FeedService } from '@app/services/feed.service';
 import { ProfileService } from '@app/services/profile.service';
 import { PostingService } from '@app/services/posting.service';

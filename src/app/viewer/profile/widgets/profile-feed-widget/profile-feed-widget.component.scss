@@ -1,0 +1,67 @@
+.card{
+    margin-bottom:4px;
+    padding:0px;
+}
+
+.card .card-header,.card-footer{
+    padding:4px;
+    background-color: #ffffff;
+}
+
+.card .card-header{
+    border-bottom: 1px solid transparent;
+}
+
+.card .card-body{
+    padding:0px;
+    margin:0px;
+}
+
+.user-block img {
+    width: 40px;
+    height: 40px;
+    float: left;
+}
+.user-block .username {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.url-tag{
+    font-size: 12px;	
+    font-weight: 100;
+    color:gray;	
+}
+
+.user-block .description {
+    color: #999;
+    font-size: 13px;
+}
+.user-block .username, 
+.user-block .description, 
+.user-block .comment {
+    display: block;
+    margin-left: 43px;
+}
+
+.card-header>.card-tools {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+}
+
+.card .post-statistics{
+    font-size: 90%;
+    color:#999;
+}
+.card .post-statistics:hover{
+    text-decoration: underline;
+}
+
+.windo-post-card .card-footer .actions a:hover{
+    text-decoration: none;
+}
+
+.windo-post-card .card-footer .actions{
+    font-size:120%;
+}

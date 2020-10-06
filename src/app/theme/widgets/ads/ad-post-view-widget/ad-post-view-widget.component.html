@@ -4,12 +4,12 @@
         <div class="card-header p-2">
             <ng-container *ngIf="ad_content.page!=null">
                 <div class="user-block">
-                    <a routerLink="/{{ad_content.page.url}}">
+                    <a routerLink="/{{ad_content.page.url}}" (click)="urlViewerService.setPage(ad_content.page);">
                         <img class="rounded-circle img-fluid" src="{{ad_content.page.picture.face}}" alt="">
                     </a>
                     <span class="username mr-4">
                         <a class="w-100 d-block text-truncate"
-                            routerLink="/{{ad_content.page.url}}">{{ad_content.page.name}}</a>
+                            routerLink="/{{ad_content.page.url}}" (click)="urlViewerService.setPage(ad_content.page);">{{ad_content.page.name}}</a>
                     </span>
                     <span class="description">
                         <span class="text-truncate text-muted">Sponsored</span>

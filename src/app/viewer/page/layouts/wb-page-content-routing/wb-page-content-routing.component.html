@@ -1,0 +1,40 @@
+<ng-container *ngIf="isRestrictedPage==false">
+    <ng-container *ngIf="urlviwerService.VIEWER_URL_PAGE==''">
+        <app-home-page></app-home-page>
+    </ng-container>
+    <ng-container *ngIf="urlviwerService.VIEWER_URL_PAGE=='about'">
+        <app-about-page></app-about-page>
+    </ng-container>
+    <ng-container *ngIf="urlviwerService.VIEWER_URL_PAGE=='photos'">
+        <app-photos-page></app-photos-page>
+    </ng-container>
+    <ng-container *ngIf="urlviwerService.VIEWER_URL_PAGE=='products'">
+        <app-products-page></app-products-page>
+    </ng-container>
+    <ng-container *ngIf="urlviwerService.VIEWER_URL_PAGE=='services'">
+        <app-services-page></app-services-page>
+    </ng-container>
+    <ng-container *ngIf="urlviwerService.VIEWER_URL_PAGE=='shop'">
+        <app-shop-page></app-shop-page>
+    </ng-container>
+    <ng-container *ngIf="urlviwerService.VIEWER_URL_PAGE=='notifications'">
+        <app-wb-page-notifications></app-wb-page-notifications>
+    </ng-container>
+    <ng-container *ngIf="urlviwerService.VIEWER_URL_PAGE=='page-admins'">
+        <app-page-admins></app-page-admins>
+    </ng-container>
+    <ng-container *ngIf="urlviwerService.VIEWER_URL_PAGE=='general-settings'">
+        <app-wb-page-general-settings></app-wb-page-general-settings>
+    </ng-container>
+    <ng-container *ngIf="urlviwerService.VIEWER_URL_PAGE=='notification-settings'">
+        <app-wb-page-notification-settings></app-wb-page-notification-settings>
+    </ng-container>
+    <ng-container *ngIf="urlviwerService.VIEWER_URL_PAGE=='manage'">
+        <app-wb-page-manage></app-wb-page-manage>
+    </ng-container>
+
+</ng-container>
+
+<ng-container *ngIf="isRestrictedPage==true">
+    <app-wb-content-not-found-page></app-wb-content-not-found-page>
+</ng-container>

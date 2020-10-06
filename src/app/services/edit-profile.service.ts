@@ -19,6 +19,8 @@ import { ProfileIndustry } from '@app/models/profile-industry';
 import { ProfileSkill } from '@app/models/profile-skill';
 import { HttpClient } from '@angular/common/http';
 import { SysFunctions } from '@app/libs/utilities/common-functions';
+import { FeedService } from './feed.service';
+import { ProfileFeedService } from '@app/viewer/profile/services/profile-feed.service';
 
 export interface EditMode {
   inEdit: boolean;
@@ -117,7 +119,7 @@ export class EditProfileService {
   loadingImage: boolean = false;
 
 
-  constructor(service: CrudService, profileService: ProfileService, urlViewerService: UrlViewerService, loadProcessService: LoadSubmitProgressService, imageCompress: NgxImageCompressService, @Inject(CRUD_OPTIONS) CRUD_OPTIONS: CrudOptions, router: Router, httpClient: HttpClient) {
+  constructor(service: CrudService, profileService: ProfileService, public feedService: FeedService, public profileFeedService: ProfileFeedService, urlViewerService: UrlViewerService, loadProcessService: LoadSubmitProgressService, imageCompress: NgxImageCompressService, @Inject(CRUD_OPTIONS) CRUD_OPTIONS: CrudOptions, router: Router, httpClient: HttpClient) {
     this.service = service;
     this.crudconfig = CRUD_OPTIONS;
     this.router = router;
@@ -173,10 +175,18 @@ export class EditProfileService {
       if (result.isSuccess()) {
         _this.messages = result.getMessages();
         var data = result.getResultData();
-        _this.profileService.MYPROFILE.cover.picture = base64CoverUri;
-        _this.profileService.MYPROFILE.cover.show_alert = false;
-        _this.urlViewerService.PPVIEWER.profile.cover.picture = base64CoverUri;
-        _this.cover_preview_info = { url: '', width: 0, height: 0, file: null, isNew: true };
+        if (data.done == true) {
+          _this.profileService.MYPROFILE.cover.picture = base64CoverUri;
+          _this.profileService.MYPROFILE.cover.show_alert = false;
+          _this.urlViewerService.PPVIEWER.profile.cover.picture = base64CoverUri;
+          _this.cover_preview_info = { url: '', width: 0, height: 0, file: null, isNew: true };
+          if (data.post != null) {
+            _this.feedService.prependFeed(data.post, false);
+            if (data.post.profile != null && data.post.profile.url == _this.profileFeedService.profile_url) {
+              _this.profileFeedService.prependFeed(data.post, false);
+            }
+          }
+        }
       } else {
         _this.errors = result.getErrors();
       }
@@ -206,10 +216,18 @@ export class EditProfileService {
       if (result.isSuccess()) {
         _this.messages = result.getMessages();
         var data = result.getResultData();
-        _this.profileService.MYPROFILE.avatar.face = base64AvatarUri;
-        _this.profileService.MYPROFILE.avatar.show_alert = false;
-        _this.urlViewerService.PPVIEWER.profile.avatar.face = base64AvatarUri;
-        _this.avatar_preview_info = { url: '', width: 0, height: 0, file: null, isNew: true };
+        if (data.done == true) {
+          _this.profileService.MYPROFILE.avatar.face = base64AvatarUri;
+          _this.profileService.MYPROFILE.avatar.show_alert = false;
+          _this.urlViewerService.PPVIEWER.profile.avatar.face = base64AvatarUri;
+          _this.avatar_preview_info = { url: '', width: 0, height: 0, file: null, isNew: true };
+          if (data.post != null) {
+            _this.feedService.prependFeed(data.post, false);
+            if (data.post.profile != null && data.post.profile.url == _this.profileFeedService.profile_url) {
+              _this.profileFeedService.prependFeed(data.post, false);
+            }
+          }
+        }
       } else {
         _this.errors = result.getErrors();
       }
@@ -437,20 +455,6 @@ export class EditProfileService {
     this.errors = this.messages = [];
     this.provider = this.getConfigValue('forms.update.provider');
     this.service.getProvider(this.provider).crudconfig.route_url = 'profile/my-profile/';
-    /*
-    this.service.update(this.provider, profileModel,{}).subscribe(function (result) {
-        _this.submitted = false;
-        if(result.isSuccess()){
-            _this.messages = result.getMessages();
-            var data=result.getResultData();
-            if(data.done){
-                _this.profileService.MYPROFILE=data.profile;
-            }				
-        } else {
-            _this.errors = result.getErrors();			
-        }
-    });
-    */
     return Observable.create((observer) => {
       this.loadProcessService.submittingData = true;
       return this.service.update(this.provider, profileModel, {}).subscribe(result => {

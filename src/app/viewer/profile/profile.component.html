@@ -1,11 +1,12 @@
 <app-wf-navbar class="d-none d-md-block d-lg-block"></app-wf-navbar>
-<app-wf-navbar-summary [back_route]="parent_route" [display_text]="urlviwerService.PPVIEWER.profile.name" class="d-block d-md-none d-lg-none"></app-wf-navbar-summary>   
+<app-wf-navbar-summary [back_route]="parent_route" [display_text]="urlviewerService.PPVIEWER.profile.name"
+    class="d-block d-md-none d-lg-none"></app-wf-navbar-summary>
 <app-wf-main-content>
-<app-time-line *ngIf="urlviwerService.VIEWER_URL_PAGE==''"></app-time-line>
-<app-about *ngIf="urlviwerService.VIEWER_URL_PAGE=='about'"></app-about>
-<app-photos *ngIf="urlviwerService.VIEWER_URL_PAGE=='photos'"></app-photos>
-<app-videos *ngIf="urlviwerService.VIEWER_URL_PAGE=='videos'"></app-videos>
-<app-connections *ngIf="urlviwerService.VIEWER_URL_PAGE=='connections'"></app-connections>
+    <app-time-line *ngIf="urlviewerService.VIEWER_URL_PAGE==''"></app-time-line>
+    <app-about *ngIf="urlviewerService.VIEWER_URL_PAGE=='about'"></app-about>
+    <app-photos *ngIf="urlviewerService.VIEWER_URL_PAGE=='photos'"></app-photos>
+    <app-videos *ngIf="urlviewerService.VIEWER_URL_PAGE=='videos'"></app-videos>
+    <app-connections *ngIf="urlviewerService.VIEWER_URL_PAGE=='connections'"></app-connections>
 </app-wf-main-content>
 <!--Main layout-->
 <app-wf-footer></app-wf-footer>
@@ -14,9 +15,7 @@
 <app-delete-profile-overlay-container></app-delete-profile-overlay-container>
 <app-overlay-load-submit-process-data-widget></app-overlay-load-submit-process-data-widget>
 <app-process-upload-images-progress-widget></app-process-upload-images-progress-widget>
-<app-share-post-form-container-widget></app-share-post-form-container-widget>
 <app-feed-images-overlay-view></app-feed-images-overlay-view>
-<app-faint-body-overlay *ngIf="postingService.show_input_buttons" (click)="postingService.messageBlur()"></app-faint-body-overlay>
-<app-mobile-overlay-post-form *ngIf="postingService.show_input_buttons"></app-mobile-overlay-post-form>
+<app-faint-body-overlay *ngIf="postingService.show_input_buttons" (click)="postingService.messageBlur()">
+</app-faint-body-overlay>
 <app-hover-card-container></app-hover-card-container>
-

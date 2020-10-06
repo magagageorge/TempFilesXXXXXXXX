@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, HostListener } from '@angular/core';
 import { UrlViewerService } from '@app/services/url-viewer.service';
-import { ProfilePhotosService } from '@app/services/profile-photos.service';
+import { ProfilePhotosService } from '../../services/profile-photos.service';
 
 @Component({
   selector: 'app-profile-photos-summary-widget',

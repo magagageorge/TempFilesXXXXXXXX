@@ -1,0 +1,12 @@
+<div class="d-block">
+    <h4 class="p-0 my-0">{{urlviewerService.PPVIEWER.page.name}}</h4>
+    <div class="p-0 my-0" class="d-block">@{{urlviewerService.PPVIEWER.page.url}}</div>
+    <div *ngIf="urlviewerService.PPVIEWER.page.category!=null" class="d-block page-title">
+        {{urlviewerService.PPVIEWER.page.category.category}}
+    </div>
+    <div *ngIf="urlviewerService.PPVIEWER.page.no_followers!=''"  class="d-block">
+       <span class="font-weight-bold">{{urlviewerService.PPVIEWER.page.no_followers}}</span>
+       <span>&nbsp;</span>
+       <span>Followers</span>
+    </div>
+</div>

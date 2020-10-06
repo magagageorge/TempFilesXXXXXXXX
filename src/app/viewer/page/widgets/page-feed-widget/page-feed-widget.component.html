@@ -1,0 +1,27 @@
+<app-loading-new-post-widget *ngIf="pageFeedService.loading_new_post"></app-loading-new-post-widget>
+<div class="col-12 p-0 m-0" #feedContainer>
+    <div class="w-100 h-100 m-0 p-0" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
+        (scrolled)="pageFeedService.onScrollDown()" [scrollWindow]="true" id="scroller">
+        <ng-container *ngFor="let feed of pageFeedService.feeds">
+            <ng-container *ngIf="feed.edit_mode!=true">
+                <app-post-card-widget [feed]="feed" [container_width]="container_width"
+                    [max_post_images_height]="max_post_images_height"></app-post-card-widget>
+            </ng-container>
+        </ng-container>
+
+        <div *ngIf="pageFeedService.loading_feeds==false && !pageFeedService.feeds.length" class="card-body">
+            <div *ngIf="!urlViewerService.PPVIEWER.page.my_page" class="d-block px-auto py-2 text-center">
+                <h5><span>{{urlViewerService.PPVIEWER.page.name}}</span> <span>&nbsp;</span><span i18n>have not posted
+                        anything yet!</span></h5>
+                <hr>
+            </div>
+            <div *ngIf="urlViewerService.PPVIEWER.page.my_page" class="d-block px-auto py-2 text-center">
+                <h5><span i18n>You have not posted anything yet! You can start right away to share information about
+                        your page,products,services,activities,events and others.</span></h5>
+                <hr>
+            </div>
+        </div>
+
+    </div>
+</div>
+<app-loading-new-post-widget *ngIf="pageFeedService.loading_feeds"></app-loading-new-post-widget>

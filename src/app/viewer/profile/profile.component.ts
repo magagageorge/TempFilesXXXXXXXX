@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { UrlViewerService } from '@app/services/url-viewer.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PostingService } from '@app/services/posting.service';
-import { ProfilePhotosService } from '@app/services/profile-photos.service';
+import { ProfilePhotosService } from './services/profile-photos.service';
+import { ProfileConnectionsService } from '@app/services/profile-connections.service';
+import { ProfileFeedService } from './services/profile-feed.service';
+import { ProfileViewerService } from './services/profile-viewer.service';
 
 @Component({
   selector: 'app-profile',
@@ -11,30 +14,22 @@ import { ProfilePhotosService } from '@app/services/profile-photos.service';
 })
 export class ProfileComponent implements OnInit {
 
-  urlviwerService: UrlViewerService;
-  postingService: PostingService;
-  parent_route:string='feed';
-  navbar_title:string='';
+  parent_route: string = 'feed';
+  navbar_title: string = '';
   route: ActivatedRoute;
   router: Router;
-  url_page: string = '';
+  last_profile_url: string = '';
 
-  constructor(urlviwerService: UrlViewerService, postingService: PostingService,profilePhotosService:ProfilePhotosService, router: Router, route: ActivatedRoute) {
-    this.urlviwerService = urlviwerService;
-    this.postingService = postingService;
+  constructor(public profileViewerService: ProfileViewerService,public urlviewerService: UrlViewerService,public postingService: PostingService, public profileFeedService: ProfileFeedService, public profilePhotosService: ProfilePhotosService, public profileConnectionsService: ProfileConnectionsService, router: Router, route: ActivatedRoute) {
     this.route = route;
     this.router = router;
   }
 
   ngOnInit() {
-    var _this=this;
+    var _this = this;
     this.route.params.subscribe(params => {
-      if (params.url_page != undefined) {
-        _this.urlviwerService.VIEWER_URL_PAGE=params.url_page;
-      }else{
-        _this.urlviwerService.VIEWER_URL_PAGE='';
-      }      
+      _this.profileViewerService.checkLoadProfileInfo(params);
     });
-  }
 
+  }
 }

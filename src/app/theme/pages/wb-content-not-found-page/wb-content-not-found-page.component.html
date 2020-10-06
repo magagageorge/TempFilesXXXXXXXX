@@ -1,0 +1,33 @@
+<div class="row mx-0 w-100" style="min-height: 80vh;">
+    <div class="col-12 col-md-6 col-lg-6 col-xl-6 mx-auto d-flex justify-content-center align-items-center">
+
+        <div class="row mx-0">
+            <div class="col-12 d-flex justify-content-center">
+                <span class="wb-font-size-200 text-primary">
+                    <span class="fa fa-lock wb-font-size-200"></span>
+                </span>
+            </div>
+            <div class="col-12 d-flex justify-content-center">
+                <span class="wb-font-size-130 font-weight-bold">
+                    This content isn't available at the moment
+                </span>
+            </div>
+            <div class="col-12 d-flex justify-content-center">
+                <span class="wb-font-size-110">
+                    When this happens, it's usually because the owner only shared it with a small group of people or
+                    changed
+                    who can see it, or it's been deleted.
+                </span>
+            </div>
+            <div class="col-12 d-flex justify-content-center">
+                <a routerLink="/feed" class="btn btn-sm btn-rounded btn-primary">Go to News Feed</a>
+            </div>
+            <ng-container *ngIf="reffererUrl!=false">
+                <div class="col-12 d-flex justify-content-center">
+                    <a routerLink="{{reffererUrl}}" class="text-primary">Go Back</a>
+                </div>
+            </ng-container>
+        </div>
+
+    </div>
+</div>

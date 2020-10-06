@@ -9,6 +9,7 @@ import { cruddefaultSettings, CrudOptions, CRUD_OPTIONS, CRUD_USER_OPTIONS, CRUD
 import { CrudProvider } from '@app/@crud/providers/crud.provider';
 import { ReportContentType } from '@app/models/report-content-type';
 import { Currency } from '@app/models/currency';
+import { Country } from '@app/models/country';
 
 
 @Injectable()
@@ -29,6 +30,7 @@ export class UtilitiesService {
     SuggestedIndutries: any[] = [];
     report_types: ReportContentType[] = [];
     currencies: Currency[] = [];
+    countries: Country[] = [];
     constructor(service: CrudService, @Inject(CRUD_OPTIONS) CRUD_OPTIONS: CrudOptions, router: Router) {
         this.service = service;
         this.crudconfig = CRUD_OPTIONS;
@@ -164,6 +166,16 @@ export class UtilitiesService {
         this.service.getProvider(this.provider).crudconfig.route_url = 'heared-from/';
         var _this = this;
         return this.service.getall(this.provider, params);
+    }
+
+    public get COUNTRIES(): Country[] {
+        var __this = this;
+        if (this.countries.length == 0) {
+            this.getCountries({}).subscribe(results => {
+                __this.countries = results.getResultData();
+            });
+        }
+        return this.countries;
     }
 
     getConfigValue(key: string): any {

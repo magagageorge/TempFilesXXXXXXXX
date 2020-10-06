@@ -1,0 +1,303 @@
+.page-info .page-title {
+  font-size: 110%;
+}
+
+.wf-page-hearder .wf-page-cover {
+  border-radius: 0px 0px 20px 20px;
+}
+
+.wf-page-cover .page-cover-upload {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  box-shadow: 2px 0px 17px -1px rgba(161, 157, 157, 1);
+  -webkit-box-shadow: 2px 0px 17px -1px rgba(161, 157, 157, 1);
+  -moz-box-shadow: 2px 0px 17px -1px rgba(161, 157, 157, 1);
+}
+
+.wf-page-cover .page-cover-upload .fa {
+  font-size: 130%;
+}
+
+.wf-page-cover .page-cover-upload .page-cover-text {
+  display: none;
+}
+
+.wf-page-cover:hover .page-cover-upload .page-cover-text {
+  display: block;
+}
+
+.wf-page-image-container .page-avatar-upload {
+  position: absolute;
+  top: -5px;
+  left: 42%;
+}
+.wf-page-image-container .page-avatar-upload .fa {
+  font-size: 130%;
+}
+
+.wf-page-title-buttons-small {
+  display: none;
+}
+
+/* 
+  ##Device = Desktops
+  ##Screen = 1281px to higher resolution desktops
+*/
+
+@media (min-width: 1281px) {
+  .wf-page-hearder {
+    height: 275px;
+    position: relative;
+  }
+
+  .wf-page-hearder .wf-page-cover {
+    position: absolute;
+    height: 250px;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    background-color: #a7adba;
+    overflow: hidden;
+  }
+
+  .wf-page-hearder .wf-page-image-container {
+    position: absolute;
+    bottom: 0px;
+    left: 40px;
+    height: 150px;
+    width: 150px;
+  }
+
+  .wf-page-hearder .wf-page-title-buttons {
+    display: block;
+    position: absolute;
+    bottom: 0px;
+    left: 190px;
+    height: 100px;
+    right: 0px;
+  }
+}
+
+/* 
+    ##Device = Laptops, Desktops
+    ##Screen = B/w 1025px to 1280px
+  */
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+  .wf-page-hearder {
+    height: 275px;
+    position: relative;
+  }
+
+  .wf-page-hearder .wf-page-cover {
+    position: absolute;
+    height: 250px;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    background-color: #06274d;
+    overflow: hidden;
+  }
+
+  .wf-page-hearder .wf-page-image-container {
+    position: absolute;
+    bottom: 0px;
+    left: 40px;
+    height: 150px;
+    width: 150px;
+  }
+
+  .wf-page-hearder .wf-page-title-buttons {
+    display: block;
+    position: absolute;
+    bottom: 0px;
+    left: 190px;
+    height: 100px;
+    right: 0px;
+  }
+}
+
+/* 
+    ##Device = Tablets, Ipads (portrait)
+    ##Screen = B/w 768px to 1024px
+  */
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .wf-page-hearder {
+    height: 250px;
+    position: relative;
+  }
+
+  .wf-page-hearder .wf-page-cover {
+    position: absolute;
+    height: 225px;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    background-color: #06274d;
+    overflow: hidden;
+  }
+
+  .wf-page-hearder .wf-page-image-container {
+    position: absolute;
+    bottom: 0px;
+    left: 20px;
+    height: 120px;
+    width: 120px;
+  }
+
+  .wf-page-hearder .wf-page-title-buttons {
+    display: block;
+    position: absolute;
+    bottom: 0px;
+    left: 140px;
+    height: 100px;
+    right: 0px;
+  }
+
+  .wf-page-hearder .wf-page-title-large {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+}
+
+/* 
+    ##Device = Tablets, Ipads (landscape)
+    ##Screen = B/w 768px to 1024px
+  */
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  .wf-page-hearder {
+    height: 200px;
+    position: relative;
+  }
+
+  .wf-page-hearder .wf-page-cover {
+    position: absolute;
+    height: 160px;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    background-color: #06274d;
+    overflow: hidden;
+  }
+
+  .wf-page-hearder .wf-page-image-container {
+    position: absolute;
+    bottom: 5px;
+    left: 20px;
+    height: 120px;
+    width: 120px;
+  }
+
+  .wf-page-hearder .wf-page-title-buttons {
+    display: block;
+    position: absolute;
+    bottom: 0px;
+    left: 140px;
+    height: 100px;
+    right: 0px;
+  }
+
+  .wf-page-hearder .wf-page-title-large {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+}
+
+/* 
+    ##Device = Low Resolution Tablets, Mobiles (Landscape)
+    ##Screen = B/w 481px to 767px
+  */
+
+@media (min-width: 481px) and (max-width: 767px) {
+  .wf-page-hearder {
+    height: 160px;
+    position: relative;
+  }
+
+  .wf-page-hearder .wf-page-cover {
+    position: absolute;
+    height: 128px;
+    left: 0;
+    right: 0;
+    top: 0px;
+    background-color: #06274d;
+    overflow: hidden;
+  }
+
+  .wf-page-hearder .wf-page-image-container {
+    position: absolute;
+    display: block;
+    bottom: 5px;
+    left: 10px;
+    height: 96px;
+    width: 96px;
+  }
+
+  .card-body .wf-page-title-buttons-small {
+    display: block;
+  }
+
+  .wf-page-hearder .wf-page-title-large {
+    display: none;
+  }
+
+  .wf-page-hearder .wf-page-title-buttons {
+    display: block;
+    position: absolute;
+    bottom: 0px;
+    left: 107px;
+    right: 0px;
+  }
+}
+
+/* 
+    ##Device = Most of the Smartphones Mobiles (Portrait)
+    ##Screen = B/w 320px to 479px
+  */
+
+@media (max-width: 480px) {
+  .wf-page-hearder {
+    height: 128px;
+    position: relative;
+  }
+
+  .wf-page-hearder .wf-page-cover {
+    position: absolute;
+    height: 102px;
+    left: 0;
+    right: 0;
+    top: 0px;
+    background-color: #06274d;
+    overflow: hidden;
+  }
+
+  .wf-page-hearder .wf-page-image-container {
+    position: absolute;
+    display: block;
+    bottom: 2px;
+    left: 10px;
+    height: 77px;
+    width: 77px;
+  }
+
+  .card-body .wf-page-title-buttons-small {
+    display: block;
+  }
+
+  .wf-page-hearder .wf-page-title-large {
+    display: none;
+  }
+
+  .wf-page-hearder .wf-page-title-buttons {
+    display: block;
+    position: absolute;
+    bottom: 0px;
+    left: 107px;
+    right: 0px;
+  }
+}

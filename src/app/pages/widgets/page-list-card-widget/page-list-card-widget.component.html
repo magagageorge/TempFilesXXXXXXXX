@@ -1,0 +1,32 @@
+<ng-container *ngIf="pageSummary!=null">
+    <div class="card m-0">
+        <div class="card-body p-1">
+            <a routerLink="/{{pageSummary.url}}" (click)="urlViewerService.setPage(pageSummary)"
+                class="p-0 m-0 text-decoration-none" style="text-decoration: none;">
+                <div class="row p-0 m-0">
+                    <div class="col-2 p-0">
+                        <ng-container *ngIf="pageSummary.picture!=null">
+                            <img style="max-height:60px;" src="{{pageSummary.picture.face}}"
+                                class="img-fluid rounded-circle z-depth-0 m-0">
+                        </ng-container>
+                    </div>
+                    <div class="col-10 p-0 d-flex align-items-center justify-content-start px-0">
+                        <div class="row mx-0 px-0">
+                            <div class="col-12  mx-0 px-0 font-weight-bold text-truncate">
+                                {{pageSummary.name}}<span class="text-muted">@{{pageSummary.url}}</span>
+                            </div>
+                            <div *ngIf="pageSummary.category!=null" class="col-12  mx-0 px-0">
+                                <span class="text-muted">{{pageSummary.category.category}}</span>
+                            </div>
+                            <div *ngIf="pageSummary.no_followers > 0" class="col-12 mx-0 px-0">
+                                <span class="font-weight-bold">{{pageSummary.no_followers}}</span>
+                                <span>&nbsp;</span>
+                                <span>Followers</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</ng-container>

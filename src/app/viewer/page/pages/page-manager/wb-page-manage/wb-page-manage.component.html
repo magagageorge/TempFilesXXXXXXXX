@@ -1,0 +1,32 @@
+<div class="card p-0 w-100" style="padding-bottom: 50px;min-height: 60vh;">
+    <div class="card-body p-0 my-2" style="overflow-y: auto;">
+        <ul class="list-group w-100 mx-0">
+            <li class="list-group-item pl-1 py-1">
+                <a routerLink="/{{pageViewerService.urlviewerService.PPVIEWER.page.url}}/notifications"
+                    class="d-block m-0 p-2 wb-font-size-120">
+                    <span class="fa fa-bell-o"></span>
+                    <span>&nbsp;</span>
+                    <span>Notifications</span>
+                </a>
+            </li>
+            <ng-container *ngIf="pageViewerService.urlviewerService.PPVIEWER.page.my_page=='Admin'">
+                <li class="list-group-item pl-1 py-1">
+                    <a routerLink="/{{pageViewerService.urlviewerService.PPVIEWER.page.url}}/page-admins"
+                        class="d-block m-0 p-2 wb-font-size-120">
+                        <span class="fa fa-users"></span>
+                        <span>&nbsp;</span>
+                        <span>Page Admins</span>
+                    </a>
+                </li>
+                <li class="list-group-item pl-1 py-1">
+                    <a routerLink="/{{pageViewerService.urlviewerService.PPVIEWER.page.url}}/settings"
+                        class="d-block m-0 p-2 wb-font-size-120">
+                        <span class="fa fa-gear"></span>
+                        <span>&nbsp;</span>
+                        <span>Settings</span>
+                    </a>
+                </li>
+            </ng-container>
+        </ul>
+    </div>
+</div>

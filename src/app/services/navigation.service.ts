@@ -6,18 +6,17 @@ export class NavigationState {
   currentRoute: string;
 }
 
-
 @Injectable({
   providedIn: 'root'
 })
 export class NavigationService {
 
+  routeState:NavigationState = new NavigationState();
   params: Params;
   constructor() {
   }
 
   setState(params: Params) {
     this.params = params;
-    //console.log(this.params);
   }
 }

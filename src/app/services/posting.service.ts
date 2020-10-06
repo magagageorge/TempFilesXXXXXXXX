@@ -3,7 +3,7 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
 import { Feed } from '@models/feed/feed';
-import { Post } from '@models/post';
+import { PostForm } from '@models/post';
 import { Visibility } from '@models/visibility';
 import { Visibilities } from '@app/data/visibilities';
 import { getDeepFromObject } from '@app/@crud/helpers';
@@ -13,6 +13,11 @@ import { CrudProvider } from '@app/@crud/providers/crud.provider';
 import { FeedService } from '@app/services/feed.service';
 import { WfLinkPreviewService } from '@app/libs/wf-link-preview/services/wf-link-preview.service';
 import { LoadSubmitProgressService } from './load-submit-progress.service';
+import { PageViewer } from '@app/models/page-viewer';
+import { ProfileService } from './profile.service';
+import { PageSummary } from '@app/models/page/page.model';
+import { ProfileFeedService } from '@app/viewer/profile/services/profile-feed.service';
+import { PageFeedService } from '@app/viewer/page/services/page-feed.service';
 
 
 export interface PreviewPicture {
@@ -37,7 +42,7 @@ export class PostingService {
   feedService: FeedService;
   crudprovider: CrudProvider;
   linkPreviewService: WfLinkPreviewService;
-  loadSubmitProgressService:LoadSubmitProgressService;
+  loadSubmitProgressService: LoadSubmitProgressService;
   protected crudconfig: {};
   protected router: Router;
   redirectDelay: number;
@@ -49,8 +54,7 @@ export class PostingService {
   show_upload_img: boolean = true;
   focus_on_message_input: boolean = false;
   selected_visibility: Visibility = new Visibility();
-  visibility_options: Visibility[] = Visibilities;
-  feed_input_model: Post = new Post();
+  feed_input_model: PostForm = new PostForm();
   filesToUpload: Array<File> = [];
   file_preview_urls: PreviewPicture[] = [];
   posted_images_in_edit: PreviewPicture[] = [];
@@ -62,14 +66,18 @@ export class PostingService {
   img_url: string;
   loadedImage: any;
   fileReader: any;
+  postingAs: string;
+  postingAs_page: PageSummary = new PageSummary();
+  profileService: ProfileService;
 
-  constructor(service: CrudService, feedService: FeedService,loadSubmitProgressService:LoadSubmitProgressService, @Inject(CRUD_OPTIONS) CRUD_OPTIONS: CrudOptions, private _modalService: NgbModal, router: Router, linkPreviewService: WfLinkPreviewService) {
+  constructor(service: CrudService, profileService: ProfileService, feedService: FeedService, public profileFeedService: ProfileFeedService, public pageFeedService: PageFeedService, loadSubmitProgressService: LoadSubmitProgressService, @Inject(CRUD_OPTIONS) CRUD_OPTIONS: CrudOptions, private _modalService: NgbModal, router: Router, linkPreviewService: WfLinkPreviewService) {
     this.service = service;
     this.feedService = feedService;
     this.crudconfig = CRUD_OPTIONS;
     this.router = router;
     this.linkPreviewService = linkPreviewService;
-    this.loadSubmitProgressService=loadSubmitProgressService;
+    this.loadSubmitProgressService = loadSubmitProgressService;
+    this.profileService = profileService;
   }
 
   onSelectFile(event) {
@@ -89,7 +97,6 @@ export class PostingService {
       this.focus_on_message_input = true;
       this.show_input_buttons = true;
       this.show_hide_inputs();
-
     }
   }
 
@@ -141,6 +148,10 @@ export class PostingService {
       formData.append("link", JSON.stringify(this.linkPreviewService.link_Preview));
     }
     formData.append("isNew", this.feed_input_model.isNew);
+
+    if (this.postingAs == 'Page' && this.postingAs_page != null) {
+      formData.append("page_id", this.postingAs_page.id);
+    }
     formData.append("visibility", this.feed_input_model.visibility);
     formData.append("message", this.feed_input_model.message.trim());
     if (this.sharePostModel.inShareMode) {
@@ -152,7 +163,7 @@ export class PostingService {
       //feed_card_elem.style.opacity = '0.5';
       //feed_card_elem.setAttribute('disabled','true');
       this.submitted = true;
-      this.loadSubmitProgressService.submittingData=true;
+      this.loadSubmitProgressService.submittingData = true;
       if (this.feed_input_model.isNew) {
         this.service.create(this.provider, formData, {}).subscribe(function (result) {
           _this.submitted = false;
@@ -160,8 +171,15 @@ export class PostingService {
             _this.messages = result.getMessages();
             var data = result.getResultData();
             if (data.done == true) {
-              _this.feedService.prependFeed(data.data);
-              _this.feed_input_model = new Post();
+              _this.feedService.prependFeed(data.data,false);
+              if (_this.postingAs == 'Page' && _this.postingAs_page != null) {
+                console.log('Prepend to Page Feed');
+                _this.pageFeedService.prependFeed(data.data, false);
+              } else {
+                _this.profileFeedService.prependFeed(data.data,false);
+                console.log('Prepend to Profile Feed');
+              }
+              _this.feed_input_model = new PostForm();
               _this.filesToUpload = [];
               _this.file_preview_urls = [];
             }
@@ -173,7 +191,7 @@ export class PostingService {
             _this.sharePostModel.sharePost = null;
           }
           _this.feedService.loading_new_post = false;
-          _this.loadSubmitProgressService.submittingData=false;
+          _this.loadSubmitProgressService.submittingData = false;
         });
       } else {
         this.service.update(this.provider, formData, { 'id': _this.feed_input_model.id }).subscribe(function (result) {
@@ -182,9 +200,13 @@ export class PostingService {
             _this.messages = result.getMessages();
             var data = result.getResultData();
             if (data.done == true) {
-              _this.feedService.clearFeed(_this.feed_input_model.id);
-              _this.feedService.prependFeed(data.data);
-              _this.feed_input_model = new Post();
+              _this.feedService.prependFeed(data.data,true);
+              if (_this.postingAs == 'Page' && _this.postingAs_page != null) {
+                _this.pageFeedService.prependFeed(data.data, true);
+              } else {
+                _this.profileFeedService.prependFeed(data.data,true);
+              }
+              _this.feed_input_model = new PostForm();
               _this.filesToUpload = [];
               _this.file_preview_urls = [];
             }
@@ -196,10 +218,10 @@ export class PostingService {
             _this.sharePostModel.sharePost = null;
           }
           _this.feedService.loading_new_post = false;
-          _this.loadSubmitProgressService.submittingData=false;
+          _this.loadSubmitProgressService.submittingData = false;
         });
       }
-      _this.feed_input_model = new Post();
+      _this.feed_input_model = new PostForm();
       _this.filesToUpload = [];
       _this.file_preview_urls = [];
       this.linkPreviewService.links = [];
@@ -208,11 +230,10 @@ export class PostingService {
     }
   }
 
-  /* Function to set the form Post Editing once Edit form clicked in the Feed */
-  setEdititablePost(post: Post, feed: Feed) {
+  /* Function to set the form PostForm Editing once Edit form clicked in the Feed */
+  setEdititablePost(post: PostForm, feed: Feed) {
     var _this = this;
-    this.feed_input_model = post;
-    this.feed_input_model.isNew = false;
+    this.setPostForm(feed, false);
     this.filesToUpload = [];
     this.file_preview_urls = [];
     let input_box: HTMLElement = document.querySelector("#feed_form_model_input");
@@ -220,12 +241,13 @@ export class PostingService {
       input_box.focus();
       input_box.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
     }
-    this.feedService.searchFeed(String(post.id)).subscribe((feedd: Feed) => {
+    this.messageFocus();
+    this.feedService.searchFeed(post.id).subscribe((feedd: Feed) => {
       if (feedd) {
         feedd.edit_mode = true;
       }
 
-      if(feed.original_post!=null){
+      if (feed.original_post != null) {
         this.shareThisPost(feed);
       }
 
@@ -238,23 +260,39 @@ export class PostingService {
     });
   }
 
+  setPostForm(feed: Feed, isNew: boolean) {
+    this.feed_input_model.id = feed.id;
+    this.feed_input_model.message = feed.message;
+    this.feed_input_model.visibility = feed.visibility;
+    this.feed_input_model.isNew = isNew;
+    if (feed.page != null) {
+      this.feed_input_model.page_id = feed.page.id;
+    }
 
-  /* Function to reset the Post Form once User Cancel Editing the Post */
+  }
+
+  /* Function to reset the PostForm Form once User Cancel Editing the PostForm */
   CancelPostEdit() {
-    this.feedService.searchFeed(String(this.feed_input_model.id)).subscribe((feed: Feed) => {
-      if (feed) {
-        feed.edit_mode = false;
+    if (this.feed_input_model.id != null) {
+      this.feedService.searchFeed(this.feed_input_model.id).subscribe((feed: Feed) => {
+        if (feed) {
+          feed.edit_mode = false;
+        }
+      });
+      let elem: HTMLElement = document.querySelector("#feed_item_" + this.feed_input_model.id);
+      if (elem != null) {
+        elem.scrollIntoView();
       }
-    });
-    this.feed_input_model = new Post();
-    this.feed_input_model.isNew = true;
+    }
+    this.clearPostForm();
     this.filesToUpload = [];
     this.file_preview_urls = [];
-    this.messageBlur();
-    let elem: HTMLElement = document.querySelector("#feed_item_" + this.feed_input_model.id);
-    if (elem != null) {
-      elem.scrollIntoView();
-    }
+  }
+
+  clearPostForm() {
+    this.feed_input_model.message = '';
+    this.feed_input_model.isNew = true;
+    this.feed_input_model.id = null;
   }
 
 
@@ -295,9 +333,10 @@ export class PostingService {
         this.show_upload_img = true;
       }
       this.show_input_buttons = false;
-      this.CancelPostEdit();
     }
+    this.CancelPostEdit();
   }
+
   messageFocus() {
     this.focus_on_message_input = true;
     this.show_hide_inputs();
@@ -311,6 +350,38 @@ export class PostingService {
     }
     this.sharePostModel.inShareMode = true;
     this.messageFocus();
+  }
+
+
+  /* The the default list of visibility
+/* options for depending on
+/* either the  publisher is a personal or Page */
+  get visibility_options(): Visibility[] {
+    if (this.postingAs == 'Page') {
+      return Visibilities.filter((v: Visibility) => v.code === 'Everyone');
+    } else {
+      return Visibilities;
+    }
+  }
+
+  get postingAsImage() {
+    if (this.postingAs == 'Page' && this.postingAs_page != null) {
+      return this.postingAs_page.picture.face;
+    } else if (this.postingAs == 'Profile' && this.profileService.MYPROFILE != null) {
+      return this.profileService.MYPROFILE.avatar.face;
+    } else {
+      return '';
+    }
+  }
+
+  get postingAsName() {
+    if (this.postingAs == 'Page' && this.postingAs_page != null) {
+      return this.postingAs_page.name;
+    } else if (this.postingAs == 'Profile' && this.profileService.MYPROFILE != null) {
+      return (this.profileService.MYPROFILE.firstname + ' ' + this.profileService.MYPROFILE.lastname);
+    } else {
+      return '';
+    }
   }
 
   getConfigValue(key: string): any {

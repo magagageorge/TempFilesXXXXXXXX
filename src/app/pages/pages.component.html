@@ -1,0 +1,29 @@
+<app-wf-navbar class="d-none d-md-block d-lg-block"></app-wf-navbar>
+<app-wf-navbar-summary [back_route]="parent_route" [display_text]="route_name" class="d-block d-md-none d-lg-none">
+</app-wf-navbar-summary>
+<app-wp-pages-main-content-container>
+    <div class="row mx-0">
+        <div class="col-12 d-block d-md-none d-lg-none d-xl-none p-2">
+            <div class="w-100 d-flex justify-content-center">
+                <button (click)="pageService.createPageOnFly()"
+                    class="btn btn-sm btn-rounded btn-outline-primary w-100">
+                    <span class="fa fa-plus-circle"></span>
+                    <span>&nbsp;</span>
+                    <span>Create New Page</span>
+                </button>
+            </div>
+        </div>
+        <div class="col-12 p-1">
+            <h5>Pages I Manage</h5>
+        </div>
+        <div class="col-12 p-0">
+            <div class="row mx-0">
+                <ng-container *ngFor="let page of pageService.MYPAGES">
+                    <div class="col-12 col-md-6 col-lg-6 col-xl-6 m-0 p-1">
+                        <app-page-list-card-widget [pageSummary]="page"></app-page-list-card-widget>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</app-wp-pages-main-content-container>

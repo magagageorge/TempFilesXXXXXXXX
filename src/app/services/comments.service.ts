@@ -417,10 +417,6 @@ export class CommentsService {
   }
 
   clearComment(comment: Comment) {
-    this.feedService.profileFeedService.searchFeed(comment.object_id).subscribe((feed: Feed) => {
-      feed.comments = feed.comments.filter((x: any) => x.id !== comment.id);
-      feed.no_comments = Number(feed.no_comments) - 1;
-    });
     this.feedService.searchFeed(comment.object_id).subscribe((feed: Feed) => {
       feed.comments = feed.comments.filter((x: any) => x.id !== comment.id);
       feed.no_comments = Number(feed.no_comments) - 1;
@@ -432,14 +428,6 @@ export class CommentsService {
   }
 
   updateSentComment(comment: Comment, tmp_id: number) {
-    this.feedService.profileFeedService.searchFeed(comment.object_id).subscribe((feed: Feed) => {
-      this.searchComment(feed.comments, tmp_id).subscribe((comm: Comment) => {
-        if (comm) {
-          this.comment_model = cloneDeep(comment);
-          comm = cloneDeep(comment);
-        }
-      });
-    });
     this.feedService.searchFeed(comment.object_id).subscribe((feed: Feed) => {
       this.searchComment(feed.comments, tmp_id).subscribe((comm: Comment) => {
         if (comm) {
@@ -468,22 +456,6 @@ export class CommentsService {
         }
       });
     }
-
-    this.feedService.profileFeedService.searchFeed(comment.object_id).subscribe((feed: Feed) => {
-      this.searchComment(feed.comments, comment.id).subscribe((comm: Comment) => {
-        if (comm) {
-          if (action == 'like' && comm.i_like!=true) {
-            comm.no_likes = Number(comm.no_likes) + 1;
-            comm.i_like = true;
-          } else {
-            if (Number(comm.no_likes) > 0 && comm.i_like==true) {
-              comm.no_likes = Number(comm.no_likes) - 1;
-              comm.i_like = false;
-            }
-          }
-        }
-      });
-    });
 
     this.feedService.searchFeed(comment.object_id).subscribe((feed: Feed) => {
       this.searchComment(feed.comments, comment.id).subscribe((comm: Comment) => {
@@ -620,22 +592,6 @@ export class CommentsService {
       });
     }
 
-    this.feedService.profileFeedService.searchFeed(feedComment.object_id).subscribe((feed: Feed) => {
-      if (feed) {
-        this.searchComment(feed.comments, feedComment.id).subscribe((comm: Comment) => {
-          if (comm) {
-            _this.searchReply(comm.replies, reply.id).subscribe((rep: CommentReply) => {
-              if (rep) { /*Don't push reply */}
-              else{
-                comm.replies.push(reply);
-                comm.no_replies = comm.no_replies + 1;
-              }
-            });
-          }
-        });
-      }
-    });
-
     this.feedService.searchFeed(feedComment.object_id).subscribe((feed: Feed) => {
       if (feed) {
         this.searchComment(feed.comments, feedComment.id).subscribe((comm: Comment) => {
@@ -667,20 +623,6 @@ export class CommentsService {
         }
       });
     }
-
-    this.feedService.profileFeedService.searchFeed(feedComment.object_id).subscribe((feed: Feed) => {
-      if (feed) {
-        _this.searchComment(feed.comments, feedComment.id).subscribe((comm: Comment) => {
-          if (comm) {
-            _this.searchReply(comm.replies, reply.id).subscribe((rep: CommentReply) => {
-              if (rep) {
-                rep = cloneDeep(reply);
-              }
-            });
-          }
-        });
-      }
-    });
 
     this.feedService.searchFeed(feedComment.object_id).subscribe((feed: Feed) => {
       if (feed) {

@@ -6,13 +6,14 @@ import { HoverCardService } from '@app/libs/wf-hover-card/services/hover-card.se
 import { UrlViewerService } from '@app/services/url-viewer.service';
 import { ImageIconsService } from '@app/services/image-icons.service';
 import { Feed } from '@app/models/feed/feed';
+import { VISIBILITY_ICONS } from '@app/data/visibilities';
 
 @Component({
   selector: 'app-shared-post-widget',
   templateUrl: './shared-post-widget.component.html',
   styleUrls: ['./shared-post-widget.component.scss']
 })
-export class SharedPostWidgetComponent implements AfterViewInit,OnInit {
+export class SharedPostWidgetComponent implements AfterViewInit, OnInit {
   @Input() post: Feed;
   @ViewChild("sharePostContainer", { static: false })
   sharePostContainer: ElementRef;
@@ -25,6 +26,7 @@ export class SharedPostWidgetComponent implements AfterViewInit,OnInit {
   hovercardService: HoverCardService;
   urlViewerService: UrlViewerService;
   imageIconsService: ImageIconsService;
+  VISIBILITY_ICONS:any = VISIBILITY_ICONS;
   constructor(feedService: FeedService, postingService: PostingService, commentService: CommentsService, imageIconsService: ImageIconsService, urlViewerService: UrlViewerService, hovercardService: HoverCardService) {
     this.postingService = postingService;
     this.commentService = commentService;
@@ -33,8 +35,8 @@ export class SharedPostWidgetComponent implements AfterViewInit,OnInit {
     this.imageIconsService = imageIconsService;
   }
 
-  ngOnInit(){
-    
+  ngOnInit() {
+
   }
   ngAfterViewInit() {
     setTimeout(() => {

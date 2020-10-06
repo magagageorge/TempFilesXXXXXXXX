@@ -1,5 +1,5 @@
 <app-loading-new-post-widget *ngIf="feedService.loading_new_post"></app-loading-new-post-widget>
-<div class="col-xs-14 col-sm-14 col-md-14 col-md-14 p-0" #feedContainer>
+<div class="col-12 p-0 m-0" #feedContainer>
     <div class="w-100 h-100 m-0 p-0" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
         (scrolled)="feedService.onScrollDown()" [scrollWindow]="true" id="scroller">
         <ng-container *ngFor="let feed of feedService.feeds;let i=index">
@@ -10,7 +10,7 @@
             <ng-container *ngIf="showAdsService.POST_ADS.length>0 && ( i % 5)==0">
                 <app-ad-post-view-widget [ad_content]="showAdsService.POST_ADS[nextAddIndex(i)]">
                 </app-ad-post-view-widget>
-            </ng-container>            
+            </ng-container>
         </ng-container>
     </div>
 </div>

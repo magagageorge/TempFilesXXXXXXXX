@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, HostListener } from '@angular/core';
 import { UrlViewerService } from '@app/services/url-viewer.service';
-import { ProfilePhotosService } from '@app/services/profile-photos.service';
 import { ViewPortDimensions } from '@app/libs/view-port-dimensions';
+import { ProfilePhotosService } from '../../services/profile-photos.service';
 
 @Component({
   selector: 'app-profile-photos-widget',

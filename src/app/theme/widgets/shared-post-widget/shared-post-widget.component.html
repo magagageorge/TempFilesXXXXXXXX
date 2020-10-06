@@ -3,28 +3,41 @@
         <ng-container *ngIf="post.hidden_post!=true">
             <div class="card-header with-border p-2">
                 <div class="user-block">
-                    <a routerLink="/{{post.profile.url}}" (mouseover)="hovercardService.OnHover($event,post.profile)"
-                        (click)="hovercardService.OnMouseOut($event);urlViewerService.setProfile(post.profile);"
-                        (mouseleave)="hovercardService.OnMouseOut($event)"><img class="rounded-circle img-fluid"
-                            src="{{post.profile.avatar.face}}" alt=""></a>
+                    <ng-container *ngIf="post.page!=null">
+                        <a routerLink="/{{post.page.url}}" (click)="urlViewerService.setPage(post.page);"><img
+                                class="rounded-circle img-fluid" src="{{post.page.picture.face}}" alt=""></a>
+                        <span class="username mr-4">
+                            <a class="w-100 d-block text-truncate" (click)="urlViewerService.setPage(post.page);"
+                                routerLink="/{{post.page.url}}">{{post.page.name}} <span
+                                    class="url-tag">@{{post.page.url}}</span></a>
+                        </span>
+                        <span class="description">
+                            <span class="d-block text-truncate">{{post.page.category.category}}</span>
+                            <span class="d-block text-truncate"><a href="javascript:void(0)" title="Everyone"><i
+                                        class="fa fa-globe"></i></a> <a routerLink="#" onclick="return false;"
+                                    title="{{post.updated_at.title}}">{{post.updated_at.date}} <i
+                                        *ngIf="post.updated_at.title!=post.created_at.title" i18n>Edited</i></a></span>
+                        </span>
+                    </ng-container>
+                    <ng-container *ngIf="post.page==null && post.profile!=null">
+                        <a routerLink="/{{post.profile.url}}" (click)="urlViewerService.setProfile(post.profile);"><img
+                                class="rounded-circle img-fluid" src="{{post.profile.avatar.face}}" alt=""></a>
 
-                    <span class="username mr-4">
-                        <a class="w-100 d-block text-truncate"
-                            (mouseover)="hovercardService.OnHover($event,post.profile)"
-                            (click)="hovercardService.OnMouseOut($event);urlViewerService.setProfile(post.profile);"
-                            (mouseleave)="hovercardService.OnMouseOut($event)"
-                            routerLink="/{{post.profile.url}}">{{post.profile.name}} <span
-                                class="url-tag">@{{post.profile.url}}</span></a>
-                    </span>
+                        <span class="username mr-4">
+                            <a class="w-100 d-block text-truncate" (click)="urlViewerService.setProfile(post.profile);"
+                                routerLink="/{{post.profile.url}}">{{post.profile.name}} <span
+                                    class="url-tag">@{{post.profile.url}}</span></a>
+                        </span>
 
-                    <span class="description">
-                        <span class="d-block text-truncate">{{post.profile.title}}</span>
-                        <span class="d-block text-truncate"><a href="javascript:void(0)" title="Everyone"><i
-                                    class="fa fa-globe"></i></a> <a routerLink="#" onclick="return false;"
-                                title="{{post.updated_at.title}}">{{post.updated_at.date}} <i
-                                    *ngIf="post.updated_at.title!=post.created_at.title" i18n>Edited</i></a></span>
-                    </span>
-
+                        <span class="description">
+                            <span class="d-block text-truncate">{{post.profile.title}}</span>
+                            <span class="d-block text-truncate">
+                                <a href="javascript:void(0)" title="{{post.visibility}}">
+                                    <i class="{{VISIBILITY_ICONS[post.visibility]}}"></i></a>
+                                <a href="javascript:void(0)" title="{{post.updated_at.title}}">{{post.updated_at.date}}
+                                    <i *ngIf="post.updated_at.title!=post.created_at.title" i18n>Edited</i></a></span>
+                        </span>
+                    </ng-container>
                 </div>
             </div>
 

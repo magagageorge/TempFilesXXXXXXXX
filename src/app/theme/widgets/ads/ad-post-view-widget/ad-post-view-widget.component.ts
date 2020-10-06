@@ -6,6 +6,7 @@ import { AdCompaign } from '@app/ads-manager/models/ad-compaign';
 import { ShowAdContent } from '@app/models/ads/ad-models';
 import { LinkProcessingService } from '@app/services/link-processing.service';
 import { ShowAdsService } from '@app/services/show-ads.service';
+import { UrlViewerService } from '@app/services/url-viewer.service';
 
 @Component({
   selector: 'app-ad-post-view-widget',
@@ -18,7 +19,7 @@ export class ViewAdPostWidgetComponent implements OnInit, AfterViewInit {
   AdPostContainer: ElementRef;
   @Input() ad_content: ShowAdContent;
   AdPostContainerWidth: number;
-  constructor(public showAdService: ShowAdsService, public imageIconsService: ImageIconsService, public linkProcessingService: LinkProcessingService) { }
+  constructor(public showAdService: ShowAdsService,public urlViewerService:UrlViewerService, public imageIconsService: ImageIconsService, public linkProcessingService: LinkProcessingService) { }
 
   ngOnInit() {
   }

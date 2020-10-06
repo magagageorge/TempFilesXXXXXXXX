@@ -37,7 +37,6 @@
     "angularx-social-login": "^1.2.6",
     "bootstrap": "^4.3.1",
     "chart.js": "^2.5.0",
-    "cordova-android": "^9.0.0",
     "cordova-browser": "^6.0.0",
     "cordova-plugin-device": "^2.0.2",
     "core-js": "^2.6.2",

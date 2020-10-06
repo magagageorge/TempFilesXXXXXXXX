@@ -1,0 +1,58 @@
+<!-- Navbar -->
+<nav class="navbar navbar-page-nav m-0 w-100 p-0">
+    <ul class="nav navbar-nav nav-flex-icons container-fluid d-inline-flex justify-content-start p-0 m-0">
+      <li class="nav-item d-inline-flex" [class.active]="urlViewerService.VIEWER_URL_PAGE==''">
+        <a routerLink="/{{urlViewerService.VIEWER_URL}}" class="nav-link waves-effect waves-light w-100 text-center">
+          <span class="fa fa-clock-o m-1"></span>
+          <span class="clearfix font-weight-bold">Home</span>
+        </a>
+      </li>
+      <li class="nav-item d-none" [class.active]="urlViewerService.VIEWER_URL_PAGE=='about'">
+        <a routerLink="/{{urlViewerService.VIEWER_URL}}/about"
+          class="nav-link waves-effect waves-light w-100 text-center">
+          <span class="fa fa-user-o m-1"></span>
+          <span class="clearfix font-weight-bold">About </span>
+        </a>
+      </li>
+      <li class="nav-item d-none" [class.active]="urlViewerService.VIEWER_URL_PAGE=='products'">
+        <a routerLink="/{{urlViewerService.VIEWER_URL}}/products"
+          class="nav-link waves-effect waves-light w-100 text-center">
+          <span class="fa fa-user-o m-1"></span>
+          <span class="clearfix font-weight-bold">Products </span>
+        </a>
+      </li>      
+      <li class="nav-item d-none" [class.active]="urlViewerService.VIEWER_URL_PAGE=='services'">
+        <a routerLink="/{{urlViewerService.VIEWER_URL}}/services"
+          class="nav-link waves-effect waves-light w-100 text-center">
+          <span class="fa fa-user-o m-1"></span>
+          <span class="clearfix font-weight-bold">Services </span>
+        </a>
+      </li>
+      <li class="nav-item d-none" [class.active]="urlViewerService.VIEWER_URL_PAGE=='shop'">
+        <a routerLink="/{{urlViewerService.VIEWER_URL}}/shop"
+          class="nav-link waves-effect waves-light w-100 text-center">
+          <span class="fa fa-user-o m-1"></span>
+          <span class="clearfix font-weight-bold">Shop </span>
+        </a>
+      </li>
+      <li class="nav-item d-inline-flex" [class.active]="urlViewerService.VIEWER_URL_PAGE=='photos'">
+        <a routerLink="/{{urlViewerService.VIEWER_URL}}/photos"
+          class="nav-link waves-effect waves-light w-100 text-center">
+          <span class="fa fa-image m-1"></span>
+          <span class="clearfix font-weight-bold">Photos </span>
+        </a>
+      </li>
+      <li class="nav-item d-none" [class.active]="urlViewerService.VIEWER_URL_PAGE=='videos'">
+        <a routerLink="/{{urlViewerService.VIEWER_URL}}/videos"
+          class="nav-link waves-effect waves-light w-100 text-center">
+          <span class="fa fa-video m-1"></span>
+          <span class="clearfix font-weight-bold">Videos </span>
+        </a>
+      </li>
+      <li class="nav-item d-none">
+        <span class="nav-link waves-effect waves-light w-100 text-center">
+          <span class="clearfix font-weight-bold">More.. </span>
+        </span>
+      </li>
+    </ul>
+  </nav>

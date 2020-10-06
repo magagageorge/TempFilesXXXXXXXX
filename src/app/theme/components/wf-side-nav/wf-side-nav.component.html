@@ -1,20 +1,82 @@
-        <!-- Sidebar navigation -->
-        <div class="d-block w-100">
-        <ul  class="list-group list-group-flush">
-            <li class="list-group-item  p-1">
-              <a routerLink="/{{profileService.MYPROFILE.url}}"  (click)="urlViewerService.setProfile(myProfile);" class="w-100">
-                <img src="{{profileService.MYPROFILE.avatar.face}}" class="rounded-circle z-depth-0" style="width:50px;height:50px;">
-                 <span class="px-2">{{profileService.MYPROFILE.name}}</span>
-              </a>
-            </li>         
-            <li class="list-group-item p-1 bg-gray">Help & Settings</li>
-            <li class="list-group-item"><a routerLink="/settings"><i class="fa fa-gear"></i> Settings</a></li>          
-            <li class="list-group-item"><a routerLink="/tos" class="waves-effect waves-light">Terms of Service</a></li>
-            <li class="list-group-item d-none"><a routerLink="/privacy" class="waves-effect waves-light">Privacy Policy</a></li>			
-            <li class="list-group-item"><a routerLink="/logout" class="waves-effect waves-light">Log Out</a></li>		            			 
-        </ul>
-        <div class="p-2">
-            <strong>Woorbi &copy; 2019</strong>
-        </div>	
-      </div>
-      <!--/. Sidebar navigation -->
+<!-- Sidebar navigation -->
+<div class="d-block w-100">
+
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item  p-1">
+      <a routerLink="/{{profileService.MYPROFILE.url}}" (click)="urlViewerService.setProfile(myProfile);" class="w-100">
+        <img src="{{profileService.MYPROFILE.avatar.face}}" class="rounded-circle z-depth-0"
+          style="width:50px;height:50px;">
+        <span class="px-2">{{profileService.MYPROFILE.name}}</span>
+      </a>
+    </li>
+
+
+
+    <ng-container *ngIf="pageService.loading_my_pages==false">
+      <li class="list-group-item p-1 bg-transparent">
+        <span class="font-weight-bold wb-font-size-110">Pages</span>
+
+        <ng-container *ngIf="pageService.MYPAGES.length>0">
+          <span>&nbsp;</span>
+          <span class="badge badge-pill badge-primary shadow-none">{{pageService.MYPAGES.length}}</span>
+        </ng-container>
+      </li>
+      <ng-container *ngIf="pageService.MYPAGES.length>0">
+        <ng-container *ngFor="let mypage of pageService.MYPAGES;let i=index">
+          <li *ngIf="i<show_n_pages" class="list-group-item">
+            <a routerLink="/{{mypage.url}}" (click)="urlViewerService.setPage(mypage)"
+              class="p-0 m-0 text-decoration-none" style="text-decoration: none;">
+              <div class="row p-0 m-0">
+                <div class="col-2 p-0">
+                  <ng-container *ngIf="mypage.picture!=null">
+                    <img style="max-height:30px;" src="{{mypage.picture.face}}"
+                      class="img-fluid rounded-circle z-depth-0 m-0">
+                  </ng-container>
+                </div>
+                <div class="col-10 p-0 d-flex align-items-center">
+                  <div class="d-inline-block w-100 m-0 p-0 font-weight-bold text-truncate">
+                    {{mypage.name}}
+                  </div>
+                </div>
+              </div>
+            </a>
+          </li>
+        </ng-container>
+
+        <ng-container *ngIf="IsShowAllPage">
+          <li class="list-group-item">
+            <div class="d-block w-100 p-0">
+              <a routerLink="/pages"
+                class="font-weight-bold text-primary w-100 d-flex justify-content-center align-items-center ">See
+                all Pages</a>
+            </div>
+          </li>
+        </ng-container>
+
+      </ng-container>
+      <ng-container *ngIf="pageService.MYPAGES.length<=4">
+        <li class="list-group-item">
+          <div class="w-100 d-flex justify-content-center p-0">
+            <button (click)="pageService.createPageOnFly()"
+              class="btn btn-sm btn-rounded btn-outline-primary shadow-none">
+              <span class="fa fa-plus-circle"></span>
+              <span>&nbsp;</span>
+              <span>Create New Page</span>
+            </button>
+          </div>
+        </li>
+      </ng-container>
+    </ng-container>
+
+
+    <li class="list-group-item p-1 bg-transparent">Help & Settings</li>
+    <li class="list-group-item"><a routerLink="/settings"><i class="fa fa-gear"></i> Settings</a></li>
+    <li class="list-group-item"><a routerLink="/tos" class="waves-effect waves-light">Terms of Service</a></li>
+    <li class="list-group-item d-none"><a routerLink="/privacy" class="waves-effect waves-light">Privacy Policy</a></li>
+    <li class="list-group-item"><a routerLink="/logout" class="waves-effect waves-light">Log Out</a></li>
+  </ul>
+  <div class="p-2">
+    <strong>Woorbi &copy; 2020</strong>
+  </div>
+</div>
+<!--/. Sidebar navigation -->

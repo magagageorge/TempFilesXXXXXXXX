@@ -1,81 +1,117 @@
-<div class="card windo-post-card" id="feed_item_{{feed.id}}">
+<div class="card windo-post-card mx-0" id="feed_item_{{feed.id}}">
     <ng-container *ngIf="feed.hidden_post!=true">
         <div class="card-header with-border p-2">
             <div class="mr-4 d-block text-truncate" *ngIf="feed.post_type!='STATUS_UPDATE'"
-                style="font-size:95%;font-style:italic;padding-bottom:5px;margin-top:0px;">
-                <a routerLink="/{{feed.profile.url}}"
-                    (click)="hovercardService.OnMouseOut($event);urlViewerService.setProfile(feed.profile);">{{feed.profile.name}}</a>
-                <ng-container *ngIf="feed.post_type=='PROFILE_COVER'"> <span> updated profile
-                        cover</span>
+                style="font-size:95%;padding-bottom:5px;margin-top:0px;">
+                <ng-container *ngIf="feed.page!=null">
+                    <a routerLink="/{{feed.page.url}}"
+                        (click)="hovercardService.OnMouseOut($event);urlViewerService.setPage(feed.page);" class="woorbi-page-link">{{feed.page.name}}</a>
+                    <ng-container *ngIf="feed.post_type=='PAGE_COVER'"> <span> updated their page
+                            cover</span>
+                    </ng-container>
+                    <ng-container *ngIf="feed.post_type=='PAGE_PICTURE'"> <span> updated their page
+                            picture</span>
+                    </ng-container>
                 </ng-container>
-                <ng-container *ngIf="feed.post_type=='PROFILE_PHOTO'"> <span> updated profile
-                        picture</span>
+                <ng-container *ngIf="feed.page==null && feed.profile!=null">
+                    <a routerLink="/{{feed.profile.url}}"
+                        (click)="hovercardService.OnMouseOut($event);urlViewerService.setProfile(feed.profile);" class="woorbi-page-link">{{feed.profile.name}}</a>
+                    <ng-container *ngIf="feed.post_type=='PROFILE_COVER'"> <span> updated profile
+                            cover</span>
+                    </ng-container>
+                    <ng-container *ngIf="feed.post_type=='PROFILE_PHOTO'"> <span> updated profile
+                            picture</span>
+                    </ng-container>
                 </ng-container>
                 <hr style="margin-bottom:5px;margin-top:5px;">
             </div>
 
             <div class="user-block">
-                <a routerLink="/{{feed.profile.url}}"
-                    (mouseover)="hovercardService.OnHover($event,feed.profile)"
-                    (click)="hovercardService.OnMouseOut($event);urlViewerService.setProfile(feed.profile);"
-                    (mouseleave)="hovercardService.OnMouseOut($event)"><img
-                        class="rounded-circle img-fluid" src="{{feed.profile.avatar.face}}" alt=""></a>
-
-                <span class="username mr-4">
-                    <a class="w-100 d-block text-truncate"
-                        (mouseover)="hovercardService.OnHover($event,feed.profile)"
+                <ng-container *ngIf="feed.page!=null">
+                    <a routerLink="/{{feed.page.url}}" (click)="urlViewerService.setPage(feed.page);"><img
+                            class="rounded-circle img-fluid" src="{{feed.page.picture.face}}" alt=""></a>
+                    <span class="username mr-4">
+                        <a class="w-100 d-block text-truncate" (click)="urlViewerService.setPage(feed.page);"
+                            routerLink="/{{feed.page.url}}">{{feed.page.name}} <span
+                                class="url-tag">@{{feed.page.url}}</span></a>
+                    </span>
+                    <span class="description">
+                        <span class="d-block text-truncate">{{feed.page.category.category}}</span>
+                        <span class="d-block text-truncate">
+                            <a href="javascript:void(0)" title="{{feed.visibility}}">
+                                <i class="{{VISIBILITY_ICONS[feed.visibility]}}"></i></a>
+                            <a href="javascript:void(0)" title="{{feed.updated_at.title}}">
+                                {{feed.updated_at.date}}
+                                <i *ngIf="feed.updated_at.title!=feed.created_at.title" i18n>Edited</i>
+                            </a>
+                        </span>
+                    </span>
+                </ng-container>
+                <ng-container *ngIf="feed.page==null && feed.profile!=null">
+                    <a routerLink="/{{feed.profile.url}}" (mouseover)="hovercardService.OnHover($event,feed.profile)"
                         (click)="hovercardService.OnMouseOut($event);urlViewerService.setProfile(feed.profile);"
-                        (mouseleave)="hovercardService.OnMouseOut($event)"
-                        routerLink="/{{feed.profile.url}}">{{feed.profile.name}} <span
-                            class="url-tag">@{{feed.profile.url}}</span></a>
-                </span>
+                        (mouseleave)="hovercardService.OnMouseOut($event)"><img class="rounded-circle img-fluid"
+                            src="{{feed.profile.avatar.face}}" alt=""></a>
 
-                <span class="description">
-                    <span class="d-block text-truncate">{{feed.profile.title}}</span>
-                    <span class="d-block text-truncate"><a href="javascript:void(0)" title="Everyone"><i
-                                class="fa fa-globe"></i></a> <a routerLink="#" onclick="return false;"
-                            title="{{feed.updated_at.title}}">{{feed.updated_at.date}} <i
-                                *ngIf="feed.updated_at.title!=feed.created_at.title"
-                                i18n>Edited</i></a></span>
-                </span>
+                    <span class="username mr-4">
+                        <a class="w-100 d-block text-truncate"
+                            (mouseover)="hovercardService.OnHover($event,feed.profile)"
+                            (click)="hovercardService.OnMouseOut($event);urlViewerService.setProfile(feed.profile);"
+                            (mouseleave)="hovercardService.OnMouseOut($event)"
+                            routerLink="/{{feed.profile.url}}">{{feed.profile.name}} <span
+                                class="url-tag">@{{feed.profile.url}}</span></a>
+                    </span>
 
+                    <span class="description">
+                        <span class="d-block text-truncate">{{feed.profile.title}}</span>
+                        <span class="d-block text-truncate">
+                            <a href="javascript:void(0)" title="{{feed.visibility}}">
+                                <i class="{{VISIBILITY_ICONS[feed.visibility]}}"></i></a>
+                            <a href="javascript:void(0)" title="{{feed.updated_at.title}}">{{feed.updated_at.date}} <i
+                                    *ngIf="feed.updated_at.title!=feed.created_at.title" i18n>Edited</i></a></span>
+                    </span>
+                </ng-container>
             </div>
 
             <div class="card-tools">
                 <div class="dropdown btn-group" ngbDropdown placement="bottom-right">
                     <a class="px-2" ngbDropdownToggle></a>
-                    <ul class="dropdown-menu  dropdown-menu-left" ngbDropdownMenu
-                        style="position:absolute;left:10px;">
+                    <ul class="dropdown-menu  dropdown-menu-left" ngbDropdownMenu style="position:absolute;left:10px;">
                         <li *ngIf="feed.my_post==true && feed.post_type=='STATUS_UPDATE'" class="dropdown-item"><a
-                                href="javascript:void(0);"
-                                (click)="postingService.setEdititablePost(feed,feed)"><span
+                                href="javascript:void(0);" (click)="postingService.setEdititablePost(feed,feed)"><span
                                     class="fa fa-edit"></span><span>&nbsp;</span>
                                 <ng-container i18n>Edit</ng-container>
                             </a></li>
-                        <li *ngIf="feed.my_post==true" class="dropdown-item"><a
-                                href="javascript:void(0);"
+                        <li *ngIf="feed.my_post==true" class="dropdown-item"><a href="javascript:void(0);"
                                 (click)="confirmDeletePost(feed.id)"><span
                                     class="fa fa-trash"></span><span>&nbsp;</span>
                                 <ng-container i18n>Delete</ng-container>
                             </a></li>
 
-                        <li *ngIf="feed.my_post!=true" class="dropdown-item"><a
-                                href="javascript:void(0);"
+                        <li *ngIf="feed.my_post!=true" class="dropdown-item"><a href="javascript:void(0);"
                                 (click)="reportPostContent(feed.id)"><span
                                     class="fa fa-flag-o"></span><span>&nbsp;</span>
                                 <ng-container i18n>Report this</ng-container>
                             </a></li>
-                        <li *ngIf="feed.my_post!=true" class="dropdown-item"><a
-                                href="javascript:void(0);" (click)="feedService.hidePost(feed.id)"><span
+                        <li *ngIf="feed.my_post!=true" class="dropdown-item"><a href="javascript:void(0);"
+                                (click)="feedService.hidePost(feed.id)"><span
                                     class="fa fa-eye-slash"></span><span>&nbsp;</span>
                                 <ng-container i18n>Hide this Post</ng-container>
                             </a></li>
-                        <li *ngIf="feed.my_post!=true" class="dropdown-item"><a
-                                href="javascript:void(0);"
-                                (click)="reportPostContent(feed.id)"><span
-                                    class="fa fa-flag-o"></span><span>&nbsp;</span>
-                                <ng-container i18n>Unfollow</ng-container> {{feed.profile.name}}
-                            </a></li>
+                        <li *ngIf="feed.my_post!=true" class="dropdown-item">
+                            <a href="javascript:void(0);" (click)="reportPostContent(feed.id)">
+                                <span class="fa fa-flag-o"></span>
+                                <span>&nbsp;</span>
+                                <ng-container i18n>Unfollow</ng-container>
+                                <ng-container *ngIf="feed.page!=null">
+                                    {{feed.page.name}}
+                                </ng-container>
+                                <ng-container *ngIf="feed.page==null && feed.profile!=null">
+                                    {{feed.profile.name}}
+                                </ng-container>
+
+                            </a>
+                        </li>
 
                     </ul>
                 </div>
@@ -84,8 +120,7 @@
 
         <div class="card-body" style="overflow:hidden;">
             <ng-container *ngIf="feed.message!=''">
-                <p [innerHTML]="feed.message | wfLinkify" class="p-2 feed-text-content"
-                    id="post-content-container"></p>
+                <p [innerHTML]="feed.message | wfLinkify" class="p-2 feed-text-content" id="post-content-container"></p>
             </ng-container>
 
             <ng-container *ngIf="feed.original_post!=null">
@@ -97,8 +132,8 @@
             <div *ngIf="feed.images && feed.images.length>0" class="w-100"
                 style="padding-left:-1px;padding-right:-1px;">
                 <app-feed-image-view-widget [container_width]="container_width"
-                    [container_height]="max_post_images_height" [feedPost]="feed"
-                    [IMAGES]="feed.images"></app-feed-image-view-widget>
+                    [container_height]="max_post_images_height" [feedPost]="feed" [IMAGES]="feed.images">
+                </app-feed-image-view-widget>
             </div>
             <div *ngIf="feed.links.length" class="w-100">
                 <div *ngFor="let link of feed.links" class="w-100">
@@ -107,21 +142,17 @@
 
             </div>
 
-            <div *ngIf="feed.no_comments>0 || feed.no_likes>0" class="row"
-                style="padding:0px;margin:0px;">
+            <div *ngIf="feed.no_comments>0 || feed.no_likes>0" class="row" style="padding:0px;margin:0px;">
                 <div class="col-md-12">
                     <span *ngIf="feed.no_likes>0" class="post-statistics woorbi-post-statistics">
-                        <a href="javascript:void(0);"
-                            (click)="showPostLikes(feed.id,feed.no_likes)"
+                        <a href="javascript:void(0);" (click)="showPostLikes(feed.id,feed.no_likes)"
                             class="show-post-no-likes windo-list-tooltip tooltipstered"><span
-                                *ngIf="feed.no_likes>0">{{feed.no_likes}}</span> <span
-                                i18n>Loves</span></a>
+                                *ngIf="feed.no_likes>0">{{feed.no_likes}}</span> <span i18n>Loves</span></a>
                     </span>
                     <span>&nbsp;&nbsp;</span>
                     <span *ngIf="feed.no_comments>0" class="post-statistics woorbi-post-statistics">
                         <a href="javascript:void(0);" class="hidden show-post-no-comments"><span
-                                *ngIf="feed.no_comments>0">{{feed.no_comments}}</span> <span
-                                i18n>Comments</span></a>
+                                *ngIf="feed.no_comments>0">{{feed.no_comments}}</span> <span i18n>Comments</span></a>
                     </span>
                 </div>
             </div>
@@ -137,40 +168,32 @@
                     <div class="col-4 text-center px-0">
                         <span style="cursor: pointer;" *ngIf="feed.i_like==true"
                             (click)="feedService.feedLike(feed,'unlike')" class="btn-liked"><span
-                                class="fa fa-heart"></span> <span>&nbsp;</span><span
-                                i18n>Love</span></span><span style="cursor: pointer;"
-                            *ngIf="feed.i_like!=true" (click)="feedService.feedLike(feed,'like')"><span
-                                class="fa fa-heart-o"></span><span>&nbsp;</span><span
-                                i18n>Love</span></span>
+                                class="fa fa-heart"></span> <span>&nbsp;</span><span i18n>Love</span></span><span
+                            style="cursor: pointer;" *ngIf="feed.i_like!=true"
+                            (click)="feedService.feedLike(feed,'like')"><span
+                                class="fa fa-heart-o"></span><span>&nbsp;</span><span i18n>Love</span></span>
                     </div>
 
                     <div class="col-4 text-center px-0">
-                        <a href="javascript:void(0);" data-guid="317"
-                            (click)="commentService.setToCommentPost(feed)"><i
-                                class="fa fa-comment-o"></i><span>&nbsp;</span><span
-                                i18n>Comment</span></a>
+                        <a href="javascript:void(0);" data-guid="317" (click)="commentService.setToCommentPost(feed)"><i
+                                class="fa fa-comment-o"></i><span>&nbsp;</span><span i18n>Comment</span></a>
                     </div>
 
                     <div class="col-4 text-center px-0">
-                        <a href="javascript:void(0);" (click)="postingService.shareThisPost(feed)"
-                            data-guid="317">
-                            <img [src]="imageIconsService.shareIcon"
-                                class="share-img-icon"><span>&nbsp;</span>
+                        <a href="javascript:void(0);" (click)="postingService.shareThisPost(feed)" data-guid="317">
+                            <img [src]="imageIconsService.shareIcon" class="share-img-icon"><span>&nbsp;</span>
                             <span i18n>Share</span></a>
                     </div>
 
                 </div>
-                <app-feed-comments-widget [feedId]="feed.id" [feed]="feed"
-                    [feedComments]="feed.comments">
+                <app-feed-comments-widget [feedId]="feed.id" [feed]="feed" [feedComments]="feed.comments">
                 </app-feed-comments-widget>
                 <div class="d-block w-100 px-2">
                     <div *ngIf="feed.loading_comments" class="w-100 align-middle py-2 text-center">
                         <span class="fa fa-circle-o-notch fa-spin"></span> </div>
-                    <div *ngIf="feed.no_comments > feed.comments.length"
-                        (click)="commentService.viewMoreComments(feed)"
+                    <div *ngIf="feed.no_comments > feed.comments.length" (click)="commentService.viewMoreComments(feed)"
                         class="wf-link w-50 color-primary pull-left  py-2" i18n>View more comments</div>
-                    <div *ngIf="feed.comments.length > 5"
-                        (click)="commentService.setToCommentPost(feed)"
+                    <div *ngIf="feed.comments.length > 5" (click)="commentService.setToCommentPost(feed)"
                         class="wf-link w-50 color-primary pull-right text-right py-2" i18n>Write Comment
                     </div>
                 </div>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProfilePhotosService } from '@app/services/profile-photos.service';
+import { ProfilePhotosService } from '../../services/profile-photos.service';
 
 @Component({
   selector: 'app-profile-images-overlay-view',

@@ -2,8 +2,8 @@ import { Component, OnInit, Input, ViewChild, ElementRef, HostListener, AfterVie
 import { UrlViewerService } from '@app/services/url-viewer.service';
 import { ConnectionsService } from '@app/services/connections.service';
 import { EditProfileService } from '@app/services/edit-profile.service';
-import { ProfileViewerService } from '@app/services/profile-viewer.service';
-import { ProfilePhotosService } from '@app/services/profile-photos.service';
+import { ProfilePhotosService } from '../../services/profile-photos.service';
+import { ProfileViewerService } from '../../services/profile-viewer.service';
 
 @Component({
   selector: 'app-profile-header',

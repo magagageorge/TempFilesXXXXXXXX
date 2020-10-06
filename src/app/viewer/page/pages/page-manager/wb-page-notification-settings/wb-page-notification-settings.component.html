@@ -1,0 +1,62 @@
+<div class="card p-0">
+    <div class="card-body p-0">
+
+        <ng-container *ngIf="loading_settings==false">
+            <form [formGroup]="settings_form">
+                <div class="row mx-0">
+                    <div class="col-12 col-md-3 col-lg-3 col-xl-3">
+                        <span>On Woorbi</span>
+                    </div>
+                    <div class="col-12">
+                        <div class="d-block">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <div class="custom-control custom-radio custom-control-inline pull-left w-100">
+                                        <input type="radio" class="custom-control-input" formControlName="notify"
+                                            name="notify" [(ngModel)]="settingsModel.notify"
+                                            [checked]="settingsModel.notify===Instantly" id="notify_Instantly"
+                                            name="notify" value="Instantly">
+                                        <label class="custom-control-label" for="notify_Instantly" i18n>Get a
+                                            notification each time there is activity on your Page or an
+                                            important Page update.</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline pull-left w-100">
+                                        <input type="radio" class="custom-control-input" formControlName="notify"
+                                            name="notify" [(ngModel)]="settingsModel.notify"
+                                            [checked]="settingsModel.notify=='Intervals'" id="notify_Intervals"
+                                            name="notify" value="Intervals">
+                                        <label class="custom-control-label" for="notify_Intervals" i18n>Get one
+                                            notification every 12–24 hours on all activity and updates on your
+                                            Page during that time.
+                                        </label>
+                                    </div>
+
+                                    <div class="custom-control custom-radio custom-control-inline pull-left w-100">
+                                        <input type="radio" class="custom-control-input" formControlName="notify"
+                                            name="notify" [(ngModel)]="settingsModel.notify"
+                                            [checked]="settingsModel.notify=='Off'" id="notify_Off" name="notify"
+                                            value="Off">
+                                        <label class="custom-control-label" for="notify_Off" i18n>Off</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </ng-container>
+        <ng-container *ngIf="loading_settings==true">
+            <div clas="row mx-0">
+                <div class="col-12 d-flex justify-content-center align-items-center">
+                    <app-loading-circles></app-loading-circles>
+                </div>
+                <div class="col-12 d-flex justify-content-center align-items-center">
+                    <span>Loading...</span>
+                </div>
+            </div>
+        </ng-container>
+
+
+    </div>
+</div>

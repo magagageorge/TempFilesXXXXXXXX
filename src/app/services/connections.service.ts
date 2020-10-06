@@ -438,17 +438,6 @@ export class ConnectionsService {
       });
     });
 
-    this.feedService.profileFeedService.feeds.forEach((feed: Feed) => {
-      if (feed.profile.user_id == profileId) {
-        feed.profile.connectStatus = connectionStatus;
-      }
-      feed.comments.forEach((comment: any) => {
-        if (comment.profile.user_id == profileId) {
-          comment.profile.connectStatus = connectionStatus;
-        }
-      });
-    });
-
   }
 
   searchProfileIN(list: Profile[], profileId: number): Observable<Profile> {

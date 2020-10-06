@@ -1,0 +1,27 @@
+<div class="container-fluid m-0 px-0" style="min-height: 100%;">
+    <div class="row mx-0" style="min-height: 80vh;">
+        <div class="col-12 mx-0 px-0 bg-white">
+            <div class="d-block wb-page-header-container mx-auto">
+                <app-page-header [nav_tab]="menu_tab_name"></app-page-header>
+            </div>
+        </div>
+        <div class="col-12 mx-0 px-0">
+            <div class="d-block wb-page-content-container p-0 mx-auto w-100">
+                <div class="row  p-0 m-0">
+                    <div class="col-12 col-md-5 col-lg-5 col-xl-5 p-0">
+                        <app-page-about-widget></app-page-about-widget>
+                        <div class="d-block d-md-none d-lg-none w-100 p-0 m-0">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-7 col-lg-7 col-xl-7 p-0 pl-md-2 pl-lg-2">
+                        <app-post-form *ngIf="urlviewerService.PPVIEWER.page.my_page" [postingAs]="'Page'"
+                            [page]="urlviewerService.pageSummary"></app-post-form>
+
+                        <app-page-feed-widget></app-page-feed-widget>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

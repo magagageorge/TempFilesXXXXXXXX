@@ -1,0 +1,67 @@
+<div class="card mx-0 p-1">
+    <div class="card-body p-1">
+        <ng-container *ngIf="pageService.loading_my_pages==true">
+            <app-wb-loading-list-widget></app-wb-loading-list-widget>
+        </ng-container>
+        <ng-container *ngIf="pageService.loading_my_pages==false">
+            <div class="w-100 p-1">
+                <span class="font-weight-bold wb-font-size-110">My Pages</span>
+                <ng-container *ngIf="pageService.MYPAGES.length>0">
+                    <span>&nbsp;</span>
+                    <span class="badge badge-pill badge-primary shadow-none">{{pageService.MYPAGES.length}}</span>
+                </ng-container>
+            </div>
+            <ng-container *ngIf="pageService.MYPAGES.length>0">
+                <ul class="list-group list-group-flush">
+                    <ng-container *ngFor="let mypage of pageService.MYPAGES;let i=index">
+                        <li *ngIf="i<show_n_pages" class="list-group-item px-0 py-1 border-none">
+                            <a routerLink="/{{mypage.url}}" (click)="urlViewerService.setPage(mypage)"
+                                class="p-0 m-0 text-decoration-none" style="text-decoration: none;">
+                                <div class="row p-0 m-0">
+                                    <div class="col-2 p-0">
+                                        <ng-container *ngIf="mypage.picture!=null">
+                                            <img style="max-height:30px;" src="{{mypage.picture.face}}"
+                                                class="img-fluid rounded-circle z-depth-0 m-0">
+                                        </ng-container>
+                                    </div>
+                                    <div class="col-10 p-0 d-flex align-items-center">
+                                        <div class="d-inline-block w-100 m-0 p-0 font-weight-bold text-truncate">
+                                            {{mypage.name}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    </ng-container>
+                </ul>
+                <ng-container *ngIf="IsShowMore">
+                    <div class="d-block w-100">
+                        <div (click)="ShowMore()"
+                            class="d-flex justify-content-center  align-items-center w-100 cursor-pointer">
+                            <span class="fa fa-chevron-circle-down"></span><span>&nbsp;</span><span
+                                class="font-weight-bold text-primary">Show more</span>
+                        </div>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="IsShowLess">
+                    <div class="d-block w-100">
+                        <div (click)="ShowLess()"
+                            class="d-flex justify-content-center align-items-center w-100 cursor-pointer">
+                            <span class="fa fa-chevron-circle-up"></span><span>&nbsp;</span><span
+                                class="font-weight-bold text-primary">Show less</span>
+                        </div>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="IsShowAll">
+                    <div class="d-block w-100">
+                        <div class="w-100">
+                            <a routerLink="/pages"
+                                class="font-weight-bold text-primary w-100 d-flex justify-content-center align-items-center ">View
+                                all</a>
+                        </div>
+                    </div>
+                </ng-container>
+            </ng-container>
+        </ng-container>
+    </div>
+</div>

@@ -177,7 +177,7 @@
                                             (ngModelChange)="switchLocation(profileModel.country)" name="country"
                                             class="form-control form-rounded">
                                             <option value="" i18n>-Select Country -</option>
-                                            <option *ngFor="let country of countries" value="{{country.id}}">
+                                            <option *ngFor="let country of utilitiesService.COUNTRIES" value="{{country.id}}">
                                                 {{country.name}}
                                             </option>
                                         </select>

@@ -1,29 +1,30 @@
-.card::-webkit-scrollbar { width: 3 !important }
-
-.post-image-preview-item{
-background-color: silver;
+.card::-webkit-scrollbar {
+    width: 3 !important;
 }
 
+.post-image-preview-item {
+    background-color: silver;
+}
 
-.post-image-preview-item:hover{
+.post-image-preview-item:hover {
     color: #ffffff;
 }
 
-.post-image-preview-item .img-preview-overlay{
+.post-image-preview-item .img-preview-overlay {
     position: absolute;
-    top:0;
+    top: 0;
     bottom: 0;
-    left:0;
-    right:0;
+    left: 0;
+    right: 0;
 }
 
-.post-image-preview-item .img-preview-overlay:hover{
+.post-image-preview-item .img-preview-overlay:hover {
     background-color: #000000;
     opacity: 0.6;
     filter: alpha(opacity=60); /* For IE8 and earlier */
 }
 
-.content-inputs-container{
-    max-height: 70vh;
+.content-inputs-container {
+    max-height: 65vh;
     overflow-y: auto;
 }

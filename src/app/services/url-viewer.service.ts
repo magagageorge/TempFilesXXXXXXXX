@@ -11,10 +11,12 @@ import { Profile } from '@app/models/profile/profile';
 import { PageProfileViewer } from '@app/models/page-profile-viewer';
 import { ProfileViewer } from '@app/models/profile-viewer';
 import { PageViewer } from '@app/models/page-viewer';
-import { ProfileFeedService } from './profile-feed.service';
-import { ProfilePhotosService } from './profile-photos.service';
+import { ProfileFeedService } from '../viewer/profile/services/profile-feed.service';
 import { ProfileConnectionsService } from './profile-connections.service';
 import { Title, Meta } from '@angular/platform-browser';
+import { PageSummary } from '@app/models/page/page.model';
+import { ProfilePhotosService } from '@app/viewer/profile/services/profile-photos.service';
+import { PageFeedService } from '@app/viewer/page/services/page-feed.service';
 
 
 @Injectable({
@@ -40,17 +42,11 @@ export class UrlViewerService {
   VIEWER_URL_PAGE: string = '';
 
   public PPVIEWER: PageProfileViewer = new PageProfileViewer();
-  profileFeedService: ProfileFeedService;
-  profilePhotosService: ProfilePhotosService;
-  profileConnectionsService: ProfileConnectionsService;
 
-  constructor(service: CrudService, profileFeedService: ProfileFeedService, profilePhotosService: ProfilePhotosService, profileConnectionsService: ProfileConnectionsService, @Inject(CRUD_OPTIONS) CRUD_OPTIONS: CrudOptions, router: Router, private title: Title, private meta: Meta) {
+  constructor(service: CrudService, @Inject(CRUD_OPTIONS) CRUD_OPTIONS: CrudOptions, router: Router, private title: Title, private meta: Meta) {
     this.service = service;
     this.crudconfig = CRUD_OPTIONS;
     this.router = router;
-    this.profileFeedService = profileFeedService;
-    this.profilePhotosService = profilePhotosService;
-    this.profileConnectionsService = profileConnectionsService;
   }
 
   /* Load the Page-Profile Details and set it to the viewer*/
@@ -60,23 +56,18 @@ export class UrlViewerService {
       return;
     }
     this.loading_viewer = true;
-    this.VIEWER_URL = url.trim();
-    this.profileFeedService.feeds = [];
-    this.profilePhotosService.feeds = [];
-    this.profilePhotosService.profilePhotos = [];
-    this.profileConnectionsService.CONNECTIONS = [];
-    this.profileFeedService.profile_url = this.VIEWER_URL;
-    this.profilePhotosService.profile_url = this.VIEWER_URL;
-    this.profileConnectionsService.profile_url = this.VIEWER_URL;
-    this.profileFeedService.loadFeed({ url: this.VIEWER_URL, page: 1 });
-    this.profilePhotosService.loadPhotos({ url: this.VIEWER_URL, page: 1 });
-    this.profileConnectionsService.loadConnections({ url: this.VIEWER_URL, page: 1 });
+    this.VIEWER_URL = url.trim();    
     this.getViewer(url).subscribe(view => {
       var results = view.getResultData();
-      if (_this.PPVIEWER.type == '' || (_this.PPVIEWER.type == 'profile' && (_this.PPVIEWER.profile.url == results.profile.url)) || (_this.PPVIEWER.type == 'page' && (_this.PPVIEWER.page.url == results.page.url))) {
+      if (_this.PPVIEWER.type == '' || (_this.PPVIEWER.type == 'profile' && results.profile != null && (_this.PPVIEWER.profile.url == results.profile.url)) || (_this.PPVIEWER.type == 'page' && results.page != null && (_this.PPVIEWER.page.url == results.page.url))) {
         _this.loading_viewer = false;
         _this.PPVIEWER = results as PageProfileViewer;
-        _this.meta.updateTag({ name: 'description', content: _this.PPVIEWER.profile.title });
+        if (_this.PPVIEWER.type == 'profile') {
+          _this.meta.updateTag({ name: 'description', content: _this.PPVIEWER.profile.title });
+        }
+        if (_this.PPVIEWER.type == 'page') {
+          _this.meta.updateTag({ name: 'description', content: _this.PPVIEWER.page.about });
+        }
       }
     });
   }
@@ -113,6 +104,55 @@ export class UrlViewerService {
     this.PPVIEWER.profile.location = profile.location;
     this.PPVIEWER.profile.connectStatus = profile.connectStatus;
     return true;
+  }
+
+  setPage(page: PageSummary) {
+    /* Return and do nothing when a user is trying to browse the same profile page */
+    if (this.PPVIEWER.page != undefined && (page.url == this.PPVIEWER.page.url)) {
+      return false;
+    }
+    this.PPVIEWER = { type: 'page', profile: new ProfileViewer, page: new PageViewer };
+    this.PPVIEWER.profile = null;
+    this.title.setTitle('' + page.name + ' | Woorbi');
+    this.meta.updateTag({ name: 'description', content: page.about });
+    this.PPVIEWER.page.id = page.id;
+    this.PPVIEWER.page.name = page.name;
+    this.PPVIEWER.page.url = page.url;
+    this.PPVIEWER.page.street = page.street;
+    this.PPVIEWER.page.address = page.address;
+    this.PPVIEWER.page.about = page.about;
+    this.PPVIEWER.page.phone = page.phone;
+    this.PPVIEWER.page.my_page = page.my_page;
+    this.PPVIEWER.page.picture = page.picture;
+    this.PPVIEWER.page.cover = page.cover;
+    this.PPVIEWER.page.category = page.category;
+    this.PPVIEWER.page.website = page.website;
+    this.PPVIEWER.page.email = page.email;
+    this.PPVIEWER.page.no_followers = page.no_followers;
+    this.PPVIEWER.page.i_follow = page.i_follow;
+    return true;
+  }
+
+  get pageSummary(): PageSummary {
+    return {
+      id: this.PPVIEWER.page.id,
+      name: this.PPVIEWER.page.name,
+      url: this.PPVIEWER.page.url,
+      street: this.PPVIEWER.page.street,
+      address: this.PPVIEWER.page.address,
+      about: this.PPVIEWER.page.about,
+      phone: this.PPVIEWER.page.phone,
+      my_page: this.PPVIEWER.page.my_page,
+      picture: this.PPVIEWER.page.picture,
+      cover: this.PPVIEWER.page.cover,
+      category: this.PPVIEWER.page.category,
+      website: this.PPVIEWER.page.website,
+      email: this.PPVIEWER.page.email,
+      mobile: this.PPVIEWER.page.mobile,
+      location:this.PPVIEWER.page.location,
+      no_followers:this.PPVIEWER.page.no_followers,
+      i_follow:this.PPVIEWER.page.i_follow
+    };
   }
 
   getConfigValue(key: string): any {

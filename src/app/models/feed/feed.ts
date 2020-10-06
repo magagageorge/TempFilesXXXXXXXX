@@ -2,6 +2,7 @@ import { WindoTime } from "@app/models/windo-time";
 import { Profile } from "@models/profile/profile";
 import { FeedLink } from "../feed-link";
 import { PreviewPicture } from "@app/services/posting.service";
+import { PageSummary } from "../page/page.model";
 
 export class PostImageData{
     url:string;
@@ -20,7 +21,7 @@ export class PostImage{
 
 
 export class Feed {
-    id:string;
+    id:number;
     original_id:string;
     message_2trash:string;
     message:string;
@@ -33,6 +34,7 @@ export class Feed {
     post_type:string;
     comments:Comment[];
     profile:Profile;
+    page:PageSummary;
     images:PostImage[];
     links:FeedLink[];
     original_post:Feed;

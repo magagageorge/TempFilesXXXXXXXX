@@ -1,0 +1,34 @@
+<ng-container *ngIf="editPageService.editMode.inEdit==true && editPageService.editMode.currentEditing!=''">
+    <div class="faint-body-overlay d-block">
+        <div class="container-fluid" style="padding:0px;">
+            <div style="position: absolute;top:0px;bottom:0px;left:0px;right:0px;">
+                <div class="d-block h-100 w-100 m-0 p-0">
+                    <ng-container *ngIf="editPageService.editMode.currentEditing=='pageCover'">
+                        <ng-container *ngIf="editPageService.editMode.coverEdit.selectOptions==true">
+                            <app-edit-page-cover-options-widget></app-edit-page-cover-options-widget>
+                        </ng-container>
+                        <ng-container
+                            *ngIf="editPageService.editMode.coverEdit.selectOptions==false && (editPageService.editMode.coverEdit.selectedOption=='UploadCover' || editPageService.editMode.coverEdit.selectedOption=='RepositionCover') && editPageService.cover_preview_info.file!=null">
+                            <app-crop-page-cover-widget></app-crop-page-cover-widget>
+                        </ng-container>
+                    </ng-container> 
+
+                    <ng-container *ngIf="editPageService.editMode.currentEditing=='pagePicture'">
+                        <ng-container *ngIf="editPageService.editMode.pictureEdit.selectOptions==true">
+                            <app-edit-page-picture-options-widget></app-edit-page-picture-options-widget>
+                        </ng-container>
+                        <ng-container
+                            *ngIf="editPageService.editMode.pictureEdit.selectOptions==false && (editPageService.editMode.pictureEdit.selectedOption=='UploadPicture' || editPageService.editMode.pictureEdit.selectedOption=='RepositionPicture') && editPageService.picture_preview_info.file!=null">
+                            <app-crop-page-picture-widget></app-crop-page-picture-widget>
+                        </ng-container>
+                    </ng-container>
+
+                    <ng-container *ngIf="editPageService.editMode.currentEditing=='PageInfo'">
+                        <app-edit-page-info-widget></app-edit-page-info-widget>
+                    </ng-container>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>

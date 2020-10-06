@@ -1,0 +1,58 @@
+<div class="d-block p-0 m-0">
+  <div class="card m-0 p-0">
+    <div class="card-body m-0 p-0 w-100" #pageCoverElm>
+      <div class="d-block wf-page-hearder" [ngStyle]="{'height':''+pageViewerService.pageCoverHeaderHeight+'px'}">
+        <div [ngStyle]="{'height':''+pageViewerService.pageCoverHeight+'px'}" class="d-block wf-page-cover">
+          <div class="d-block w-100 h-100 p-0 m-0"
+            (click)="pagePhotoService.viewCoverInModal(urlviewerService.PPVIEWER.page.cover)">
+            <img src="{{urlviewerService.PPVIEWER.page.cover.picture}}" class="img-fluid w-100 z-depth-2"
+              style="overflow:hidden;">
+          </div>
+          <div *ngIf="urlviewerService.PPVIEWER.page.my_page==true" class="d-block page-cover-upload"
+            (click)="editPageService.editCover()" title="Update Cover Photo" style="cursor: pointer;">
+            <span class="d-inline-block text-default"><span class="fa fa-camera"></span></span>
+          </div>
+        </div>
+        <div class="wf-page-image-container">
+          <div class="d-block wf-page-img  w-100 h-100 m-0 p-0">
+            <div class="d-block w-100 h-100 m-0 p-0"
+              (click)="pagePhotoService.viewAvatarInModal(urlviewerService.PPVIEWER.page.picture)">
+              <img src="{{urlviewerService.PPVIEWER.page.picture.face}}" class="img-fluid rounded-circle img-thumbnail">
+            </div>
+            <div *ngIf="urlviewerService.PPVIEWER.page.my_page==true" class="d-block page-avatar-upload"
+              (click)="editPageService.editPicture()" title="Update Page Photo" style="cursor: pointer;">
+              <span class="d-inline-block text-default"><span class="fa fa-camera"></span></span>
+            </div>
+          </div>
+        </div>
+        <div class="wf-page-title-buttons p-0">
+          <div class="row m-0 p-0 h-100 w-100">
+            <div class="col-12 col-md-8 col-lg-8 col-xl-8 wf-page-title-large">
+              <app-page-title-widget></app-page-title-widget>
+            </div>
+            <div class="col-12 col-md-4 col-lg-4 col-xl-4 wf-page-buttons d-flex align-items-center justify-content-end">
+              <app-page-actions-buttons-widget [page]='urlviewerService.pageSummary'></app-page-actions-buttons-widget>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wf-page-title-buttons-small p-2">
+        <div class="d-block w-100">
+          <div class="row m-0 p-0">
+            <div class="col-12 d-flex align-items-center justify-content-start">
+              <app-page-title-widget></app-page-title-widget>
+            </div>
+            <div class="col-12 col-md-6 col-lg-6 d-none">
+              <app-page-actions-buttons-widget [page]='urlviewerService.pageSummary'></app-page-actions-buttons-widget>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-block w-100 mt-1">
+        <app-page-nav-widget [tab]="nav_tab"></app-page-nav-widget>
+      </div>
+    </div>
+  </div>
+</div>

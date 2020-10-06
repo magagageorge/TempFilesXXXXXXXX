@@ -1,0 +1,152 @@
+<ng-container
+    *ngIf="(urlviwerService.PPVIEWER.page.about!='' && urlviwerService.PPVIEWER.page.about!=null) || urlviwerService.PPVIEWER.page.my_page!=false">
+    <div class="card p-1">
+        <div class="card-body p-0">
+            <div class="d-block w-100">
+                <div class="row my-2 mx-0">
+                    <div class="col-10">
+                        <h5>About</h5>
+                    </div>
+                    <div class="col-2 pull-right">
+                        <span *ngIf="urlviwerService.PPVIEWER.page.my_page!=false" class="pull-right"
+                            style="font-size: 150%;cursor: pointer;" (click)="editPageService.EditPageInfo()">
+                            <span class="fa fa-pencil"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="d-block  w-100">
+                <div *ngIf="urlviwerService.loading_viewer!=false || (urlviwerService.PPVIEWER.page.about!='' && urlviwerService.PPVIEWER.page.about!=null) || urlviwerService.PPVIEWER.page.my_page!=false"
+                    class="row mx-0">
+
+                    <div *ngIf="urlviwerService.PPVIEWER.page.about!='' && urlviwerService.PPVIEWER.page.about!=null"
+                        class="col-12">
+                        <p>
+                            <span style="font-size:120%;"><span class="fa fa-info-circle"></span></span>
+                            <span>&nbsp;</span>
+                            {{urlviwerService.PPVIEWER.page.about}}
+                        </p>
+                    </div>
+                    <ng-container
+                        *ngIf="urlviwerService.PPVIEWER.page.my_page!=false && (urlviwerService.PPVIEWER.page.about=='' || urlviwerService.PPVIEWER.page.about==null)">
+                        <div class="col-12 mx-0">
+                            <div class="d-block w-100 mx-0 py-1" (click)="editPageService.EditPageInfo()" style=" cursor:
+                            pointer;">
+                                <span style="font-size:120%;">
+                                    <span class="fa fa-book"></span></span>
+                                <span class="p-1">Add your page summary to tell people about what your are excactly
+                                    doing. (<span style="color: darkgray;">It is the first
+                                        thing people look when Visiting your page</span>)</span> <span
+                                    class="fa fa-plus"></span>
+
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+
+                <div *ngIf="urlviwerService.loading_viewer==true || (urlviwerService.PPVIEWER.page.website!='' && urlviwerService.PPVIEWER.page.website!=null) || urlviwerService.PPVIEWER.page.my_page!=false"
+                    class="row mx-0">
+
+                    <div *ngIf="urlviwerService.PPVIEWER.page.website!='' && urlviwerService.PPVIEWER.page.website!=null"
+                        class="col-12">
+                        <p>
+                            <span style="font-size:120%;"><span class="fa fa-globe"></span></span>
+                            <span>&nbsp;</span>
+                            <a href="{{insertLinkProtocol(urlviwerService.PPVIEWER.page.website)}}" target="_blank">
+                                {{urlviwerService.PPVIEWER.page.website}}
+                            </a>
+                        </p>
+                    </div>
+                    <ng-container
+                        *ngIf="urlviwerService.PPVIEWER.page.my_page!=false && (urlviwerService.PPVIEWER.page.website=='' || urlviwerService.PPVIEWER.page.website==null)">
+                        <div class="col-12 mx-0">
+                            <div class="d-block w-100 mx-0 py-1" (click)="editPageService.EditPageInfo()" style=" cursor:
+                                pointer;">
+                                <span style="font-size:120%;">
+                                    <span class="fa fa-globe"></span></span>
+                                <span class="p-1">Add your page website.</span> <span class="fa fa-plus"></span>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+                <div *ngIf="urlviwerService.loading_viewer==true || (urlviwerService.PPVIEWER.page.email!='' && urlviwerService.PPVIEWER.page.email!=null) || urlviwerService.PPVIEWER.page.my_page!=false"
+                    class="row mx-0">
+
+                    <div *ngIf="urlviwerService.PPVIEWER.page.email!='' && urlviwerService.PPVIEWER.page.email!=null"
+                        class="col-12">
+                        <p>
+                            <span style="font-size:120%;"><span class="fa fa-envelope"></span></span>
+                            <span>&nbsp;</span>
+                            <a href="mailto:{{urlviwerService.PPVIEWER.page.email}}"
+                                target="_blank">{{urlviwerService.PPVIEWER.page.email}}</a>
+                        </p>
+                    </div>
+                    <ng-container
+                        *ngIf="urlviwerService.PPVIEWER.page.my_page!=false && (urlviwerService.PPVIEWER.page.email=='' || urlviwerService.PPVIEWER.page.email==null)">
+                        <div class="col-12 mx-0">
+                            <div class="d-block w-100 mx-0 py-1" (click)="editPageService.EditPageInfo()" style=" cursor:
+                            pointer;">
+                                <span style="font-size:120%;">
+                                    <span class="fa fa-envelope"></span></span>
+                                <span class="p-1">Add your page email.</span> <span class="fa fa-plus"></span>
+
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+
+                <div *ngIf="urlviwerService.loading_viewer==true || (urlviwerService.PPVIEWER.page.phone!='' && urlviwerService.PPVIEWER.page.phone!=null) || urlviwerService.PPVIEWER.page.my_page!=false"
+                    class="row mx-0">
+
+                    <div *ngIf="urlviwerService.PPVIEWER.page.phone!='' && urlviwerService.PPVIEWER.page.phone!=null"
+                        class="col-12">
+                        <p>
+                            <span style="font-size:120%;"><span class="fa fa-phone"></span></span>
+                            <span>&nbsp;</span>
+                            <a href="tel:{{urlviwerService.PPVIEWER.page.phone}}"
+                                target="_blank">{{urlviwerService.PPVIEWER.page.phone}}</a>
+                        </p>
+                    </div>
+                    <ng-container
+                        *ngIf="urlviwerService.PPVIEWER.page.my_page!=false && (urlviwerService.PPVIEWER.page.phone=='' || urlviwerService.PPVIEWER.page.phone==null)">
+                        <div class="col-12 mx-0">
+                            <div class="d-block w-100 mx-0 py-1" (click)="editPageService.EditPageInfo()" style=" cursor:
+                            pointer;">
+                                <span style="font-size:120%;">
+                                    <span class="fa fa-phone"></span></span>
+                                <span class="p-1">Add your page phone.</span> <span class="fa fa-plus"></span>
+
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+                <div *ngIf="urlviwerService.loading_viewer==true || (urlviwerService.PPVIEWER.page.location!='' && urlviwerService.PPVIEWER.page.location!=null) || urlviwerService.PPVIEWER.page.my_page!=false"
+                    class="row mx-0">
+
+                    <div *ngIf="urlviwerService.PPVIEWER.page.location!='' && urlviwerService.PPVIEWER.page.location!=null"
+                        class="col-12">
+                        <p>
+                            <span style="font-size:120%;"><span class="fa fa-map-marker"></span></span>
+                            <span>&nbsp;</span>
+                            <span>{{urlviwerService.PPVIEWER.page.location.name}}</span>
+                        </p>
+                    </div>
+                </div>
+
+                <div *ngIf="urlviwerService.loading_viewer==true || (urlviwerService.PPVIEWER.page.category!='' && urlviwerService.PPVIEWER.page.category!=null) || urlviwerService.PPVIEWER.page.my_page!=false"
+                    class="row mx-0">
+
+                    <div *ngIf="urlviwerService.PPVIEWER.page.category!='' && urlviwerService.PPVIEWER.page.category!=null"
+                        class="col-12">
+                        <p>
+                            <span style="font-size:120%;"><span class="fa fa-folder"></span></span>
+                            <span>&nbsp;</span>
+                            <span>{{urlviwerService.PPVIEWER.page.category.category}}</span>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</ng-container>

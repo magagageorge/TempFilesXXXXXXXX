@@ -8,7 +8,6 @@ import { CrudService } from '@app/@crud/services/crud.service';
 import { cruddefaultSettings, CrudOptions, CRUD_OPTIONS, CRUD_USER_OPTIONS, CRUD_PROVIDERS, CRUD_INTERCEPTOR_HEADER } from '@app/@crud/crud.options';
 import { CrudProvider } from '@app/@crud/providers/crud.provider';
 import { PostPhoto } from '@app/models/post-photo';
-import { ProfileFeedService } from './profile-feed.service';
 import { OverlayPost } from '@app/models/feed/overlay-post';
 
 @Injectable({
@@ -18,7 +17,6 @@ export class FeedService {
   feeds: Feed[] = [];
   service: CrudService;
   crudprovider: CrudProvider;
-  profileFeedService: ProfileFeedService;
   protected crudconfig: {};
   protected router: Router;
   redirectDelay: number;
@@ -40,10 +38,9 @@ export class FeedService {
   OVERLAY_FEED: OverlayPost;
 
 
-  constructor(service: CrudService, profileFeedService: ProfileFeedService, @Inject(CRUD_OPTIONS) CRUD_OPTIONS: CrudOptions, private _modalService: NgbModal, router: Router) {
+  constructor(service: CrudService, @Inject(CRUD_OPTIONS) CRUD_OPTIONS: CrudOptions, private _modalService: NgbModal, router: Router) {
     this.next_feed_page = 1;
     this.service = service;
-    this.profileFeedService = profileFeedService;
     this.crudconfig = CRUD_OPTIONS;
     this.router = router;
     this.OVERLAY_FEED = new OverlayPost();
@@ -104,15 +101,14 @@ export class FeedService {
     });
   }
 
-  searchFeed(id: string): Observable<Feed> {
+  searchFeed(id: number): Observable<Feed> {
     return of(this.feeds.find((feed: Feed) => feed.id == id));
   }
 
 
   hidePost(post_id: number) {
     var _this = this;
-    let id = String(post_id);
-    this.searchFeed(id).subscribe(feed => {
+    this.searchFeed(post_id).subscribe(feed => {
       if (feed) {
         feed.hidden_post = true;
       }
@@ -122,7 +118,7 @@ export class FeedService {
       if (result.isSuccess()) {
         var data = result.getResultData();
         if (data != true) {
-          _this.searchFeed(id).subscribe(feed => {
+          _this.searchFeed(post_id).subscribe(feed => {
             if (feed) {
               feed.hidden_post = false;
             }
@@ -139,8 +135,7 @@ export class FeedService {
   unhidePost(post_id: number) {
     var _this = this;
     this.errors = this.messages = [];
-    let id = String(post_id);
-    this.searchFeed(id).subscribe(feed => {
+    this.searchFeed(post_id).subscribe(feed => {
       if (feed) {
         feed.unhidding_post = true;
       }
@@ -150,8 +145,7 @@ export class FeedService {
       if (result.isSuccess()) {
         var data = result.getResultData();
         if (data == true) {
-          let id = String(post_id);
-          _this.searchFeed(id).subscribe(feed => {
+          _this.searchFeed(post_id).subscribe(feed => {
             if (feed) {
               feed.unhidding_post = false;
               feed.hidden_post = false;
@@ -190,14 +184,17 @@ export class FeedService {
   }
 
   clearFeed(feed_id: number) {
-    this.profileFeedService.clearFeed(feed_id);
+    //this.profileFeedService.clearFeed(feed_id);
     this.feeds = this.feeds.filter((x: any) => x.id !== feed_id);
   }
 
-
-  prependFeed(feed: Feed) {
-    this.feeds.unshift(feed);
+  prependFeed(feed: Feed,search_remove_first:boolean) {
+      if(search_remove_first){
+        this.clearFeed(feed.id);
+      }
+      this.feeds.unshift(feed);
   }
+
   pushFeed(feed: Feed) {
     this.feeds = this.feeds.concat(feed);
   }
@@ -208,7 +205,7 @@ export class FeedService {
       this.OVERLAY_FEED.feed.comments.unshift(comment);
       this.OVERLAY_FEED.feed.no_comments = Number(this.OVERLAY_FEED.feed.no_comments) + 1;
     }
-    this.profileFeedService.pushComment(feedId, comment);
+    //this.profileFeedService.pushComment(feedId, comment);
     this.searchFeed(feedId).subscribe(feed => {
       if (feed) {
         feed.comments.unshift(comment);
@@ -222,8 +219,8 @@ export class FeedService {
     if (this.OVERLAY_FEED.feed != null && feedId == this.OVERLAY_FEED.feed.id) {
       this.OVERLAY_FEED.feed.comments = this.OVERLAY_FEED.feed.comments.concat(comments);
     }
-    this.profileFeedService.pushComments(feedId, comments);
-    this.searchFeed(String(feedId)).subscribe((feed: Feed) => {
+    //this.profileFeedService.pushComments(feedId, comments);
+    this.searchFeed(feedId).subscribe((feed: Feed) => {
       if (feed) {
         feed.comments = feed.comments.concat(comments);
       }
@@ -235,7 +232,7 @@ export class FeedService {
       return;
     }
     this.updateFeedLike(feed, action);
-    this.profileFeedService.updateFeedLike(feed, action);
+    //this.profileFeedService.updateFeedLike(feed, action);
     var _this = this;
     this.errors = this.messages = [];
     this.service.getProvider(this.provider).crudconfig.route_url = 'feed/feed-like/';
@@ -248,13 +245,13 @@ export class FeedService {
           var data = result.getResultData();
           if (data != true) {
             _this.updateFeedLike(feed, 'unlike');
-            _this.profileFeedService.updateFeedLike(feed, 'unlike');
+            //_this.profileFeedService.updateFeedLike(feed, 'unlike');
           }
         }
         else {
           _this.errors = result.getErrors();
           _this.updateFeedLike(feed, 'unlike');
-          _this.profileFeedService.updateFeedLike(feed, 'unlike');
+          //_this.profileFeedService.updateFeedLike(feed, 'unlike');
         }
       });
     } else {
@@ -264,19 +261,18 @@ export class FeedService {
           var data = result.getResultData();
           if (data != true) {
             _this.updateFeedLike(feed, 'like');
-            _this.profileFeedService.updateFeedLike(feed, 'like');
+            //_this.profileFeedService.updateFeedLike(feed, 'like');
           }
         } else {
           _this.errors = result.getErrors();
           _this.updateFeedLike(feed, 'like');
-          _this.profileFeedService.updateFeedLike(feed, 'like');
+          //_this.profileFeedService.updateFeedLike(feed, 'like');
         }
       });
     }
   }
 
   updateFeedLike(feed: Feed, action: string) {
-
     /* Update date post status in overlay or single post in case is open and is the one one being liked */
     if (this.OVERLAY_FEED.feed != null && feed.id == this.OVERLAY_FEED.feed.id) {
       if (action == 'like') {

@@ -1,0 +1,99 @@
+<div class="card m-0 h-100 px-2 pt-2" style="padding-bottom: 50px;">
+    <div class="card-header bg-white px-0 py-1">
+        <div class="row mx-0 px-0">
+            <div class="col-12 p-0">
+                <h4 class="m-0 py-1 font-weight-bold">Page Manager</h4>
+            </div>
+            <div class="col-12 p-0">
+                <a routerLink="/{{pageViewerService.urlviewerService.PPVIEWER.page.url}}"
+                    (click)="pageViewerService.urlviewerService.setPage(pageViewerService.urlviewerService.pageSummary)"
+                    class="px-0 py-1 m-0 text-decoration-none" style="text-decoration: none;">
+                    <div class="row p-0 m-0">
+                        <div class="col-2 p-0">
+                            <ng-container *ngIf="pageViewerService.urlviewerService.PPVIEWER.page.picture!=null">
+                                <img style="max-height:50px;"
+                                    src="{{pageViewerService.urlviewerService.PPVIEWER.page.picture.face}}"
+                                    class="img-fluid rounded-circle z-depth-0 m-0">
+                            </ng-container>
+                        </div>
+                        <div class="col-10 p-0 d-flex align-items-center justify-content-start">
+                            <span
+                                class="m-0 py-1 w-100 wb-font-size-120 font-weight-bold wb-max-ln-2">{{pageViewerService.urlviewerService.PPVIEWER.page.name}}</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-0 my-1" style="overflow-y: auto;">
+        <div class="d-block w-100 border-bottom p-0">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item pl-1 py-1">
+                    <a routerLink="/{{pageViewerService.urlviewerService.PPVIEWER.page.url}}"
+                        class="d-block m-0 p-2 wb-font-size-120">
+                        <span class="fa fa-home"></span>
+                        <span>&nbsp;</span>
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li class="list-group-item pl-1 py-1">
+                    <a routerLink="/{{pageViewerService.urlviewerService.PPVIEWER.page.url}}/notifications"
+                        class="d-block m-0 p-2 wb-font-size-120">
+                        <span class="fa fa-bell-o"></span>
+                        <span>&nbsp;</span>
+                        <span>Notifications</span>
+                    </a>
+                </li>
+                <ng-container *ngIf="pageViewerService.urlviewerService.PPVIEWER.page.my_page=='Admin'">
+                    <li class="list-group-item pl-1 py-1">
+                        <a routerLink="/{{pageViewerService.urlviewerService.PPVIEWER.page.url}}/page-admins"
+                            class="d-block m-0 p-2 wb-font-size-120">
+                            <span class="fa fa-users"></span>
+                            <span>&nbsp;</span>
+                            <span>Page Admins</span>
+                        </a>
+                    </li>
+                    <li class="list-group-item pl-1 py-1">
+                        <a href="javascript:void(0)" class="d-block m-0 p-2 wb-font-size-120 w-100"
+                            [class.text-primary]="dropDowns.settings.active" (click)="ActivateMenu(dropDowns.settings)">
+                            <span class="fa fa-gear"></span>
+                            <span>&nbsp;</span>
+                            <span>Settings</span>
+
+                            <ng-container *ngIf="dropDowns.settings.active">
+                                <span class="fa fa-chevron-up pull-right"></span>
+                            </ng-container>
+                            <ng-container *ngIf="dropDowns.settings.active==false">
+                                <span class="fa fa-chevron-down pull-right"></span>
+                            </ng-container>
+                        </a>
+                        <ng-container *ngIf="dropDowns.settings.active">
+                            <ul class="list-group list-group-flush ml-3">
+                                <li class="list-group-item pl-1 py-1">
+                                    <a routerLink="/{{pageViewerService.urlviewerService.PPVIEWER.page.url}}/general-settings"
+                                        class="d-block m-0 p-2 wb-font-size-120" 
+                                        [class.text-primary]="dropDowns.settings.general.active"
+                                        (click)="ActivateMenu(dropDowns.settings.general)">
+                                        <span class="fa fa-gear"></span>
+                                        <span>&nbsp;</span>
+                                        <span>General Settings</span>
+                                    </a>
+                                </li>
+                                <li class="list-group-item pl-1 py-1">
+                                    <a routerLink="/{{pageViewerService.urlviewerService.PPVIEWER.page.url}}/notification-settings"
+                                        class="d-block m-0 p-2 wb-font-size-120" 
+                                        [class.text-primary]="dropDowns.settings.notifications.active"
+                                        (click)="ActivateMenu(dropDowns.settings.notifications)">
+                                        <span class="fa fa-globe"></span>
+                                        <span>&nbsp;</span>
+                                        <span>Notification Settings</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </ng-container>
+                    </li>
+                </ng-container>
+            </ul>
+        </div>
+    </div>
+</div>

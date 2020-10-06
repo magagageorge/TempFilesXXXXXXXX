@@ -7,8 +7,8 @@
             </div>
             <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 p-0">
                 <app-add-profile-photo-alert-widget *ngIf="profileService.MYPROFILE.avatar.show_alert==true">
-                </app-add-profile-photo-alert-widget>
-                <app-post-form></app-post-form>
+                </app-add-profile-photo-alert-widget>                
+                    <app-post-form [postingAs]="'Profile'" [page]="null"></app-post-form>                
                 <app-feed-widget></app-feed-widget>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 p-0 d-none d-md-block d-lg-block pull-right">
@@ -23,8 +23,5 @@
 <app-overlay-load-submit-process-data-widget></app-overlay-load-submit-process-data-widget>
 <app-faint-body-overlay *ngIf="postingService.show_input_buttons" (click)="postingService.messageBlur()">
 </app-faint-body-overlay>
-<app-mobile-overlay-post-form *ngIf="postingService.show_input_buttons"></app-mobile-overlay-post-form>
-<app-share-post-form-container-widget *ngIf="postingService.sharePostModel.inShareMode==true">
-</app-share-post-form-container-widget>
 <app-hover-card-container></app-hover-card-container>
 <app-edit-profile-overlay-container></app-edit-profile-overlay-container>

@@ -1,0 +1,227 @@
+<div class="card p-0">
+    <div class="card-body p-1" style="min-height: 90vh;">
+        <div class="d-block w-100">
+            <h5>Add new Page User</h5>
+            <br>
+
+            <div class="row mx-0 border border-dark border-round">
+                <div class="col-12 col-md-7 col-lg-7 col-xl-7 px-0">
+                    <div class="d-flex justify-content-start align-items-center p-1 w-100 h-100">
+                        <ng-container *ngIf="selected_profile!=null">
+                            <div class="row mx-0 w-100 border border-light border-round">
+                                <div class="col-1 p-0  d-flex align-items-center justify-content-center">
+                                    <img class="rounded-circle img-fluid" style="max-height: 50px;"
+                                        src="{{selected_profile.avatar.face}}" alt="">
+                                </div>
+                                <div class="col-9 p-0 d-flex align-items-center">
+                                    <div class="d-block px-2 m-0">
+                                        <span>
+                                            <strong>{{selected_profile.name}}</strong> <span
+                                                class="url-tag">@{{selected_profile.url}}</span>
+                                        </span>
+
+                                        <span class="wb-max-ln-1">
+                                            {{selected_profile.title}}
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-2 d-flex align-items-center justify-content-center">
+                                    <button class="btn btn-sm btn-light btn-rounded px-2 py-1"
+                                        (click)="removeSelectedUser()">
+                                        <span class="fa fa-close"></span>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </ng-container>
+                        <ng-container *ngIf="selected_profile==null">
+                            <input type="search" class="messenger-search-people-input form-control form-rounded"
+                                (keyup)="searchUser()" placeholder="Type name to search" [(ngModel)]="search_query">
+                        </ng-container>
+                    </div>
+                    <div class="d-block w-100" style="position: relative;z-index: 101;">
+                        <ng-container *ngIf="search_query.trim().length>2">
+                            <div class="messenger-search-people-results border border-light">
+                                <div *ngIf="loading_search" class="d-flex justify-content-center align-items-center">
+                                    <app-loading-circles></app-loading-circles>
+                                </div>
+                                <div *ngIf="searched_profiles.length" class="d-block p-0">
+                                    <ng-container *ngFor="let profile of searched_profiles">
+                                        <div class="row m-0 border-bottom border-light search-result-profile-card cursor-pointer"
+                                            (click)="SelectThis(profile);">
+                                            <div class="col-12 p-0 m-0 align-middle">
+                                                <div class="h-100 w-100 m-0 p-0">
+                                                    <div *ngIf="profile" class="d-block h-100 p-1 m-0 align-middle">
+                                                        <div class="row h-100 m-0 p-0">
+                                                            <div class="col-2 col-md-1 col-lg-1 p-0">
+                                                                <img src="{{profile.avatar.face}}"
+                                                                    class="img-fluid rounded-circle m-0"
+                                                                    style="max-height:60px;">
+                                                            </div>
+                                                            <div
+                                                                class="col-10  col-md-11 col-lg-11 py-auto px-1 align-middle">
+                                                                <span
+                                                                    class="d-block w-100 text-truncate"><strong>{{profile.name}}</strong></span>
+                                                                <span
+                                                                    class="d-block w-100 text-truncate">{{profile.title}}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                                <div *ngIf="!searched_profiles.length && search_query.trim().length>2 && loading_search==false"
+                                    class="d-block p-0">
+                                    <div class="row m-0">
+                                        <div class="col-12 text-center">
+                                            <h6>
+                                                <ng-container i18n>No results found</ng-container>
+                                            </h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </ng-container>
+                    </div>
+                </div>
+                <div class="col-12 col-md-5 col-lg-5 col-xl-5 d-flex justify-content-start align-items-center">
+                    <div class="row mx-0 w-100">
+                        <div class="col-6  d-flex justify-content-start align-items-center">
+                            <div class="d-block w-100">
+                                <select id="inputrole" [(ngModel)]="new_userrole" name="new_userrole"
+                                    class="form-control form-rounded w-100">
+                                    <option *ngFor="let role of user_roles" value="{{role.name}}">
+                                        {{role.name}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-6  d-flex justify-content-start align-items-center">
+                            <button (click)="addUser()" [class.disabled]="selected_profile==null"
+                                class="btn btn-sm btn-outline-primary btn-rounded w-100">Add</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="w-100">
+            <br>
+        </div>
+        <div class="d-block w-100" style="z-index: 100;">
+            <h5>Page Users</h5>
+            <ng-container *ngIf="page_users.length > 0 && loading_users==false">
+                <ng-container *ngFor="let page_user of page_users">
+                    <div class="row mx-0 border-bottom border-light">
+                        <div class="col-12 col-md-7 col-lg-7 col-xl-7 p-0 d-flex align-items-center">
+                            <div class="row mx-0 w-100">
+                                <div class="col-2 p-1">
+                                    <img class="rounded-circle img-fluid" style="max-height: 70px;"
+                                        src="{{page_user.profile.avatar.face}}" alt="">
+                                </div>
+                                <div class="col-10 p-0 d-flex align-items-center">
+                                    <span>
+                                        <span><strong>{{page_user.profile.name}}</strong></span>
+                                        <span class="url-tag">@{{page_user.profile.url}}</span>
+                                        <span>&nbsp;&nbsp;</span>
+                                        <span class="text-muted">{{page_user.profile.title}}</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            class="col-12 col-md-5 col-lg-5 col-xl-5 p-0 d-flex align-items-center justify-content-center">
+                            <div class="row mx-0 p-0 w-100">
+                                <div class="col-6 d-flex justify-content-start align-items-center">
+                                    <ng-container *ngIf="page_user.in_edit==false">
+                                        <span class="text-dark">{{page_user.role}}</span>
+                                    </ng-container>
+                                    <ng-container *ngIf="page_user.in_edit==true">
+                                        <select [(ngModel)]="page_user.role" name="new_userrole{{page_user.id}}"
+                                            (change)="saveUserEdit(page_user)" class="form-control form-rounded w-100">
+                                            <option *ngFor="let role of user_roles" value="{{role.name}}">
+                                                {{role.name}}
+                                            </option>
+                                        </select>
+                                    </ng-container>
+                                </div>
+                                <div class="col-6 d-flex justify-content-end align-items-center">
+                                    <ng-container *ngIf="page_user.profile.my_profile!=true">
+                                        <ng-container *ngIf="page_user.in_edit==false">
+                                            <button (click)="setUserInEdit(page_user.id)"
+                                                class="btn btn-sm btn-outline-secondary btn-rounded">Edit</button>
+                                        </ng-container>
+                                        <ng-container *ngIf="page_user.in_edit==true">
+                                            <button (click)="cancelUserEdit(page_user.id)"
+                                                class="btn btn-sm btn-primary btn-rounded pull-left">Done</button>
+
+                                            <button (click)="wantToRemoveUser(page_user.id)"
+                                                class="btn btn-sm btn-danger btn-rounded pull-right px-2 py-1"><span
+                                                    class="wb-font-zise-120">&times;</span></button>
+                                        </ng-container>
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </ng-container>
+            </ng-container>
+
+            <ng-container *ngIf="loading_users==true">
+                <div clas="row mx-0">
+                    <div class="col-12 d-flex justify-content-center align-items-center">
+                        <app-loading-circles></app-loading-circles>
+                    </div>
+                    <div class="col-12 d-flex justify-content-center align-items-center">
+                        <span>Loading...</span>
+                    </div>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="loading_new_user==true">
+                <div clas="row mx-0">
+                    <div class="col-12 d-flex justify-content-center align-items-center">
+                        <app-loading-circles></app-loading-circles>
+                    </div>
+                    <div class="col-12 d-flex justify-content-center align-items-center">
+                        <span>Loading...</span>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+
+
+    <ng-container *ngIf="want_to_delete_user>0">
+        <app-overlay-modal-container>
+            <div class="row m-0 px-0 h-100 w-100">
+                <div class="col-12 mx-0 px-0 d-flex justify-content-center align-items-center">
+                    <div class="card">
+                        <div class="card-header p-1">
+                            <span class="wb-font-size-120">Remover Page User!</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-block w-100">
+                                <span>Are your sure you want to remove this user from this page?</span>
+                            </div>
+                            <div class="d-block w-100">
+                                <div class="row mx-0 px-0">
+                                    <div class="col-6 px-0 d-flex justify-content-start">
+                                        <button (click)="cancelRemoveUser()"
+                                            class="btn btn-sm btn-default pull-left">No,Thank you.</button>
+                                    </div>
+                                    <div class="col-6 px-0 d-flex justify-content-end">
+                                        <button (click)="RemoveUser()"
+                                            class="btn btn-sm btn-primary pull-right">Remove</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </app-overlay-modal-container>
+    </ng-container>

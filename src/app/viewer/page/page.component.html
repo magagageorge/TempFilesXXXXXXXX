@@ -1,3 +1,27 @@
-<p>
-  page works!
-</p>
+<app-wf-navbar class="d-none d-md-block d-lg-block"></app-wf-navbar>
+<app-wf-navbar-summary [back_route]="parent_route" [display_text]="urlviwerService.PPVIEWER.page.name"
+    class="d-block d-md-none d-lg-none"></app-wf-navbar-summary>
+<ng-container *ngIf="urlviwerService.PPVIEWER.page.my_page!=true && urlviwerService.PPVIEWER.page.my_page!=''">
+    <app-wb-page-manager-content-container>
+
+        <app-page-manager-top-menu-widget></app-page-manager-top-menu-widget>
+
+        <app-wb-page-content-routing></app-wb-page-content-routing>
+    </app-wb-page-manager-content-container>
+</ng-container>
+<ng-container *ngIf="urlviwerService.PPVIEWER.page.my_page==false">
+    <app-wb-page-main-content>
+        <app-wb-page-content-routing></app-wb-page-content-routing>
+    </app-wb-page-main-content>
+</ng-container>
+<!--Main layout-->
+<app-wf-footer></app-wf-footer>
+<ng-container *ngIf="pagePhotosService.currentViewImage!=null">
+    <app-page-images-overlay-view ></app-page-images-overlay-view>
+</ng-container>
+<app-overlay-load-submit-process-data-widget></app-overlay-load-submit-process-data-widget>
+<app-process-upload-images-progress-widget></app-process-upload-images-progress-widget>
+<app-feed-images-overlay-view></app-feed-images-overlay-view>
+<app-faint-body-overlay *ngIf="postingService.show_input_buttons" (click)="postingService.messageBlur()">
+</app-faint-body-overlay>
+<app-hover-card-container></app-hover-card-container>

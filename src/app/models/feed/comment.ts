@@ -7,7 +7,7 @@ export class Comment {
     id:number;
     message:string;
     object_model:string;
-    object_id:string;
+    object_id:number;
     profile:Profile;
     pictures:any[];
     upload_files:Array<File>;

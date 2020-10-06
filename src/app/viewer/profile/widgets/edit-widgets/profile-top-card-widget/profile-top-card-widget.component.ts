@@ -51,7 +51,6 @@ export class ProfileTopCardWidgetComponent implements OnInit {
     this.profileService = profileService;
     this.utilitiesService = utilitiesService;
     this.selectedLocation = new Country();
-    this.loadCountries();
   }
 
   ngOnInit() {
@@ -115,26 +114,18 @@ export class ProfileTopCardWidgetComponent implements OnInit {
             }
           });
         }
+      }else{
+        _this.selectedLocation = new Country();
       }
     });
   }
 
   filterCountry(id: any): Observable<Country> {
-    var _this = this;
-    return of(_this.countries.find((country: Country) => country.id === id));
-  }
-
-  loadCountries() {
-    var __this = this;
-    this.utilitiesService.getCountries({}).subscribe(results => {
-      __this.countries = results.getResultData();
-      __this.switchLocation(__this.profileModel.country);
-    });
+    return of(this.utilitiesService.COUNTRIES.find((country: Country) => country.id === id));
   }
 
   searchCityInSelectedCountry(id: number): Observable<City> {
-    var _this = this;
-    return of(_this.selectedLocation.cities.find((city: City) => city.id === id));
+    return of(this.selectedLocation.cities.find((city: City) => city.id === id));
   }
 
 }

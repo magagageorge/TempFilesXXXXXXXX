@@ -1,197 +1,207 @@
-<div [class.disabled]="feedService.loading_new_post" class="card card-primary" id="wffeed-post-card"
-  [ngStyle]="{'z-index':postingService.show_input_buttons ? 2001 : 1 }">
-  <div *ngIf="postingService.show_input_buttons || postingService.sharePostModel.inShareMode"
-    class="card-header py-1 px-1 d-none d-md-block d-lg-block">
-    <div class="row m-0">
-      <div class="col-10 align-middle p-0">
-        <span class="pull-left" style="font-size:120%;">
-          <ng-container *ngIf="postingService.sharePostModel.inShareMode">
-            Share Post
-          </ng-container>
-          <ng-container *ngIf="postingService.sharePostModel.inShareMode!=true">
-            <ng-container *ngIf="postingService.feed_input_model.isNew">
-              Create Post
-            </ng-container>
-            <ng-container *ngIf="postingService.feed_input_model.isNew!=true">
-              Edit Post
-            </ng-container>
-          </ng-container>
-        </span>
-      </div>
-      <div class="col-2 align-middle  p-0" style="font-size:130%;">
-        <span style="cursor: pointer;font-weight:lighter;" class="fa fa-times pull-right"
-          (click)="postingService.messageBlur()"></span>
-      </div>
-    </div>
-  </div>
-
-
-  <div *ngIf="postingService.sharePostModel.inShareMode"
-    class="card-header py-1 px-1 d-block d-md-none d-lg-none">
-    <div class="row m-0">
-      <div class="col-10 align-middle p-0">
-        <span class="pull-left" style="font-size:120%;">
-          <ng-container *ngIf="postingService.sharePostModel.inShareMode">
-            Share Post
-          </ng-container>
-          <ng-container *ngIf="postingService.sharePostModel.inShareMode==false">
-            <ng-container *ngIf="postingService.feed_input_model.isNew">
-              Create Post
-            </ng-container>
-            <ng-container *ngIf="postingService.feed_input_model.isNew==false">
-              Edit Post
-            </ng-container>
-          </ng-container>
-        </span>
-      </div>
-      <div class="col-2 align-middle  p-0" style="font-size:130%;">
-        <span style="cursor: pointer;font-weight:lighter;" class="fa fa-times pull-right"
-          (click)="postingService.messageBlur()"></span>
-      </div>
-    </div>
-  </div>
-
-
-
-
-
+<div class="card mx-0">
   <div class="card-body p-1">
-    <form #feedForm_feedId="ngForm">
-      <input class="d-none" type='file' id="post_upload_input_id" name="upload_files"
-        (change)="postingService.onSelectFile($event)" multiple #post_upload_input_id>
-      <div class="row m-0">
-        <div *ngIf="postingService.show_input_buttons" class="col-12 p-0 d-block align-middle">
-          <div class="row m-0  align-middle">
-            <div class="col-2 d-inline-block px-0">
-              <img style="max-height:50px;" src="{{profileService.MYPROFILE.avatar.face}}"
-                class="img-fluid rounded-circle d-inline-block m-0">
-            </div>
-            <div class="col-10 d-inline-block  px-0 align-middle">
-              <div class="d-block w-100 pull-left font-weight-bold text-truncate">{{profileService.MYPROFILE.firstname}}
-                {{profileService.MYPROFILE.lastname}}</div>
-              <div class="d-block w-100  pull-left align-middle" ngbDropdown #myDrop="ngbDropdown"
-                placement="bottom-right">
-                <button class="btn btn-sm btn-outline-primary  btn-rounded align-middle px-2 py-1 m-0"
-                  id="dropdownManual1" ngbDropdownAnchor (focus)="myDrop.open()"
-                  title="Share with {{postingService.selected_visibility.text}}"
-                  style="border:1px solid transparent"><span>Share this with </span><span>&nbsp;&nbsp;</span><span
-                    class="{{postingService.selected_visibility.icon}}"></span>
-                  {{postingService.selected_visibility.text}}</button>
-                <div ngbDropdownMenu aria-labelledby="dropdownManual1">
-                  <button *ngFor="let visibility of postingService.visibility_options" class="dropdown-item"
-                    (click)="postingService.changeVisibility(visibility)"><span class="{{visibility.icon}}"></span>
-                    {{visibility.text}}</button>
+     <input class="d-none" type='file' id="post_upload_input_id" name="upload_files"
+      (change)="postingService.onSelectFile($event)" multiple #post_upload_input_id>
+
+    <div class="row m-0 content-inputs-container">
+      <div class="col-md-1 col-lg-1 p-0 d-none d-md-block d-lg-block">
+        <ng-container *ngIf="postingService.show_input_buttons!=true">
+          <img style="max-height:60px;" src="{{postingService.postingAsImage}}" class="img-fluid rounded-circle mt-1">
+        </ng-container>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-11 col-lg-11 p-1 mr-0">
+        <div class="w-100 h-100 form-control form-rounded align-middle cursor-pointer"
+          (click)="postingService.messageFocus()" style="box-shadow: none;background-color: transparent;">
+          <span>Write here,use @ to tag someone</span>
+        </div>
+        <ng-container *ngIf="postingService.sharePostModel.inShareMode!=true">
+          <div style="position:absolute;right:0px;top:12px;">
+            <span *ngIf="postingService.show_upload_img" (click)="postingService.SelectFeedUploadImage()"
+              class="p-2 m-2 text-primary" style="cursor: pointer;font-size: 120%">
+              <span class="fa fa-camera"></span>
+            </span>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-container *ngIf="postingService.show_input_buttons">
+  <app-wb-overlay-post-form-container>
+    <div [class.disabled]="feedService.loading_new_post" class="card card-primary mx-0" id="wffeed-post-card"
+      [ngStyle]="{'z-index':postingService.show_input_buttons ? 2001 : 1 }">
+      
+      <div *ngIf="postingService.show_input_buttons || postingService.sharePostModel.inShareMode"
+        class="card-header py-1 px-1 d-none d-md-block d-lg-block d-xl-block">
+        <div class="row m-0">
+          <div class="col-10 align-middle p-0">
+            <span class="pull-left" style="font-size:120%;">
+              <ng-container *ngIf="postingService.sharePostModel.inShareMode">
+                Share Post
+              </ng-container>
+              <ng-container *ngIf="postingService.sharePostModel.inShareMode!=true">
+                <ng-container *ngIf="postingService.feed_input_model.isNew">
+                  Create Post
+                </ng-container>
+                <ng-container *ngIf="postingService.feed_input_model.isNew!=true">
+                  Edit Post
+                </ng-container>
+              </ng-container>
+            </span>
+          </div>
+          <div class="col-2 align-middle  p-0" style="font-size:130%;">
+            <span style="cursor: pointer;font-weight:lighter;" class="fa fa-times pull-right"
+              (click)="postingService.messageBlur()"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-body p-1">
+        <form #feedForm_feedId="ngForm">
+          <div class="row m-0">
+            <div *ngIf="postingService.show_input_buttons" class="col-12 p-0 d-block align-middle">
+              <div class="row m-0  align-middle">
+                <div class="col-2 d-inline-block px-0">
+                  <img style="max-height:50px;" src="{{postingService.postingAsImage}}"
+                    class="img-fluid rounded-circle d-inline-block m-0">
+                </div>
+                <div class="col-10 d-inline-block  px-0 align-middle">
+                  <div class="d-block w-100 pull-left font-weight-bold text-truncate">{{postingService.postingAsName}}</div>
+                  <div class="d-block w-100  pull-left align-middle" ngbDropdown #myDrop="ngbDropdown"
+                    placement="bottom-right">
+                    <button class="btn btn-sm btn-outline-primary  btn-rounded align-middle px-2 py-1 m-0"
+                      id="dropdownManual1" ngbDropdownAnchor (focus)="myDrop.open()"
+                      title="Share with {{postingService.selected_visibility.text}}"
+                      style="border:1px solid transparent">
+                      <span>Share this with </span><span>&nbsp;&nbsp;</span>
+                      <span class="{{postingService.selected_visibility.icon}}"></span>
+                      {{postingService.selected_visibility.text}}</button>
+                    <div ngbDropdownMenu aria-labelledby="dropdownManual1">
+                      <button *ngFor="let visibility of postingService.visibility_options" class="dropdown-item"
+                        (click)="postingService.changeVisibility(visibility)"><span class="{{visibility.icon}}"></span>
+                        {{visibility.text}}</button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="row m-0 content-inputs-container" id="postcontentcontainer">
-        <div class="col-md-1 col-lg-1 p-0 d-none d-md-block d-lg-block">
-          <ng-container *ngIf="postingService.show_input_buttons!=true">
-            <img style="max-height:60px;" src="{{profileService.MYPROFILE.avatar.face}}"
-            class="img-fluid rounded-circle mt-1">
-          </ng-container>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-11 col-lg-11 p-1 mr-0">
-          <div appWfLinkPreview class="w-100 h-100 form-control form-rounded align-middle" id="feed_form_model_input"
-            (change)="postingService.messageFocus()" (focus)="postingService.messageFocus()"
-            [(ngModel)]="postingService.feed_input_model.message" #ctrl="ngModel" name="message" contenteditable="true"
-            data-text="Write here,use @ to tag someone">
-          </div>
-          <ng-container *ngIf="postingService.sharePostModel.inShareMode!=true">
-            <div style="position:absolute;right:0px;top:12px;">
-              <span *ngIf="postingService.show_upload_img" (click)="postingService.SelectFeedUploadImage()"
-                class="p-2 m-2 text-primary" style="cursor: pointer;font-size: 120%">
-                <span class="fa fa-camera"></span>
-              </span>
-            </div>
-          </ng-container>
-        </div>
-
-        <ng-container
-          *ngIf="postingService.sharePostModel.inShareMode && postingService.sharePostModel.sharePost!=null">
-          <div class="col-12 p-1 w-100">
-            <app-shared-post-widget [post]="postingService.sharePostModel.sharePost"></app-shared-post-widget>
-          </div>
-        </ng-container>
-
-        <ng-container *ngIf="postingService.sharePostModel.inShareMode!=true">
-          <div class="col-12 p-1 w-100" *ngIf="linkPreviewSevice.links.length==0" style="overflow-x: auto;">
-            <div *ngFor="let img_preview of postingService.file_preview_urls"
-              class="pull-left m-1 d-block post-image-preview-item" style="position:relative;width:100px;height:100px;">
-              <span (click)="postingService.RemovePreviewImage(img_preview)" class="round-btn" title="Remove"
-                style="z-index:3001; width:20px;height:20px;padding:1px;cursor:pointer;position:absolute;top:-5px;right:-5px;">
-                <span class="fa fa-close"></span>
-              </span>
-              <div class="h-100 w-100 p-0" style="overflow:hidden;">
-                <img [src]="img_preview.url" class="rounded m-0" [class.w-100]="img_preview.width<=img_preview.height"
-                  [class.h-100]="img_preview.width>=img_preview.height">
+          <div class="row m-0 content-inputs-container" id="postcontentcontainer">
+            <div class="col-12 p-1 mr-0">
+              <div appWfLinkPreview class="w-100 h-100 form-control form-rounded align-middle"
+                id="feed_form_model_input" (change)="postingService.messageFocus()"
+                (focus)="postingService.messageFocus()" [(ngModel)]="postingService.feed_input_model.message"
+                #ctrl="ngModel" name="message" contenteditable="true" data-text="Write here,use @ to tag someone"
+                style="box-shadow: none;background-color: transparent;">
               </div>
-              <div class="img-preview-overlay"> &nbsp;</div>
+
+              <div class="d-none justify-content-start align-items-center border-light"
+                style="position: absolute;left: 0;top: 0;right: 0;bottom: 0;background-color: red;">
+                <span>Write here,use @ to tag someone</span>
+              </div>
+              <ng-container *ngIf="postingService.sharePostModel.inShareMode!=true">
+                <div style="position:absolute;right:0px;top:12px;">
+                  <span *ngIf="postingService.show_upload_img" (click)="postingService.SelectFeedUploadImage()"
+                    class="p-2 m-2 text-primary" style="cursor: pointer;font-size: 120%">
+                    <span class="fa fa-camera"></span>
+                  </span>
+                </div>
+              </ng-container>
             </div>
-            <div *ngIf="postingService.file_preview_urls.length" (click)="post_upload_input_id.click()"
-              class="pull-left m-1 d-block post-image-preview-item align-middle text-center" title="Upload more Images"
-              style="position:relative;width:100px;height:100px;font-size:200%;border:2px dashed gray;cursor: pointer;">
-              <span style="position:absolute;top:30px;bottom:30px;left:30px;right:30px;">
-                <span class="fa fa-plus"></span>
-              </span>
-            </div>
 
-          </div>
-
-          <div class="col-md-1 col-lg-1 p-0 d-none d-md-block d-lg-block"></div>
-          <div class="col-xs-12 col-sm-12 col-md-11 col-lg-11 p-0 mr-0">
-            <app-wf-link-preview-container [multiple]="false"></app-wf-link-preview-container>
-          </div>
-        </ng-container>
-
-      </div>
-
-      <div *ngIf="postingService.show_input_buttons" class="row px-0 m-0">
-        <div class="col-12 p-1">
-          <div class="row px-0 m-0">
+            <ng-container
+              *ngIf="postingService.sharePostModel.inShareMode && postingService.sharePostModel.sharePost!=null">
+              <div class="col-12 p-1 w-100">
+                <app-shared-post-widget [post]="postingService.sharePostModel.sharePost"></app-shared-post-widget>
+              </div>
+            </ng-container>
 
             <ng-container *ngIf="postingService.sharePostModel.inShareMode!=true">
-              <div class="col-12 col-md-2 pl-0">
-                <button *ngIf="linkPreviewSevice.links.length==0" (click)="postingService.SelectFeedUploadImage()"
-                  class="btn-circle btn-sm btn-outline-primary d-inline-block pull-left" title="Add Photo or Video">
-                  <span class="fa fa-camera align-middle color-primary" style="font-size:120%;"></span>
-                </button>
+              <div class="col-12 p-1 w-100" *ngIf="linkPreviewSevice.links.length==0" style="overflow-x: auto;">
+                <div *ngFor="let img_preview of postingService.file_preview_urls"
+                  class="pull-left m-1 d-block post-image-preview-item"
+                  style="position:relative;width:100px;height:100px;">
+                  <span (click)="postingService.RemovePreviewImage(img_preview)" class="round-btn" title="Remove"
+                    style="z-index:3001; width:20px;height:20px;padding:1px;cursor:pointer;position:absolute;top:-5px;right:-5px;">
+                    <span class="fa fa-close"></span>
+                  </span>
+                  <div class="h-100 w-100 p-0" style="overflow:hidden;">
+                    <img [src]="img_preview.url" class="rounded m-0"
+                      [class.w-100]="img_preview.width<=img_preview.height"
+                      [class.h-100]="img_preview.width>=img_preview.height">
+                  </div>
+                  <div class="img-preview-overlay"> &nbsp;</div>
+                </div>
+                <div *ngIf="postingService.file_preview_urls.length" (click)="post_upload_input_id.click()"
+                  class="pull-left m-1 d-block post-image-preview-item align-middle text-center"
+                  title="Upload more Images"
+                  style="position:relative;width:100px;height:100px;font-size:200%;border:2px dashed gray;cursor: pointer;">
+                  <span style="position:absolute;top:30px;bottom:30px;left:30px;right:30px;">
+                    <span class="fa fa-plus"></span>
+                  </span>
+                </div>
+
               </div>
-              <div class="col-12 col-md-1  pl-0 d-none">
-                <button class="btn-circle btn-sm btn-outline-primary d-inline-block pull-left" title="Add Location">
-                  <span class="fa fa-map-marker align-middle color-primary" style="font-size:120%;"></span>
-                </button>
+
+              <div class="col-md-1 col-lg-1 p-0 d-none d-md-block d-lg-block"></div>
+              <div class="col-xs-12 col-sm-12 col-md-11 col-lg-11 p-0 mr-0">
+                <app-wf-link-preview-container [multiple]="false"></app-wf-link-preview-container>
               </div>
             </ng-container>
 
-            <ng-container *ngIf="postingService.sharePostModel.inShareMode">
-              <div class="col-12 col-md-2 col-lg-2 col-xl-2 d-none d-md-block d-lg-block d-xl-block"></div>
-            </ng-container>
+          </div>
 
-            <div class="col-12 col-md-3 col-lg-3 col-xl-3"></div>
-            <div class="col-12 col-md-4 col-lg-4 col-xl-4"></div>
-            <div class="col-12 col-md-3 col-lg-3 col-xl-3 pr-0 pull-right">
-              <button type="submit" (click)="postingService.post()"
-                class="btn btn-primary btn-sm float-right pull-right d-inline-block btn-rounded px-3"><span
-                  class="fa fa-send"></span><span>&nbsp;</span>
-                <ng-container *ngIf="postingService.feed_input_model.isNew && postingService.sharePostModel.inShareMode!=true" i18n>Post</ng-container>
-                <ng-container *ngIf="postingService.sharePostModel.inShareMode" i18n>Share</ng-container>
-                <ng-container *ngIf="postingService.feed_input_model.isNew!=true" i18n>Save</ng-container>
-              </button>
+          <div *ngIf="postingService.show_input_buttons" class="row px-0 m-0">
+            <div class="col-12 p-1">
+              <div class="row px-0 m-0">
+                <ng-container *ngIf="postingService.sharePostModel.inShareMode!=true">
+                  <div class="col-12 col-md-2 pl-0">
+                    <button *ngIf="linkPreviewSevice.links.length==0" (click)="postingService.SelectFeedUploadImage()"
+                      class="btn-circle btn-sm btn-outline-primary d-inline-block pull-left" title="Add Photo or Video">
+                      <span class="fa fa-camera align-middle color-primary" style="font-size:120%;"></span>
+                    </button>
+                  </div>
+                  <div class="col-12 col-md-1  pl-0 d-none">
+                    <button class="btn-circle btn-sm btn-outline-primary d-inline-block pull-left" title="Add Location">
+                      <span class="fa fa-map-marker align-middle color-primary" style="font-size:120%;"></span>
+                    </button>
+                  </div>
+                </ng-container>
+
+                <ng-container *ngIf="postingService.sharePostModel.inShareMode">
+                  <div class="col-12 col-md-2 col-lg-2 col-xl-2 d-none d-md-block d-lg-block d-xl-block"></div>
+                </ng-container>
+
+                <div class="col-12 col-md-3 col-lg-3 col-xl-3"></div>
+                <div class="col-12 col-md-4 col-lg-4 col-xl-4"></div>
+                <div class="col-12 col-md-3 col-lg-3 col-xl-3 pr-0 pull-right">
+                  <button type="submit" (click)="postingService.post()"
+                    class="btn btn-primary btn-sm float-right pull-right d-inline-block btn-rounded px-3"><span
+                      class="fa fa-send"></span><span>&nbsp;</span>
+                    <ng-container
+                      *ngIf="postingService.feed_input_model.isNew && postingService.sharePostModel.inShareMode!=true"
+                      i18n>
+                      Post</ng-container>
+                    <ng-container
+                      *ngIf="postingService.sharePostModel.inShareMode && postingService.feed_input_model.isNew==true"
+                      i18n>
+                      Share</ng-container>
+                    <ng-container *ngIf="postingService.feed_input_model.isNew!=true" i18n>Save</ng-container>
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
+        </form>
       </div>
-    </form>
-  </div>
-  <div *ngIf="postingService.show_input_buttons" class="d-none card-footer p-1">
-    <button type="submit" (click)="postingService.post()"
-      class="btn btn-primary btn-sm float-right d-inline-block btn-rounded  px-2"><span
-        class="fa fa-send"></span><span>&nbsp;</span>
-      <ng-container i18n>Post</ng-container>
-    </button>
-  </div>
-</div>
+      <div *ngIf="postingService.show_input_buttons" class="d-none card-footer p-1">
+        <button type="submit" (click)="postingService.post()"
+          class="btn btn-primary btn-sm float-right d-inline-block btn-rounded  px-2"><span
+            class="fa fa-send"></span><span>&nbsp;</span>
+          <ng-container i18n>Post</ng-container>
+        </button>
+      </div>
+    </div>
+  </app-wb-overlay-post-form-container>
+</ng-container>

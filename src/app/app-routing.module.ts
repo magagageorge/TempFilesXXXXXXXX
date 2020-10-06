@@ -55,10 +55,15 @@ const routes: Routes = [
     loadChildren: './messages/messages.module#MessagesModule'
   },
   {
-    path:'adsmanager',
-    canActivate:[AuthGuard],
-    loadChildren:'./ads-manager/ads-manager.module#AdsManagerModule'
-   },
+    path: 'adsmanager',
+    canActivate: [AuthGuard],
+    loadChildren: './ads-manager/ads-manager.module#AdsManagerModule'
+  },
+  {
+    path: 'pages',
+    canActivate: [AuthGuard],
+    loadChildren: './pages/woorbi-pages.module#WoorbiPagesModule'
+  },
   {
     path: ':url/:url_page',
     canActivate: [AuthGuard], // here we tell Angular to check the access with our AuthGuard
@@ -74,7 +79,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload',scrollPositionRestoration: 'top' })],
+  imports: [RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload', scrollPositionRestoration: 'top' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

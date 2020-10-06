@@ -1,0 +1,20 @@
+.navbar-page-nav{
+    background-color: transparent;
+}
+
+.navbar-page-nav .nav-item{
+    border-bottom: 3px solid transparent;
+    width: 20%;
+}
+
+.navbar-page-nav .nav-item:hover{
+    border-bottom: 3px solid #cfa9f1;
+}
+
+.navbar-page-nav .nav-item.active{
+    border-bottom: 3px solid #06274d;
+}
+
+.navbar-page-nav .nav-item.active:hover{
+    border-bottom: 3px solid #06274d;
+}

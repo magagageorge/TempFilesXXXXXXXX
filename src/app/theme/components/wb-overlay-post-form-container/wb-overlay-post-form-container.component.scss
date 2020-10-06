@@ -1,0 +1,56 @@
+main.content {
+    position: relative;
+    margin-top: 15px;
+    padding: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.wb-overlay-post-form-container {
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    z-index: 2100;
+    background-color: transparentize($color: #fff, $amount: 0.6);
+}
+
+header .navbar {
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+.float-left {
+    float: left;
+}
+
+.navbar .nav {
+    margin-top: 3px;
+}
+
+.navbar-nav .nav-link .fa {
+    font-size: 120%;
+}
+
+form .form-control {
+    border: 1px solid transparent;
+}
+
+form .form-rounded {
+    border-radius: 0px;
+}
+
+@media (max-width: 767px) {
+    main.content {
+        position: relative;
+        margin-top: 50px;
+        padding: 0px;
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+
+    .wb-overlay-post-form-container {
+        background-color: #fff;
+    }
+}

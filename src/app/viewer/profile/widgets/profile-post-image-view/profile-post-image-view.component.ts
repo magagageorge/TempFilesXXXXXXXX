@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, HostListener } from '@angular/core';
-import { ProfilePhotosService } from '@app/services/profile-photos.service';
 import { ImageIconsService } from '@app/services/image-icons.service';
+import { ProfilePhotosService } from '../../services/profile-photos.service';
 
 @Component({
   selector: 'app-profile-post-image-view',

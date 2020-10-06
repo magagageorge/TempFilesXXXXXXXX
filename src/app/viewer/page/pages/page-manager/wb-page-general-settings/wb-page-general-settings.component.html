@@ -1,0 +1,441 @@
+<div class="card p-0">
+    <div class="card-body p-0">
+
+        <ng-container *ngIf="loading_settings==false">
+            <form [formGroup]="settings_form">
+                <ul class="list-group w-100">
+                    <li class="list-group-item px-0">
+                        <div class="row mx-0">
+                            <div class="col-12 col-md-3 col-lg-3 col-xl-3">
+                                <span>Page Visibility</span>
+                            </div>
+                            <div class="col-10 col-md-7 col-lg-7 col-xl-8">
+                                <div class="d-block text-muted">
+                                    Page published
+                                </div>
+                                <div class="d-block">
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <div
+                                                class="custom-control custom-radio custom-control-inline pull-left w-100">
+                                                <input type="radio" class="custom-control-input"
+                                                    formControlName="published" name="published"
+                                                    [(ngModel)]="settingsModel.published"
+                                                    [checked]="settingsModel.published===1" id="published_Yes"
+                                                    name="published" value="1">
+                                                <label class="custom-control-label" for="published_Yes" i18n>Page
+                                                    Published</label>
+                                            </div>
+                                            <div
+                                                class="custom-control custom-radio custom-control-inline pull-left w-100">
+                                                <input type="radio" class="custom-control-input"
+                                                    formControlName="published" name="published"
+                                                    [(ngModel)]="settingsModel.published"
+                                                    [checked]="settingsModel.published===0" id="published_No"
+                                                    name="published" value="0">
+                                                <label class="custom-control-label" for="published_No" i18n>Page
+                                                    Unpublished</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-2 col-md-2 col-lg-1 col-xl-1">
+                                <div class="w-100 edit-button">
+                                    <span class="fa fa-pencil"></span>
+                                    <span>&nbsp;</span>
+                                    <span>Edit</span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="list-group-item px-0">
+                        <div class="row mx-0">
+                            <div class="col-12 col-md-3 col-lg-3 col-xl-3">
+                                <span>Visitors Posts</span>
+                            </div>
+                            <div class="col-10 col-md-7 col-lg-7 col-xl-8">
+                                <div class="d-block text-muted">
+                                    Choose who can post to your page.
+                                </div>
+                                <div class="d-block">
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <div
+                                                class="custom-control custom-radio custom-control-inline pull-left w-100">
+                                                <input type="radio" class="custom-control-input"
+                                                    formControlName="visitors_can_post" name="visitors_can_post"
+                                                    [(ngModel)]="settingsModel.visitors_can_post"
+                                                    [checked]="settingsModel.visitors_can_post===1"
+                                                    id="visitors_can_post_Yes" name="visitors_can_post" value="1">
+                                                <label class="custom-control-label" for="visitors_can_post_Yes"
+                                                    i18n>Allow
+                                                    visitors to the Page to publish Posts</label>
+                                            </div>
+                                            <div
+                                                class="custom-control custom-radio custom-control-inline pull-left w-100">
+                                                <input type="radio" class="custom-control-input"
+                                                    formControlName="visitors_can_post" name="visitors_can_post"
+                                                    [(ngModel)]="settingsModel.visitors_can_post"
+                                                    [checked]="settingsModel.visitors_can_post===0"
+                                                    id="visitors_can_post_No" name="visitors_can_post" value="0">
+                                                <label class="custom-control-label" for="visitors_can_post_No"
+                                                    i18n>Disable
+                                                    posts by other people on the Page</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-2 col-md-2 col-lg-1 col-xl-1">
+                                <div class="w-100 edit-button">
+                                    <span class="fa fa-pencil"></span>
+                                    <span>&nbsp;</span>
+                                    <span>Edit</span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item px-0">
+                        <div class="row mx-0">
+                            <div class="col-12 col-md-3 col-lg-3 col-xl-3">
+                                <span>Messaging</span>
+                            </div>
+                            <div class="col-10 col-md-7 col-lg-7 col-xl-8">
+                                <div class="d-block text-muted">
+                                    People can send Messages Privately
+                                </div>
+                                <div class="d-block">
+                                    <div class="row mx-0">
+                                        <div class="col-12 px-0 pull-left">
+                                            <div class="form-check m-0 p-0">
+                                                <input type="checkbox" formControlName="private_messages"
+                                                    [(ngModel)]="settingsModel.private_messages"
+                                                    class="form-check-input" id="private_messages">
+                                                <label for="private_messages">Allow people to contact my Page privately
+                                                    by
+                                                    showing the Message button.</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 px-0">
+                                            Turning messaging off will remove the Send Message button from your Page. It
+                                            will also hide all Page posts with Send Message buttons and prevent them
+                                            from
+                                            being boosted.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-2 col-md-2 col-lg-1 col-xl-1">
+                                <div class="w-100 edit-button">
+                                    <span class="fa fa-pencil"></span>
+                                    <span>&nbsp;</span>
+                                    <span>Edit</span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item px-0">
+                        <div class="row mx-0">
+                            <div class="col-12 col-md-3 col-lg-3 col-xl-3">
+                                <span>Country Restrictions</span>
+                            </div>
+                            <div class="col-10 col-md-7 col-lg-7 col-xl-8">
+                                <div class="d-block text-muted">
+                                    Page is Visible to Everyone
+                                </div>
+                                <div class="d-block">
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <div
+                                                class="custom-control custom-radio custom-control-inline pull-left w-100">
+                                                <input type="radio" class="custom-control-input"
+                                                    formControlName="country_restrictions" name="country_restrictions"
+                                                    [(ngModel)]="settingsModel.country_restrictions"
+                                                    [checked]="settingsModel.country_restrictions=='Show'"
+                                                    id="country_restrictions_Yes" name="country_restrictions"
+                                                    value="Show">
+                                                <label class="custom-control-label" for="country_restrictions_Yes"
+                                                    i18n>Only
+                                                    show this Page to viewers in these countries</label>
+                                            </div>
+                                            <div
+                                                class="custom-control custom-radio custom-control-inline pull-left w-100">
+                                                <input type="radio" class="custom-control-input"
+                                                    formControlName="country_restrictions" name="country_restrictions"
+                                                    [(ngModel)]="settingsModel.country_restrictions"
+                                                    [checked]="settingsModel.country_restrictions=='Hide'"
+                                                    id="country_restrictions_No" name="country_restrictions"
+                                                    value="Hide">
+                                                <label class="custom-control-label" for="country_restrictions_No"
+                                                    i18n>Hide
+                                                    this Page from viewers in these countries</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-2 col-md-2 col-lg-1 col-xl-1">
+                                <div class="w-100 edit-button">
+                                    <span class="fa fa-pencil"></span>
+                                    <span>&nbsp;</span>
+                                    <span>Edit</span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item px-0">
+                        <div class="row mx-0">
+                            <div class="col-12 col-md-3 col-lg-3 col-xl-3">
+                                <span>Age Restrictions</span>
+                            </div>
+                            <div class="col-10 col-md-7 col-lg-7 col-xl-8">
+                                <div class="d-block text-muted">
+                                    Page is shown to Everyone
+                                </div>
+                                <div class="d-block">
+
+                                </div>
+                            </div>
+                            <div class="col-2 col-md-2 col-lg-1 col-xl-1">
+                                <div class="w-100 edit-button">
+                                    <span class="fa fa-pencil"></span>
+                                    <span>&nbsp;</span>
+                                    <span>Edit</span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item px-0">
+                        <div class="row mx-0">
+                            <div class="col-12 col-md-3 col-lg-3 col-xl-3">
+                                <span>Page Moderation</span>
+                            </div>
+                            <div class="col-10 col-md-7 col-lg-7 col-xl-8">
+                                <div class="d-block text-muted">
+                                    No words are being block from my page.
+                                </div>
+                                <div class="d-block">
+
+                                </div>
+                            </div>
+                            <div class="col-2 col-md-2 col-lg-1 col-xl-1">
+                                <div class="w-100 edit-button">
+                                    <span class="fa fa-pencil"></span>
+                                    <span>&nbsp;</span>
+                                    <span>Edit</span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item px-0">
+                        <div class="row mx-0">
+                            <div class="col-12 col-md-3 col-lg-3 col-xl-3">
+                                <span>Profanity Filter</span>
+                            </div>
+                            <div class="col-10 col-md-7 col-lg-7 col-xl-8">
+                                <div class="d-block text-muted">
+                                    Turned off
+                                </div>
+                                <div class="d-block">
+
+                                </div>
+                            </div>
+                            <div class="col-2 col-md-2 col-lg-1 col-xl-1">
+                                <div class="w-100 edit-button">
+                                    <span class="fa fa-pencil"></span>
+                                    <span>&nbsp;</span>
+                                    <span>Edit</span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item px-0">
+                        <div class="row mx-0">
+                            <div class="col-12 col-md-3 col-lg-3 col-xl-3">
+                                <span>Page Updates</span>
+                            </div>
+                            <div class="col-10 col-md-7 col-lg-7 col-xl-8">
+                                <div class="d-block text-muted">
+                                    Page posts are automatically published when you update page information.
+                                </div>
+                                <div class="d-block">
+                                    <div class="row mx-0">
+                                        <div class="col-12 px-0 pull-left">
+                                            <div class="form-check m-0 p-0">
+                                                <input type="checkbox" formControlName="page_updates"
+                                                    [(ngModel)]="settingsModel.page_updates" class="form-check-input"
+                                                    id="page_updates">
+                                                <label for="page_updates">Automatically publish posts when information
+                                                    is
+                                                    updated on this Page.</label>
+                                            </div>
+                                            <span
+                                                title="Posts will be created when you update the Page buttons, description, phone number, address, business hours or website."><span
+                                                    class="fa fa-info-circle"></span></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-2 col-md-2 col-lg-1 col-xl-1">
+                                <div class="w-100 edit-button">
+                                    <span class="fa fa-pencil"></span>
+                                    <span>&nbsp;</span>
+                                    <span>Edit</span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item px-0">
+                        <div class="row mx-0">
+                            <div class="col-12 col-md-3 col-lg-3 col-xl-3">
+                                <span>Post In Multiple Languages</span>
+                            </div>
+                            <div class="col-10 col-md-7 col-lg-7 col-xl-8">
+                                <div class="d-block text-muted">
+                                    Ability to write posts in Multiple Languages in turned off.
+                                </div>
+                                <div class="d-block">
+                                    <div class="row mx-0">
+                                        <div class="col-12 px-0 pull-left">
+                                            <div class="form-check m-0 p-0">
+                                                <input type="checkbox" formControlName="post_multiple_language"
+                                                    [(ngModel)]="settingsModel.post_multiple_language"
+                                                    class="form-check-input" id="post_multiple_language">
+                                                <label for="post_multiple_language">Allow people who manage this page to
+                                                    write posts in multiple languages</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-2 col-md-2 col-lg-1 col-xl-1">
+                                <div class="w-100 edit-button">
+                                    <span class="fa fa-pencil"></span>
+                                    <span>&nbsp;</span>
+                                    <span>Edit</span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item px-0">
+                        <div class="row mx-0">
+                            <div class="col-12 col-md-3 col-lg-3 col-xl-3">
+                                <span>Transilate automatically</span>
+                            </div>
+                            <div class="col-10 col-md-7 col-lg-7 col-xl-8">
+                                <div class="d-block text-muted">
+                                    Your posts may show transilation automatically for people who read other languages.
+                                </div>
+                                <div class="d-block">
+                                    <div class="row mx-0">
+                                        <div class="col-12 px-0 pull-left">
+                                            <div class="form-check m-0 p-0">
+                                                <input type="checkbox" formControlName="translate_automatically"
+                                                    [(ngModel)]="settingsModel.translate_automatically"
+                                                    class="form-check-input" id="translate_automatically">
+                                                <label for="translate_automatically">Show people who understand other
+                                                    languages automatic translations of your posts when
+                                                    available</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-2 col-md-2 col-lg-1 col-xl-1">
+                                <div class="w-100 edit-button">
+                                    <span class="fa fa-pencil"></span>
+                                    <span>&nbsp;</span>
+                                    <span>Edit</span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item px-0">
+                        <div class="row mx-0">
+                            <div class="col-12 col-md-3 col-lg-3 col-xl-3">
+                                <span>Comment Ranking</span>
+                            </div>
+                            <div class="col-10 col-md-7 col-lg-7 col-xl-8">
+                                <div class="d-block text-muted">
+                                    Most relevant comments are shown for my Page posts by default.
+                                </div>
+                                <div class="d-block">
+                                    <div class="row mx-0">
+                                        <div class="col-12 px-0 pull-left">
+                                            <div class="form-check m-0 p-0">
+                                                <input type="checkbox" formControlName="comment_ranking"
+                                                    [(ngModel)]="settingsModel.comment_ranking" class="form-check-input"
+                                                    id="comment_ranking">
+                                                <label for="comment_ranking">See most relevant comments by
+                                                    default.</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-2 col-md-2 col-lg-1 col-xl-1">
+                                <div class="w-100 edit-button">
+                                    <span class="fa fa-pencil"></span>
+                                    <span>&nbsp;</span>
+                                    <span>Edit</span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item px-0">
+                        <div class="row mx-0">
+                            <div class="col-12 col-md-3 col-lg-3 col-xl-3">
+                                <span>Remove Page</span>
+                            </div>
+                            <div class="col-10 col-md-7 col-lg-7 col-xl-8">
+                                <div class="d-block text-muted">
+                                    Delete your Page
+                                </div>
+                                <div class="d-block w-100">
+                                    <div class="row mx-0">
+                                        <div class="col-12 px-0">
+                                            Deleting your Page means that nobody will be able to see or find it. Once
+                                            you've
+                                            clicked "Delete", you'll have 10 days to restore it in case you change your
+                                            mind. After that, you'll be asked to confirm if you want to delete it
+                                            permanently. If you choose to <a href="javascript:void(0)"
+                                                class="font-weight-bold">unpublish</a> instead, only admins will be able
+                                            to
+                                            see
+                                            your Page.
+                                        </div>
+                                        <div class="col-12 px-0">
+                                            <button class="btn btn-sm btn-danger px-2 py-1">Delete Page</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-2 col-md-2 col-lg-1 col-xl-1">
+                                <div class="w-100 edit-button">
+                                    <span class="fa fa-pencil"></span>
+                                    <span>&nbsp;</span>
+                                    <span>Edit</span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </form>
+        </ng-container>
+        <ng-container *ngIf="loading_settings==true">
+            <div clas="row mx-0">
+                <div class="col-12 d-flex justify-content-center align-items-center">
+                    <app-loading-circles></app-loading-circles>
+                </div>
+                <div class="col-12 d-flex justify-content-center align-items-center">
+                    <span>Loading...</span>
+                </div>
+            </div>
+        </ng-container>
+
+
+    </div>
+</div>

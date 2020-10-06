@@ -1,0 +1,53 @@
+<div class="card m-0 h-100 px-2 pt-2" style="padding-bottom: 50px;">
+    <div class="card-header bg-white px-0 py-1">
+        <div class="row mx-0 px-0">
+            <div class="col-12 p-0">
+                <h6 class="m-0 py-1 font-weight-bold">
+                    <span class="font-weight-bold wb-font-size-110">My Pages</span>
+                    <ng-container *ngIf="pageService.MYPAGES.length>0">
+                        <span>&nbsp;</span>
+                        <span class="badge badge-pill badge-primary box-shadow-none">
+                            {{pageService.MYPAGES.length}}
+                        </span>
+                    </ng-container>
+                </h6>
+            </div>
+            <div class="col-12 p-0" style="max-height: 50vh;overflow-y: auto;">
+                <ng-container *ngIf="pageService.MYPAGES.length>0">
+                    <ul class="list-group list-group-flush">
+                        <ng-container *ngFor="let mypage of pageService.MYPAGES;let i=index">
+                            <li class="list-group-item px-0 py-1 border-none">
+                                <a routerLink="/{{mypage.url}}" (click)="urlViewerService.setPage(mypage)"
+                                    class="p-0 m-0 text-decoration-none" style="text-decoration: none;">
+                                    <div class="row p-0 m-0">
+                                        <div class="col-2 p-0">
+                                            <ng-container *ngIf="mypage.picture!=null">
+                                                <img style="max-height:50px;" src="{{mypage.picture.face}}"
+                                                    class="img-fluid rounded-circle z-depth-0 m-0">
+                                            </ng-container>
+                                        </div>
+                                        <div class="col-10 p-0 d-flex align-items-center">
+                                            <div class="d-inline-block w-100 m-0 p-0 font-weight-bold text-truncate">
+                                                {{mypage.name}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                        </ng-container>
+                    </ul>
+                </ng-container>
+            </div>
+            <div class="col-12 p-0">
+                <div class="w-100 d-flex justify-content-center">
+                    <button (click)="pageService.createPageOnFly()" class="btn btn-sm btn-rounded btn-outline-primary">
+                        <span class="fa fa-plus-circle"></span>
+                        <span>&nbsp;</span>
+                        <span>Create New Page</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

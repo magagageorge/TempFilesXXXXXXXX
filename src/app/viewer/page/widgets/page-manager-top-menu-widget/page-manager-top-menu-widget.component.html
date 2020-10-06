@@ -1,0 +1,20 @@
+<!-- Navbar -->
+<nav class="navbar navbar-page-nav m-0 w-100 p-0 d-block d-md-none d-lg-none d-l-none">
+    <ul class="nav navbar-nav nav-flex-icons container-fluid d-inline-flex justify-content-center p-0 m-0 w-100">
+        <li class="nav-item d-inline-flex w-50 justify-content-center"
+            [class.active]="ActiveTab=='page'">
+            <a routerLink="/{{urlViewerService.VIEWER_URL}}"
+                class="nav-link waves-effect waves-light w-100 d-flex justify-content-center text-nowrap">
+                <span class="fa fa-flag m-1"></span>
+                <span class="clearfix font-weight-bold">Page</span>
+            </a>
+        </li>
+        <li class="nav-item d-inline-flex w-50" [class.active]="ActiveTab=='manage'">
+            <a routerLink="/{{urlViewerService.VIEWER_URL}}/manage"
+                class="nav-link waves-effect waves-light w-100 d-flex justify-content-center text-nowrap">
+                <span class="fa fa-gear m-1"></span>
+                <span class="clearfix font-weight-bold">Manage Page</span>
+            </a>
+        </li>
+    </ul>
+</nav>
