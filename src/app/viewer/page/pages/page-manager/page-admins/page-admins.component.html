@@ -1,7 +1,9 @@
-<div class="card p-0">
-    <div class="card-body p-1" style="min-height: 90vh;">
-        <div class="d-block w-100">
-            <h5>Add new Page User</h5>
+<div class="card p-0 m-md-1 m-lg-1 m-xl-1">
+    <div class="card-body px-0 py-1" style="min-height: 90vh;">
+        <div class="font-weight-bold wb-font-size-120 mx-2">Page Users Management</div>
+        <div class="d-block w-100 py-2">
+            <div class="font-weight-bold wb-font-size-120 mx-2">Add New Page User</div>
+            
             <br>
 
             <div class="row mx-0 border border-dark border-round">
@@ -112,7 +114,7 @@
             <br>
         </div>
         <div class="d-block w-100" style="z-index: 100;">
-            <h5>Page Users</h5>
+            <div class="font-weight-bold wb-font-size-120 mx-2">Page Users</div>
             <ng-container *ngIf="page_users.length > 0 && loading_users==false">
                 <ng-container *ngFor="let page_user of page_users">
                     <div class="row mx-0 border-bottom border-light">

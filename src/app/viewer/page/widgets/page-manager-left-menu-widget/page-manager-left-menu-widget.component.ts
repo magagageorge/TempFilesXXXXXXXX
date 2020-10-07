@@ -14,6 +14,7 @@ export class PageManagerLeftMenuWidgetComponent implements OnInit {
   constructor(public pageViewerService: PageViewerService) { }
 
   ngOnInit() {
+    this.autoActivateMenus();
   }
 
   ActivateMenu(menu: any) {
@@ -21,6 +22,17 @@ export class PageManagerLeftMenuWidgetComponent implements OnInit {
       menu.active = false;
     } else {
       menu.active = true
+    }
+  }
+
+  autoActivateMenus() {
+    if (this.pageViewerService.urlviewerService.VIEWER_URL_PAGE == 'notification-settings') {
+      this.ActivateMenu(this.dropDowns.settings);
+      this.ActivateMenu(this.dropDowns.settings.notifications);
+    }
+    if (this.pageViewerService.urlviewerService.VIEWER_URL_PAGE == 'general-settings') {
+      this.ActivateMenu(this.dropDowns.settings);
+      this.ActivateMenu(this.dropDowns.settings.general);
     }
   }
 

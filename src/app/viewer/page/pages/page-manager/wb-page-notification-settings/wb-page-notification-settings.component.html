@@ -1,30 +1,30 @@
-<div class="card p-0">
-    <div class="card-body p-0">
-
+<div class="card p-0 m-md-1 m-lg-1 m-xl-1">
+    <div class="card-body px-0 py-1">
+        <div class="font-weight-bold wb-font-size-120 mx-2">Notification Settings</div>
         <ng-container *ngIf="loading_settings==false">
             <form [formGroup]="settings_form">
                 <div class="row mx-0">
-                    <div class="col-12 col-md-3 col-lg-3 col-xl-3">
-                        <span>On Woorbi</span>
+                    <div class="col-12">
+                        <span class="font-weight-bold">On Woorbi</span>
                     </div>
                     <div class="col-12">
-                        <div class="d-block">
+                        <div class="d-block mx-2">
                             <div class="form-row">
                                 <div class="form-group">
                                     <div class="custom-control custom-radio custom-control-inline pull-left w-100">
-                                        <input type="radio" class="custom-control-input" formControlName="notify"
-                                            name="notify" [(ngModel)]="settingsModel.notify"
-                                            [checked]="settingsModel.notify===Instantly" id="notify_Instantly"
-                                            name="notify" value="Instantly">
+                                        <input type="radio" (click)="saveSettings()" class="custom-control-input"
+                                            formControlName="notify" name="notify" [(ngModel)]="settingsModel.notify"
+                                            [checked]="settingsModel.notify=='Instantly'" id="notify_Instantly"
+                                            value="Instantly">
                                         <label class="custom-control-label" for="notify_Instantly" i18n>Get a
                                             notification each time there is activity on your Page or an
                                             important Page update.</label>
                                     </div>
                                     <div class="custom-control custom-radio custom-control-inline pull-left w-100">
-                                        <input type="radio" class="custom-control-input" formControlName="notify"
-                                            name="notify" [(ngModel)]="settingsModel.notify"
+                                        <input type="radio" (click)="saveSettings()" class="custom-control-input"
+                                            formControlName="notify" name="notify" [(ngModel)]="settingsModel.notify"
                                             [checked]="settingsModel.notify=='Intervals'" id="notify_Intervals"
-                                            name="notify" value="Intervals">
+                                            value="Intervals">
                                         <label class="custom-control-label" for="notify_Intervals" i18n>Get one
                                             notification every 12–24 hours on all activity and updates on your
                                             Page during that time.
@@ -32,17 +32,313 @@
                                     </div>
 
                                     <div class="custom-control custom-radio custom-control-inline pull-left w-100">
-                                        <input type="radio" class="custom-control-input" formControlName="notify"
-                                            name="notify" [(ngModel)]="settingsModel.notify"
-                                            [checked]="settingsModel.notify=='Off'" id="notify_Off" name="notify"
-                                            value="Off">
+                                        <input type="radio" (click)="saveSettings()" class="custom-control-input"
+                                            formControlName="notify" name="notify" [(ngModel)]="settingsModel.notify"
+                                            [checked]="settingsModel.notify=='Off'" id="notify_Off" value="Off">
                                         <label class="custom-control-label" for="notify_Off" i18n>Off</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mx-0">
+                                <div class="col-12">
+                                    <span class="font-weight-bold">Edit your notification settings for:</span>
+                                </div>
+                                <div class="col-12 col-md-8 col-lg-8 col-xl-8">
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item p-0">
+                                            <div class="row m-0">
+                                                <div class="col-12 col-md-9 col-lg-9 col-xl-9 px-0">
+                                                    <div>New Page mention</div>
+                                                </div>
+                                                <div class="col-12 col-md-3 col-lg-3 col-xl-3 p-0">
+                                                    <div class="form-group m-0">
+                                                        <div class="switch">
+                                                            <label>
+                                                                Off
+                                                                <input type="checkbox" formControlName="page_mentioned"
+                                                                    (change)="saveSettings()"
+                                                                    [(ngModel)]="settingsModel.page_mentioned">
+                                                                <span class="lever"></span> On
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item p-0">
+                                            <div class="row mx-0">
+                                                <div class="col-12 col-md-9 col-lg-9 col-xl-9 px-0">
+                                                    <div>New Page review</div>
+                                                </div>
+                                                <div class="col-12 col-md-3 col-lg-3 col-xl-3 p-0">
+                                                    <div class="form-group m-0">
+                                                        <div class="switch">
+                                                            <label>
+                                                                Off
+                                                                <input type="checkbox" formControlName="page_review"
+                                                                    (change)="saveSettings()"
+                                                                    [(ngModel)]="settingsModel.page_review">
+                                                                <span class="lever"></span> On
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item p-0">
+                                            <div class="row mx-0">
+                                                <div class="col-12 col-md-9 col-lg-9 col-xl-9 px-0">
+                                                    <div>New followers of Page</div>
+                                                </div>
+                                                <div class="col-12 col-md-3 col-lg-3 col-xl-3 p-0">
+                                                    <div class="form-group m-0">
+                                                        <div class="switch">
+                                                            <label>
+                                                                Off
+                                                                <input type="checkbox" formControlName="page_followed"
+                                                                    (change)="saveSettings()"
+                                                                    [(ngModel)]="settingsModel.page_followed">
+                                                                <span class="lever"></span> On
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item p-0">
+                                            <div class="row mx-0">
+                                                <div class="col-12 col-md-9 col-lg-9 col-xl-9 px-0">
+                                                    <div>New post comment</div>
+                                                </div>
+                                                <div class="col-12 col-md-3 col-lg-3 col-xl-3 p-0">
+                                                    <div class="form-group m-0">
+                                                        <div class="switch">
+                                                            <label>
+                                                                Off
+                                                                <input type="checkbox" formControlName="post_commented"
+                                                                    (change)="saveSettings()"
+                                                                    [(ngModel)]="settingsModel.post_commented">
+                                                                <span class="lever"></span> On
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item p-0">
+                                            <div class="row mx-0">
+                                                <div class="col-12 col-md-9 col-lg-9 col-xl-9 px-0">
+                                                    <div>New shares for Page posts</div>
+                                                </div>
+                                                <div class="col-12 col-md-3 col-lg-3 col-xl-3 p-0">
+                                                    <div class="form-group m-0">
+                                                        <div class="switch">
+                                                            <label>
+                                                                Off
+                                                                <input type="checkbox" formControlName="post_shared"
+                                                                    (change)="saveSettings()"
+                                                                    [(ngModel)]="settingsModel.post_shared">
+                                                                <span class="lever"></span> On
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item p-0">
+                                            <div class="row mx-0">
+                                                <div class="col-12 col-md-9 col-lg-9 col-xl-9 px-0">
+                                                    <div>New Likes on Page post</div>
+                                                </div>
+                                                <div class="col-12 col-md-3 col-lg-3 col-xl-3 p-0">
+                                                    <div class="form-group m-0">
+                                                        <div class="switch">
+                                                            <label>
+                                                                Off
+                                                                <input type="checkbox" formControlName="post_likes"
+                                                                    (change)="saveSettings()"
+                                                                    [(ngModel)]="settingsModel.post_likes">
+                                                                <span class="lever"></span> On
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item p-0">
+                                            <div class="row mx-0">
+                                                <div class="col-12 col-md-9 col-lg-9 col-xl-9 px-0">
+                                                    <div>New Like on Page Comment</div>
+                                                </div>
+                                                <div class="col-12 col-md-3 col-lg-3 col-xl-3 p-0">
+                                                    <div class="form-group m-0">
+                                                        <div class="switch">
+                                                            <label>
+                                                                Off
+                                                                <input type="checkbox" formControlName="comment_likes"
+                                                                    (change)="saveSettings()"
+                                                                    [(ngModel)]="settingsModel.comment_likes">
+                                                                <span class="lever"></span> On
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item p-0">
+                                            <div class="row mx-0">
+                                                <div class="col-12 col-md-9 col-lg-9 col-xl-9 px-0">
+                                                    <div>Edits to Posts you have written</div>
+                                                </div>
+                                                <div class="col-12 col-md-3 col-lg-3 col-xl-3 p-0">
+                                                    <div class="form-group m-0">
+                                                        <div class="switch">
+                                                            <label>
+                                                                Off
+                                                                <input type="checkbox"
+                                                                    formControlName="edit_on_page_post"
+                                                                    (change)="saveSettings()"
+                                                                    [(ngModel)]="settingsModel.edit_on_page_post">
+                                                                <span class="lever"></span> On
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item p-0">
+                                            <div class="row mx-0">
+                                                <div class="col-12 col-md-9 col-lg-9 col-xl-9 px-0">
+                                                    <div>Edits to Comments you have written</div>
+                                                </div>
+                                                <div class="col-12 col-md-3 col-lg-3 col-xl-3 p-0">
+                                                    <div class="form-group m-0">
+                                                        <div class="switch">
+                                                            <label>
+                                                                Off
+                                                                <input type="checkbox"
+                                                                    formControlName="edit_on_page_comment"
+                                                                    (change)="saveSettings()"
+                                                                    [(ngModel)]="settingsModel.edit_on_page_comment">
+                                                                <span class="lever"></span> On
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item p-0">
+                                            <div class="row mx-0">
+                                                <div class="col-12 col-md-9 col-lg-9 col-xl-9 px-0">
+                                                    <div>When the is a new Incoming Page Message</div>
+                                                </div>
+                                                <div class="col-12 col-md-3 col-lg-3 col-xl-3 p-0">
+                                                    <div class="form-group m-0">
+                                                        <div class="switch">
+                                                            <label>
+                                                                Off
+                                                                <input type="checkbox"
+                                                                    formControlName="page_sent_message"
+                                                                    (change)="saveSettings()"
+                                                                    [(ngModel)]="settingsModel.page_sent_message">
+                                                                <span class="lever"></span> On
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <span class="font-weight-bold"> <span
+                                class="fa fa-comments-o"></span><span>&nbsp;</span><span>Messages</span></span>
+                        <div class="d-block">
+                            Get a notification when someone sends your Page a message on Woorbi Chat. Push notifications
+                            for the Pages
+                            Manager app can be managed on the app.
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="d-block mx-2">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <div class="custom-control custom-radio custom-control-inline pull-left w-100">
+                                        <input type="radio" (click)="saveSettings()" class="custom-control-input"
+                                            formControlName="messages" name="messages"
+                                            [(ngModel)]="settingsModel.messages"
+                                            [checked]="settingsModel.messages=='On'" id="messages_On" value="On">
+                                        <label class="custom-control-label" for="messages_On" i18n>On</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline pull-left w-100">
+                                        <input type="radio" (click)="saveSettings()" class="custom-control-input"
+                                            formControlName="messages" name="messages"
+                                            [(ngModel)]="settingsModel.messages"
+                                            [checked]="settingsModel.messages=='Off'" id="messages_Off" value="Off">
+                                        <label class="custom-control-label" for="messages_Off" i18n>Off</label>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
+                    <div class="col-12">
+                        <span class="font-weight-bold"> <span
+                                class="fa fa-envelope-o"></span><span>&nbsp;</span><span>Email</span></span>
+                    </div>
+                    <div class="col-12">
+                        <div class="d-block mx-2">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <div class="custom-control custom-radio custom-control-inline pull-left w-100">
+                                        <input type="radio" (click)="saveSettings()" class="custom-control-input"
+                                            formControlName="email" name="email" [(ngModel)]="settingsModel.email"
+                                            [checked]="settingsModel.email=='On'" id="email_On" value="On">
+                                        <label class="custom-control-label" for="email_On" i18n>Get an email each time
+                                            there
+                                            is activity on your Page or an important Page update.</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline pull-left w-100">
+                                        <input type="radio" (click)="saveSettings()" class="custom-control-input"
+                                            formControlName="email" name="email" [(ngModel)]="settingsModel.email"
+                                            [checked]="settingsModel.email=='Off'" id="email_Off" value="Off">
+                                        <label class="custom-control-label" for="email_Off" i18n>Off</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <span class="font-weight-bold"> <span class="fa fa-mobile"></span><span>&nbsp;</span><span>Text
+                                Messages</span></span>
+                    </div>
+                    <div class="col-12">
+                        <div class="d-block mx-2">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <div class="custom-control custom-radio custom-control-inline pull-left w-100">
+                                        <input type="radio" (click)="saveSettings()" class="custom-control-input"
+                                            formControlName="text_messages" name="text_messages"
+                                            [(ngModel)]="settingsModel.text_messages"
+                                            [checked]="settingsModel.text_messages=='On'" id="text_messages_On"
+                                            value="On">
+                                        <label class="custom-control-label" for="text_messages_On" i18n>On</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline pull-left w-100">
+                                        <input type="radio" (click)="saveSettings()" class="custom-control-input"
+                                            formControlName="text_messages" name="text_messages"
+                                            [(ngModel)]="settingsModel.text_messages"
+                                            [checked]="settingsModel.text_messages=='Off'" id="text_messages_Off"
+                                            value="Off">
+                                        <label class="custom-control-label" for="text_messages_Off" i18n>Off</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </form>
         </ng-container>

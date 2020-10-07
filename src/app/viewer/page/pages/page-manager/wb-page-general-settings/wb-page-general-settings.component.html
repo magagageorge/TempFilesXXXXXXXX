@@ -1,9 +1,9 @@
-<div class="card p-0">
-    <div class="card-body p-0">
-
+<div class="card p-0 m-md-1 m-lg-1 m-xl-1">
+    <div class="card-body px-0 py-1">
+        <div class="font-weight-bold wb-font-size-120 mx-2">General Settings</div>
         <ng-container *ngIf="loading_settings==false">
             <form [formGroup]="settings_form">
-                <ul class="list-group w-100">
+                <ul class="list-group list-group-flush w-100">
                     <li class="list-group-item px-0">
                         <div class="row mx-0">
                             <div class="col-12 col-md-3 col-lg-3 col-xl-3">
@@ -11,7 +11,7 @@
                             </div>
                             <div class="col-10 col-md-7 col-lg-7 col-xl-8">
                                 <div class="d-block text-muted">
-                                    Page published
+                                    {{GENERAL_SETTINGS.published[settingsModel.published]}}
                                 </div>
                                 <div class="d-block">
                                     <div class="form-row">
@@ -57,7 +57,7 @@
                             </div>
                             <div class="col-10 col-md-7 col-lg-7 col-xl-8">
                                 <div class="d-block text-muted">
-                                    Choose who can post to your page.
+                                    {{GENERAL_SETTINGS.visitors_can_post[settingsModel.visitors_can_post]}}
                                 </div>
                                 <div class="d-block">
                                     <div class="form-row">
@@ -104,7 +104,7 @@
                             </div>
                             <div class="col-10 col-md-7 col-lg-7 col-xl-8">
                                 <div class="d-block text-muted">
-                                    People can send Messages Privately
+                                    {{GENERAL_SETTINGS.private_messages[settingsModel.private_messages]}}
                                 </div>
                                 <div class="d-block">
                                     <div class="row mx-0">
@@ -143,7 +143,7 @@
                             </div>
                             <div class="col-10 col-md-7 col-lg-7 col-xl-8">
                                 <div class="d-block text-muted">
-                                    Page is Visible to Everyone
+                                    {{GENERAL_SETTINGS.country_restrictions[settingsModel.country_restrictions]}}
                                 </div>
                                 <div class="d-block">
                                     <div class="form-row">
@@ -192,10 +192,22 @@
                             </div>
                             <div class="col-10 col-md-7 col-lg-7 col-xl-8">
                                 <div class="d-block text-muted">
-                                    Page is shown to Everyone
+                                    {{GENERAL_SETTINGS.age_restrictions[settingsModel.age_restrictions]}}
                                 </div>
                                 <div class="d-block">
-
+                                    <div class="form-row mx-0">
+                                        <div class="form-group">
+                                            <select formControlName="age_restrictions"
+                                            [(ngModel)]="settingsModel.age_restrictions" class="form-check-input"
+                                            id="age_restrictions">
+                                            <option value="1">Public</option>
+                                            <option value="17">People 17 and over</option>
+                                            <option value="18">People 18 and over</option>
+                                            <option value="19">People 19 and over</option>
+                                            <option value="21">People 21 and over</option>
+                                        </select>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-2 col-md-2 col-lg-1 col-xl-1">
@@ -214,7 +226,7 @@
                             </div>
                             <div class="col-10 col-md-7 col-lg-7 col-xl-8">
                                 <div class="d-block text-muted">
-                                    No words are being block from my page.
+                                    {{GENERAL_SETTINGS.page_moderation[settingsModel.page_moderation]}}
                                 </div>
                                 <div class="d-block">
 
@@ -236,10 +248,19 @@
                             </div>
                             <div class="col-10 col-md-7 col-lg-7 col-xl-8">
                                 <div class="d-block text-muted">
-                                    Turned off
+                                    {{GENERAL_SETTINGS.profanity_filter[settingsModel.profanity_filter]}}
                                 </div>
                                 <div class="d-block">
-
+                                    <div class="form-row mx-0">
+                                        <div class="form-group">
+                                            <select formControlName="profanity_filter"
+                                                [(ngModel)]="settingsModel.profanity_filter" class="form-check-input"
+                                                id="profanity_filter">
+                                                <option value="0">Off</option>
+                                                <option value="1">On</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-2 col-md-2 col-lg-1 col-xl-1">
@@ -258,7 +279,7 @@
                             </div>
                             <div class="col-10 col-md-7 col-lg-7 col-xl-8">
                                 <div class="d-block text-muted">
-                                    Page posts are automatically published when you update page information.
+                                    {{GENERAL_SETTINGS.page_updates[settingsModel.page_updates]}}
                                 </div>
                                 <div class="d-block">
                                     <div class="row mx-0">
@@ -294,7 +315,7 @@
                             </div>
                             <div class="col-10 col-md-7 col-lg-7 col-xl-8">
                                 <div class="d-block text-muted">
-                                    Ability to write posts in Multiple Languages in turned off.
+                                    {{GENERAL_SETTINGS.post_multiple_language[settingsModel.post_multiple_language]}}
                                 </div>
                                 <div class="d-block">
                                     <div class="row mx-0">
@@ -322,7 +343,7 @@
                     <li class="list-group-item px-0">
                         <div class="row mx-0">
                             <div class="col-12 col-md-3 col-lg-3 col-xl-3">
-                                <span>Transilate automatically</span>
+                                <span>{{GENERAL_SETTINGS.translate_automatically[settingsModel.translate_automatically]}}</span>
                             </div>
                             <div class="col-10 col-md-7 col-lg-7 col-xl-8">
                                 <div class="d-block text-muted">
@@ -359,7 +380,7 @@
                             </div>
                             <div class="col-10 col-md-7 col-lg-7 col-xl-8">
                                 <div class="d-block text-muted">
-                                    Most relevant comments are shown for my Page posts by default.
+                                    {{GENERAL_SETTINGS.comment_ranking[settingsModel.comment_ranking]}}
                                 </div>
                                 <div class="d-block">
                                     <div class="row mx-0">
@@ -391,7 +412,7 @@
                             </div>
                             <div class="col-10 col-md-7 col-lg-7 col-xl-8">
                                 <div class="d-block text-muted">
-                                    Delete your Page
+                                    {{GENERAL_SETTINGS.page_deletion[settingsModel.page_deletion]}}
                                 </div>
                                 <div class="d-block w-100">
                                     <div class="row mx-0">
@@ -425,6 +446,7 @@
                 </ul>
             </form>
         </ng-container>
+
         <ng-container *ngIf="loading_settings==true">
             <div clas="row mx-0">
                 <div class="col-12 d-flex justify-content-center align-items-center">

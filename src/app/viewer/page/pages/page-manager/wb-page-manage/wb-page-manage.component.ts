@@ -8,9 +8,18 @@ import { PageViewerService } from '@app/viewer/page/services/page-viewer.service
 })
 export class WbPageManageComponent implements OnInit {
 
+  dropDowns: any = { settings: { active: false, general: { active: false }, notifications: { active: false } } };
+
   constructor(public pageViewerService: PageViewerService) { }
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  ActivateMenu(menu: any) {
+    if (menu.active == true) {
+      menu.active = false;
+    } else {
+      menu.active = true
+    }
   }
 
 }

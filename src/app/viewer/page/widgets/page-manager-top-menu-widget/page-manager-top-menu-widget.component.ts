@@ -29,7 +29,8 @@ export class PageManagerTopMenuWidgetComponent implements OnInit {
     if (this.urlViewerService.VIEWER_URL_PAGE == 'manage'
       || this.urlViewerService.VIEWER_URL_PAGE == 'notifications'
       || this.urlViewerService.VIEWER_URL_PAGE == 'page-admins'
-      || this.urlViewerService.VIEWER_URL_PAGE == 'settings'
+      || this.urlViewerService.VIEWER_URL_PAGE == 'notification-settings'
+      || this.urlViewerService.VIEWER_URL_PAGE == 'general-settings'
     ) {
       return 'manage';
     }

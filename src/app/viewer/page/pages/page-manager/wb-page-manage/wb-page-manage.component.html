@@ -1,6 +1,6 @@
 <div class="card p-0 w-100" style="padding-bottom: 50px;min-height: 60vh;">
     <div class="card-body p-0 my-2" style="overflow-y: auto;">
-        <ul class="list-group w-100 mx-0">
+        <ul class="list-group list-group-flush 100 mx-0">
             <li class="list-group-item pl-1 py-1">
                 <a routerLink="/{{pageViewerService.urlviewerService.PPVIEWER.page.url}}/notifications"
                     class="d-block m-0 p-2 wb-font-size-120">
@@ -19,12 +19,43 @@
                     </a>
                 </li>
                 <li class="list-group-item pl-1 py-1">
-                    <a routerLink="/{{pageViewerService.urlviewerService.PPVIEWER.page.url}}/settings"
-                        class="d-block m-0 p-2 wb-font-size-120">
+                    <a href="javascript:void(0)" class="d-block m-0 p-2 wb-font-size-120 w-100"
+                        [class.text-primary]="dropDowns.settings.active" (click)="ActivateMenu(dropDowns.settings)">
                         <span class="fa fa-gear"></span>
                         <span>&nbsp;</span>
                         <span>Settings</span>
+
+                        <ng-container *ngIf="dropDowns.settings.active">
+                            <span class="fa fa-chevron-up pull-right"></span>
+                        </ng-container>
+                        <ng-container *ngIf="dropDowns.settings.active==false">
+                            <span class="fa fa-chevron-down pull-right"></span>
+                        </ng-container>
                     </a>
+                    <ng-container *ngIf="dropDowns.settings.active">
+                        <ul class="list-group list-group-flush ml-3">
+                            <li class="list-group-item pl-1 py-1">
+                                <a routerLink="/{{pageViewerService.urlviewerService.PPVIEWER.page.url}}/general-settings"
+                                    class="d-block m-0 p-2 wb-font-size-120" 
+                                    [class.text-primary]="dropDowns.settings.general.active"
+                                    (click)="ActivateMenu(dropDowns.settings.general)">
+                                    <span class="fa fa-gear"></span>
+                                    <span>&nbsp;</span>
+                                    <span>General Settings</span>
+                                </a>
+                            </li>
+                            <li class="list-group-item pl-1 py-1">
+                                <a routerLink="/{{pageViewerService.urlviewerService.PPVIEWER.page.url}}/notification-settings"
+                                    class="d-block m-0 p-2 wb-font-size-120" 
+                                    [class.text-primary]="dropDowns.settings.notifications.active"
+                                    (click)="ActivateMenu(dropDowns.settings.notifications)">
+                                    <span class="fa fa-globe"></span>
+                                    <span>&nbsp;</span>
+                                    <span>Notification Settings</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </ng-container>
                 </li>
             </ng-container>
         </ul>
