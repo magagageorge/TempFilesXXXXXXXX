@@ -41,6 +41,7 @@ import { PageAdminsComponent } from './pages/page-manager/page-admins/page-admin
 import { PageManagerTopMenuWidgetComponent } from './widgets/page-manager-top-menu-widget/page-manager-top-menu-widget.component';
 import { WbPageManageComponent } from './pages/page-manager/wb-page-manage/wb-page-manage.component';
 import { WbPageNotificationSettingsComponent } from './pages/page-manager/wb-page-notification-settings/wb-page-notification-settings.component';
+import { PageNotificationWidgetComponent } from './widgets/page-notification-widget/page-notification-widget.component';
 
 @NgModule({
   imports: [
@@ -55,7 +56,7 @@ import { WbPageNotificationSettingsComponent } from './pages/page-manager/wb-pag
     WfHoverCardModule.forRoot(),
     ImageCropperModule
   ],
-  declarations: [PageComponent, HomePageComponent, AboutPageComponent, PhotosPageComponent, ProductsPageComponent, ServicesPageComponent, ShopPageComponent, PageHeaderComponent, PageActionsButtonsWidgetComponent, PageTitleWidgetComponent, PageNavWidgetComponent, PageAboutWidgetComponent, WbPageMainContentComponent, WbPageManagerContentContainerComponent, PageManagerLeftMenuWidgetComponent, WbPageContentRoutingComponent, CropPagePictureWidgetComponent, CropPageCoverWidgetComponent, EditPagePictureOptionsWidgetComponent, EditPageCoverOptionsWidgetComponent, EditPageOverlayContainerComponent, EditPageInfoWidgetComponent, CreatePagePostButtonsWidgetsComponent, PageFeedWidgetComponent, PagePhotosSummaryWidgetComponent, PagePhotosWidgetComponent, PageImagesOverlayViewComponent, WbPageNotificationsComponent, WbPageGeneralSettingsComponent, PageAdminsComponent, PageManagerTopMenuWidgetComponent, WbPageManageComponent, WbPageNotificationSettingsComponent],
+  declarations: [PageComponent, HomePageComponent, AboutPageComponent, PhotosPageComponent, ProductsPageComponent, ServicesPageComponent, ShopPageComponent, PageHeaderComponent, PageActionsButtonsWidgetComponent, PageTitleWidgetComponent, PageNavWidgetComponent, PageAboutWidgetComponent, WbPageMainContentComponent, WbPageManagerContentContainerComponent, PageManagerLeftMenuWidgetComponent, WbPageContentRoutingComponent, CropPagePictureWidgetComponent, CropPageCoverWidgetComponent, EditPagePictureOptionsWidgetComponent, EditPageCoverOptionsWidgetComponent, EditPageOverlayContainerComponent, EditPageInfoWidgetComponent, CreatePagePostButtonsWidgetsComponent, PageFeedWidgetComponent, PagePhotosSummaryWidgetComponent, PagePhotosWidgetComponent, PageImagesOverlayViewComponent, WbPageNotificationsComponent, WbPageGeneralSettingsComponent, PageAdminsComponent, PageManagerTopMenuWidgetComponent, WbPageManageComponent, WbPageNotificationSettingsComponent, PageNotificationWidgetComponent],
   exports: [PageComponent, HomePageComponent, AboutPageComponent, PhotosPageComponent, ProductsPageComponent, ServicesPageComponent, ShopPageComponent, PageHeaderComponent, WbPageMainContentComponent,WbPageManagerContentContainerComponent, PageManagerLeftMenuWidgetComponent, WbPageContentRoutingComponent, CropPagePictureWidgetComponent, CropPageCoverWidgetComponent, EditPagePictureOptionsWidgetComponent, EditPageCoverOptionsWidgetComponent, EditPageOverlayContainerComponent, EditPageInfoWidgetComponent,CreatePagePostButtonsWidgetsComponent]
 })
 export class PageModule { }

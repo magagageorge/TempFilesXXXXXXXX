@@ -1,8 +1,11 @@
 <ng-container *ngIf="i_follow==true">
-    <button type="button" (click)="following()"
-        class="btn btn-primary btn-sm btn-rounded waves-effect shadow-none">Following</button>
+    <button type="button" (click)="following()" class="btn btn-follow btn-following btn-rounded shadow-none">
+        <span class="following"><span><i class="fa fa-check"
+                    aria-hidden="true"></i>&nbsp;</span><span>Following</span></span>
+        <span class="unfollow">Unfollow</span>
+    </button>
 </ng-container>
 <ng-container *ngIf="i_follow==false">
     <button type="button" (click)="following()"
-        class="btn btn-outline-primary btn-sm btn-rounded waves-effect shadow-none">Follow</button>
+        class="btn btn-outline-primary btn-follow btn-rounded shadow-none">Follow</button>
 </ng-container>

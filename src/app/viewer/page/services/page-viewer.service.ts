@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { UrlViewerService } from '@app/services/url-viewer.service';
 import { PageFeedService } from './page-feed.service';
+import { PageNotificationService } from './page-notification.service';
 import { PagePhotosService } from './page-photos.service';
 
 @Injectable({
@@ -15,7 +16,7 @@ export class PageViewerService {
   pageCoverHeight: number;
   pageCoverHeaderHeight: number;
   last_page_url: string = '';
-  constructor(public urlviewerService: UrlViewerService, public pageFeedService: PageFeedService, public pagePhotosService: PagePhotosService) {
+  constructor(public urlviewerService: UrlViewerService, public pageNotificationService: PageNotificationService, public pageFeedService: PageFeedService, public pagePhotosService: PagePhotosService) {
     this.pageCoverWidth = 720;
     this.pageCoverHeight = 240;
     this.pageCoverHeaderHeight = 240;
@@ -46,9 +47,12 @@ export class PageViewerService {
     this.pageFeedService.feeds = [];
     this.pagePhotosService.feeds = [];
     this.pagePhotosService.pagePhotos = [];
+    this.pageNotificationService.reset();
     this.pageFeedService.page_id = this.urlviewerService.PPVIEWER.page.id;
     this.pagePhotosService.page_id = this.urlviewerService.PPVIEWER.page.id;
+    this.pageNotificationService.page_id = this.urlviewerService.PPVIEWER.page.id;
     this.pageFeedService.loadFeed({ p: this.urlviewerService.PPVIEWER.page.id, page: 1 });
     this.pagePhotosService.loadPhotos({ p: this.urlviewerService.PPVIEWER.page.id, page: 1 });
   }
+
 }

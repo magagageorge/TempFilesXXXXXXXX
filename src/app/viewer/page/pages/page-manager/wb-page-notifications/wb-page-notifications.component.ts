@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PageNotificationService } from '@app/viewer/page/services/page-notification.service';
 
 @Component({
   selector: 'app-wb-page-notifications',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WbPageNotificationsComponent implements OnInit {
 
-  constructor() { }
+  
+  constructor(public notificationsService: PageNotificationService) { }
 
   ngOnInit() {
+    if (this.notificationsService.NOTIFICATIONS.length == 0) {
+      this.notificationsService.initialLoad();
+    }
   }
 
 }

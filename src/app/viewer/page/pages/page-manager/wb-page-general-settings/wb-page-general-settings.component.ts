@@ -56,7 +56,6 @@ export class WbPageGeneralSettingsComponent implements OnInit {
       this.page_id = this.editPageService.urlViewerService.PPVIEWER.page.id;
       this.loadSettings({ id: this.editPageService.urlViewerService.PPVIEWER.page.id });
     }
-
   }
 
   get f() {
