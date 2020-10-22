@@ -105,82 +105,8 @@ export class FeedService {
     return of(this.feeds.find((feed: Feed) => feed.id == id));
   }
 
-
-  hidePost(post_id: number) {
-    var _this = this;
-    this.searchFeed(post_id).subscribe(feed => {
-      if (feed) {
-        feed.hidden_post = true;
-      }
-    });
-    this.service.getProvider(this.provider).crudconfig.route_url = 'feed/feed-hide/';
-    this.service.create(this.provider, { object_id: post_id }, {}).subscribe(function (result) {
-      if (result.isSuccess()) {
-        var data = result.getResultData();
-        if (data != true) {
-          _this.searchFeed(post_id).subscribe(feed => {
-            if (feed) {
-              feed.hidden_post = false;
-            }
-          });
-        }
-      }
-      else {
-        _this.errors = result.getErrors();
-
-      }
-    });
-  }
-
-  unhidePost(post_id: number) {
-    var _this = this;
-    this.errors = this.messages = [];
-    this.searchFeed(post_id).subscribe(feed => {
-      if (feed) {
-        feed.unhidding_post = true;
-      }
-    });
-    this.service.getProvider(this.provider).crudconfig.route_url = 'feed/feed-hide/';
-    this.service.delete(this.provider, { id: post_id }).subscribe(function (result) {
-      if (result.isSuccess()) {
-        var data = result.getResultData();
-        if (data == true) {
-          _this.searchFeed(post_id).subscribe(feed => {
-            if (feed) {
-              feed.unhidding_post = false;
-              feed.hidden_post = false;
-            }
-          });
-        } else {
-
-        }
-      } else {
-        _this.errors = result.getErrors();
-      }
-    });
-  }
-
   deletePost(id: number) {
-    //let elem:Element = document.getElementById("comment_item_"+comment.object_id+"_"+comment.id);
-    let elem: HTMLElement = document.querySelector("#feed_item_" + id);
-    elem.style.opacity = '0.6';
-    this.clearFeed(id);
-    var _this = this;
-    this.errors = this.messages = [];
-    this.modalRef.close();
-    this.service.getProvider(this.provider).crudconfig.route_url = 'feed/p/';
-    this.service.delete(this.provider, { id: id }).subscribe(function (result) {
-      if (result.isSuccess()) {
-        var data = result.getResultData();
-        if (data == true) {
-        } else {
-          elem.style.opacity = '1';
-        }
-      } else {
-        _this.errors = result.getErrors();
-        elem.style.opacity = '1';
-      }
-    });
+    /** THIS FUNCTION IS TO BE REMOVED */
   }
 
   clearFeed(feed_id: number) {
@@ -188,11 +114,11 @@ export class FeedService {
     this.feeds = this.feeds.filter((x: any) => x.id !== feed_id);
   }
 
-  prependFeed(feed: Feed,search_remove_first:boolean) {
-      if(search_remove_first){
-        this.clearFeed(feed.id);
-      }
-      this.feeds.unshift(feed);
+  prependFeed(feed: Feed, search_remove_first: boolean) {
+    if (search_remove_first) {
+      this.clearFeed(feed.id);
+    }
+    this.feeds.unshift(feed);
   }
 
   pushFeed(feed: Feed) {
@@ -223,81 +149,6 @@ export class FeedService {
     this.searchFeed(feedId).subscribe((feed: Feed) => {
       if (feed) {
         feed.comments = feed.comments.concat(comments);
-      }
-    });
-  }
-
-  feedLike(feed: Feed, action: string) {
-    if (feed.sending_like == true) {
-      return;
-    }
-    this.updateFeedLike(feed, action);
-    //this.profileFeedService.updateFeedLike(feed, action);
-    var _this = this;
-    this.errors = this.messages = [];
-    this.service.getProvider(this.provider).crudconfig.route_url = 'feed/feed-like/';
-    feed.sending_like = true;
-    if (action == "like") {
-      this.service.create(this.provider, { object_id: feed.id, target_id: feed.profile.user_id }, {}).subscribe(function (result) {
-        _this.submitted = false;
-        feed.sending_like = false;
-        if (result.isSuccess()) {
-          var data = result.getResultData();
-          if (data != true) {
-            _this.updateFeedLike(feed, 'unlike');
-            //_this.profileFeedService.updateFeedLike(feed, 'unlike');
-          }
-        }
-        else {
-          _this.errors = result.getErrors();
-          _this.updateFeedLike(feed, 'unlike');
-          //_this.profileFeedService.updateFeedLike(feed, 'unlike');
-        }
-      });
-    } else {
-      this.service.delete(this.provider, { id: feed.id }).subscribe(function (result) {
-        feed.sending_like = false;
-        if (result.isSuccess()) {
-          var data = result.getResultData();
-          if (data != true) {
-            _this.updateFeedLike(feed, 'like');
-            //_this.profileFeedService.updateFeedLike(feed, 'like');
-          }
-        } else {
-          _this.errors = result.getErrors();
-          _this.updateFeedLike(feed, 'like');
-          //_this.profileFeedService.updateFeedLike(feed, 'like');
-        }
-      });
-    }
-  }
-
-  updateFeedLike(feed: Feed, action: string) {
-    /* Update date post status in overlay or single post in case is open and is the one one being liked */
-    if (this.OVERLAY_FEED.feed != null && feed.id == this.OVERLAY_FEED.feed.id) {
-      if (action == 'like') {
-        this.OVERLAY_FEED.feed.no_likes = Number(this.OVERLAY_FEED.feed.no_likes) + 1;
-        this.OVERLAY_FEED.feed.i_like = true;
-      } else {
-        if (Number(this.OVERLAY_FEED.feed.no_likes) > 0) {
-          this.OVERLAY_FEED.feed.no_likes = Number(this.OVERLAY_FEED.feed.no_likes) - 1;
-          this.OVERLAY_FEED.feed.i_like = false;
-        }
-      }
-    }
-
-    /* update post status in feed */
-    this.searchFeed(feed.id).subscribe((feed: Feed) => {
-      if (feed) {
-        if (action == 'like') {
-          feed.no_likes = Number(feed.no_likes) + 1;
-          feed.i_like = true;
-        } else {
-          if (Number(feed.no_likes) > 0) {
-            feed.no_likes = Number(feed.no_likes) - 1;
-            feed.i_like = false;
-          }
-        }
       }
     });
   }

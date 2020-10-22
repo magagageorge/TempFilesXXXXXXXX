@@ -18,6 +18,9 @@ import { ProfileService } from './profile.service';
 import { PageSummary } from '@app/models/page/page.model';
 import { ProfileFeedService } from '@app/viewer/profile/services/profile-feed.service';
 import { PageFeedService } from '@app/viewer/page/services/page-feed.service';
+import { SysFunctions } from '@app/libs/utilities/common-functions';
+import { NgxImageCompressService } from 'ngx-image-compress';
+import { ProfileModel } from '@app/@crud/models/ProfileModel';
 
 
 export interface PreviewPicture {
@@ -67,10 +70,13 @@ export class PostingService {
   loadedImage: any;
   fileReader: any;
   postingAs: string;
+  postingTo: string;
+  postingTo_Profile: ProfileModel;
+  postingTo_Page: PageSummary = new PageSummary();
   postingAs_page: PageSummary = new PageSummary();
   profileService: ProfileService;
 
-  constructor(service: CrudService, profileService: ProfileService, feedService: FeedService, public profileFeedService: ProfileFeedService, public pageFeedService: PageFeedService, loadSubmitProgressService: LoadSubmitProgressService, @Inject(CRUD_OPTIONS) CRUD_OPTIONS: CrudOptions, private _modalService: NgbModal, router: Router, linkPreviewService: WfLinkPreviewService) {
+  constructor(service: CrudService, profileService: ProfileService, feedService: FeedService, public profileFeedService: ProfileFeedService, public pageFeedService: PageFeedService, public imageCompress: NgxImageCompressService, loadSubmitProgressService: LoadSubmitProgressService, @Inject(CRUD_OPTIONS) CRUD_OPTIONS: CrudOptions, private _modalService: NgbModal, router: Router, linkPreviewService: WfLinkPreviewService) {
     this.service = service;
     this.feedService = feedService;
     this.crudconfig = CRUD_OPTIONS;
@@ -78,6 +84,7 @@ export class PostingService {
     this.linkPreviewService = linkPreviewService;
     this.loadSubmitProgressService = loadSubmitProgressService;
     this.profileService = profileService;
+    this.provider = this.getConfigValue('forms.getall.provider');
   }
 
   onSelectFile(event) {
@@ -91,7 +98,6 @@ export class PostingService {
         if (!f.type.match('image.*')) {
           continue;
         }
-        this.filesToUpload.push(<File>f);
         this.PushPreviewFiles(<File>f);
       }
       this.focus_on_message_input = true;
@@ -101,18 +107,30 @@ export class PostingService {
   }
 
   PushPreviewFiles(f: File) {
+    var _this = this;
     var fileReader = new FileReader();
     var i_url;
+    console.log('Before Compression=' + (f.size / 1024));
     fileReader.onload = (e) => {
       if (e) {
         i_url = (<FileReader>e.target).result;
-        var loadedImage = new Image();
-        loadedImage.onload = (event) => {
-          if (event) {
-            this.file_preview_urls.push({ url: i_url, width: loadedImage.width, height: loadedImage.height, file: <File>f });
-          }
-        }
-        loadedImage.src = i_url;
+        SysFunctions.getImageCompressionRates(i_url, 'POST_IMAGE').then(rts => {
+          SysFunctions.getImageOrientation(f).then(orientation => {
+            _this.imageCompress.compressFile(i_url, orientation, rts.ratio, rts.quality).then(
+              processedImageDataUrl => {
+                var loadedImage = new Image();
+                loadedImage.onload = (event) => {
+                  if (event) {
+                    var imgFile = SysFunctions.DataUrlToFile(processedImageDataUrl);
+                    _this.filesToUpload.push(imgFile);
+                    console.log('After Compression=' + (imgFile.size / 1024));
+                    _this.file_preview_urls.push({ url: processedImageDataUrl, width: loadedImage.width, height: loadedImage.height, file: imgFile });
+                  }
+                }
+                loadedImage.src = processedImageDataUrl;
+              });
+          });
+        });
       }
     }
     fileReader.readAsDataURL(<File>f);
@@ -171,12 +189,12 @@ export class PostingService {
             _this.messages = result.getMessages();
             var data = result.getResultData();
             if (data.done == true) {
-              _this.feedService.prependFeed(data.data,false);
+              _this.feedService.prependFeed(data.data, false);
               if (_this.postingAs == 'Page' && _this.postingAs_page != null) {
                 console.log('Prepend to Page Feed');
                 _this.pageFeedService.prependFeed(data.data, false);
               } else {
-                _this.profileFeedService.prependFeed(data.data,false);
+                _this.profileFeedService.prependFeed(data.data, false);
                 console.log('Prepend to Profile Feed');
               }
               _this.feed_input_model = new PostForm();
@@ -200,11 +218,11 @@ export class PostingService {
             _this.messages = result.getMessages();
             var data = result.getResultData();
             if (data.done == true) {
-              _this.feedService.prependFeed(data.data,true);
+              _this.feedService.prependFeed(data.data, true);
               if (_this.postingAs == 'Page' && _this.postingAs_page != null) {
                 _this.pageFeedService.prependFeed(data.data, true);
               } else {
-                _this.profileFeedService.prependFeed(data.data,true);
+                _this.profileFeedService.prependFeed(data.data, true);
               }
               _this.feed_input_model = new PostForm();
               _this.filesToUpload = [];
@@ -268,7 +286,6 @@ export class PostingService {
     if (feed.page != null) {
       this.feed_input_model.page_id = feed.page.id;
     }
-
   }
 
   /* Function to reset the PostForm Form once User Cancel Editing the PostForm */
@@ -382,6 +399,194 @@ export class PostingService {
     } else {
       return '';
     }
+  }
+
+  deletePost(id: number) {
+    this.clearFeed(id);
+    var _this = this;
+    this.errors = this.messages = [];
+    this.service.getProvider(this.provider).crudconfig.route_url = 'feed/p/';
+    this.service.delete(this.provider, { id: id }).subscribe(function (result) {
+      if (result.isSuccess()) {
+        var data = result.getResultData();
+        if (data == true) {
+        } else {
+          //elem.style.opacity = '1';
+        }
+      } else {
+        _this.errors = result.getErrors();
+        //elem.style.opacity = '1';
+      }
+    });
+  }
+
+  clearFeed(feed_id: number) {
+    this.feedService.feeds = this.feedService.feeds.filter((x: any) => x.id !== feed_id);
+    this.profileFeedService.feeds = this.profileFeedService.feeds.filter((x: any) => x.id !== feed_id);
+    this.pageFeedService.feeds = this.pageFeedService.feeds.filter((x: any) => x.id !== feed_id);
+  }
+
+  wantToShareAs() {
+
+  }
+
+
+  feedLike(feed: Feed, action: string) {
+    if (feed.sending_like == true) {
+      return;
+    }
+    this.updateFeedLike(feed, action);
+    //this.profileFeedService.updateFeedLike(feed, action);
+    var _this = this;
+    this.errors = this.messages = [];
+    this.service.getProvider(this.provider).crudconfig.route_url = 'feed/feed-like/';
+    feed.sending_like = true;
+    if (action == "like") {
+      console.log(feed);
+      this.service.create(this.provider, { object_id: feed.id }, {}).subscribe(function (result) {
+        _this.submitted = false;
+        feed.sending_like = false;
+        if (result.isSuccess()) {
+          var data = result.getResultData();
+          if (data != true) {
+            _this.updateFeedLike(feed, 'unlike');
+          }
+        }
+        else {
+          _this.errors = result.getErrors();
+          _this.updateFeedLike(feed, 'unlike');
+        }
+      });
+    } else {
+      this.service.delete(this.provider, { id: feed.id }).subscribe(function (result) {
+        feed.sending_like = false;
+        if (result.isSuccess()) {
+          var data = result.getResultData();
+          if (data != true) {
+            _this.updateFeedLike(feed, 'like');
+          }
+        } else {
+          _this.errors = result.getErrors();
+          _this.updateFeedLike(feed, 'like');
+        }
+      });
+    }
+  }
+
+  updateFeedLike(feed: Feed, action: string) {
+    /* Update date post status in overlay or single post in case is open and is the one one being liked */
+    if (this.feedService.OVERLAY_FEED.feed != null && feed.id == this.feedService.OVERLAY_FEED.feed.id) {
+      if (action == 'like') {
+        this.feedService.OVERLAY_FEED.feed.no_likes = Number(this.feedService.OVERLAY_FEED.feed.no_likes) + 1;
+        this.feedService.OVERLAY_FEED.feed.i_like = true;
+      } else {
+        if (Number(this.feedService.OVERLAY_FEED.feed.no_likes) > 0) {
+          this.feedService.OVERLAY_FEED.feed.no_likes = Number(this.feedService.OVERLAY_FEED.feed.no_likes) - 1;
+          this.feedService.OVERLAY_FEED.feed.i_like = false;
+        }
+      }
+    }
+
+    /* update post status in feed */
+    this.feedService.searchFeed(feed.id).subscribe((feed: Feed) => {
+      if (feed) {
+        if (action == 'like') {
+          feed.no_likes = Number(feed.no_likes) + 1;
+          feed.i_like = true;
+        } else {
+          if (Number(feed.no_likes) > 0) {
+            feed.no_likes = Number(feed.no_likes) - 1;
+            feed.i_like = false;
+          }
+        }
+      }
+    });
+
+    /* update post status in feed */
+    this.profileFeedService.searchFeed(feed.id).subscribe((feed: Feed) => {
+      if (feed) {
+        if (action == 'like') {
+          feed.no_likes = Number(feed.no_likes) + 1;
+          feed.i_like = true;
+        } else {
+          if (Number(feed.no_likes) > 0) {
+            feed.no_likes = Number(feed.no_likes) - 1;
+            feed.i_like = false;
+          }
+        }
+      }
+    });
+
+    /* update post status in feed */
+    this.pageFeedService.searchFeed(feed.id).subscribe((feed: Feed) => {
+      if (feed) {
+        if (action == 'like') {
+          feed.no_likes = Number(feed.no_likes) + 1;
+          feed.i_like = true;
+        } else {
+          if (Number(feed.no_likes) > 0) {
+            feed.no_likes = Number(feed.no_likes) - 1;
+            feed.i_like = false;
+          }
+        }
+      }
+    });
+
+  }
+
+  hidePost(post_id: number) {
+    var _this = this;
+    this.updatePostHiding(post_id, true);
+    this.service.getProvider(this.provider).crudconfig.route_url = 'feed/feed-hide/';
+    this.service.create(this.provider, { object_id: post_id }, {}).subscribe(function (result) {
+      if (result.isSuccess()) {
+        var data = result.getResultData();
+        if (data != true) {
+          _this.updatePostHiding(post_id, false);
+        }
+      }
+      else {
+        _this.errors = result.getErrors();
+
+      }
+    });
+  }
+
+  unhidePost(post_id: number) {
+    var _this = this;
+    this.errors = this.messages = [];
+    _this.updatePostHiding(post_id, false);
+    this.service.getProvider(this.provider).crudconfig.route_url = 'feed/feed-hide/';
+    this.service.delete(this.provider, { id: post_id }).subscribe(function (result) {
+      if (result.isSuccess()) {
+        var data = result.getResultData();
+        if (data == true) {
+          _this.updatePostHiding(post_id, true);
+        } else {
+
+        }
+      } else {
+        _this.errors = result.getErrors();
+      }
+    });
+  }
+
+  updatePostHiding(postId: number, status: boolean) {
+    this.feedService.searchFeed(postId).subscribe(feed => {
+      if (feed) {
+        feed.hidden_post = status;
+      }
+    });
+    this.profileFeedService.searchFeed(postId).subscribe(feed => {
+      if (feed) {
+        feed.hidden_post = status;
+      }
+    });
+    this.pageFeedService.searchFeed(postId).subscribe(feed => {
+      if (feed) {
+        feed.hidden_post = status;
+      }
+    });
   }
 
   getConfigValue(key: string): any {

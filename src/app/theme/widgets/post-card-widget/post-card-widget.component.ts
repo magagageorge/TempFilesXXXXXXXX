@@ -10,6 +10,7 @@ import { ReportContentModalComponent } from '@app/theme/modals/report-content-mo
 import { PostDeleteModalComponent } from '@app/theme/modals/post-delete-modal/post-delete-modal.component';
 import { LikesModalComponent } from '@app/theme/modals/likes-modal/likes-modal.component';
 import { VISIBILITY_ICONS } from '@app/data/visibilities';
+import { Feed } from '@app/models/feed/feed';
 
 @Component({
   selector: 'app-post-card-widget',
@@ -56,6 +57,11 @@ export class PostCardWidgetComponent implements OnInit {
   showPostLikes(post_id: number, no_likes: any) {
     this.appModalService.modalRef = this.appModalService._modalService.open(LikesModalComponent, { centered: true });
     this.appModalService.modalRef.componentInstance.setModel(post_id, 'Post', no_likes);
+  }
+
+  wantToShareAs(post:Feed){
+    this.postingService.postingAs='Profile';
+    this.postingService.shareThisPost(post);
   }
 
 }

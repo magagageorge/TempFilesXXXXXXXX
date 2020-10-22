@@ -96,7 +96,7 @@ export class PageNotificationService {
     this.clearNotification(id);
     var _this = this;
     this.errors = this.messages = [];
-    this.service.getProvider(this.provider).crudconfig.route_url = 'notifications/default/';
+    this.service.getProvider(this.provider).crudconfig.route_url = 'page/notifications/';
     this.service.delete(this.provider, { id: id }).subscribe(function (result) {
       if (result.isSuccess()) {
         var data = result.getResultData();

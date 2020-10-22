@@ -13,11 +13,10 @@
                         <app-page-photos-summary-widget></app-page-photos-summary-widget>
                     </div>
                     <div class="col-12 col-md-7 col-lg-7 col-xl-7 p-0  mx-0 pl-md-1 pl-lg-1 pl-xl-1">
-                        <app-post-form *ngIf="urlviewerService.PPVIEWER.page.my_page" [postingAs]="'Page'"
-                            [page]="urlviewerService.pageSummary"></app-post-form>
-
+                        <ng-container *ngIf="urlviewerService.pageSummary">
+                            <app-post-form [postingTo]="'Page'" [page]="urlviewerService.pageSummary"></app-post-form>
+                        </ng-container>
                         <app-page-feed-widget></app-page-feed-widget>
-
                     </div>
                 </div>
             </div>

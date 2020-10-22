@@ -1,3 +1,11 @@
-<div (mouseover)="hovercardService.OnCardHover($event)" (mouseleave)="hovercardService.OnCardLeave($event)"  class="hovercard card bg-white" id="hovercard-container">
- <app-hover-card></app-hover-card> 
+<div (mouseover)="hovercardService.OnCardHover($event)" (mouseleave)="hovercardService.OnCardLeave($event)"
+    class="card hovercard bg-white p-0 shadow-sm" id="hovercard-container">
+    <div class="card-body p-0">
+        <ng-container *ngIf="hovercardService.profile!=null">
+            <app-profile-card [profile]="hovercardService.profile"></app-profile-card>
+        </ng-container>
+        <ng-container *ngIf="hovercardService.page!=null">
+            <app-page-card [page]="hovercardService.page"></app-page-card>
+        </ng-container>
+    </div>
 </div>

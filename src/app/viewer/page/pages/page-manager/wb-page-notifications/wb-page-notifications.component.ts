@@ -8,7 +8,6 @@ import { PageNotificationService } from '@app/viewer/page/services/page-notifica
 })
 export class WbPageNotificationsComponent implements OnInit {
 
-  
   constructor(public notificationsService: PageNotificationService) { }
 
   ngOnInit() {

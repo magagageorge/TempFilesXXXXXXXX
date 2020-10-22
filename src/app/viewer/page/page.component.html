@@ -19,6 +19,9 @@
 <ng-container *ngIf="pagePhotosService.currentViewImage!=null">
     <app-page-images-overlay-view ></app-page-images-overlay-view>
 </ng-container>
+<ng-container *ngIf="appModalService.deletePostModal.visible==true">
+    <app-delete-post-modal></app-delete-post-modal>
+</ng-container>
 <app-overlay-load-submit-process-data-widget></app-overlay-load-submit-process-data-widget>
 <app-process-upload-images-progress-widget></app-process-upload-images-progress-widget>
 <app-feed-images-overlay-view></app-feed-images-overlay-view>

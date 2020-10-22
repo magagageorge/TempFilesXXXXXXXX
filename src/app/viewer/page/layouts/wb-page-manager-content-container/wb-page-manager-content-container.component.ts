@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppModalService } from '@app/services/app-modal.service';
 import { EditPageService } from '@app/services/edit-page.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { EditPageService } from '@app/services/edit-page.service';
 })
 export class WbPageManagerContentContainerComponent implements OnInit {
 
-  constructor(public editPageService:EditPageService) { }
+  constructor(public editPageService: EditPageService, public appModalService: AppModalService) { }
 
   ngOnInit() {
   }

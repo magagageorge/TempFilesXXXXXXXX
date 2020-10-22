@@ -1,0 +1,19 @@
+<app-overlay-modal-container>
+    <div class="row m-0 px-0 h-100 w-100">
+        <div class="col-12 mx-0 px-0 d-flex justify-content-center align-items-center">
+            <div class="card">
+                <div class="card-header">
+                    <span class="wb-font-size-120 font-weight-bold">Remove Connection</span>
+                </div>
+                <div class="card-body">
+                    <p i18n><strong>Are you sure you want to remove this person from your network</strong></p>
+                </div>
+                <div class="card-footer p-1">
+                    <button type="button" (click)="appModalService.showRemoveConnection(false,null)"
+                        class="btn btn-outline-secondary btn-rounded btn-sm pull-left" i18n>No,Thanks</button>
+                    <button type="button" (click)="deleteConnection()" class="btn btn-danger btn-rounded btn-sm pull-right" i18n>Remove</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</app-overlay-modal-container>

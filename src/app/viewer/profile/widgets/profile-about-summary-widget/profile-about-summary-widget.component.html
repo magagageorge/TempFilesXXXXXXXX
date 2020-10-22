@@ -1,31 +1,31 @@
-<div class="card m-0 p-0">
-    <div class="card-header p-0">
-        <div class="d-block w-100 m-0 p-0">
-            <div class="row my-2 mx-0 p-0">
-                <div class="col-12">
-                    <span>About <span>{{urlviwerService.PPVIEWER.profile.firstname}}</span></span>
+<div class="card m-0">
+    <div class="card-body p-1">
+        <div class="d-block w-100">
+            <div class="row my-2 mx-0">
+                <div class="col-9 font-weight-bold wb-font-size-120">
+                    <span>About</span>
+                </div>
+                <div class="col-3 d-flex justify-content-end align-items-center">
+                    <a routerLink="/{{urlviewerService.PPVIEWER.profile.url}}/about" class="btn-link">All</a>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="card-body p-0">
         <ng-container>
-
             <div class="d-block w-100 m-0 p-0">
-                <div *ngIf="urlviwerService.loading_viewer==true || (urlviwerService.PPVIEWER.profile.about!='' && urlviwerService.PPVIEWER.profile.about!=null) || urlviwerService.PPVIEWER.profile.my_profile==true"
+                <div *ngIf="urlviewerService.loading_viewer==true || (urlviewerService.PPVIEWER.profile.about!='' && urlviewerService.PPVIEWER.profile.about!=null) || urlviewerService.PPVIEWER.profile.my_profile==true"
                     class="row my-1 mx-0 p-0">
 
-                    <div *ngIf="urlviwerService.PPVIEWER.profile.about!='' && urlviwerService.PPVIEWER.profile.about!=null"
+                    <div *ngIf="urlviewerService.PPVIEWER.profile.about!='' && urlviewerService.PPVIEWER.profile.about!=null"
                         class="col-12">
                         <p>
-                            {{urlviwerService.PPVIEWER.profile.about}}
+                            {{urlviewerService.PPVIEWER.profile.about}}
                         </p>
                     </div>
 
-                    <div *ngIf="urlviwerService.PPVIEWER.profile.my_profile==true && (urlviwerService.PPVIEWER.profile.about=='' || urlviwerService.PPVIEWER.profile.about==null)"
-                        class="col-12 px-2">
+                    <div *ngIf="urlviewerService.PPVIEWER.profile.my_profile==true && (urlviewerService.PPVIEWER.profile.about=='' || urlviewerService.PPVIEWER.profile.about==null)"
+                        class="col-12 px-1">
                         <div class="list-group w-100 p-0 mx-0">
-                            <a routerLink="/{{urlviwerService.PPVIEWER.profile.url}}/about"
+                            <a routerLink="/{{urlviewerService.PPVIEWER.profile.url}}/about"
                                 (click)="editProfileService.EditProfileAbout()" class="list-group-item">
                                 <span class="d-block w-100 p-0">
                                     <span style="font-size:110%;">
@@ -41,11 +41,11 @@
             </div>
 
             <ng-container
-                *ngIf="urlviwerService.PPVIEWER.profile.experiences.length || urlviwerService.PPVIEWER.profile.my_profile==true">
+                *ngIf="urlviewerService.PPVIEWER.profile.experiences.length || urlviewerService.PPVIEWER.profile.my_profile==true">
                 <div class="d-block w-100 m-0 px-2">
-                    <ng-container *ngIf="urlviwerService.PPVIEWER.profile.experiences.length">
+                    <ng-container *ngIf="urlviewerService.PPVIEWER.profile.experiences.length">
                         <ng-container
-                            *ngFor="let experience of urlviwerService.PPVIEWER.profile.experiences;let i=index">
+                            *ngFor="let experience of urlviewerService.PPVIEWER.profile.experiences;let i=index">
                             <div *ngIf="i==0" class="d-block p-1">
                                 <span class="fa fa-briefcase"></span>
                                 <span
@@ -59,10 +59,10 @@
                         </ng-container>
                     </ng-container>
                     <ng-container
-                        *ngIf="urlviwerService.PPVIEWER.profile.my_profile==true && urlviwerService.PPVIEWER.profile.experiences.length==0">
+                        *ngIf="urlviewerService.PPVIEWER.profile.my_profile==true && urlviewerService.PPVIEWER.profile.experiences.length==0">
                         <div class="d-block px-0">
                             <div class="list-group w-100 p-0 mx-0 my-1">
-                                <a routerLink="/{{urlviwerService.PPVIEWER.profile.url}}/about"
+                                <a routerLink="/{{urlviewerService.PPVIEWER.profile.url}}/about"
                                     (click)="editProfileService.AddProfileExperience()" class="list-group-item">
                                     <span class="d-block w-100 p-0">
                                         <span style="font-size:110%;">
@@ -78,10 +78,11 @@
             </ng-container>
 
             <ng-container
-                *ngIf="urlviwerService.PPVIEWER.profile.educations.length || urlviwerService.PPVIEWER.profile.my_profile==true">
+                *ngIf="urlviewerService.PPVIEWER.profile.educations.length || urlviewerService.PPVIEWER.profile.my_profile==true">
                 <div class="d-block w-100 m-0 px-2">
-                    <ng-container *ngIf="urlviwerService.PPVIEWER.profile.educations.length">
-                        <ng-container *ngFor="let education of urlviwerService.PPVIEWER.profile.educations;let i=index">
+                    <ng-container *ngIf="urlviewerService.PPVIEWER.profile.educations.length">
+                        <ng-container
+                            *ngFor="let education of urlviewerService.PPVIEWER.profile.educations;let i=index">
                             <div *ngIf="i==0" class="d-block p-1">
                                 <span class="fa fa-graduation-cap"></span>
                                 <span *ngIf="education.major=='' || education.major=='-'"><span>&nbsp;</span><span
@@ -94,10 +95,10 @@
                         </ng-container>
                     </ng-container>
                     <ng-container
-                        *ngIf="urlviwerService.PPVIEWER.profile.my_profile==true && urlviwerService.PPVIEWER.profile.educations.length==0">
+                        *ngIf="urlviewerService.PPVIEWER.profile.my_profile==true && urlviewerService.PPVIEWER.profile.educations.length==0">
                         <div class="d-block px-0">
                             <div class="list-group w-100 p-0 mx-0 my-1">
-                                <a routerLink="/{{urlviwerService.PPVIEWER.profile.url}}/about"
+                                <a routerLink="/{{urlviewerService.PPVIEWER.profile.url}}/about"
                                     (click)="editProfileService.AddProfileEducation()" class="list-group-item">
                                     <span class="d-block w-100 p-0">
                                         <span style="font-size:110%;">
@@ -111,10 +112,10 @@
                     </ng-container>
                 </div>
             </ng-container>
-            <ng-container *ngIf="urlviwerService.PPVIEWER.profile.dealing.length">
+            <ng-container *ngIf="urlviewerService.PPVIEWER.profile.dealing.length">
                 <div class="d-block w-100 m-0 py-1 px-3">
                     <span class="font-weight-bold">Deals with</span>
-                    <ng-container *ngFor="let deal of urlviwerService.PPVIEWER.profile.dealing;let i = index">
+                    <ng-container *ngFor="let deal of urlviewerService.PPVIEWER.profile.dealing;let i = index">
                         <ng-container *ngIf="i<5">
                             <span class="chip" style="margin:1px;">{{deal.i_name}}</span>
                         </ng-container>
@@ -123,10 +124,10 @@
 
                 </div>
             </ng-container>
-            <ng-container *ngIf="urlviwerService.PPVIEWER.profile.skills.length">
+            <ng-container *ngIf="urlviewerService.PPVIEWER.profile.skills.length">
                 <div class="d-block w-100 m-0 py-1 px-3">
                     <span class="font-weight-bold">Knows</span>
-                    <ng-container *ngFor="let skill of urlviwerService.PPVIEWER.profile.skills;let i = index">
+                    <ng-container *ngFor="let skill of urlviewerService.PPVIEWER.profile.skills;let i = index">
                         <ng-container *ngIf="i<5">
                             <span class="chip" style="margin:1px;">{{skill.s_name}}</span>
                         </ng-container>
@@ -135,7 +136,7 @@
                 </div>
             </ng-container>
         </ng-container>
-        <div *ngIf="urlviwerService.loading_viewer" class="d-block p-0 m-0 text-center">
+        <div *ngIf="urlviewerService.loading_viewer" class="d-block p-0 m-0 text-center">
             <span class="fa fa-spinner fa-pulse fa-fw"></span>
         </div>
     </div>

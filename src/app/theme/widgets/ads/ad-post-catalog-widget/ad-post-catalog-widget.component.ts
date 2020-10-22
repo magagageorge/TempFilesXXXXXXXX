@@ -13,12 +13,12 @@ import { LinkProcessingService } from '@app/services/link-processing.service';
 export class ViewAdPostCatalogWidgetComponent implements OnInit {
 
   @Input() dispayContainer: number;
-  @Input() cards:ShowAdContentCard[];
-  @Input() call_to_action:string;
+  @Input() cards: ShowAdContentCard[];
+  @Input() call_to_action: string;
   boxWidth: number = 290;
   currentViewCardIndex: number = 0;
   positionLeft: number = 0;
-  constructor(public imageIconsService: ImageIconsService,public linkProcessingService:LinkProcessingService) { }
+  constructor(public imageIconsService: ImageIconsService, public linkProcessingService: LinkProcessingService) { }
 
   ngOnInit() {
     this.setCardWidth();

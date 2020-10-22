@@ -1,0 +1,27 @@
+<div class="d-block w-100 p-0">
+    <div class="display-pic">
+        <div class="cover-photo">
+            <div class="display-pic-gradient"></div>
+            <a *ngIf="page.cover.picture!=''" routerLink="/{{page.url}}" class="w-100 h-100 p-0 m-0"><img
+                    src="{{page.cover.picture}}" class="img-fluid"></a>
+
+        </div>
+        <div class="page-pic">
+            <div class="pic">
+                <a routerLink="/{{page.url}}"><img src="{{page.picture.face}}" class="img-fluid rounded-circle"></a>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="title-container">
+        <a routerLink="/{{page.url}}"><span class="w-100 d-block text-truncate"> {{page.name}}<span
+                    class="url-tag">@{{page.url}}</span></span></a>
+    </div>
+
+    <div class="details d-block">
+        {{page.about}}
+    </div>
+
+
+</div>

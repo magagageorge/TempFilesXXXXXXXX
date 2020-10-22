@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppModalService } from '@app/services/app-modal.service';
 
 @Component({
   selector: 'app-wb-page-main-content',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WbPageMainContentComponent implements OnInit {
 
-  constructor() { }
+  constructor(public appModalService:AppModalService) { }
 
   ngOnInit() {
   }

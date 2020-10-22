@@ -4,10 +4,10 @@
             <div class="card-header with-border p-2">
                 <div class="user-block">
                     <ng-container *ngIf="post.page!=null">
-                        <a routerLink="/{{post.page.url}}" (click)="urlViewerService.setPage(post.page);"><img
+                        <a routerLink="/{{post.page.url}}" (mouseover)="hovercardService.OnHover($event,post.page,'page')" (click)="urlViewerService.setPage(post.page);"><img
                                 class="rounded-circle img-fluid" src="{{post.page.picture.face}}" alt=""></a>
                         <span class="username mr-4">
-                            <a class="w-100 d-block text-truncate" (click)="urlViewerService.setPage(post.page);"
+                            <a class="w-100 d-block text-truncate" (mouseover)="hovercardService.OnHover($event,post.page,'page')" (click)="urlViewerService.setPage(post.page);"
                                 routerLink="/{{post.page.url}}">{{post.page.name}} <span
                                     class="url-tag">@{{post.page.url}}</span></a>
                         </span>
@@ -20,11 +20,11 @@
                         </span>
                     </ng-container>
                     <ng-container *ngIf="post.page==null && post.profile!=null">
-                        <a routerLink="/{{post.profile.url}}" (click)="urlViewerService.setProfile(post.profile);"><img
+                        <a routerLink="/{{post.profile.url}}" (mouseover)="hovercardService.OnHover($event,post.profile,'profile')" (click)="urlViewerService.setProfile(post.profile);"><img
                                 class="rounded-circle img-fluid" src="{{post.profile.avatar.face}}" alt=""></a>
 
                         <span class="username mr-4">
-                            <a class="w-100 d-block text-truncate" (click)="urlViewerService.setProfile(post.profile);"
+                            <a class="w-100 d-block text-truncate" (mouseover)="hovercardService.OnHover($event,post.profile,'profile')" (click)="urlViewerService.setProfile(post.profile);"
                                 routerLink="/{{post.profile.url}}">{{post.profile.name}} <span
                                     class="url-tag">@{{post.profile.url}}</span></a>
                         </span>

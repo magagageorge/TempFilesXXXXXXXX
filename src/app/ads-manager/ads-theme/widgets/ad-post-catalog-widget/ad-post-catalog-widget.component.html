@@ -31,15 +31,15 @@
                                         <ng-container *ngIf="selectedCTA!=null">
                                             <div class="d-block">
                                                 <div
-                                                    class="btn btn-sm btn-outline-primary btn-rounded pull-right font-weight-bold text-nowrap">
-                                                    {{selectedCTA.name}}
+                                                    class="btn btn-call-to-action btn-outline-primary btn-rounded pull-right font-weight-bold text-nowrap">
+                                                    {{ 'ADS.'+selectedCTA.code | translate }}
                                                 </div>
                                             </div>
                                         </ng-container>
                                         <ng-container *ngIf="selectedCTA==null">
                                             <div class="d-block">
                                                 <div
-                                                    class="btn btn-sm btn-outline-primary btn-rounded pull-right font-weight-bold text-nowrap">
+                                                    class="btn btn-call-to-action btn-outline-primary btn-rounded pull-right font-weight-bold text-nowrap">
                                                     [ ACTION ]
                                                 </div>
                                             </div>

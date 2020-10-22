@@ -1,5 +1,5 @@
-<div class="row py-1 border-bottom border-light mx-0 px-0" [class.bg-white]="notification.seen===0" id="notification_item_{{notification.id}}">
-    <div class="col-2 col-md-1 col-lg-1 p-0 cursor-pointer" (click)="showNotificationDetails(notification)">
+<div class="row py-1 border-bottom border-light mx-0 px-2" [class.bg-white]="notification.seen===0" id="notification_item_{{notification.id}}">
+    <div class="col-2 col-md-1 col-lg-1 p-0 cursor-pointer d-flex justify-content-center" (click)="showNotificationDetails(notification)">
       <ng-container *ngIf="notification.people_list.length == 1">
         <div class="d-block w-100 h-100">
           <img src="{{notification.people_list[0].face}}" class="img-fluid rounded-circle m-0" style="max-height: 60px;">
@@ -20,7 +20,7 @@
         </div>
       </ng-container>
     </div>
-    <div class="col-9  col-md-10 col-lg-10 p-1">
+    <div class="col-10  col-md-11 col-lg-11 col-xl-11 p-1">
       <div class="d-block p-0 m-0 cursor-pointer" (click)="showNotificationDetails(notification)">
         <p class="w-100 m-0">
           <ng-container *ngIf="notification.people_list.length > 0">
@@ -66,7 +66,7 @@
         </p>
       </div>
     </div>
-    <div class="col-1 text-center px-0">
+    <div class="col-1 text-center px-0 d-none">
       <div class="card-tools w-100">
         <div class="dropdown btn-group" ngbDropdown placement="bottom-right">
           <a class="px-2" ngbDropdownToggle></a>

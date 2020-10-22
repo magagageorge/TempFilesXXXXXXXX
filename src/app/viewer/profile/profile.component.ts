@@ -6,6 +6,7 @@ import { ProfilePhotosService } from './services/profile-photos.service';
 import { ProfileConnectionsService } from '@app/services/profile-connections.service';
 import { ProfileFeedService } from './services/profile-feed.service';
 import { ProfileViewerService } from './services/profile-viewer.service';
+import { AppModalService } from '@app/services/app-modal.service';
 
 @Component({
   selector: 'app-profile',
@@ -20,7 +21,7 @@ export class ProfileComponent implements OnInit {
   router: Router;
   last_profile_url: string = '';
 
-  constructor(public profileViewerService: ProfileViewerService,public urlviewerService: UrlViewerService,public postingService: PostingService, public profileFeedService: ProfileFeedService, public profilePhotosService: ProfilePhotosService, public profileConnectionsService: ProfileConnectionsService, router: Router, route: ActivatedRoute) {
+  constructor(public profileViewerService: ProfileViewerService, public appModalService: AppModalService, public urlviewerService: UrlViewerService, public postingService: PostingService, public profileFeedService: ProfileFeedService, public profilePhotosService: ProfilePhotosService, public profileConnectionsService: ProfileConnectionsService, router: Router, route: ActivatedRoute) {
     this.route = route;
     this.router = router;
   }

@@ -4,6 +4,7 @@ import { ProfileService } from '@app/services/profile.service';
 import { PostingService } from '@app/services/posting.service';
 import { DeviceDetectorService } from '@app/libs/device-detector';
 import { Title, Meta } from '@angular/platform-browser';
+import { AppModalService } from '@app/services/app-modal.service';
 
 @Component({
   selector: 'app-feed',
@@ -17,7 +18,7 @@ export class FeedComponent implements OnInit {
   postingService: PostingService;
   deviceService: DeviceDetectorService;
 
-  constructor(profileService: ProfileService, feedService: FeedService, postingService: PostingService, private title: Title, private meta: Meta, deviceService: DeviceDetectorService) {
+  constructor(profileService: ProfileService,public appModalService:AppModalService, feedService: FeedService, postingService: PostingService, private title: Title, private meta: Meta, deviceService: DeviceDetectorService) {
     this.profileService = profileService;
     this.feedService = feedService;
     this.postingService = postingService;

@@ -5,8 +5,16 @@
   margin-top: 2px;
   margin-bottom: 2px;
   border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
   overflow: hidden;
+  position: relative;
 }
+
+.card .dropdown .dropdown-menu {
+  z-index: 3001;
+}
+
 .form-rounded {
   border-radius: 1.2rem;
 }
@@ -126,6 +134,20 @@
   width: 20px;
   height: 20px;
 }
+
+.btn {
+  &.btn-call-to-action {
+    padding: 0.3rem 1rem;
+    font-size: 0.81rem;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    .fa {
+      font-size: 0.8rem;
+    }
+  }
+}
+
 /* STYLING FOR OVERLAY FORMS MODALS*/
 .overlay-modal-form-card {
   max-height: 100vh;
@@ -134,6 +156,16 @@
 @media (max-width: 767px) {
   .overlay-modal-form-card {
     height: 100vh;
+  }
+
+  .btn {
+    &.btn-call-to-action {
+      padding: 0.2rem 0.8rem;
+      font-size: 0.81rem;
+      .fa {
+        font-size: 0.8rem;
+      }
+    }
   }
 }
 
@@ -235,21 +267,20 @@
   font-size: 200%;
 }
 
-
 ::-webkit-scrollbar {
   width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
-  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-  box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
   border-radius: 10px;
-  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
 }
 
 /* Large devices (laptops/desktops, 992px and up) */

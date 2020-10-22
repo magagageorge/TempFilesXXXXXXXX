@@ -37,7 +37,6 @@ export class ChatFormWidgetComponent implements AfterViewInit {
   ngAfterViewInit() {
     this.messageInputWidth = this.messageInput.nativeElement.clientWidth;
     this.messageInputHeight = this.messageInput.nativeElement.clientHeight;
-    console.log(this.messageInputHeight);
   }
 
   messageFocus() {
@@ -119,6 +118,6 @@ export class ChatFormWidgetComponent implements AfterViewInit {
   }
 
   onResizeEnd(event: ResizeEvent): void {
-    console.log('Element was resized', event);
+    //console.log('Element was resized', event);
   }
 }

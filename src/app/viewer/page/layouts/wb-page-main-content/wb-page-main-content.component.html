@@ -9,3 +9,6 @@
     </div>
 </main>
 <app-navigation-watch></app-navigation-watch>
+<ng-container *ngIf="appModalService.removeConnectionModel.visible==true">
+    <app-delete-connection-modal></app-delete-connection-modal>
+</ng-container>

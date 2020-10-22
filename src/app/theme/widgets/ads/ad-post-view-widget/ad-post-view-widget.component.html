@@ -1,15 +1,20 @@
 <div class="card windo-ad-post-card" inViewport [inViewportOptions]="{ threshold: [0] }"
-(inViewportAction)="showAdService.onPostAdInViewPort(ad_content)" #AdPostContainer>
+    (inViewportAction)="showAdService.onPostAdInViewPort(ad_content)" #AdPostContainer>
     <ng-container>
         <div class="card-header p-2">
             <ng-container *ngIf="ad_content.page!=null">
                 <div class="user-block">
-                    <a routerLink="/{{ad_content.page.url}}" (click)="urlViewerService.setPage(ad_content.page);">
+                    <a routerLink="/{{ad_content.page.url}}"
+                        (mouseover)="hovercardService.OnHover($event,ad_content.page,'page')"
+                        (mouseleave)="hovercardService.OnMouseOut($event)"
+                        (click)="urlViewerService.setPage(ad_content.page);">
                         <img class="rounded-circle img-fluid" src="{{ad_content.page.picture.face}}" alt="">
                     </a>
                     <span class="username mr-4">
-                        <a class="w-100 d-block text-truncate"
-                            routerLink="/{{ad_content.page.url}}" (click)="urlViewerService.setPage(ad_content.page);">{{ad_content.page.name}}</a>
+                        <a class="w-100 d-block text-truncate" routerLink="/{{ad_content.page.url}}"
+                            (mouseover)="hovercardService.OnHover($event,ad_content.page,'page')"
+                            (mouseleave)="hovercardService.OnMouseOut($event)"
+                            (click)="urlViewerService.setPage(ad_content.page);">{{ad_content.page.name}}</a>
                     </span>
                     <span class="description">
                         <span class="text-truncate text-muted">Sponsored</span>
@@ -70,8 +75,8 @@
                                         <ng-container *ngIf="ad_content.call_to_action!=null">
                                             <div class="d-block">
                                                 <div
-                                                    class="btn btn-sm btn-outline-primary btn-rounded pull-right font-weight-bold text-nowrap">
-                                                    {{ad_content.call_to_action}}
+                                                    class="btn btn-call-to-action btn-outline-primary btn-rounded pull-right font-weight-bold text-nowrap">
+                                                    {{ 'ADS.' + ad_content.call_to_action | translate }}
                                                 </div>
                                             </div>
                                         </ng-container>

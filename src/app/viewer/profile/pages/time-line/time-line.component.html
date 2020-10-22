@@ -16,8 +16,10 @@
                         <div class="d-block w-100">
                             <h5 i18n>Posts</h5>
                         </div>
-                        <app-post-form *ngIf="urlviewerService.PPVIEWER.profile.my_profile" [postingAs]="'Profile'"
-                            [page]="null"></app-post-form>
+                        <ng-container *ngIf="urlviewerService.PPVIEWER.profile">
+                            <app-post-form [postingTo]="'Profile'" [page]="null"
+                                [profile]="urlviewerService.PPVIEWER.profile"></app-post-form>
+                        </ng-container>
                         <app-profile-feed-widget></app-profile-feed-widget>
                     </div>
                 </div>

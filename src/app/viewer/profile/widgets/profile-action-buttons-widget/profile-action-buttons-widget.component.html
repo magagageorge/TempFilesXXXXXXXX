@@ -1,37 +1,8 @@
   <ng-container *ngIf="urlviwerService.PPVIEWER.profile.my_profile!=true">
+    <app-wb-profile-connect-button [profile_id]="urlviwerService.PPVIEWER.profile.user_id" [connectStatus]="urlviwerService.PPVIEWER.profile.connectStatus"></app-wb-profile-connect-button>
     <button *ngIf="urlviwerService.PPVIEWER.profile.connectStatus.connected==true"
       class="btn btn-outline-primary btn-sm btn-rounded waves-effect"><span
         class="fa fa-envelope"></span><span>&nbsp;</span>
       <ng-container i18n>Message</ng-container>
     </button>
-    <button
-      *ngIf="urlviwerService.PPVIEWER.profile.connectStatus.connected==false && urlviwerService.PPVIEWER.profile.connectStatus.request_sent==false && urlviwerService.PPVIEWER.profile.connectStatus.request_received==false"
-      (click)="connectionsService.Connect(urlviwerService.PPVIEWER.profile);"
-      class="btn btn-outline-primary btn-sm btn-rounded waves-effect"><span
-        class="fa fa-user-plus"></span><span>&nbsp;</span>
-      <ng-container i18n>Connect</ng-container>
-    </button>
-
-    <ng-container
-      *ngIf="urlviwerService.PPVIEWER.profile.connectStatus.connected==false && urlviwerService.PPVIEWER.profile.connectStatus.request_received==true">
-      <button (click)="connectionsService.Accept(urlviwerService.PPVIEWER.profile);"
-        class="btn btn-outline-primary btn-sm btn-rounded waves-effect"><span
-          class="fa fa-user-plus"></span><span>&nbsp;</span>
-        <ng-container i18n>Accept</ng-container>
-      </button>
-      <button (click)="connectionsService.Ignore(urlviwerService.PPVIEWER.profile);"
-        class="btn btn-outline-default btn-sm btn-rounded waves-effect"><span>&nbsp;</span>
-        <ng-container i18n>Ignore</ng-container>
-      </button>
-    </ng-container>
-    <ng-container
-      *ngIf="urlviwerService.PPVIEWER.profile.connectStatus.connected==false && urlviwerService.PPVIEWER.profile.connectStatus.request_sent==true">
-      <span class="text-primary my-auto align-middle"><span class="fa fa-check"></span><span>&nbsp;</span>
-        <ng-container i18n>Request Sent</ng-container>
-      </span>
-      <button (click)="connectionsService.Cancel(urlviwerService.PPVIEWER.profile);"
-        class="btn btn-outline-default btn-sm btn-rounded waves-effect"><span>&nbsp;</span>
-        <ng-container i18n>Cancel</ng-container>
-      </button>
-    </ng-container>
   </ng-container>

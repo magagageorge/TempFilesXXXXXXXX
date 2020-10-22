@@ -9,6 +9,10 @@ import { ThemeModule } from './theme/theme.module';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxImageCompressService } from 'ngx-image-compress';
 
+
+import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+
 import { AUTH_TOKEN_CLASS, AuthJWTToken, AuthModule } from './auth';
 import { EmailPassAuthProvider } from './auth/providers';
 import { SocialAuthProvider } from './auth/providers';
@@ -70,6 +74,14 @@ import { ShowAdsService } from './services/show-ads.service';
 import { LinkProcessingService } from './services/link-processing.service';
 import { WbWindowService } from './services/wb-window.service';
 import { PageFeedService } from './viewer/page/services/page-feed.service';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+
+
+// AoT requires an exported function for factories
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
+
 
 @NgModule({
   declarations: [
@@ -99,6 +111,15 @@ import { PageFeedService } from './viewer/page/services/page-feed.service';
     FormsModule,
     WfHoverCardModule.forRoot(),
     DeviceDetectorModule.forRoot(),
+    HttpClientModule,
+    TranslateModule.forRoot({
+        loader: {
+            provide: TranslateLoader,
+            useFactory: HttpLoaderFactory,
+            deps: [HttpClient]
+        },
+        defaultLanguage: 'en-US'
+    }),
     CrudModule.forRoot({
       providers: {
         crud: {

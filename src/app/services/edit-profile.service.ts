@@ -315,15 +315,17 @@ export class EditProfileService {
     var _this = this;
     this.imageCompress.uploadFile().then(({ image, orientation }) => {
       _this.processingImage = true;
-      this.imageCompress.compressFile(image, orientation, 50, 50).then(
-        result => {
-          _this.cover_preview_info = { url: '', width: 0, height: 0, file: null, isNew: true };
-          _this.editMode.coverEdit.selectOptions = false;
-          _this.editMode.coverEdit.selectedOption = 'UploadCover';
-          _this.processingImage = false;
-          _this.PreviewCompressedCover(result, 'base64');
-        }
-      );
+      SysFunctions.getImageCompressionRates(image, 'PROFILE_COVER').then(rts => {
+        this.imageCompress.compressFile(image, orientation, rts.ratio, rts.quality).then(
+          result => {
+            _this.cover_preview_info = { url: '', width: 0, height: 0, file: null, isNew: true };
+            _this.editMode.coverEdit.selectOptions = false;
+            _this.editMode.coverEdit.selectedOption = 'UploadCover';
+            _this.processingImage = false;
+            _this.PreviewCompressedCover(result, 'base64');
+          }
+        );
+      });
     });
   }
 
@@ -338,15 +340,17 @@ export class EditProfileService {
     var _this = this;
     this.imageCompress.uploadFile().then(({ image, orientation }) => {
       _this.processingImage = true;
-      this.imageCompress.compressFile(image, orientation, 50, 50).then(
-        result => {
-          _this.avatar_preview_info = { url: '', width: 0, height: 0, file: null, isNew: true };
-          _this.editMode.avatarEdit.selectOptions = false;
-          _this.editMode.avatarEdit.selectedOption = 'UploadAvatar';
-          _this.processingImage = false;
-          _this.PreviewCompressedAvatar(result, 'base64');
-        }
-      );
+      SysFunctions.getImageCompressionRates(image, 'PROFILE_PICTURE').then(rts => {
+        this.imageCompress.compressFile(image, orientation, rts.ratio, rts.quality).then(
+          result => {
+            _this.avatar_preview_info = { url: '', width: 0, height: 0, file: null, isNew: true };
+            _this.editMode.avatarEdit.selectOptions = false;
+            _this.editMode.avatarEdit.selectedOption = 'UploadAvatar';
+            _this.processingImage = false;
+            _this.PreviewCompressedAvatar(result, 'base64');
+          }
+        );
+      });
     });
   }
 

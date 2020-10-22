@@ -1,9 +1,20 @@
 import { Observable } from "rxjs";
 import { HttpClient, HttpXhrBackend } from "@angular/common/http";
 
+
 export class SysFunctions {
 
     private static httpClient: HttpClient = new HttpClient(new HttpXhrBackend({ build: () => new XMLHttpRequest() }));
+
+    private static WB_IMG_SIZES: any = {
+        'PROFILE_PICTURE': { width: 640, height: 640, ratio: 1 },
+        'PROFILE_COVER': { width: 1200, height: 400, ration: 3 },
+        'PAGE_PICTURE': { width: 640, height: 640, ratio: 1 },
+        'PAGE_COVER': { width: 1200, height: 400, ration: 3 },
+        'POST_IMAGE': { width: 1200, height: 700, ration: 3 },
+        'MESSAGE_IMAGE': { width: 800, height: 700, ration: 3 },
+        'AD_IMAGE': { width: 800, height: 700, ration: 3 },
+    };
 
     constructor() { }
 
@@ -98,7 +109,7 @@ export class SysFunctions {
 
 
     public static ucwords(str: string) {
-       var  text = str.toLowerCase();
+        var text = str.toLowerCase();
         return text.charAt(0).toUpperCase() + text.slice(1);
     }
 
@@ -128,6 +139,127 @@ public static b64toBlob(b64Data, contentType) {
 }
 */
 
+    public static getImageCompressionRates(imageDataUrl: string, pictureType: string): Promise<any> {
+
+        var promise = new Promise((/**
+         * @param {?} resolve
+         * @param {?} reject
+         * @return {?}
+         */
+            function (resolve, reject) {
+
+                var sourceImage = new Image();
+                // important for safari: we need to wait for onload event
+                sourceImage.onload = (
+                    /**
+                     * @return {?}
+                     */
+                    function () {
+                        var w;
+                        var h;
+                        var wh_ratio;
+                        var img_size = null;
+                        w = sourceImage.naturalWidth;
+                        h = sourceImage.naturalHeight;
+                        wh_ratio = w / h;
+
+                        var imgFile = SysFunctions.DataUrlToFile(imageDataUrl);
+                        img_size = Math.round(imgFile.size / 1024);
+                        console.log(img_size);
+                        var result = SysFunctions.getCompressRatios(w, h, img_size, pictureType);
+                        resolve(result);
+                    });
+                sourceImage.src = imageDataUrl;
+            }));
+        return promise;
+    }
+
+    public static getCompressRatios(w: number, h: number, size: number, type: string) {
+        var img_type = null;
+        var ratio = 99;
+        var quality = 95;
+        var new_image_size = null
+        if (SysFunctions.WB_IMG_SIZES[type] != undefined) {
+            img_type = SysFunctions.WB_IMG_SIZES[type];
+            if (w > img_type.width) {
+                ratio = Math.round((img_type.width / w) * 100);
+            } else {
+                ratio = 99;
+            }
+        }
+
+        /** Due to Simple Research every 1% loss in pixel equals to 0.7586% loss in file size
+         * so some of the size will have alread lost in imeze resizing thus
+        */
+        if (ratio < 99) {
+            new_image_size = ((ratio * 0.5) / 100) * size;
+        } else {
+            new_image_size = size;
+        }
+        console.log(new_image_size);
+        if (new_image_size != null && new_image_size > 300) {
+            quality = Math.round((300 / new_image_size) * 100);
+        }
+        console.log({ ratio: ratio, quality: quality });
+        return { ratio: ratio, quality: quality }
+    }
+
+    public static getImageOrientation(file: File): Promise<any> {
+        var promise = new Promise<number | undefined>(resolve => {
+            const reader = new FileReader();
+
+            reader.onload = () => resolve((() => {
+                const view = new DataView(reader.result as ArrayBuffer);
+
+                if (view.getUint16(0, false) != 0xFFD8) {
+                    return;
+                }
+
+                const length = view.byteLength;
+
+                let offset = 2;
+
+                while (offset < length) {
+                    const marker = view.getUint16(offset, false);
+
+                    offset += 2;
+
+                    if (marker == 0xFFE1) {
+                        offset += 2;
+
+                        if (view.getUint32(offset, false) != 0x45786966) {
+                            return;
+                        }
+
+                        offset += 6;
+
+                        const little = view.getUint16(offset, false) == 0x4949;
+
+                        offset += view.getUint32(offset + 4, little);
+
+                        const tags = view.getUint16(offset, little);
+
+                        offset += 2;
+
+                        for (var i = 0; i < tags; i++) {
+                            if (view.getUint16(offset + (i * 12), little) == 0x0112) {
+                                return view.getUint16(offset + (i * 12) + 8, little);
+                            }
+                        }
+                    } else if ((marker & 0xFF00) != 0xFF00) {
+                        break;
+                    } else {
+                        offset += view.getUint16(offset, false);
+                    }
+                }
+            })());
+
+            reader.readAsArrayBuffer(file.slice(0, 64 * 1024));
+
+        });
+
+        return promise;
+    }
 
 
 }

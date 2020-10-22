@@ -11,12 +11,12 @@ export class ProfilePhotosSummaryWidgetComponent implements AfterViewInit {
 
   @ViewChild("imageContainer", { static: false })
   imageContainer: ElementRef;
-  urlviwerService: UrlViewerService;
+  urlviewerService: UrlViewerService;
   containerWidth: number = 200;
   imageWidth: number=0;
   profilePhotosService: ProfilePhotosService;
-  constructor(urlviwerService: UrlViewerService, profilePhotosService: ProfilePhotosService) {
-    this.urlviwerService = urlviwerService;
+  constructor(urlviewerService: UrlViewerService, profilePhotosService: ProfilePhotosService) {
+    this.urlviewerService = urlviewerService;
     this.profilePhotosService = profilePhotosService;
   }
 

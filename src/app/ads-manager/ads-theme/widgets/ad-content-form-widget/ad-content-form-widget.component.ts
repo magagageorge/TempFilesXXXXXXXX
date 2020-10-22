@@ -13,6 +13,7 @@ import { WfLinkPreviewService } from '@app/libs/wf-link-preview/services/wf-link
 import { LinkPreview } from '@app/libs/wf-link-preview';
 import { SysFunctions } from '@app/libs/utilities/common-functions';
 import { Router } from '@angular/router';
+import { NgxImageCompressService } from 'ngx-image-compress';
 
 @Component({
   selector: 'app-ad-content-form-widget',
@@ -39,7 +40,7 @@ export class AdContentFormWidgetComponent implements OnInit, AfterViewInit {
   show_card_description: boolean = false;
   media_upload_to_card: AdContentCardForm = null;
   saving_ad: boolean;
-  constructor(public adsService: AdsService, private formBuilder: FormBuilder, public imageIconsService: ImageIconsService, public linkPreviewService: WfLinkPreviewService, public router: Router) {
+  constructor(public adsService: AdsService, public imageCompress: NgxImageCompressService, private formBuilder: FormBuilder, public imageIconsService: ImageIconsService, public linkPreviewService: WfLinkPreviewService, public router: Router) {
   }
 
   ngOnInit() {
@@ -108,7 +109,7 @@ export class AdContentFormWidgetComponent implements OnInit, AfterViewInit {
     const formData: any = new FormData();
     formData.append("compaign_id", _this.compaign.id);
     formData.append("name", _this.ad_draft_model.name);
-    if(_this.ad_draft_model.id!=null){
+    if (_this.ad_draft_model.id != null) {
       formData.append("id", _this.ad_draft_model.id);
     }
     formData.append("introduction", _this.ad_draft_model.introduction);
@@ -123,11 +124,11 @@ export class AdContentFormWidgetComponent implements OnInit, AfterViewInit {
 
     this.adsService.service.getProvider(this.adsService.provider).crudconfig.route_url = 'ads/ad/';
     if (this.ad_draft_model.id > 0) {
-      this.adsService.WaitProcessingRequest(true,'Saving Changes!');
+      this.adsService.WaitProcessingRequest(true, 'Saving Changes!');
       return this.adsService.service.update(this.adsService.provider, formData, { id: _this.ad_draft_model.id }).subscribe(results => {
         _this.saving_ad = false;
         _this.submitted = false;
-        _this.adsService.WaitProcessingRequest(false,'');
+        _this.adsService.WaitProcessingRequest(false, '');
         if (results.isSuccess()) {
           var data = results.getResultData();
           if (data.done == true && data.adcontent != null) {
@@ -137,11 +138,11 @@ export class AdContentFormWidgetComponent implements OnInit, AfterViewInit {
         }
       });
     } else {
-      this.adsService.WaitProcessingRequest(true,'Saving Your Ad!');
+      this.adsService.WaitProcessingRequest(true, 'Saving Your Ad!');
       return this.adsService.service.create(this.adsService.provider, formData).subscribe(results => {
         _this.saving_ad = false;
         _this.submitted = false;
-        _this.adsService.WaitProcessingRequest(false,'');
+        _this.adsService.WaitProcessingRequest(false, '');
         if (results.isSuccess()) {
           var data = results.getResultData();
           if (data.done == true && data.adcontent != null) {
@@ -162,19 +163,32 @@ export class AdContentFormWidgetComponent implements OnInit, AfterViewInit {
         if (lPreview) {
           _this.ad_draft_model.cards[0].headline = lPreview.title;
           _this.ad_draft_model.cards[0].description = lPreview.description;
-          if (lPreview.image!=null && lPreview.image.trim() != '') {
+          if (lPreview.image != null && lPreview.image.trim() != '') {
             var loadedImage = new Image();
             loadedImage.setAttribute('crossorigin', 'anonymous');
             loadedImage.onload = (event) => {
               if (event) {
                 SysFunctions.ImageUrlToBlob(lPreview.image.trim()).subscribe(blob => {
                   SysFunctions.BlobtoDataURL(blob).then(base64Url => {
-                    var imgFile = SysFunctions.DataUrlToFile(base64Url);
-                    _this.ad_draft_model.cards[0].media = base64Url;
-                    _this.ad_draft_model.cards[0].media_file = imgFile;
-                    _this.ad_draft_model.cards[0].media_height = loadedImage.height;
-                    _this.ad_draft_model.cards[0].media_width = loadedImage.width;
-                    _this.ad_draft_model.cards[0].media_wh_ratio = loadedImage.width / loadedImage.height;
+                    SysFunctions.getImageCompressionRates(base64Url, 'AD_IMAGE').then(rts => {
+                      SysFunctions.getImageOrientation(SysFunctions.DataUrlToFile(base64Url)).then(orientation => {
+                        _this.imageCompress.compressFile(base64Url, orientation, rts.ratio, rts.quality).then(
+                          processedImageDataUrl => {
+                            var loadedImage2 = new Image();
+                            loadedImage2.onload = (event) => {
+                              if (event) {
+                                var imgFile = SysFunctions.DataUrlToFile(processedImageDataUrl);
+                                _this.ad_draft_model.cards[0].media = processedImageDataUrl;
+                                _this.ad_draft_model.cards[0].media_file = imgFile;
+                                _this.ad_draft_model.cards[0].media_height = loadedImage2.height;
+                                _this.ad_draft_model.cards[0].media_width = loadedImage2.width;
+                                _this.ad_draft_model.cards[0].media_wh_ratio = loadedImage2.width / loadedImage2.height;
+                              }
+                            }
+                            loadedImage2.src = processedImageDataUrl;
+                          });
+                      });
+                    });
                   });
                 });
               }
@@ -315,11 +329,11 @@ export class AdContentFormWidgetComponent implements OnInit, AfterViewInit {
       this.AdDestinationUrl.clearValidators();
       this.AdCallToAction.clearValidators();
       for (var i = 0; i < this.cards.length; i++) {
-        if(i==0){
+        if (i == 0) {
           this.cards.controls[i].get('headline').setValidators([Validators.required]);
           this.cards.controls[i].get('description').setValidators([Validators.required]);
-          this.cards.controls[i].get('destination_url').setValidators([Validators.required, Validators.pattern(URL_REGEXP)]);  
-        }else{
+          this.cards.controls[i].get('destination_url').setValidators([Validators.required, Validators.pattern(URL_REGEXP)]);
+        } else {
           this.cards.controls[i].get('headline').clearValidators();
           this.cards.controls[i].get('description').clearValidators();
           this.cards.controls[i].get('destination_url').clearValidators();
@@ -403,28 +417,37 @@ export class AdContentFormWidgetComponent implements OnInit, AfterViewInit {
   }
 
   PushPreviewImages(f: File) {
+    var _this = this;
     var fileReader = new FileReader();
     var i_url;
     fileReader.onload = (e) => {
       if (e) {
         i_url = (<FileReader>e.target).result;
-        var loadedImage = new Image();
-        loadedImage.onload = (event) => {
-          if (event) {
-            this.searchAdCard(this.media_upload_to_card).subscribe((card: AdContentCardForm) => {
-              if (card) {
-                card.media_file = f;
-                card.media = i_url;
-                card.upload_media = true;
-                card.media_width = loadedImage.width;
-                card.media_height = loadedImage.height;
-                card.media_wh_ratio = card.media_width / card.media_height;
-              }
-              this.media_upload_to_card = null;
-            });
-          }
-        }
-        loadedImage.src = i_url;
+        SysFunctions.getImageCompressionRates(i_url, 'AD_IMAGE').then(rts => {
+          SysFunctions.getImageOrientation(f).then(orientation => {
+            _this.imageCompress.compressFile(i_url, orientation, rts.ratio, rts.quality).then(
+              processedImageDataUrl => {
+                var loadedImage = new Image();
+                loadedImage.onload = (event) => {
+                  if (event) {
+                    var imgFile = SysFunctions.DataUrlToFile(processedImageDataUrl);
+                    this.searchAdCard(this.media_upload_to_card).subscribe((card: AdContentCardForm) => {
+                      if (card) {
+                        card.media_file = imgFile;
+                        card.media = processedImageDataUrl;
+                        card.upload_media = true;
+                        card.media_width = loadedImage.width;
+                        card.media_height = loadedImage.height;
+                        card.media_wh_ratio = card.media_width / card.media_height;
+                      }
+                      this.media_upload_to_card = null;
+                    });
+                  }
+                }
+                loadedImage.src = processedImageDataUrl;
+              });
+          });
+        });
       }
     }
     fileReader.readAsDataURL(<File>f);

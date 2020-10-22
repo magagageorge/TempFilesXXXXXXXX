@@ -5,7 +5,10 @@
                 style="font-size:95%;padding-bottom:5px;margin-top:0px;">
                 <ng-container *ngIf="feed.page!=null">
                     <a routerLink="/{{feed.page.url}}"
-                        (click)="hovercardService.OnMouseOut($event);urlViewerService.setPage(feed.page);" class="woorbi-page-link">{{feed.page.name}}</a>
+                    (mouseover)="hovercardService.OnHover($event,feed.page,'page')" 
+                    (mouseleave)="hovercardService.OnMouseOut($event)"
+                        (click)="hovercardService.OnMouseOut($event);urlViewerService.setPage(feed.page);"
+                        class="woorbi-page-link">{{feed.page.name}}</a>
                     <ng-container *ngIf="feed.post_type=='PAGE_COVER'"> <span> updated their page
                             cover</span>
                     </ng-container>
@@ -15,7 +18,10 @@
                 </ng-container>
                 <ng-container *ngIf="feed.page==null && feed.profile!=null">
                     <a routerLink="/{{feed.profile.url}}"
-                        (click)="hovercardService.OnMouseOut($event);urlViewerService.setProfile(feed.profile);" class="woorbi-page-link">{{feed.profile.name}}</a>
+                    (mouseover)="hovercardService.OnHover($event,feed.profile,'profile')" 
+                    (mouseleave)="hovercardService.OnMouseOut($event)"
+                        (click)="hovercardService.OnMouseOut($event);urlViewerService.setProfile(feed.profile);"
+                        class="woorbi-page-link">{{feed.profile.name}}</a>
                     <ng-container *ngIf="feed.post_type=='PROFILE_COVER'"> <span> updated profile
                             cover</span>
                     </ng-container>
@@ -28,10 +34,10 @@
 
             <div class="user-block">
                 <ng-container *ngIf="feed.page!=null">
-                    <a routerLink="/{{feed.page.url}}" (click)="urlViewerService.setPage(feed.page);"><img
+                    <a routerLink="/{{feed.page.url}}" (mouseover)="hovercardService.OnHover($event,feed.page,'page')" (mouseleave)="hovercardService.OnMouseOut($event)" (click)="urlViewerService.setPage(feed.page);"><img
                             class="rounded-circle img-fluid" src="{{feed.page.picture.face}}" alt=""></a>
                     <span class="username mr-4">
-                        <a class="w-100 d-block text-truncate" (click)="urlViewerService.setPage(feed.page);"
+                        <a class="w-100 d-block text-truncate" (mouseover)="hovercardService.OnHover($event,feed.page,'page')" (mouseleave)="hovercardService.OnMouseOut($event)" (click)="urlViewerService.setPage(feed.page);"
                             routerLink="/{{feed.page.url}}">{{feed.page.name}} <span
                                 class="url-tag">@{{feed.page.url}}</span></a>
                     </span>
@@ -48,14 +54,14 @@
                     </span>
                 </ng-container>
                 <ng-container *ngIf="feed.page==null && feed.profile!=null">
-                    <a routerLink="/{{feed.profile.url}}" (mouseover)="hovercardService.OnHover($event,feed.profile)"
+                    <a routerLink="/{{feed.profile.url}}" (mouseover)="hovercardService.OnHover($event,feed.profile,'profile')"
                         (click)="hovercardService.OnMouseOut($event);urlViewerService.setProfile(feed.profile);"
                         (mouseleave)="hovercardService.OnMouseOut($event)"><img class="rounded-circle img-fluid"
                             src="{{feed.profile.avatar.face}}" alt=""></a>
 
                     <span class="username mr-4">
                         <a class="w-100 d-block text-truncate"
-                            (mouseover)="hovercardService.OnHover($event,feed.profile)"
+                            (mouseover)="hovercardService.OnHover($event,feed.profile,'profile')"
                             (click)="hovercardService.OnMouseOut($event);urlViewerService.setProfile(feed.profile);"
                             (mouseleave)="hovercardService.OnMouseOut($event)"
                             routerLink="/{{feed.profile.url}}">{{feed.profile.name}} <span
@@ -82,11 +88,12 @@
                                     class="fa fa-edit"></span><span>&nbsp;</span>
                                 <ng-container i18n>Edit</ng-container>
                             </a></li>
-                        <li *ngIf="feed.my_post==true" class="dropdown-item"><a href="javascript:void(0);"
-                                (click)="confirmDeletePost(feed.id)"><span
+                        <li *ngIf="feed.my_post==true" class="dropdown-item">
+                            <a href="javascript:void(0);" (click)="appModalService.showDeletePost(true,feed.id)"><span
                                     class="fa fa-trash"></span><span>&nbsp;</span>
                                 <ng-container i18n>Delete</ng-container>
-                            </a></li>
+                            </a>
+                        </li>
 
                         <li *ngIf="feed.my_post!=true" class="dropdown-item"><a href="javascript:void(0);"
                                 (click)="reportPostContent(feed.id)"><span
@@ -94,7 +101,7 @@
                                 <ng-container i18n>Report this</ng-container>
                             </a></li>
                         <li *ngIf="feed.my_post!=true" class="dropdown-item"><a href="javascript:void(0);"
-                                (click)="feedService.hidePost(feed.id)"><span
+                                (click)="postingService.hidePost(feed.id)"><span
                                     class="fa fa-eye-slash"></span><span>&nbsp;</span>
                                 <ng-container i18n>Hide this Post</ng-container>
                             </a></li>
@@ -167,10 +174,10 @@
                 <div class="row actions">
                     <div class="col-4 text-center px-0">
                         <span style="cursor: pointer;" *ngIf="feed.i_like==true"
-                            (click)="feedService.feedLike(feed,'unlike')" class="btn-liked"><span
+                            (click)="postingService.feedLike(feed,'unlike')" class="btn-liked"><span
                                 class="fa fa-heart"></span> <span>&nbsp;</span><span i18n>Love</span></span><span
                             style="cursor: pointer;" *ngIf="feed.i_like!=true"
-                            (click)="feedService.feedLike(feed,'like')"><span
+                            (click)="postingService.feedLike(feed,'like')"><span
                                 class="fa fa-heart-o"></span><span>&nbsp;</span><span i18n>Love</span></span>
                     </div>
 
@@ -180,7 +187,7 @@
                     </div>
 
                     <div class="col-4 text-center px-0">
-                        <a href="javascript:void(0);" (click)="postingService.shareThisPost(feed)" data-guid="317">
+                        <a href="javascript:void(0);" (click)="wantToShareAs(feed)">
                             <img [src]="imageIconsService.shareIcon" class="share-img-icon"><span>&nbsp;</span>
                             <span i18n>Share</span></a>
                     </div>
@@ -206,7 +213,7 @@
                 <h5 i18n>You will no longer see this post in your feed!</h5>
                 <hr>
                 <span class="px-2 py-1" style="cursor:pointer;font-size:105%;"
-                    (click)="feedService.unhidePost(feed.id)"><span class="fa fa-undo"></span>
+                    (click)="postingService.unhidePost(feed.id)"><span class="fa fa-undo"></span>
                     <span>&nbsp;</span><span i18n>Undo</span><span>&nbsp;</span><span>&nbsp;</span>
                     <span *ngIf="feed.unhidding_post==true" style="font-size:12px;">
                         <i class="fa fa-circle-o-notch fa-spin fa-1x fa-fw"></i>

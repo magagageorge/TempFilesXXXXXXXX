@@ -45,8 +45,9 @@
                                         <div *ngIf="(feed.comment_input_box!='' && feed.comment_input_box!=null) || feed.comment_image_preview!=null"
                                                 class="input-group w-100 pull-right">
                                                 <button type="submit"
-                                                        class="btn  btn-primary btn-sm p-1 text-primary pull-right mr-1"><span
-                                                                class="fa fa-send"></span> Post</button>
+                                                        class="btn  btn-primary btn-sm p-1 text-primary pull-right mr-1">
+                                                        <span class="fa fa-send"></span> Post
+                                                </button>
                                         </div>
                                         <input class="d-none" type='file' name="upload_files"
                                                 (change)="commentService.onSelectFile($event,feed)"
@@ -67,7 +68,7 @@
                         <div class="col-12 px-0">
                                 <div *ngIf="!feedComment.edit_mode" class="user-block">
                                         <a routerLink="/{{feedComment.profile.url}}"
-                                                (mouseover)="hovercardService.OnHover($event,feedComment.profile)"
+                                                (mouseover)="hovercardService.OnHover($event,feedComment.profile,'profile')"
                                                 (click)="hovercardService.OnMouseOut($event);urlViewerService.setProfile(feedComment.profile);"
                                                 (mouseleave)="hovercardService.OnMouseOut($event)">
                                                 <img class="rounded-circle img-fluid my-1"
@@ -76,7 +77,7 @@
                                         <div class="description" style="position: relative;">
                                                 <div class="d-block w-100 pl-1 font-weight-bold username"><a
                                                                 routerLink="/{{feedComment.profile.url}}"
-                                                                (mouseover)="hovercardService.OnHover($event,feedComment.profile)"
+                                                                (mouseover)="hovercardService.OnHover($event,feedComment.profile,'profile')"
                                                                 (click)="hovercardService.OnMouseOut($event);urlViewerService.setProfile(feedComment.profile);"
                                                                 (mouseleave)="hovercardService.OnMouseOut($event)">{{feedComment.profile.name}}</a>
                                                 </div>
@@ -87,8 +88,10 @@
                                                 <div class="comment-message d-block w-100 pl-1"
                                                         style="padding-right:30px;">
                                                         <ng-container *ngIf="feedComment.message!=''">
-                                                                <p [innerHTML]="feedComment.message | wfLinkify" class="w-100 m-0 feed-comment-text-content" id="post-content-container"></p>
-                                                        </ng-container>                  
+                                                                <p [innerHTML]="feedComment.message | wfLinkify"
+                                                                        class="w-100 m-0 feed-comment-text-content"
+                                                                        id="post-content-container"></p>
+                                                        </ng-container>
                                                         <div *ngIf="feedComment.pictures.length" class="d-block p-0"
                                                                 [ngStyle]="{'width':''+container_width+'px','background-image':'url(' + imageIconsService.loadingPictureImage + ')'}"
                                                                 style="background-size: 100%;background-repeat: no-repeat; ">
@@ -107,20 +110,23 @@
                                                                         (click)="commentService.commentLike(feedComment,'unlike')"
                                                                         class="btn-liked"><span
                                                                                 class="fa fa-heart"></span><span>&nbsp;</span>
-                                                                        <span i18n>Love</span></span>
+                                                                        <span i18n>Love</span>
+                                                                </span>
                                                                 <span style="cursor:pointer"
                                                                         *ngIf="feedComment.i_like!=true"
                                                                         (click)="commentService.commentLike(feedComment,'like')"><span
                                                                                 class="fa fa-heart-o"></span><span>&nbsp;</span>
-                                                                        <span i18n>Love</span></span>
+                                                                        <span i18n>Love</span>
+                                                                </span>
                                                                 <span>&nbsp;&nbsp;</span>
                                                                 <span (click)="showPostLikes(feedComment.id,feedComment.no_likes)"
                                                                         *ngIf="feedComment.no_likes>0"
                                                                         style="cursor:pointer"> {{feedComment.no_likes}}
                                                                         <span *ngIf="feedComment.no_likes>1"
-                                                                                i18n>Loves</span><span
-                                                                                *ngIf="feedComment.no_likes==1"
-                                                                                i18n>Love</span> </span>
+                                                                                i18n>Loves</span>
+                                                                        <span *ngIf="feedComment.no_likes==1"
+                                                                                i18n>Love</span>
+                                                                </span>
 
                                                                 <span>&nbsp;&nbsp;</span>
                                                                 <span class="font-weight-bold" style="cursor:pointer"
@@ -218,19 +224,13 @@
                                                         </div>
                                                 </div>
 
-
-
-
-
-
-
-                                                <div class="p-0" style="position:absolute;right:0px;top:0px;">
+                                                <div class="p-0"
+                                                        style="position:absolute;right:0px;top:0px;">
                                                         <div class="dropdown btn-group" ngbDropdown
                                                                 placement="bottom-right">
                                                                 <a class="p-1" ngbDropdownToggle></a>
                                                                 <ul class="dropdown-menu  dropdown-menu-left"
-                                                                        ngbDropdownMenu
-                                                                        style="position:absolute;left:10px;">
+                                                                        ngbDropdownMenu>
                                                                         <li *ngIf="feedComment.my_comment!=true"
                                                                                 class="dropdown-item"><a
                                                                                         href="javascript:void(0);"
@@ -238,7 +238,8 @@
                                                                                                 class="fa fa-flag-o"></span><span>&nbsp;</span>
                                                                                         <ng-container i18n>Report this
                                                                                         </ng-container>
-                                                                                </a></li>
+                                                                                </a>
+                                                                        </li>
                                                                         <li *ngIf="feedComment.my_comment==true"
                                                                                 class="dropdown-item"><a
                                                                                         href="javascript:void(0);"
@@ -246,15 +247,17 @@
                                                                                                 class="fa fa-edit"></span><span>&nbsp;</span>
                                                                                         <ng-container i18n>Edit
                                                                                         </ng-container>
-                                                                                </a></li>
+                                                                                </a>
+                                                                        </li>
                                                                         <li *ngIf="feedComment.my_comment==true"
                                                                                 class="dropdown-item"><a
                                                                                         href="javascript:void(0);"
-                                                                                        (click)="confirmDeleteComment(feedComment)"><span
+                                                                                        (click)="appModalService.showDeleteComment(true,feedComment,null)"><span
                                                                                                 class="fa fa-delete"></span><span>&nbsp;</span>
                                                                                         <ng-container i18n>Delete
                                                                                         </ng-container>
-                                                                                </a></li>
+                                                                                </a>
+                                                                        </li>
                                                                 </ul>
                                                         </div>
                                                 </div>

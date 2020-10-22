@@ -5,7 +5,7 @@
                         <div *ngIf="!commentReply.edit_mode" class="col-12 px-0">
                                 <div *ngIf="commentReply.id!=feedComment.replyId" class="user-block">
                                         <a routerLink="/{{commentReply.profile.url}}"
-                                                (mouseover)="hovercardService.OnHover($event,commentReply.profile)"
+                                                (mouseover)="hovercardService.OnHover($event,commentReply.profile,'profile')"
                                                 (click)="hovercardService.OnMouseOut($event);urlViewerService.setProfile(commentReply.profile);"
                                                 (mouseleave)="hovercardService.OnMouseOut($event)">
                                                 <img class="rounded-circle img-fluid my-1"
@@ -14,7 +14,7 @@
                                         <div class="description" style="position: relative;padding-right:30px;">
                                                 <div class="d-block w-100 pl-1 font-weight-bold username"><a
                                                                 routerLink="/{{commentReply.profile.url}}"
-                                                                (mouseover)="hovercardService.OnHover($event,commentReply.profile)"
+                                                                (mouseover)="hovercardService.OnHover($event,commentReply.profile,'profile')"
                                                                 (click)="hovercardService.OnMouseOut($event);urlViewerService.setProfile(commentReply.profile);"
                                                                 (mouseleave)="hovercardService.OnMouseOut($event)">{{commentReply.profile.name}}</a>
                                                 </div>
@@ -70,29 +70,32 @@
                                                                         ngbDropdownMenu
                                                                         style="position:absolute;left:10px;">
                                                                         <li *ngIf="commentReply.my_comment!=true"
-                                                                                class="dropdown-item"><a
-                                                                                        href="javascript:void(0);"
+                                                                                class="dropdown-item">
+                                                                                <a href="javascript:void(0);"
                                                                                         (click)="reportCommentContentReply(commentReply.id)"><span
                                                                                                 class="fa fa-flag-o"></span><span>&nbsp;</span>
                                                                                         <ng-container i18n>Report this
                                                                                         </ng-container>
-                                                                                </a></li>
+                                                                                </a>
+                                                                        </li>
                                                                         <li *ngIf="commentReply.my_comment==true"
-                                                                                class="dropdown-item"><a
-                                                                                        href="javascript:void(0);"
+                                                                                class="dropdown-item">
+                                                                                <a href="javascript:void(0);"
                                                                                         (click)="commentService.setToEditCommentReply(commentReply)"><span
                                                                                                 class="fa fa-edit"></span><span>&nbsp;</span>
                                                                                         <ng-container i18n>Edit
                                                                                         </ng-container>
-                                                                                </a></li>
+                                                                                </a>
+                                                                        </li>
                                                                         <li *ngIf="commentReply.my_comment==true"
-                                                                                class="dropdown-item"><a
-                                                                                        href="javascript:void(0);"
-                                                                                        (click)="confirmDeleteCommentReply(feedComment,commentReply)"><span
+                                                                                class="dropdown-item">
+                                                                                <a href="javascript:void(0);"
+                                                                                        (click)="appModalService.showDeleteComment(true,feedComment,commentReply)"><span
                                                                                                 class="fa fa-delete"></span><span>&nbsp;</span>
                                                                                         <ng-container i18n>Delete
                                                                                         </ng-container>
-                                                                                </a></li>
+                                                                                </a>
+                                                                        </li>
                                                                 </ul>
                                                         </div>
                                                 </div>

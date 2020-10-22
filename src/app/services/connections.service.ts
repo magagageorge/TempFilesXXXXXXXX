@@ -11,6 +11,9 @@ import { UrlViewerService } from './url-viewer.service';
 import { FeedService } from './feed.service';
 import { Feed } from '@app/models/feed/feed';
 import { Comment } from '@app/models/feed/comment';
+import { ConnectionStatus } from '@app/models/global';
+import { ProfileFeedService } from '@app/viewer/profile/services/profile-feed.service';
+import { PageFeedService } from '@app/viewer/page/services/page-feed.service';
 
 @Injectable({
   providedIn: 'root'
@@ -43,7 +46,7 @@ export class ConnectionsService {
   urlViewerService: UrlViewerService;
   feedService: FeedService;
 
-  constructor(service: CrudService, @Inject(CRUD_OPTIONS) CRUD_OPTIONS: CrudOptions, feedService: FeedService, urlViewerService: UrlViewerService, private _modalService: NgbModal, router: Router) {
+  constructor(service: CrudService, @Inject(CRUD_OPTIONS) CRUD_OPTIONS: CrudOptions, feedService: FeedService, public profileFeedService: ProfileFeedService, public pageFeedService: PageFeedService, urlViewerService: UrlViewerService, private _modalService: NgbModal, router: Router) {
     this.next_suggestion_page = 1;
     this.next_request_page = 1;
     this.next_connections_page = 1;
@@ -91,204 +94,124 @@ export class ConnectionsService {
     });
   }
 
-  Connect(profile: Profile): void {
-    this.clearSuggestion(profile);
+  Connect(profileId: number): void {
     var _this = this;
     this.errors = this.messages = [];
+    this.UpdateConnectionStatus(profileId, { action: 'cancel_request', connected: false, request_received: false, request_sent: true });
     this.service.getProvider(this.provider).crudconfig.route_url = 'mynetwork/connections/';
-    this.service.create(this.provider, { p: profile.user_id, a: 'connect' }).subscribe(function (result) {
+    this.service.create(this.provider, { p: profileId, a: 'connect' }).subscribe(function (result) {
+      if (result.isSuccess()) {
+        var data = result.getResultData();
+        if (data.done = 1) {      
+          _this.searchSuggestions(String(profileId)).subscribe(request => {
+            if (request) {
+              _this.clearSuggestion(request);
+              _this.CONNECT_SENT_REQUESTS.push(request);
+            }
+          });
+        } else {
+          _this.UpdateConnectionStatus(profileId, { action: 'connect', connected: false, request_received: false, request_sent: false });
+        }
+      } else {
+        _this.errors = result.getErrors();
+        _this.UpdateConnectionStatus(profileId, { action: 'connect', connected: false, request_received: false, request_sent: false });
+      }
+    });
+  }
+
+  Accept(profileId: number): void {
+    var _this = this;
+    this.UpdateConnectionStatus(profileId, { action: 'message', connected: true, request_received: false, request_sent: false });
+    this.errors = this.messages = [];
+    this.service.getProvider(this.provider).crudconfig.route_url = 'mynetwork/connections/';
+    this.service.create(this.provider, { p: profileId, a: 'accept' }).subscribe(function (result) {
       if (result.isSuccess()) {
         var data = result.getResultData();
         if (data.done == 1) {
-          profile.connectStatus = data.connectStatus;
-          _this.CONNECT_SENT_REQUESTS.push(profile);
+          _this.searchRequests(String(profileId)).subscribe(request => {
+            if (request) {
+              _this.clearRequest(request);
+              _this.CONNECTIONS.push(request);
+            }
+          });
         } else {
+          _this.UpdateConnectionStatus(profileId, { action: 'cancel_request', connected: false, request_received: true, request_sent: false });
         }
       } else {
         _this.errors = result.getErrors();
+        _this.UpdateConnectionStatus(profileId, { action: 'cancel_request', connected: false, request_received: true, request_sent: false });
       }
     });
   }
 
-  Accept(profile: Profile): void {
-    this.clearRequest(profile);
+  Cancel(profileId: number): void {
     var _this = this;
+    this.UpdateConnectionStatus(profileId, { action: 'connect', connected: false, request_received: false, request_sent: false });
     this.errors = this.messages = [];
     this.service.getProvider(this.provider).crudconfig.route_url = 'mynetwork/connections/';
-    this.service.create(this.provider, { p: profile.user_id, a: 'accept' }).subscribe(function (result) {
+    this.service.create(this.provider, { p: profileId, a: 'cancel' }).subscribe(function (result) {
       if (result.isSuccess()) {
         var data = result.getResultData();
         if (data.done == 1) {
-          profile.connectStatus = data.connectStatus;
-          _this.CONNECTIONS.push(profile);
+          _this.searchSentRequests(String(profileId)).subscribe(request => {
+            if (request) {
+              _this.clearSentRequest(request);
+            }
+          });
         } else {
+          _this.UpdateConnectionStatus(profileId, { action: 'cancel_request', connected: false, request_received: false, request_sent: true });
         }
       } else {
         _this.errors = result.getErrors();
+        _this.UpdateConnectionStatus(profileId, { action: 'cancel_request', connected: false, request_received: false, request_sent: true });
       }
     });
   }
 
-  Cancel(profile: Profile): void {
-    this.clearSentRequest(profile);
+  Ignore(profileId: number): void {
     var _this = this;
-    this.errors = this.messages = [];
-    this.service.getProvider(this.provider).crudconfig.route_url = 'mynetwork/connections/';
-    this.service.create(this.provider, { p: profile.user_id, a: 'cancel' }).subscribe(function (result) {
-      if (result.isSuccess()) {
-        var data = result.getResultData();
-        if (data.done == 1) {
-          profile.connectStatus = data.connectStatus;
-          _this.CONNECT_SUGGESTIONS.push(profile);
-          _this.UpdateConnectionStatus(profile.user_id, data.connectStatus);
-        } else {
-        }
-      } else {
-        _this.errors = result.getErrors();
-      }
-    });
-  }
-
-  Ignore(profile: Profile): void {
-    this.clearRequest(profile);
-    var _this = this;
-    this.errors = this.messages = [];
-    this.service.getProvider(this.provider).crudconfig.route_url = 'mynetwork/connections/';
-    this.service.create(this.provider, { p: profile.user_id, a: 'deny' }).subscribe(function (result) {
-      if (result.isSuccess()) {
-        var data = result.getResultData();
-        if (data.done == 1) {
-          _this.UpdateConnectionStatus(profile.user_id, data.connectStatus);
-        } else {
-        }
-      } else {
-        _this.errors = result.getErrors();
-      }
-    });
-  }
-
-  Disconnect(profile: Profile): void {
-    this.clearConnection(profile);
-    var _this = this;
-    this.errors = this.messages = [];
-    this.service.getProvider(this.provider).crudconfig.route_url = 'mynetwork/connections/';
-    this.service.create(this.provider, { p: profile.user_id, a: 'disconnect' }).subscribe(function (result) {
-      if (result.isSuccess()) {
-        var data = result.getResultData();
-        if (data.done == 1) {
-          _this.UpdateConnectionStatus(profile.user_id, data.connectStatus);
-        } else {
-        }
-      } else {
-        _this.errors = result.getErrors();
-      }
-    });
-  }
-
-  ConnectById(profielId: number): void {
-    var _this = this;
-    this.searchSuggestions(String(profielId)).subscribe(request => {
-      if (request) {
-        _this.clearSuggestion(request);
-      }
-    });
-    this.errors = this.messages = [];
-    this.service.getProvider(this.provider).crudconfig.route_url = 'mynetwork/connections/';
-    this.service.create(this.provider, { p: profielId, a: 'connect' }).subscribe(function (result) {
-      if (result.isSuccess()) {
-        var data = result.getResultData();
-        if (data.done = 1) {
-          _this.CONNECT_SENT_REQUESTS.push(data.profile);
-        } else {
-        }
-      } else {
-        _this.errors = result.getErrors();
-      }
-    });
-  }
-
-  AccpetById(profielId: number): void {
-    var _this = this;
-    this.searchRequests(String(profielId)).subscribe(request => {
-      if (request) {
-        _this.clearRequest(request);
-      }
-    });
-    this.errors = this.messages = [];
-    this.service.getProvider(this.provider).crudconfig.route_url = 'mynetwork/connections/';
-    this.service.create(this.provider, { p: profielId, a: 'accept' }).subscribe(function (result) {
-      if (result.isSuccess()) {
-        var data = result.getResultData();
-        if (data.done == 1) {
-          _this.CONNECTIONS.push(data.profile);
-        } else {
-        }
-      } else {
-        _this.errors = result.getErrors();
-      }
-    });
-  }
-
-  CancelById(profielId: number): void {
-    var _this = this;
-    this.searchSentRequests(String(profielId)).subscribe(request => {
-      if (request) {
-        _this.clearSentRequest(request);
-      }
-    });
-    this.errors = this.messages = [];
-    this.service.getProvider(this.provider).crudconfig.route_url = 'mynetwork/connections/';
-    this.service.create(this.provider, { p: profielId, a: 'cancel' }).subscribe(function (result) {
-      if (result.isSuccess()) {
-        var data = result.getResultData();
-        if (data.done == 1) {
-          _this.CONNECT_SUGGESTIONS.push(data.profile);
-        } else {
-        }
-      } else {
-        _this.errors = result.getErrors();
-      }
-    });
-  }
-
-  IgnoreById(profielId: number): void {
-    var _this = this;
-    this.searchSuggestions(String(profielId)).subscribe(suggestion => {
+    this.searchSuggestions(String(profileId)).subscribe(suggestion => {
       if (suggestion) {
         _this.clearSuggestion(suggestion);
       }
     });
+    this.UpdateConnectionStatus(profileId, { action: 'connect', connected: false, request_received: false, request_sent: false });
     this.errors = this.messages = [];
     this.service.getProvider(this.provider).crudconfig.route_url = 'mynetwork/connections/';
-    this.service.create(this.provider, { p: profielId, a: 'deny' }).subscribe(function (result) {
+    this.service.create(this.provider, { p: profileId, a: 'deny' }).subscribe(function (result) {
       if (result.isSuccess()) {
         var data = result.getResultData();
         if (data == true) {
         } else {
+          _this.UpdateConnectionStatus(profileId, { action: 'accept', connected: false, request_received: true, request_sent: false });
         }
       } else {
         _this.errors = result.getErrors();
+        _this.UpdateConnectionStatus(profileId, { action: 'accept', connected: false, request_received: true, request_sent: false });
       }
     });
   }
 
-  DisconnectById(profielId: number): void {
+  Disconnect(profileId: number): void {
     var _this = this;
-    this.searchConnections(String(profielId)).subscribe(suggestion => {
+    this.searchConnections(String(profileId)).subscribe(suggestion => {
       if (suggestion) {
         _this.clearConnection(suggestion);
       }
     });
+    this.UpdateConnectionStatus(profileId, { action: 'connect', connected: false, request_received: false, request_sent: false });
     this.errors = this.messages = [];
     this.service.getProvider(this.provider).crudconfig.route_url = 'mynetwork/connections/';
-    this.service.create(this.provider, { p: profielId, a: 'disconnect' }).subscribe(function (result) {
+    this.service.create(this.provider, { p: profileId, a: 'disconnect' }).subscribe(function (result) {
       if (result.isSuccess()) {
         var data = result.getResultData();
         if (data == true) {
         } else {
+          _this.UpdateConnectionStatus(profileId, { action: 'message', connected: true, request_received: false, request_sent: false });
         }
       } else {
         _this.errors = result.getErrors();
+        _this.UpdateConnectionStatus(profileId, { action: 'message', connected: true, request_received: false, request_sent: false });
       }
     });
   }
@@ -309,7 +232,6 @@ export class ConnectionsService {
       }
     });
   }
-
 
   loadConnections(params?: {}): any {
     this.loading_connections = true;
@@ -390,7 +312,7 @@ export class ConnectionsService {
     this.CONNECT_SENT_REQUESTS = this.CONNECT_SENT_REQUESTS.filter((x: any) => x.user_id !== profile.user_id);
   }
 
-  UpdateConnectionStatus(profileId: number, connectionStatus: any) {
+  UpdateConnectionStatus(profileId: number, connectionStatus: ConnectionStatus) {
     if (this.urlViewerService.PPVIEWER.profile != null && this.urlViewerService.PPVIEWER.profile.user_id == profileId) {
       this.urlViewerService.PPVIEWER.profile.connectStatus = connectionStatus;
     }
@@ -428,12 +350,44 @@ export class ConnectionsService {
     }
 
     this.feedService.feeds.forEach((feed: Feed) => {
-      if (feed.profile.user_id == profileId) {
-        feed.profile.connectStatus = connectionStatus;
+      if (feed.profile != null) {
+        if (feed.profile.user_id == profileId) {
+          feed.profile.connectStatus = connectionStatus;
+        }
       }
       feed.comments.forEach((comment: any) => {
-        if (comment.profile.user_id == profileId) {
-          comment.profile.connectStatus = connectionStatus;
+        if (comment.profile != null) {
+          if (comment.profile.user_id == profileId) {
+            comment.profile.connectStatus = connectionStatus;
+          }
+        }
+      });
+    });
+    this.profileFeedService.feeds.forEach((feed: Feed) => {
+      if (feed.profile != null) {
+        if (feed.profile.user_id == profileId) {
+          feed.profile.connectStatus = connectionStatus;
+        }
+      }
+      feed.comments.forEach((comment: any) => {
+        if (comment.profile != null) {
+          if (comment.profile.user_id == profileId) {
+            comment.profile.connectStatus = connectionStatus;
+          }
+        }
+      });
+    });
+    this.pageFeedService.feeds.forEach((feed: Feed) => {
+      if (feed.profile != null) {
+        if (feed.profile.user_id == profileId) {
+          feed.profile.connectStatus = connectionStatus;
+        }
+      }
+      feed.comments.forEach((comment: any) => {
+        if (comment.profile != null) {
+          if (comment.profile.user_id == profileId) {
+            comment.profile.connectStatus = connectionStatus;
+          }
         }
       });
     });

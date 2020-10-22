@@ -1,12 +1,19 @@
 <div class="card">
-    <div class="card-header py-1">
-        <span>Photos</span>
-    </div>
     <div class="card-body p-1">
+        <div class="d-block w-100">
+            <div class="row my-2 mx-0">
+                <div class="col-9 font-weight-bold wb-font-size-120">
+                    <span>Photos</span>
+                </div>
+                <div class="col-3 d-flex justify-content-end align-items-center">
+                    <a routerLink="/{{urlviewerService.PPVIEWER.profile.url}}/photos" class="btn-link">All</a>
+                </div>
+            </div>
+        </div>
         <div class="row m-0" #imageContainer>
             <ng-container *ngIf="profilePhotosService.profilePhotos.length>0">
                 <ng-container *ngFor="let photo of profilePhotosService.profilePhotos; let i = index">
-                    <div *ngIf="i<6" [ngStyle]="{'height':''+imageWidth+'px','width':''+imageWidth+'px'}" class="p-image-summary-img col-3 col-md-4 col-lg-4 p-0"
+                    <div *ngIf="i<6" [ngStyle]="{'height':''+imageWidth+'px','width':''+imageWidth+'px'}" class="p-image-summary-img col-3 col-md-4 col-lg-4 p-0 rounded"
                         [ngClass]="(photo.data.width>photo.data.height)?'d-flex d-flex-row justify-content-center':''"
                         style="background-size: 100%;background-repeat: no-repeat;border-radius:0px;overflow:hidden;border:1px solid #ffffff;" (click)="profilePhotosService.viewPhotoInModal(photo,i)">
                         <img [src]="photo.data.url" [ngClass]="(photo.data.width>photo.data.height) ?'h-100':'w-100'">
@@ -15,16 +22,16 @@
             </ng-container>
             <ng-container *ngIf="profilePhotosService.profilePhotos.length==0">
                 <div class="col-3 col-md-4 col-lg-4 p-0" style="border:1px solid #ffffff;">
-                    <img src="assets/img/image.png" class="img-fluid">
+                    <img src="assets/img/image.png" class="img-fluid rounded">
                 </div>
                 <div class="col-3 col-md-4 col-lg-4 p-0" style="border:1px solid #ffffff;">
-                    <img src="assets/img/image.png" class="img-fluid">
+                    <img src="assets/img/image.png" class="img-fluid rounded">
                 </div>
                 <div class="col-3 col-md-4 col-lg-4 p-0" style="border:1px solid #ffffff;">
-                    <img src="assets/img/image.png" class="img-fluid">
+                    <img src="assets/img/image.png" class="img-fluid rounded">
                 </div>
                 <div class="col-3 col-md-4 col-lg-4 p-0 d-block d-md-none d-lg-none" style="border:1px solid #ffffff;">
-                    <img src="assets/img/image.png" class="img-fluid">
+                    <img src="assets/img/image.png" class="img-fluid rounded">
                 </div>
             </ng-container>
         </div>

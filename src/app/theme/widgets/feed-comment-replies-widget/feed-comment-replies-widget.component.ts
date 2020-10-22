@@ -61,6 +61,4 @@ export class FeedCommentRepliesWidgetComponent implements OnInit {
     this.appModalService.modalRef.componentInstance.setModel(post_id, 'CommentReply');
   }
 
-
-
 }

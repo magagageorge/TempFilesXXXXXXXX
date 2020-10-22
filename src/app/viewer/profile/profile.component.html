@@ -10,6 +10,9 @@
 </app-wf-main-content>
 <!--Main layout-->
 <app-wf-footer></app-wf-footer>
+<ng-container *ngIf="appModalService.deletePostModal.visible==true">
+    <app-delete-post-modal></app-delete-post-modal>
+</ng-container>
 <app-profile-images-overlay-view></app-profile-images-overlay-view>
 <app-edit-profile-overlay-container></app-edit-profile-overlay-container>
 <app-delete-profile-overlay-container></app-delete-profile-overlay-container>

@@ -16,6 +16,7 @@ import { WfLinkifyModule } from '@app/libs/wf-linkify';
 import { AdPostCatalogWidgetComponent } from './widgets/ad-post-catalog-widget/ad-post-catalog-widget.component';
 import { AdTextPreviewWidgetComponent } from './widgets/ad-text-preview-widget/ad-text-preview-widget.component';
 import { AdsProcessingRequestOverlayComponent } from './widgets/ads-processing-request-overlay/ads-processing-request-overlay.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { AdsProcessingRequestOverlayComponent } from './widgets/ads-processing-r
     NgbModalModule,
     FormsModule,
     ReactiveFormsModule,
-    WfLinkifyModule
+    WfLinkifyModule,
+    TranslateModule
   ],
   exports: [AdsNavBarComponent, AdsMainContentComponent,AdsNavTabsWidgetComponent, CreateAdAccountFormModalComponent, OverlayContentModalComponent, AdContentFormWidgetComponent, AdPreviewWidgetComponent, AdPostPreviewWidgetComponent, AdPostCatalogWidgetComponent, AdTextPreviewWidgetComponent, AdsProcessingRequestOverlayComponent],
 })

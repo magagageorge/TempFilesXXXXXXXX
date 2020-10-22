@@ -11,6 +11,8 @@ import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { Link, WfLinkifyService } from '@app/libs/wf-linkify';
 import { WfLinkPreviewService } from '@app/libs/wf-link-preview/services/wf-link-preview.service';
 import { LinkPreview } from '@app/libs/wf-link-preview';
+import { SysFunctions } from '@app/libs/utilities/common-functions';
+import { NgxImageCompressService } from 'ngx-image-compress';
 
 
 export interface PreviewPicture {
@@ -66,9 +68,9 @@ export class ChatThreadWidgetComponent implements AfterViewInit {
   links: Link[] = [];
   mentions: Link[] = [];
   hashtags: Link[] = [];
-  linkPreview: LinkPreview=null;
+  linkPreview: LinkPreview = null;
 
-  constructor(messengerService: MessengerService, public linkifyService: WfLinkifyService,
+  constructor(messengerService: MessengerService, public imageCompress: NgxImageCompressService, public linkifyService: WfLinkifyService,
     public linkPreviewService: WfLinkPreviewService, router: Router) {
     this.messengerService = messengerService;
     this.router = router;
@@ -248,8 +250,8 @@ export class ChatThreadWidgetComponent implements AfterViewInit {
             this.PushPreviewImages(<File>f);
           } else {
             this.file_preview_list.push({ name: f.name, size: MathService.BitesToSize(f.size), extention: MessengerService.getFileExtension(f.name), file: f });
+            this.filesToUpload.push(<File>f);
           }
-          this.filesToUpload.push(<File>f);
         } else {
           continue;
         }
@@ -260,16 +262,28 @@ export class ChatThreadWidgetComponent implements AfterViewInit {
   PushPreviewImages(f: File) {
     var fileReader = new FileReader();
     var i_url;
+    var _this = this;
     fileReader.onload = (e) => {
       if (e) {
         i_url = (<FileReader>e.target).result;
-        var loadedImage = new Image();
-        loadedImage.onload = (event) => {
-          if (event) {
-            this.image_preview_urls.push({ url: i_url, width: loadedImage.width, height: loadedImage.height, file: <File>f });
-          }
-        }
-        loadedImage.src = i_url;
+        SysFunctions.getImageCompressionRates(i_url, 'MESSAGE_IMAGE').then(rts => {
+          SysFunctions.getImageOrientation(f).then(orientation => {
+            _this.imageCompress.compressFile(i_url, orientation, rts.ratio, rts.quality).then(
+              processedImageDataUrl => {
+                var loadedImage = new Image();
+                loadedImage.onload = (event) => {
+                  if (event) {
+                    console.log(rts)
+                    var imgFile = SysFunctions.DataUrlToFile(processedImageDataUrl);
+                    _this.filesToUpload.push(imgFile);
+                    _this.image_preview_urls.push({ url: processedImageDataUrl, width: loadedImage.width, height: loadedImage.height, file: imgFile });
+                  }
+                }
+                loadedImage.src = processedImageDataUrl;
+              });
+          });
+
+        });
       }
     }
     fileReader.readAsDataURL(<File>f);
@@ -356,8 +370,8 @@ export class ChatThreadWidgetComponent implements AfterViewInit {
 
   }
 
-  updateLinkPreview(prev:LinkPreview){
-    this.linkPreview=prev;
+  updateLinkPreview(prev: LinkPreview) {
+    this.linkPreview = prev;
   }
 
 }

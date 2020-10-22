@@ -13,9 +13,9 @@
                         </div>
                         <div class="col-7 col-md-10 col-lg-10 col-xl-10">
                             <span *ngIf="editProfileService.editMode.experience.action=='edit'"
-                                class="font-weight-bold">Edit Work</span>
+                                class="font-weight-bold">Edit Work Story</span>
                             <span *ngIf="editProfileService.editMode.experience.action=='add'"
-                                class="font-weight-bold">Add Work</span>
+                                class="font-weight-bold">Add to Work Story</span>
                         </div>
                         <div class="col-3 d-md-none d-lg-none d-xl-none">
                             <div class="d-block pull-right font-weight-bold">
@@ -182,7 +182,7 @@
                     <div class="d-block w-100 d-md-none d-lg-none d-xl-none py-3 text-center">
                         <ng-container *ngIf="this.editProfileService.editMode.experience.action == 'edit'">
                             <button class="btn btn-sm btn-warning btn-rounded" (click)="delete()">Delete
-                                Experience</button>
+                                Work Story</button>
                         </ng-container>
                     </div>
 
