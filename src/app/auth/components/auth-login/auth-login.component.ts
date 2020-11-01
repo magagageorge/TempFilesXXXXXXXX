@@ -4,9 +4,10 @@ import { AuthSocialLink, AUTH_OPTIONS, AuthOptions } from '../../auth.options';
 import { AuthService } from '../../services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { getDeepFromObject } from '../../helpers';
+/*
 import { AuthService as sAuthService } from "angularx-social-login";
 import { FacebookLoginProvider, GoogleLoginProvider, LinkedInLoginProvider } from "angularx-social-login";
-
+*/
 
 @Component({
     selector: 'app-auth-login',
@@ -18,7 +19,7 @@ export class AuthLoginComponent implements OnInit {
     model: any = {};
     formGroup: FormGroup;
     service: AuthService;
-    sauthService: sAuthService;
+    /*sauthService: sAuthService;*/
     protected config: {};
     protected router: Router;
     redirectDelay: number;
@@ -31,9 +32,8 @@ export class AuthLoginComponent implements OnInit {
     login_failed: boolean = false;
     socialLinks: AuthSocialLink[];
 
-    constructor(service: AuthService, sauthService: sAuthService, router: Router, @Inject(AUTH_OPTIONS) AUTH_OPTIONS: AuthOptions, private formBuilder: FormBuilder) {
+    constructor(service: AuthService,  router: Router, @Inject(AUTH_OPTIONS) AUTH_OPTIONS: AuthOptions, private formBuilder: FormBuilder) {
         this.service = service;
-        this.sauthService = sauthService;
         this.config = AUTH_OPTIONS;
         this.router = router;
         this.redirectDelay = 0;
@@ -100,7 +100,7 @@ export class AuthLoginComponent implements OnInit {
     getConfigValue(key: string): any {
         return getDeepFromObject(this.config, key, null);
     }
-
+/*
     signInWithGoogle(): void {
         var _this = this;
         this.sauthService.signIn(GoogleLoginProvider.PROVIDER_ID, { prompt: 'select_account' }).then(account => {
@@ -170,5 +170,6 @@ export class AuthLoginComponent implements OnInit {
     signOut(): void {
         this.sauthService.signOut();
     }
+    */
 
 }

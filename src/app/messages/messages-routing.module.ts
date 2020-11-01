@@ -6,7 +6,7 @@ import { MessagesComponent } from './messages.component';
 const routes: Routes = [
   {
     path: 'thread',
-    loadChildren: './thread/thread.module#ThreadModule'
+    loadChildren: () => import('./thread/thread.module').then(m => m.ThreadModule)
   },
   {path:'',component:MessagesComponent}
 ];

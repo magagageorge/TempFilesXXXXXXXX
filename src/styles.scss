@@ -196,7 +196,7 @@
   max-lines: 3;
 }
 
-.wb-max-ln-3 {
+.wb-max-ln-4 {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -225,6 +225,14 @@
 .wb-page-header-container,
 .wb-page-content-container {
   max-width: 880px;
+}
+
+.wb-font-size-80 {
+  font-size: 80%;
+}
+
+.wb-font-size-90 {
+  font-size: 90%;
 }
 
 .wb-font-size-110 {

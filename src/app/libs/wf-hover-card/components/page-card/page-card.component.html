@@ -2,26 +2,51 @@
     <div class="display-pic">
         <div class="cover-photo">
             <div class="display-pic-gradient"></div>
-            <a *ngIf="page.cover.picture!=''" routerLink="/{{page.url}}" class="w-100 h-100 p-0 m-0"><img
+            <a *ngIf="page.cover.picture!=''" routerLink="/{{page.url}}" (click)="urlViewerService.setPage(page)" class="w-100 h-100 p-0 m-0"><img
                     src="{{page.cover.picture}}" class="img-fluid"></a>
 
         </div>
         <div class="page-pic">
             <div class="pic">
-                <a routerLink="/{{page.url}}"><img src="{{page.picture.face}}" class="img-fluid rounded-circle"></a>
+                <a routerLink="/{{page.url}}" (click)="urlViewerService.setPage(page)"><img src="{{page.picture.face}}" class="img-fluid rounded-circle"></a>
             </div>
+        </div>
+        <ng-container *ngIf="page.about!=''">
+            <div class="card-header-buttons d-flex justify-content-end p-0">
+                <app-wb-page-follow-button [page_id]='page.id' [i_follow]='page.i_follow'></app-wb-page-follow-button>
+            </div>
+        </ng-container>
+        <div class="title-container">
+            <a routerLink="/{{page.url}}" (click)="urlViewerService.setPage(page)">
+                <span class="w-100 wb-max-ln-1 wb-font-size-120">
+                    {{page.name}}
+                </span>
+                <span class="text-muted w-100 wb-max-ln-1 wb-font-size-90">{{page.category.category}}</span>
+            </a>
         </div>
     </div>
 
-
-    <div class="title-container">
-        <a routerLink="/{{page.url}}"><span class="w-100 d-block text-truncate"> {{page.name}}<span
-                    class="url-tag">@{{page.url}}</span></span></a>
+    <div class="w-100 wb-max-ln-1 px-1 py-0">
+        <span *ngIf="page.no_followers!=''" class="mx-1">
+            <span class="font-weight-bold">{{page.no_followers}}</span>
+            <span>&nbsp;</span>
+            <span class="text-muted">Followers</span>
+        </span>
+        <span *ngIf="page.location!=null" class="mx-1">
+            <span style="font-size:120%;"><span class="fa fa-map-marker"></span></span>
+            <span>&nbsp;</span>
+            <span class="text-muted">{{page.location.name}}</span>
+        </span>
     </div>
 
-    <div class="details d-block">
-        {{page.about}}
-    </div>
+    <ng-container *ngIf="page.about!=''">
+        <div class="w-100 wb-max-ln-3 px-1 py-0">
+            {{page.about}}
+        </div>
+    </ng-container>
+    <ng-container *ngIf="page.about==''">
+        <app-wb-page-follow-button [page_id]='page.id' [i_follow]='page.i_follow'></app-wb-page-follow-button>
+    </ng-container>
 
 
 </div>

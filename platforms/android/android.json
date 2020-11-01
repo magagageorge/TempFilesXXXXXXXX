@@ -29,47 +29,47 @@
           "/manifest": [
             {
               "xml": "<uses-permission android:name=\"android.permission.CAMERA\" />",
-              "count": 3,
+              "count": 5,
               "after": "uses-permission"
             },
             {
               "xml": "<uses-permission android:name=\"android.permission.READ_EXTERNAL_STORAGE\" />",
-              "count": 3,
+              "count": 5,
               "after": "uses-permission"
             },
             {
               "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
-              "count": 3,
+              "count": 5,
               "after": "uses-permission"
             },
             {
               "xml": "<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\" />",
-              "count": 3,
+              "count": 5,
               "after": "uses-permission"
             },
             {
               "xml": "<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\" />",
-              "count": 3,
+              "count": 5,
               "after": "uses-permission"
             },
             {
               "xml": "<uses-feature android:name=\"android.hardware.location.gps\" />",
-              "count": 3,
+              "count": 5,
               "after": "uses-permission"
             },
             {
               "xml": "<uses-permission android:name=\"android.permission.INTERNET\" />",
-              "count": 3,
+              "count": 5,
               "after": "uses-permission"
             },
             {
               "xml": "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />",
-              "count": 3,
+              "count": 5,
               "after": "uses-permission"
             },
             {
               "xml": "<uses-permission android:name=\"android.permission.READ_CONTACTS\" />",
-              "count": 3,
+              "count": 5,
               "after": "uses-permission"
             }
           ]

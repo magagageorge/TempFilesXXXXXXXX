@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService as sAuthService } from "angularx-social-login";
+/*import { AuthService as sAuthService } from "angularx-social-login";*/
 import { SocialUser } from "angularx-social-login";
 import { AuthService } from "app/auth/";
 
@@ -14,18 +14,20 @@ export class WfSocialHeaderComponent implements OnInit {
   protected loggedIn: boolean;
   private authService:AuthService;
   
-  constructor(private sauthService: sAuthService,authService:AuthService) { 
+  constructor(authService:AuthService) { 
     this.authService=authService;
   }
  
   ngOnInit() {
     var _this = this;
+    /*
     this.sauthService.authState.subscribe((user) => {
       console.log(user);
       _this.user = user;
       _this.loggedIn = (user != null);
       _this.pushAccount(user);
     });
+    */
   }
 
   pushAccount(account:SocialUser){

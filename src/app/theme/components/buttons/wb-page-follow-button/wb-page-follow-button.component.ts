@@ -10,13 +10,13 @@ export class WbPageFollowButtonComponent implements OnInit {
 
   @Input() page_id:number;
   @Input() i_follow:boolean;
-  constructor(public folliwingService:FollowingService) { }
+  constructor(public followingService:FollowingService) { }
 
   ngOnInit() {
   }
 
   following(){
-    this.folliwingService.FollowPage(this.page_id,this.i_follow);
+    this.followingService.FollowPage(this.page_id,this.i_follow);
   }
 
 }

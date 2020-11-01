@@ -4,9 +4,8 @@
             <div class="mr-4 d-block text-truncate" *ngIf="feed.post_type!='STATUS_UPDATE'"
                 style="font-size:95%;padding-bottom:5px;margin-top:0px;">
                 <ng-container *ngIf="feed.page!=null">
-                    <a routerLink="/{{feed.page.url}}"
-                    (mouseover)="hovercardService.OnHover($event,feed.page,'page')" 
-                    (mouseleave)="hovercardService.OnMouseOut($event)"
+                    <a routerLink="/{{feed.page.url}}" (mouseover)="hovercardService.OnHover($event,feed.page,'page')"
+                        (mouseleave)="hovercardService.OnMouseOut($event)"
                         (click)="hovercardService.OnMouseOut($event);urlViewerService.setPage(feed.page);"
                         class="woorbi-page-link">{{feed.page.name}}</a>
                     <ng-container *ngIf="feed.post_type=='PAGE_COVER'"> <span> updated their page
@@ -18,8 +17,8 @@
                 </ng-container>
                 <ng-container *ngIf="feed.page==null && feed.profile!=null">
                     <a routerLink="/{{feed.profile.url}}"
-                    (mouseover)="hovercardService.OnHover($event,feed.profile,'profile')" 
-                    (mouseleave)="hovercardService.OnMouseOut($event)"
+                        (mouseover)="hovercardService.OnHover($event,feed.profile,'profile')"
+                        (mouseleave)="hovercardService.OnMouseOut($event)"
                         (click)="hovercardService.OnMouseOut($event);urlViewerService.setProfile(feed.profile);"
                         class="woorbi-page-link">{{feed.profile.name}}</a>
                     <ng-container *ngIf="feed.post_type=='PROFILE_COVER'"> <span> updated profile
@@ -34,15 +33,21 @@
 
             <div class="user-block">
                 <ng-container *ngIf="feed.page!=null">
-                    <a routerLink="/{{feed.page.url}}" (mouseover)="hovercardService.OnHover($event,feed.page,'page')" (mouseleave)="hovercardService.OnMouseOut($event)" (click)="urlViewerService.setPage(feed.page);"><img
-                            class="rounded-circle img-fluid" src="{{feed.page.picture.face}}" alt=""></a>
+                    <a routerLink="/{{feed.page.url}}" (mouseover)="hovercardService.OnHover($event,feed.page,'page')"
+                        (mouseleave)="hovercardService.OnMouseOut($event)"
+                        (click)="urlViewerService.setPage(feed.page);"><img class="rounded-circle img-fluid"
+                            src="{{feed.page.picture.face}}" alt=""></a>
                     <span class="username mr-4">
-                        <a class="w-100 d-block text-truncate" (mouseover)="hovercardService.OnHover($event,feed.page,'page')" (mouseleave)="hovercardService.OnMouseOut($event)" (click)="urlViewerService.setPage(feed.page);"
+                        <a class="w-100 d-block text-truncate"
+                            (mouseover)="hovercardService.OnHover($event,feed.page,'page')"
+                            (mouseleave)="hovercardService.OnMouseOut($event)"
+                            (click)="urlViewerService.setPage(feed.page);"
                             routerLink="/{{feed.page.url}}">{{feed.page.name}} <span
                                 class="url-tag">@{{feed.page.url}}</span></a>
                     </span>
                     <span class="description">
-                        <span class="d-block text-truncate">{{feed.page.category.category}}</span>
+                        <span *ngIf="feed.page.category!=null"
+                            class="d-block text-truncate">{{feed.page.category.category}}</span>
                         <span class="d-block text-truncate">
                             <a href="javascript:void(0)" title="{{feed.visibility}}">
                                 <i class="{{VISIBILITY_ICONS[feed.visibility]}}"></i></a>
@@ -54,7 +59,8 @@
                     </span>
                 </ng-container>
                 <ng-container *ngIf="feed.page==null && feed.profile!=null">
-                    <a routerLink="/{{feed.profile.url}}" (mouseover)="hovercardService.OnHover($event,feed.profile,'profile')"
+                    <a routerLink="/{{feed.profile.url}}"
+                        (mouseover)="hovercardService.OnHover($event,feed.profile,'profile')"
                         (click)="hovercardService.OnMouseOut($event);urlViewerService.setProfile(feed.profile);"
                         (mouseleave)="hovercardService.OnMouseOut($event)"><img class="rounded-circle img-fluid"
                             src="{{feed.profile.avatar.face}}" alt=""></a>
@@ -127,12 +133,12 @@
 
         <div class="card-body" style="overflow:hidden;">
             <ng-container *ngIf="feed.message!=''">
-                <p [innerHTML]="feed.message | wfLinkify" class="p-2 feed-text-content" id="post-content-container"></p>
+                <app-show-more-post-text-widget [text]="feed.message" [post_id]="feed.id" [min_limit]="80" [max_limit]="250" [show_more_in_modal]="true" [show_all]="(view_in=='modal')?true:false"></app-show-more-post-text-widget>
             </ng-container>
 
             <ng-container *ngIf="feed.original_post!=null">
                 <div class="w-100">
-                    <app-shared-post-widget [post]="feed.original_post"></app-shared-post-widget>
+                    <app-shared-post-widget [post]="feed.original_post" [view_in]="view_in"></app-shared-post-widget>
                 </div>
             </ng-container>
 

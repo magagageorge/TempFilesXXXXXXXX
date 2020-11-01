@@ -1,30 +1,38 @@
-
 /** Cover picture styles */
 
 .display-pic {
-    height: 97px;
-    background-color: #06274d;
+    height: 150px;
     position: relative;
 }
 
 .display-pic-gradient {
-    height: 97px;
+    height: 100px;
     position: absolute;
     top: 43;
     width: 100%;
-	}
+}
 
 .cover-photo {
     height: 100px;
     overflow: hidden;
+    margin: -1px;
+}
+
+.card-header-buttons {
+    position: absolute;
+    height: 50px;
+    left: 100px;
+    right: 0px;
+    top: 50px;
+    z-index: 1;
 }
 
 .profile-pic {
     position: absolute;
-    width: 350px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     left: 10px;
-    top: 45px;
+    top: 60px;
     z-index: 1;
 }
 
@@ -39,14 +47,14 @@
 
 .title-container {
     /*margin: -40px 0 0 140px;*/
-    position: absolute;	
+    position: absolute;
     margin: 0 !important;
     right: 1px;
-    left:30%;
-	padding:1px;
-	margin-top:5px;
-   font-weight: 900;
-   z-index: 4;  
+    left: 95px;
+    padding: 1px;
+    margin-top: 5px;
+    font-weight: 900;
+    z-index: 4;
 }
 
 .title-container a {
@@ -61,7 +69,6 @@
 }
 
 /** Hover card info and interaction */
-
 .info {
     height: 37px;
     width: 100%;
@@ -77,8 +84,8 @@
 .info-inner {
     padding: 0px;
     margin-left: 0px;
-    padding-top:7px;
-	padding-bottom:7px;
+    padding-top: 7px;
+    padding-bottom: 7px;
 }
 
 .info-inner a {
@@ -92,13 +99,13 @@
 .details {
     margin-top: 30px;
     margin-left: 2px;
-	margin-right:2px;
+    margin-right: 2px;
 }
 
 .details-list {
     list-style-type: none;
     color: #333;
-    font-family: 'lucida grande',tahoma,verdana,arial,sans-serif;
+    font-family: "lucida grande", tahoma, verdana, arial, sans-serif;
 }
 
 .details-list-sub-item {

@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Profile } from '@app/models/profile/profile';
 import { ConnectionsService } from '@app/services/connections.service';
+import { UrlViewerService } from '@app/services/url-viewer.service';
 
 @Component({
   selector: 'app-profile-card',
@@ -9,7 +10,7 @@ import { ConnectionsService } from '@app/services/connections.service';
 })
 export class ProfileCardComponent implements OnInit {
   @Input() profile: Profile;
-  constructor(public connectionsService:ConnectionsService) { }
+  constructor(public connectionsService:ConnectionsService,public urlViewerService:UrlViewerService) { }
 
   ngOnInit() {
   }

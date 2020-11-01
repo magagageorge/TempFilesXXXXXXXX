@@ -1,4 +1,4 @@
-import { Injectable, Inject, Renderer2, RendererFactory2 } from '@angular/core';
+import { Injectable, Inject, Renderer2, RendererFactory2, HostListener } from '@angular/core';
 import { WINDOW } from '@app/libs/window';
 
 @Injectable({
@@ -8,12 +8,23 @@ export class WbWindowService {
 
   public renderer: Renderer2;
   windowHeight: number;
-  windowWidth:number;
+  windowWidth: number;
   constructor(@Inject(WINDOW) public window: any, rendererFactory: RendererFactory2) {
-    this.windowHeight = window.innerHeight; //Y
-    this.windowWidth = window.innerWidth; //X
+    this.setWindowDimension();
     this.renderer = rendererFactory.createRenderer(null, null);
   }
+
+  setWindowDimension() {
+    this.windowHeight = this.window.innerHeight; //Y
+    this.windowWidth = this.window.innerWidth; //X
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.setWindowDimension();
+  }
+
+  
   /*
     onWindowScroll(sidebar: ElementRef) {
       var wasScrollingDown = true;

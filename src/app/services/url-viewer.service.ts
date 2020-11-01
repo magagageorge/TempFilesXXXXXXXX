@@ -126,6 +126,7 @@ export class UrlViewerService {
     this.PPVIEWER.page.picture = page.picture;
     this.PPVIEWER.page.cover = page.cover;
     this.PPVIEWER.page.category = page.category;
+    this.PPVIEWER.page.location = page.location;
     this.PPVIEWER.page.website = page.website;
     this.PPVIEWER.page.email = page.email;
     this.PPVIEWER.page.no_followers = page.no_followers;

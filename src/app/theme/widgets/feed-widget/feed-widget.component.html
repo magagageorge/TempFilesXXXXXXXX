@@ -5,7 +5,7 @@
         <ng-container *ngFor="let feed of feedService.feeds;let i=index">
             <ng-container *ngIf="feed.edit_mode!=true">
                 <app-post-card-widget [feed]="feed" [container_width]="container_width"
-                    [max_post_images_height]="max_post_images_height"></app-post-card-widget>
+                    [max_post_images_height]="max_post_images_height" [view_in]="'feed'"></app-post-card-widget>
             </ng-container>
             <ng-container *ngIf="showAdsService.POST_ADS.length>0 && ( i % 5)==0">
                 <app-ad-post-view-widget [ad_content]="showAdsService.POST_ADS[nextAddIndex(i)]">

@@ -32,48 +32,48 @@ const routes: Routes = [
   {
     path: 'mynetwork',
     canActivate: [AuthGuard], // here we tell Angular to check the access with our AuthGuard
-    loadChildren: './mynetwork/mynetwork.module#MynetworkModule'
+    loadChildren: () => import('./mynetwork/mynetwork.module').then(m => m.MynetworkModule)
   },
   {
     path: 'notifications',
     canActivate: [AuthGuard], // here we tell Angular to check the access with our AuthGuard
-    loadChildren: './notifications/notifications.module#NotificationsModule'
+    loadChildren: () => import('./notifications/notifications.module').then(m => m.NotificationsModule)
   },
   {
     path: 'search',
     canActivate: [AuthGuard], // here we tell Angular to check the access with our AuthGuard
-    loadChildren: './search/search.module#SearchModule'
+    loadChildren: () => import('./search/search.module').then(m => m.SearchModule)
   },
   {
     path: 'settings',
     canActivate: [AuthGuard], // here we tell Angular to check the access with our AuthGuard
-    loadChildren: './settings/settings.module#SettingsModule'
+    loadChildren: () => import('./settings/settings.module').then(m => m.SettingsModule)
   },
   {
     path: 'messages',
     canActivate: [AuthGuard], // here we tell Angular to check the access with our AuthGuard
-    loadChildren: './messages/messages.module#MessagesModule'
+    loadChildren: () => import('./messages/messages.module').then(m => m.MessagesModule)
   },
   {
     path: 'adsmanager',
     canActivate: [AuthGuard],
-    loadChildren: './ads-manager/ads-manager.module#AdsManagerModule'
+    loadChildren: () => import('./ads-manager/ads-manager.module').then(m => m.AdsManagerModule)
   },
   {
     path: 'pages',
     canActivate: [AuthGuard],
-    loadChildren: './pages/woorbi-pages.module#WoorbiPagesModule'
+    loadChildren: () => import('./pages/woorbi-pages.module').then(m => m.WoorbiPagesModule)
   },
   {
     path: ':url/:url_page',
     canActivate: [AuthGuard], // here we tell Angular to check the access with our AuthGuard
-    loadChildren: './viewer/viewer.module#ViewerModule',
+    loadChildren: () => import('./viewer/viewer.module').then(m => m.ViewerModule),
     runGuardsAndResolvers: 'always'
   },
   {
     path: ':url',
     canActivate: [AuthGuard], // here we tell Angular to check the access with our AuthGuard
-    loadChildren: './viewer/viewer.module#ViewerModule',
+    loadChildren: () => import('./viewer/viewer.module').then(m => m.ViewerModule),
     runGuardsAndResolvers: 'always'
   },
 ];

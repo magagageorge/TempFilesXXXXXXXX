@@ -4,29 +4,45 @@
             <div class="card-header with-border p-2">
                 <div class="user-block">
                     <ng-container *ngIf="post.page!=null">
-                        <a routerLink="/{{post.page.url}}" (mouseover)="hovercardService.OnHover($event,post.page,'page')" (click)="urlViewerService.setPage(post.page);"><img
-                                class="rounded-circle img-fluid" src="{{post.page.picture.face}}" alt=""></a>
+                        <a routerLink="/{{post.page.url}}"
+                            (mouseover)="hovercardService.OnHover($event,post.page,'page')"
+                            (mouseleave)="hovercardService.OnMouseOut($event)"
+                            (click)="urlViewerService.setPage(post.page);"><img class="rounded-circle img-fluid"
+                                src="{{post.page.picture.face}}" alt=""></a>
                         <span class="username mr-4">
-                            <a class="w-100 d-block text-truncate" (mouseover)="hovercardService.OnHover($event,post.page,'page')" (click)="urlViewerService.setPage(post.page);"
+                            <a class="w-100 d-block text-truncate"
+                                (mouseover)="hovercardService.OnHover($event,post.page,'page')"
+                                (mouseleave)="hovercardService.OnMouseOut($event)"
+                                (click)="urlViewerService.setPage(post.page);"
                                 routerLink="/{{post.page.url}}">{{post.page.name}} <span
                                     class="url-tag">@{{post.page.url}}</span></a>
                         </span>
                         <span class="description">
-                            <span class="d-block text-truncate">{{post.page.category.category}}</span>
+                            <span *ngIf="post.page.category!=null"
+                                class="d-block text-truncate">{{post.page.category.category}}</span>
                             <span class="d-block text-truncate"><a href="javascript:void(0)" title="Everyone"><i
                                         class="fa fa-globe"></i></a> <a routerLink="#" onclick="return false;"
                                     title="{{post.updated_at.title}}">{{post.updated_at.date}} <i
-                                        *ngIf="post.updated_at.title!=post.created_at.title" i18n>Edited</i></a></span>
+                                        *ngIf="post.updated_at.title!=post.created_at.title" i18n>Edited</i></a>
+                            </span>
                         </span>
                     </ng-container>
                     <ng-container *ngIf="post.page==null && post.profile!=null">
-                        <a routerLink="/{{post.profile.url}}" (mouseover)="hovercardService.OnHover($event,post.profile,'profile')" (click)="urlViewerService.setProfile(post.profile);"><img
-                                class="rounded-circle img-fluid" src="{{post.profile.avatar.face}}" alt=""></a>
+                        <a routerLink="/{{post.profile.url}}"
+                            (mouseover)="hovercardService.OnHover($event,post.profile,'profile')"
+                            (mouseleave)="hovercardService.OnMouseOut($event)"
+                            (click)="urlViewerService.setProfile(post.profile);"><img class="rounded-circle img-fluid"
+                                src="{{post.profile.avatar.face}}" alt="">
+                        </a>
 
                         <span class="username mr-4">
-                            <a class="w-100 d-block text-truncate" (mouseover)="hovercardService.OnHover($event,post.profile,'profile')" (click)="urlViewerService.setProfile(post.profile);"
+                            <a class="w-100 d-block text-truncate"
+                                (mouseover)="hovercardService.OnHover($event,post.profile,'profile')"
+                                (mouseleave)="hovercardService.OnMouseOut($event)"
+                                (click)="urlViewerService.setProfile(post.profile);"
                                 routerLink="/{{post.profile.url}}">{{post.profile.name}} <span
-                                    class="url-tag">@{{post.profile.url}}</span></a>
+                                    class="url-tag">@{{post.profile.url}}</span>
+                            </a>
                         </span>
 
                         <span class="description">
@@ -43,8 +59,7 @@
 
             <div class="card-body" style="overflow:hidden;">
                 <ng-container *ngIf="post.message!=''">
-                    <p [innerHTML]="post.message | wfLinkify" class="p-2 feed-text-content" id="post-content-container">
-                    </p>
+                    <app-show-more-post-text-widget [text]="post.message" [post_id]="post.id" [min_limit]="80" [max_limit]="250" [show_more_in_modal]="true" [show_all]="(view_in=='modal')?true:false"></app-show-more-post-text-widget>
                 </ng-container>
 
                 <div *ngIf="post.images && post.images.length>0" class="w-100"
@@ -53,11 +68,11 @@
                         [container_height]="max_post_images_height" [feedPost]="post" [IMAGES]="post.images">
                     </app-feed-image-view-widget>
                 </div>
+
                 <div *ngIf="post.links.length" class="w-100">
                     <div *ngFor="let link of post.links" class="w-100">
                         <app-link-preview-widget [link]="link"></app-link-preview-widget>
                     </div>
-
                 </div>
 
             </div>

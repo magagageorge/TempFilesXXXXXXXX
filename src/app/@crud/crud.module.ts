@@ -30,7 +30,7 @@ export function crudOptionsFactory(options: any): any {
 @NgModule()
 export class CrudModule {
 	CrudModule(){}
-    static forRoot(crudOptions?: CrudOptions): ModuleWithProviders {
+    static forRoot(crudOptions?: CrudOptions): ModuleWithProviders<CrudModule> {
     return {
       ngModule: CrudModule,
       providers: [

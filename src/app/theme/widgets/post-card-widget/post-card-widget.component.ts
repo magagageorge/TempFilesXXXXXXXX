@@ -22,6 +22,7 @@ export class PostCardWidgetComponent implements OnInit {
   @Input() feed: any;
   @Input() container_width: number;
   @Input() max_post_images_height: number;
+  @Input() view_in:string;
 
   feedService: FeedService;
   postingService: PostingService;

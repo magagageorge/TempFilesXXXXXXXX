@@ -24,7 +24,7 @@ export { WfLinkifyService } from './services/wf-linkify.service';
 export class WfLinkifyModule {
 
 
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<WfLinkifyModule> {
     return {
       ngModule: WfLinkifyModule,
       providers: [WfLinkifyService]

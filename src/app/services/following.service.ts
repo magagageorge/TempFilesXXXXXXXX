@@ -13,6 +13,10 @@ import { Feed } from '@app/models/feed/feed';
 import { Comment } from '@app/models/feed/comment';
 import { PageService } from './page.service';
 import { PageSummary } from '@app/models/page/page.model';
+import { PageFeedService } from '@app/viewer/page/services/page-feed.service';
+import { ProfileFeedService } from '@app/viewer/profile/services/profile-feed.service';
+import { ShowAdsService } from './show-ads.service';
+import { ShowAdContent } from '@app/models/ads/ad-models';
 
 @Injectable({
     providedIn: 'root'
@@ -32,7 +36,7 @@ export class FollowingService {
     urlViewerService: UrlViewerService;
     feedService: FeedService;
 
-    constructor(service: CrudService, @Inject(CRUD_OPTIONS) CRUD_OPTIONS: CrudOptions,public pageService:PageService, feedService: FeedService, urlViewerService: UrlViewerService, router: Router) {
+    constructor(service: CrudService, @Inject(CRUD_OPTIONS) CRUD_OPTIONS: CrudOptions, public pageService: PageService, feedService: FeedService, public pageFeedService: PageFeedService, public profileFeedService: ProfileFeedService, public showAdsService: ShowAdsService, urlViewerService: UrlViewerService, router: Router) {
         this.service = service;
         this.crudconfig = CRUD_OPTIONS;
         this.router = router;
@@ -56,7 +60,7 @@ export class FollowingService {
             if (result.isSuccess()) {
                 var data = result.getResultData();
                 if (data.done == true) {
-                   _this.UpdatePagesFollowStatus(page_id,data.i_follow,data.no_followers);
+                    _this.UpdatePagesFollowStatus(page_id, data.i_follow, data.no_followers);
                 } else {
                 }
             } else {
@@ -71,15 +75,50 @@ export class FollowingService {
             this.urlViewerService.PPVIEWER.page.no_followers = no_followers;
             this.urlViewerService.PPVIEWER.page.i_follow = i_follow;
         }
-
-        if(this.pageService.MYPAGES.length>0){
-            this.pageService.getPage(page_id).subscribe((page:PageSummary)=>{
-                if(page){
-                    page.i_follow=i_follow;
-                    page.no_followers=no_followers;
+        if (this.pageService.MYPAGES.length > 0) {
+            this.pageService.getPage(page_id).subscribe((page: PageSummary) => {
+                if (page) {
+                    page.i_follow = i_follow;
+                    page.no_followers = no_followers;
                 }
             });
         }
+        this.feedService.feeds.forEach((post: Feed) => {
+            if (post.page != null && post.page.id == page_id) {
+                post.page.i_follow = i_follow;
+                post.page.no_followers = no_followers;
+            }
+            if (post.original_post != null && post.original_post.page != null && post.original_post.page.id == page_id) {
+                post.original_post.page.i_follow = i_follow;
+                post.original_post.page.no_followers = no_followers;
+            }
+        });
+        this.pageFeedService.feeds.forEach((post: Feed) => {
+            if (post.page != null && post.page.id == page_id) {
+                post.page.i_follow = i_follow;
+                post.page.no_followers = no_followers;
+            }
+            if (post.original_post != null && post.original_post.page != null && post.original_post.page.id == page_id) {
+                post.original_post.page.i_follow = i_follow;
+                post.original_post.page.no_followers = no_followers;
+            }
+        });
+        this.profileFeedService.feeds.forEach((post: Feed) => {
+            if (post.page != null && post.page.id == page_id) {
+                post.page.i_follow = i_follow;
+                post.page.no_followers = no_followers;
+            }
+            if (post.original_post != null && post.original_post.page != null && post.original_post.page.id == page_id) {
+                post.original_post.page.i_follow = i_follow;
+                post.original_post.page.no_followers = no_followers;
+            }
+        });
+        this.showAdsService.POST_ADS.forEach((ad: ShowAdContent) => {
+            if (ad.page != null && ad.page.id == page_id) {
+                ad.page.i_follow = i_follow;
+                ad.page.no_followers = no_followers;
+            }
+        })
 
     }
 

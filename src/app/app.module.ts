@@ -100,7 +100,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   entryComponents: [PostDeleteModalComponent, CommentDeleteModalComponent, ReportContentModalComponent, LikesModalComponent, CommentReplyDeleteModalComponent, ConfirmDeleteContentModalComponent, ReportMessengerContentModalComponent, CreateAdAccountFormModalComponent],
   imports: [
     BrowserModule,
-    NgbModule.forRoot(),
+    NgbModule,
     CommonModule,
     ThemeModule,
     NgSelectModule,

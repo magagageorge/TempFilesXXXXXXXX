@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppModalService } from '@app/services/app-modal.service';
+import { FeedService } from '@app/services/feed.service';
 
 @Component({
   selector: 'app-wf-main-content',
@@ -8,7 +9,7 @@ import { AppModalService } from '@app/services/app-modal.service';
 })
 export class WfMainContentComponent implements OnInit {
 
-  constructor(public appModalService:AppModalService) { }
+  constructor(public appModalService:AppModalService,public feedService:FeedService) { }
 
   ngOnInit() {
   }

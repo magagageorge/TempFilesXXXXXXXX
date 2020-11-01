@@ -5,7 +5,7 @@
         <ng-container *ngFor="let feed of pageFeedService.feeds">
             <ng-container *ngIf="feed.edit_mode!=true">
                 <app-post-card-widget [feed]="feed" [container_width]="container_width"
-                    [max_post_images_height]="max_post_images_height"></app-post-card-widget>
+                    [max_post_images_height]="max_post_images_height" [view_in]="'page_feed'"></app-post-card-widget>
             </ng-container>
         </ng-container>
 

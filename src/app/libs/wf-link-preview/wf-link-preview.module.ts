@@ -28,7 +28,7 @@ export {WfLinkPreviewDirective} from './directives/wf-link-preview.directive';
 
 })
 export class WfLinkPreviewModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<WfLinkPreviewModule> {
     return {
       ngModule: WfLinkPreviewModule,
       providers: [WfLinkPreviewService, WfLinkifyService]

@@ -24,7 +24,7 @@ export class ProfileViewer {
     timezone:string;
     country:string; 
     city:string; 
-    location:string;
+    location:any;
     state:string; 
     street:string; 
     zip:string; 

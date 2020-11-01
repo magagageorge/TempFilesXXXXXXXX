@@ -9,12 +9,12 @@ const routes: Routes = [
   {
     path: 'accounts',
     canActivate: [AuthGuard], // here we tell Angular to check the access with our AuthGuard
-    loadChildren: './accounts/accounts.module#AccountsModule'
+    loadChildren: () => import('./accounts/accounts.module').then(m => m.AccountsModule)
   },
   {
     path: 'compaigns',
     canActivate: [AuthGuard], // here we tell Angular to check the access with our AuthGuard
-    loadChildren: './ads/ads.module#AdsModule'
+    loadChildren: () => import('./ads/ads.module').then(m => m.AdsModule)
   }
 ];
 

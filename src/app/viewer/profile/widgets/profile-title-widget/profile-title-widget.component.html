@@ -5,8 +5,8 @@
     {{urlviewerService.PPVIEWER.profile.title}}
   </div>
   <div class="d-block">
-    <span *ngIf="urlviewerService.PPVIEWER.profile.location!=''"><span class="fa fa-map-marker"></span>
-      {{urlviewerService.PPVIEWER.profile.location}}</span>
+    <span *ngIf="urlviewerService.PPVIEWER.profile.location.name!='NONE'"><span class="fa fa-map-marker"></span>
+      {{urlviewerService.PPVIEWER.profile.location.name}}</span>
     <span>&nbsp;&nbsp;</span>
     <a *ngIf="urlviewerService.PPVIEWER.profile.no_connections>0"
       routerLink="/{{urlviewerService.PPVIEWER.profile.url}}/connections"

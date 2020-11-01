@@ -15,6 +15,7 @@ import { VISIBILITY_ICONS } from '@app/data/visibilities';
 })
 export class SharedPostWidgetComponent implements AfterViewInit, OnInit {
   @Input() post: Feed;
+  @Input() view_in:string;
   @ViewChild("sharePostContainer", { static: false })
   sharePostContainer: ElementRef;
   container_width: number;

@@ -102,7 +102,7 @@ export class ConnectionsService {
     this.service.create(this.provider, { p: profileId, a: 'connect' }).subscribe(function (result) {
       if (result.isSuccess()) {
         var data = result.getResultData();
-        if (data.done = 1) {      
+        if (data.done = 1) {
           _this.searchSuggestions(String(profileId)).subscribe(request => {
             if (request) {
               _this.clearSuggestion(request);
@@ -318,7 +318,7 @@ export class ConnectionsService {
     }
 
     if (this.urlViewerService.PPVIEWER.profile.profile_views.length > 0) {
-      this.searchProfileIN(this.urlViewerService.PPVIEWER.profile.profile_views, profileId).subscribe(found => {
+      this.searchProfileIN(this.urlViewerService.PPVIEWER.profile.profile_views, profileId).subscribe((found:Profile) => {
         if (found) {
           found.connectStatus = connectionStatus;
         }
@@ -326,7 +326,7 @@ export class ConnectionsService {
     }
 
     if (this.CONNECTIONS.length > 0) {
-      this.searchProfileIN(this.CONNECTIONS, profileId).subscribe(found => {
+      this.searchProfileIN(this.CONNECTIONS, profileId).subscribe((found:Profile) => {
         if (found) {
           found.connectStatus = connectionStatus;
         }
@@ -334,7 +334,7 @@ export class ConnectionsService {
     }
 
     if (this.CONNECT_REQUESTS.length > 0) {
-      this.searchProfileIN(this.CONNECT_REQUESTS, profileId).subscribe(found => {
+      this.searchProfileIN(this.CONNECT_REQUESTS, profileId).subscribe((found:Profile) => {
         if (found) {
           found.connectStatus = connectionStatus;
         }
@@ -342,7 +342,7 @@ export class ConnectionsService {
     }
 
     if (this.CONNECT_SENT_REQUESTS.length > 0) {
-      this.searchProfileIN(this.CONNECT_SENT_REQUESTS, profileId).subscribe(found => {
+      this.searchProfileIN(this.CONNECT_SENT_REQUESTS, profileId).subscribe((found:Profile) => {
         if (found) {
           found.connectStatus = connectionStatus;
         }
@@ -353,6 +353,9 @@ export class ConnectionsService {
       if (feed.profile != null) {
         if (feed.profile.user_id == profileId) {
           feed.profile.connectStatus = connectionStatus;
+        }
+        if (feed.original_post != null && feed.original_post.profile != null && feed.original_post.profile.user_id == profileId) {
+          feed.original_post.profile.connectStatus = connectionStatus;
         }
       }
       feed.comments.forEach((comment: any) => {
@@ -368,6 +371,9 @@ export class ConnectionsService {
         if (feed.profile.user_id == profileId) {
           feed.profile.connectStatus = connectionStatus;
         }
+        if (feed.original_post != null && feed.original_post.profile != null && feed.original_post.profile.user_id == profileId) {
+          feed.original_post.profile.connectStatus = connectionStatus;
+        }
       }
       feed.comments.forEach((comment: any) => {
         if (comment.profile != null) {
@@ -381,6 +387,9 @@ export class ConnectionsService {
       if (feed.profile != null) {
         if (feed.profile.user_id == profileId) {
           feed.profile.connectStatus = connectionStatus;
+        }
+        if (feed.original_post != null && feed.original_post.profile != null && feed.original_post.profile.user_id == profileId) {
+          feed.original_post.profile.connectStatus = connectionStatus;
         }
       }
       feed.comments.forEach((comment: any) => {

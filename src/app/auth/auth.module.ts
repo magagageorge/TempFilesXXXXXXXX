@@ -17,8 +17,8 @@ import { defaultSettings, AUTH_USER_OPTIONS, AUTH_OPTIONS, AUTH_PROVIDERS, AUTH_
 //import { AuthComponent } from './components/auth.component';
 import { deepExtend } from './helpers';
 
-import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
-import { GoogleLoginProvider, FacebookLoginProvider, LinkedInLoginProvider} from "angularx-social-login";
+//import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
+//import { GoogleLoginProvider, FacebookLoginProvider, LinkedInLoginProvider} from "angularx-social-login";
  
 
 import { AuthOptions } from './auth.options';
@@ -48,6 +48,7 @@ export function nbOptionsFactory(options: any): any{
     return deepExtend(defaultSettings, options);
 }
 
+/*
 let config = new AuthServiceConfig([
     {
       id: GoogleLoginProvider.PROVIDER_ID,
@@ -62,10 +63,12 @@ let config = new AuthServiceConfig([
       provider: new LinkedInLoginProvider("78p6juavy4wlrw", false, 'en_US')
     }
   ]);
+ 
 
   export function provideConfig() {
     return config;
   }
+   */
 
 @NgModule({
   imports: [
@@ -74,7 +77,7 @@ let config = new AuthServiceConfig([
     RouterModule,
 	  ReactiveFormsModule,
     HttpClientModule,
-    SocialLoginModule
+    //SocialLoginModule
   ],
   declarations: [
   MustMatchDirective,
@@ -96,7 +99,7 @@ let config = new AuthServiceConfig([
 })
 export class AuthModule {
 
-static forRoot(nbAuthOptions?: AuthOptions): ModuleWithProviders{
+static forRoot(nbAuthOptions?: AuthOptions): ModuleWithProviders<AuthModule>{
         return {
             ngModule: AuthModule,
             providers: [
@@ -111,7 +114,7 @@ static forRoot(nbAuthOptions?: AuthOptions): ModuleWithProviders{
                     deps: [AUTH_OPTIONS, TokenService, Injector],
                 },
                 { provide: TokenStorage, useClass: TokenLocalStorage },
-                {provide: AuthServiceConfig,useFactory: provideConfig},
+                /*{provide: AuthServiceConfig,useFactory: provideConfig},*/
                 TokenService,
                 DummyAuthProvider,
                 EmailPassAuthProvider,

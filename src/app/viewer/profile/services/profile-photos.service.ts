@@ -118,13 +118,15 @@ export class ProfilePhotosService {
   pushProfilePhotos(feeds: Feed[]) {
     var _this = this;
     feeds.forEach(feed => {
-      feed.images.forEach(photo => {
-        var p = new PostPhoto();
-        p.post_id = Number(feed.id);
-        p.data = photo.data;
-        p.id = photo.id;
-        _this.profilePhotos.push(p);
-      });
+      if (feed.images.length > 0) {
+        feed.images.forEach(photo => {
+          var p = new PostPhoto();
+          p.post_id = Number(feed.id);
+          p.data = photo.data;
+          p.id = photo.id;
+          _this.profilePhotos.push(p);
+        });
+      }
     });
   }
 

@@ -16,7 +16,7 @@
   </div>
   <div class="card-body p-1">
     <div *ngIf="notificationsService.NOTIFICATIONS.length" class="row p-0 m-0">
-       <div   infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="notificationsService.onScrollDown()" [scrollWindow]="true" id="scroller" *ngFor="let notification of notificationsService.NOTIFICATIONS" class="col-12 m-0 px-0">
+       <div infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="notificationsService.onScrollDown()" [scrollWindow]="true" id="scroller" *ngFor="let notification of notificationsService.NOTIFICATIONS" class="col-12 m-0 px-0">
           <app-notification-widget [notification]="notification"></app-notification-widget>
        </div>
     </div>

@@ -10,7 +10,6 @@ import { ProfileCardComponent } from './components/profile-card/profile-card.com
 import { PageCardComponent } from './components/page-card/page-card.component';
 import { ThemeModule } from '@app/theme/theme.module';
 
-
 @NgModule({
   imports: [
     CommonModule,
@@ -22,10 +21,10 @@ import { ThemeModule } from '@app/theme/theme.module';
   exports: [HoverCardDirective, HoverCardContainerComponent, HoverCardComponent]
 })
 export class WfHoverCardModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<WfHoverCardModule> {
     return {
       ngModule: WfHoverCardModule,
       providers: [HoverCardService]
     };
   }
- }
+}

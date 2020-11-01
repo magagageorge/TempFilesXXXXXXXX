@@ -10,7 +10,7 @@
       "prefix": "app",
       "schematics": {
         "@schematics/angular:component": {
-          "styleext": "scss"
+          "style": "scss"
         }
       },
       "architect": {
@@ -37,6 +37,12 @@
           },
           "configurations": {
             "production": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -44,8 +50,7 @@
                 }
               ],
               "optimization": true,
-              "outputHashing": "all",
-              "i18nLocale": "en",              
+              "outputHashing": "all",              
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,

@@ -1,0 +1,16 @@
+<p class="px-2 feed-text-content" id="post-content-container">
+    <span [innerHTML]="showText | wfLinkify" class=""></span>
+    <ng-container *ngIf="show_more && show_all!=true">
+        <span>...&nbsp;</span>
+        <ng-container *ngIf="open_in_modal!=true">
+            <a href="javascript:void(0)" (click)="showMore()"><span>Show more</span></a>
+        </ng-container>
+        <ng-container *ngIf="show_more_in_modal==true && open_in_modal==true">
+            <a href="javascript:void(0)" (click)="showMoreInModalView()">Show more</a>
+        </ng-container>
+    </ng-container>
+    <ng-container *ngIf="show_less  && show_all!=true">
+        <span>&nbsp;</span>
+        <a href="javascript:void(0)" (click)="showLess()"><span>Show less</span></a>
+    </ng-container>
+</p>

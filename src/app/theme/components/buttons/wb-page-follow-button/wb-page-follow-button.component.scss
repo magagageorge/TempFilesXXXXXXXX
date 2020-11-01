@@ -1,6 +1,9 @@
 .btn-following {
     background-color: #4285f4 !important;
 }
+.btn-not-following {
+    background-color: #fff !important;
+}
 .btn-following:hover {
     background-color: #752612 !important;
     border: 2px solid #752612 !important;
@@ -15,12 +18,11 @@
 .btn-following:hover .unfollow {
     display: block;
 }
-
 .btn-follow {
     min-width: 8rem;
     border: 2px solid #4285f4 !important;
     padding: 0.4rem 1.4rem;
-    margin: .6rem;
+    margin: 0.6rem;
     font-weight: bold;
     font-size: 0.85rem;
     .fa {

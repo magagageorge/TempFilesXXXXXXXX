@@ -41,7 +41,7 @@ export class PagePhotosService {
   loading_feeds: boolean = false;
   loading_new_post: boolean = false;
   next_feed_page: number;
-  page_id: number=null;
+  page_id: number = null;
   pagePhotos: PostPhoto[] = [];
   currentViewImage: PostPhoto = null;
   currentViewImageIndex: any = -1;
@@ -117,13 +117,15 @@ export class PagePhotosService {
   pushPagePhotos(feeds: Feed[]) {
     var _this = this;
     feeds.forEach(feed => {
-      feed.images.forEach(photo => {
-        var p = new PostPhoto();
-        p.post_id = Number(feed.id);
-        p.data = photo.data;
-        p.id = photo.id;
-        _this.pagePhotos.push(p);
-      });
+      if (feed.images.length > 0) {
+        feed.images.forEach(photo => {
+          var p = new PostPhoto();
+          p.post_id = Number(feed.id);
+          p.data = photo.data;
+          p.id = photo.id;
+          _this.pagePhotos.push(p);
+        });
+      }
     });
   }
 

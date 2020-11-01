@@ -27,7 +27,7 @@ export class MyProfile {
     country: string;
     city: string;
     city_id: string;
-    location: string;
+    location: any;
     state: string;
     street: string;
     zip: string;

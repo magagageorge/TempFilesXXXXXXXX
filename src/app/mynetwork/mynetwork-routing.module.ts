@@ -7,11 +7,11 @@ const routes: Routes = [
   { path: '', component: MynetworkComponent },
   {
     path: 'invitations',
-    loadChildren: './invitations/invitations.module#InvitationsModule'
+    loadChildren: () => import('./invitations/invitations.module').then(m => m.InvitationsModule)
   },
   {
     path: 'contacts',
-    loadChildren: './contacts/contacts.module#ContactsModule'
+    loadChildren: () => import('./contacts/contacts.module').then(m => m.ContactsModule)
   },
   { path: 'connections', component: ConnectionsComponent }
 ];

@@ -5,6 +5,7 @@ import { ProfileHoverCard } from '../interfaces/profile-hover-card';
 import { DeviceDetectorService } from '@app/libs/device-detector';
 import { Profile } from '@app/models/profile/profile';
 import { PageSummary } from '@app/models/page/page.model';
+import { WbWindowService } from '@app/services/wb-window.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class HoverCardService implements OnInit {
   pcard_hovered: boolean = false;
   pcard_waiting_to_show: boolean = false;
   deviceService: DeviceDetectorService;
-  constructor(deviceService: DeviceDetectorService) {
+  constructor(deviceService: DeviceDetectorService, public windowService: WbWindowService) {
     this.deviceService = deviceService;
   }
 
@@ -27,18 +28,10 @@ export class HoverCardService implements OnInit {
 
   OnHover(event: MouseEvent, model: any, type: string) {
     var _this = this;
+    if (this.windowService.windowWidth < 768) {
+      return;
+    }
     if (this.deviceService.isDesktop) {
-      if (type == 'page') {
-        this.page = model;
-        this.profile = null;
-      } else if (type == 'profile') {
-        this.profile = model;
-        this.page = null;
-      } else {
-        this.page = null;
-        this.profile = null;
-      }
-
       var hovercard_elem = document.getElementById('hovercard-container') as HTMLElement;
       if (this.plink_hovered == false) {
         this.plink_hovered = true;
@@ -49,6 +42,16 @@ export class HoverCardService implements OnInit {
         setTimeout(function () {
           if (_this.plink_hovered == true) {
             //console.log(target.scrollTop);
+            if (type == 'page') {
+              _this.page = model;
+              _this.profile = null;
+            } else if (type == 'profile') {
+              _this.profile = model;
+              _this.page = null;
+            } else {
+              _this.page = null;
+              _this.profile = null;
+            }
             hovercard_elem.style.top = position.y + 'px';
             hovercard_elem.style.left = position.x + 'px';
             hovercard_elem.style.display = 'block';
