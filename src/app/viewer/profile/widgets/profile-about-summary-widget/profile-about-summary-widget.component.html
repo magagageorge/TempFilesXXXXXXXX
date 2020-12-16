@@ -17,15 +17,16 @@
 
                     <div *ngIf="urlviewerService.PPVIEWER.profile.about!='' && urlviewerService.PPVIEWER.profile.about!=null"
                         class="col-12">
-                        <p>
-                            {{urlviewerService.PPVIEWER.profile.about}}
-                        </p>
+                        <app-show-more-text-widget [text]="urlviewerService.PPVIEWER.profile.about" [item_id]="null"
+                        [show_more_url]="'about'"
+                            [min_limit]="40" [max_limit]="45" [show_all]="false">
+                        </app-show-more-text-widget>
                     </div>
 
                     <div *ngIf="urlviewerService.PPVIEWER.profile.my_profile==true && (urlviewerService.PPVIEWER.profile.about=='' || urlviewerService.PPVIEWER.profile.about==null)"
                         class="col-12 px-1">
                         <div class="list-group w-100 p-0 mx-0">
-                            <a routerLink="/{{urlviewerService.PPVIEWER.profile.url}}/about"
+                            <a routerLink="{{urlviewerService.PPVIEWER.profile.url}}/about"
                                 (click)="editProfileService.EditProfileAbout()" class="list-group-item">
                                 <span class="d-block w-100 p-0">
                                     <span style="font-size:110%;">

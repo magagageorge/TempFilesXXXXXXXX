@@ -10,8 +10,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxImageCompressService } from 'ngx-image-compress';
 
 
-import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { AUTH_TOKEN_CLASS, AuthJWTToken, AuthModule } from './auth';
 import { EmailPassAuthProvider } from './auth/providers';
@@ -75,6 +75,7 @@ import { LinkProcessingService } from './services/link-processing.service';
 import { WbWindowService } from './services/wb-window.service';
 import { PageFeedService } from './viewer/page/services/page-feed.service';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { DaywakaProvider } from './@crud/providers/daywaka.provider';
 
 
 // AoT requires an exported function for factories
@@ -113,12 +114,12 @@ export function HttpLoaderFactory(http: HttpClient) {
     DeviceDetectorModule.forRoot(),
     HttpClientModule,
     TranslateModule.forRoot({
-        loader: {
-            provide: TranslateLoader,
-            useFactory: HttpLoaderFactory,
-            deps: [HttpClient]
-        },
-        defaultLanguage: 'en-US'
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      },
+      defaultLanguage: 'en-US'
     }),
     CrudModule.forRoot({
       providers: {
@@ -140,6 +141,14 @@ export function HttpLoaderFactory(http: HttpClient) {
         },
         ads: {
           service: AdsProvider,
+          config: {
+            token: {
+              key: 'token', // this parameter tells Nebular where to look for the token
+            },
+          },
+        },
+        daywaka: {
+          service: DaywakaProvider,
           config: {
             token: {
               key: 'token', // this parameter tells Nebular where to look for the token
@@ -170,9 +179,9 @@ export function HttpLoaderFactory(http: HttpClient) {
       },
     }),
   ],
-  providers: [AuthGuard, UrlViewerService, ProfileService, PageService, PostingService, UtilitiesService, FeedService, ProfileFeedService,PageFeedService,  ProfileConnectionsService, CommentsService, NotificationsService, ConnectionsService, ImageIconsService, EditProfileService,  MessengerService, AppModalService, MessengerModalsService, LoadSubmitProgressService, NavigationService, NgxImageCompressService, MathService, AdsService, ShowAdsService, LinkProcessingService,WbWindowService,
+  providers: [AuthGuard, UrlViewerService, ProfileService, PageService, PostingService, UtilitiesService, FeedService, ProfileFeedService, PageFeedService, ProfileConnectionsService, CommentsService, NotificationsService, ConnectionsService, ImageIconsService, EditProfileService, MessengerService, AppModalService, MessengerModalsService, LoadSubmitProgressService, NavigationService, NgxImageCompressService, MathService, AdsService, ShowAdsService, LinkProcessingService, WbWindowService,
     { provide: NgbDateAdapter, useClass: CustomAdapter },
-   /* { provide: Window, useValue: window },*/
+    /* { provide: Window, useValue: window },*/
     { provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter }],
   schemas: [NO_ERRORS_SCHEMA],
   bootstrap: [AppComponent]

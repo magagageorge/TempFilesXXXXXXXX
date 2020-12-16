@@ -1,0 +1,111 @@
+/* Why Us Section
+--------------------------------*/
+#why-us {
+    padding: 60px 0;
+  }
+  
+  @media (max-width: 991px) {
+    #why-us .why-us-content {
+      padding-top: 30px;
+    }
+  }
+  
+  #why-us .why-us-content .features {
+    margin: 0 0 15px 0;
+    padding: 0;
+  }
+  
+  #why-us .why-us-content .features i {
+    font-size: 36px;
+    float: left;
+  }
+  
+  #why-us .why-us-content .features h4 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-left: 56px;
+    color: #413e66;
+    margin-bottom: 5px;
+  }
+  
+  #why-us .why-us-content .features p {
+    font-size: 16px;
+    margin-left: 56px;
+    color: #555186;
+  }
+  
+  #why-us .counters {
+    padding-top: 40px;
+  }
+  
+  #why-us .counters span {
+    font-family: "Montserrat", sans-serif;
+    font-weight: bold;
+    font-size: 48px;
+    display: block;
+    color: #555186;
+  }
+  
+  #why-us .counters p {
+    padding: 0;
+    margin: 0 0 20px 0;
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    color: #8a87b6;
+  }
+  
+  /* Call To Action Section
+  --------------------------------*/
+  #call-to-action {
+    background: #2d2b46;
+    background-size: cover;
+    padding: 40px 0;
+  }
+  
+  #call-to-action .cta-title {
+    color: #fff;
+    font-size: 28px;
+    font-weight: 700;
+  }
+  
+  #call-to-action .cta-text {
+    color: #fff;
+  }
+  
+  @media (min-width: 991px) {
+    #call-to-action .cta-btn-container {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+  }
+  
+  #call-to-action .cta-btn {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 1px;
+    display: inline-block;
+    padding: 8px 26px;
+    border-radius: 3px;
+    transition: 0.5s;
+    margin: 10px;
+    border: 3px solid #fff;
+    color: #fff;
+  }
+  
+  #call-to-action .cta-btn:hover {
+    background: #1bb1dc;
+    border: 3px solid #1bb1dc;
+  }
+  
+  /* Features Section
+  --------------------------------*/
+  #features {
+    padding: 80px 0;
+  }
+  
+  #features h4 {
+    font-weight: 600;
+    font-size: 24px;
+  }

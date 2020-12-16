@@ -1,0 +1,283 @@
+<form [formGroup]="frm_jobform" (ngSubmit)="save()" class="p-1">
+    <div class="form">
+        <div class="d-block">
+            <div class="card m-0"  [class.d-none]="route!='start'">
+                <div class="card-header">
+                    <label class="py-0 m-0">Business</label>
+                </div>
+                <div class="card-body p-1">
+                    <div class="row mx-0">
+                        <div class="col-12">
+                            <div class="d-block w-100">
+                                <div class="row mx-0">
+                                    <div class="col-12">
+                                        <div class="w-100 p-0">
+                                            <span>Your Woorbi Page represents your business in job
+                                                Post.</span>
+                                            <span> You can also <a href="javascript:void(0)"
+                                                    (click)="pageService.createPageOnFly()" class="text-primary">Create
+                                                    a Woorbi Page</a></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mx-0">
+                                    <div class="col-12 dropdown d-block frmity-dropdown p-0" ngbDropdown
+                                        placement="bottom-left" style="min-width: 250px;">
+                                        <a class="dropdown-toggle border border-light d-block m-0"
+                                            style="max-width: 300px;"
+                                            [ngStyle]="{'pointer-events': (pageService.MYPAGES.length>0) ? 'auto' : 'none' }"
+                                            data-toggle="dropdown" aria-expanded="false" ngbDropdownToggle>
+                                            <ng-container *ngIf="pageService.MYPAGES.length>0">
+                                                <ng-container *ngIf="jobModel.selected_page!=null">
+                                                    <span class="row mx-0">
+                                                        <span class="col-3 p-0">
+                                                            <img style="max-height:50px;"
+                                                                src="{{jobModel.selected_page.picture.face}}"
+                                                                class="img-fluid rounded-circle z-depth-0 m-0">
+                                                        </span>
+                                                        <span class="col-8 p-0 d-flex align-items-center">
+                                                            <span
+                                                                class="d-inline-block w-100 m-0 p-0 font-weight-bold text-truncate">
+                                                                {{jobModel.selected_page.name}}
+                                                            </span>
+                                                        </span>
+                                                        <span class="col-1 p-0 d-flex align-items-center"
+                                                            style="font-size: 120%;">
+                                                            <i class="fa fa-caret-down" aria-hidden="true"></i>
+                                                        </span>
+                                                    </span>
+                                                </ng-container>
+
+                                                <ng-container
+                                                    *ngIf="jobModel.selected_page==null && pageService.MYPAGES[0]!=null">
+                                                    <span class="row mx-0">
+                                                        <span class="col-11 p-0 d-flex align-items-center">
+                                                            <span
+                                                                class="d-inline-block w-100 m-0 p-0 font-weight-bold text-truncate">
+                                                                - Select Page -
+                                                            </span>
+                                                        </span>
+                                                        <span class="col-1 p-0 d-flex align-items-center"
+                                                            style="font-size: 120%;">
+                                                            <i class="fa fa-caret-down" aria-hidden="true"></i>
+                                                        </span>
+                                                    </span>
+                                                </ng-container>
+                                            </ng-container>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right" style="width:300px;"
+                                            ngbDropdownMenu>
+                                            <ul class="list-group list-group-flush">
+                                                <ng-container *ngFor="let mypage of pageService.MYPAGES">
+                                                    <li class="list-group-item px-0 py-1">
+                                                        <a href="javascript:void(0)" (click)="setSelectedPage(mypage)"
+                                                            class="p-0 m-0 text-decoration-none"
+                                                            style="text-decoration: none;">
+                                                            <div class="row p-0 m-0">
+                                                                <div class="col-3 p-0">
+                                                                    <ng-container *ngIf="mypage.picture!=null">
+                                                                        <img style="max-height:50px;"
+                                                                            src="{{mypage.picture.face}}"
+                                                                            class="img-fluid rounded-circle z-depth-0 m-0">
+                                                                    </ng-container>
+                                                                </div>
+                                                                <div class="col-9 p-0 d-flex align-items-center">
+                                                                    <div
+                                                                        class="d-inline-block w-100 m-0 p-0 font-weight-bold text-truncate">
+                                                                        {{mypage.name}}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                </ng-container>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mx-0">
+                        <div class="col-12">
+                            <input type="hidden" formControlName="page_id" [(ngModel)]="jobModel.page_id">
+                            <div *ngIf="submitted && frm.page_id.errors" class="w-100  text-danger  form-text m-0 p-0">
+                                <div *ngIf="frm.page_id.errors.required" class="error">
+                                    <span class="fa fa-exclamation-circle"></span>
+                                    <span class="px-1 py-2">Please
+                                        Select a Business Page or Create a New Page.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="card m-0">
+                <div class="card-header">
+                    <label class="py-0 m-0">Job Name</label>
+                </div>
+                <div class="card-body p-1">
+                    <div class="row align-middle py-2">
+                        <div class="col-12">
+
+                            <input type="text" class="form-control" name="name" rows="4" formControlName="name"
+                                 [ngClass]="{ 'is-invalid': submitted && frm.name.errors }"
+                                [(ngModel)]="jobModel.name">
+                            <div *ngIf="submitted && frm.name.errors"
+                                class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                                <div *ngIf="frm.name.errors.required" i18n>Required</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card m-0">
+                <div class="card-header">
+                    <label class="py-0 m-0">Description</label>
+                </div>
+                <div class="card-body p-1">
+                    <div class="row align-middle py-2">
+                        <div class="col-12">
+
+                            <textarea class="form-control" name="description" rows="4" formControlName="description"
+                                 [ngClass]="{ 'is-invalid': submitted && frm.description.errors }"
+                                [(ngModel)]="jobModel.description"></textarea>
+                            <div *ngIf="submitted && frm.description.errors"
+                                class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                                <div *ngIf="frm.description.errors.required" i18n>Required</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card m-0">
+                <div class="card-header">
+                    <label class="py-0 m-0">Category</label>
+                </div>
+                <div class="card-body p-1">
+                    <div class="row align-middle py-2">
+                        <div class="col-12">
+
+                            <select class="form-control" name="category_id" formControlName="category_id"
+                                 [ngClass]="{ 'is-invalid': submitted && frm.category_id.errors }"
+                                [(ngModel)]="jobModel.category_id">
+                                <option value="null">- Select Category -</option>
+                                <ng-container *ngFor="let category of daywakaService.JOB_CATEGORIES">
+                                    <option value="{{category.id}}">{{category.name}}</option>
+                                </ng-container>
+                            </select>
+                            <div *ngIf="submitted && frm.category_id.errors"
+                                class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                                <div *ngIf="frm.category_id.errors.required" i18n>Required</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card m-0">
+                <div class="card-header">
+                    <label class="py-0 m-0">No of Workers</label>
+                </div>
+                <div class="card-body p-1">
+                    <div class="row align-middle py-2">
+                        <div class="col-12">
+                            <input type="text" class="form-control" name="no_workers" formControlName="no_workers"
+                                 [ngClass]="{ 'is-invalid': submitted && frm.no_workers.errors }"
+                                [(ngModel)]="jobModel.no_workers">
+                            <div *ngIf="submitted && frm.no_workers.errors"
+                                class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                                <div *ngIf="frm.no_workers.errors.required" i18n>Required</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+
+            <div class="card m-0">
+                <div class="card-header">
+                    <label class="py-0 m-0">Fee</label>
+                </div>
+                <div class="card-body p-1">
+                    <div class="row align-middle py-2">
+                        <div class="col-12">
+
+                            <input type="text" class="form-control" name="fee" formControlName="fee" 
+                                [ngClass]="{ 'is-invalid': submitted && frm.fee.errors }" [(ngModel)]="jobModel.fee">
+                            <div *ngIf="submitted && frm.fee.errors"
+                                class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                                <div *ngIf="frm.fee.errors.required" i18n>Required</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card m-0">
+                <div class="card-header">
+                    <label class="py-0 m-0">Place</label>
+                </div>
+                <div class="card-body p-1">
+                    <div class="row align-middle py-2">
+                        <div class="col-12">
+                            <label class="py-0 m-0">Location Name</label>
+                            <input type="text" class="form-control" name="location_name" formControlName="location_name"
+                                 [ngClass]="{ 'is-invalid': submitted && frm.location_name.errors }"
+                                [(ngModel)]="jobModel.location_name">
+                            <div *ngIf="submitted && frm.location_name.errors"
+                                class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                                <div *ngIf="frm.location_name.errors.required" i18n>Required</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row align-middle py-2">
+                        <div class="col-12">
+                            <label class="py-0 m-0">Address</label>
+                            <input type="text" class="form-control" name="address" formControlName="address"
+                                 [ngClass]="{ 'is-invalid': submitted && frm.address.errors }"
+                                [(ngModel)]="jobModel.address">
+                            <div *ngIf="submitted && frm.address.errors"
+                                class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                                <div *ngIf="frm.address.errors.required" i18n>Required</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row align-middle py-2">
+                        <div class="col-6">
+                            <label class="py-0 m-0">City</label>
+                            <input type="text" class="form-control" name="city" formControlName="city"
+                                 [ngClass]="{ 'is-invalid': submitted && frm.city.errors }"
+                                [(ngModel)]="jobModel.city">
+                            <div *ngIf="submitted && frm.city.errors"
+                                class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                                <div *ngIf="frm.city.errors.required" i18n>Required</div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <label class="py-0 m-0">zip</label>
+                            <input type="text" class="form-control" name="zip" formControlName="zip" 
+                                [ngClass]="{ 'is-invalid': submitted && frm.zip.errors }" [(ngModel)]="jobModel.zip">
+                            <div *ngIf="submitted && frm.zip.errors"
+                                class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                                <div *ngIf="frm.zip.errors.required" i18n>Required</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row align-middle py-2">
+                <div class="col-12">
+                    <button type="submit" class="btn btn-sm btn-outline-primary">Post Job</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

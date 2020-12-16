@@ -10,11 +10,11 @@ import { EditProfileService } from '@app/services/edit-profile.service';
 })
 export class ProfileAboutWidgetComponent implements OnInit {
 
-  urlviwerService:UrlViewerService;
+  urlviewerService:UrlViewerService;
   profileService:ProfileService;
   editProfileService:EditProfileService;
-  constructor(urlviwerService:UrlViewerService,profileService:ProfileService,editProfileService:EditProfileService) {
-    this.urlviwerService=urlviwerService;
+  constructor(urlviewerService:UrlViewerService,profileService:ProfileService,editProfileService:EditProfileService) {
+    this.urlviewerService=urlviewerService;
     this.profileService=profileService;
     this.editProfileService=editProfileService;
    }

@@ -1,0 +1,92 @@
+<ng-container *ngIf="loading==false">
+
+<div class="d-block w-100">
+    <a routerLink="/daywaka/{{dwViewerService.VIEWER_URL}}/edit-job/{{JOB_AD.id}}"
+        class="btn btn-sm btn-rounded btn-primary">
+        <span class="fa fa-pencil"></span><span>&nbsp;</span><span>Edit Job</span>
+    </a>
+</div>
+
+<div class="card">
+    <div class="card-header py-1">
+        <h5>Job Details</h5>
+    </div>
+    <div class="card-body p-1">
+        <div class="d-block w-100">
+            <div class="row mx-0 p-1 border-bottom border-light">
+                <div class="col-12 col-md-3 col-lg-3 col-xl-3 font-weight-bold">Posted at</div>
+                <div class="col-12 col-md-9 col-lg-9 col-xl-9">{{JOB_AD.updated_at}}</div>
+            </div>
+            <div class="row mx-0 p-1 border-bottom border-light">
+                <div class="col-12 col-md-3 col-lg-3 col-xl-3 font-weight-bold">Status</div>
+                <div class="col-12 col-md-9 col-lg-9 col-xl-9">{{JOB_AD.status}}</div>
+            </div>
+            <div class="row mx-0 p-1 border-bottom border-light">
+                <div class="col-12 col-md-3 col-lg-3 col-xl-3 font-weight-bold">Job Name</div>
+                <div class="col-12 col-md-9 col-lg-9 col-xl-9">{{JOB_AD.name}}</div>
+            </div>
+            <div class="row mx-0 p-1 border-bottom border-light">
+                <div class="col-12 col-md-3 col-lg-3 col-xl-3 font-weight-bold">Category</div>
+                <div class="col-12 col-md-9 col-lg-9 col-xl-9">{{JOB_AD.category.name}}</div>
+            </div>
+            <div class="row mx-0 p-1 border-bottom border-light">
+                <div class="col-12 col-md-3 col-lg-3 col-xl-3 font-weight-bold">Description</div>
+                <div class="col-12 col-md-9 col-lg-9 col-xl-9">{{JOB_AD.description}}</div>
+            </div>
+            <div class="row mx-0 p-1 border-bottom border-light">
+                <div class="col-12 col-md-3 col-lg-3 col-xl-3 font-weight-bold">Workers Needed</div>
+                <div class="col-12 col-md-9 col-lg-9 col-xl-9">{{JOB_AD.no_workers}}</div>
+            </div>
+            <div class="row mx-0 p-1 border-bottom border-light">
+                <div class="col-12 col-md-3 col-lg-3 col-xl-3 font-weight-bold">Location</div>
+                <div class="col-12 col-md-9 col-lg-9 col-xl-9">
+                    <ng-container *ngIf="JOB_AD.location.length>0">
+                        {{JOB_AD.location[0].location_name}}
+                    </ng-container>
+                </div>
+            </div>
+            <div class="row mx-0 p-1 border-bottom border-light">
+                <div class="col-12 col-md-3 col-lg-3 col-xl-3 font-weight-bold">Address</div>
+                <div class="col-12 col-md-9 col-lg-9 col-xl-9">
+                    <ng-container *ngIf="JOB_AD.location.length>0">
+                        {{JOB_AD.location[0].address}}
+                    </ng-container>
+                </div>
+            </div>
+            <div class="row mx-0 p-1 border-bottom border-light">
+                <div class="col-12 col-md-3 col-lg-3 col-xl-3 font-weight-bold">City</div>
+                <div class="col-12 col-md-9 col-lg-9 col-xl-9">
+                    <ng-container *ngIf="JOB_AD.location.length>0">
+                        {{JOB_AD.location[0].city}}
+                    </ng-container>
+                </div>
+            </div>
+            <div class="row mx-0 p-1 border-bottom border-light">
+                <div class="col-12 col-md-3 col-lg-3 col-xl-3 font-weight-bold">Zip</div>
+                <div class="col-12 col-md-9 col-lg-9 col-xl-9">
+                    <ng-container *ngIf="JOB_AD.location.length>0">
+                        {{JOB_AD.location[0].zip}}
+                    </ng-container>
+                </div>
+            </div>
+            <div class="row mx-0 p-1 border-bottom border-light">
+                <div class="col-12 col-md-3 col-lg-3 col-xl-3 font-weight-bold">Start Time</div>
+                <div class="col-12 col-md-9 col-lg-9 col-xl-9"></div>
+            </div>
+            <div class="row mx-0 p-1 border-bottom border-light">
+                <div class="col-12 col-md-3 col-lg-3 col-xl-3 font-weight-bold">Estimated Job Duration</div>
+                <div class="col-12 col-md-9 col-lg-9 col-xl-9"></div>
+            </div>
+            <div class="row mx-0 p-1 border-bottom border-light">
+                <div class="col-12 col-md-3 col-lg-3 col-xl-3 font-weight-bold">Pay</div>
+                <div class="col-12 col-md-9 col-lg-9 col-xl-9">{{JOB_AD.fee}}</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</ng-container>
+
+<ng-container *ngIf="loading==true">
+
+</ng-container>

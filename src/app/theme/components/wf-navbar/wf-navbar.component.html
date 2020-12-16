@@ -43,10 +43,10 @@
             </li>
             <li *ngIf="is_authenticated==true" class="nav-item d-none d-md-block d-lg-block d-xl-block pull-left ml-1"
                 style="max-width: 150px;">
-            </li>            
+            </li>
             <li *ngIf="is_authenticated==true" class="nav-item d-none d-md-block d-lg-block d-xl-block pull-left ml-1"
                 style="max-width: 150px;">
-            </li>   
+            </li>
 
             <li *ngIf="is_authenticated==true;" class="nav-item d-sm-none">
                 <a routerLink="/search" class="nav-link waves-effect waves-light"><span class="fa fa-search"></span></a>
@@ -68,7 +68,7 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-righ" style="width:300px;" ngbDropdownMenu>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item px-0 py-1">
+                        <li *ngIf="profileService.MYPROFILE!=null" class="list-group-item px-0 py-1">
                             <a routerLink="/{{profileService.MYPROFILE.url}}"
                                 (click)="urlViewerService.setProfile(getMyProfile());"
                                 class="p-0 m-0 text-decoration-none" style="text-decoration: none;">
@@ -109,7 +109,8 @@
                 class="nav-item nav-item avatar dropdown nav-user d-none d-md-block d-lg-block">
                 <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-6" data-toggle="dropdown"
                     ngbDropdownToggle>
-                    <span style="max-height:50px;" class="btn-circle btn-sm btn-outline-primary z-depth-0 d-flex justify-content-center align-items-center">
+                    <span style="max-height:50px;"
+                        class="btn-circle btn-sm btn-outline-primary z-depth-0 d-flex justify-content-center align-items-center">
                         <span class="fa fa-plus align-middle"></span>
                     </span>
                 </a>
@@ -120,7 +121,8 @@
                                 style="text-decoration: none;">
                                 <div class="row p-0 m-0">
                                     <div class="col-2 p-0">
-                                        <span style="max-height:60px;font-size: 120%;" class="img-fluid rounded-circle z-depth-0 m-0 text-primary">
+                                        <span style="max-height:60px;font-size: 120%;"
+                                            class="img-fluid rounded-circle z-depth-0 m-0 text-primary">
                                             <span class="fa fa-bullhorn" style="font-size: 120%;"></span>
                                         </span>
                                     </div>

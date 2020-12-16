@@ -46,3 +46,31 @@ export class Profile {
         this.mutualConnections=[];
     }
 }
+
+export class ProfileSummary {
+    user_id:number;
+    firstname:string; 
+    middlename:string; 
+    lastname:string; 
+    name:string; 
+    picture:string; 
+    avatar:ProfileAvatar; 
+    cover:ProfileCover; 
+    title:string; 
+    about:string;
+    no_connections:number;
+    no_followers:number;
+    no_followings:number;
+    location:any;    
+    url:string; 
+    connectStatus:any;
+    my_profile:boolean;
+    short_info:string;
+    summary_info:string;
+    mutualConnections:any[];
+    constructor() {
+        this.avatar = new ProfileAvatar();
+        this.cover = new ProfileCover();
+        this.mutualConnections=[];
+    }
+}

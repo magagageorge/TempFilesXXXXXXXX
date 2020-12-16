@@ -1,1 +1,16 @@
-<p>show-more-text-widget works!</p>
+<p class="p-0 text-content">
+    <span [innerHTML]="showText | wfLinkify" class=""></span>
+    <ng-container *ngIf="show_more && show_all!=true">
+        <span>...&nbsp;</span>
+        <ng-container *ngIf="go_to_url!=true">
+            <a href="javascript:void(0)" (click)="showMore()"><span>Show more</span></a>
+        </ng-container>
+        <ng-container *ngIf="show_more_url!=null && show_more_url!=undefined && go_to_url==true">
+            <a href="javascript:void(0)" (click)="showMoreInModalView()">Show more</a>
+        </ng-container>
+    </ng-container>
+    <ng-container *ngIf="show_less  && show_all!=true">
+        <span>&nbsp;</span>
+        <a href="javascript:void(0)" (click)="showLess()"><span>Show less</span></a>
+    </ng-container>
+</p>

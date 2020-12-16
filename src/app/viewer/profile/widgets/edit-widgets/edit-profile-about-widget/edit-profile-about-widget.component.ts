@@ -18,6 +18,7 @@ export class EditProfileAboutWidgetComponent implements OnInit {
   profileGroup: FormGroup;
   profileModel: MyProfile = new MyProfile();
   submitted: boolean = false;
+  formdata:FormData = new FormData();
 
   stored_city_id: Number;
   constructor(editProfileService: EditProfileService,urlViewerService:UrlViewerService, profileService: ProfileService,private formBuilder: FormBuilder) {
@@ -45,8 +46,9 @@ export class EditProfileAboutWidgetComponent implements OnInit {
     if (this.profileGroup.invalid) {
       return;
     }
-    this.editProfileService.saveProfileInfo(this.profileModel).subscribe(result=>{
-        console.log(result);
+    this.formdata.append("about",this.profileModel.about);
+    this.editProfileService.saveProfileInfo(this.formdata).subscribe(result=>{
+        //console.log(result);
     });
     this.editProfileService.cancelEditTopProfileCard();
   }

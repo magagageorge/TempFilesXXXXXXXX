@@ -60,6 +60,10 @@ const routes: Routes = [
     loadChildren: () => import('./ads-manager/ads-manager.module').then(m => m.AdsManagerModule)
   },
   {
+    path: 'daywaka',
+    loadChildren: () => import('./daywaka/daywaka.module').then(m => m.DaywakaModule)
+  },
+  {
     path: 'pages',
     canActivate: [AuthGuard],
     loadChildren: () => import('./pages/woorbi-pages.module').then(m => m.WoorbiPagesModule)

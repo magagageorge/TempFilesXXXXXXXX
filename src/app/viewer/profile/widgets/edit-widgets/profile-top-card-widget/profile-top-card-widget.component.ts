@@ -95,9 +95,21 @@ export class ProfileTopCardWidgetComponent implements OnInit {
       return;
     }
     this.profileModel.birthday = this.datePicker.getDate();
-    this.editProfileService.saveProfileInfo(this.profileModel).subscribe(response => {
+    this.editProfileService.saveProfileInfo(this.Form_Data).subscribe(response => {
     });
     this.editProfileService.cancelEditTopProfileCard();
+  }
+
+  get Form_Data(){
+    var formdata = new FormData();
+    formdata.append("firstname",this.profileModel.firstname);
+    formdata.append("lastname",this.profileModel.lastname);
+    formdata.append("title",this.profileModel.title);
+    formdata.append("gender",this.profileModel.gender);
+    formdata.append("country",this.profileModel.country);
+    formdata.append("city_id",this.profileModel.city_id);
+    formdata.append("birthday",this.datePicker.getDate());
+    return formdata;
   }
 
   switchLocation(id: any) {

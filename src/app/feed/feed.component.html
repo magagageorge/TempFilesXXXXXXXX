@@ -7,8 +7,7 @@
             </div>
             <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 p-0">
                 <app-add-profile-photo-alert-widget *ngIf="profileService.MYPROFILE.avatar.show_alert==true">
-                </app-add-profile-photo-alert-widget>
-                
+                </app-add-profile-photo-alert-widget>                
                 <app-post-form [postingTo]="'Feed'" [postingAs]="'Profile'" [page]="null"></app-post-form>
                 <app-feed-widget></app-feed-widget>
             </div>

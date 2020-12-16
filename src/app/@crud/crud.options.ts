@@ -65,7 +65,15 @@ export  const cruddefaultSettings: any= {
                 success: true,
                 error: true,
             },
-        },              
+        },    
+        daywaka: {
+            redirectDelay: 10,
+            provider: 'daywaka',
+            showMessages: {
+                success: true,
+                error: true,
+            },
+        },                   
     },
 };
 

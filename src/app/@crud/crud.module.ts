@@ -9,6 +9,7 @@ import { TokenService } from 'app/auth/services/token/token.service';
 import { CrudOptions,cruddefaultSettings,CRUD_CONFIG, CRUD_OPTIONS,CRUD_USER_OPTIONS, CRUD_PROVIDERS, CRUD_INTERCEPTOR_HEADER } from './crud.options';
 import { MessengerProvider } from './providers';
 import { AdsProvider } from './providers/ads.provider';
+import { DaywakaProvider } from './providers/daywaka.provider';
 
 export function crudServiceFactory(crudconfig: any, tokenService: TokenService, injector: Injector): CrudService {
     var providers = crudconfig.providers || {};
@@ -47,7 +48,8 @@ export class CrudModule {
       TokenService,
       CrudProvider,
       MessengerProvider,
-      AdsProvider	  
+      AdsProvider,
+      DaywakaProvider	  
 	  ]
     };
   }

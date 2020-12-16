@@ -1,0 +1,18 @@
+<div class="container-fluid">
+<ng-container *ngIf="dwViewerService.VIEWER_URL_PAGE==''">
+    <app-dw-bussiness-dashboard></app-dw-bussiness-dashboard>
+</ng-container>
+<ng-container *ngIf="dwViewerService.VIEWER_URL_PAGE=='jobs'">
+    <app-dw-business-jobs></app-dw-business-jobs>
+</ng-container>
+<ng-container *ngIf="dwViewerService.VIEWER_URL_PAGE=='create-job'">
+    <app-dw-create-business-job></app-dw-create-business-job>
+</ng-container>
+<ng-container *ngIf="dwViewerService.VIEWER_URL_PAGE=='edit-job'">
+    <app-dw-edit-business-job></app-dw-edit-business-job>
+</ng-container>
+<ng-container *ngIf="dwViewerService.VIEWER_URL_PAGE=='view-job'">
+    <app-dw-view-business-job></app-dw-view-business-job>
+</ng-container>
+</div>
+

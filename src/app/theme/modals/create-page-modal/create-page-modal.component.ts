@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { PageService } from '@app/services/page.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PageCategory, PageMainCategory } from '@app/models/page/page.cagegory';
-import { PageModel } from '@app/models/page/page.model';
 import { ImageCropperComponent, ImageCroppedEvent } from '@app/libs/wb-image-cropper';
 
 @Component({

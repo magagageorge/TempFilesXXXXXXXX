@@ -1,0 +1,61 @@
+<div class="card">
+    <div class="card-body">
+        <h4>Jobs</h4>
+
+        <div class="d-block">
+            <div class="row mx-0">
+                <div class="col-12">
+                    <a routerLink="/daywaka/{{dwViewerService.VIEWER_URL}}/create-job"
+                        class="btn btn-sm btn-rounded btn-primary pull-left">
+                        <span class="fa fa-plus"></span><span>&nbsp;</span>
+                        <span>New Job</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive text-nowrap">
+            <!--Table-->
+            <table class="table table-striped">
+
+                <!--Table head-->
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Start Time</th>
+                        <th>Job Name</th>
+                        <th>Category</th>
+                        <th>Fee</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <!--Table head-->
+                <!--Table body-->
+                <tbody>
+                    <ng-container *ngIf="JOB_LIST.length>0">
+                        <tr *ngFor="let job_ad of JOB_LIST;let i = index">
+                            <th scope="row">{{i+1}}</th>
+                            <td>-</td>
+                            <td>
+                                <a routerLink="/daywaka/{{dwViewerService.VIEWER_URL}}/view-job/{{job_ad.id}}"
+                                    class="p-2">
+                                    {{job_ad.name}}
+                                </a>
+                            </td>
+                            <td>{{job_ad.category.name}}</td>
+                            <td>{{job_ad.fee}}</td>
+                            <td>
+                                <a routerLink="/daywaka/{{dwViewerService.VIEWER_URL}}/edit-job/{{job_ad.id}}"
+                                    class="p-2">
+                                    <span class="fa fa-pencil"></span><span>&nbsp;</span>
+                                </a>
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+                <!--Table body-->
+            </table>
+            <!--Table-->
+        </div>
+
+    </div>
+</div>
