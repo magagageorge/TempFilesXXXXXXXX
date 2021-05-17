@@ -7,6 +7,8 @@ import { DaywakaThemeModule } from './daywaka-theme/daywaka-theme.module';
 import { RouterModule } from '@angular/router';
 import { DaywakaService } from './services/daywaka.service';
 import { DwViewerService } from './services/dw-viewer.service';
+import { DwJobViewerService } from './services/dw-job-viewer.service';
+import { DwProfileService } from './services/dw-profile.service';
 
 
 @NgModule({
@@ -17,6 +19,6 @@ import { DwViewerService } from './services/dw-viewer.service';
     DaywakaRoutingModule,
     DaywakaThemeModule
   ],
-  providers: [DaywakaService, DwViewerService]
+  providers: [DaywakaService, DwViewerService,DwJobViewerService,DwProfileService]
 })
 export class DaywakaModule { }

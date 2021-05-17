@@ -1,0 +1,2488 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>woorbi documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">woorbi documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content class">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Classes</li>
+  <li>EmailPassAuthProvider</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/auth/providers/email-pass-auth.provider.ts</code>
+        </p>
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>The most common authentication provider for email/password strategy.</p>
+
+            </p>
+
+            <p class="comment">
+                <h3>Extends</h3>
+            </p>
+            <p class="comment">
+                        <code><a href="../classes/AbstractAuthProvider.html" target="_self" >AbstractAuthProvider</a></code>
+            </p>
+
+
+            <p class="comment">
+                <h3>Example</h3>
+            </p>
+            <div class="io-description">
+                        <div>
+                            <pre class="line-numbers"><code class="language-html">Default settings object:
+
+```
+ * {
+ *  baseEndpoint: '',
+ *  login: {
+ *    alwaysFail: false,
+ *    rememberMe: true,
+ *    endpoint: '/api/auth/login',
+ *    method: 'post',
+ *    redirect: {
+ *      success: '/',
+ *      failure: null,
+ *    },
+ *    defaultErrors: ['Login/Email combination is not correct, please try again.'],
+ *    defaultMessages: ['You have been successfully logged in.'],
+ *  },
+ *  register: {
+ *    alwaysFail: false,
+ *    rememberMe: true,
+ *    endpoint: '/api/auth/register',
+ *    method: 'post',
+ *    redirect: {
+ *      success: '/',
+ *      failure: null,
+ *    },
+ *    defaultErrors: ['Something went wrong, please try again.'],
+ *    defaultMessages: ['You have been successfully registered.'],
+ *  },
+ *  logout: {
+ *    alwaysFail: false,
+ *    endpoint: '/api/auth/logout',
+ *    method: 'delete',
+ *    redirect: {
+ *      success: '/',
+ *      failure: null,
+ *    },
+ *    defaultErrors: ['Something went wrong, please try again.'],
+ *    defaultMessages: ['You have been successfully logged out.'],
+ *  },
+ *  requestPass: {
+ *    endpoint: '/api/auth/request-pass',
+ *    method: 'post',
+ *    redirect: {
+ *      success: '/',
+ *      failure: null,
+ *    },
+ *    defaultErrors: ['Something went wrong, please try again.'],
+ *    defaultMessages: ['Reset password instructions have been sent to your email.'],
+ *  },
+ *  resetPass: {
+ *    endpoint: '/api/auth/reset-pass',
+ *    method: 'put',
+ *    redirect: {
+ *      success: '/',
+ *      failure: null,
+ *    },
+ *    resetPasswordTokenKey: 'reset_password_token',
+ *    defaultErrors: ['Something went wrong, please try again.'],
+ *    defaultMessages: ['Your password has been successfully changed.'],
+ *  },
+ *  token: {
+ *    key: 'data.token',
+ *    getter: (module: string, res: HttpResponse&lt;Object&gt;) =&gt; getDeepFromObject(res.body,
+ *      this.getConfigValue('token.key')),
+ *  },
+ *  errors: {
+ *    key: 'data.errors',
+ *    getter: (module: string, res: HttpErrorResponse) =&gt; getDeepFromObject(res.error,
+ *      this.getConfigValue('errors.key'),
+ *      this.getConfigValue(`${module}.defaultErrors`)),
+ *  },
+ *  messages: {
+ *    key: 'data.messages',
+ *    getter: (module: string, res: HttpResponse&lt;Object&gt;) =&gt; getDeepFromObject(res.body,
+ *      this.getConfigValue('messages.key'),
+ *      this.getConfigValue(`${module}.defaultMessages`)),
+ *  },
+ *}
+ *
+ * // Note, there is no need to copy over the whole object to change the settings you need.
+ * // Also, this.getConfigValue call won't work outside ofthe default config declaration
+ * // (which is inside of the `EmailPassAuthProvider` class), so you have to replace it with a custom helper function
+ * // if you need it.
+ * ```</code></pre>
+                        </div>
+            </div>
+
+            <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#ctorParameters">ctorParameters</a>
+                            </li>
+                            <li>
+                                <a href="#decorators">decorators</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#defaultConfig">defaultConfig</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#http">http</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#route">route</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#config">config</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#defaultConfig">defaultConfig</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#authenticate">authenticate</a>
+                            </li>
+                            <li>
+                                <a href="#clear">clear</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#getActionEndpoint">getActionEndpoint</a>
+                            </li>
+                            <li>
+                                <a href="#logout">logout</a>
+                            </li>
+                            <li>
+                                <a href="#register">register</a>
+                            </li>
+                            <li>
+                                <a href="#requestPassword">requestPassword</a>
+                            </li>
+                            <li>
+                                <a href="#resetPassword">resetPassword</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#validateToken">validateToken</a>
+                            </li>
+                            <li>
+                                <a href="#verifyCode">verifyCode</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Abstract</span>
+                                <a href="#authenticate">authenticate</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Abstract</span>
+                                <a href="#clear">clear</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#createFailResponse">createFailResponse</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#createSuccessResponse">createSuccessResponse</a>
+                            </li>
+                            <li>
+                                <a href="#getConfigValue">getConfigValue</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#getJsonSafe">getJsonSafe</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Abstract</span>
+                                <a href="#logout">logout</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Abstract</span>
+                                <a href="#register">register</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Abstract</span>
+                                <a href="#requestPassword">requestPassword</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Abstract</span>
+                                <a href="#resetPassword">resetPassword</a>
+                            </li>
+                            <li>
+                                <a href="#setConfig">setConfig</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+            <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(http: <a href="https://angular.io/api/common/http/HttpClient" target="_blank">HttpClient</a>, route: <a href="https://angular.io/api/router/ActivatedRoute" target="_blank">ActivatedRoute</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="109" class="link-to-prism">src/app/auth/providers/email-pass-auth.provider.ts:109</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>http</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/common/http/HttpClient" target="_blank" >HttpClient</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>route</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/router/ActivatedRoute" target="_blank" >ActivatedRoute</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+            <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ctorParameters"></a>
+                        <span class="name">
+                            <b>
+                            ctorParameters</b>
+                            <a href="#ctorParameters"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>function () {
+		return [
+        { type: HttpClient, },
+        { type: ActivatedRoute, },
+      ]; }</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="384" class="link-to-prism">src/app/auth/providers/email-pass-auth.provider.ts:384</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="decorators"></a>
+                        <span class="name">
+                            <b>
+                            decorators</b>
+                            <a href="#decorators"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>[]</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>[
+        { type: Injectable },
+    ]</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="380" class="link-to-prism">src/app/auth/providers/email-pass-auth.provider.ts:380</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="defaultConfig"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Protected</span>
+                            defaultConfig</b>
+                            <a href="#defaultConfig"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../interfaces/EmailPassAuthProviderConfig.html" target="_self" >EmailPassAuthProviderConfig</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="109" class="link-to-prism">src/app/auth/providers/email-pass-auth.provider.ts:109</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="http"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Protected</span>
+                            http</b>
+                            <a href="#http"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://angular.io/api/common/http/HttpClient" target="_blank" >HttpClient</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="107" class="link-to-prism">src/app/auth/providers/email-pass-auth.provider.ts:107</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="route"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            route</b>
+                            <a href="#route"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="108" class="link-to-prism">src/app/auth/providers/email-pass-auth.provider.ts:108</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="config"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Protected</span>
+                            config</b>
+                            <a href="#config"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>{}</code>
+                        </td>
+                    </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Inherited from         <code><a href="../classes/AbstractAuthProvider.html" target="_self" >AbstractAuthProvider</a></code>
+</div>
+                                </td>
+                            </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in         <code><a href="../classes/AbstractAuthProvider.html#source" target="_self" >AbstractAuthProvider:8</a></code>
+</div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="defaultConfig"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Protected</span>
+                            defaultConfig</b>
+                            <a href="#defaultConfig"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>{}</code>
+                        </td>
+                    </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Inherited from         <code><a href="../classes/AbstractAuthProvider.html" target="_self" >AbstractAuthProvider</a></code>
+</div>
+                                </td>
+                            </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in         <code><a href="../classes/AbstractAuthProvider.html#source" target="_self" >AbstractAuthProvider:7</a></code>
+</div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+</section>
+
+            <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="authenticate"></a>
+                    <span class="name">
+                        <b>
+                            authenticate
+                        </b>
+                        <a href="#authenticate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>authenticate(data?: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="209"
+                            class="link-to-prism">src/app/auth/providers/email-pass-auth.provider.ts:209</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>data</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../classes/AuthResult.html" target="_self" >Observable&lt;AuthResult&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="clear"></a>
+                    <span class="name">
+                        <b>
+                            clear
+                        </b>
+                        <a href="#clear"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>clear(data?: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="104"
+                            class="link-to-prism">src/app/auth/providers/email-pass-auth.provider.ts:104</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>data</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../classes/AuthResult.html" target="_self" >Observable&lt;AuthResult&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getActionEndpoint"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Protected</span>
+                            getActionEndpoint
+                        </b>
+                        <a href="#getActionEndpoint"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getActionEndpoint(action: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="374"
+                            class="link-to-prism">src/app/auth/providers/email-pass-auth.provider.ts:374</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>action</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="logout"></a>
+                    <span class="name">
+                        <b>
+                            logout
+                        </b>
+                        <a href="#logout"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>logout()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="333"
+                            class="link-to-prism">src/app/auth/providers/email-pass-auth.provider.ts:333</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../classes/AuthResult.html" target="_self" >Observable&lt;AuthResult&gt;</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="register"></a>
+                    <span class="name">
+                        <b>
+                            register
+                        </b>
+                        <a href="#register"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>register(data?: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="233"
+                            class="link-to-prism">src/app/auth/providers/email-pass-auth.provider.ts:233</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>data</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../classes/AuthResult.html" target="_self" >Observable&lt;AuthResult&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="requestPassword"></a>
+                    <span class="name">
+                        <b>
+                            requestPassword
+                        </b>
+                        <a href="#requestPassword"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>requestPassword(data?: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="261"
+                            class="link-to-prism">src/app/auth/providers/email-pass-auth.provider.ts:261</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>data</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../classes/AuthResult.html" target="_self" >Observable&lt;AuthResult&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="resetPassword"></a>
+                    <span class="name">
+                        <b>
+                            resetPassword
+                        </b>
+                        <a href="#resetPassword"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>resetPassword(data?: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="307"
+                            class="link-to-prism">src/app/auth/providers/email-pass-auth.provider.ts:307</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>data</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../classes/AuthResult.html" target="_self" >Observable&lt;AuthResult&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="validateToken"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Protected</span>
+                            validateToken
+                        </b>
+                        <a href="#validateToken"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>validateToken(module: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="362"
+                            class="link-to-prism">src/app/auth/providers/email-pass-auth.provider.ts:362</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>module</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="verifyCode"></a>
+                    <span class="name">
+                        <b>
+                            verifyCode
+                        </b>
+                        <a href="#verifyCode"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>verifyCode(data?: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="284"
+                            class="link-to-prism">src/app/auth/providers/email-pass-auth.provider.ts:284</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>data</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../classes/AuthResult.html" target="_self" >Observable&lt;AuthResult&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="authenticate"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Abstract</span>
+                            authenticate
+                        </b>
+                        <a href="#authenticate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>authenticate(data?: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Inherited from         <code><a href="../classes/AbstractAuthProvider.html" target="_self" >AbstractAuthProvider</a></code>
+</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-line">Defined in         <code><a href="../classes/AbstractAuthProvider.html#source" target="_self" >AbstractAuthProvider:15</a></code>
+</div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>data</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../classes/AuthResult.html" target="_self" >Observable&lt;AuthResult&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="clear"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Abstract</span>
+                            clear
+                        </b>
+                        <a href="#clear"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>clear(data?: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Inherited from         <code><a href="../classes/AbstractAuthProvider.html" target="_self" >AbstractAuthProvider</a></code>
+</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-line">Defined in         <code><a href="../classes/AbstractAuthProvider.html#source" target="_self" >AbstractAuthProvider:16</a></code>
+</div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>data</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../classes/AuthResult.html" target="_self" >Observable&lt;AuthResult&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createFailResponse"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Protected</span>
+                            createFailResponse
+                        </b>
+                        <a href="#createFailResponse"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>createFailResponse(data?: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Inherited from         <code><a href="../classes/AbstractAuthProvider.html" target="_self" >AbstractAuthProvider</a></code>
+</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-line">Defined in         <code><a href="../classes/AbstractAuthProvider.html#source" target="_self" >AbstractAuthProvider:21</a></code>
+</div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>data</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>HttpResponse&lt;Object&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createSuccessResponse"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Protected</span>
+                            createSuccessResponse
+                        </b>
+                        <a href="#createSuccessResponse"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>createSuccessResponse(data?: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Inherited from         <code><a href="../classes/AbstractAuthProvider.html" target="_self" >AbstractAuthProvider</a></code>
+</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-line">Defined in         <code><a href="../classes/AbstractAuthProvider.html#source" target="_self" >AbstractAuthProvider:24</a></code>
+</div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>data</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>HttpResponse&lt;Object&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getConfigValue"></a>
+                    <span class="name">
+                        <b>
+                            getConfigValue
+                        </b>
+                        <a href="#getConfigValue"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getConfigValue(key: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Inherited from         <code><a href="../classes/AbstractAuthProvider.html" target="_self" >AbstractAuthProvider</a></code>
+</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-line">Defined in         <code><a href="../classes/AbstractAuthProvider.html#source" target="_self" >AbstractAuthProvider:12</a></code>
+</div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>key</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getJsonSafe"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Protected</span>
+                            getJsonSafe
+                        </b>
+                        <a href="#getJsonSafe"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getJsonSafe(res: HttpResponse<Object>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Inherited from         <code><a href="../classes/AbstractAuthProvider.html" target="_self" >AbstractAuthProvider</a></code>
+</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-line">Defined in         <code><a href="../classes/AbstractAuthProvider.html#source" target="_self" >AbstractAuthProvider:27</a></code>
+</div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>res</td>
+                                    <td>
+                                            <code>HttpResponse&lt;Object&gt;</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="logout"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Abstract</span>
+                            logout
+                        </b>
+                        <a href="#logout"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>logout()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Inherited from         <code><a href="../classes/AbstractAuthProvider.html" target="_self" >AbstractAuthProvider</a></code>
+</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-line">Defined in         <code><a href="../classes/AbstractAuthProvider.html#source" target="_self" >AbstractAuthProvider:20</a></code>
+</div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../classes/AuthResult.html" target="_self" >Observable&lt;AuthResult&gt;</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="register"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Abstract</span>
+                            register
+                        </b>
+                        <a href="#register"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>register(data?: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Inherited from         <code><a href="../classes/AbstractAuthProvider.html" target="_self" >AbstractAuthProvider</a></code>
+</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-line">Defined in         <code><a href="../classes/AbstractAuthProvider.html#source" target="_self" >AbstractAuthProvider:17</a></code>
+</div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>data</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../classes/AuthResult.html" target="_self" >Observable&lt;AuthResult&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="requestPassword"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Abstract</span>
+                            requestPassword
+                        </b>
+                        <a href="#requestPassword"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>requestPassword(data?: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Inherited from         <code><a href="../classes/AbstractAuthProvider.html" target="_self" >AbstractAuthProvider</a></code>
+</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-line">Defined in         <code><a href="../classes/AbstractAuthProvider.html#source" target="_self" >AbstractAuthProvider:18</a></code>
+</div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>data</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../classes/AuthResult.html" target="_self" >Observable&lt;AuthResult&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="resetPassword"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Abstract</span>
+                            resetPassword
+                        </b>
+                        <a href="#resetPassword"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>resetPassword(data?: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Inherited from         <code><a href="../classes/AbstractAuthProvider.html" target="_self" >AbstractAuthProvider</a></code>
+</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-line">Defined in         <code><a href="../classes/AbstractAuthProvider.html#source" target="_self" >AbstractAuthProvider:19</a></code>
+</div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>data</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../classes/AuthResult.html" target="_self" >Observable&lt;AuthResult&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setConfig"></a>
+                    <span class="name">
+                        <b>
+                            setConfig
+                        </b>
+                        <a href="#setConfig"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>setConfig(config: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Inherited from         <code><a href="../classes/AbstractAuthProvider.html" target="_self" >AbstractAuthProvider</a></code>
+</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-line">Defined in         <code><a href="../classes/AbstractAuthProvider.html#source" target="_self" >AbstractAuthProvider:9</a></code>
+</div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>config</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+
+
+
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { HttpClient, HttpErrorResponse } from &#x27;@angular/common/http&#x27;;
+import { ActivatedRoute } from &#x27;@angular/router&#x27;;
+import { EmailPassAuthProviderConfig } from &#x27;./email-pass-auth.options&#x27;;
+import { AuthResult } from &#x27;../services/auth-result&#x27;;
+import { AbstractAuthProvider } from &#x27;./abstract-auth.provider&#x27;;
+import { Injectable } from &#x27;@angular/core&#x27;;
+import { of as observableOf,Observable } from &#x27;rxjs&#x27;;
+import { switchMap,map,catchError } from &#x27;rxjs/operators&#x27;;
+import { getDeepFromObject } from &#x27;../helpers&#x27;;
+
+/**
+ * The most common authentication provider for email/password strategy.
+ *
+ *
+ * @example
+ *
+ * Default settings object:
+ *
+ * &#x60;&#x60;&#x60;
+ * {
+ *  baseEndpoint: &#x27;&#x27;,
+ *  login: {
+ *    alwaysFail: false,
+ *    rememberMe: true,
+ *    endpoint: &#x27;/api/auth/login&#x27;,
+ *    method: &#x27;post&#x27;,
+ *    redirect: {
+ *      success: &#x27;/&#x27;,
+ *      failure: null,
+ *    },
+ *    defaultErrors: [&#x27;Login/Email combination is not correct, please try again.&#x27;],
+ *    defaultMessages: [&#x27;You have been successfully logged in.&#x27;],
+ *  },
+ *  register: {
+ *    alwaysFail: false,
+ *    rememberMe: true,
+ *    endpoint: &#x27;/api/auth/register&#x27;,
+ *    method: &#x27;post&#x27;,
+ *    redirect: {
+ *      success: &#x27;/&#x27;,
+ *      failure: null,
+ *    },
+ *    defaultErrors: [&#x27;Something went wrong, please try again.&#x27;],
+ *    defaultMessages: [&#x27;You have been successfully registered.&#x27;],
+ *  },
+ *  logout: {
+ *    alwaysFail: false,
+ *    endpoint: &#x27;/api/auth/logout&#x27;,
+ *    method: &#x27;delete&#x27;,
+ *    redirect: {
+ *      success: &#x27;/&#x27;,
+ *      failure: null,
+ *    },
+ *    defaultErrors: [&#x27;Something went wrong, please try again.&#x27;],
+ *    defaultMessages: [&#x27;You have been successfully logged out.&#x27;],
+ *  },
+ *  requestPass: {
+ *    endpoint: &#x27;/api/auth/request-pass&#x27;,
+ *    method: &#x27;post&#x27;,
+ *    redirect: {
+ *      success: &#x27;/&#x27;,
+ *      failure: null,
+ *    },
+ *    defaultErrors: [&#x27;Something went wrong, please try again.&#x27;],
+ *    defaultMessages: [&#x27;Reset password instructions have been sent to your email.&#x27;],
+ *  },
+ *  resetPass: {
+ *    endpoint: &#x27;/api/auth/reset-pass&#x27;,
+ *    method: &#x27;put&#x27;,
+ *    redirect: {
+ *      success: &#x27;/&#x27;,
+ *      failure: null,
+ *    },
+ *    resetPasswordTokenKey: &#x27;reset_password_token&#x27;,
+ *    defaultErrors: [&#x27;Something went wrong, please try again.&#x27;],
+ *    defaultMessages: [&#x27;Your password has been successfully changed.&#x27;],
+ *  },
+ *  token: {
+ *    key: &#x27;data.token&#x27;,
+ *    getter: (module: string, res: HttpResponse&lt;Object&gt;) &#x3D;&gt; getDeepFromObject(res.body,
+ *      this.getConfigValue(&#x27;token.key&#x27;)),
+ *  },
+ *  errors: {
+ *    key: &#x27;data.errors&#x27;,
+ *    getter: (module: string, res: HttpErrorResponse) &#x3D;&gt; getDeepFromObject(res.error,
+ *      this.getConfigValue(&#x27;errors.key&#x27;),
+ *      this.getConfigValue(&#x60;${module}.defaultErrors&#x60;)),
+ *  },
+ *  messages: {
+ *    key: &#x27;data.messages&#x27;,
+ *    getter: (module: string, res: HttpResponse&lt;Object&gt;) &#x3D;&gt; getDeepFromObject(res.body,
+ *      this.getConfigValue(&#x27;messages.key&#x27;),
+ *      this.getConfigValue(&#x60;${module}.defaultMessages&#x60;)),
+ *  },
+ *}
+ *
+ * // Note, there is no need to copy over the whole object to change the settings you need.
+ * // Also, this.getConfigValue call won&#x27;t work outside ofthe default config declaration
+ * // (which is inside of the &#x60;EmailPassAuthProvider&#x60; class), so you have to replace it with a custom helper function
+ * // if you need it.
+ * &#x60;&#x60;&#x60;
+ */
+export class EmailPassAuthProvider extends AbstractAuthProvider {
+    clear(data?: any): Observable&lt;AuthResult&gt; {
+        throw new Error(&quot;Method not implemented.&quot;);
+    }
+    protected http: HttpClient;
+    private route;
+    protected defaultConfig: EmailPassAuthProviderConfig;
+    constructor(http: HttpClient, route: ActivatedRoute){	
+	    super();
+		var __this &#x3D;  this;
+        __this.defaultConfig &#x3D; {
+            baseEndpoint: &#x27;https://196.45.144.12/app.woorbi.com/auth/&#x27;,
+            //baseEndpoint: &#x27;http://app.woorbi.com/auth/&#x27;,
+            login: {
+                alwaysFail: false,
+                rememberMe: true,
+                // TODO: what does that mean?
+                endpoint: &#x27;login&#x27;,
+                method: &#x27;post&#x27;,
+                redirect: {
+                    success: &#x27;/&#x27;,
+                    failure: null,
+                },
+                defaultErrors: [&#x27;Wrong Username or Password, please try again.&#x27;],
+                defaultMessages: [&#x27;You have been successfully logged in.&#x27;],
+            },
+            register: {
+                alwaysFail: false,
+                rememberMe: true,
+                endpoint: &#x27;register&#x27;,
+                method: &#x27;post&#x27;,
+                redirect: {
+                    success: &#x27;/start&#x27;,
+                    failure: null,
+                },
+                defaultErrors: [&#x27;Something went wrong, please try again.&#x27;],
+                defaultMessages: [&#x27;You have been successfully registered.&#x27;],
+            },
+            logout: {
+                alwaysFail: false,
+                endpoint: &#x27;logout&#x27;,
+                method: &#x27;post&#x27;,
+                redirect: {
+                    success: &#x27;/&#x27;,
+                    failure: null,
+                },
+                defaultErrors: [&#x27;Something went wrong, please try again.&#x27;],
+                defaultMessages: [&#x27;You have been successfully logged out.&#x27;],
+            },
+            requestPass: {
+                endpoint: &#x27;request-password-reset&#x27;,
+                method: &#x27;post&#x27;,
+                redirect: {
+                    success: &#x27;/&#x27;,
+                    failure: null,
+                },
+                defaultErrors: [&#x27;Something went wrong, please try again.&#x27;],
+                defaultMessages: [&#x27;Reset password instructions have been sent to your email.&#x27;],
+            },
+            verifyCode: {
+                alwaysFail: false,
+                rememberMe: true,                
+                endpoint: &#x27;verify-code&#x27;,
+                method: &#x27;put&#x27;,
+                redirect: {
+                    success: &#x27;/reset-password&#x27;,
+                    failure: null,
+                },
+                defaultErrors: [&#x27;Something went wrong, please try again.&#x27;],
+                defaultMessages: [&#x27;Reset Code Verified.&#x27;],
+            },            
+            resetPass: {
+                endpoint: &#x27;reset-password&#x27;,
+                method: &#x27;put&#x27;,
+                redirect: {
+                    success: &#x27;/&#x27;,
+                    failure: null,
+                },
+                resetPasswordTokenKey: &#x27;reset_password_token&#x27;,
+                defaultErrors: [&#x27;Something went wrong, please try again.&#x27;],
+                defaultMessages: [&#x27;Your password has been successfully changed.&#x27;],
+            },
+            token: {
+                key: &#x27;data.token&#x27;,
+                getter: function (module, res) {
+                    return getDeepFromObject(res.body, __this.getConfigValue(&#x27;token.key&#x27;));
+                },
+            },
+            errors: {
+                key: &#x27;data.errors&#x27;,
+                getter: function (module, res) {
+                    return getDeepFromObject(res.error, __this.getConfigValue(&#x27;errors.key&#x27;), __this.getConfigValue(module + &quot;.defaultErrors&quot;));
+                },
+            },
+            messages: {
+                key: &#x27;data.messages&#x27;,
+                getter: function (module, res) {
+                    return getDeepFromObject(res.body, __this.getConfigValue(&#x27;messages.key&#x27;), __this.getConfigValue(module + &quot;.defaultMessages&quot;));
+                },
+            },
+        };
+		
+        __this.http &#x3D; http;
+        __this.route &#x3D; route;			
+        return __this;
+    }
+    authenticate(data?: any): Observable&lt;AuthResult&gt;{
+        var __this &#x3D; this;
+        var method &#x3D; this.getConfigValue(&#x27;login.method&#x27;);
+        var url &#x3D; this.getActionEndpoint(&#x27;login&#x27;);
+        return this.http.request(method, url, { body: data, observe: &#x27;response&#x27; })
+            .pipe(map(function (res) {
+            if (__this.getConfigValue(&#x27;login.alwaysFail&#x27;)) {
+                throw __this.createFailResponse(data);
+            }
+            return res;
+        }), this.validateToken(&#x27;login&#x27;), map(function (res) {
+            return new AuthResult(true, res, __this.getConfigValue(&#x27;login.redirect.success&#x27;), [], __this.getConfigValue(&#x27;messages.getter&#x27;)(&#x27;login&#x27;, res), __this.getConfigValue(&#x27;token.getter&#x27;)(&#x27;login&#x27;, res));
+        }), catchError(function(res){
+            var errors &#x3D; [];
+            if (res instanceof HttpErrorResponse) {
+                errors &#x3D; __this.getConfigValue(&#x27;errors.getter&#x27;)(&#x27;login&#x27;, res);
+                //errors.push(res.error);
+            }
+            else {
+                errors.push(&#x27;Something went wrong,please check your Internet Connection.&#x27;);
+            }
+            return observableOf(new AuthResult(false, res, __this.getConfigValue(&#x27;login.redirect.failure&#x27;), errors));
+        }));
+    }
+    register(data?: any): Observable&lt;AuthResult&gt;{
+        var __this &#x3D; this;
+        var method &#x3D; this.getConfigValue(&#x27;register.method&#x27;);
+        var url &#x3D; this.getActionEndpoint(&#x27;register&#x27;);
+        return this.http.request(method, url, { body: data, observe: &#x27;response&#x27; })
+            .pipe(map(function (res) {
+            if (__this.getConfigValue(&#x27;register.alwaysFail&#x27;)) {
+                throw __this.createFailResponse(data);
+            }
+            return res;
+        }), this.validateToken(&#x27;register&#x27;), map(function (res) {
+            return new AuthResult(true, res, __this.getConfigValue(&#x27;register.redirect.success&#x27;), [], __this.getConfigValue(&#x27;messages.getter&#x27;)(&#x27;register&#x27;, res), __this.getConfigValue(&#x27;token.getter&#x27;)(&#x27;register&#x27;, res));
+        }), catchError(function (res) {
+            var errors &#x3D; [];
+            if (res instanceof HttpErrorResponse) {
+                if(res.status&#x3D;&#x3D;&#x3D;422){
+                 errors.push(&#x27;This email has already been registered with Woorbi.If you have previously signed up with this email please try to login with it.&#x27;);
+                }else{
+                    errors &#x3D; __this.getConfigValue(&#x27;errors.getter&#x27;)(&#x27;register&#x27;, res);
+                }
+
+            }
+            else {
+                errors.push(&#x27;Something went wrong.&#x27;);
+            }
+            return observableOf(new AuthResult(false, res, __this.getConfigValue(&#x27;register.redirect.failure&#x27;), errors));
+        }));
+    }
+    requestPassword(data?: any): Observable&lt;AuthResult&gt;{
+        var __this &#x3D; this;
+        var method &#x3D; this.getConfigValue(&#x27;requestPass.method&#x27;);
+        var url &#x3D; this.getActionEndpoint(&#x27;requestPass&#x27;);
+        return this.http.request(method, url, { body: data, observe: &#x27;response&#x27; })
+            .pipe(map(function (res) {
+            if (__this.getConfigValue(&#x27;requestPass.alwaysFail&#x27;)) {
+                throw __this.createFailResponse();
+            }
+            return res;
+        }), map(function (res) {
+            return new AuthResult(true, res, __this.getConfigValue(&#x27;requestPass.redirect.success&#x27;), [], __this.getConfigValue(&#x27;messages.getter&#x27;)(&#x27;requestPass&#x27;, res));
+        }), catchError(function (res) {
+            var errors &#x3D; [];
+            if (res instanceof HttpErrorResponse) {
+                errors &#x3D; __this.getConfigValue(&#x27;errors.getter&#x27;)(&#x27;requestPass&#x27;, res);
+            }
+            else {
+                errors.push(&#x27;Something went wrong.&#x27;);
+            }
+            return observableOf(new AuthResult(false, res, __this.getConfigValue(&#x27;requestPass.redirect.failure&#x27;), errors));
+        }));
+    }
+    verifyCode(data?: any): Observable&lt;AuthResult&gt;{
+        var __this &#x3D; this;
+        var method &#x3D; this.getConfigValue(&#x27;verifyCode.method&#x27;);
+        var url &#x3D; this.getActionEndpoint(&#x27;verifyCode&#x27;);
+        return this.http.request(method, url, { body: data, observe: &#x27;response&#x27; })
+            .pipe(map(function (res) {
+            if (__this.getConfigValue(&#x27;verifyCode.alwaysFail&#x27;)) {
+                throw __this.createFailResponse();
+            }
+            return res;
+        }),this.validateToken(&#x27;verifyCode&#x27;), map(function (res) {
+            return new AuthResult(true, res, __this.getConfigValue(&#x27;verifyCode.redirect.success&#x27;), [], __this.getConfigValue(&#x27;messages.getter&#x27;)(&#x27;verifyCode&#x27;, res), __this.getConfigValue(&#x27;token.getter&#x27;)(&#x27;verifyCode&#x27;, res));
+        }),catchError(function (res) {
+            var errors &#x3D; [];
+            if (res instanceof HttpErrorResponse) {
+                errors &#x3D; __this.getConfigValue(&#x27;errors.getter&#x27;)(&#x27;verifyCode&#x27;, res);
+            }
+            else {
+                errors.push(&#x27;Something went wrong.&#x27;);
+            }
+            return observableOf(new AuthResult(false, res, __this.getConfigValue(&#x27;verifyCode.redirect.failure&#x27;), errors));
+        }));
+    }    
+    resetPassword(data?: any): Observable&lt;AuthResult&gt;{
+        var __this &#x3D; this;
+        if (data &#x3D;&#x3D;&#x3D; void 0) { data &#x3D; {}; }
+        var tokenKey &#x3D; this.getConfigValue(&#x27;resetPass.resetPasswordTokenKey&#x27;);
+        data[tokenKey] &#x3D; this.route.snapshot.queryParams[tokenKey];
+        var method &#x3D; this.getConfigValue(&#x27;resetPass.method&#x27;);
+        var url &#x3D; this.getActionEndpoint(&#x27;resetPass&#x27;);
+        return this.http.request(method, url, { body: data, observe: &#x27;response&#x27; })
+            .pipe(map(function (res) {
+            if (__this.getConfigValue(&#x27;resetPass.alwaysFail&#x27;)) {
+                throw __this.createFailResponse();
+            }
+            return res;
+        }), map(function (res) {
+            return new AuthResult(true, res, __this.getConfigValue(&#x27;resetPass.redirect.success&#x27;), [], __this.getConfigValue(&#x27;messages.getter&#x27;)(&#x27;resetPass&#x27;, res));
+        }), catchError(function (res) {
+            var errors &#x3D; [];
+            if (res instanceof HttpErrorResponse) {
+                errors &#x3D; __this.getConfigValue(&#x27;errors.getter&#x27;)(&#x27;resetPass&#x27;, res);
+            }
+            else {
+                errors.push(&#x27;Something went wrong.&#x27;);
+            }
+            return observableOf(new AuthResult(false, res, __this.getConfigValue(&#x27;resetPass.redirect.failure&#x27;), errors));
+        }));
+    }
+    logout(): Observable&lt;AuthResult&gt;{
+        var __this &#x3D; this;
+        var method &#x3D; this.getConfigValue(&#x27;logout.method&#x27;);
+        var url &#x3D; this.getActionEndpoint(&#x27;logout&#x27;);
+		//url&#x3D;null;
+        return observableOf({})
+            .pipe(switchMap(function (res) {
+            if (!url) {
+                return observableOf(res);
+            }
+            return __this.http.request(method, url, { observe: &#x27;response&#x27; });
+        }), map(function (res) {
+            if (__this.getConfigValue(&#x27;logout.alwaysFail&#x27;)) {
+                throw __this.createFailResponse();
+            }
+            return res;
+        }), map(function (res) {
+            return new AuthResult(true, res, __this.getConfigValue(&#x27;logout.redirect.success&#x27;), [], __this.getConfigValue(&#x27;messages.getter&#x27;)(&#x27;logout&#x27;, res));
+        }), catchError(function (res) {
+            var errors &#x3D; [];
+            if (res instanceof HttpErrorResponse) {
+                errors &#x3D; __this.getConfigValue(&#x27;errors.getter&#x27;)(&#x27;logout&#x27;, res);
+            }
+            else {
+                errors.push(&#x27;Something went wrong.&#x27;);
+            }
+            return observableOf(new AuthResult(false, res, __this.getConfigValue(&#x27;logout.redirect.failure&#x27;), errors));
+        }));
+    }
+    protected validateToken(module: string): any{
+        var __this &#x3D; this;
+        return map(function (res) {
+            var token &#x3D; __this.getConfigValue(&#x27;token.getter&#x27;)(module, res);
+            if (!token) {
+                var key &#x3D; __this.getConfigValue(&#x27;token.key&#x27;);
+                console.warn(&quot;EmailPassAuthProvider:\n                          Token is not provided under &#x27;&quot; + key + &quot;&#x27; key\n                          with getter &#x27;&quot; + __this.getConfigValue(&#x27;token.getter&#x27;) + &quot;&#x27;, check your auth configuration.&quot;);
+                throw new Error(&#x27;Could not extract token from the response.&#x27;);
+            }
+            return res;
+        });
+    }
+    protected getActionEndpoint(action: string): string{
+        var actionEndpoint &#x3D; this.getConfigValue(action + &quot;.endpoint&quot;);
+        var baseEndpoint &#x3D; this.getConfigValue(&#x27;baseEndpoint&#x27;);
+        return baseEndpoint + actionEndpoint;
+    }
+	
+	decorators &#x3D; [
+        { type: Injectable },
+    ];
+    /** @nocollapse */    
+	ctorParameters &#x3D; function () {
+		return [
+        { type: HttpClient, },
+        { type: ActivatedRoute, },
+      ]; }
+}
+</code></pre>
+    </div>
+</div>
+
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'class';
+            var COMPODOC_CURRENT_PAGE_URL = 'EmailPassAuthProvider.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

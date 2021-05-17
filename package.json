@@ -10,7 +10,8 @@
     "build": "ng build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "compodoc": "npx compodoc -p tsconfig.json src"
   },
   "private": true,
   "author": "Kinggeorge Magaga",
@@ -18,17 +19,18 @@
   "dependencies": {
     "@angular-material-extensions/link-preview": "^1.1.1",
     "@angular/animations": "^10.2.1",
-    "@angular/cdk": "^8.2.3",
+    "@angular/cdk": "^10.0.2",
     "@angular/common": "^10.2.1",
     "@angular/compiler": "^10.2.1",
     "@angular/core": "^10.2.1",
     "@angular/forms": "^10.2.1",
     "@angular/http": "^7.2.16",
-    "@angular/material": "^8.2.3",
+    "@angular/material": "^10.0.2",
     "@angular/platform-browser": "^10.2.1",
     "@angular/platform-browser-dynamic": "^10.2.1",
     "@angular/platform-server": "^10.2.1",
     "@angular/router": "^10.2.1",
+    "@compodoc/compodoc": "^1.1.11",
     "@ng-bootstrap/ng-bootstrap": "^7.0.0",
     "@ng-select/ng-select": "^2.20.5",
     "@ngx-translate/core": "^12.1.2",
@@ -64,6 +66,7 @@
     "@angular/compiler-cli": "^10.2.1",
     "@angular/language-service": "^10.2.1",
     "@angular/localize": "^10.2.1",
+    "@types/googlemaps": "^3.40.5",
     "@types/jasmine": "^3.6.0",
     "@types/jasminewd2": "^2.0.8",
     "@types/node": "^12.11.1",
@@ -81,7 +84,8 @@
     "protractor": "~7.0.0",
     "rxjs-tslint": "^0.1.8",
     "ts-node": "~5.0.1",
-    "tslint": "~6.1.0"
+    "tslint": "~6.1.0",
+    "typedoc": "^0.20.34"
   },
   "cordova": {
     "plugins": {

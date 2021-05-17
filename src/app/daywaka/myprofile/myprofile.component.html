@@ -1,0 +1,336 @@
+<app-dw-jobs-content-container [TOPNAV_TITLE]="top_title">
+
+    <ng-container *ngIf="profileService.MYPROFILE!=null">
+
+        <ng-container *ngIf="profileService.MYPROFILE!=null">
+            <app-dw-profile-header-widget [PROFILE]="profileService.MYPROFILE"></app-dw-profile-header-widget>
+        </ng-container>
+
+        <div class="card mx-0 my-1">
+            <div class="card-body p-1">
+                <div class="row mx-0">
+                    <div class="col-12 p-1">
+                        <h5>LIFETIME STATS</h5>
+                    </div>
+                </div>
+                <div class="row mx-0">
+                    <div class="col-4">
+                        <div class="row mx-0">
+                            <div class="col-12 d-flex justify-content-center"><span class="font-weight-bold">0</span>
+                            </div>
+                            <div class="col-12 d-flex justify-content-center">Jobs Worked</div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="row mx-0">
+                            <div class="col-12 d-flex justify-content-center">TZS <span
+                                    class="font-weight-bold">0</span>
+                            </div>
+                            <div class="col-12 d-flex justify-content-center">Money Paid</div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="row mx-0">
+                            <div class="col-12 d-flex justify-content-center"><span class="font-weight-bold">0</span>
+                            </div>
+                            <div class="col-12 d-flex justify-content-center">Hours Paid</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mx-0 my-1">
+            <div class="card-body p-1">
+                <div class="row mx-0">
+                    <div class="col-12 p-1">
+                        <h5>CONTACT</h5>
+                    </div>
+                </div>
+                <div class="row mx-0">
+                    <div class="col-12 p-1">
+                        <div class="row mx-0">
+                            <div class="col-1"><span class="fa fa-phone"></span></div>
+                            <div class="col-10">
+                                <ng-container
+                                    *ngIf="profileService.MYPROFILE!=null && profileService.MYPROFILE.contacts.mobile!=null">
+                                    {{profileService.MYPROFILE.contacts.mobile}}
+                                </ng-container>
+                                <ng-container
+                                    *ngIf="profileService.MYPROFILE!=null && profileService.MYPROFILE.contacts.mobile==null">
+                                    Phone Number
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mx-0 my-1">
+            <div class="card-body p-1">
+                <div class="row mx-0">
+                    <div class="col-12 p-1">
+                        <h5>EMAIL</h5>
+                    </div>
+                </div>
+                <div class="row mx-0">
+                    <div class="col-12 p-1">
+                        <div class="row mx-0">
+                            <div class="col-1"><span class="fa fa-envelope"></span></div>
+                            <div class="col-10">
+                                <ng-container
+                                    *ngIf="profileService.MYPROFILE!=null && profileService.MYPROFILE.contacts.email!=null">
+                                    {{profileService.MYPROFILE.contacts.email}}
+                                </ng-container>
+                                <ng-container
+                                    *ngIf="profileService.MYPROFILE!=null && profileService.MYPROFILE.contacts.email==null">
+                                    Email address
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mx-0 my-1">
+            <div class="card-body p-1">
+                <div class="row mx-0">
+                    <div class="col-12 p-1">
+                        <h5>ONBOARDING STATUS</h5>
+                    </div>
+                </div>
+                <div class="row mx-0">
+                    <div class="col-12 p-1">
+                        <div class="row mx-0">
+                            <div class="col-1"><span class="fa fa-user"></span></div>
+                            <div class="col-10">Basic Information</div>
+                        </div>
+                        <div class="row mx-0">
+                            <div class="col-1"><span class="fa fa-list"></span></div>
+                            <div class="col-10">Daywaka Quiz</div>
+                        </div>
+                        <div class="row mx-0">
+                            <div class="col-1"><span class="fa fa-check-circle"></span></div>
+                            <div class="col-10">Background Check</div>
+                        </div>
+                        <div class="row mx-0">
+                            <div class="col-1"><span class="fa fa-check-circle"></span></div>
+                            <div class="col-10">Start Working</div>
+                        </div>
+                        <div class="row mx-0">
+                            <div class="col-12 d-flex justify-content-center">
+                                <button class="btn btn-sm btn-outline-secondary btn-rounded w-100">Continue</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mx-0 my-1">
+            <div class="card-body p-1">
+                <div class="row mx-0">
+                    <div class="col-12 p-1">
+                        <h5>INVITE FRIENDS</h5>
+                    </div>
+                </div>
+                <div class="row mx-0">
+                    <div class="col-12 p-1">
+                        <div class="row mx-0">
+                            <div class="col-12 d-flex justify-content-center">
+                                <button class="btn btn-sm btn-outline-secondary btn-rounded w-100">Send
+                                    Invitations</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mx-0 my-1">
+            <div class="card-body p-1">
+                <div class="row mx-0">
+                    <div class="col-8 p-1">
+                        <h5>BIOGRAPHY</h5>
+                    </div>
+                    <div class="col-4 px-1 d-flex justify-content-end">
+                        <ng-container *ngIf="profileService.MYPROFILE.my_profile==true">
+                            <span class="pull-right" style="font-size: 150%;cursor: pointer;"
+                                (click)="editProfileService.EditProfileAbout()">
+                                <span class="fa fa-pencil"></span>
+                            </span>
+                        </ng-container>
+                    </div>
+                </div>
+                <div class="row mx-0">
+                    <div class="col-12 p-1">
+                        <div class="row mx-0">
+                            <div class="col-12 p-1">
+                                <p>
+                                    <ng-container *ngIf="profileService.MYPROFILE.about!=''">
+                                        {{profileService.MYPROFILE.about}}
+                                    </ng-container>
+                                    <ng-container *ngIf="profileService.MYPROFILE.about!=''">
+                                        <span>Something about myself</span>
+                                    </ng-container>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mx-0 my-1">
+            <div class="card-body p-1">
+                <div class="row mx-0">
+                    <div class="col-8 p-1">
+                        <h5>SKILLS and EXPERIENCE</h5>
+                    </div>
+                    <div class="col-4 px-1 d-flex justify-content-end">
+                        <ng-container *ngIf="profileService.MYPROFILE.my_profile==true">
+                            <ng-container
+                                *ngIf="profileService.MYPROFILE.skills!=null && profileService.MYPROFILE.skills.length>0">
+                                <span class="pull-right" style="font-size: 150%;cursor: pointer;"
+                                    (click)="editProfileService.EditProfileSkills()">
+                                    <span class="fa fa-pencil"></span>
+                                </span>
+                            </ng-container>
+                            <ng-container *ngIf="profileService.MYPROFILE.skills.length==0">
+                                <span class="pull-right" style="font-size: 150%;cursor: pointer;"
+                                    (click)="editProfileService.AddProfileSkills()">
+                                    <span class="fa fa-plus"></span>
+                                </span>
+                            </ng-container>
+                        </ng-container>
+                    </div>
+                </div>
+                <div class="row mx-0">
+                    <div class="col-12 p-1">
+                        <div class="row mx-0">
+                            <div class="col-12 p-1">
+                                <p>I have the following skills</p>
+                                <ng-container *ngFor="let skill of profileService.MYPROFILE.skills;let i = index">
+                                    <span class="chip" style="margin:1px;">
+                                        <span>&nbsp;</span><span>{{skill.name}}</span></span>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mx-0 my-1">
+            <div class="card-body p-1">
+                <div class="row mx-0">
+                    <div class="col-8 p-1">
+                        <h5>LANGUAGES</h5>
+                    </div>
+                    <div class="col-4 px-1 d-flex justify-content-end">
+                        <ng-container *ngIf="profileService.MYPROFILE.my_profile==true">
+                            <ng-container
+                                *ngIf="profileService.MYPROFILE.languages!=null && profileService.MYPROFILE.languages.length>0">
+                                <span class="pull-right" style="font-size: 150%;cursor: pointer;"
+                                    (click)="editProfileService.EditProfileLanguages()">
+                                    <span class="fa fa-pencil"></span>
+                                </span>
+                            </ng-container>
+                            <ng-container *ngIf="profileService.MYPROFILE.languages.length==0">
+                                <span class="pull-right" style="font-size: 150%;cursor: pointer;"
+                                    (click)="editProfileService.AddProfileLanguages()">
+                                    <span class="fa fa-plus"></span>
+                                </span>
+                            </ng-container>
+                        </ng-container>
+                    </div>
+                </div>
+                <div class="row mx-0">
+                    <div class="col-12 p-1">
+                        <div class="row mx-0">
+                            <div class="col-12 p-1">
+                                <p>I speak the following languages</p>
+                                <ng-container *ngFor="let language of profileService.MYPROFILE.languages;let i = index">
+                                    <span class="chip" style="margin:1px;">
+                                        <span>&nbsp;</span><span>{{language.name}}</span></span>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <ng-container *ngIf="dwprofileService.MY_DAYWAKA_PROFILE!=null">
+            <div class="card mx-0 my-1">
+                <div class="card-body p-1">
+                    <div class="row mx-0">
+                        <div class="col-8 p-1">
+                            <h5>JOB PREFERENCES</h5>
+                        </div>
+                        <div class="col-4 px-1 d-flex justify-content-end">
+                            <ng-container
+                                *ngIf="dwprofileService.MY_DAYWAKA_PROFILE.job_preferences!=null && dwprofileService.MY_DAYWAKA_PROFILE.job_preferences.length>0">
+                                <span class="pull-right" style="font-size: 150%;cursor: pointer;"
+                                    (click)="dwprofileService.EditJobPreferences()">
+                                    <span class="fa fa-pencil"></span>
+                                </span>
+                            </ng-container>
+                            <ng-container *ngIf="dwprofileService.MY_DAYWAKA_PROFILE.job_preferences.length==0">
+                                <span class="pull-right" style="font-size: 150%;cursor: pointer;"
+                                    (click)="dwprofileService.AddJobPreferences()">
+                                    <span class="fa fa-plus"></span>
+                                </span>
+                            </ng-container>
+                        </div>
+                    </div>
+                    <div class="row mx-0">
+                        <div class="col-12 p-1">
+                            <div class="row mx-0">
+                                <div class="col-12 p-1">
+                                    <p>I prefer the following types of jobs</p>
+                                    <ng-container
+                                        *ngFor="let preference of dwprofileService.MY_DAYWAKA_PROFILE.job_preferences;let i = index">
+                                        <span class="chip" style="margin:1px;">
+                                            <span>&nbsp;</span><span>{{preference.name}}</span></span>
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+
+        <div class="card mx-0 my-1">
+            <div class="card-body p-1">
+                <div class="row mx-0">
+                    <div class="col-8 p-1">
+                        <h5>OTHER WORK OPPORTUNITIES</h5>
+                    </div>
+                    <div class="col-4 px-1 d-flex justify-content-end">
+                        <div><span class="fa fa-pencil"></span><span>&nbsp;</span> <span>Edit</span></div>
+                    </div>
+                </div>
+                <div class="row mx-0">
+                    <div class="col-12 p-1">
+                        <div class="row mx-0">
+                            <div class="col-12 p-1">
+                                <p>I'm open to long term jobs</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="profileService.MYPROFILE==null && profileService.loading_myprofile==true">
+
+    </ng-container>
+</app-dw-jobs-content-container>
+<app-shared-edit-profile-overlay-container></app-shared-edit-profile-overlay-container>
+<app-dw-edit-profile-overlay-container-modal></app-dw-edit-profile-overlay-container-modal>

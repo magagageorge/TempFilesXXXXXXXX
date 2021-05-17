@@ -1,0 +1,151 @@
+<ng-container *ngIf="dwProfile!=null">
+    <div class="row mx-0 w-100">
+        <div class="col-12 m-0 p-0">
+                <app-dw-profile-header-widget [PROFILE]="dwProfile"></app-dw-profile-header-widget>
+        </div>
+    </div>
+
+    <div class="card my-2 p-1  w-100">
+        <div class="card-body">
+            <div class="row mx-0">
+                <div class="col-4 m-0 p-0 d-flex justify-content-center">
+                    <div class="row mx-0 p-1">
+                        <div class="col-12 p-0 d-flex justify-content-center">
+                            <span class="font-weight-bold">{{dwProfile.ratings}}</span>
+                        </div>
+                        <div class="col-12 p-0 d-flex justify-content-center">
+                            Overall Rating
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 m-0 p-0 d-flex justify-content-center">
+                    <div class="row mx-0 p-1">
+                        <div class="col-12 p-0 d-flex justify-content-center">
+                            <span class="font-weight-bold">13</span>
+                        </div>
+                        <div class="col-12 p-0 d-flex justify-content-center">
+                            Total Jobs
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 m-0 p-0 d-flex justify-content-center">
+                    <div class="row mx-0 p-1">
+                        <div class="col-12 p-0 d-flex justify-content-center">
+                            <span class="font-weight-bold">4</span>
+                        </div>
+                        <div class="col-12 p-0 d-flex justify-content-center">
+                            Jobs For You
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="card my-2 p-1 w-100">
+        <div class="card-body">
+
+            <div class="row mx-0">
+                <div class="col-6 col-md-4 m-0 p-0">
+                    <div class="row mx-0 p-1">
+                        <div class="col-3 p-0">
+                            <span class="font-weight-bold ">13</span>
+                        </div>
+                        <div class="col-9 p-0">
+                            Background Check
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-8 m-0 p-0">
+                    <div class="row mx-0 p-1">
+                        <div class="col-12 p-0"><span class="font-weight-bold wb-font-size-110">Contacts</span>
+                        </div>
+                        <div class="col-12 p-1">
+                            <span class="font-weight-bold fa fa-phone"></span><span>{{dwProfile.contacts.mobile}}</span>
+                        </div>
+                        <div class="col-12 p-1">
+                            <span class="font-weight-bold fa fa-envelop"></span><span>{{dwProfile.contacts.email}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="card my-2 p-1 w-100">
+        <div class="card-header">
+            <h5>Jobs For Your</h5>
+        </div>
+        <div class="card-body">
+            <div class="row mx-0">
+                <div class="col-6 m-0 p-0 d-flex justify-content-center">
+                    <div class="row mx-0 p-1">
+                        <div class="col-3 p-0">
+                            <span class="font-weight-bold">13</span>
+                        </div>
+                        <div class="col-9 p-0">
+                            Total Jobs
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 m-0 p-0 d-flex justify-content-center">
+                    <div class="row mx-0 p-1">
+                        <div class="col-12 p-0"><span class="font-weight-bold wb-font-size-110">Contacts</span>
+                        </div>
+                        <div class="col-12 p-1">
+                            <span class="font-weight-bold fa fa-phone"></span><span>0773834834</span>
+                        </div>
+                        <div class="col-12 p-1">
+                            <span class="font-weight-bold fa fa-envelop"></span><span>email@email.com</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ng-container *ngIf="dwProfile.skills.length>0">
+        <div class="card my-2 p-1 w-100">
+            <div class="card-header">
+                <h5>Some Skills</h5>
+            </div>
+            <div class="card-body">
+                <div class="row mx-0">
+                    <div class="col-12 p-1">
+                        <div class="row mx-0">
+                            <div class="col-12 p-1">
+                                <ng-container *ngFor="let skill of dwProfile.skills;let i = index">
+                                    <span class="chip" style="margin:1px;">
+                                        <span>&nbsp;</span><span>{{skill.name}}</span></span>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="dwProfile.languages.length>0">
+        <div class="card my-2 p-1 w-100">
+            <div class="card-header">
+                <h5>Speaks</h5>
+            </div>
+            <div class="card-body">
+                <div class="row mx-0">
+                    <div class="col-12 p-1">
+                        <div class="row mx-0">
+                            <div class="col-12 p-1">
+                                <ng-container *ngFor="let language of dwProfile.languages;let i = index">
+                                    <span class="chip" style="margin:1px;">
+                                        <span>&nbsp;</span><span>{{language.name}}</span></span>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+</ng-container>

@@ -1,0 +1,59 @@
+<div class="card m-0 h-100 px-2 pt-2" style="padding-bottom: 50px;">
+    <ng-container *ngIf="profileService.MYPROFILE!=null">
+        <div class="card-header bg-white px-0 py-1">
+            <div class="row mx-0 px-0">
+                <div class="col-12 p-0">
+                    <a routerLink="/myprofile" class="px-0 py-1 m-0 text-decoration-none"
+                        style="text-decoration: none;">
+                        <div class="row p-0 m-0">
+                            <div class="col-12 p-0 d-flex align-items-center justify-content-center">
+                                <ng-container *ngIf="profileService.MYPROFILE.avatar.face!=null">
+                                    <img style="max-height:50px;" src="{{profileService.MYPROFILE.avatar.face}}"
+                                        class="img-fluid rounded-circle z-depth-0 m-0">
+                                </ng-container>
+                            </div>
+                            <div class="col-12 p-0 d-flex align-items-center justify-content-center">
+                                <span
+                                    class="m-0 py-1 wb-font-size-120 font-weight-bold wb-max-ln-2">{{profileService.MYPROFILE.name}}</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+    <div class="card-body p-0 my-1" style="overflow-y: auto;">
+        <div class="d-block w-100 border-bottom p-0">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item pl-1 py-1">
+                    <a routerLink="/jobs" class="d-block m-0 p-2 wb-font-size-120">
+                        <span class="fa fa-building"></span>
+                        <span>&nbsp;</span>
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li class="list-group-item pl-1 py-1">
+                    <a routerLink="/jobs/nearby" class="d-block m-0 p-2 wb-font-size-120">
+                        <span class="fa fa-map-marker"></span>
+                        <span>&nbsp;</span>
+                        <span>Nearby Jobs</span>
+                    </a>
+                </li>
+                <li class="list-group-item pl-1 py-1">
+                    <a routerLink="/myprofile" class="d-block m-0 p-2 wb-font-size-120">
+                        <span class="fa fa-user"></span>
+                        <span>&nbsp;</span>
+                        <span>Profile</span>
+                    </a>
+                </li>
+                <li class="list-group-item pl-1 py-1">
+                    <a routerLink="/jobs/myjobs" class="d-block m-0 p-2 wb-font-size-120">
+                        <span class="fa fa-briefcase"></span>
+                        <span>&nbsp;</span>
+                        <span>My Jobs</span>
+                    </a>
+                </li>                
+            </ul>
+        </div>
+    </div>
+</div>

@@ -14,13 +14,13 @@ export class DwCreateBusinessJobComponent implements OnInit {
   constructor(public daywakaService: DaywakaService, public dwViewerService: DwViewerService) { }
 
   ngOnInit(): void {
-     this.fillForm();
+    this.fillForm();
   }
 
   fillForm() {
     if (this.dwViewerService.PPVIEWER.page != null) {
       this.jobForm.selected_page = this.dwViewerService.PPVIEWER.page;
-      this.jobForm.page_id=this.dwViewerService.PPVIEWER.page.id
+      this.jobForm.page_id = this.dwViewerService.PPVIEWER.page.id
       this.jobForm.advertized_by = 'Business';
     }
 
@@ -29,7 +29,15 @@ export class DwCreateBusinessJobComponent implements OnInit {
       this.jobForm.profile_id = this.dwViewerService.PPVIEWER.profile.user_id;
       this.jobForm.advertized_by = 'Individual';
     }
-    this.jobForm.category_id=null;
+    this.jobForm.multiple_days = 'No';
+    this.jobForm.duration_hours = '1';
+    this.jobForm.duration_minutes = '0';
+    this.jobForm.travel_tips = '';
+    this.jobForm.status = true;
+    this.jobForm.category_id = null;
+    this.jobForm.startdate = null;
+    this.jobForm.starttime = null;
+    this.jobForm.currency = null;
   }
 
 }

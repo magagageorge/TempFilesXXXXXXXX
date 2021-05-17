@@ -1,0 +1,202 @@
+<div class="row m-0 px-0 h-100 align-items-center">
+    <div class="col-12 col-md-6 col-lg-6 mx-auto px-0 h-100 align-items-center d-flex" #OvelayViewProfilePicture>
+        <div class="d-block align-self-center w-100 mx-auto my-auto">
+
+            <div class="card w-100 mx-auto my-auto overlay-modal-form-card">
+                <div class="card-header px-1">
+                    <div class="row px-0 mx-0">
+                        <div class="col-2 d-md-none d-lg-none d-xl-none">
+                            <span class="pull-left" (click)="editProfileService.cancelEditProfile()"
+                                style="font-size: 130%;cursor: pointer;">
+                                <span class="fa fa-close"></span>
+                            </span>
+                        </div>
+                        <div class="col-7 col-md-10 col-lg-10 col-xl-10">
+                            <span *ngIf="editProfileService.editMode.experience.action=='edit'"
+                                class="font-weight-bold">Edit Work Story</span>
+                            <span *ngIf="editProfileService.editMode.experience.action=='add'"
+                                class="font-weight-bold">Add to Work Story</span>
+                        </div>
+                        <div class="col-3 d-md-none d-lg-none d-xl-none">
+                            <div class="d-block pull-right font-weight-bold">
+                                <span class="cursor-pointer  pull-right" (click)="save()"> <span>Save</span> </span>
+                            </div>
+                        </div>
+                        <div class="col-2 d-none d-md-block d-lg-block d-xl-block">
+                            <span class="pull-right" (click)="editProfileService.cancelEditProfile()"
+                                style="font-size: 130%;cursor: pointer;">
+                                <span class="fa fa-close"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body p-1" style="overflow-y: scroll;">
+                    <form [formGroup]="experienceGroup" (ngSubmit)="save()" class="p-1">
+                        <div class="form">
+                            <div class="d-block mb-2">
+                                <div class="row align-middle py-1 mx-0">
+                                    <div class="col-12">
+                                        <label class="py-0 m-0">Company</label>
+                                        <input type="text" class="form-control form-rounded" name="company_name"
+                                            formControlName="company_name"
+                                            [ngClass]="{ 'is-invalid': submitted && f.company_name.errors }"
+                                            [(ngModel)]="experienceModel.company_name" placeholder="Company Name">
+                                        <div *ngIf="submitted && f.company_name.errors"
+                                            class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                                            <div *ngIf="f.company_name.errors.required" i18n>Required</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="py-0 m-0">Position</label>
+                                        <input type="text" class="form-control form-rounded" name="position"
+                                            formControlName="position"
+                                            [ngClass]="{ 'is-invalid': submitted && f.position.errors }"
+                                            [(ngModel)]="experienceModel.position" placeholder="Position">
+                                        <div *ngIf="submitted && f.position.errors"
+                                            class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                                            <div *ngIf="f.position.errors.required" i18n>Required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="d-block mb-2">
+                                <div class="d-block">
+                                    <div class="row mx-0">
+                                        <div class="col-12 pull-left">
+                                            <div class="form-check m-0 p-0">
+                                                <input type="checkbox" formControlName="current_here"
+                                                    [(ngModel)]="experienceModel.current_here" class="form-check-input"
+                                                    id="current_here">
+                                                <label for="current_here" class="">I am currently working in this
+                                                    role</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-inline-block w-50">
+                                    <label class="py-0 font-weight-bold">From</label>
+                                    <div class="row align-middle py-1 mx-0">
+                                        <div class="col-12 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                                            <label class="py-0 m-0">Year</label>
+                                            <select id="startyear" formControlName="startyear"
+                                                [ngClass]="{ 'is-invalid': submitted && f.startyear.errors }"
+                                                [(ngModel)]="experienceModel.startyear"
+                                                (ngModelChange)="startDate.yearChanged(startDate.selected_year)"
+                                                name="startyear" class="form-control form-rounded">
+                                                <option value="" i18n>Year</option>
+                                                <option *ngFor="let year of startDate.util_years" value="{{year.id}}">
+                                                    {{year.name}}
+                                                </option>
+                                            </select>
+                                            <div *ngIf="submitted && f.startyear.errors"
+                                                class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                                                <div *ngIf="f.startyear.errors.required" i18n>Required</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-7 col-md-7 col-lg-7 col-xl-7">
+                                            <label class="py-0 m-0">Month</label>
+                                            <select id="startmonth" formControlName="startmonth"
+                                                [ngClass]="{ 'is-invalid': submitted && f.startmonth.errors }"
+                                                [(ngModel)]="experienceModel.startmonth"
+                                                (ngModelChange)="startDate.monthChanged(startDate.selected_month)"
+                                                name="startmonth" class="form-control form-rounded">
+                                                <option value="" i18n>Month</option>
+                                                <option *ngFor="let month of startDate.util_months"
+                                                    value="{{month.id}}">
+                                                    {{month.name}}
+                                                </option>
+                                            </select>
+                                            <div *ngIf="submitted && f.startmonth.errors"
+                                                class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                                                <div *ngIf="f.startmonth.errors.required" i18n>Required</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-inline-block w-50">
+                                    <label class="py-0 font-weight-bold">To</label>
+                                    <div class="row align-middle py-1 mx-0">
+                                        <ng-container *ngIf="experienceModel.current_here!='1'">
+                                            <div class="col-12 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                                                <label class="py-0 m-0">Year</label>
+                                                <select id="endyear" formControlName="endyear"
+                                                    [ngClass]="{ 'is-invalid': submitted && f.endyear.errors }"
+                                                    [(ngModel)]="experienceModel.endyear"
+                                                    (ngModelChange)="endDate.yearChanged(endDate.selected_year)"
+                                                    name="endyear" class="form-control form-rounded">
+                                                    <option value="" i18n>Year</option>
+                                                    <option *ngFor="let year of endDate.util_years" value="{{year.id}}">
+                                                        {{year.name}}
+                                                    </option>
+                                                </select>
+                                                <div *ngIf="submitted && f.endyear.errors"
+                                                    class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                                                    <div *ngIf="f.endyear.errors.required" i18n>Required</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-7 col-md-7 col-lg-7 col-xl-7">
+                                                <label class="py-0 m-0">Month</label>
+                                                <select id="endmonth" formControlName="endmonth"
+                                                    [ngClass]="{ 'is-invalid': submitted && f.endmonth.errors }"
+                                                    [(ngModel)]="experienceModel.endmonth"
+                                                    (ngModelChange)="endDate.monthChanged(endDate.selected_month)"
+                                                    name="endmonth" class="form-control form-rounded">
+                                                    <option value="" i18n>Month</option>
+                                                    <option *ngFor="let month of endDate.util_months"
+                                                        value="{{month.id}}">
+                                                        {{month.name}}
+                                                    </option>
+                                                </select>
+                                                <div *ngIf="submitted && f.endmonth.errors"
+                                                    class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                                                    <div *ngIf="f.endmonth.errors.required" i18n>Required</div>
+                                                </div>
+                                            </div>
+                                        </ng-container>
+                                        <div *ngIf="experienceModel.current_here=='1'" class="col-12">
+                                            <span>Present</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="d-block mb-2">
+                                <div class="row align-middle py-1 mx-0">
+                                    <div class="col-12">
+                                        <label class="py-0 m-0">Description</label>
+                                        <textarea class="form-control form-rounded" name="description"
+                                            formControlName="description"
+                                            [ngClass]="{ 'is-invalid': submitted && f.description.errors }"
+                                            [(ngModel)]="experienceModel.description"></textarea>
+                                        <div *ngIf="submitted && f.description.errors"
+                                            class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                                            <div *ngIf="f.description.errors.required" i18n>Required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+                    <div class="d-block w-100 d-md-none d-lg-none d-xl-none py-3 text-center">
+                        <ng-container *ngIf="this.editProfileService.editMode.experience.action == 'edit'">
+                            <button class="btn btn-sm btn-warning btn-rounded" (click)="delete()">Delete
+                                Work Story</button>
+                        </ng-container>
+                    </div>
+
+                </div>
+                <div class="card-footer p-0  d-none d-md-block d-lg-block d-xl-block">
+                    <ng-container *ngIf="this.editProfileService.editMode.experience.action == 'edit'">
+                        <button class="btn btn-sm btn-warning btn-rounded pull-left" (click)="delete()">Delete</button>
+                    </ng-container>
+
+                    <button class="btn btn-sm btn-rounded btn-primary pull-right" (click)="save()">Save</button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>

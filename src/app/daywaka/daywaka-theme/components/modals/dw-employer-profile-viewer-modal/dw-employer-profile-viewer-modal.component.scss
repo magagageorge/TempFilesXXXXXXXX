@@ -1,0 +1,27 @@
+.content-container {
+    position: relative;
+    margin-top: 60px;
+    padding: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.content-container .content {
+    max-height: calc(100vh - 65px);
+    overflow-y: auto;
+}
+
+@media (max-width: 600px) {
+    .content-container {
+        position: relative;
+        margin-top: 50px;
+        padding: 0px;
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+
+    .content-container .content {
+        max-height: calc(100vh - 50px);
+        overflow-y: auto;
+    }
+}

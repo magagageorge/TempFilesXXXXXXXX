@@ -1,0 +1,222 @@
+<div class="row m-0 px-0 h-100 align-items-center">
+    <div class="col-12 col-md-6 col-lg-6 mx-auto px-0 h-100 align-items-center d-flex" #OvelayViewProfilePicture>
+        <div class="d-block align-self-center w-100 mx-auto my-auto">
+
+            <div class="card w-100 mx-auto my-auto overlay-modal-form-card">
+                <div class="card-header">
+                    
+                    <div class="row px-0 mx-0">
+                        <div class="col-2 d-md-none d-lg-none d-xl-none">
+                            <span class="pull-left" (click)="editProfileService.cancelEditTopProfileCard()"
+                                style="font-size: 130%;cursor: pointer;">
+                                <span class="fa fa-close"></span>
+                            </span>
+                        </div>
+                        <div class="col-7 col-md-10 col-lg-10 col-xl-10">
+                            <span class="font-weight-bold">Edit Profile Info</span>
+                        </div>
+                        <div class="col-3 d-md-none d-lg-none d-xl-none">
+                            <div class="d-block pull-right font-weight-bold">
+                                <span class="cursor-pointer  pull-right" (click)="save()"> <span>Save</span> </span>
+                            </div>
+                        </div>
+                        <div class="col-2 d-none d-md-block d-lg-block d-xl-block">
+                            <span class="pull-right" (click)="editProfileService.cancelEditTopProfileCard()"
+                                style="font-size: 130%;cursor: pointer;">
+                                <span class="fa fa-close"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body" style="overflow-y: scroll;">
+                    <form [formGroup]="profileGroup" (ngSubmit)="save()" class="p-1">
+                        <div class="form">
+                            <div class="d-block mb-2">
+                                <div class="row align-middle py-1">
+                                    <div class="col-12 col-md-6 col-lg-6">
+                                        <label class="py-0">First Name</label>
+                                        <input type="text" class="form-control form-rounded" name="firstname"
+                                            formControlName="firstname"
+                                            [ngClass]="{ 'is-invalid': submitted && f.firstname.errors }"
+                                            [(ngModel)]="profileModel.firstname" placeholder="First Name">
+                                        <div *ngIf="submitted && f.firstname.errors"
+                                            class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                                            <div *ngIf="f.firstname.errors.required" i18n>Required</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6">
+                                        <label class="py-0">Last Name</label>
+                                        <input type="text" class="form-control form-rounded" name="lastname"
+                                            formControlName="lastname"
+                                            [ngClass]="{ 'is-invalid': submitted && f.lastname.errors }"
+                                            [(ngModel)]="profileModel.lastname" placeholder="Last Name">
+                                        <div *ngIf="submitted && f.lastname.errors"
+                                            class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                                            <div *ngIf="f.lastname.errors.required" i18n>Required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="d-block mb-2">
+                                <div class="row align-middle py-1">
+                                    <div class="col-12">
+                                        <label class="py-0">HeadLine</label>
+                                        <textarea class="form-control form-rounded" name="title" formControlName="title"
+                                            [ngClass]="{ 'is-invalid': submitted && f.title.errors }"
+                                            [(ngModel)]="profileModel.title"></textarea>
+                                        <div *ngIf="submitted && f.title.errors"
+                                            class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                                            <div *ngIf="f.title.errors.required" i18n>Required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="d-block mb-2">
+                                <label class="py-0 font-weight-bold">Date of Birth</label>
+                                <p>This should be your date of Birth,and it will not be shown to others unless you set
+                                    it by yourself in the account settings.</p>
+                                <div class="row align-middle py-1">
+                                    <div class="col-5 col-md-4 col-lg-4 col-xl-4">
+                                        <label class="py-0">Month</label>
+                                        <select id="inputmonth" formControlName="inp_month"
+                                            [ngClass]="{ 'is-invalid': submitted && f.inp_month.errors }"
+                                            [(ngModel)]="datePicker.selected_month"
+                                            (ngModelChange)="datePicker.monthChanged(datePicker.selected_month)"
+                                            name="inp_month" class="form-control form-rounded">
+                                            <option value="" i18n>Month</option>
+                                            <option *ngFor="let month of datePicker.util_months" value="{{month.id}}">
+                                                {{month.name}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="submitted && f.inp_month.errors"
+                                            class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                                            <div *ngIf="f.inp_month.errors.required" i18n>Required</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-3 col-md-4 col-lg-4 col-xl-4">
+                                        <label class="py-0">Day</label>
+                                        <select id="inputday" formControlName="inp_day"
+                                            [ngClass]="{ 'is-invalid': submitted && f.inp_day.errors }"
+                                            [(ngModel)]="datePicker.selected_day"
+                                            (ngModelChange)="datePicker.dayChanged(datePicker.selected_month)"
+                                            name="inp_day" class="form-control form-rounded">
+                                            <option value="" i18n>Day</option>
+                                            <option *ngFor="let day of datePicker.util_days" value="{{day.id}}">
+                                                {{day.name}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="submitted && f.inp_day.errors"
+                                            class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                                            <div *ngIf="f.inp_day.errors.required" i18n>Required</div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-4">
+                                        <label class="py-0">Year</label>
+                                        <select id="inputyear" formControlName="inp_year"
+                                            [ngClass]="{ 'is-invalid': submitted && f.inp_year.errors }"
+                                            [(ngModel)]="datePicker.selected_year"
+                                            (ngModelChange)="datePicker.yearChanged(datePicker.selected_year)"
+                                            name="inp_year" class="form-control form-rounded">
+                                            <option value="" i18n>Year</option>
+                                            <option *ngFor="let year of datePicker.util_years" value="{{year.id}}">
+                                                {{year.name}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="submitted && f.inp_year.errors"
+                                            class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                                            <div *ngIf="f.inp_year.errors.required" i18n>Required</div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="d-block mb-2">
+                                <label class="py-0 font-weight-bold">Add Your Gender</label>
+                                <div class="row align-middle py-1">
+                                    <div class="col-12" [ngClass]="{ 'is-invalid': submitted && f.gender.errors }">
+                                        <div class="custom-control custom-radio custom-control-inline pull-left">
+                                            <input type="radio" class="custom-control-input" formControlName="gender"
+                                                name="gender" [(ngModel)]="profileModel.gender"
+                                                [checked]="profileModel.gender==='Male'" id="gender_Male" name="gender"
+                                                value="Male">
+                                            <label class="custom-control-label" for="gender_Male" i18n>Male</label>
+                                        </div>
+                                        <div class="custom-control custom-radio custom-control-inline pull-left">
+                                            <input type="radio" class="custom-control-input" formControlName="gender"
+                                                name="gender" [(ngModel)]="profileModel.gender"
+                                                [checked]="profileModel.gender==='Female'" id="gender_Female"
+                                                name="gender" value="Female">
+                                            <label class="custom-control-label" for="gender_Female" i18n>Female</label>
+                                        </div>
+                                        <div *ngIf="submitted && f.gender.errors"
+                                            class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                                            <div *ngIf="f.gender.errors.required" i18n>Required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="d-block mb-2">
+                                <label class="py-0 font-weight-bold">Current Location</label>
+                                <div class="row align-middle py-1">
+                                    <div class="col-12 col-md-6 col-lg-6">
+                                        <label class="py-0">Country</label>
+                                        <select id="inputcountry" formControlName="country"
+                                            [ngClass]="{ 'is-invalid': submitted && f.country.errors }"
+                                            [(ngModel)]="profileModel.country"
+                                            (ngModelChange)="switchLocation(profileModel.country)" name="country"
+                                            class="form-control form-rounded">
+                                            <option value="" i18n>-Select Country -</option>
+                                            <option *ngFor="let country of utilitiesService.COUNTRIES" value="{{country.id}}">
+                                                {{country.name}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="submitted && f.country.errors"
+                                            class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                                            <div *ngIf="f.country.errors.required" i18n>Required</div>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="selectedLocation" class="col-12 col-md-6 col-lg-6">
+                                        <label class="py-0">City or State</label>
+                                        <select id="inputCity" formControlName="city_id"
+                                            [(ngModel)]="profileModel.city_id"
+                                            [ngClass]="{ 'is-invalid': submitted && f.city_id.errors }" name="city_id"
+                                            class="form-control form-rounded">
+                                            <option value="" i18n>- City/Town -</option>
+                                            <option *ngFor="let city of selectedLocation.cities" value="{{city.id}}">
+                                                {{city.name}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="submitted && f.city_id.errors"
+                                            class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                                            <div *ngIf="f.city_id.errors.required" i18n>Required</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </form>
+
+
+                </div>
+                <div class="card-footer p-0  d-none d-md-block d-lg-block d-xl-block">
+                    <button class="btn btn-sm btn-rounded btn-primary pull-right" (click)="save()">Save</button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>

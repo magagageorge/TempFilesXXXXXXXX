@@ -1,0 +1,66 @@
+<ng-container *ngIf="editProfileService.editMode.inEdit==true && editProfileService.editMode.currentEditing!=''">
+    <div class="faint-body-overlay d-block">
+
+        <div class="container-fluid" style="padding:0px;">
+            <div style="position: absolute;top:0px;bottom:0px;left:0px;right:0px;">
+                <div class="d-block h-100 w-100 m-0 p-0">
+                    <ng-container *ngIf="editProfileService.editMode.currentEditing=='profileCover'">
+                        <ng-container *ngIf="editProfileService.editMode.coverEdit.selectOptions==true">
+                            <app-shared-edit-cover-options-widget></app-shared-edit-cover-options-widget>
+                        </ng-container>
+                        <ng-container
+                            *ngIf="editProfileService.editMode.coverEdit.selectOptions==false && (editProfileService.editMode.coverEdit.selectedOption=='UploadCover' || editProfileService.editMode.coverEdit.selectedOption=='RepositionCover') && editProfileService.cover_preview_info.file!=null">
+                            <app-shared-crop-cover-widget></app-shared-crop-cover-widget>
+                        </ng-container>
+                    </ng-container>
+
+                    <ng-container *ngIf="editProfileService.editMode.currentEditing=='profileAvatar'">
+                        <ng-container *ngIf="editProfileService.editMode.avatarEdit.selectOptions==true">
+                            <app-shared-edit-avatar-options-widget></app-shared-edit-avatar-options-widget>
+                        </ng-container>
+                        <ng-container
+                            *ngIf="editProfileService.editMode.avatarEdit.selectOptions==false && (editProfileService.editMode.avatarEdit.selectedOption=='UploadAvatar' || editProfileService.editMode.avatarEdit.selectedOption=='RepositionAvatar') && editProfileService.avatar_preview_info.file!=null">
+                            <app-shared-crop-avatar-widget></app-shared-crop-avatar-widget>
+                        </ng-container>
+                    </ng-container>
+
+                    <ng-container
+                        *ngIf="editProfileService.editMode.inEdit==true && editProfileService.editMode.currentEditing=='topProfileCard'">
+                        <app-shared-profile-top-card-widget></app-shared-profile-top-card-widget>
+                    </ng-container>
+
+                    <ng-container
+                        *ngIf="editProfileService.editMode.inEdit==true && editProfileService.editMode.currentEditing=='ProfileLanguages'">
+                        <app-shared-edit-profile-languages-widget></app-shared-edit-profile-languages-widget>
+                    </ng-container>                    
+
+                    <ng-container
+                        *ngIf="editProfileService.editMode.inEdit==true && editProfileService.editMode.currentEditing=='ProfileAbout'">
+                        <app-shared-edit-profile-about-widget></app-shared-edit-profile-about-widget>
+                    </ng-container>
+
+                    <ng-container
+                        *ngIf="editProfileService.editMode.inEdit==true && editProfileService.editMode.currentEditing=='ProfileExperience'">
+                        <app-shared-edit-profile-experience-widget></app-shared-edit-profile-experience-widget>
+                    </ng-container>
+
+                    <ng-container
+                        *ngIf="editProfileService.editMode.inEdit==true && editProfileService.editMode.currentEditing=='ProfileEducation'">
+                        <app-shared-edit-profile-education-widget></app-shared-edit-profile-education-widget>
+                    </ng-container>
+
+                    <ng-container
+                        *ngIf="editProfileService.editMode.inEdit==true && editProfileService.editMode.currentEditing=='ProfileIndustries'">
+                        <app-shared-edit-profile-industries-widget></app-shared-edit-profile-industries-widget>
+                    </ng-container>
+
+                    <ng-container
+                        *ngIf="editProfileService.editMode.inEdit==true && editProfileService.editMode.currentEditing=='ProfileSkills'">
+                        <app-shared-edit-profile-skills-widget></app-shared-edit-profile-skills-widget>
+                    </ng-container>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>

@@ -1,4 +1,4 @@
-import { Injectable, Inject } from '@angular/core';
+import { Injectable, Inject, EventEmitter } from '@angular/core';
 import { PageMainCategory } from '@app/models/page/page.cagegory';
 import { PageModel, PageForm, PageSummary } from '@app/models/page/page.model';
 import { CrudService, CRUD_OPTIONS, CrudOptions } from '@app/@crud';
@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { getDeepFromObject } from '@app/@crud/helpers';
 import { SysFunctions } from '@app/libs/utilities/common-functions';
 import { NgxImageCompressService } from 'ngx-image-compress';
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -21,16 +21,18 @@ export class PageService {
   submitted: boolean;
   errors: string[];
   messages: string[];
-  model:PageForm=new PageForm();
+  model: PageForm = new PageForm();
   creating_page_onfly: boolean = false;
   pageCategories: PageMainCategory[];
   uploadingImage: boolean = false;
   processingImage: boolean = false;
   loadingImage: boolean = false;
-  loading_my_pages:boolean = false;
-  MYPAGES:PageSummary[]=[];
+  loading_my_pages: boolean = false;
+  MYPAGES: PageSummary[] = [];
+  newPageCreatedEmitter = new BehaviorSubject<PageSummary>(null);
+  
 
-  constructor(public service: CrudService, @Inject(CRUD_OPTIONS) CRUD_OPTIONS: CrudOptions,public imageCompress: NgxImageCompressService, router: Router) {
+  constructor(public service: CrudService, @Inject(CRUD_OPTIONS) CRUD_OPTIONS: CrudOptions, public imageCompress: NgxImageCompressService, router: Router) {
     this.service = service;
     this.crudconfig = CRUD_OPTIONS;
     this.router = router;
@@ -45,10 +47,10 @@ export class PageService {
   }
 
   loadMyPages() {
-    var _this=this;
-    this.loading_my_pages=true;
+    var _this = this;
+    this.loading_my_pages = true;
     this.getMyPages().subscribe(results => {
-      this.loading_my_pages=false;
+      this.loading_my_pages = false;
       this.MYPAGES = results.getResultData();
     });
   }
@@ -65,6 +67,15 @@ export class PageService {
     return this.service.getall(this.provider, params);
   }
 
+
+  setNewPageCreate(newValue:PageSummary): void {
+    this.newPageCreatedEmitter.next(newValue);
+  }
+
+  hasNewPageCreated(): Observable<PageSummary> {
+    return this.newPageCreatedEmitter.asObservable();
+  }
+
   savePage() {
     var _this = this;
     //this.uploadingImage = true;
@@ -72,18 +83,18 @@ export class PageService {
     const formData: any = new FormData();
     this.provider = this.getConfigValue('forms.update.provider');
     this.service.getProvider(this.provider).crudconfig.route_url = 'page/my-page/';
-    formData.append("name",_this.model.name);
-    formData.append("category_id",_this.model.category_id);
+    formData.append("name", _this.model.name);
+    formData.append("category_id", _this.model.category_id);
     //formData.append("name",_this.model.name);
     //formData.append("name",_this.model.name);
 
     if (_this.model.picture_preview_info.isNew == true && _this.model.picture_preview_info.file != null) {
-      formData.append("PagePictureForm[org_image]", _this.model.picture_preview_info.file,_this.model.picture_preview_info.file['name']);
+      formData.append("PagePictureForm[org_image]", _this.model.picture_preview_info.file, _this.model.picture_preview_info.file['name']);
     }
 
-    if(_this.model.croppedImage!=''){
+    if (_this.model.croppedImage != '') {
       var cropped_image = SysFunctions.DataUrlToFile(_this.model.croppedImage);
-      formData.append("PagePictureForm[image]", cropped_image,cropped_image['name']);
+      formData.append("PagePictureForm[image]", cropped_image, cropped_image['name']);
       formData.append("wh_ratio", 0);
     }
 
@@ -93,6 +104,7 @@ export class PageService {
         _this.messages = result.getMessages();
         var data = result.getResultData();
         _this.MYPAGES.push(data.page);
+        _this.setNewPageCreate(data.page);
         _this.doneCreateOnlyPage();
       } else {
         _this.errors = result.getErrors();
@@ -155,16 +167,16 @@ export class PageService {
 
   cancelCreateOnlyPage() {
     this.creating_page_onfly = false;
-    this.model=new PageForm();
+    this.model = new PageForm();
   }
 
   doneCreateOnlyPage() {
     this.creating_page_onfly = false;
-    this.model=new PageForm();
+    this.model = new PageForm();
   }
 
-  getPage(page_id:number):Observable<PageSummary>{
-    return of(this.MYPAGES.find((p:PageSummary)=>p.id==page_id));
+  getPage(page_id: number): Observable<PageSummary> {
+    return of(this.MYPAGES.find((p: PageSummary) => p.id == page_id));
   }
 
   getConfigValue(key: string): any {

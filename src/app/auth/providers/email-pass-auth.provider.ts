@@ -111,8 +111,8 @@ export class EmailPassAuthProvider extends AbstractAuthProvider {
 	    super();
 		var __this =  this;
         __this.defaultConfig = {
-            //baseEndpoint: 'http://localhost/woorbi.api/api/web/auth/',
-            baseEndpoint: 'http://app.woorbi.com/auth/',
+            baseEndpoint: 'https://196.45.144.12/app.woorbi.com/auth/',
+            //baseEndpoint: 'http://app.woorbi.com/auth/',
             login: {
                 alwaysFail: false,
                 rememberMe: true,

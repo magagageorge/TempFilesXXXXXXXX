@@ -1,0 +1,52 @@
+<ng-container *ngIf="JOBS!=null">
+    <ng-container *ngFor="let JOB of JOBS;let i=index">
+        <div class="card p-1">
+            <div class="card-body p-1">
+                <a routerLink="/{{DETAILS_ROUTE}}/{{JOB.schedule_id}}" class="d-block p-0 m-0">
+                    <div class="row mx-0">
+                        <div class="col-2 p-0">
+                            <ng-container *ngIf="JOB.page!=null && JOB.page.picture.face">
+                                <img style="max-height:50px;" src="{{JOB.page.picture.face}}"
+                                    class="img-fluid rounded-circle z-depth-0 m-0">
+                            </ng-container>
+                            <ng-container *ngIf="JOB.profile!=null && JOB.profile.avatar.face">
+                                <img style="max-height:50px;" src="{{JOB.profile.avatar.face}}"
+                                    class="img-fluid rounded-circle z-depth-0 m-0">
+                            </ng-container>
+                        </div>
+                        <div class="col-10 p-0">
+                            <div class="row mx-0 p-0">
+                                <div class="col-9 p-0">
+                                    <div class="w-100 font-weight-bold">
+                                        <ng-container *ngIf="JOB.page!=null">
+                                            {{JOB.page.name}}
+                                        </ng-container>
+                                        <ng-container *ngIf="JOB.profile!=null">
+                                            {{JOB.profile.name}}
+                                        </ng-container>
+                                    </div>
+                                    <div class="w-100">
+                                        {{JOB.fulltime}}
+                                    </div>
+                                    <div class="w-100">
+                                        {{JOB.category.name}}
+                                    </div>
+                                    <ng-container *ngIf="JOB.location!=null && JOB.location.length>0">
+                                        <div class="w-100">
+                                            {{JOB.location[0].location_name}}
+                                        </div>
+                                    </ng-container>
+                                </div>
+                                <div class="col-3 p-0">
+                                    <div class="font-weight-bold">
+                                        TZS {{JOB.fee}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </ng-container>
+</ng-container>

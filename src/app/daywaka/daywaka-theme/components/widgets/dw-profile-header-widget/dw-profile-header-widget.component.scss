@@ -1,0 +1,334 @@
+.profile-info .profile-title {
+    font-size: 110%;
+}
+
+.wf-profile-hearder .wf-profile-cover {
+    border-radius: 0px;
+}
+
+.wf-profile-cover .profile-cover-upload {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    box-shadow: 2px 0px 17px -1px rgba(161, 157, 157, 1);
+    -webkit-box-shadow: 2px 0px 17px -1px rgba(161, 157, 157, 1);
+    -moz-box-shadow: 2px 0px 17px -1px rgba(161, 157, 157, 1);
+}
+
+.wf-profile-cover .profile-cover-upload .fa {
+    font-size: 130%;
+}
+
+.wf-profile-cover .profile-cover-upload .profile-cover-text {
+    display: none;
+}
+
+.wf-profile-cover:hover .profile-cover-upload .profile-cover-text {
+    display: block;
+}
+
+.wf-profile-image-container .profile-avatar-upload {
+    position: absolute;
+    top: -5px;
+    left: 42%;
+}
+.wf-profile-image-container .profile-avatar-upload .fa {
+    font-size: 130%;
+}
+
+.wf-profile-hearder {
+    overflow: hidden;
+}
+
+.wf-profile-hearder .wf-profile-cover {
+    background-color: #a7adba;
+    overflow: hidden;
+    /* Add the blur effect */
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
+}
+
+.wf-profile-hearder .wf-profile-title-buttons {
+    background-color: #ffffff;
+    opacity: 0.6;
+    height: 40px;
+}
+
+.wf-profile-hearder .wf-profile-title-buttons .name {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    filter: none;
+    width: 100%;
+    height: 100%;
+    font-weight: bold;
+}
+
+/* 
+    ##Device = Desktops
+    ##Screen = 1281px to higher resolution desktops
+  */
+
+@media (min-width: 1281px) {
+    .wf-profile-hearder {
+        height: 200px;
+        position: relative;
+    }
+
+    .wf-profile-hearder .wf-profile-cover {
+        position: absolute;
+        height: 200px;
+        left: 0px;
+        right: 0px;
+        top: 0px;
+    }
+
+    .wf-profile-hearder .wf-profile-image-container {
+        position: absolute;
+        bottom: 10px;
+        left: 20px;
+        height: 150px;
+        width: 150px;
+    }
+
+    .wf-profile-hearder .wf-profile-title-buttons {
+        position: absolute;
+        bottom: 10px;
+        left: 175px;
+        right: 0px;
+    }
+
+    .wf-profile-hearder .wf-profile-title-buttons .name {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        font-size: 22px;
+        filter: none;
+    }
+}
+
+/* 
+      ##Device = Laptops, Desktops
+      ##Screen = B/w 1025px to 1280px
+    */
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+    .wf-profile-hearder {
+        height: 200px;
+        position: relative;
+        display: block;
+    }
+
+    .wf-profile-hearder .wf-profile-cover {
+        position: absolute;
+        height: 200px;
+        left: 0px;
+        right: 0px;
+        top: 0px;
+        background-color: #06274d;
+        overflow: hidden;
+    }
+
+    .wf-profile-hearder .wf-profile-image-container {
+        position: absolute;
+        bottom: 10px;
+        left: 20px;
+        height: 150px;
+        width: 150px;
+        display: block;
+    }
+
+    .wf-profile-hearder .wf-profile-title-buttons {
+        position: absolute;
+        bottom: 10px;
+        left: 175px;
+        right: 0px;
+        font-size: large;
+        display: block;
+    }
+
+    .wf-profile-hearder .wf-profile-title-buttons .name {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        font-size: 22px;
+        filter: none;
+    }
+}
+
+/* 
+      ##Device = Tablets, Ipads (portrait)
+      ##Screen = B/w 768px to 1024px
+    */
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .wf-profile-hearder {
+        height: 180px;
+        position: relative;
+    }
+
+    .wf-profile-hearder .wf-profile-cover {
+        position: absolute;
+        height: 180px;
+        left: 0px;
+        right: 0px;
+        top: 0px;
+    }
+
+    .wf-profile-hearder .wf-profile-image-container {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        height: 120px;
+        width: 120px;
+    }
+
+    .wf-profile-hearder .wf-profile-title-buttons {
+        position: absolute;
+        bottom: 0px;
+        left: 135px;
+        right: 0px;
+    }
+    .wf-profile-hearder .wf-profile-title-buttons .name {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        font-size: 22px;
+        filter: none;
+    }
+}
+
+/* 
+      ##Device = Tablets, Ipads (landscape)
+      ##Screen = B/w 768px to 1024px
+    */
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    .wf-profile-hearder {
+        height: 200px;
+        position: relative;
+    }
+
+    .wf-profile-hearder .wf-profile-cover {
+        position: absolute;
+        height: 160px;
+        left: 0px;
+        right: 0px;
+        top: 0px;
+    }
+
+    .wf-profile-hearder .wf-profile-image-container {
+        position: absolute;
+        bottom: 5px;
+        left: 10px;
+        height: 120px;
+        width: 120px;
+    }
+
+    .wf-profile-hearder .wf-profile-title-buttons {
+        position: absolute;
+        bottom: 0px;
+        left: 135px;
+        right: 0px;
+    }
+    .wf-profile-hearder .wf-profile-title-buttons .name {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        font-size: 22px;
+        filter: none;
+    }
+}
+
+/* 
+      ##Device = Low Resolution Tablets, Mobiles (Landscape)
+      ##Screen = B/w 481px to 767px
+    */
+
+@media (min-width: 481px) and (max-width: 767px) {
+    .wf-profile-hearder {
+        height: 160px;
+        position: relative;
+    }
+
+    .wf-profile-hearder .wf-profile-cover {
+        position: absolute;
+        height: 160px;
+        left: 0;
+        right: 0;
+        top: 0px;
+    }
+
+    .wf-profile-hearder .wf-profile-image-container {
+        position: absolute;
+        display: block;
+        top: 5px;
+        margin-left: auto;
+        margin-right: auto;
+        left: 0;
+        right: 0;
+        height: 90px;
+        width: 90px;
+    }
+
+    .wf-profile-hearder .wf-profile-title-buttons {
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+    }
+    .wf-profile-hearder .wf-profile-title-buttons .name {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 18px;
+        filter: none;
+    }
+}
+
+/* 
+      ##Device = Most of the Smartphones Mobiles (Portrait)
+      ##Screen = B/w 320px to 479px
+    */
+
+@media (min-width: 120px) and (max-width: 480px) {
+    .wf-profile-hearder {
+        height: 130px;
+        position: relative;
+    }
+
+    .wf-profile-hearder .wf-profile-cover {
+        position: absolute;
+        height: 130px;
+        left: 0;
+        right: 0;
+        top: 0px;
+    }
+
+    .wf-profile-hearder .wf-profile-image-container {
+        position: absolute;
+        display: block;
+        top: 5px;
+        margin-left: auto;
+        margin-right: auto;
+        left: 0;
+        right: 0;
+        height: 70px;
+        width: 70px;
+    }
+
+    .wf-profile-hearder .wf-profile-title-buttons {
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+    }
+
+    .wf-profile-hearder .wf-profile-title-buttons .name {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 18px;
+        filter: none;
+    }
+}

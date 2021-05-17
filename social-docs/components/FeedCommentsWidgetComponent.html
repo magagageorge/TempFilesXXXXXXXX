@@ -1,0 +1,1893 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>woorbi documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">woorbi documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li>FeedCommentsWidgetComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/theme/widgets/feed-comments-widget/feed-comments-widget.component.ts</code>
+</p>
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-feed-comments-widget</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./feed-comments-widget.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./feed-comments-widget.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#appModalService">appModalService</a>
+                            </li>
+                            <li>
+                                <a href="#comment_model">comment_model</a>
+                            </li>
+                            <li>
+                                <a href="#commentService">commentService</a>
+                            </li>
+                            <li>
+                                <a href="#container_width">container_width</a>
+                            </li>
+                            <li>
+                                <a href="#feedService">feedService</a>
+                            </li>
+                            <li>
+                                <a href="#hovercardService">hovercardService</a>
+                            </li>
+                            <li>
+                                <a href="#imageIconsService">imageIconsService</a>
+                            </li>
+                            <li>
+                                <a href="#profileService">profileService</a>
+                            </li>
+                            <li>
+                                <a href="#urlViewerService">urlViewerService</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#CastComment">CastComment</a>
+                            </li>
+                            <li>
+                                <a href="#comment">comment</a>
+                            </li>
+                            <li>
+                                <a href="#confirmDeleteComment">confirmDeleteComment</a>
+                            </li>
+                            <li>
+                                <a href="#delete">delete</a>
+                            </li>
+                            <li>
+                                <a href="#getPictureHeight">getPictureHeight</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit">ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#ReplyComment">ReplyComment</a>
+                            </li>
+                            <li>
+                                <a href="#reportCommentContent">reportCommentContent</a>
+                            </li>
+                            <li>
+                                <a href="#showPostLikes">showPostLikes</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#feed">feed</a>
+                            </li>
+                            <li>
+                                <a href="#feedComments">feedComments</a>
+                            </li>
+                            <li>
+                                <a href="#feedId">feedId</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(commentService: <a href="../injectables/CommentsService.html">CommentsService</a>, appModalService: <a href="../injectables/AppModalService.html">AppModalService</a>, feedService: <a href="../injectables/FeedService.html">FeedService</a>, urlViewerService: <a href="../injectables/UrlViewerService.html">UrlViewerService</a>, hovercardService: <a href="../injectables/HoverCardService.html">HoverCardService</a>, profileService: <a href="../injectables/ProfileService.html">ProfileService</a>, imageIconsService: <a href="../injectables/ImageIconsService.html">ImageIconsService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/theme/widgets/feed-comments-widget/feed-comments-widget.component.ts:32</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>commentService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/CommentsService.html" target="_self" >CommentsService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>appModalService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AppModalService.html" target="_self" >AppModalService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>feedService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/FeedService.html" target="_self" >FeedService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>urlViewerService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/UrlViewerService.html" target="_self" >UrlViewerService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>hovercardService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/HoverCardService.html" target="_self" >HoverCardService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>profileService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ProfileService.html" target="_self" >ProfileService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>imageIconsService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ImageIconsService.html" target="_self" >ImageIconsService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section>
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="feed"></a>
+                        <b>feed</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/Feed.html" target="_self" >Feed</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/theme/widgets/feed-comments-widget/feed-comments-widget.component.ts:22</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="feedComments"></a>
+                        <b>feedComments</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/Comment.html" target="_self" >Comment[]</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/theme/widgets/feed-comments-widget/feed-comments-widget.component.ts:23</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="feedId"></a>
+                        <b>feedId</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/theme/widgets/feed-comments-widget/feed-comments-widget.component.ts:21</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="CastComment"></a>
+                    <span class="name">
+                        <b>
+                            CastComment
+                        </b>
+                        <a href="#CastComment"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>CastComment(feedComment: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="55"
+                            class="link-to-prism">src/app/theme/widgets/feed-comments-widget/feed-comments-widget.component.ts:55</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>feedComment</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="comment"></a>
+                    <span class="name">
+                        <b>
+                            comment
+                        </b>
+                        <a href="#comment"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>comment()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="47"
+                            class="link-to-prism">src/app/theme/widgets/feed-comments-widget/feed-comments-widget.component.ts:47</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="confirmDeleteComment"></a>
+                    <span class="name">
+                        <b>
+                            confirmDeleteComment
+                        </b>
+                        <a href="#confirmDeleteComment"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>confirmDeleteComment(comment: <a href="../classes/Comment.html">Comment</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="65"
+                            class="link-to-prism">src/app/theme/widgets/feed-comments-widget/feed-comments-widget.component.ts:65</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>comment</td>
+                                    <td>
+                                                <code><a href="../classes/Comment.html" target="_self" >Comment</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="delete"></a>
+                    <span class="name">
+                        <b>
+                            delete
+                        </b>
+                        <a href="#delete"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>delete()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="49"
+                            class="link-to-prism">src/app/theme/widgets/feed-comments-widget/feed-comments-widget.component.ts:49</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getPictureHeight"></a>
+                    <span class="name">
+                        <b>
+                            getPictureHeight
+                        </b>
+                        <a href="#getPictureHeight"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getPictureHeight(width: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, height: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="59"
+                            class="link-to-prism">src/app/theme/widgets/feed-comments-widget/feed-comments-widget.component.ts:59</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>width</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>height</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <b>
+                            ngOnInit
+                        </b>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="43"
+                            class="link-to-prism">src/app/theme/widgets/feed-comments-widget/feed-comments-widget.component.ts:43</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ReplyComment"></a>
+                    <span class="name">
+                        <b>
+                            ReplyComment
+                        </b>
+                        <a href="#ReplyComment"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ReplyComment(comm: <a href="../classes/Comment.html">Comment</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="51"
+                            class="link-to-prism">src/app/theme/widgets/feed-comments-widget/feed-comments-widget.component.ts:51</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>comm</td>
+                                    <td>
+                                                <code><a href="../classes/Comment.html" target="_self" >Comment</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="reportCommentContent"></a>
+                    <span class="name">
+                        <b>
+                            reportCommentContent
+                        </b>
+                        <a href="#reportCommentContent"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>reportCommentContent(post_id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="70"
+                            class="link-to-prism">src/app/theme/widgets/feed-comments-widget/feed-comments-widget.component.ts:70</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>post_id</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showPostLikes"></a>
+                    <span class="name">
+                        <b>
+                            showPostLikes
+                        </b>
+                        <a href="#showPostLikes"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>showPostLikes(comment_id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, no_likes: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="75"
+                            class="link-to-prism">src/app/theme/widgets/feed-comments-widget/feed-comments-widget.component.ts:75</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>comment_id</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>no_likes</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="appModalService"></a>
+                        <span class="name">
+                            <b>
+                            appModalService</b>
+                            <a href="#appModalService"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../injectables/AppModalService.html" target="_self" >AppModalService</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/theme/widgets/feed-comments-widget/feed-comments-widget.component.ts:27</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="comment_model"></a>
+                        <span class="name">
+                            <b>
+                            comment_model</b>
+                            <a href="#comment_model"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../classes/Comment.html" target="_self" >Comment</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>new Comment()</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/theme/widgets/feed-comments-widget/feed-comments-widget.component.ts:29</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="commentService"></a>
+                        <span class="name">
+                            <b>
+                            commentService</b>
+                            <a href="#commentService"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../injectables/CommentsService.html" target="_self" >CommentsService</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/theme/widgets/feed-comments-widget/feed-comments-widget.component.ts:25</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="container_width"></a>
+                        <span class="name">
+                            <b>
+                            container_width</b>
+                            <a href="#container_width"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/theme/widgets/feed-comments-widget/feed-comments-widget.component.ts:24</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="feedService"></a>
+                        <span class="name">
+                            <b>
+                            feedService</b>
+                            <a href="#feedService"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../injectables/FeedService.html" target="_self" >FeedService</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/theme/widgets/feed-comments-widget/feed-comments-widget.component.ts:26</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="hovercardService"></a>
+                        <span class="name">
+                            <b>
+                            hovercardService</b>
+                            <a href="#hovercardService"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../injectables/HoverCardService.html" target="_self" >HoverCardService</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/theme/widgets/feed-comments-widget/feed-comments-widget.component.ts:28</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="imageIconsService"></a>
+                        <span class="name">
+                            <b>
+                            imageIconsService</b>
+                            <a href="#imageIconsService"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../injectables/ImageIconsService.html" target="_self" >ImageIconsService</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/theme/widgets/feed-comments-widget/feed-comments-widget.component.ts:32</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="profileService"></a>
+                        <span class="name">
+                            <b>
+                            profileService</b>
+                            <a href="#profileService"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../injectables/ProfileService.html" target="_self" >ProfileService</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/theme/widgets/feed-comments-widget/feed-comments-widget.component.ts:31</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="urlViewerService"></a>
+                        <span class="name">
+                            <b>
+                            urlViewerService</b>
+                            <a href="#urlViewerService"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../injectables/UrlViewerService.html" target="_self" >UrlViewerService</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/theme/widgets/feed-comments-widget/feed-comments-widget.component.ts:30</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Input, ElementRef, OnInit, ViewChild } from &#x27;@angular/core&#x27;;
+import { CommentsService } from &#x27;@app/services/comments.service&#x27;;
+import { FeedService } from &#x27;@app/services/feed.service&#x27;;
+import { ProfileService } from &#x27;@app/services/profile.service&#x27;;
+import { Comment } from &quot;@models/feed/comment&quot;;
+import { HoverCardService } from &#x27;@app/libs/wf-hover-card/services/hover-card.service&#x27;;
+import { UrlViewerService } from &#x27;@app/services/url-viewer.service&#x27;;
+import { Feed } from &#x27;@app/models/feed/feed&#x27;;
+import { ImageIconsService } from &#x27;@app/services/image-icons.service&#x27;;
+import { AppModalService } from &#x27;@app/services/app-modal.service&#x27;;
+import { CommentDeleteModalComponent } from &#x27;@app/theme/modals/comment-delete-modal/comment-delete-modal.component&#x27;;
+import { ReportContentModalComponent } from &#x27;@app/theme/modals/report-content-modal/report-content-modal.component&#x27;;
+import { LikesModalComponent } from &#x27;@app/theme/modals/likes-modal/likes-modal.component&#x27;;
+
+@Component({
+  selector: &#x27;app-feed-comments-widget&#x27;,
+  templateUrl: &#x27;./feed-comments-widget.component.html&#x27;,
+  styleUrls: [&#x27;./feed-comments-widget.component.scss&#x27;]
+})
+export class FeedCommentsWidgetComponent implements OnInit {
+  @Input() feedId: number;
+  @Input() feed: Feed;
+  @Input() feedComments: Comment[];
+  container_width: number;
+  commentService: CommentsService
+  feedService: FeedService;
+  appModalService: AppModalService;
+  hovercardService: HoverCardService;
+  comment_model: Comment &#x3D; new Comment();
+  urlViewerService: UrlViewerService;
+  profileService: ProfileService;
+  imageIconsService: ImageIconsService;
+  constructor(commentService: CommentsService, appModalService: AppModalService, feedService: FeedService, urlViewerService: UrlViewerService, hovercardService: HoverCardService, profileService: ProfileService, imageIconsService: ImageIconsService) {
+    this.commentService &#x3D; commentService;
+    this.feedService &#x3D; feedService;
+    this.hovercardService &#x3D; hovercardService;
+    this.urlViewerService &#x3D; urlViewerService;
+    this.profileService &#x3D; profileService;
+    this.imageIconsService &#x3D; imageIconsService;
+    this.appModalService &#x3D; appModalService;
+  }
+
+  ngOnInit() {
+    this.container_width &#x3D; (this.commentService.feedContainerWidth &gt; 170) ? 170 : this.commentService.feedContainerWidth;
+  }
+
+  comment() {
+  }
+  delete() { }
+
+  ReplyComment(comm: Comment) {
+    this.commentService.commentReply(comm);
+  }
+
+  CastComment(feedComment: any) {
+    feedComment &#x3D; feedComment as Comment;
+  }
+
+  getPictureHeight(width: number, height: number) {
+    let ratio &#x3D; width / height;
+    let new_height &#x3D; this.container_width / ratio;
+    return new_height;
+  }
+
+  confirmDeleteComment(comment: Comment) {
+    this.appModalService.modalRef &#x3D; this.appModalService._modalService.open(CommentDeleteModalComponent, { centered: true });
+    this.appModalService.modalRef.componentInstance.comment &#x3D; comment;
+  }
+
+  reportCommentContent(post_id: number) {
+    this.appModalService.modalRef &#x3D; this.appModalService._modalService.open(ReportContentModalComponent, { centered: true });
+    this.appModalService.modalRef.componentInstance.setModel(post_id, &#x27;Comment&#x27;);
+  }
+
+  showPostLikes(comment_id: number, no_likes: any) {
+    this.appModalService.modalRef &#x3D; this.appModalService._modalService.open(LikesModalComponent, { centered: true });
+    this.appModalService.modalRef.componentInstance.setModel(comment_id, &#x27;Comment&#x27;, no_likes);
+  }
+
+
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;row mx-0 px-2&quot; #feedComments_{{feedId}}&gt;
+        &lt;div *ngIf&#x3D;&quot;feed.no_comments &lt; 4 || feed.comment_mode&#x3D;&#x3D;true&quot; class&#x3D;&quot;col-12 mx-0&quot;&gt;
+                &lt;div class&#x3D;&quot;row align-top&quot;&gt;
+
+                        &lt;div class&#x3D;&quot;col-2 col-md-1 col-lg-1 d-block p-1 align-top mt-0&quot;
+                                style&#x3D;&quot;float:left;max-width: 50px;&quot;&gt;
+                                &lt;img class&#x3D;&quot;rounded-circle img-fluid w-100 py-1&quot;
+                                        src&#x3D;&quot;{{profileService.MYPROFILE.avatar.face}}&quot; alt&#x3D;&quot;&quot;&gt;
+                        &lt;/div&gt;
+                        &lt;div class&#x3D;&quot;col px-0 py-1 align-top&quot; style&#x3D;&quot;float:right;&quot;&gt;
+                                &lt;form (ngSubmit)&#x3D;&quot;commentService.comment(feed)&quot; #commentForm_feedId&#x3D;&quot;ngForm&quot;
+                                        class&#x3D;&quot;w-100 mx-0 align-top my-auto px-0 py-1&quot;
+                                        style&#x3D;&quot;position:relative;min-height:50px;&quot;&gt;
+
+                                        &lt;div class&#x3D;&quot;w-100 h-100 form-control text-break form-text form-rounded align-middle my-0&quot;
+                                                id&#x3D;&quot;feed_comment_box_{{feedId}}&quot; [(ngModel)]&#x3D;&quot;feed.comment_input_box&quot;
+                                                #ctrl&#x3D;&quot;ngModel&quot; name&#x3D;&quot;message&quot; contenteditable&#x3D;&quot;true&quot;
+                                                data-text&#x3D;&quot;Write your Comment&quot;&gt;
+                                        &lt;/div&gt;
+                                        &lt;div *ngIf&#x3D;&quot;feed.comment_image_preview&#x3D;&#x3D;null&quot;
+                                                (click)&#x3D;&quot;commentService.CommentImageUpload(feed)&quot; class&#x3D;&quot;align-middle&quot;
+                                                style&#x3D;&quot;position:absolute;top:12px;right:0px;&quot;&gt;
+                                                &lt;span class&#x3D;&quot;text-primary p-2 m-1&quot;
+                                                        style&#x3D;&quot;cursor: pointer;font-size: 120%&quot;&gt;&lt;span
+                                                                class&#x3D;&quot;fa fa-camera&quot;&gt;&lt;/span&gt;&lt;/span&gt;
+                                        &lt;/div&gt;
+                                        &lt;div class&#x3D;&quot;d-block w-100&quot;&gt;
+                                                &lt;div *ngIf&#x3D;&quot;feed.comment_image_preview!&#x3D;null&quot;
+                                                        class&#x3D;&quot;pull-left m-1 d-block post-image-preview-item&quot;
+                                                        style&#x3D;&quot;position:relative;width:100px;height:100px;&quot;&gt;
+                                                        &lt;span (click)&#x3D;&quot;commentService.RemoveCommentPreviewImage(feed)&quot;
+                                                                class&#x3D;&quot;round-btn&quot; title&#x3D;&quot;Remove&quot;
+                                                                style&#x3D;&quot;z-index:3001; width:20px;height:20px;padding:1px;cursor:pointer;position:absolute;top:-5px;right:-5px;&quot;&gt;
+                                                                &lt;span class&#x3D;&quot;fa fa-close&quot;&gt;&lt;/span&gt;
+                                                        &lt;/span&gt;
+                                                        &lt;div class&#x3D;&quot;h-100 w-100 p-0&quot; style&#x3D;&quot;overflow:hidden;&quot;&gt;
+                                                                &lt;img [src]&#x3D;&quot;feed.comment_image_preview.url&quot;
+                                                                        class&#x3D;&quot;rounded m-0&quot;
+                                                                        [class.w-100]&#x3D;&quot;feed.comment_image_preview.width&lt;&#x3D;feed.comment_image_preview.height&quot;
+                                                                        [class.h-100]&#x3D;&quot;feed.comment_image_preview.width&gt;&#x3D;feed.comment_image_preview.height&quot;&gt;
+                                                        &lt;/div&gt;
+                                                        &lt;div class&#x3D;&quot;img-preview-overlay&quot;&gt; &amp;nbsp;&lt;/div&gt;
+                                                &lt;/div&gt;
+                                        &lt;/div&gt;
+                                        &lt;div *ngIf&#x3D;&quot;(feed.comment_input_box!&#x3D;&#x27;&#x27; &amp;&amp; feed.comment_input_box!&#x3D;null) || feed.comment_image_preview!&#x3D;null&quot;
+                                                class&#x3D;&quot;input-group w-100 pull-right&quot;&gt;
+                                                &lt;button type&#x3D;&quot;submit&quot;
+                                                        class&#x3D;&quot;btn  btn-primary btn-sm p-1 text-primary pull-right mr-1&quot;&gt;
+                                                        &lt;span class&#x3D;&quot;fa fa-send&quot;&gt;&lt;/span&gt; Post
+                                                &lt;/button&gt;
+                                        &lt;/div&gt;
+                                        &lt;input class&#x3D;&quot;d-none&quot; type&#x3D;&#x27;file&#x27; name&#x3D;&quot;upload_files&quot;
+                                                (change)&#x3D;&quot;commentService.onSelectFile($event,feed)&quot;
+                                                id&#x3D;&#x27;comment_upload_input_{{feed.id}}&#x27;&gt;
+                                &lt;/form&gt;
+                        &lt;/div&gt;
+                &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div class&#x3D;&quot;d-block w-100 px-2&quot; *ngIf&#x3D;&quot;feed.loading_new_comment&quot;&gt;
+                &lt;div class&#x3D;&quot;w-100 align-middle py-2 text-center&quot;&gt; &lt;span class&#x3D;&quot;fa fa-circle-o-notch fa-spin&quot;&gt;&lt;/span&gt;
+                &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div *ngIf&#x3D;&quot;feedComments.length&quot; class&#x3D;&quot;col-12&quot;&gt;
+                &lt;div *ngFor&#x3D;&quot;let feedComment of feedComments&quot; class&#x3D;&quot;row my-1&quot;
+                        id&#x3D;&quot;comment_item_{{feedComment.object_id}}_{{feedComment.id}}&quot;&gt;
+                        &lt;div class&#x3D;&quot;col-12 px-0&quot;&gt;
+                                &lt;div *ngIf&#x3D;&quot;!feedComment.edit_mode&quot; class&#x3D;&quot;user-block&quot;&gt;
+                                        &lt;a routerLink&#x3D;&quot;/{{feedComment.profile.url}}&quot;
+                                                (mouseover)&#x3D;&quot;hovercardService.OnHover($event,feedComment.profile,&#x27;profile&#x27;)&quot;
+                                                (click)&#x3D;&quot;hovercardService.OnMouseOut($event);urlViewerService.setProfile(feedComment.profile);&quot;
+                                                (mouseleave)&#x3D;&quot;hovercardService.OnMouseOut($event)&quot;&gt;
+                                                &lt;img class&#x3D;&quot;rounded-circle img-fluid my-1&quot;
+                                                        src&#x3D;&quot;{{feedComment.profile.avatar.face}}&quot; alt&#x3D;&quot;&quot;&gt;
+                                        &lt;/a&gt;
+                                        &lt;div class&#x3D;&quot;description&quot; style&#x3D;&quot;position: relative;&quot;&gt;
+                                                &lt;div class&#x3D;&quot;d-block w-100 pl-1 font-weight-bold username&quot;&gt;&lt;a
+                                                                routerLink&#x3D;&quot;/{{feedComment.profile.url}}&quot;
+                                                                (mouseover)&#x3D;&quot;hovercardService.OnHover($event,feedComment.profile,&#x27;profile&#x27;)&quot;
+                                                                (click)&#x3D;&quot;hovercardService.OnMouseOut($event);urlViewerService.setProfile(feedComment.profile);&quot;
+                                                                (mouseleave)&#x3D;&quot;hovercardService.OnMouseOut($event)&quot;&gt;{{feedComment.profile.name}}&lt;/a&gt;
+                                                &lt;/div&gt;
+                                                &lt;div class&#x3D;&quot;d-block w-100 pl-1 short-info text-truncate&quot;
+                                                        style&#x3D;&quot;padding-right:30px;&quot;&gt;
+                                                        {{feedComment.profile.title}}
+                                                &lt;/div&gt;
+                                                &lt;div class&#x3D;&quot;comment-message d-block w-100 pl-1&quot;
+                                                        style&#x3D;&quot;padding-right:30px;&quot;&gt;
+                                                        &lt;ng-container *ngIf&#x3D;&quot;feedComment.message!&#x3D;&#x27;&#x27;&quot;&gt;
+                                                                &lt;app-show-more-text-widget class&#x3D;&quot;w-100 m-0 feed-comment-text-content&quot; [text]&#x3D;&quot;feedComment.message&quot;
+                                                                        [item_id]&#x3D;&quot;feedComment.id&quot; [min_limit]&#x3D;&quot;15&quot;
+                                                                        [max_limit]&#x3D;&quot;500&quot;
+                                                                        [show_more_url]&#x3D;&quot;null&quot;
+                                                                        [show_all]&#x3D;&quot;false&quot;&gt;
+                                                                &lt;/app-show-more-text-widget&gt;
+                                                        &lt;/ng-container&gt;
+                                                        &lt;div *ngIf&#x3D;&quot;feedComment.pictures.length&quot; class&#x3D;&quot;d-block p-0&quot;
+                                                                [ngStyle]&#x3D;&quot;{&#x27;width&#x27;:&#x27;&#x27;+container_width+&#x27;px&#x27;,&#x27;background-image&#x27;:&#x27;url(&#x27; + imageIconsService.loadingPictureImage + &#x27;)&#x27;}&quot;
+                                                                style&#x3D;&quot;background-size: 100%;background-repeat: no-repeat; &quot;&gt;
+                                                                &lt;div *ngFor&#x3D;&quot;let feed_image of feedComment.pictures&quot;
+                                                                        [ngStyle]&#x3D;&quot;{&#x27;background-image&#x27;:&#x27;url(&#x27; + feed_image.data.url + &#x27;)&#x27;,&#x27;min-height&#x27;:&#x27;&#x27;+getPictureHeight(feed_image.data.width,feed_image.data.height)+&#x27;px&#x27;}&quot;
+                                                                        class&#x3D;&quot;d-block w-100 h-100 m-0 p-0&quot;
+                                                                        style&#x3D;&quot;background-size: 100%;background-repeat: no-repeat;border-radius:5px;&quot;&gt;
+
+                                                                &lt;/div&gt;
+                                                        &lt;/div&gt;
+
+                                                        &lt;div *ngIf&#x3D;&quot;feedComment.sending!&#x3D;true&quot;
+                                                                class&#x3D;&quot;w-100 my-1 comment-stats&quot;&gt;
+                                                                &lt;span class&#x3D;&quot;font-weight-bold&quot; style&#x3D;&quot;cursor:pointer&quot;
+                                                                        *ngIf&#x3D;&quot;feedComment.i_like&#x3D;&#x3D;true&quot;
+                                                                        (click)&#x3D;&quot;commentService.commentLike(feedComment,&#x27;unlike&#x27;)&quot;
+                                                                        class&#x3D;&quot;btn-liked&quot;&gt;&lt;span
+                                                                                class&#x3D;&quot;fa fa-heart&quot;&gt;&lt;/span&gt;&lt;span&gt;&amp;nbsp;&lt;/span&gt;
+                                                                        &lt;span i18n&gt;Love&lt;/span&gt;
+                                                                &lt;/span&gt;
+                                                                &lt;span style&#x3D;&quot;cursor:pointer&quot;
+                                                                        *ngIf&#x3D;&quot;feedComment.i_like!&#x3D;true&quot;
+                                                                        (click)&#x3D;&quot;commentService.commentLike(feedComment,&#x27;like&#x27;)&quot;&gt;&lt;span
+                                                                                class&#x3D;&quot;fa fa-heart-o&quot;&gt;&lt;/span&gt;&lt;span&gt;&amp;nbsp;&lt;/span&gt;
+                                                                        &lt;span i18n&gt;Love&lt;/span&gt;
+                                                                &lt;/span&gt;
+                                                                &lt;span&gt;&amp;nbsp;&amp;nbsp;&lt;/span&gt;
+                                                                &lt;span (click)&#x3D;&quot;showPostLikes(feedComment.id,feedComment.no_likes)&quot;
+                                                                        *ngIf&#x3D;&quot;feedComment.no_likes&gt;0&quot;
+                                                                        style&#x3D;&quot;cursor:pointer&quot;&gt; {{feedComment.no_likes}}
+                                                                        &lt;span *ngIf&#x3D;&quot;feedComment.no_likes&gt;1&quot;
+                                                                                i18n&gt;Loves&lt;/span&gt;
+                                                                        &lt;span *ngIf&#x3D;&quot;feedComment.no_likes&#x3D;&#x3D;1&quot;
+                                                                                i18n&gt;Love&lt;/span&gt;
+                                                                &lt;/span&gt;
+
+                                                                &lt;span&gt;&amp;nbsp;&amp;nbsp;&lt;/span&gt;
+                                                                &lt;span class&#x3D;&quot;font-weight-bold&quot; style&#x3D;&quot;cursor:pointer&quot;
+                                                                        (click)&#x3D;&quot;commentService.setToReplyComment(feedComment)&quot;&gt;&lt;span
+                                                                                class&#x3D;&quot;fa fa-comment-o&quot;&gt;&lt;/span&gt;&lt;span&gt;&amp;nbsp;&lt;/span&gt;&lt;span
+                                                                                i18n&gt;Reply&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/span&gt;
+
+                                                                &lt;span *ngIf&#x3D;&quot;feedComment.no_replies&gt;0&quot;
+                                                                        style&#x3D;&quot;cursor:pointer&quot;&gt;
+                                                                        {{feedComment.no_replies}}
+                                                                        &lt;span *ngIf&#x3D;&quot;feedComment.no_replies&gt;1&quot;
+                                                                                i18n&gt;Replies&lt;/span&gt;&lt;span
+                                                                                *ngIf&#x3D;&quot;feedComment.no_replies&#x3D;&#x3D;1&quot;
+                                                                                i18n&gt;Reply&lt;/span&gt; &lt;/span&gt;
+
+
+                                                                &lt;span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/span&gt;
+                                                                &lt;span
+                                                                        title&#x3D;&quot;{{feedComment.updated_at.title}}&quot;&gt;{{feedComment.updated_at.date}}&lt;/span&gt;
+
+
+                                                        &lt;/div&gt;
+                                                        &lt;div *ngIf&#x3D;&quot;feedComment.sending&#x3D;&#x3D;true&quot; class&#x3D;&quot;w-100&quot;&gt;
+                                                                &lt;span class&#x3D;&quot;font-weight-bold&quot;&gt;
+                                                                        &lt;i class&#x3D;&quot;fa fa-circle-o-notch fa-spin&quot;&gt;&lt;/i&gt;
+                                                                        &lt;span&gt;&amp;nbsp;&lt;/span&gt;
+                                                                        &lt;i i18n&gt;Sending...&lt;/i&gt;&lt;/span&gt;
+                                                        &lt;/div&gt;
+                                                &lt;/div&gt;
+
+                                                &lt;div class&#x3D;&quot;d-block w-100 p-0 m-0&quot;&gt;
+                                                        &lt;div class&#x3D;&quot;d-block w-100 px-2 py-2&quot;
+                                                                *ngIf&#x3D;&quot;feedComment.no_replies &gt; feedComment.replies.length&quot;&gt;
+                                                                &lt;div (click)&#x3D;&quot;commentService.viewMoreCommentReplies(feedComment)&quot;
+                                                                        class&#x3D;&quot;wf-link color-primary &quot; i18n&gt;View
+                                                                        previous
+                                                                        replies&lt;/div&gt;
+
+                                                                &lt;div *ngIf&#x3D;&quot;feedComment.loading_replies&quot;
+                                                                        class&#x3D;&quot;w-100 align-middle py-2 text-center&quot;&gt;
+                                                                        &lt;span
+                                                                                class&#x3D;&quot;fa fa-circle-o-notch fa-spin&quot;&gt;&lt;/span&gt;
+                                                                &lt;/div&gt;
+                                                        &lt;/div&gt;
+
+                                                        &lt;app-feed-comment-replies-widget [commentId]&#x3D;&quot;feedComment.id&quot;
+                                                                [feedComment]&#x3D;&quot;feedComment&quot;
+                                                                [commentReplies]&#x3D;&quot;feedComment.replies&quot;&gt;
+                                                        &lt;/app-feed-comment-replies-widget&gt;
+
+                                                        &lt;div class&#x3D;&quot;d-block w-100 px-2&quot;
+                                                                *ngIf&#x3D;&quot;feedComment.loading_new_reply&quot;&gt;
+                                                                &lt;div class&#x3D;&quot;w-100 align-middle py-2 text-center&quot;&gt; &lt;span
+                                                                                class&#x3D;&quot;fa fa-circle-o-notch fa-spin&quot;&gt;&lt;/span&gt;
+                                                                &lt;/div&gt;
+                                                        &lt;/div&gt;
+
+                                                &lt;/div&gt;
+
+                                                &lt;div *ngIf&#x3D;&quot;feedComment.replying&quot; class&#x3D;&quot;d-block w-100 px-0&quot;&gt;
+                                                        &lt;div class&#x3D;&quot;row mx-0 px-0 align-items-top&quot;&gt;
+
+                                                                &lt;div class&#x3D;&quot;col-1 d-block d-sm-block d-lg-block p-1 align-top mt-0&quot;
+                                                                        style&#x3D;&quot;float:left;min-width: 40px;&quot;&gt;
+                                                                        &lt;img class&#x3D;&quot;rounded-circle img-fluid w-100 mx-0 align-middle my-1&quot;
+                                                                                style&#x3D;&quot;min-width: 35px;min-height:35px;&quot;
+                                                                                src&#x3D;&quot;{{profileService.MYPROFILE.avatar.face}}&quot;
+                                                                                alt&#x3D;&quot;&quot;&gt;
+                                                                &lt;/div&gt;
+                                                                &lt;div class&#x3D;&quot;col px-0 py-1&quot; style&#x3D;&quot;float:right;&quot;&gt;
+                                                                        &lt;form class&#x3D;&quot;w-100 mx-0 my-auto px-0 py-1&quot;
+                                                                                style&#x3D;&quot;position:relative;min-height:50px;&quot;&gt;
+                                                                                &lt;div class&#x3D;&quot;w-100 h-100 form-control text-break form-rounded align-middle my-0 pr-4&quot;
+                                                                                        id&#x3D;&quot;comment_reply_box_{{feedComment.object_id}}_{{feedComment.id}}&quot;
+                                                                                        [(ngModel)]&#x3D;&quot;feedComment.reply_box&quot;
+                                                                                        #ctrl&#x3D;&quot;ngModel&quot; name&#x3D;&quot;message&quot;
+                                                                                        contenteditable&#x3D;&quot;true&quot;
+                                                                                        data-text&#x3D;&quot;Add a reply&quot;&gt;
+                                                                                &lt;/div&gt;
+                                                                                &lt;div class&#x3D;&quot;d-none align-middle&quot;
+                                                                                        style&#x3D;&quot;position:absolute;top:12px;right:0px;&quot;&gt;
+                                                                                        &lt;span class&#x3D;&quot;text-primary p-2 m-1&quot;
+                                                                                                style&#x3D;&quot;cursor: pointer;font-size: 120%&quot;&gt;&lt;span
+                                                                                                        class&#x3D;&quot;fa fa-camera&quot;&gt;&lt;/span&gt;&lt;/span&gt;
+                                                                                &lt;/div&gt;
+                                                                                &lt;div
+                                                                                        class&#x3D;&quot;d-block w-100 px-1 py-0 pull-right&quot;&gt;
+                                                                                        &lt;button *ngIf&#x3D;&quot;feedComment.reply_box!&#x3D;&#x27;&#x27;&quot;
+                                                                                                (click)&#x3D;&quot;ReplyComment(feedComment)&quot;
+                                                                                                class&#x3D;&quot;btn  btn-primary btn-sm p-1 text-primary pull-left mx-0 my-2&quot;&gt;
+                                                                                                Reply&lt;/button&gt;
+                                                                                &lt;/div&gt;
+                                                                        &lt;/form&gt;
+                                                                &lt;/div&gt;
+                                                        &lt;/div&gt;
+                                                &lt;/div&gt;
+
+                                                &lt;div class&#x3D;&quot;p-0&quot; style&#x3D;&quot;position:absolute;right:0px;top:0px;&quot;&gt;
+                                                        &lt;div class&#x3D;&quot;dropdown btn-group&quot; ngbDropdown
+                                                                placement&#x3D;&quot;bottom-right&quot;&gt;
+                                                                &lt;a class&#x3D;&quot;p-1&quot; ngbDropdownToggle&gt;&lt;/a&gt;
+                                                                &lt;ul class&#x3D;&quot;dropdown-menu  dropdown-menu-left&quot;
+                                                                        ngbDropdownMenu&gt;
+                                                                        &lt;li *ngIf&#x3D;&quot;feedComment.my_comment!&#x3D;true&quot;
+                                                                                class&#x3D;&quot;dropdown-item&quot;&gt;&lt;a
+                                                                                        href&#x3D;&quot;javascript:void(0);&quot;
+                                                                                        (click)&#x3D;&quot;reportCommentContent(feedComment.id)&quot;&gt;&lt;span
+                                                                                                class&#x3D;&quot;fa fa-flag-o&quot;&gt;&lt;/span&gt;&lt;span&gt;&amp;nbsp;&lt;/span&gt;
+                                                                                        &lt;ng-container i18n&gt;Report this
+                                                                                        &lt;/ng-container&gt;
+                                                                                &lt;/a&gt;
+                                                                        &lt;/li&gt;
+                                                                        &lt;li *ngIf&#x3D;&quot;feedComment.my_comment&#x3D;&#x3D;true&quot;
+                                                                                class&#x3D;&quot;dropdown-item&quot;&gt;&lt;a
+                                                                                        href&#x3D;&quot;javascript:void(0);&quot;
+                                                                                        (click)&#x3D;&quot;commentService.setToEditComment(feedComment)&quot;&gt;&lt;span
+                                                                                                class&#x3D;&quot;fa fa-edit&quot;&gt;&lt;/span&gt;&lt;span&gt;&amp;nbsp;&lt;/span&gt;
+                                                                                        &lt;ng-container i18n&gt;Edit
+                                                                                        &lt;/ng-container&gt;
+                                                                                &lt;/a&gt;
+                                                                        &lt;/li&gt;
+                                                                        &lt;li *ngIf&#x3D;&quot;feedComment.my_comment&#x3D;&#x3D;true&quot;
+                                                                                class&#x3D;&quot;dropdown-item&quot;&gt;&lt;a
+                                                                                        href&#x3D;&quot;javascript:void(0);&quot;
+                                                                                        (click)&#x3D;&quot;appModalService.showDeleteComment(true,feedComment,null)&quot;&gt;&lt;span
+                                                                                                class&#x3D;&quot;fa fa-delete&quot;&gt;&lt;/span&gt;&lt;span&gt;&amp;nbsp;&lt;/span&gt;
+                                                                                        &lt;ng-container i18n&gt;Delete
+                                                                                        &lt;/ng-container&gt;
+                                                                                &lt;/a&gt;
+                                                                        &lt;/li&gt;
+                                                                &lt;/ul&gt;
+                                                        &lt;/div&gt;
+                                                &lt;/div&gt;
+                                        &lt;/div&gt;
+                                &lt;/div&gt;
+
+
+
+
+
+
+
+                                &lt;div *ngIf&#x3D;&quot;feedComment.edit_mode&quot; class&#x3D;&quot;col-12 mx-0&quot;&gt;
+                                        &lt;div class&#x3D;&quot;row align-top&quot;&gt;
+
+                                                &lt;div class&#x3D;&quot;col-md-1 col-lg-1 d-none d-sm-block d-lg-block p-1 align-top mt-0&quot;
+                                                        style&#x3D;&quot;float:left;max-width: 50px;&quot;&gt;
+                                                        &lt;img class&#x3D;&quot;rounded-circle img-fluid w-100 m-0&quot;
+                                                                src&#x3D;&quot;{{profileService.MYPROFILE.avatar.face}}&quot; alt&#x3D;&quot;&quot;&gt;
+                                                &lt;/div&gt;
+                                                &lt;div class&#x3D;&quot;col-xs-12 col-sm-12 col-md-11 col-lg-11 px-0 py-1 align-top&quot;
+                                                        style&#x3D;&quot;float:right;&quot;&gt;
+                                                        &lt;form (ngSubmit)&#x3D;&quot;commentService.commentEdit(feedComment)&quot;
+                                                                #commentEditForm_{{feedComment.id}}&#x3D;&quot;ngForm&quot;
+                                                                class&#x3D;&quot;w-100 mx-0 align-top my-auto px-0 py-1&quot;
+                                                                style&#x3D;&quot;position:relative;min-height:50px;&quot;&gt;
+                                                                &lt;div class&#x3D;&quot;w-100 h-100 form-control text-break form-rounded align-middle my-0&quot;
+                                                                        id&#x3D;&quot;comment_edit_box_{{feedComment.id}}&quot;
+                                                                        [(ngModel)]&#x3D;&quot;feedComment.edit_input_content&quot;
+                                                                        #ctrl&#x3D;&quot;ngModel&quot; name&#x3D;&quot;message&quot;
+                                                                        contenteditable&#x3D;&quot;true&quot;
+                                                                        data-text&#x3D;&quot;Write your Comment&quot;&gt;
+                                                                &lt;/div&gt;
+                                                                &lt;div *ngIf&#x3D;&quot;!feedComment.preview_pictures.length&quot;
+                                                                        (click)&#x3D;&quot;commentService.CommentEditImageUpload(feedComment)&quot;
+                                                                        class&#x3D;&quot;align-middle&quot;
+                                                                        style&#x3D;&quot;position:absolute;top:12px;right:0px;&quot;&gt;
+                                                                        &lt;span class&#x3D;&quot;text-primary p-2 m-1&quot;
+                                                                                style&#x3D;&quot;cursor: pointer;font-size: 120%&quot;&gt;&lt;span
+                                                                                        class&#x3D;&quot;fa fa-camera&quot;&gt;&lt;/span&gt;&lt;/span&gt;
+                                                                &lt;/div&gt;
+
+                                                                &lt;div *ngIf&#x3D;&quot;feedComment.preview_pictures.length&quot;
+                                                                        class&#x3D;&quot;d-block w-100&quot;&gt;
+                                                                        &lt;div *ngFor&#x3D;&quot;let preview of feedComment.preview_pictures&quot;
+                                                                                class&#x3D;&quot;pull-left m-1 d-block post-image-preview-item&quot;
+                                                                                style&#x3D;&quot;position:relative;width:100px;height:100px;&quot;&gt;
+                                                                                &lt;span (click)&#x3D;&quot;commentService.RemoveCommentEditPreviewImage(feedComment,preview)&quot;
+                                                                                        class&#x3D;&quot;round-btn&quot; title&#x3D;&quot;Remove&quot;
+                                                                                        style&#x3D;&quot;z-index:3001; width:20px;height:20px;padding:1px;cursor:pointer;position:absolute;top:-5px;right:-5px;&quot;&gt;
+                                                                                        &lt;span
+                                                                                                class&#x3D;&quot;fa fa-close&quot;&gt;&lt;/span&gt;
+                                                                                &lt;/span&gt;
+                                                                                &lt;div class&#x3D;&quot;h-100 w-100 p-0&quot;
+                                                                                        style&#x3D;&quot;overflow:hidden;&quot;&gt;
+                                                                                        &lt;img [src]&#x3D;&quot;preview.url&quot;
+                                                                                                class&#x3D;&quot;rounded m-0&quot;
+                                                                                                [class.w-100]&#x3D;&quot;preview.width&lt;&#x3D;preview.height&quot;
+                                                                                                [class.h-100]&#x3D;&quot;preview.width&gt;&#x3D;preview.height&quot;&gt;
+                                                                                &lt;/div&gt;
+                                                                                &lt;div class&#x3D;&quot;img-preview-overlay&quot;&gt; &amp;nbsp;
+                                                                                &lt;/div&gt;
+                                                                        &lt;/div&gt;
+                                                                &lt;/div&gt;
+
+                                                                &lt;div class&#x3D;&quot;input-group w-100 pull-right&quot;&gt;
+                                                                        &lt;button type&#x3D;&quot;submit&quot;
+                                                                                [class.disabled]&#x3D;&quot;feedComment.message&#x3D;&#x3D;feedComment.edit_input_content &amp;&amp; feedComment.pictures.length &amp;&amp; feedComment.upload_file &amp;&amp; feedComment.pictures[0].data.url&#x3D;&#x3D;feedComment.preview_pictures[0].url&quot;
+                                                                                class&#x3D;&quot;btn  btn-primary btn-sm p-1 text-primary pull-right mr-1&quot;&gt;
+                                                                                &lt;span i18n&gt;Save Changes&lt;/span&gt;&lt;/button&gt;
+                                                                        &lt;span (click)&#x3D;&quot;commentService.CancelcommentEdit(feedComment)&quot;
+                                                                                class&#x3D;&quot;btn btn-outline-default btn-sm p-1 text-primary pull-right mr-1&quot;
+                                                                                i18n&gt;
+                                                                                Cancel&lt;/span&gt;
+                                                                &lt;/div&gt;
+                                                                &lt;input class&#x3D;&quot;d-none&quot; type&#x3D;&#x27;file&#x27; name&#x3D;&quot;upload_files&quot;
+                                                                        (change)&#x3D;&quot;commentService.onSelectFileEditComment($event,feedComment)&quot;
+                                                                        id&#x3D;&#x27;comment_edit_upload_input_{{feedComment.id}}&#x27;&gt;
+                                                        &lt;/form&gt;
+                                                &lt;/div&gt;
+                                        &lt;/div&gt;
+                                &lt;/div&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+                        &lt;/div&gt;
+                &lt;/div&gt;
+        &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./feed-comments-widget.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.card-comments {
+    background: #fff !important;
+  }
+  
+  .card-footer .comment-card {
+    background-color: #fff;
+  }
+  
+  .card-comments .card-comment {
+    &amp;:first-of-type {
+      padding-top: 0;
+    }
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+    border: 1px solid red;
+  }
+  
+  .img-sm, .card-comments .card-comment img, .user-block.user-block-sm img {
+    float: left;
+    margin-left: 0px;
+    width: 30px !important;
+    height: 30px !important;
+  }
+  
+  .img-sm, .img-md, .img-lg, .card-comments .card-comment img, .user-block.user-block-sm img {
+    float: left;
+  }
+  
+
+  .card-comments {
+    .comment-text {
+      margin-left: 40px;
+      position: relative;
+    }
+    .username {
+      font-weight: 600;
+      font-size: 13px;
+    }
+    .comment-message {
+      font-weight: 100;
+      font-size: 14px;
+      padding-right: 30px;
+      position: relative;
+      width: 100%;
+      display: block;
+      /* for IE 6 */
+      img {
+        position: absolute;
+        left: 0;
+        width: 100%;
+      }
+    }
+    .username .comment-metadata {
+      position: absolute;
+      top: 0px;
+      right: 0px;
+    }
+    .comment-text .text-muted {
+      font-weight: 400;
+      font-size: 12px;
+    }
+  }
+
+  .user-block{
+    display:block;
+}
+
+  .user-block img {
+    width: 35px;
+    height: 35px;
+    float: left;
+}
+.user-block .username {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.url-tag{
+    font-size: 12px;	
+    font-weight: 100;
+    color:gray;	
+}
+
+.user-block .description {
+    font-size: 14px;
+}
+
+.user-block .description .comment-stats,.short-info{ 
+  font-size: 13px;	
+  font-weight: 500;
+  color: indigo;
+}
+
+.user-block .description, 
+.user-block .comment {
+    display: block;
+    margin-left: 38px;
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="row mx-0 px-2" #feedComments_{{feedId}}>        <div *ngIf="feed.no_comments < 4 || feed.comment_mode==true" class="col-12 mx-0">                <div class="row align-top">                        <div class="col-2 col-md-1 col-lg-1 d-block p-1 align-top mt-0"                                style="float:left;max-width: 50px;">                                <img class="rounded-circle img-fluid w-100 py-1"                                        src="{{profileService.MYPROFILE.avatar.face}}" alt="">                        </div>                        <div class="col px-0 py-1 align-top" style="float:right;">                                <form (ngSubmit)="commentService.comment(feed)" #commentForm_feedId="ngForm"                                        class="w-100 mx-0 align-top my-auto px-0 py-1"                                        style="position:relative;min-height:50px;">                                        <div class="w-100 h-100 form-control text-break form-text form-rounded align-middle my-0"                                                id="feed_comment_box_{{feedId}}" [(ngModel)]="feed.comment_input_box"                                                #ctrl="ngModel" name="message" contenteditable="true"                                                data-text="Write your Comment">                                        </div>                                        <div *ngIf="feed.comment_image_preview==null"                                                (click)="commentService.CommentImageUpload(feed)" class="align-middle"                                                style="position:absolute;top:12px;right:0px;">                                                <span class="text-primary p-2 m-1"                                                        style="cursor: pointer;font-size: 120%"><span                                                                class="fa fa-camera"></span></span>                                        </div>                                        <div class="d-block w-100">                                                <div *ngIf="feed.comment_image_preview!=null"                                                        class="pull-left m-1 d-block post-image-preview-item"                                                        style="position:relative;width:100px;height:100px;">                                                        <span (click)="commentService.RemoveCommentPreviewImage(feed)"                                                                class="round-btn" title="Remove"                                                                style="z-index:3001; width:20px;height:20px;padding:1px;cursor:pointer;position:absolute;top:-5px;right:-5px;">                                                                <span class="fa fa-close"></span>                                                        </span>                                                        <div class="h-100 w-100 p-0" style="overflow:hidden;">                                                                <img [src]="feed.comment_image_preview.url"                                                                        class="rounded m-0"                                                                        [class.w-100]="feed.comment_image_preview.width<=feed.comment_image_preview.height"                                                                        [class.h-100]="feed.comment_image_preview.width>=feed.comment_image_preview.height">                                                        </div>                                                        <div class="img-preview-overlay"> &nbsp;</div>                                                </div>                                        </div>                                        <div *ngIf="(feed.comment_input_box!=\'\' && feed.comment_input_box!=null) || feed.comment_image_preview!=null"                                                class="input-group w-100 pull-right">                                                <button type="submit"                                                        class="btn  btn-primary btn-sm p-1 text-primary pull-right mr-1">                                                        <span class="fa fa-send"></span> Post                                                </button>                                        </div>                                        <input class="d-none" type=\'file\' name="upload_files"                                                (change)="commentService.onSelectFile($event,feed)"                                                id=\'comment_upload_input_{{feed.id}}\'>                                </form>                        </div>                </div>        </div>        <div class="d-block w-100 px-2" *ngIf="feed.loading_new_comment">                <div class="w-100 align-middle py-2 text-center"> <span class="fa fa-circle-o-notch fa-spin"></span>                </div>        </div>        <div *ngIf="feedComments.length" class="col-12">                <div *ngFor="let feedComment of feedComments" class="row my-1"                        id="comment_item_{{feedComment.object_id}}_{{feedComment.id}}">                        <div class="col-12 px-0">                                <div *ngIf="!feedComment.edit_mode" class="user-block">                                        <a routerLink="/{{feedComment.profile.url}}"                                                (mouseover)="hovercardService.OnHover($event,feedComment.profile,\'profile\')"                                                (click)="hovercardService.OnMouseOut($event);urlViewerService.setProfile(feedComment.profile);"                                                (mouseleave)="hovercardService.OnMouseOut($event)">                                                <img class="rounded-circle img-fluid my-1"                                                        src="{{feedComment.profile.avatar.face}}" alt="">                                        </a>                                        <div class="description" style="position: relative;">                                                <div class="d-block w-100 pl-1 font-weight-bold username"><a                                                                routerLink="/{{feedComment.profile.url}}"                                                                (mouseover)="hovercardService.OnHover($event,feedComment.profile,\'profile\')"                                                                (click)="hovercardService.OnMouseOut($event);urlViewerService.setProfile(feedComment.profile);"                                                                (mouseleave)="hovercardService.OnMouseOut($event)">{{feedComment.profile.name}}</a>                                                </div>                                                <div class="d-block w-100 pl-1 short-info text-truncate"                                                        style="padding-right:30px;">                                                        {{feedComment.profile.title}}                                                </div>                                                <div class="comment-message d-block w-100 pl-1"                                                        style="padding-right:30px;">                                                        <ng-container *ngIf="feedComment.message!=\'\'">                                                                <app-show-more-text-widget class="w-100 m-0 feed-comment-text-content" [text]="feedComment.message"                                                                        [item_id]="feedComment.id" [min_limit]="15"                                                                        [max_limit]="500"                                                                        [show_more_url]="null"                                                                        [show_all]="false">                                                                </app-show-more-text-widget>                                                        </ng-container>                                                        <div *ngIf="feedComment.pictures.length" class="d-block p-0"                                                                [ngStyle]="{\'width\':\'\'+container_width+\'px\',\'background-image\':\'url(\' + imageIconsService.loadingPictureImage + \')\'}"                                                                style="background-size: 100%;background-repeat: no-repeat; ">                                                                <div *ngFor="let feed_image of feedComment.pictures"                                                                        [ngStyle]="{\'background-image\':\'url(\' + feed_image.data.url + \')\',\'min-height\':\'\'+getPictureHeight(feed_image.data.width,feed_image.data.height)+\'px\'}"                                                                        class="d-block w-100 h-100 m-0 p-0"                                                                        style="background-size: 100%;background-repeat: no-repeat;border-radius:5px;">                                                                </div>                                                        </div>                                                        <div *ngIf="feedComment.sending!=true"                                                                class="w-100 my-1 comment-stats">                                                                <span class="font-weight-bold" style="cursor:pointer"                                                                        *ngIf="feedComment.i_like==true"                                                                        (click)="commentService.commentLike(feedComment,\'unlike\')"                                                                        class="btn-liked"><span                                                                                class="fa fa-heart"></span><span>&nbsp;</span>                                                                        <span i18n>Love</span>                                                                </span>                                                                <span style="cursor:pointer"                                                                        *ngIf="feedComment.i_like!=true"                                                                        (click)="commentService.commentLike(feedComment,\'like\')"><span                                                                                class="fa fa-heart-o"></span><span>&nbsp;</span>                                                                        <span i18n>Love</span>                                                                </span>                                                                <span>&nbsp;&nbsp;</span>                                                                <span (click)="showPostLikes(feedComment.id,feedComment.no_likes)"                                                                        *ngIf="feedComment.no_likes>0"                                                                        style="cursor:pointer"> {{feedComment.no_likes}}                                                                        <span *ngIf="feedComment.no_likes>1"                                                                                i18n>Loves</span>                                                                        <span *ngIf="feedComment.no_likes==1"                                                                                i18n>Love</span>                                                                </span>                                                                <span>&nbsp;&nbsp;</span>                                                                <span class="font-weight-bold" style="cursor:pointer"                                                                        (click)="commentService.setToReplyComment(feedComment)"><span                                                                                class="fa fa-comment-o"></span><span>&nbsp;</span><span                                                                                i18n>Reply</span></span><span>&nbsp;&nbsp;&nbsp;</span>                                                                <span *ngIf="feedComment.no_replies>0"                                                                        style="cursor:pointer">                                                                        {{feedComment.no_replies}}                                                                        <span *ngIf="feedComment.no_replies>1"                                                                                i18n>Replies</span><span                                                                                *ngIf="feedComment.no_replies==1"                                                                                i18n>Reply</span> </span>                                                                <span>&nbsp;&nbsp;&nbsp;</span>                                                                <span                                                                        title="{{feedComment.updated_at.title}}">{{feedComment.updated_at.date}}</span>                                                        </div>                                                        <div *ngIf="feedComment.sending==true" class="w-100">                                                                <span class="font-weight-bold">                                                                        <i class="fa fa-circle-o-notch fa-spin"></i>                                                                        <span>&nbsp;</span>                                                                        <i i18n>Sending...</i></span>                                                        </div>                                                </div>                                                <div class="d-block w-100 p-0 m-0">                                                        <div class="d-block w-100 px-2 py-2"                                                                *ngIf="feedComment.no_replies > feedComment.replies.length">                                                                <div (click)="commentService.viewMoreCommentReplies(feedComment)"                                                                        class="wf-link color-primary " i18n>View                                                                        previous                                                                        replies</div>                                                                <div *ngIf="feedComment.loading_replies"                                                                        class="w-100 align-middle py-2 text-center">                                                                        <span                                                                                class="fa fa-circle-o-notch fa-spin"></span>                                                                </div>                                                        </div>                                                        <app-feed-comment-replies-widget [commentId]="feedComment.id"                                                                [feedComment]="feedComment"                                                                [commentReplies]="feedComment.replies">                                                        </app-feed-comment-replies-widget>                                                        <div class="d-block w-100 px-2"                                                                *ngIf="feedComment.loading_new_reply">                                                                <div class="w-100 align-middle py-2 text-center"> <span                                                                                class="fa fa-circle-o-notch fa-spin"></span>                                                                </div>                                                        </div>                                                </div>                                                <div *ngIf="feedComment.replying" class="d-block w-100 px-0">                                                        <div class="row mx-0 px-0 align-items-top">                                                                <div class="col-1 d-block d-sm-block d-lg-block p-1 align-top mt-0"                                                                        style="float:left;min-width: 40px;">                                                                        <img class="rounded-circle img-fluid w-100 mx-0 align-middle my-1"                                                                                style="min-width: 35px;min-height:35px;"                                                                                src="{{profileService.MYPROFILE.avatar.face}}"                                                                                alt="">                                                                </div>                                                                <div class="col px-0 py-1" style="float:right;">                                                                        <form class="w-100 mx-0 my-auto px-0 py-1"                                                                                style="position:relative;min-height:50px;">                                                                                <div class="w-100 h-100 form-control text-break form-rounded align-middle my-0 pr-4"                                                                                        id="comment_reply_box_{{feedComment.object_id}}_{{feedComment.id}}"                                                                                        [(ngModel)]="feedComment.reply_box"                                                                                        #ctrl="ngModel" name="message"                                                                                        contenteditable="true"                                                                                        data-text="Add a reply">                                                                                </div>                                                                                <div class="d-none align-middle"                                                                                        style="position:absolute;top:12px;right:0px;">                                                                                        <span class="text-primary p-2 m-1"                                                                                                style="cursor: pointer;font-size: 120%"><span                                                                                                        class="fa fa-camera"></span></span>                                                                                </div>                                                                                <div                                                                                        class="d-block w-100 px-1 py-0 pull-right">                                                                                        <button *ngIf="feedComment.reply_box!=\'\'"                                                                                                (click)="ReplyComment(feedComment)"                                                                                                class="btn  btn-primary btn-sm p-1 text-primary pull-left mx-0 my-2">                                                                                                Reply</button>                                                                                </div>                                                                        </form>                                                                </div>                                                        </div>                                                </div>                                                <div class="p-0" style="position:absolute;right:0px;top:0px;">                                                        <div class="dropdown btn-group" ngbDropdown                                                                placement="bottom-right">                                                                <a class="p-1" ngbDropdownToggle></a>                                                                <ul class="dropdown-menu  dropdown-menu-left"                                                                        ngbDropdownMenu>                                                                        <li *ngIf="feedComment.my_comment!=true"                                                                                class="dropdown-item"><a                                                                                        href="javascript:void(0);"                                                                                        (click)="reportCommentContent(feedComment.id)"><span                                                                                                class="fa fa-flag-o"></span><span>&nbsp;</span>                                                                                        <ng-container i18n>Report this                                                                                        </ng-container>                                                                                </a>                                                                        </li>                                                                        <li *ngIf="feedComment.my_comment==true"                                                                                class="dropdown-item"><a                                                                                        href="javascript:void(0);"                                                                                        (click)="commentService.setToEditComment(feedComment)"><span                                                                                                class="fa fa-edit"></span><span>&nbsp;</span>                                                                                        <ng-container i18n>Edit                                                                                        </ng-container>                                                                                </a>                                                                        </li>                                                                        <li *ngIf="feedComment.my_comment==true"                                                                                class="dropdown-item"><a                                                                                        href="javascript:void(0);"                                                                                        (click)="appModalService.showDeleteComment(true,feedComment,null)"><span                                                                                                class="fa fa-delete"></span><span>&nbsp;</span>                                                                                        <ng-container i18n>Delete                                                                                        </ng-container>                                                                                </a>                                                                        </li>                                                                </ul>                                                        </div>                                                </div>                                        </div>                                </div>                                <div *ngIf="feedComment.edit_mode" class="col-12 mx-0">                                        <div class="row align-top">                                                <div class="col-md-1 col-lg-1 d-none d-sm-block d-lg-block p-1 align-top mt-0"                                                        style="float:left;max-width: 50px;">                                                        <img class="rounded-circle img-fluid w-100 m-0"                                                                src="{{profileService.MYPROFILE.avatar.face}}" alt="">                                                </div>                                                <div class="col-xs-12 col-sm-12 col-md-11 col-lg-11 px-0 py-1 align-top"                                                        style="float:right;">                                                        <form (ngSubmit)="commentService.commentEdit(feedComment)"                                                                #commentEditForm_{{feedComment.id}}="ngForm"                                                                class="w-100 mx-0 align-top my-auto px-0 py-1"                                                                style="position:relative;min-height:50px;">                                                                <div class="w-100 h-100 form-control text-break form-rounded align-middle my-0"                                                                        id="comment_edit_box_{{feedComment.id}}"                                                                        [(ngModel)]="feedComment.edit_input_content"                                                                        #ctrl="ngModel" name="message"                                                                        contenteditable="true"                                                                        data-text="Write your Comment">                                                                </div>                                                                <div *ngIf="!feedComment.preview_pictures.length"                                                                        (click)="commentService.CommentEditImageUpload(feedComment)"                                                                        class="align-middle"                                                                        style="position:absolute;top:12px;right:0px;">                                                                        <span class="text-primary p-2 m-1"                                                                                style="cursor: pointer;font-size: 120%"><span                                                                                        class="fa fa-camera"></span></span>                                                                </div>                                                                <div *ngIf="feedComment.preview_pictures.length"                                                                        class="d-block w-100">                                                                        <div *ngFor="let preview of feedComment.preview_pictures"                                                                                class="pull-left m-1 d-block post-image-preview-item"                                                                                style="position:relative;width:100px;height:100px;">                                                                                <span (click)="commentService.RemoveCommentEditPreviewImage(feedComment,preview)"                                                                                        class="round-btn" title="Remove"                                                                                        style="z-index:3001; width:20px;height:20px;padding:1px;cursor:pointer;position:absolute;top:-5px;right:-5px;">                                                                                        <span                                                                                                class="fa fa-close"></span>                                                                                </span>                                                                                <div class="h-100 w-100 p-0"                                                                                        style="overflow:hidden;">                                                                                        <img [src]="preview.url"                                                                                                class="rounded m-0"                                                                                                [class.w-100]="preview.width<=preview.height"                                                                                                [class.h-100]="preview.width>=preview.height">                                                                                </div>                                                                                <div class="img-preview-overlay"> &nbsp;                                                                                </div>                                                                        </div>                                                                </div>                                                                <div class="input-group w-100 pull-right">                                                                        <button type="submit"                                                                                [class.disabled]="feedComment.message==feedComment.edit_input_content && feedComment.pictures.length && feedComment.upload_file && feedComment.pictures[0].data.url==feedComment.preview_pictures[0].url"                                                                                class="btn  btn-primary btn-sm p-1 text-primary pull-right mr-1">                                                                                <span i18n>Save Changes</span></button>                                                                        <span (click)="commentService.CancelcommentEdit(feedComment)"                                                                                class="btn btn-outline-default btn-sm p-1 text-primary pull-right mr-1"                                                                                i18n>                                                                                Cancel</span>                                                                </div>                                                                <input class="d-none" type=\'file\' name="upload_files"                                                                        (change)="commentService.onSelectFileEditComment($event,feedComment)"                                                                        id=\'comment_edit_upload_input_{{feedComment.id}}\'>                                                        </form>                                                </div>                                        </div>                                </div>                        </div>                </div>        </div></div></div>'
+    var COMPONENTS = [{'name': 'AboutComponent', 'selector': 'app-about'},{'name': 'AboutPageComponent', 'selector': 'app-about-page'},{'name': 'AccountComponent', 'selector': 'app-account'},{'name': 'AccountsComponent', 'selector': 'app-accounts'},{'name': 'AdContentFormWidgetComponent', 'selector': 'app-ad-content-form-widget'},{'name': 'AddProfilePhotoAlertWidgetComponent', 'selector': 'app-add-profile-photo-alert-widget'},{'name': 'AdPostCatalogWidgetComponent', 'selector': 'app-ad-post-catalog-widget'},{'name': 'AdPostPreviewWidgetComponent', 'selector': 'app-ad-post-preview-widget'},{'name': 'AdPreviewWidgetComponent', 'selector': 'app-ad-preview-widget'},{'name': 'AdsComponent', 'selector': 'app-ads'},{'name': 'AdsMainContentComponent', 'selector': 'app-ads-main-content'},{'name': 'AdsManagerComponent', 'selector': 'app-ads-manager'},{'name': 'AdsNavBarComponent', 'selector': 'app-ads-nav-bar'},{'name': 'AdsNavTabsWidgetComponent', 'selector': 'app-ads-nav-tabs-widget'},{'name': 'AdsProcessingRequestOverlayComponent', 'selector': 'app-ads-processing-request-overlay'},{'name': 'AdTextPreviewWidgetComponent', 'selector': 'app-ad-text-preview-widget'},{'name': 'AdTextRightColumnViewComponent', 'selector': 'app-ad-text-right-column-view'},{'name': 'AdTextTopBannerSmallViewComponent', 'selector': 'app-ad-text-top-banner-small-view'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AuthChangePasswordComponent', 'selector': 'app-auth-change-password'},{'name': 'AuthLoginComponent', 'selector': 'app-auth-login'},{'name': 'AuthLogoutComponent', 'selector': 'app-auth-logout'},{'name': 'AuthRegisterComponent', 'selector': 'app-auth-register'},{'name': 'AuthRequestPasswordComponent', 'selector': 'app-auth-request-password'},{'name': 'AuthResetPasswordComponent', 'selector': 'app-auth-reset-password'},{'name': 'ChatFormWidgetComponent', 'selector': 'app-chat-form-widget'},{'name': 'ChatRoomsMobileHeadWidgetComponent', 'selector': 'app-chat-rooms-mobile-head-widget'},{'name': 'ChatRoomsRoomWidgetComponent', 'selector': 'app-chat-rooms-room-widget'},{'name': 'ChatRoomsWidgetComponent', 'selector': 'app-chat-rooms-widget'},{'name': 'ChatSearchPeopleWidgetComponent', 'selector': 'app-chat-search-people-widget'},{'name': 'ChatThreadHeadWidgetComponent', 'selector': 'app-chat-thread-head-widget'},{'name': 'ChatThreadMobileHeadWidgetComponent', 'selector': 'app-chat-thread-mobile-head-widget'},{'name': 'ChatThreadWidgetComponent', 'selector': 'app-chat-thread-widget'},{'name': 'CommentDeleteModalComponent', 'selector': 'app-comment-delete-modal'},{'name': 'CommentReplyDeleteModalComponent', 'selector': 'app-comment-reply-delete-modal'},{'name': 'ConfirmDeleteContentModalComponent', 'selector': 'app-confirm-delete-content-modal'},{'name': 'ConnectComponent', 'selector': 'app-connect'},{'name': 'ConnectionsComponent', 'selector': 'app-connections'},{'name': 'ConnectionsComponent', 'selector': 'app-connections'},{'name': 'ContactsComponent', 'selector': 'app-contacts'},{'name': 'ContactWidgetComponent', 'selector': 'app-contact-widget'},{'name': 'CreateAdAccountFormModalComponent', 'selector': 'app-create-ad-account-form-modal'},{'name': 'CreateComponent', 'selector': 'app-create'},{'name': 'CreatePageModalComponent', 'selector': 'app-create-page-modal'},{'name': 'CreatePagePostButtonsWidgetsComponent', 'selector': 'app-create-page-post-buttons-widgets'},{'name': 'CropAvatarWidgetComponent', 'selector': 'app-crop-avatar-widget'},{'name': 'CropCoverWidgetComponent', 'selector': 'app-crop-cover-widget'},{'name': 'CropPageCoverWidgetComponent', 'selector': 'app-crop-page-cover-widget'},{'name': 'CropPagePictureWidgetComponent', 'selector': 'app-crop-page-picture-widget'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DaywakaComponent', 'selector': 'app-daywaka'},{'name': 'DeleteCommentModalComponent', 'selector': 'app-delete-comment-modal'},{'name': 'DeleteConnectionModalComponent', 'selector': 'app-delete-connection-modal'},{'name': 'DeletePostModalComponent', 'selector': 'app-delete-post-modal'},{'name': 'DeleteProfileEducationWidgetComponent', 'selector': 'app-delete-profile-education-widget'},{'name': 'DeleteProfileExperienceWidgetComponent', 'selector': 'app-delete-profile-experience-widget'},{'name': 'DeleteProfileOverlayContainerComponent', 'selector': 'app-delete-profile-overlay-container'},{'name': 'DwAcceptJobModalComponent', 'selector': 'app-dw-accept-job-modal'},{'name': 'DwBusinessComponent', 'selector': 'app-dw-business-page'},{'name': 'DwBusinessContentRouterComponent', 'selector': 'app-dw-business-content-router'},{'name': 'DwBusinessJobsComponent', 'selector': 'app-dw-business-jobs'},{'name': 'DwBusinessTopMenuWidgetComponent', 'selector': 'app-dw-business-top-menu-widget'},{'name': 'DwBussinesJobsWidgetComponent', 'selector': 'app-dw-bussines-jobs-widget'},{'name': 'DwBussinessDashboardComponent', 'selector': 'app-dw-bussiness-dashboard'},{'name': 'DwCreateBusinessJobComponent', 'selector': 'app-dw-create-business-job'},{'name': 'DwCreatePageModalComponent', 'selector': 'app-dw-create-page-modal'},{'name': 'DwEditBusinessJobComponent', 'selector': 'app-dw-edit-business-job'},{'name': 'DwEditJobPreferencesWidgetComponent', 'selector': 'app-dw-edit-job-preferences-widget'},{'name': 'DwEditProfileOverlayContainerModalComponent', 'selector': 'app-dw-edit-profile-overlay-container-modal'},{'name': 'DwEmployerProfileViewerModalComponent', 'selector': 'app-dw-employer-profile-viewer-modal'},{'name': 'DwFindWorkComponent', 'selector': 'app-dw-find-work'},{'name': 'DwFindWorkersComponent', 'selector': 'app-dw-find-workers'},{'name': 'DwFooterComponent', 'selector': 'app-dw-footer'},{'name': 'DwJobsComponent', 'selector': 'app-dw-jobs'},{'name': 'DwJobsContentContainerComponent', 'selector': 'app-dw-jobs-content-container'},{'name': 'DwMainContentContainerComponent', 'selector': 'app-dw-main-content-container'},{'name': 'DwNavBarComponent', 'selector': 'app-dw-nav-bar'},{'name': 'DwOverlayModalContainerComponent', 'selector': 'app-dw-overlay-modal-container'},{'name': 'DwPageManagerContentContainerComponent', 'selector': 'app-dw-page-manager-content-container'},{'name': 'DwPageManagerLeftMenuComponent', 'selector': 'app-dw-page-manager-left-menu'},{'name': 'DwProfileHeaderWidgetComponent', 'selector': 'app-dw-profile-header-widget'},{'name': 'DwProfileLeftMenuWidgetComponent', 'selector': 'app-dw-profile-left-menu-widget'},{'name': 'DwProfileNavBarComponent', 'selector': 'app-dw-profile-nav-bar'},{'name': 'DwViewBusinessJobComponent', 'selector': 'app-dw-view-business-job'},{'name': 'DwViewerComponent', 'selector': 'app-dw-viewer'},{'name': 'DwWelcomePageComponent', 'selector': 'app-dw-welcome-page'},{'name': 'EditAvatarOptionsWidgetComponent', 'selector': 'app-edit-avatar-options-widget'},{'name': 'EditCompaignAdComponent', 'selector': 'app-edit-compaign-ad'},{'name': 'EditCompaignLeftComponent', 'selector': 'app-edit-compaign-left'},{'name': 'EditComponent', 'selector': 'app-edit'},{'name': 'EditComponent', 'selector': 'app-edit'},{'name': 'EditCoverOptionsWidgetComponent', 'selector': 'app-edit-cover-options-widget'},{'name': 'EditPageCoverOptionsWidgetComponent', 'selector': 'app-edit-page-cover-options-widget'},{'name': 'EditPageInfoWidgetComponent', 'selector': 'app-edit-page-info-widget'},{'name': 'EditPageOverlayContainerComponent', 'selector': 'app-edit-page-overlay-container'},{'name': 'EditPagePictureOptionsWidgetComponent', 'selector': 'app-edit-page-picture-options-widget'},{'name': 'EditProfileAboutWidgetComponent', 'selector': 'app-edit-profile-about-widget'},{'name': 'EditProfileEducationWidgetComponent', 'selector': 'app-edit-profile-education-widget'},{'name': 'EditProfileExperienceWidgetComponent', 'selector': 'app-edit-profile-experience-widget'},{'name': 'EditProfileIndustriesWidgetComponent', 'selector': 'app-edit-profile-industries-widget'},{'name': 'EditProfileOverlayContainerComponent', 'selector': 'app-edit-profile-overlay-container'},{'name': 'EditProfileSkillsWidgetComponent', 'selector': 'app-edit-profile-skills-widget'},{'name': 'EmployerProfileViewerComponent', 'selector': 'app-dw-employer-profile-viewer'},{'name': 'FaintBodyOverlayComponent', 'selector': 'app-faint-body-overlay'},{'name': 'FeedCommentRepliesWidgetComponent', 'selector': 'app-feed-comment-replies-widget'},{'name': 'FeedCommentsWidgetComponent', 'selector': 'app-feed-comments-widget'},{'name': 'FeedComponent', 'selector': 'app-feed'},{'name': 'FeedImagesOverlayViewComponent', 'selector': 'app-feed-images-overlay-view'},{'name': 'FeedImageViewWidgetComponent', 'selector': 'app-feed-image-view-widget'},{'name': 'FeedPostImageViewComponent', 'selector': 'app-feed-post-image-view'},{'name': 'FeedWidgetComponent', 'selector': 'app-feed-widget'},{'name': 'FirstJobComponent', 'selector': 'app-first-job'},{'name': 'FoldingCubeComponent', 'selector': 'app-folding-cube'},{'name': 'FoldingCubeSharedComponent', 'selector': 'app-shared-folding-cube'},{'name': 'ForSeekBusWidgetComponent', 'selector': 'app-for-seek-bus-widget'},{'name': 'HomePageComponent', 'selector': 'app-home-page'},{'name': 'HoverCardComponent', 'selector': 'app-hover-card'},{'name': 'HoverCardContainerComponent', 'selector': 'app-hover-card-container'},{'name': 'HowItWorksEmployerWidgetComponent', 'selector': 'app-how-it-works-employer-widget'},{'name': 'HowItWorksSeekerWidgetComponent', 'selector': 'app-how-it-works-seeker-widget'},{'name': 'ImageCropperComponent', 'selector': 'image-cropper'},{'name': 'ImportComponent', 'selector': 'app-import'},{'name': 'InPageContentModalComponent', 'selector': 'app-in-page-content-modal'},{'name': 'InvitationsComponent', 'selector': 'app-invitations'},{'name': 'InviteComponent', 'selector': 'app-invite'},{'name': 'InviteNavWidgetComponent', 'selector': 'app-invite-nav-widget'},{'name': 'JobDetailsComponent', 'selector': 'app-job-details'},{'name': 'JobDetailsHeaderWidgetComponent', 'selector': 'app-job-details-header-widget'},{'name': 'JobsByListWidgetComponent', 'selector': 'app-jobs-by-list-widget'},{'name': 'JobsByMapWidgetComponent', 'selector': 'app-jobs-by-map-widget'},{'name': 'JoinComponent', 'selector': 'app-join'},{'name': 'LikesModalComponent', 'selector': 'app-likes-modal'},{'name': 'LinkPreviewWidgetComponent', 'selector': 'app-link-preview-widget'},{'name': 'LoadingBarsComponent', 'selector': 'app-loading-bars'},{'name': 'LoadingBarsSharedComponent', 'selector': 'app-shared-loading-bars'},{'name': 'LoadingCirclesComponent', 'selector': 'app-loading-circles'},{'name': 'LoadingCirclesSharedComponent', 'selector': 'app-shared-loading-circles'},{'name': 'LoadingNewPostWidgetComponent', 'selector': 'app-loading-new-post-widget'},{'name': 'LoadingPostWidgetComponent', 'selector': 'app-loading-post-widget'},{'name': 'LoadSubmitProcessDataModalComponent', 'selector': 'app-load-submit-process-data-modal'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LogoutComponent', 'selector': 'app-logout'},{'name': 'MessageImageModalViewComponent', 'selector': 'app-message-image-modal-view'},{'name': 'MessageImagesWidgetComponent', 'selector': 'app-message-images-widget'},{'name': 'MessageImageViewWidgetComponent', 'selector': 'app-message-image-view-widget'},{'name': 'MessageLinkViewWidgetComponent', 'selector': 'app-message-link-view-widget'},{'name': 'MessagesComponent', 'selector': 'app-messages'},{'name': 'MobileSearchFormWidgetComponent', 'selector': 'app-mobile-search-form-widget'},{'name': 'MutualConnectionsWidgetComponent', 'selector': 'app-mutual-connections-widget'},{'name': 'MyJobsComponent', 'selector': 'app-my-jobs'},{'name': 'MynetworkComponent', 'selector': 'app-mynetwork'},{'name': 'MyPagesComponent', 'selector': 'app-my-pages'},{'name': 'MyPagesListWidgetComponent', 'selector': 'app-my-pages-list-widget'},{'name': 'MyprofileComponent', 'selector': 'app-myprofile'},{'name': 'NavigationWatchComponent', 'selector': 'app-navigation-watch'},{'name': 'NearByJobsComponent', 'selector': 'app-near-by-jobs'},{'name': 'NetworkLeftWidgetComponent', 'selector': 'app-network-left-widget'},{'name': 'NetworkNavWidgetComponent', 'selector': 'app-network-nav-widget'},{'name': 'NewComponent', 'selector': 'app-new'},{'name': 'NgbdDatepickerAdapter', 'selector': 'ngbd-datepicker'},{'name': 'NotificationsComponent', 'selector': 'app-notifications'},{'name': 'NotificationsComponent', 'selector': 'app-notifications'},{'name': 'NotificationsLeftWidgetComponent', 'selector': 'app-notifications-left-widget'},{'name': 'NotificationWidgetComponent', 'selector': 'app-notification-widget'},{'name': 'OverlayContentModalComponent', 'selector': 'app-overlay-content-modal'},{'name': 'OverlayLoadSubmitProcessDataWidgetComponent', 'selector': 'app-overlay-load-submit-process-data-widget'},{'name': 'OverlayModalContainerComponent', 'selector': 'app-overlay-modal-container'},{'name': 'OverlayPostViewWidgetComponent', 'selector': 'app-overlay-post-view-widget'},{'name': 'PageAboutWidgetComponent', 'selector': 'app-page-about-widget'},{'name': 'PageActionsButtonsWidgetComponent', 'selector': 'app-page-actions-buttons-widget'},{'name': 'PageAdminsComponent', 'selector': 'app-page-admins'},{'name': 'PageCardComponent', 'selector': 'app-page-card'},{'name': 'PageComponent', 'selector': 'app-page'},{'name': 'PageFeedWidgetComponent', 'selector': 'app-page-feed-widget'},{'name': 'PageHeaderComponent', 'selector': 'app-page-header'},{'name': 'PageImagesOverlayViewComponent', 'selector': 'app-page-images-overlay-view'},{'name': 'PageListCardWidgetComponent', 'selector': 'app-page-list-card-widget'},{'name': 'PageManagerLeftMenuWidgetComponent', 'selector': 'app-page-manager-left-menu-widget'},{'name': 'PageManagerTopMenuWidgetComponent', 'selector': 'app-page-manager-top-menu-widget'},{'name': 'PageNavWidgetComponent', 'selector': 'app-page-nav-widget'},{'name': 'PageNotificationWidgetComponent', 'selector': 'app-page-notification-widget'},{'name': 'PagePhotosSummaryWidgetComponent', 'selector': 'app-page-photos-summary-widget'},{'name': 'PagePhotosWidgetComponent', 'selector': 'app-page-photos-widget'},{'name': 'PagesComponent', 'selector': 'app-pages'},{'name': 'PageTitleWidgetComponent', 'selector': 'app-page-title-widget'},{'name': 'PasswordComponent', 'selector': 'app-password'},{'name': 'PeopleComponent', 'selector': 'app-people'},{'name': 'PeopleWidgetComponent', 'selector': 'app-people-widget'},{'name': 'PersonalInfoComponent', 'selector': 'app-personal-info'},{'name': 'PhotosComponent', 'selector': 'app-photos'},{'name': 'PhotosPageComponent', 'selector': 'app-photos-page'},{'name': 'PostCardWidgetComponent', 'selector': 'app-post-card-widget'},{'name': 'PostDeleteModalComponent', 'selector': 'app-post-delete-modal'},{'name': 'PostFormComponent', 'selector': 'app-post-form'},{'name': 'PostImageOverlayViewComponent', 'selector': 'app-post-image-overlay-view'},{'name': 'PostJobFormComponent', 'selector': 'app-dw-post-job-form'},{'name': 'PostsComponent', 'selector': 'app-posts'},{'name': 'PostsWidgetComponent', 'selector': 'app-posts-widget'},{'name': 'PreferencesComponent', 'selector': 'app-preferences'},{'name': 'PrivacySecurityComponent', 'selector': 'app-privacy-security'},{'name': 'ProcessUploadImagesProgressWidgetComponent', 'selector': 'app-process-upload-images-progress-widget'},{'name': 'ProductsPageComponent', 'selector': 'app-products-page'},{'name': 'ProfileAboutSummaryWidgetComponent', 'selector': 'app-profile-about-summary-widget'},{'name': 'ProfileAboutWidgetComponent', 'selector': 'app-profile-about-widget'},{'name': 'ProfileActionButtonsWidgetComponent', 'selector': 'app-profile-action-buttons-widget'},{'name': 'ProfileActivityWidgetComponent', 'selector': 'app-profile-activity-widget'},{'name': 'ProfileActivityWidgetComponent', 'selector': 'app-profile-activity-widget'},{'name': 'ProfileCardComponent', 'selector': 'app-profile-card'},{'name': 'ProfileCardWidgetComponent', 'selector': 'app-profile-card-widget'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ProfileContactsWidgetComponent', 'selector': 'app-profile-contacts-widget'},{'name': 'ProfileContactsWidgetComponent', 'selector': 'app-profile-contacts-widget'},{'name': 'ProfileDealingWidgetComponent', 'selector': 'app-profile-dealing-widget'},{'name': 'ProfileDealingWidgetComponent', 'selector': 'app-profile-dealing-widget'},{'name': 'ProfileEducationsWidgetComponent', 'selector': 'app-profile-educations-widget'},{'name': 'ProfileExperienceWidgetComponent', 'selector': 'app-profile-experience-widget'},{'name': 'ProfileFeedImageViewWidgetComponent', 'selector': 'app-profile-feed-image-view-widget'},{'name': 'ProfileFeedWidgetComponent', 'selector': 'app-profile-feed-widget'},{'name': 'ProfileFollowsWidgetComponent', 'selector': 'app-profile-follows-widget'},{'name': 'ProfileFollowsWidgetComponent', 'selector': 'app-profile-follows-widget'},{'name': 'ProfileHeaderComponent', 'selector': 'app-profile-header'},{'name': 'ProfileHeaderComponent', 'selector': 'app-profile-header'},{'name': 'ProfileImagesOverlayViewComponent', 'selector': 'app-profile-images-overlay-view'},{'name': 'ProfileLeftNavWidgetComponent', 'selector': 'app-profile-left-nav-widget'},{'name': 'ProfileLeftNavWidgetComponent', 'selector': 'app-profile-left-nav-widget'},{'name': 'ProfileLeftWidgetComponent', 'selector': 'app-profile-left-widget'},{'name': 'ProfileLikesWidgetComponent', 'selector': 'app-profile-likes-widget'},{'name': 'ProfileLikesWidgetComponent', 'selector': 'app-profile-likes-widget'},{'name': 'ProfileMoviesWidgetComponent', 'selector': 'app-profile-movies-widget'},{'name': 'ProfileMoviesWidgetComponent', 'selector': 'app-profile-movies-widget'},{'name': 'ProfileMusicWidgetComponent', 'selector': 'app-profile-music-widget'},{'name': 'ProfileMusicWidgetComponent', 'selector': 'app-profile-music-widget'},{'name': 'ProfileNavWidgetComponent', 'selector': 'app-profile-nav-widget'},{'name': 'ProfileNetworkSummaryWidgetComponent', 'selector': 'app-profile-network-summary-widget'},{'name': 'ProfilePagesWidgetComponent', 'selector': 'app-profile-pages-widget'},{'name': 'ProfilePagesWidgetComponent', 'selector': 'app-profile-pages-widget'},{'name': 'ProfilePhotosSummaryWidgetComponent', 'selector': 'app-profile-photos-summary-widget'},{'name': 'ProfilePhotosWidgetComponent', 'selector': 'app-profile-photos-widget'},{'name': 'ProfilePhotosWidgetComponent', 'selector': 'app-profile-photos-widget'},{'name': 'ProfilePostImageViewComponent', 'selector': 'app-profile-post-image-view'},{'name': 'ProfileRightSidebarComponent', 'selector': 'app-profile-right-sidebar'},{'name': 'ProfileSkillsWidgetComponent', 'selector': 'app-profile-skills-widget'},{'name': 'ProfileSkillsWidgetComponent', 'selector': 'app-profile-skills-widget'},{'name': 'ProfileTitleWidgetComponent', 'selector': 'app-profile-title-widget'},{'name': 'ProfileTopCardWidgetComponent', 'selector': 'app-profile-top-card-widget'},{'name': 'ProfileVideosSummaryWidgetComponent', 'selector': 'app-profile-videos-summary-widget'},{'name': 'ProfileVideosWidgetComponent', 'selector': 'app-profile-videos-widget'},{'name': 'ProfileVideosWidgetComponent', 'selector': 'app-profile-videos-widget'},{'name': 'ProfileViewsWidgetComponent', 'selector': 'app-profile-views-widget'},{'name': 'QuickSearchResultsWidgetComponent', 'selector': 'app-quick-search-results-widget'},{'name': 'ReportContentModalComponent', 'selector': 'app-report-content-modal'},{'name': 'ReportMessengerContentModalComponent', 'selector': 'app-report-messenger-content-modal'},{'name': 'RequestPasswordResetComponent', 'selector': 'app-request-password-reset'},{'name': 'ResetPasswordComponent', 'selector': 'app-reset-password'},{'name': 'RightSidebarContainerComponent', 'selector': 'app-right-sidebar-container'},{'name': 'RippleCirclesComponent', 'selector': 'app-ripple-circles'},{'name': 'RippleCirclesSharedComponent', 'selector': 'app-shared-ripple-circles'},{'name': 'RyouMayknowWidgetComponent', 'selector': 'app-ryou-mayknow-widget'},{'name': 'SearchComponent', 'selector': 'app-search'},{'name': 'SearchFormWidgetComponent', 'selector': 'app-search-form-widget'},{'name': 'SearchNavWidgetComponent', 'selector': 'app-search-nav-widget'},{'name': 'SentComponent', 'selector': 'app-sent'},{'name': 'ServicesPageComponent', 'selector': 'app-services-page'},{'name': 'SettingsComponent', 'selector': 'app-settings'},{'name': 'SettingsLeftWidgetComponent', 'selector': 'app-settings-left-widget'},{'name': 'SharedCropAvatarWidgetComponent', 'selector': 'app-shared-crop-avatar-widget'},{'name': 'SharedCropCoverWidgetComponent', 'selector': 'app-shared-crop-cover-widget'},{'name': 'SharedDeleteProfileEducationWidgetComponent', 'selector': 'app-shared-delete-profile-education-widget'},{'name': 'SharedDeleteProfileExperienceWidgetComponent', 'selector': 'app-shared-delete-profile-experience-widget'},{'name': 'SharedDeleteProfileOverlayContainerComponent', 'selector': 'app-shared-delete-profile-overlay-container'},{'name': 'SharedEditAvatarOptionsWidgetComponent', 'selector': 'app-shared-edit-avatar-options-widget'},{'name': 'SharedEditCoverOptionsWidgetComponent', 'selector': 'app-shared-edit-cover-options-widget'},{'name': 'SharedEditProfileAboutWidgetComponent', 'selector': 'app-shared-edit-profile-about-widget'},{'name': 'SharedEditProfileEducationWidgetComponent', 'selector': 'app-shared-edit-profile-education-widget'},{'name': 'SharedEditProfileExperienceWidgetComponent', 'selector': 'app-shared-edit-profile-experience-widget'},{'name': 'SharedEditProfileIndustriesWidgetComponent', 'selector': 'app-shared-edit-profile-industries-widget'},{'name': 'SharedEditProfileLanguagesWidgetComponent', 'selector': 'app-shared-edit-profile-languages-widget'},{'name': 'SharedEditProfileOverlayContainerComponent', 'selector': 'app-shared-edit-profile-overlay-container'},{'name': 'SharedEditProfileSkillsWidgetComponent', 'selector': 'app-shared-edit-profile-skills-widget'},{'name': 'SharedOverlayModalContainerComponent', 'selector': 'app-shared-overlay-modal-container'},{'name': 'SharedPostWidgetComponent', 'selector': 'app-shared-post-widget'},{'name': 'SharedProfileTopCardWidgetComponent', 'selector': 'app-shared-profile-top-card-widget'},{'name': 'ShopPageComponent', 'selector': 'app-shop-page'},{'name': 'ShowMorePostTextWidgetComponent', 'selector': 'app-show-more-post-text-widget'},{'name': 'ShowMoreTextWidgetComponent', 'selector': 'app-show-more-text-widget'},{'name': 'SideNavComponent', 'selector': 'app-side-nav'},{'name': 'SimpleFeedCardWidgetComponent', 'selector': 'app-simple-feed-card-widget'},{'name': 'SocialSitesComponent', 'selector': 'app-social-sites'},{'name': 'StartComponent', 'selector': 'app-start'},{'name': 'ThreadComponent', 'selector': 'app-thread'},{'name': 'TimeLineComponent', 'selector': 'app-time-line'},{'name': 'TopComponent', 'selector': 'app-top'},{'name': 'TosComponent', 'selector': 'app-tos'},{'name': 'VerticalBarsComponent', 'selector': 'app-vertical-bars'},{'name': 'VerticalBarsSharedComponent', 'selector': 'app-shared-vertical-bars'},{'name': 'VideosComponent', 'selector': 'app-videos'},{'name': 'ViewAdPostCatalogWidgetComponent', 'selector': 'app-ad-view-post-catalog-widget'},{'name': 'ViewAdPostWidgetComponent', 'selector': 'app-ad-post-view-widget'},{'name': 'ViewAdTextWidgetComponent', 'selector': 'app-ad-text-view-widget'},{'name': 'ViewerComponent', 'selector': 'app-viewer'},{'name': 'WbContentNotFoundPageComponent', 'selector': 'app-wb-content-not-found-page'},{'name': 'WbDateTimePickerListComponent', 'selector': 'app-wb-date-time-picker-list'},{'name': 'WbLinksPreviewComponent', 'selector': 'app-wb-links-preview'},{'name': 'WbLoadingListWidgetComponent', 'selector': 'app-wb-loading-list-widget'},{'name': 'WbLoadingListWidgetSharedComponent', 'selector': 'app-shared-wb-loading-list-widget'},{'name': 'WbMarkGoogleMapComponent', 'selector': 'app-wb-mark-google-map'},{'name': 'WbMessagesContentComponent', 'selector': 'app-wb-messages-content'},{'name': 'WbOverlayPostFormContainerComponent', 'selector': 'app-wb-overlay-post-form-container'},{'name': 'WbPageContentRoutingComponent', 'selector': 'app-wb-page-content-routing'},{'name': 'WbPageFollowButtonComponent', 'selector': 'app-wb-page-follow-button'},{'name': 'WbPageGeneralSettingsComponent', 'selector': 'app-wb-page-general-settings'},{'name': 'WbPageMainContentComponent', 'selector': 'app-wb-page-main-content'},{'name': 'WbPageManageComponent', 'selector': 'app-wb-page-manage'},{'name': 'WbPageManagerContentContainerComponent', 'selector': 'app-wb-page-manager-content-container'},{'name': 'WbPageMessageButtonComponent', 'selector': 'app-wb-page-message-button'},{'name': 'WbPageNotificationsComponent', 'selector': 'app-wb-page-notifications'},{'name': 'WbPageNotificationSettingsComponent', 'selector': 'app-wb-page-notification-settings'},{'name': 'WbProfileConnectButtonComponent', 'selector': 'app-wb-profile-connect-button'},{'name': 'WbProfileMessageButtonComponent', 'selector': 'app-wb-profile-message-button'},{'name': 'WbShowonGoogleMapComponent', 'selector': 'app-wb-showon-google-map'},{'name': 'WelcomeComponent', 'selector': 'app-welcome'},{'name': 'WelcomeEmployerWidgetComponent', 'selector': 'app-dw-welcome-employer-widget'},{'name': 'WelcomeOneWidgetComponent', 'selector': 'app-welcome-one-widget'},{'name': 'WelcomePageComponent', 'selector': 'app-welcome-page'},{'name': 'WelcomeSeekerWidgetComponent', 'selector': 'app-dw-welcome-seeker-widget'},{'name': 'WfFooterComponent', 'selector': 'app-wf-footer'},{'name': 'WfHashtagPreviewComponent', 'selector': 'app-wf-hashtag-preview'},{'name': 'WfLeftSideBarComponent', 'selector': 'app-wf-left-side-bar'},{'name': 'WfLinkPreviewComponent', 'selector': 'app-wf-link-preview'},{'name': 'WfLinkPreviewContainerComponent', 'selector': 'app-wf-link-preview-container'},{'name': 'WfMainContentComponent', 'selector': 'app-wf-main-content'},{'name': 'WfMentionPreviewComponent', 'selector': 'app-wf-mention-preview'},{'name': 'WfNavbarComponent', 'selector': 'app-wf-navbar'},{'name': 'WfNavbarEmptyComponent', 'selector': 'app-wf-navbar-empty'},{'name': 'WfNavbarSummaryComponent', 'selector': 'app-wf-navbar-summary'},{'name': 'WfRightSidebarComponent', 'selector': 'app-wf-right-sidebar'},{'name': 'WfSideNavComponent', 'selector': 'app-wf-side-nav'},{'name': 'WfSocialHeaderComponent', 'selector': 'app-wf-social-header'},{'name': 'WoorbiPagesComponent', 'selector': 'app-woorbi-pages'},{'name': 'WpPagesLeftMenuWidgetComponent', 'selector': 'app-wp-pages-left-menu-widget'},{'name': 'WpPagesMainContentContainerComponent', 'selector': 'app-wp-pages-main-content-container'}];
+    var DIRECTIVES = [{'name': 'ContentEditableFormDirective', 'selector': '[contenteditable]'},{'name': 'HoverCardDirective', 'selector': '[appHoverCard]'},{'name': 'MustMatchDirective', 'selector': '[mustMatch]'},{'name': 'ValidateDateDirective', 'selector': '[wbDateField]'},{'name': 'WfLinkPreviewDirective', 'selector': '[appWfLinkPreview]'}];
+    var ACTUAL_COMPONENT = {'name': 'FeedCommentsWidgetComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'FeedCommentsWidgetComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { DaywakaService } from '@app/daywaka/services/daywaka.service';
 
 @Component({
   selector: 'app-dw-find-workers',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DwFindWorkersComponent implements OnInit {
 
-  constructor() { }
+  constructor(public daywakaService: DaywakaService, public router: Router) { }
 
   ngOnInit(): void {
+    this.daywakaService.isAccountLoaded().subscribe((accountLoaded) => {
+      if (accountLoaded) {
+        if (this.daywakaService.DW_CONFIGS.defaultPage != null) {
+          this.router.navigateByUrl('/'+this.daywakaService.DW_CONFIGS.defaultPage.url);
+        }
+      }
+    });
   }
 
 }

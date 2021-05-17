@@ -1,11 +1,8 @@
 <ng-container *ngIf="loading==false">
-    <div class="card">
-        <div class="card-body">
-            <h4>Edit Job</h4>
-            <app-dw-post-job-form [route]="'edit-job'" [jobModel]="jobForm"></app-dw-post-job-form>
-        </div>
+    <div class="d-block w-100 py-2">
+        <h4>Edit Job</h4>
+        <app-dw-post-job-form [route]="'edit-job'" [jobModel]="jobForm"></app-dw-post-job-form>
     </div>
-
 </ng-container>
 
 <ng-container *ngIf="loading==true">

@@ -1,0 +1,32 @@
+<!--Double navigation-->
+<header class="fixed-top header-transparent container-fluid px-0">
+    <!-- Navbar -->
+    <nav class="navbar fixed-top px-1 px-md-5 px-lg-5 m-0">
+        <!-- SideNav slide-out button -->
+        <ul class="nav navbar-nav nav-flex-icons float-left justify-content-between container-fluid w-100 px-0 px-md-5 px-lg-5 m-0"
+            style="margin-left:1px;margin-right:1px;">
+            <li class="nav-item d-block d-md-none d-lg-none d-xl-none float-left p-0"
+                (click)="toogleLeftMenu()">
+                <div class="nav-link waves-effect waves-light m-0 p-1 wb-font-size-140" style="color:#fff;"><i
+                        class="fa fa-list"></i></div>
+            </li>
+            <li class="nav-item d-none d-md-block d-lg-block  float-left"
+                style="max-width: 150px;">
+                <a class="nav-link navbar-brand px-0 mx-0" routerLink="/"
+                    style="font-weight:bold;color:#fff;font-size:20px;">
+                    Woorbi Daywaka
+                </a>
+            </li>
+            <li class="nav-item d-block push-left p-0" (click)="toogleLeftMenu()">
+                <div class="nav-link waves-effect waves-light m-0 p-1 wb-font-size-110" style="color:#fff;">
+                    {{TOPNAV_TITLE}}</div>
+            </li>
+            <li class="nav-item d-block push-right p-0">
+                <div class="nav-link waves-effect waves-light m-0 p-1" style="color:#fff;">
+                    Map</div>
+            </li>
+        </ul>
+    </nav>
+    <!-- /.Navbar -->
+</header>
+<!--/.Double navigation-->

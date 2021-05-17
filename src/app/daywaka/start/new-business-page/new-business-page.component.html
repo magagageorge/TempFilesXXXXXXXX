@@ -1,0 +1,85 @@
+<app-dw-nav-bar></app-dw-nav-bar>
+<app-dw-main-content-container>
+    <br>
+    <div class="container-fluid mt-5 pt-3">
+        <div class="row mx-0">
+            <div class="col-12 col-md-6 col-lg-6 col-xl-6 mx-auto">
+                <div class="d-flex justify-content-center">
+                    <h4>Create a Business Page</h4>
+                </div>
+
+                <div class="card">
+                    <div class="card-body" style="min-height: 70vh;">
+                        <div class="row mx-0">
+                            <div class="col-12 d-flex justify-content-center">
+                                <span class="wb-font-size-120">
+                                    Your Woorbi Page represents your business in job
+                                    Post.
+                                </span>
+                            </div>
+
+                            <ng-container *ngIf="pageService.MYPAGES.length>0">
+                                <div class="col-12 py-3">
+                                    <div class="d-block w-100">
+                                        <p class="wb-font-size-110">You can Select one of existing page(s) bellow</p>
+                                    </div>
+                                    <ul class="list-group">
+                                        <ng-container *ngFor="let mypage of pageService.MYPAGES">
+                                            <li class="list-group-item px-0 py-1 rounded my-1">
+                                                <a href="javascript:void(0)" (click)="setSelectedPage(mypage)"
+                                                    class="p-0 m-0 text-decoration-none" style="text-decoration: none;">
+                                                    <div class="row p-0 m-0">
+                                                        <div class="col-3 p-0" style="max-width:50px;">
+                                                            <ng-container *ngIf="mypage.picture!=null">
+                                                                <img style="max-height:50px;"
+                                                                    src="{{mypage.picture.face}}"
+                                                                    class="img-fluid rounded-circle z-depth-0 m-0">
+                                                            </ng-container>
+                                                        </div>
+                                                        <div class="col-7 p-0 d-flex align-items-center">
+                                                            <div
+                                                                class="d-inline-block w-100 m-0 px-1 font-weight-bold text-truncate">
+                                                                {{mypage.name}}
+                                                            </div>
+                                                        </div>
+                                                        <div
+                                                            class="col px-1 px-md-2 d-flex justify-content-end align-items-center border-light">
+                                                            <ng-container
+                                                                *ngIf="selectedPage!=null && selectedPage.id==mypage.id">
+                                                                <span class="wb-font-size-200 text-success"><i
+                                                                        class="fa fa-check-circle"></i></span>
+                                                            </ng-container>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        </ng-container>
+                                    </ul>
+                                    <div class="d-block w-100">
+                                        <div class="row mx-0">
+                                            <div *ngIf="selectedPage!=null"
+                                                class="col-12 d-flex justify-content-center">
+                                                <button (click)="continueWithSelectedPage(selectedPage)" class="btn btn-sm btn-outline-primary btn-rounded">
+                                                    Use Selected Page
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 d-flex justify-content-center border-top">
+                                    <span class="wb-font-size-120">Or</span>
+                                </div>                                
+                            </ng-container>
+                            <div class="col-12 d-flex justify-content-center">
+                                <span><a href="javascript:void(0)" (click)="pageService.createPageOnFly()"
+                                        class="btn btn-sm btn-outline-primary btn-rounded">Create
+                                        New Woorbi Page</a></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</app-dw-main-content-container>
+<app-dw-footer></app-dw-footer>

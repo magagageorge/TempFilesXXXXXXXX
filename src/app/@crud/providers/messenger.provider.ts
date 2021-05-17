@@ -27,8 +27,8 @@ export class MessengerProvider {
         _this.http=http;
         _this.route=route;
         _this.defaultConfig = {
-            //baseEndpoint: 'http://localhost/woorbi.ms/api/web/',
-            baseEndpoint: 'http://ms.woorbi.com/',
+            baseEndpoint: 'http://196.45.144.12/ms.woorbi.com/',
+            //baseEndpoint: 'http://ms.woorbi.com/',
 			route_url:'',
             create: {
 				alwaysFail: false,

@@ -1,0 +1,139 @@
+<app-dw-jobs-content-container [TOPNAV_TITLE]="top_title">
+    <ng-container *ngIf="JOBAD!=null">
+        <div class="job-details-content" [class.has-actions-buttons]="JOBAD.my_status!=null">
+            <app-job-details-header-widget [JOBAD]="JOBAD"></app-job-details-header-widget>
+
+            <div class="d-block w-100 my-1">
+                <div class="card m-0 p-0">
+                    <div class="card-body m-0 p-3 w-100">
+                        <div class="row mx-0  p-0">
+                            <div class="col-12 p-0">
+                                {{jobDate()}}
+                            </div>
+                            <div class="col-12 p-0">
+                                <div class="font-weight-bold wb-font-size-120">
+                                    {{jobTime()}}
+                                </div>
+                            </div>
+                            <div class="col-12 p-0">
+                                <div class="row mx-0">
+                                    <div class="col-7 p-0 wb-font-size-110">
+                                        Estimated Total Pay
+                                    </div>
+                                    <div class="col-5 p-0">
+                                        <div class="font-weight-bold wb-font-size-110">
+                                            TZS{{jobEstPay()}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-block w-100 my-1">
+                <div class="card m-0 p-0">
+                    <div class="card-body m-0 p-3 w-100">
+                        <div class="w-100 font-weight-bold wb-font-size-110">
+                            Requirements
+                        </div>
+                        <ng-container *ngIf="jobRequirements!=null">
+                            <ul class="m-0 p-0" style="list-style-type: none;">
+                                <ng-container *ngFor="let j_requirement of jobRequirements">
+                                    <li><span class="fa fa-check wb-font-size-130"></span>
+                                        <span>&nbsp;</span>
+                                        <span>{{j_requirement}}</span>
+                                    </li>
+                                </ng-container>
+                            </ul>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-block w-100 my-1">
+                <div class="card m-0 p-0">
+                    <div class="card-body m-0 p-3 w-100">
+                        <div class="w-100 font-weight-bold wb-font-size-110">
+                            What you will be doing
+                        </div>
+                        <div class="w-100 d-block text-content">
+                            {{JOBAD.description}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <ng-container *ngIf="JOBAD.location.length>0">
+                <div class="d-block w-100 my-1">
+                    <div class="card m-0 p-0">
+                        <div class="card-body m-0 py-3 px-0 w-100">
+                            <div class="d-block w-100 px-3">
+                                <div class="w-100 font-weight-bold wb-font-size-110">
+                                    Location
+                                </div>
+                                <div class="w-100 d-block">
+                                    {{JOBAD.location[0].location_name}}
+                                </div>
+                                <div class="w-100 d-block">
+                                    {{JOBAD.location[0].address}}
+                                </div>
+                            </div>
+                            <div class="w-100 job-detail-map p-0">
+                                <ng-container>
+                                    <app-wb-showon-google-map [location_name]="DW" [defaultPosition]="latlngPos"
+                                        [computeDirection]="true"></app-wb-showon-google-map>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+
+            <div class="d-block w-100 my-1">
+                <div class="card m-0 p-0">
+                    <div class="card-body m-0 p-3 w-100">
+                        <div class="w-100 font-weight-bold wb-font-size-110">
+                            Travel Tips
+                        </div>
+                        <div class="w-100 d-block text-content">
+                            {{JOBAD.travel_tips}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-block w-100 my-1">
+                <div class="card m-0 p-0">
+                    <div class="card-body m-0 p-3 w-100">
+                        <div class="w-100 font-weight-bold wb-font-size-110">
+                            Trust and Safety Fee
+                        </div>
+                        <div class="w-100 d-block">
+                            The trust and Safety Fee for this job is estimated to be TZS300.00
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-block w-100 my-1">
+                <div class="card m-0 p-0">
+                    <div class="card-body m-0 p-3 w-100">
+                        <div class="w-100 font-weight-bold wb-font-size-110">
+                            Withdrawal Policy
+                        </div>
+                        <div class="w-100 d-block">
+                            Learn about Woorbi Daywaka Withdrawal Policy.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <app-dw-job-actions-bar [JOB_AD]="JOBAD"></app-dw-job-actions-bar>
+        </div>
+
+    </ng-container>
+
+</app-dw-jobs-content-container>
+<app-dw-accept-job-modal [JOB_AD]="JOBAD" (jobStatusEmit)="updateJobStatus($event)"></app-dw-accept-job-modal>

@@ -1,0 +1,38 @@
+<ng-container *ngIf="dwProfileViewerService.VIEW_PROFILE_MODAL">
+    <app-dw-overlay-modal-container>
+        <div class="row mx-0 w-100">
+            <div class="col-12 p-0 container-fluid">
+
+                <!--Double navigation-->
+                <header class="container-fluid px-0">
+                    <!-- Navbar -->
+                    <nav class="navbar fixed-top m-0">
+                        <!-- SideNav slide-out button -->
+                        <ul class="nav navbar-nav nav-flex-icons float-left px-1 container-fluid  m-0">
+                            <li class="nav-item float-left">
+                                <a class="nav-link navbar-brand px-0 mx-0 text-white" href="javascript:void(0);" (click)="dwProfileViewerService.viewProfileInModal(false, null)">
+                                    <span class="fa fa-arrow-left"></span>
+                                </a>
+                            </li>
+                            <li class="nav-item   float-left">
+                                <span class="nav-link navbar-brand  px-0 mx-0">
+                                    Worker Details
+                                </span>
+                            </li>
+                        </ul>
+                    </nav>
+                    <!-- /.Navbar -->
+                </header>
+                <!--/.Double navigation-->
+            </div>
+        </div>
+        <div class="row mx-0 p-0 w-100 bg-light content-container">
+            <div class="col-12 col-md-10 col-lg-10 col-xl-8 bg-white my-0 mx-auto h-100 p-0">
+                <div class="d-block w-100 content p-0">
+                    <app-dw-employer-profile-viewer [profileId]="dwProfileViewerService.VIEW_PROFILEID_MODAL">
+                    </app-dw-employer-profile-viewer>
+                </div>
+            </div>
+        </div>
+    </app-dw-overlay-modal-container>
+</ng-container>

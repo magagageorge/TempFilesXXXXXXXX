@@ -1,0 +1,177 @@
+<app-dw-nav-bar></app-dw-nav-bar>
+<app-dw-main-content-container>
+    <br>
+    <div class="container-fluid mt-5 pt-3 dw-form-container">
+        <div class="row mx-0">
+            <div class="col-12 col-md-8 col-lg-8 col-xl-8 mx-auto">
+                <div class="d-flex justify-content-center text-white">
+                    <h4>Get Started Today</h4>
+                </div>
+                <div class="d-block w-100 h-100">
+                    <form [formGroup]="frm_guestForm" class="form-inline" (ngSubmit)="save()" class="p-1">
+                        <div class="form">
+                            <div class="d-block">
+
+                                <div class="card mx-0">
+                                    <div class="card-body p-1">
+                                        <div class="row mx-0 align-middle py-2">
+                                            <div class="col-6">
+                                                <input type="text" class="form-control" name="firstname" rows="4"
+                                                    formControlName="firstname"
+                                                    [ngClass]="{ 'is-invalid': submitted && frm.firstname.errors }"
+                                                    placeholder="First Name" [(ngModel)]="guestForm.firstname">
+                                                <div *ngIf="submitted && frm.firstname.errors"
+                                                    class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                                                    <div *ngIf="frm.firstname.errors.required" i18n>Required</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <input type="text" class="form-control" name="lastname"
+                                                    formControlName="lastname"
+                                                    [ngClass]="{ 'is-invalid': submitted && frm.lastname.errors }"
+                                                    placeholder="Last Name" [(ngModel)]="guestForm.lastname">
+                                                <div *ngIf="submitted && frm.lastname.errors"
+                                                    class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                                                    <div *ngIf="frm.lastname.errors.required" i18n>Required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mx-0 align-middle py-2">
+                                            <div class="col-6">
+                                                <input type="email" class="form-control" name="business_email" rows="4"
+                                                    formControlName="business_email"
+                                                    [ngClass]="{ 'is-invalid': submitted && frm.business_email.errors }"
+                                                    placeholder="Business Email" [(ngModel)]="guestForm.business_email">
+                                                <div *ngIf="submitted && frm.business_email.errors"
+                                                    class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                                                    <div *ngIf="frm.business_email.errors.required" i18n>Required</div>
+                                                    <div *ngIf="frm.business_email.errors.email" i18n>Invalid Email Address</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <input type="text" class="form-control" name="phone_number"
+                                                    formControlName="phone_number"
+                                                    [ngClass]="{ 'is-invalid': submitted && frm.phone_number.errors }"
+                                                    placeholder="Phone Number" [(ngModel)]="guestForm.phone_number">
+                                                <div *ngIf="submitted && frm.phone_number.errors"
+                                                    class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                                                    <div *ngIf="frm.phone_number.errors.required" i18n>Required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mx-0 align-middle py-2">
+                                            <div class="col-6">
+                                                <input type="text" class="form-control" name="business_name" rows="4"
+                                                    formControlName="business_name"
+                                                    [ngClass]="{ 'is-invalid': submitted && frm.business_name.errors }"
+                                                    placeholder="Business Name" [(ngModel)]="guestForm.business_name">
+                                                <div *ngIf="submitted && frm.business_name.errors"
+                                                    class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                                                    <div *ngIf="frm.business_name.errors.required" i18n>Required</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <input type="text" class="form-control" name="city_name"
+                                                    formControlName="city_name"
+                                                    [ngClass]="{ 'is-invalid': submitted && frm.city_name.errors }"
+                                                    placeholder="City" [(ngModel)]="guestForm.city_name">
+                                                <div *ngIf="submitted && frm.city_name.errors"
+                                                    class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                                                    <div *ngIf="frm.city_name.errors.required" i18n>Required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mx-0 align-middle py-2">
+                                            <div class="col-6">
+                                                <select class="form-control" name="job_type" formControlName="job_type"
+                                                    [ngClass]="{ 'is-invalid': submitted && frm.job_type.errors }"
+                                                    [(ngModel)]="guestForm.job_type">
+                                                    <option value="">- Job Type -</option>
+                                                    <ng-container
+                                                        *ngFor="let category of daywakaService.JOB_CATEGORIES">
+                                                        <option value="{{category.id}}">{{category.name}}</option>
+                                                    </ng-container>
+                                                </select>
+                                                <div *ngIf="submitted && frm.job_type.errors"
+                                                    class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                                                    <div *ngIf="frm.job_type.errors.required" i18n>Required</div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-6">
+                                                <select class="form-control" name="no_workers"
+                                                    formControlName="no_workers"
+                                                    [ngClass]="{ 'is-invalid': submitted && frm.no_workers.errors }"
+                                                    [(ngModel)]="guestForm.no_workers">
+                                                    <option value>- No of Workers -</option>
+                                                    <option value="1-5">1-5</option>
+                                                    <option value="5-10">5-10</option>
+                                                    <option value="10-25">10-25</option>
+                                                    <option value="25-50">25-50</option>
+                                                    <option value="50-100">50-100</option>
+                                                    <option value="100+">100+</option>
+                                                </select>
+                                                <div *ngIf="submitted && frm.no_workers.errors"
+                                                    class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                                                    <div *ngIf="frm.no_workers.errors.required" i18n>Required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mx-0 align-middle py-2">
+                                            <div class="col-12">
+                                                <label>Description(Comments)</label>
+                                                <textarea class="form-control" name="description" rows="4"
+                                                    formControlName="description"
+                                                    [ngClass]="{ 'is-invalid': submitted && frm.description.errors }"
+                                                    [(ngModel)]="guestForm.description"></textarea>
+                                                <div *ngIf="submitted && frm.description.errors"
+                                                    class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                                                    <div *ngIf="frm.description.errors.required" i18n>Required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mx-0 align-middle py-2">
+                                            <div class="col-12">
+                                                <select class="form-control" name="source" formControlName="source"
+                                                    [ngClass]="{ 'is-invalid': submitted && frm.source.errors }"
+                                                    [(ngModel)]="guestForm.source">
+                                                    <option value>How Did You Hear About Us?</option>
+                                                    <option value="Partner">Partner</option>
+                                                    <option value="Referral">Referral</option>
+                                                    <option value="Online Search">Online Search</option>
+                                                    <option value="Advertisement">Advertisement</option>
+                                                    <option value="News / Media">News / Media</option>
+                                                    <option value="Social Media">Social Media</option>
+                                                    <option value="App Store">App Store</option>
+                                                    <option value="Other">Other</option>
+                                                </select>
+                                                <div *ngIf="submitted && frm.source.errors"
+                                                    class="invalid-feedback text-danger text-right form-text text-muted mb-1">
+                                                    <div *ngIf="frm.source.errors.required" i18n>Required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="row mx-0 align-middle py-2">
+                                    <div class="col-12 d-flex justify-content-center">
+                                        <button type="submit" class="btn btn-sm btn-rounded btn-outline-primary">Continue</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</app-dw-main-content-container>
+<app-dw-footer></app-dw-footer>

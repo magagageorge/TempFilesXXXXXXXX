@@ -1,17 +1,30 @@
-  <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top header-transparent">
-    <div class="container d-flex align-items-center">
+<!-- ======= Header ======= -->
+<header id="header" class="fixed-top header-transparent">
+  <div class="container d-flex align-items-center">
 
-      <h1 class="logo mr-auto"><a routerLink="/daywaka">Woorbi Daywaka</a></h1>
-      <!-- Uncomment below if you prefer to use an image logo -->
-      <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+    <h1 class="logo mr-auto"><a routerLink="/">Woorbi Daywaka</a></h1>
+    <!-- Uncomment below if you prefer to use an image logo -->
+    <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
-      <nav class="main-nav d-none d-lg-block">
-        <ul>
-          <li><a routerLink="/daywaka/find-work">Find Work</a></li>
-          <li><a routerLink="/daywaka/find-workers">Find Workers</a></li>
-        </ul>
-      </nav><!-- .main-nav-->
+    <nav class="main-nav d-none d-md-block d-lg-block d-xl-block">
+      <ul>
+        <li><a routerLink="/find-work">Find Work</a></li>
+        <ng-container *ngIf="is_authenticated==true">
+          <ng-container *ngIf="daywakaService.DW_CONFIGS.defaultPage!=null">
+            <li><a routerLink="/{{daywakaService.DW_CONFIGS.defaultPage.url}}">Find Workers</a></li>
+          </ng-container>
+          <ng-container *ngIf="daywakaService.DW_CONFIGS.defaultPage==null">
+            <li><a routerLink="/find-workers">Find Workers</a></li>
+          </ng-container>
+        </ng-container>
+        <ng-container *ngIf="is_authenticated!=true">
+          <li><a routerLink="/find-workers">Find Workers</a></li>
+        </ng-container>
+        <ng-container *ngIf="is_authenticated!=true">
+          <li><a routerLink="/login"><span class="btn btn-sm btn-outline-primary btn-rounded px-3 py-1">Login</span></a></li>
+        </ng-container>        
+      </ul>
+    </nav><!-- .main-nav-->
 
-    </div>
-  </header><!-- End Header -->
+  </div>
+</header><!-- End Header -->

@@ -15,7 +15,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { TosComponent } from './tos/tos.component';
 
 const routes: Routes = [
-  { path: '', component: WelcomeComponent },
+  /*{ path: '', component: WelcomeComponent },*/
   { path: 'login', component: LoginComponent },
   { path: 'join', component: JoinComponent },
   { path: 'logout', canActivate: [AuthGuard], component: LogoutComponent },
@@ -60,7 +60,8 @@ const routes: Routes = [
     loadChildren: () => import('./ads-manager/ads-manager.module').then(m => m.AdsManagerModule)
   },
   {
-    path: 'daywaka',
+    /*path: 'daywaka',*/
+    path: '',
     loadChildren: () => import('./daywaka/daywaka.module').then(m => m.DaywakaModule)
   },
   {

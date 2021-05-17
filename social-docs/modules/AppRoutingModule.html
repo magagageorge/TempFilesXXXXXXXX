@@ -1,0 +1,228 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>woorbi documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">woorbi documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content module">
+                   <div class="content-data">
+
+
+
+<ol class="breadcrumb">
+    <li>Modules</li>
+    <li>AppRoutingModule</li>
+</ol>
+
+
+<ul class="nav nav-tabs" role="tablist">
+    <li  class="active" >
+        <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+    </li>
+    <li >
+        <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+    </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/app-routing.module.ts</code>
+        </p>
+
+
+
+
+        <div class="container-fluid module">
+            <div class="row">
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { NgModule } from &#x27;@angular/core&#x27;;
+import { RouterModule, Routes } from &#x27;@angular/router&#x27;;
+
+import { AuthGuard } from &#x27;./services/auth-guard.service&#x27;;
+import { AppComponent } from &#x27;./app.component&#x27;;
+import { LoginComponent } from &#x27;./login/login.component&#x27;;
+import { JoinComponent } from &#x27;./join/join.component&#x27;;
+import { RequestPasswordResetComponent } from &#x27;./request-password-reset/request-password-reset.component&#x27;;
+import { ResetPasswordComponent } from &#x27;./reset-password/reset-password.component&#x27;;
+import { FeedComponent } from &#x27;./feed/feed.component&#x27;;
+import { LogoutComponent } from &#x27;./logout/logout.component&#x27;;
+import { StartComponent } from &#x27;./start/start.component&#x27;;
+import { SideNavComponent } from &#x27;./side-nav/side-nav.component&#x27;;
+import { WelcomeComponent } from &#x27;./welcome/welcome.component&#x27;;
+import { TosComponent } from &#x27;./tos/tos.component&#x27;;
+
+const routes: Routes &#x3D; [
+  { path: &#x27;&#x27;, component: WelcomeComponent },
+  { path: &#x27;login&#x27;, component: LoginComponent },
+  { path: &#x27;join&#x27;, component: JoinComponent },
+  { path: &#x27;logout&#x27;, canActivate: [AuthGuard], component: LogoutComponent },
+  { path: &#x27;request-password-reset&#x27;, component: RequestPasswordResetComponent },
+  { path: &#x27;reset-password&#x27;, canActivate: [AuthGuard], component: ResetPasswordComponent },
+  { path: &#x27;start&#x27;, canActivate: [AuthGuard], component: StartComponent },
+  { path: &#x27;nav&#x27;, canActivate: [AuthGuard], component: SideNavComponent },
+  { path: &#x27;tos&#x27;, component: TosComponent },
+  {
+    path: &#x27;feed&#x27;,
+    canActivate: [AuthGuard], // here we tell Angular to check the access with our AuthGuard	
+    component: FeedComponent
+  },
+  {
+    path: &#x27;mynetwork&#x27;,
+    canActivate: [AuthGuard], // here we tell Angular to check the access with our AuthGuard
+    loadChildren: () &#x3D;&gt; &quot;import(&#x27;./mynetwork/mynetwork.module&#x27;).then(m &#x3D;&gt; m.MynetworkModule)&quot;
+  },
+  {
+    path: &#x27;notifications&#x27;,
+    canActivate: [AuthGuard], // here we tell Angular to check the access with our AuthGuard
+    loadChildren: () &#x3D;&gt; &quot;import(&#x27;./notifications/notifications.module&#x27;).then(m &#x3D;&gt; m.NotificationsModule)&quot;
+  },
+  {
+    path: &#x27;search&#x27;,
+    canActivate: [AuthGuard], // here we tell Angular to check the access with our AuthGuard
+    loadChildren: () &#x3D;&gt; &quot;import(&#x27;./search/search.module&#x27;).then(m &#x3D;&gt; m.SearchModule)&quot;
+  },
+  {
+    path: &#x27;settings&#x27;,
+    canActivate: [AuthGuard], // here we tell Angular to check the access with our AuthGuard
+    loadChildren: () &#x3D;&gt; &quot;import(&#x27;./settings/settings.module&#x27;).then(m &#x3D;&gt; m.SettingsModule)&quot;
+  },
+  {
+    path: &#x27;messages&#x27;,
+    canActivate: [AuthGuard], // here we tell Angular to check the access with our AuthGuard
+    loadChildren: () &#x3D;&gt; &quot;import(&#x27;./messages/messages.module&#x27;).then(m &#x3D;&gt; m.MessagesModule)&quot;
+  },
+  {
+    path: &#x27;adsmanager&#x27;,
+    canActivate: [AuthGuard],
+    loadChildren: () &#x3D;&gt; &quot;import(&#x27;./ads-manager/ads-manager.module&#x27;).then(m &#x3D;&gt; m.AdsManagerModule)&quot;
+  },
+  {
+    path: &#x27;daywaka&#x27;,
+    loadChildren: () &#x3D;&gt; &quot;import(&#x27;./daywaka/daywaka.module&#x27;).then(m &#x3D;&gt; m.DaywakaModule)&quot;
+  },
+  {
+    path: &#x27;pages&#x27;,
+    canActivate: [AuthGuard],
+    loadChildren: () &#x3D;&gt; &quot;import(&#x27;./pages/woorbi-pages.module&#x27;).then(m &#x3D;&gt; m.WoorbiPagesModule)&quot;
+  },
+  {
+    path: &#x27;:url/:url_page&#x27;,
+    canActivate: [AuthGuard], // here we tell Angular to check the access with our AuthGuard
+    loadChildren: () &#x3D;&gt; &quot;import(&#x27;./viewer/viewer.module&#x27;).then(m &#x3D;&gt; m.ViewerModule)&quot;,
+    runGuardsAndResolvers: &#x27;always&#x27;
+  },
+  {
+    path: &#x27;:url&#x27;,
+    canActivate: [AuthGuard], // here we tell Angular to check the access with our AuthGuard
+    loadChildren: () &#x3D;&gt; &quot;import(&#x27;./viewer/viewer.module&#x27;).then(m &#x3D;&gt; m.ViewerModule)&quot;,
+    runGuardsAndResolvers: &#x27;always&#x27;
+  },
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes, { onSameUrlNavigation: &#x27;reload&#x27;, scrollPositionRestoration: &#x27;top&#x27; })],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'module';
+            var COMPODOC_CURRENT_PAGE_URL = 'AppRoutingModule.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

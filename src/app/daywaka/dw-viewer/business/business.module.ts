@@ -14,6 +14,7 @@ import { DwBussinessDashboardComponent } from './components/pages/dw-bussiness-d
 import { DwBusinessJobsComponent } from './components/pages/dw-business-jobs/dw-business-jobs.component';
 import { DaywakaThemeModule } from '@app/daywaka/daywaka-theme/daywaka-theme.module';
 import { DwViewBusinessJobComponent } from './components/pages/dw-view-business-job/dw-view-business-job.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { DwViewBusinessJobComponent } from './components/pages/dw-view-business-
   imports: [
     CommonModule,
     RouterModule,
-    DaywakaThemeModule
+    DaywakaThemeModule,
+    NgbModule
   ],
   providers:[DwPageViewerService]
 })

@@ -23,6 +23,7 @@ main.content {
 .page-manager-container {
     padding-left: 0px;
     padding-right: 0px;
+    z-index: 100;
 }
 .wb-page-manager-left-navigation {
     width: 0px;
@@ -32,7 +33,18 @@ main.content {
     bottom: 0;
     left: 0;
     background-color: #ffffff;
+    z-index: 101;
 }
+
+.wb-page-manager-left-navigation.menu-opened {
+    transition: width 1s ease-in-out;
+    -webkit-transition: width 1s ease-in-out;
+    -moz-transition: width 1s ease-in-out;
+    -o-transition: width 1s ease-in-out;
+    -ms-transition: width 1s ease-in-out;
+}
+
+
 
 @media (min-width: 1281px) {
     .page-manager-container {
@@ -97,6 +109,10 @@ main.content {
     */
 
 @media (min-width: 481px) and (max-width: 767px) {
+    .wb-page-manager-left-navigation.menu-opened {
+        width: 250px;
+        display: block;
+    }
 }
 
 /* 
@@ -104,4 +120,8 @@ main.content {
       ##Screen = B/w 320px to 479px
     */
 @media (min-width: 120px) and (max-width: 480px) {
+    .wb-page-manager-left-navigation.menu-opened {
+        width: 250px;
+        display: block;
+    }
 }

@@ -1,0 +1,86 @@
+<div class="d-block p-0 m-0">
+    <div class="card m-0 p-0">
+        <div class="card-body m-0 p-0 w-100" #pageCoverElm>
+            <div class="d-block wf-page-hearder" [ngStyle]="{'height':''+jobViewerService.pageCoverHeaderHeight+'px'}">
+                <div [ngStyle]="{'height':''+jobViewerService.pageCoverHeight+'px'}" class="d-block wf-page-cover">
+                    <div class="d-block w-100 h-100 p-0 m-0">
+                        <img src="{{JOBAD.jobhead.cover.picture}}" class="img-fluid w-100 z-depth-2"
+                            style="overflow:hidden;">
+                    </div>
+                </div>
+                <div class="wf-page-image-container">
+                    <div class="d-block wf-page-img  w-100 h-100 m-0 p-0">
+                        <div class="d-block w-100 h-100 m-0 p-0">
+                            <img src="{{JOBAD.jobhead.picture.face}}" class="img-fluid rounded-circle img-thumbnail">
+                        </div>
+                    </div>
+                </div>
+                <div class="wf-page-title-buttons p-0">
+                    <div class="row m-0 p-0 h-100 w-100">
+                        <div class="col-12 col-md-8 col-lg-8 col-xl-8 wf-page-title-large">
+                            <div class="d-block w-100">
+                                <h4 class="p-0 my-0">{{JOBAD.jobhead.name}}</h4>
+                            </div>
+                            <div class="d-block w-100">
+                                <div *ngIf="JOBAD.category!=null" class="d-block page-title">
+                                    {{JOBAD.category.name}}
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            class="col-12 col-md-4 col-lg-4 col-xl-4 wf-page-buttons d-flex align-items-center justify-content-end">
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-block w-100 mt-1">
+
+                <div class="wf-page-title-buttons-small p-0">
+                    <div class="d-block w-100">
+                        <div class="row m-0 p-0">
+                            <div class="col-12">
+                                <div class="d-block w-100">
+                                    <h4 class="p-0 my-0">{{JOBAD.jobhead.name}}</h4>
+                                </div>
+                                <div class="d-block w-100">
+                                    <div *ngIf="JOBAD.jobhead.category!=null" class="d-block page-title wb-font-size-110">
+                                        {{JOBAD.category.name}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-block w-100">
+                <div class="row mx-0">
+                    <div class="col-7">
+                        <div class="d-block wb-font-size-140">
+                            <span class="fa fa-star-o"></span>
+                            <span class="m-1"></span>
+                            <span class="fa fa-star-o"></span>
+                            <span class="m-1"></span>
+                            <span class="fa fa-star-o"></span>
+                            <span class="m-1"></span>
+                            <span class="fa fa-star-o"></span>
+                            <span class="m-1"></span>
+                            <span class="fa fa-star-o"></span>
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="w-100 d-block wb-font-size-120 font-weight-bold">
+                            TZS{{JOBAD.fee}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

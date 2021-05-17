@@ -106,18 +106,18 @@ export class UtilitiesService {
         return this.service.getall(this.provider, params);
     }
 
+    getLanguages(params: {}): any {
+        this.provider = this.getConfigValue('forms.getall.provider');
+        this.service.getProvider(this.provider).crudconfig.route_url = 'utilities/languages/';
+        var _this = this;
+        return this.service.getall(this.provider, params);
+    }
+
     getIndustries(params: {}): any {
         this.provider = this.getConfigValue('forms.getall.provider');
         this.service.getProvider(this.provider).crudconfig.route_url = 'utilities/industries/';
         var _this = this;
         return this.service.getall(this.provider, params);
-    }
-
-    getLanguages(): any {
-        this.provider = this.getConfigValue('forms.getall.provider');
-        this.service.getProvider(this.provider).crudconfig.route_url = 'languages/';
-        var _this = this;
-        return this.service.getall(this.provider, this.locations);
     }
 
     getServiceCategories(params?: {}): any {

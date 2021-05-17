@@ -1,4 +1,4 @@
-import { AuthToken, TokenClass,nbCreateToken } from './token';
+import { AuthToken, TokenClass, nbCreateToken } from './token';
 import { Inject, Injectable } from '@angular/core';
 import { AUTH_TOKEN_CLASS } from '../../auth.options';
 
@@ -27,7 +27,7 @@ export abstract class TokenStorage {
 export class TokenLocalStorage implements TokenStorage {
     protected tokenClass: TokenClass;
     protected key: string;
-    constructor(@Inject(AUTH_TOKEN_CLASS) AUTH_TOKEN_CLASS:TokenClass){
+    constructor(@Inject(AUTH_TOKEN_CLASS) AUTH_TOKEN_CLASS: TokenClass) {
         this.tokenClass = AUTH_TOKEN_CLASS;
         this.key = 'auth_app_token';
     }
@@ -35,39 +35,39 @@ export class TokenLocalStorage implements TokenStorage {
      * Returns token from localStorage
      * @returns {AuthToken}
      */
-    get(): AuthToken{
+    get(): AuthToken {
         return nbCreateToken(this.tokenClass, localStorage.getItem(this.key));
     }
     /**
      * Sets token to localStorage
      * @param {AuthToken} token
      */
-    set(token: AuthToken): void{
+    set(token: AuthToken): void {
         localStorage.setItem(this.key, token.toString());
     }
     /**
      * Sets raw (string) token to localStorage
      * @param {string} token
      */
-    setRaw(token: string): void{
+    setRaw(token: string): void {
         localStorage.setItem(this.key, token);
     }
     /**
      * Clears token from localStorage
      */
-    clear(): void{
+    clear(): void {
         localStorage.removeItem(this.key);
     }
-	
-	/*
+
+    /*
      decorators = [
         { type: Injectable },
     ];
 	
     ctorParameters() {
-		return [
+        return [
         { type: undefined, decorators: [{ type: Inject, args: [AUTH_TOKEN_CLASS,] },] },
        ];
-	}
-   */	
+    }
+   */
 }

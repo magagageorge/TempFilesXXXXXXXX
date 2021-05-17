@@ -118,7 +118,7 @@ export class ProfilePhotosService {
   pushProfilePhotos(feeds: Feed[]) {
     var _this = this;
     feeds.forEach(feed => {
-      if (feed.images.length > 0) {
+      if (feed.images!=null && feed.images.length > 0) {
         feed.images.forEach(photo => {
           var p = new PostPhoto();
           p.post_id = Number(feed.id);

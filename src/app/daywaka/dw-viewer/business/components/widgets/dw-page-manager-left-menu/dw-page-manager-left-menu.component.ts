@@ -16,4 +16,8 @@ export class DwPageManagerLeftMenuComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  getInitLetter(name:string){
+    return (name.substr(0,1)).toUpperCase();
+  }
+
 }

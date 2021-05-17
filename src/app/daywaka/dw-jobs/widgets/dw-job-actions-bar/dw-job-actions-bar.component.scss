@@ -1,0 +1,112 @@
+.job-view-actions-buttons {
+  position: fixed;
+  padding: 4px;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  height: 60px;
+  border: 1px solid blue;
+  background-color: #ffffff;
+}
+
+.timeline-wrap-container {
+  height: 110%;
+}
+.timeline-wrap-container ul {
+  display: flex;
+  align-items: stretch; /* Default */
+  justify-content: space-between;
+  width: 100%;
+  background: transparent;
+  margin: 0;
+  padding: 0;
+}
+
+.timeline-wrap-container ul li {
+  display: block;
+  flex: 0 1 auto; /* Default */
+  list-style-type: none;
+  background: transparent;
+}
+
+#timeline-wrap {
+  top: 50%;
+  bottom: 50%;
+  left: 0%;
+  right: 0%;
+  position: absolute;
+  border: 2px solid red;
+}
+
+.timeline {
+  height: 5px;
+  width: 100%;
+  background-color: #aabbc4;
+  position: relative;
+}
+
+.marker {
+  z-index: 1000;
+  color: #fff;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 1.5em;
+  text-align: center;
+  position: relative;
+  background-color: #999999;
+  border-radius: 50%;
+}
+
+.marker:hover {
+  -moz-transform: scale(1.2);
+  -webkit-transform: scale(1.2);
+  -o-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  transform: scale(1.2);
+
+  -webkit-transition: all 300ms ease;
+  -moz-transition: all 300ms ease;
+  -ms-transition: all 300ms ease;
+  -o-transition: all 300ms ease;
+  transition: all 300ms ease;
+}
+
+.timeline-icon {
+  vertical-align: middle;
+}
+
+.timeline-icon.one {
+  background-color: rgb(249, 23, 56) !important;
+}
+
+.timeline-icon.two {
+  background-color: #536295 !important;
+}
+
+.timeline-icon.three {
+  background-color: #6976a2 !important;
+}
+
+.timeline-icon.four {
+  background-color: #7e8aaf !important;
+}
+
+.mfirst {
+  top: -13px;
+}
+
+.m2 {
+  top: -13px;
+  left: 32.5%;
+}
+
+.m3 {
+  top: -13px;
+  left: 66%;
+}
+
+.mlast {
+  top: -13px;
+  left: 100%;
+}

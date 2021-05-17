@@ -21,6 +21,7 @@ import { HttpClient } from '@angular/common/http';
 import { SysFunctions } from '@app/libs/utilities/common-functions';
 import { FeedService } from './feed.service';
 import { ProfileFeedService } from '@app/viewer/profile/services/profile-feed.service';
+import { ProfileLanguage } from '@app/models/profile/profile-models';
 
 export interface EditMode {
   inEdit: boolean;
@@ -49,6 +50,10 @@ export interface EditMode {
     action: string;
     processingSkills: boolean;
   },
+  languages: {
+    action: string;
+    processingLanguages: boolean;
+  },
   industries: {
     action: string;
     processingIndustries: boolean;
@@ -72,6 +77,10 @@ export interface DeleteMode {
     action: string;
     processingSkills: boolean;
   },
+  languages: {
+    action: string;
+    processingLanguages: boolean;
+  }, 
   industries: {
     action: string;
     processingIndustries: boolean;
@@ -112,8 +121,8 @@ export class EditProfileService {
   loading_profile: boolean = false;
   cover_preview_info: PreviewPicture = { url: '', width: 0, height: 0, file: null, isNew: true };
   avatar_preview_info: PreviewPicture = { url: '', width: 0, height: 0, file: null, isNew: true };
-  editMode: EditMode = { inEdit: false, currentEditing: '', coverEdit: { selectOptions: false, selectedOption: '', processingCover: false }, avatarEdit: { selectOptions: false, selectedOption: '', processingAvatar: false }, education: { action: '', processingEducation: false, inEditData: new ProfileEducation() }, experience: { action: '', processingExperience: false, inEditData: new WorkExperience() }, skills: { action: '', processingSkills: false }, industries: { action: '', processingIndustries: false } };
-  deleteMode: DeleteMode = { inDelete: false, currentDeleting: '', education: { action: '', processingEducation: false, inDeleteData: new ProfileEducation() }, experience: { action: '', processingExperience: false, inDeleteData: new WorkExperience() }, skills: { action: '', processingSkills: false }, industries: { action: '', processingIndustries: false } };
+  editMode: EditMode = { inEdit: false, currentEditing: '', coverEdit: { selectOptions: false, selectedOption: '', processingCover: false }, avatarEdit: { selectOptions: false, selectedOption: '', processingAvatar: false }, education: { action: '', processingEducation: false, inEditData: new ProfileEducation() }, experience: { action: '', processingExperience: false, inEditData: new WorkExperience() }, skills: { action: '', processingSkills: false },languages: { action: '', processingLanguages: false }, industries: { action: '', processingIndustries: false } };
+  deleteMode: DeleteMode = { inDelete: false, currentDeleting: '', education: { action: '', processingEducation: false, inDeleteData: new ProfileEducation() }, experience: { action: '', processingExperience: false, inDeleteData: new WorkExperience() }, skills: { action: '', processingSkills: false },languages: { action: '', processingLanguages: false }, industries: { action: '', processingIndustries: false } };
   uploadingImage: boolean = false;
   processingImage: boolean = false;
   loadingImage: boolean = false;
@@ -556,6 +565,18 @@ export class EditProfileService {
     this.editMode.inEdit = true;
   }
 
+  EditProfileLanguages() {
+    this.editMode.currentEditing = 'ProfileLanguages';
+    this.editMode.languages.action = 'editLanguages';
+    this.editMode.inEdit = true;
+  }
+
+  AddProfileLanguages() {
+    this.editMode.currentEditing = 'ProfileLanguages';
+    this.editMode.languages.action = 'addLanguages';
+    this.editMode.inEdit = true;
+  }
+
   saveProfileEducation(educationModel: ProfileEducation) {
     var _this = this;
     this.provider = this.getConfigValue('forms.update.provider');
@@ -719,6 +740,54 @@ export class EditProfileService {
         }
         skills.forEach(skill => {
           _this.profileService.MYPROFILE.skills = _this.profileService.MYPROFILE.skills.filter((x: any) => x.id !== skill.id);
+        });
+
+      } else {
+        _this.errors = result.getErrors();
+      }
+    });
+  }
+
+  saveProfileLanguages(languages: any[]) {
+    var _this = this;
+    const formData: any = new FormData();
+    this.provider = this.getConfigValue('forms.update.provider');
+    this.service.getProvider(this.provider).crudconfig.route_url = 'profile/my-profile-languages/';
+    formData.append("profile_languages", JSON.stringify(languages));
+    this.loadProcessService.submittingData = true;
+    this.service.create(this.provider, formData, {}).subscribe(function (result) {
+      _this.loadProcessService.submittingData = false;
+      if (result.isSuccess()) {
+        _this.messages = result.getMessages();
+        var resp = result.getResultData();
+        if (_this.isMyProfileInEdit()) {
+          _this.urlViewerService.PPVIEWER.profile.languages = resp.data as ProfileLanguage[];
+        }
+        _this.profileService.MYPROFILE.languages = resp.data as ProfileLanguage[];
+      } else {
+        _this.errors = result.getErrors();
+      }
+    });
+  }
+
+  deleteProfileLanguages(languages: any[]) {
+    var _this = this;
+    const formData: any = new FormData();
+    this.provider = this.getConfigValue('forms.update.provider');
+    this.service.getProvider(this.provider).crudconfig.route_url = 'profile/my-profile-languages/';
+    formData.append("profile_languages", JSON.stringify(languages));
+    this.loadProcessService.submittingData = true;
+    this.service.update(this.provider, formData, {}).subscribe(function (result) {
+      _this.loadProcessService.submittingData = false;
+      if (result.isSuccess()) {
+        _this.messages = result.getMessages();
+        if (_this.isMyProfileInEdit()) {
+          languages.forEach(language => {
+            _this.urlViewerService.PPVIEWER.profile.languages = _this.urlViewerService.PPVIEWER.profile.languages.filter((x: any) => x.id !== language.id);
+          });
+        }
+        languages.forEach(language => {
+          _this.profileService.MYPROFILE.languages = _this.profileService.MYPROFILE.languages.filter((x: any) => x.id !== language.id);
         });
 
       } else {

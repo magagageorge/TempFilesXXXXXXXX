@@ -26,7 +26,8 @@ export class Profile {
     zip:string; 
     phone_private:string; 
     phone_work:string; 
-    mobile:string; 
+    mobile:string;
+    contacts:any; 
     fax:string; 
     user_type:string;
     im_skype:string; 

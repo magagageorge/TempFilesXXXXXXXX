@@ -262,4 +262,15 @@ public static b64toBlob(b64Data, contentType) {
     }
 
 
+    public static isJsonFormat(dataString: string) {
+        if (typeof dataString !== 'string') return false;
+        try {
+            const result = JSON.parse(dataString);
+            const type = Object.prototype.toString.call(result);
+            return type === '[object Object]'
+                || type === '[object Array]';
+        } catch (err) {
+            return false;
+        }
+    }
 }

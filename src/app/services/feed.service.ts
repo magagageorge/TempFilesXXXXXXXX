@@ -9,6 +9,7 @@ import { cruddefaultSettings, CrudOptions, CRUD_OPTIONS, CRUD_USER_OPTIONS, CRUD
 import { CrudProvider } from '@app/@crud/providers/crud.provider';
 import { PostPhoto } from '@app/models/post-photo';
 import { OverlayPost } from '@app/models/feed/overlay-post';
+import { AuthService } from '@app/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -38,7 +39,7 @@ export class FeedService {
   OVERLAY_FEED: OverlayPost;
 
 
-  constructor(service: CrudService, @Inject(CRUD_OPTIONS) CRUD_OPTIONS: CrudOptions, private _modalService: NgbModal, router: Router) {
+  constructor(service: CrudService, public authService: AuthService, @Inject(CRUD_OPTIONS) CRUD_OPTIONS: CrudOptions, private _modalService: NgbModal, router: Router) {
     this.next_feed_page = 1;
     this.service = service;
     this.crudconfig = CRUD_OPTIONS;
@@ -81,22 +82,28 @@ export class FeedService {
     this.provider = this.getConfigValue('forms.getall.provider');
     this.service.getProvider(this.provider).crudconfig.route_url = 'feed/feed/';
     var _this = this;
-    return this.service.getall(this.provider, params).subscribe(results => {
-      _this.loading_feeds = false;
-      if (results.isSuccess()) {
-        var posts = results.getResultData() as Feed[];
-        if (posts.length) {
-          _this.searchFeed(posts[0].id).subscribe(feed => {
-            if (feed) {
-              _this.reached_end_of_feed = true;
+
+    /* only load feed when the user is a loggedin user */
+    this.authService.isAuthenticated().subscribe(is_authenticated => {
+      if (is_authenticated) {
+        return _this.service.getall(this.provider, params).subscribe(results => {
+          _this.loading_feeds = false;
+          if (results.isSuccess()) {
+            var posts = results.getResultData() as Feed[];
+            if (posts.length) {
+              _this.searchFeed(posts[0].id).subscribe(feed => {
+                if (feed) {
+                  _this.reached_end_of_feed = true;
+                } else {
+                  _this.next_feed_page++;
+                  _this.feeds = _this.feeds.concat(posts);
+                }
+              });
             } else {
-              _this.next_feed_page++;
-              _this.feeds = _this.feeds.concat(posts);
+              _this.reached_end_of_feed = true;
             }
-          });
-        } else {
-          _this.reached_end_of_feed = true;
-        }
+          }
+        });
       }
     });
   }

@@ -1,0 +1,208 @@
+<div class="card mx-0 my-2" style="overflow: hidden;">
+    <div class="card-body p-0">
+        <div class="row mx-0 border-light">
+            <div (click)="toggleDetailsList()"
+                class="col-1 d-flex justify-content-center text-white align-items-center bg-warning btn-show-item-details font-weight-bold">
+                <ng-container *ngIf="SHOW_DETAILS_LIST==false">
+                    <span class="fa fa-chevron-down"></span>
+                </ng-container>
+                <ng-container *ngIf="SHOW_DETAILS_LIST==true">
+                    <span class="fa fa-chevron-up"></span>
+                </ng-container>
+            </div>
+            <div class="col-8 px-0 py-2 border-light">
+                <div class="row mx-0">
+                    <ng-container *ngIf="renderedIn=='JOB_LIST'">
+                        <div class="col-12 font-weight-bold">
+                            {{jobscheduleItem.category.name}}
+                        </div>
+                        <div class="col-12">
+                            {{jobscheduleItem.name}}
+                        </div>
+                    </ng-container>
+
+                    <div class="col-12">
+                        <span class="d-inline-block">
+                            <span>&nbsp;</span>
+                            <span class="fa fa-clock-o"></span>
+                            <span>&nbsp;</span>
+                            {{jobscheduleItem.fulltime}}
+                            <span>&nbsp;</span>
+                        </span>
+                        <ng-container *ngIf="renderedIn=='JOB_LIST'">
+                            <span class="d-inline-block">
+                                <span>|&nbsp;</span>
+                                <ng-container *ngIf="jobscheduleItem.location.length>0">
+                                    <span class="fa fa-map-marker"></span>
+                                    <span>&nbsp;</span>
+                                    {{jobscheduleItem.location[0].location_name}}
+                                </ng-container>
+                                <span>&nbsp;</span>
+                            </span>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+            <div class="col d-flex align-items-center border-light p-0">
+                <ng-container *ngIf="renderedIn=='JOB_LIST'">
+                    <div class="row mx-0 w-100 h-100">
+                        <div
+                            class="col-12 p-0 col-md-3 col-lg-3 col-lx-3 cursor-pointer d-flex justify-content-center text-primary align-items-center">
+                            <a routerLink="/{{dwViewerService.VIEWER_URL}}/view-job/{{jobscheduleItem.job_id}}"
+                                class="wb-font-size-120 text-primary"><span class="fa fa-list"></span>
+                            </a>
+                        </div>
+                        <div
+                            class="col-12 p-0 col-md-3 col-lg-3 col-lx-3 cursor-pointer wb-font-size-120 d-flex justify-content-center text-primary align-items-center">
+                            <span class="fa fa-refresh"></span>
+                        </div>
+                        <div
+                            class="col-12 p-0 col-md-3 col-lg-3 col-lx-3 cursor-pointer wb-font-size-120 d-flex justify-content-center text-primary align-items-center">
+                            <span class="fa fa-trash"></span>
+                        </div>
+                        <div
+                            class="col-12 p-0 col-md-3 col-lg-3 col-lx-3 cursor-pointer wb-font-size-120 d-flex justify-content-center text-primary align-items-center">
+                            <span class="fa fa-pencil"></span>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+        <ng-container *ngIf="SHOW_DETAILS_LIST==true && jobscheduleItem.workers_list.length>0">
+            <div class="row mx-0 bg-light">
+                <div class="col-1 px-0">
+
+                </div>
+                <div class="col-7 px-0 d-flex align-items-center">
+                    <span class="px-2 font-weight-bold text-primary">Workers</span>
+                </div>
+                <div class="col-4 d-flex justify-content-end px-0">
+                    <ng-container *ngIf="jobscheduleItem.workers_list.length>1">
+                        <button class="btn btn-sm btn-outline-secondary btn-rounded px-2 py-1 m-0">Actions</button>
+                    </ng-container>
+                </div>
+            </div>
+            <div class="row mx-0 border-light">
+                <div class="col-12 px-0 py-2">
+                    <ng-container *ngFor="let WORKER of jobscheduleItem.workers_list">
+                        <div class="row mx-0">
+                            <div class="col-2 px-1 px-md-3 px-lg-3 px-xl-3 worker-image cursor-pointer"
+                                (click)="dwProfileViewerService.viewProfileInModal(true, WORKER.profile.user_id)">
+                                <ng-container *ngIf="WORKER.profile.avatar!=null">
+                                    <img src="{{WORKER.profile.avatar.face}}"
+                                        class="img-fluid rounded-circle img-thumbnail">
+                                </ng-container>
+                                <ng-container *ngIf="WORKER.profile.avatar==null">
+                                    <img src="/assets/img/face.jpg" class="img-fluid rounded-circle img-thumbnail">
+                                </ng-container>
+                            </div>
+                            <div class="col-10 px-1 col-md-3 col-lg-3 col-xl-3 d-flex align-items-center">
+                                <a href="javascript:void(0);"
+                                    (click)="dwProfileViewerService.viewProfileInModal(true, WORKER.profile.user_id)">
+                                    {{WORKER.profile.name}}
+                                </a>
+                            </div>
+                            <div class="col-12 px-1 col-md-3 col-lg-3 col-xl-3  d-flex align-items-center">
+                                <span>{{WORKER.status}}</span><span>&nbsp;</span><span><span
+                                        class="fa fa-clock-o"></span>&nbsp;{{WORKER.status_time}}</span>
+                                <span>&nbsp;</span>
+                                <ng-container *ngIf="WORKER.status_location!=null">
+                                    <span class="wb-font-size-140" (click)="openMap(true,WORKER.status_location)"
+                                        style="cursor: pointer;"><i class="fa fa-globe" aria-hidden="true"></i></span>
+                                </ng-container>
+                            </div>
+                            <div class="col-12 px-1 col-md-3 col-lg-3 col-xl-3 d-flex align-items-center">
+                                <div class="row mx-0 w-100 px-0">
+                                    <div class="col-6 px-0  d-flex align-items-center">
+                                        <div (click)="openWorkingDetails(WORKER)"
+                                            class="btn btn-sm btn-rounded btn-outline-primary px-2 py-1 mx-1 w-100">
+                                            <span class="fa fa-list"></span>&nbsp;Details
+                                        </div>
+                                    </div>
+                                    <div class="col-6 px-0  d-flex align-items-center">
+                                        <div class="btn btn-sm btn-rounded btn-outline-primary px-2 py-1 mx-1 w-100">
+                                            <span class="fa fa-comments"></span>&nbsp;Messages
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col px-1 d-flex justify-content-center align-items-center">
+                                <ng-container *ngIf="WORKER.status=='Approved'">
+                                    <div class="d-inline-block">
+                                        <span class="mx-1 cursor-pointer"
+                                            [ngClass]="WORKER.rating >=1 ? 'text-success' : 'text-light'"
+                                            (click)=rateJob(1,WORKER.id)>
+                                            <span class="fa fa-2x"
+                                                [ngClass]="WORKER.rating >=1 ? 'fa-star' : 'fa-star-o'"></span></span>
+                                        <span class="mx-1 cursor-pointer"
+                                            [ngClass]="WORKER.rating >=2 ? 'text-success' : 'text-light'"
+                                            (click)=rateJob(2,WORKER.id)>
+                                            <span class="fa fa-2x"
+                                                [ngClass]="WORKER.rating >=2 ? 'fa-star' : 'fa-star-o'"></span></span>
+                                        <span class="mx-1 cursor-pointer"
+                                            [ngClass]="WORKER.rating >=3 ? 'text-success' : 'text-light'"
+                                            (click)=rateJob(3,WORKER.id)>
+                                            <span class="fa fa-2x"
+                                                [ngClass]="WORKER.rating >=3 ? 'fa-star' : 'fa-star-o'"></span></span>
+                                        <span class="mx-1 cursor-pointer"
+                                            [ngClass]="WORKER.rating >=4 ? 'text-success' : 'text-light'"
+                                            (click)=rateJob(4,WORKER.id)>
+                                            <span class="fa fa-2x"
+                                                [ngClass]="WORKER.rating >=4 ? 'fa-star' : 'fa-star-o'"></span></span>
+                                        <span class="mx-1 cursor-pointer"
+                                            [ngClass]="WORKER.rating >=5 ? 'text-success' : 'text-light'"
+                                            (click)=rateJob(5,WORKER.id)>
+                                            <span class="fa fa-2x"
+                                                [ngClass]="WORKER.rating >=5 ? 'fa-star' : 'fa-star-o'"></span></span>
+                                    </div>
+                                </ng-container>
+                                <ng-container *ngIf="WORKER.status=='Completed'">
+                                    <button (click)="openApproveJobModal(WORKER)"
+                                        class="btn btn-sm btn-rounded btn-outline-default px-2 py-1 mx-1 w-100"><span
+                                            class="fa fa-check-circle 2x"></span>&nbsp;Approve</button>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+
+            <ng-container *ngIf="SHOW_ON_MAP.status==true && SHOW_ON_MAP.location!=null">
+                <app-dw-overlay-modal-container>
+                    <div class="row mx-0 w-100 h-100">
+                        <div class="col-12 p-0 map-header">
+                            <div class="row m-0 p-0 bg-white h-100 w-100 d-flex align-items-center">
+                                <div class="col-10">
+                                    <h5>View On Map</h5>
+                                </div>
+                                <div class="col-2 d-flex justify-content-end" style="font-size:300%;">
+                                    <span (click)="openMap(false,null)" class="" style="cursor: pointer;">&times;</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 p-0 map-body">
+                            <app-wb-showon-google-map [location_name]="DW" [showMyPosition]="false"
+                                [defaultPosition]="SHOW_ON_MAP.location" [computeDirection]="false">
+                            </app-wb-showon-google-map>
+                        </div>
+                    </div>
+                </app-dw-overlay-modal-container>
+            </ng-container>
+            <ng-container *ngIf="SHOW_WOKRING_DETAILS.status==true && SHOW_WOKRING_DETAILS.job_acceptance!=null">
+                <app-dw-worker-job-schedule-details-modal [job_schedule]="jobscheduleItem"
+                    [job_acceptance]="SHOW_WOKRING_DETAILS.job_acceptance"
+                    (modalclosedStatusEmit)="workerDetailsModalStatus($event)">
+                </app-dw-worker-job-schedule-details-modal>
+            </ng-container>
+
+            <ng-container *ngIf="SHOW_JOB_APPROVE_MODAL.status==true && SHOW_JOB_APPROVE_MODAL.job_acceptance!=null">
+                <app-approve-completed-job-modal [job_acceptance]="SHOW_JOB_APPROVE_MODAL.job_acceptance"
+                    (jobStatusEmit)="updateJobAcceptanceStatus($event)" (jobRatingEmit)="
+                    updateJobAcceptanceRating($event)" (modalclosedStatusEmit)="approveJobModalStatus($event)">
+                </app-approve-completed-job-modal>
+            </ng-container>
+
+        </ng-container>
+
+    </div>
+</div>

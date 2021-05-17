@@ -1,0 +1,61 @@
+<div class="card mx-0 my-2" style="overflow: hidden;">
+    <div class="card-body p-0">
+        <div class="row mx-0 border-light">
+            <div class="col-9 px-0 py-2 border-light">
+                <div class="row mx-0">
+                    <div class="col-12 font-weight-bold">
+                        {{jobItem.category.name}}
+                    </div>
+                    <div class="col-12">
+                        {{jobItem.name}}
+                    </div>
+                    <div class="col-12">
+                        <span class="d-inline-block">
+                            <span>&nbsp;</span>
+                            <span class="fa fa-clock-o"></span>
+                            <span>&nbsp;</span>
+                            {{jobItem.fulltime}}
+                            <span>&nbsp;</span>
+                        </span>
+                        <span class="d-inline-block">
+                            <span>|&nbsp;</span>
+                            <ng-container *ngIf="jobItem.location.length>0">
+                                <span class="fa fa-map-marker"></span>
+                                <span>&nbsp;</span>
+                                {{jobItem.location[0].location_name}}
+                            </ng-container>
+                            <span>&nbsp;</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col d-flex align-items-end border-light p-0">
+                <div class="row mx-0 w-100 h-100">
+                    <div class="col-6 cursor-pointer d-flex justify-content-center text-primary align-items-center">
+                        <a routerLink="/{{dwViewerService.VIEWER_URL}}/view-job/{{jobItem.id}}"
+                            class="wb-font-size-120 text-primary">
+                            <span class="fa fa-list"></span>
+                        </a>
+                    </div>
+                    <div class="col-6 cursor-pointer d-flex justify-content-center align-items-center">
+                        <div (click)="deleteJob()" class="d-inline-block text-primary wb-font-size-120">
+                            <span class="fa fa-trash"></span>
+                        </div>
+                    </div>                    
+                    <ng-container *ngIf="jobItem.status=='Draft'">
+                        <div class="col-6 cursor-pointer d-flex justify-content-center align-items-center">
+                            <div (click)="deleteJob()" class="d-inline-block text-primary wb-font-size-120">
+                                <span class="fa fa-trash"></span>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<ng-container *ngIf="setToDeleteJob.status==true">
+    <app-dw-employer-delete-job-modal [JOB_AD]="jobItem" (jobDeletedEmit)="updateDeleteEvent($event)"
+        (modalclosedStatusEmit)="deleteJob($event)">
+    </app-dw-employer-delete-job-modal>
+</ng-container>

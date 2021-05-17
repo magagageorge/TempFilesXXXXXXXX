@@ -1,0 +1,15 @@
+<ng-container *ngIf="dwProfileService.editMode.inEdit==true && dwProfileService.editMode.currentEditing!=''">
+    <div class="faint-body-overlay d-block">
+
+        <div class="container-fluid" style="padding:0px;">
+            <div style="position: absolute;top:0px;bottom:0px;left:0px;right:0px;">
+                <div class="d-block h-100 w-100 m-0 p-0">
+                    <ng-container
+                        *ngIf="dwProfileService.editMode.inEdit==true && dwProfileService.editMode.currentEditing=='JobPreferences'">
+                        <app-dw-edit-job-preferences-widget></app-dw-edit-job-preferences-widget>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>

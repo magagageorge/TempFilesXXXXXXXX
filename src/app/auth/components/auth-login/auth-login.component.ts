@@ -4,6 +4,7 @@ import { AuthSocialLink, AUTH_OPTIONS, AuthOptions } from '../../auth.options';
 import { AuthService } from '../../services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { getDeepFromObject } from '../../helpers';
+import { LocalStorageService } from '@app/services/local-storage.service';
 /*
 import { AuthService as sAuthService } from "angularx-social-login";
 import { FacebookLoginProvider, GoogleLoginProvider, LinkedInLoginProvider } from "angularx-social-login";
@@ -32,7 +33,7 @@ export class AuthLoginComponent implements OnInit {
     login_failed: boolean = false;
     socialLinks: AuthSocialLink[];
 
-    constructor(service: AuthService,  router: Router, @Inject(AUTH_OPTIONS) AUTH_OPTIONS: AuthOptions, private formBuilder: FormBuilder) {
+    constructor(service: AuthService, private storageService: LocalStorageService, router: Router, @Inject(AUTH_OPTIONS) AUTH_OPTIONS: AuthOptions, private formBuilder: FormBuilder) {
         this.service = service;
         this.config = AUTH_OPTIONS;
         this.router = router;
@@ -53,10 +54,15 @@ export class AuthLoginComponent implements OnInit {
 
     ngOnInit() {
         var _this = this;
+        var redirect_url = this.storageService.get('WB_AFTER_LOGIN_REDIRECT_URL');
         /* If the loggedin user navigate to this route redirect to feed */
         this.service.isAuthenticated().subscribe(is_authenticated => {
             if (is_authenticated) {
-                return _this.router.navigateByUrl('feed');
+                if (redirect_url != null && redirect_url!='/logout' && redirect_url!='logout') {
+                    _this.storageService.clear('WB_AFTER_LOGIN_REDIRECT_URL');
+                    return _this.router.navigateByUrl(redirect_url);
+                }
+                return _this.router.navigateByUrl('/');
             }
         });
 
@@ -85,7 +91,7 @@ export class AuthLoginComponent implements OnInit {
                 window.location.reload();
             } else {
                 _this.errors = result.getErrors();
-            }         
+            }
 
             var redirect = result.getRedirect();
             if (redirect) {
@@ -100,76 +106,76 @@ export class AuthLoginComponent implements OnInit {
     getConfigValue(key: string): any {
         return getDeepFromObject(this.config, key, null);
     }
-/*
-    signInWithGoogle(): void {
-        var _this = this;
-        this.sauthService.signIn(GoogleLoginProvider.PROVIDER_ID, { prompt: 'select_account' }).then(account => {
-            this.service.authenticate(this.social_provider, account).subscribe(function (result) {
-                var res_data = result.getResponse();
-                if (result.isSuccess()) {
-                    console.log(res_data);
-                }
-                else {
-                    _this.errors = result.getErrors();
-                    console.log(res_data);
-                }
-                var redirect = result.getRedirect();
-                if (redirect) {
-                    setTimeout(function () {
-                        return _this.router.navigateByUrl(redirect);
-                    }, _this.redirectDelay);
-                }
+    /*
+        signInWithGoogle(): void {
+            var _this = this;
+            this.sauthService.signIn(GoogleLoginProvider.PROVIDER_ID, { prompt: 'select_account' }).then(account => {
+                this.service.authenticate(this.social_provider, account).subscribe(function (result) {
+                    var res_data = result.getResponse();
+                    if (result.isSuccess()) {
+                        console.log(res_data);
+                    }
+                    else {
+                        _this.errors = result.getErrors();
+                        console.log(res_data);
+                    }
+                    var redirect = result.getRedirect();
+                    if (redirect) {
+                        setTimeout(function () {
+                            return _this.router.navigateByUrl(redirect);
+                        }, _this.redirectDelay);
+                    }
+                });
             });
-        });
-    }
-
-    signInWithFB(): void {
-        var _this = this;
-        this.sauthService.signIn(FacebookLoginProvider.PROVIDER_ID, { enable_profile_selector: true }).then(account => {
-            this.service.authenticate(this.social_provider, account).subscribe(function (result) {
-                var res_data = result.getResponse();
-                if (result.isSuccess()) {
-                    console.log(res_data);
-                }
-                else {
-                    _this.errors = result.getErrors();
-                    console.log(res_data);
-                }
-                var redirect = result.getRedirect();
-                if (redirect) {
-                    setTimeout(function () {
-                        return _this.router.navigateByUrl(redirect);
-                    }, _this.redirectDelay);
-                }
+        }
+    
+        signInWithFB(): void {
+            var _this = this;
+            this.sauthService.signIn(FacebookLoginProvider.PROVIDER_ID, { enable_profile_selector: true }).then(account => {
+                this.service.authenticate(this.social_provider, account).subscribe(function (result) {
+                    var res_data = result.getResponse();
+                    if (result.isSuccess()) {
+                        console.log(res_data);
+                    }
+                    else {
+                        _this.errors = result.getErrors();
+                        console.log(res_data);
+                    }
+                    var redirect = result.getRedirect();
+                    if (redirect) {
+                        setTimeout(function () {
+                            return _this.router.navigateByUrl(redirect);
+                        }, _this.redirectDelay);
+                    }
+                });
             });
-        });
-    }
-
-    signInWithLinkedIn(): void {
-        var _this = this;
-        this.sauthService.signIn(LinkedInLoginProvider.PROVIDER_ID).then(account => {
-            this.service.authenticate(this.social_provider, account).subscribe(function (result) {
-                var res_data = result.getResponse();
-                if (result.isSuccess()) {
-                    console.log(res_data);
-                }
-                else {
-                    _this.errors = result.getErrors();
-                    console.log(res_data);
-                }
-                var redirect = result.getRedirect();
-                if (redirect) {
-                    setTimeout(function () {
-                        return _this.router.navigateByUrl(redirect);
-                    }, _this.redirectDelay);
-                }
+        }
+    
+        signInWithLinkedIn(): void {
+            var _this = this;
+            this.sauthService.signIn(LinkedInLoginProvider.PROVIDER_ID).then(account => {
+                this.service.authenticate(this.social_provider, account).subscribe(function (result) {
+                    var res_data = result.getResponse();
+                    if (result.isSuccess()) {
+                        console.log(res_data);
+                    }
+                    else {
+                        _this.errors = result.getErrors();
+                        console.log(res_data);
+                    }
+                    var redirect = result.getRedirect();
+                    if (redirect) {
+                        setTimeout(function () {
+                            return _this.router.navigateByUrl(redirect);
+                        }, _this.redirectDelay);
+                    }
+                });
             });
-        });
-    }
-
-    signOut(): void {
-        this.sauthService.signOut();
-    }
-    */
+        }
+    
+        signOut(): void {
+            this.sauthService.signOut();
+        }
+        */
 
 }

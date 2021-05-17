@@ -8,6 +8,17 @@ export class ProfUser {
     constructor() {
     }
 }
+
+export interface ProfileContacts {
+    email: string;
+    mobile: string;
+}
+
+export interface ProfileLanguages {
+    id: number;
+    lang_id: number;
+    name: string;
+}
 export class MyProfile {
     user_id: number;
     firstname: string;
@@ -21,6 +32,8 @@ export class MyProfile {
     no_connections: number;
     no_followers: number;
     no_followings: number;
+    contacts: ProfileContacts;
+    languages: ProfileLanguages[];
     gender: string;
     language: string;
     timezone: string;
@@ -48,20 +61,22 @@ export class MyProfile {
     im_skype: string;
     url: string;
     birthday: string;
-    birth_date:{month:'',day:'',year:''};
+    birth_date: { month: '', day: '', year: '' };
     url_facebook: string;
     url_linkedin: string;
     url_googleplus: string;
     url_twitter: string;
     created_at: string;
     updated_at: string;
-    skills:any[];
-    dealing:any[];
-    educations:any[];
-    experiences:any[];
+    skills: any[];
+    dealing: any[];
+    educations: any[];
+    experiences: any[];
     constructor() {
         this.my_profile = true;
         this.avatar = new ProfileAvatar();
         this.cover = new ProfileCover();
+        this.contacts = null;
+        this.languages = [];
     }
 }

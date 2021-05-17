@@ -1,0 +1,92 @@
+<app-dw-overlay-modal-container>
+    <div class="row mx-0 px-0 h-100 w-100 my-auto">
+        <div
+            class="col-12 col-md-6 col-lg-6 col-xl-6 mx-auto px-md-5 px-lg-5 px-xl-5 py-2 h-100 d-flex align-items-center justify-content-center">
+            <div class="card p-1 my-auto">
+                <div class="card-header  p-1">
+                    <div class="row mx-0 w-100">
+                        <div class="col-12 p-0 container-fluid">
+                            <div class="row mx-0">
+                                <div class="col-8 d-inline-block wb-font-size-110">Approve Job</div>
+                                <div class="col-4 d-flex justify-content-end align-items-center">
+                                    <button type="button" class="close btn-sm pull-right" aria-describedby="modal-title"
+                                        (click)="closeThis()">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body p-1">
+                    <div class="row mx-0">
+
+
+                    </div>
+                    <ng-container *ngIf="ACTION=='APPROVE'">
+                        <div class="col-12">
+                            <h6>You are about to approve job and payment for
+                                <ng-container *ngIf="job_acceptance.profile!=null">
+                                    {{job_acceptance.profile.name}}
+                                </ng-container>
+                            </h6>
+                        </div>
+                    </ng-container>
+                    <ng-container *ngIf="ACTION=='RATE'">
+                        <div class="col-12">
+                            <h6>Please rate
+                                <ng-container *ngIf="job_acceptance.profile!=null">
+                                    {{job_acceptance.profile.name}}'s Work
+                                </ng-container>
+                            </h6>
+                        </div>
+
+                        <div class="col-12 d-flex justify-content-center">
+                            <div class="d-inline-block">
+                                <span class="mx-1 cursor-pointer"
+                                    [ngClass]="job_acceptance.rating >=1 ? 'text-success' : 'text-light'"
+                                    (click)=rateJob(1,job_acceptance.id)>
+                                    <span class="fa fa-2x"
+                                        [ngClass]="job_acceptance.rating >=1 ? 'fa-star' : 'fa-star-o'"></span></span>
+                                <span class="mx-1 cursor-pointer"
+                                    [ngClass]="job_acceptance.rating >=2 ? 'text-success' : 'text-light'"
+                                    (click)=rateJob(2,job_acceptance.id)>
+                                    <span class="fa fa-2x"
+                                        [ngClass]="job_acceptance.rating >=2 ? 'fa-star' : 'fa-star-o'"></span></span>
+                                <span class="mx-1 cursor-pointer"
+                                    [ngClass]="job_acceptance.rating >=3 ? 'text-success' : 'text-light'"
+                                    (click)=rateJob(3,job_acceptance.id)>
+                                    <span class="fa fa-2x"
+                                        [ngClass]="job_acceptance.rating >=3 ? 'fa-star' : 'fa-star-o'"></span></span>
+                                <span class="mx-1 cursor-pointer"
+                                    [ngClass]="job_acceptance.rating >=4 ? 'text-success' : 'text-light'"
+                                    (click)=rateJob(4,job_acceptance.id)>
+                                    <span class="fa fa-2x"
+                                        [ngClass]="job_acceptance.rating >=4 ? 'fa-star' : 'fa-star-o'"></span></span>
+                                <span class="mx-1 cursor-pointer"
+                                    [ngClass]="job_acceptance.rating >=5 ? 'text-success' : 'text-light'"
+                                    (click)=rateJob(5,job_acceptance.id)>
+                                    <span class="fa fa-2x"
+                                        [ngClass]="job_acceptance.rating >=5 ? 'fa-star' : 'fa-star-o'"></span></span>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+                <div class="card-footer  p-1">
+                    <ng-container *ngIf="request_responded==true">
+                        <div class="row mx-0">
+                            <div class="col-12 d-flex justify-content-center">
+                                <button (click)="closeThis()"
+                                    class="btn btn-sm btn-rounded btn-outline-warning">Done</button>
+                            </div>
+                        </div>
+                    </ng-container>
+                    <ng-container *ngIf="ACTION=='APPROVE'">
+                        <button class="btn btn-sm btn-outline-warning btn-rounded" (click)="approveJob()">Approve
+                            Now</button>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </div>
+</app-dw-overlay-modal-container>

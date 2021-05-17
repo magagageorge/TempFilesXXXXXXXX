@@ -32,6 +32,7 @@ export class AuthLogoutComponent implements OnInit {
     logout(provider: string): void{
         var _this = this;
         this.service.logout(provider).subscribe(result=>{
+            window.location.reload();
             var redirect = result.getRedirect();
             if (redirect) {
                 setTimeout(function () {

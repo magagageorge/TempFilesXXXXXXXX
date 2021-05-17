@@ -1,0 +1,15 @@
+<app-dw-profile-nav-bar [TOPNAV_TITLE]="TOPNAV_TITLE"></app-dw-profile-nav-bar>
+<main class="content container-fluid p-0">
+    <div class="container-fluid m-0 p-0">
+        <div class="wb-page-manager-left-navigation shadow-sm" id="dw-mobile-left-menu">
+            <app-dw-profile-left-menu-widget></app-dw-profile-left-menu-widget>
+        </div>
+        <div class="d-block page-manager-container">
+            <div class="row mx-0" style="min-height: 80vh;">
+                <div class="col-12 d-block mx-0 px-0">
+                    <ng-content></ng-content>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

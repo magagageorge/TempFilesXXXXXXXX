@@ -1,0 +1,3248 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>woorbi documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">woorbi documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content injectable">
+                   <div class="content-data">
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Injectables</li>
+  <li>AdsService</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/ads-manager/services/ads.service.ts</code>
+        </p>
+
+
+
+
+            <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#ad_account">ad_account</a>
+                            </li>
+                            <li>
+                                <a href="#ad_form_open">ad_form_open</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#add_account_loaded">add_account_loaded</a>
+                            </li>
+                            <li>
+                                <a href="#ADS_LIST">ADS_LIST</a>
+                            </li>
+                            <li>
+                                <a href="#ADS_OBJECTIVES">ADS_OBJECTIVES</a>
+                            </li>
+                            <li>
+                                <a href="#ADS_OBJECTIVES_TYPES">ADS_OBJECTIVES_TYPES</a>
+                            </li>
+                            <li>
+                                <a href="#allowedExtensions">allowedExtensions</a>
+                            </li>
+                            <li>
+                                <a href="#callActions">callActions</a>
+                            </li>
+                            <li>
+                                <a href="#compaign_in_edit">compaign_in_edit</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#crudconfig">crudconfig</a>
+                            </li>
+                            <li>
+                                <a href="#loading_ads">loading_ads</a>
+                            </li>
+                            <li>
+                                <a href="#loading_ads_manager">loading_ads_manager</a>
+                            </li>
+                            <li>
+                                <a href="#loading_ads_objectives">loading_ads_objectives</a>
+                            </li>
+                            <li>
+                                <a href="#next_ads_page">next_ads_page</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#profileService">profileService</a>
+                            </li>
+                            <li>
+                                <a href="#provider">provider</a>
+                            </li>
+                            <li>
+                                <a href="#redirectDelay">redirectDelay</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#router">router</a>
+                            </li>
+                            <li>
+                                <a href="#service">service</a>
+                            </li>
+                            <li>
+                                <a href="#showMessages">showMessages</a>
+                            </li>
+                            <li>
+                                <a href="#wait_processing_request">wait_processing_request</a>
+                            </li>
+                            <li>
+                                <a href="#wait_processing_request_message">wait_processing_request_message</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#adsContentToContentForm">adsContentToContentForm</a>
+                            </li>
+                            <li>
+                                <a href="#closeAdContentFormModal">closeAdContentFormModal</a>
+                            </li>
+                            <li>
+                                <a href="#filterObjectiveByType">filterObjectiveByType</a>
+                            </li>
+                            <li>
+                                <a href="#getAdFormats">getAdFormats</a>
+                            </li>
+                            <li>
+                                <a href="#getConfigValue">getConfigValue</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Static</span>
+                                <a href="#getFileExtension">getFileExtension</a>
+                            </li>
+                            <li>
+                                <a href="#isAccountLoaded">isAccountLoaded</a>
+                            </li>
+                            <li>
+                                <a href="#loadAdObjectives">loadAdObjectives</a>
+                            </li>
+                            <li>
+                                <a href="#loadAdsAccount">loadAdsAccount</a>
+                            </li>
+                            <li>
+                                <a href="#openAdContentFormModal">openAdContentFormModal</a>
+                            </li>
+                            <li>
+                                <a href="#removeDeletedAd">removeDeletedAd</a>
+                            </li>
+                            <li>
+                                <a href="#removeDeletedCompaign">removeDeletedCompaign</a>
+                            </li>
+                            <li>
+                                <a href="#searchAdInCompaign">searchAdInCompaign</a>
+                            </li>
+                            <li>
+                                <a href="#searchAdInCompaignForm">searchAdInCompaignForm</a>
+                            </li>
+                            <li>
+                                <a href="#searchCTA">searchCTA</a>
+                            </li>
+                            <li>
+                                <a href="#SelectObjective">SelectObjective</a>
+                            </li>
+                            <li>
+                                <a href="#setAccountLoaded">setAccountLoaded</a>
+                            </li>
+                            <li>
+                                <a href="#setAdCardForms">setAdCardForms</a>
+                            </li>
+                            <li>
+                                <a href="#setAdContentForm">setAdContentForm</a>
+                            </li>
+                            <li>
+                                <a href="#setCompaignModelForm">setCompaignModelForm</a>
+                            </li>
+                            <li>
+                                <a href="#setCompaingInEdit">setCompaingInEdit</a>
+                            </li>
+                            <li>
+                                <a href="#unSelectAllObjectives">unSelectAllObjectives</a>
+                            </li>
+                            <li>
+                                <a href="#UpdateAdStatus">UpdateAdStatus</a>
+                            </li>
+                            <li>
+                                <a href="#UpdateCompaignStatus">UpdateCompaignStatus</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#validateFile">validateFile</a>
+                            </li>
+                            <li>
+                                <a href="#WaitProcessingRequest">WaitProcessingRequest</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#CompaingInEdit">CompaingInEdit</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+            <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(service: <a href="../classes/CrudService.html">CrudService</a>, profileService: <a href="../injectables/ProfileService.html">ProfileService</a>, CRUD_OPTIONS: <a href="../interfaces/CrudOptions.html">CrudOptions</a>, _modalService: NgbModal, router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/ads-manager/services/ads.service.ts:42</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>service</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../classes/CrudService.html" target="_self" >CrudService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>profileService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ProfileService.html" target="_self" >ProfileService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>CRUD_OPTIONS</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../interfaces/CrudOptions.html" target="_self" >CrudOptions</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>_modalService</td>
+                                                  
+                                                        <td>
+                                                                    <code>NgbModal</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+            <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="adsContentToContentForm"></a>
+                    <span class="name">
+                        <b>
+                            adsContentToContentForm
+                        </b>
+                        <a href="#adsContentToContentForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>adsContentToContentForm(ads: <a href="../classes/AdContent.html">AdContent[]</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="195"
+                            class="link-to-prism">src/app/ads-manager/services/ads.service.ts:195</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>ads</td>
+                                    <td>
+                                                <code><a href="../classes/AdContent.html" target="_self" >AdContent[]</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>{}</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="closeAdContentFormModal"></a>
+                    <span class="name">
+                        <b>
+                            closeAdContentFormModal
+                        </b>
+                        <a href="#closeAdContentFormModal"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>closeAdContentFormModal()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="129"
+                            class="link-to-prism">src/app/ads-manager/services/ads.service.ts:129</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="filterObjectiveByType"></a>
+                    <span class="name">
+                        <b>
+                            filterObjectiveByType
+                        </b>
+                        <a href="#filterObjectiveByType"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>filterObjectiveByType(type: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="109"
+                            class="link-to-prism">src/app/ads-manager/services/ads.service.ts:109</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>type</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../classes/AdObjective.html" target="_self" >AdObjective[]</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getAdFormats"></a>
+                    <span class="name">
+                        <b>
+                            getAdFormats
+                        </b>
+                        <a href="#getAdFormats"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getAdFormats(selectedObjective: <a href="../classes/AdObjective.html">AdObjective</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="261"
+                            class="link-to-prism">src/app/ads-manager/services/ads.service.ts:261</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>selectedObjective</td>
+                                    <td>
+                                                <code><a href="../classes/AdObjective.html" target="_self" >AdObjective</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>{}</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getConfigValue"></a>
+                    <span class="name">
+                        <b>
+                            getConfigValue
+                        </b>
+                        <a href="#getConfigValue"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getConfigValue(key: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="149"
+                            class="link-to-prism">src/app/ads-manager/services/ads.service.ts:149</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>key</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getFileExtension"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Static</span>
+                            getFileExtension
+                        </b>
+                        <a href="#getFileExtension"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getFileExtension(filename: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="138"
+                            class="link-to-prism">src/app/ads-manager/services/ads.service.ts:138</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>filename</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>null | string</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isAccountLoaded"></a>
+                    <span class="name">
+                        <b>
+                            isAccountLoaded
+                        </b>
+                        <a href="#isAccountLoaded"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>isAccountLoaded()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="60"
+                            class="link-to-prism">src/app/ads-manager/services/ads.service.ts:60</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Observable&lt;boolean&gt;</code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadAdObjectives"></a>
+                    <span class="name">
+                        <b>
+                            loadAdObjectives
+                        </b>
+                        <a href="#loadAdObjectives"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>loadAdObjectives(params?: literal type)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="95"
+                            class="link-to-prism">src/app/ads-manager/services/ads.service.ts:95</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>params</td>
+                                    <td>
+                                            <code>literal type</code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadAdsAccount"></a>
+                    <span class="name">
+                        <b>
+                            loadAdsAccount
+                        </b>
+                        <a href="#loadAdsAccount"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>loadAdsAccount(params?: literal type)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="64"
+                            class="link-to-prism">src/app/ads-manager/services/ads.service.ts:64</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>params</td>
+                                    <td>
+                                            <code>literal type</code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="openAdContentFormModal"></a>
+                    <span class="name">
+                        <b>
+                            openAdContentFormModal
+                        </b>
+                        <a href="#openAdContentFormModal"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>openAdContentFormModal()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="134"
+                            class="link-to-prism">src/app/ads-manager/services/ads.service.ts:134</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="removeDeletedAd"></a>
+                    <span class="name">
+                        <b>
+                            removeDeletedAd
+                        </b>
+                        <a href="#removeDeletedAd"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>removeDeletedAd(ad_id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="347"
+                            class="link-to-prism">src/app/ads-manager/services/ads.service.ts:347</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>ad_id</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="removeDeletedCompaign"></a>
+                    <span class="name">
+                        <b>
+                            removeDeletedCompaign
+                        </b>
+                        <a href="#removeDeletedCompaign"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>removeDeletedCompaign(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="351"
+                            class="link-to-prism">src/app/ads-manager/services/ads.service.ts:351</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="searchAdInCompaign"></a>
+                    <span class="name">
+                        <b>
+                            searchAdInCompaign
+                        </b>
+                        <a href="#searchAdInCompaign"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>searchAdInCompaign(ads: any[], adId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="253"
+                            class="link-to-prism">src/app/ads-manager/services/ads.service.ts:253</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>ads</td>
+                                    <td>
+                                            <code>any[]</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>adId</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../classes/AdContent.html" target="_self" >Observable&lt;AdContent&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="searchAdInCompaignForm"></a>
+                    <span class="name">
+                        <b>
+                            searchAdInCompaignForm
+                        </b>
+                        <a href="#searchAdInCompaignForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>searchAdInCompaignForm(ads: AdContentForm[], adId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="257"
+                            class="link-to-prism">src/app/ads-manager/services/ads.service.ts:257</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>ads</td>
+                                    <td>
+                                            <code>AdContentForm[]</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>adId</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Observable&lt;AdContentForm&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="searchCTA"></a>
+                    <span class="name">
+                        <b>
+                            searchCTA
+                        </b>
+                        <a href="#searchCTA"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>searchCTA(call_to_action: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="145"
+                            class="link-to-prism">src/app/ads-manager/services/ads.service.ts:145</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>call_to_action</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../interfaces/Action.html" target="_self" >Observable&lt;CallToAction&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="SelectObjective"></a>
+                    <span class="name">
+                        <b>
+                            SelectObjective
+                        </b>
+                        <a href="#SelectObjective"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>SelectObjective(code: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="119"
+                            class="link-to-prism">src/app/ads-manager/services/ads.service.ts:119</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>code</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setAccountLoaded"></a>
+                    <span class="name">
+                        <b>
+                            setAccountLoaded
+                        </b>
+                        <a href="#setAccountLoaded"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>setAccountLoaded(newValue)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="56"
+                            class="link-to-prism">src/app/ads-manager/services/ads.service.ts:56</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>newValue</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setAdCardForms"></a>
+                    <span class="name">
+                        <b>
+                            setAdCardForms
+                        </b>
+                        <a href="#setAdCardForms"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>setAdCardForms(adCards: AdContentCard[])</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="228"
+                            class="link-to-prism">src/app/ads-manager/services/ads.service.ts:228</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>adCards</td>
+                                    <td>
+                                            <code>AdContentCard[]</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>AdContentCardForm[]</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setAdContentForm"></a>
+                    <span class="name">
+                        <b>
+                            setAdContentForm
+                        </b>
+                        <a href="#setAdContentForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>setAdContentForm(adContent: <a href="../classes/AdContent.html">AdContent</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="204"
+                            class="link-to-prism">src/app/ads-manager/services/ads.service.ts:204</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>adContent</td>
+                                    <td>
+                                                <code><a href="../classes/AdContent.html" target="_self" >AdContent</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setCompaignModelForm"></a>
+                    <span class="name">
+                        <b>
+                            setCompaignModelForm
+                        </b>
+                        <a href="#setCompaignModelForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>setCompaignModelForm(compaign: <a href="../classes/AdCompaign.html">AdCompaign</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="157"
+                            class="link-to-prism">src/app/ads-manager/services/ads.service.ts:157</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>compaign</td>
+                                    <td>
+                                                <code><a href="../classes/AdCompaign.html" target="_self" >AdCompaign</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setCompaingInEdit"></a>
+                    <span class="name">
+                        <b>
+                            setCompaingInEdit
+                        </b>
+                        <a href="#setCompaingInEdit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>setCompaingInEdit(compaign: <a href="../classes/AdCompaignForm.html">AdCompaignForm</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="153"
+                            class="link-to-prism">src/app/ads-manager/services/ads.service.ts:153</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>compaign</td>
+                                    <td>
+                                                <code><a href="../classes/AdCompaignForm.html" target="_self" >AdCompaignForm</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="unSelectAllObjectives"></a>
+                    <span class="name">
+                        <b>
+                            unSelectAllObjectives
+                        </b>
+                        <a href="#unSelectAllObjectives"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>unSelectAllObjectives()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="113"
+                            class="link-to-prism">src/app/ads-manager/services/ads.service.ts:113</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="UpdateAdStatus"></a>
+                    <span class="name">
+                        <b>
+                            UpdateAdStatus
+                        </b>
+                        <a href="#UpdateAdStatus"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>UpdateAdStatus(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, status: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="355"
+                            class="link-to-prism">src/app/ads-manager/services/ads.service.ts:355</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>status</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="UpdateCompaignStatus"></a>
+                    <span class="name">
+                        <b>
+                            UpdateCompaignStatus
+                        </b>
+                        <a href="#UpdateCompaignStatus"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>UpdateCompaignStatus(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, status: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="359"
+                            class="link-to-prism">src/app/ads-manager/services/ads.service.ts:359</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>status</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="validateFile"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            validateFile
+                        </b>
+                        <a href="#validateFile"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>validateFile(file: File)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="85"
+                            class="link-to-prism">src/app/ads-manager/services/ads.service.ts:85</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>file</td>
+                                    <td>
+                                            <code>File</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" target="_blank" >Boolean</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="WaitProcessingRequest"></a>
+                    <span class="name">
+                        <b>
+                            WaitProcessingRequest
+                        </b>
+                        <a href="#WaitProcessingRequest"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>WaitProcessingRequest(status: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>, message: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="363"
+                            class="link-to-prism">src/app/ads-manager/services/ads.service.ts:363</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>status</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>message</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+            <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ad_account"></a>
+                        <span class="name">
+                            <b>
+                            ad_account</b>
+                            <a href="#ad_account"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../classes/AdsAccount.html" target="_self" >AdsAccount</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>null</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/ads-manager/services/ads.service.ts:22</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ad_form_open"></a>
+                        <span class="name">
+                            <b>
+                            ad_form_open</b>
+                            <a href="#ad_form_open"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>false</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/ads-manager/services/ads.service.ts:38</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="add_account_loaded"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            add_account_loaded</b>
+                            <a href="#add_account_loaded"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>BehaviorSubject&lt;boolean&gt;</code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/ads-manager/services/ads.service.ts:39</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ADS_LIST"></a>
+                        <span class="name">
+                            <b>
+                            ADS_LIST</b>
+                            <a href="#ADS_LIST"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>any[]</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>[]</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/ads-manager/services/ads.service.ts:23</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ADS_OBJECTIVES"></a>
+                        <span class="name">
+                            <b>
+                            ADS_OBJECTIVES</b>
+                            <a href="#ADS_OBJECTIVES"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../classes/AdObjective.html" target="_self" >AdObjective[]</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>[]</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/ads-manager/services/ads.service.ts:24</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ADS_OBJECTIVES_TYPES"></a>
+                        <span class="name">
+                            <b>
+                            ADS_OBJECTIVES_TYPES</b>
+                            <a href="#ADS_OBJECTIVES_TYPES"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>AdObjectiveType[]</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>[]</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/ads-manager/services/ads.service.ts:25</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="allowedExtensions"></a>
+                        <span class="name">
+                            <b>
+                            allowedExtensions</b>
+                            <a href="#allowedExtensions"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>string[]</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>[&#x27;png&#x27;, &#x27;jpg&#x27;, &#x27;gif&#x27;, &#x27;jpeg&#x27;]</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/ads-manager/services/ads.service.ts:40</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="callActions"></a>
+                        <span class="name">
+                            <b>
+                            callActions</b>
+                            <a href="#callActions"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../interfaces/Action.html" target="_self" >CallToAction[]</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/ads-manager/services/ads.service.ts:28</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="compaign_in_edit"></a>
+                        <span class="name">
+                            <b>
+                            compaign_in_edit</b>
+                            <a href="#compaign_in_edit"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../classes/AdCompaignForm.html" target="_self" >AdCompaignForm</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>null</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/ads-manager/services/ads.service.ts:26</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="crudconfig"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Protected</span>
+                            crudconfig</b>
+                            <a href="#crudconfig"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>literal type</code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/ads-manager/services/ads.service.ts:29</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="loading_ads"></a>
+                        <span class="name">
+                            <b>
+                            loading_ads</b>
+                            <a href="#loading_ads"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/ads-manager/services/ads.service.ts:35</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="loading_ads_manager"></a>
+                        <span class="name">
+                            <b>
+                            loading_ads_manager</b>
+                            <a href="#loading_ads_manager"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>false</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/ads-manager/services/ads.service.ts:36</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="loading_ads_objectives"></a>
+                        <span class="name">
+                            <b>
+                            loading_ads_objectives</b>
+                            <a href="#loading_ads_objectives"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>false</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/ads-manager/services/ads.service.ts:37</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="next_ads_page"></a>
+                        <span class="name">
+                            <b>
+                            next_ads_page</b>
+                            <a href="#next_ads_page"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/ads-manager/services/ads.service.ts:34</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="profileService"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            profileService</b>
+                            <a href="#profileService"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../injectables/ProfileService.html" target="_self" >ProfileService</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/ads-manager/services/ads.service.ts:44</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="provider"></a>
+                        <span class="name">
+                            <b>
+                            provider</b>
+                            <a href="#provider"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/ads-manager/services/ads.service.ts:33</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="redirectDelay"></a>
+                        <span class="name">
+                            <b>
+                            redirectDelay</b>
+                            <a href="#redirectDelay"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/ads-manager/services/ads.service.ts:31</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="router"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Protected</span>
+                            router</b>
+                            <a href="#router"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/ads-manager/services/ads.service.ts:30</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="service"></a>
+                        <span class="name">
+                            <b>
+                            service</b>
+                            <a href="#service"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../classes/CrudService.html" target="_self" >CrudService</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/ads-manager/services/ads.service.ts:27</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="showMessages"></a>
+                        <span class="name">
+                            <b>
+                            showMessages</b>
+                            <a href="#showMessages"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/ads-manager/services/ads.service.ts:32</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="wait_processing_request"></a>
+                        <span class="name">
+                            <b>
+                            wait_processing_request</b>
+                            <a href="#wait_processing_request"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>false</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/ads-manager/services/ads.service.ts:41</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="wait_processing_request_message"></a>
+                        <span class="name">
+                            <b>
+                            wait_processing_request_message</b>
+                            <a href="#wait_processing_request_message"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>&#x27;&#x27;</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/ads-manager/services/ads.service.ts:42</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+</section>
+
+            <section>
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="CompaingInEdit"></a>
+                        <span class="name"><b>CompaingInEdit</b><a href="#CompaingInEdit"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>CompaingInEdit()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="343" class="link-to-prism">src/app/ads-manager/services/ads.service.ts:343</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+</section>
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable, Inject } from &#x27;@angular/core&#x27;;
+import { getDeepFromObject } from &#x27;@app/@crud/helpers&#x27;;
+import { Router } from &#x27;@angular/router&#x27;;
+import { CrudService, CRUD_OPTIONS, CrudOptions } from &#x27;@app/@crud&#x27;;
+import { NgbModal } from &#x27;@ng-bootstrap/ng-bootstrap&#x27;;
+import { Observable, of, BehaviorSubject } from &#x27;rxjs&#x27;;
+import { AdsAccount } from &#x27;../models/ads-account&#x27;;
+import { ProfileService } from &#x27;@app/services/profile.service&#x27;;
+import { AdObjectiveType } from &#x27;../models/ad-objective-type&#x27;;
+import { AdObjective } from &#x27;../models/ad-objective&#x27;;
+import { AdCompaignForm } from &#x27;../models/ad-compaign-form&#x27;;
+import { AdCompaign } from &#x27;../models/ad-compaign&#x27;;
+import { AdContent, AdContentForm, AdContentCard, AdContentCardForm } from &#x27;../models/ad-content&#x27;;
+import { WB_AD_FORMATS, AdFormat } from &#x27;../models/ad-format&#x27;;
+import { CallToAction, call_to_actions } from &#x27;../models/call-to-action&#x27;;
+
+@Injectable({
+  providedIn: &#x27;root&#x27;
+})
+export class AdsService {
+
+  ad_account: AdsAccount &#x3D; null;
+  ADS_LIST: any[] &#x3D; [];
+  ADS_OBJECTIVES: AdObjective[] &#x3D; [];
+  ADS_OBJECTIVES_TYPES: AdObjectiveType[] &#x3D; [];
+  compaign_in_edit: AdCompaignForm &#x3D; null;
+  service: CrudService;
+  callActions: CallToAction[];
+  protected crudconfig: {};
+  protected router: Router;
+  redirectDelay: number;
+  showMessages: any;
+  provider: string;
+  next_ads_page: number;
+  loading_ads: boolean;
+  loading_ads_manager: boolean &#x3D; false;
+  loading_ads_objectives: boolean &#x3D; false;
+  ad_form_open: boolean &#x3D; false;
+  private add_account_loaded: BehaviorSubject&lt;boolean&gt;;
+  allowedExtensions: string[] &#x3D; [&#x27;png&#x27;, &#x27;jpg&#x27;, &#x27;gif&#x27;, &#x27;jpeg&#x27;];
+  wait_processing_request: boolean &#x3D; false;
+  wait_processing_request_message: string &#x3D; &#x27;&#x27;;
+
+  constructor(service: CrudService, public profileService: ProfileService, @Inject(CRUD_OPTIONS) CRUD_OPTIONS: CrudOptions, private _modalService: NgbModal, router: Router) {
+    this.next_ads_page &#x3D; 1;
+    this.service &#x3D; service;
+    this.crudconfig &#x3D; CRUD_OPTIONS;
+    this.router &#x3D; router;
+    this.provider &#x3D; this.getConfigValue(&#x27;forms.ads.provider&#x27;);
+    this.add_account_loaded &#x3D; new BehaviorSubject&lt;boolean&gt;(false);
+    this.loadAdObjectives({});
+    this.callActions &#x3D; call_to_actions;
+  }
+
+  /* function to change the account_loaded_state*/
+  setAccountLoaded(newValue): void {
+    this.add_account_loaded.next(newValue);
+  }
+
+  isAccountLoaded(): Observable&lt;boolean&gt; {
+    return this.add_account_loaded.asObservable();
+  }
+
+  loadAdsAccount(params?: {}): any {
+    var _this &#x3D; this;
+    this.loading_ads_manager &#x3D; true;
+    this.service.getProvider(this.provider).crudconfig.route_url &#x3D; &#x27;ads/account/&#x27;;
+    return this.service.getone(this.provider, params).subscribe(results &#x3D;&gt; {
+      _this.loading_ads_manager &#x3D; false;
+      if (results.isSuccess()) {
+        var data &#x3D; results.getResultData();
+        _this.ad_account &#x3D; data.ad_acc as AdsAccount;
+        if (data.ad_acc !&#x3D; null) {
+          if (this.router.url &#x3D;&#x3D; &#x27;/adsmanager&#x27;) {
+            _this.router.navigateByUrl(&#x27;adsmanager/compaigns&#x27;);
+          }
+        } else {
+          _this.router.navigateByUrl(&#x27;adsmanager/accounts&#x27;);
+        }
+        this.setAccountLoaded(true);
+      }
+    });
+  }
+
+  public validateFile(file: File): Boolean {
+    if (this.allowedExtensions.length !&#x3D;&#x3D; 0 &amp;&amp; file instanceof File) {
+      const ext &#x3D; AdsService.getFileExtension(file.name);
+      if (this.allowedExtensions.indexOf(ext) !&#x3D;&#x3D; -1) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  loadAdObjectives(params?: {}): any {
+    var _this &#x3D; this;
+    this.service.getProvider(this.provider).crudconfig.route_url &#x3D; &#x27;ads/objectives/&#x27;;
+    this.loading_ads_objectives &#x3D; true;
+    return this.service.getall(this.provider, params).subscribe(results &#x3D;&gt; {
+      _this.loading_ads_objectives &#x3D; false;
+      if (results.isSuccess()) {
+        var data &#x3D; results.getResultData();
+        _this.ADS_OBJECTIVES &#x3D; data.objectives;
+        _this.ADS_OBJECTIVES_TYPES &#x3D; data.types;
+      }
+    });
+  }
+
+  filterObjectiveByType(type: string): AdObjective[] {
+    return this.ADS_OBJECTIVES.filter((x: AdObjective) &#x3D;&gt; x.type_code &#x3D;&#x3D;&#x3D; type);
+  }
+
+  unSelectAllObjectives() {
+    this.ADS_OBJECTIVES.forEach(objective &#x3D;&gt; {
+      objective.selected &#x3D; false;
+    });
+  }
+
+  SelectObjective(code: string) {
+    this.ADS_OBJECTIVES.forEach((obj: AdObjective) &#x3D;&gt; {
+      if (obj.code &#x3D;&#x3D; code) {
+        obj.selected &#x3D; true;
+      } else {
+        obj.selected &#x3D; false;
+      }
+    });
+  }
+
+  closeAdContentFormModal() {
+    this.ad_form_open &#x3D; false;
+  }
+
+
+  openAdContentFormModal() {
+    this.ad_form_open &#x3D; true;
+  }
+
+  public static getFileExtension(filename: string): null | string {
+    if (filename.indexOf(&#x27;.&#x27;) &#x3D;&#x3D;&#x3D; -1) {
+      return null;
+    }
+    return filename.split(&#x27;.&#x27;).pop();
+  }
+
+  searchCTA(call_to_action: string): Observable&lt;CallToAction&gt; {
+    return of(this.callActions.find((cta: CallToAction) &#x3D;&gt; cta.code &#x3D;&#x3D;&#x3D; call_to_action));
+  }
+
+  getConfigValue(key: string): any {
+    return getDeepFromObject(this.crudconfig, key, null);
+  }
+
+  setCompaingInEdit(compaign: AdCompaignForm) {
+    this.compaign_in_edit &#x3D; compaign;
+  }
+
+  setCompaignModelForm(compaign: AdCompaign) {
+    var compaign_model &#x3D; new AdCompaignForm();
+    compaign_model.id &#x3D; compaign.id;
+    compaign_model.account_id &#x3D; compaign.account_id;
+    compaign_model.objective &#x3D; compaign.objective.code;
+    compaign_model.selected_objective &#x3D; compaign.objective;
+    compaign_model.compaign_name &#x3D; compaign.compaign_name;
+    compaign_model.gender &#x3D; compaign.aud_gender;
+    compaign_model.aud_age_max &#x3D; compaign.aud_age_max;
+    compaign_model.aud_age_min &#x3D; compaign.aud_age_min;
+    compaign_model.gender &#x3D; compaign.aud_gender;
+    compaign_model.aud_locations &#x3D; compaign.aud_locations;
+    compaign_model.currentForm &#x3D; compaign.current_form;
+    compaign_model.status &#x3D; compaign.status;
+    compaign_model.ads &#x3D; this.adsContentToContentForm(compaign.ads);
+    if (compaign.budget_schedule !&#x3D; null) {
+      compaign_model.budget_type &#x3D; compaign.budget_schedule.budget_type;
+      if (compaign.budget_schedule.budget_type &#x3D;&#x3D; &#x27;total&#x27;) {
+        compaign_model.total_budget &#x3D; compaign.budget_schedule.total_budget;
+        compaign_model.daily_budget &#x3D; &#x27;&#x27;;
+      } else {
+        compaign_model.daily_budget &#x3D; compaign.budget_schedule.daily_budget;
+        compaign_model.total_budget &#x3D; &#x27;&#x27;;
+      }
+      if (compaign.budget_schedule.end_date !&#x3D; null &amp;&amp; compaign.budget_schedule.end_date !&#x3D; &#x27;&#x27;) {
+        compaign_model.date_schedule &#x3D; &#x27;start_end&#x27;;
+      } else {
+        compaign_model.date_schedule &#x3D; &#x27;continuous&#x27;;
+      }
+      compaign_model.start_date &#x3D; compaign.budget_schedule.start_date;
+      compaign_model.end_date &#x3D; compaign.budget_schedule.end_date;
+    } else {
+      compaign_model.budget_type &#x3D; &#x27;daily&#x27;;
+      compaign_model.date_schedule &#x3D; &#x27;continuous&#x27;;
+    }
+    return compaign_model;
+  }
+
+  adsContentToContentForm(ads: AdContent[]) {
+    var _this &#x3D; this;
+    var ads_forms &#x3D; [] as AdContentForm[];
+    ads.forEach((ad: AdContent) &#x3D;&gt; {
+      ads_forms.push(_this.setAdContentForm(ad));
+    });
+    return ads_forms;
+  }
+
+  setAdContentForm(adContent: AdContent) {
+    var form_model &#x3D; new AdContentForm();
+    form_model.id &#x3D; adContent.id;
+    form_model.introduction &#x3D; adContent.introduction;
+    form_model.name &#x3D; adContent.name;
+    form_model.one_destination &#x3D; adContent.one_destination;
+    form_model.destination_url &#x3D; adContent.destination_url;
+    form_model.page_id &#x3D; (adContent.page !&#x3D; null) ? adContent.page.id : null;
+    form_model.ad_format &#x3D; adContent.ad_format;
+    form_model.call_to_action &#x3D; adContent.call_to_action;
+    form_model.cards &#x3D; this.setAdCardForms(adContent.cards);
+    form_model.compaign_id &#x3D; adContent.compaign_id;
+    form_model.status &#x3D; adContent.status;
+    this.searchCTA(adContent.call_to_action).subscribe((cta: CallToAction) &#x3D;&gt; {
+      if (cta) {
+        form_model.selectedCTA &#x3D; cta;
+      } else {
+        form_model.selectedCTA &#x3D; null;
+      }
+    });
+    form_model.selected_page &#x3D; adContent.page;
+    return form_model;
+  }
+
+  setAdCardForms(adCards: AdContentCard[]): AdContentCardForm[] {
+    var card_forms: AdContentCardForm[] &#x3D; [];
+    var sn &#x3D; 1;
+    adCards.forEach(card &#x3D;&gt; {
+      card_forms.push({
+        id: card.id,
+        sn: sn,
+        headline: card.headline,
+        description: card.description,
+        destination_url: card.destination_url,
+        media: card.media,
+        upload_media: false,
+        media_file: null,
+        media_width: card.media_width,
+        media_height: card.media_height,
+        media_wh_ratio: 0,
+        media_size: card.media_size,
+        media_ext: card.media_ext
+      });
+      sn++;
+    });
+
+    return card_forms;
+  }
+
+  searchAdInCompaign(ads: any[], adId: number): Observable&lt;AdContent&gt; {
+    return of(ads.find((ad: AdContent) &#x3D;&gt; ad.id &#x3D;&#x3D; adId));
+  }
+
+  searchAdInCompaignForm(ads: AdContentForm[], adId: number): Observable&lt;AdContentForm&gt; {
+    return of(ads.find((ad: AdContentForm) &#x3D;&gt; ad.id &#x3D;&#x3D; adId));
+  }
+
+  getAdFormats(selectedObjective: AdObjective) {
+    var _this &#x3D; this;
+    var ad_formats &#x3D; [];
+    WB_AD_FORMATS.forEach((ad_format: AdFormat) &#x3D;&gt; {
+      if (selectedObjective !&#x3D; null &amp;&amp; ad_format.active &#x3D;&#x3D; true) {
+        if (ad_format.id &#x3D;&#x3D; &#x27;SINGLE_IMAGE&#x27; &amp;&amp; (selectedObjective.code &#x3D;&#x3D; &#x27;APP_INSTALL&#x27; ||
+          selectedObjective.code &#x3D;&#x3D; &#x27;BRAND_AWARE&#x27; ||
+          selectedObjective.code &#x3D;&#x3D; &#x27;CONVERSION&#x27; ||
+          selectedObjective.code &#x3D;&#x3D; &#x27;ENGAGE&#x27; ||
+          selectedObjective.code &#x3D;&#x3D; &#x27;LEAD&#x27; ||
+          selectedObjective.code &#x3D;&#x3D; &#x27;REACH&#x27; ||
+          selectedObjective.code &#x3D;&#x3D; &#x27;TRAFFIC&#x27;)
+        ) {
+          ad_formats.push(ad_format);
+        } else if (ad_format.id &#x3D;&#x3D; &#x27;CAROUSEL_IMAGE&#x27; &amp;&amp; (selectedObjective.code &#x3D;&#x3D; &#x27;APP_INSTALL&#x27; ||
+          selectedObjective.code &#x3D;&#x3D; &#x27;BRAND_AWARE&#x27; ||
+          selectedObjective.code &#x3D;&#x3D; &#x27;CONVERSION&#x27; ||
+          selectedObjective.code &#x3D;&#x3D; &#x27;ENGAGE&#x27; ||
+          selectedObjective.code &#x3D;&#x3D; &#x27;LEAD&#x27; ||
+          selectedObjective.code &#x3D;&#x3D; &#x27;REACH&#x27; ||
+          selectedObjective.code &#x3D;&#x3D; &#x27;TRAFFIC&#x27; ||
+          selectedObjective.code &#x3D;&#x3D; &#x27;SELL_RENT&#x27;)
+        ) {
+          ad_formats.push(ad_format);
+        } else if (ad_format.id &#x3D;&#x3D; &#x27;MESSAGE_AD&#x27; &amp;&amp; (selectedObjective.code &#x3D;&#x3D; &#x27;APP_INSTALL&#x27; ||
+          selectedObjective.code &#x3D;&#x3D; &#x27;BRAND_AWARE&#x27; ||
+          selectedObjective.code &#x3D;&#x3D; &#x27;CONVERSION&#x27; ||
+          selectedObjective.code &#x3D;&#x3D; &#x27;ENGAGE&#x27; ||
+          selectedObjective.code &#x3D;&#x3D; &#x27;LEAD&#x27; ||
+          selectedObjective.code &#x3D;&#x3D; &#x27;REACH&#x27; ||
+          selectedObjective.code &#x3D;&#x3D; &#x27;TRAFFIC&#x27; ||
+          selectedObjective.code &#x3D;&#x3D; &#x27;SELL_RENT&#x27;)
+        ) {
+          ad_formats.push(ad_format);
+        } else if (ad_format.id &#x3D;&#x3D; &#x27;TEXT_AD&#x27; &amp;&amp; (selectedObjective.code &#x3D;&#x3D; &#x27;APP_INSTALL&#x27; ||
+          selectedObjective.code &#x3D;&#x3D; &#x27;BRAND_AWARE&#x27; ||
+          selectedObjective.code &#x3D;&#x3D; &#x27;CONVERSION&#x27; ||
+          selectedObjective.code &#x3D;&#x3D; &#x27;ENGAGE&#x27; ||
+          selectedObjective.code &#x3D;&#x3D; &#x27;LEAD&#x27; ||
+          selectedObjective.code &#x3D;&#x3D; &#x27;REACH&#x27; ||
+          selectedObjective.code &#x3D;&#x3D; &#x27;TRAFFIC&#x27; ||
+          selectedObjective.code &#x3D;&#x3D; &#x27;SELL_RENT&#x27;)
+        ) {
+          ad_formats.push(ad_format);
+        } else if (ad_format.id &#x3D;&#x3D; &#x27;SPOTLIGHT_AD&#x27; &amp;&amp; (selectedObjective.code &#x3D;&#x3D; &#x27;APP_INSTALL&#x27; ||
+          selectedObjective.code &#x3D;&#x3D; &#x27;BRAND_AWARE&#x27; ||
+          selectedObjective.code &#x3D;&#x3D; &#x27;CONVERSION&#x27; ||
+          selectedObjective.code &#x3D;&#x3D; &#x27;ENGAGE&#x27; ||
+          selectedObjective.code &#x3D;&#x3D; &#x27;LEAD&#x27; ||
+          selectedObjective.code &#x3D;&#x3D; &#x27;REACH&#x27; ||
+          selectedObjective.code &#x3D;&#x3D; &#x27;TRAFFIC&#x27; ||
+          selectedObjective.code &#x3D;&#x3D; &#x27;SELL_RENT&#x27;)
+        ) {
+          ad_formats.push(ad_format);
+        } else if (ad_format.id &#x3D;&#x3D; &#x27;FOLLOWER_AD&#x27; &amp;&amp; (selectedObjective.code &#x3D;&#x3D; &#x27;APP_INSTALL&#x27; ||
+          selectedObjective.code &#x3D;&#x3D; &#x27;BRAND_AWARE&#x27; ||
+          selectedObjective.code &#x3D;&#x3D; &#x27;CONVERSION&#x27; ||
+          selectedObjective.code &#x3D;&#x3D; &#x27;ENGAGE&#x27; ||
+          selectedObjective.code &#x3D;&#x3D; &#x27;LEAD&#x27; ||
+          selectedObjective.code &#x3D;&#x3D; &#x27;REACH&#x27; ||
+          selectedObjective.code &#x3D;&#x3D; &#x27;TRAFFIC&#x27; ||
+          selectedObjective.code &#x3D;&#x3D; &#x27;SELL_RENT&#x27;)
+        ) {
+          ad_formats.push(ad_format);
+        } else if (ad_format.id &#x3D;&#x3D; &#x27;VIDEO_AD&#x27; &amp;&amp; (selectedObjective.code &#x3D;&#x3D; &#x27;APP_INSTALL&#x27; ||
+          selectedObjective.code &#x3D;&#x3D; &#x27;BRAND_AWARE&#x27; ||
+          selectedObjective.code &#x3D;&#x3D; &#x27;CONVERSION&#x27; ||
+          selectedObjective.code &#x3D;&#x3D; &#x27;ENGAGE&#x27; ||
+          selectedObjective.code &#x3D;&#x3D; &#x27;LEAD&#x27; ||
+          selectedObjective.code &#x3D;&#x3D; &#x27;REACH&#x27; ||
+          selectedObjective.code &#x3D;&#x3D; &#x27;TRAFFIC&#x27; ||
+          selectedObjective.code &#x3D;&#x3D; &#x27;SELL_RENT&#x27; ||
+          selectedObjective.code &#x3D;&#x3D; &#x27;VIDEO_VIEWS&#x27;)
+        ) {
+          ad_formats.push(ad_format);
+        } else { }
+      }
+    });
+
+    return ad_formats;
+  }
+
+  get CompaingInEdit() {
+    return this.compaign_in_edit;
+  }
+
+  removeDeletedAd(ad_id: number) {
+    this.CompaingInEdit.ads &#x3D; this.CompaingInEdit.ads.filter((ad: AdContentForm) &#x3D;&gt; ad.id !&#x3D;&#x3D; ad_id);
+  }
+
+  removeDeletedCompaign(id: number) {
+    this.ad_account.compaigns &#x3D; this.ad_account.compaigns.filter((ad: AdCompaign) &#x3D;&gt; ad.id !&#x3D;&#x3D; id);
+  }
+
+  UpdateAdStatus(id:number,status:string) {
+
+  }
+
+  UpdateCompaignStatus(id:number,status:string){
+
+  }
+
+  WaitProcessingRequest(status: boolean, message: string) {
+    this.wait_processing_request &#x3D; status;
+    this.wait_processing_request_message &#x3D; message;
+  }
+
+}
+</code></pre>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'AdsService.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

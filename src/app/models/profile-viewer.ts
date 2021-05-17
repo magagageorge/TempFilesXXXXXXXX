@@ -26,7 +26,8 @@ export class ProfileViewer {
     city:string; 
     location:any;
     state:string; 
-    street:string; 
+    street:string;
+    languages:any[]; 
     zip:string; 
     phone_private:string; 
     phone_work:string; 
@@ -55,5 +56,6 @@ export class ProfileViewer {
         this.educations=[];
         this.experiences=[];
         this.mutualConnections=[];
+        this.languages=[];
     }    
 }

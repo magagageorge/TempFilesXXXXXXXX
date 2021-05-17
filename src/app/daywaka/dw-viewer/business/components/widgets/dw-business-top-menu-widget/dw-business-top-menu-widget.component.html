@@ -5,17 +5,126 @@
         <!-- SideNav slide-out button -->
         <ul class="nav navbar-nav nav-flex-icons float-left container-fluid w-100 px-0 px-md-5 px-lg-5 m-0"
             style="margin-left:1px;margin-right:1px;">
-            <li class="nav-item d-block d-md-none d-lg-none d-xl-none float-left">
-                <a routerLink="/daywaka" class="nav-link waves-effect waves-light" style="color:#fff;"><i
-                        class="fa fa-list"></i></a>
+            <li class="nav-item d-block d-md-none d-lg-none d-xl-none float-left p-0" (click)="toogleLeftMenu()">
+                <div class="nav-link waves-effect waves-light m-0 p-1 wb-font-size-140" style="color:#fff;"><i class="fa fa-list"></i></div>
             </li>
-            <li class="nav-item d-none d-md-block d-lg-block  float-left"
-                style="max-width: 150px;">
-                <a class="nav-link navbar-brand px-0 mx-0" routerLink="/daywaka"
+            <li class="nav-item d-none d-md-block d-lg-block  float-left" style="max-width: 150px;">
+                <a class="nav-link navbar-brand px-0 mx-0" routerLink="/"
                     style="font-weight:bold;color:#fff;font-size:20px;">
                     Woorbi Daywaka
                 </a>
             </li>
+            <li *ngIf="is_authenticated==true;" ngbDropdown placement="bottom-right"
+                class="nav-item nav-item avatar dropdown nav-user d-none d-md-block d-lg-block">
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-5" data-toggle="dropdown"
+                    ngbDropdownToggle>
+
+                    <ng-container *ngIf="daywakaService.DW_CONFIGS.defaultPage!=null">
+                        <img *ngIf="daywakaService.DW_CONFIGS.defaultPage.picture!=null" style="max-height:50px;"
+                            src="{{daywakaService.DW_CONFIGS.defaultPage.picture.face}}"
+                            class="img-fluid rounded-circle z-depth-0">
+                        <div *ngIf="daywakaService.DW_CONFIGS.defaultPage.picture==null"
+                            class="btn-circle btn-sm btn-outline-primary">
+                            {{getInitLetter(daywakaService.DW_CONFIGS.defaultPage.name)}}
+                        </div>
+                    </ng-container>
+                    <div *ngIf="daywakaService.DW_CONFIGS.defaultPage==null"
+                        class="btn-circle btn-sm btn-outline-primary">
+                        A
+                    </div>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" style="width:300px;" ngbDropdownMenu>
+                    <ul class="list-group list-group-flush pages-dropdown-list">
+                        <ng-container *ngIf="daywakaService.DW_CONFIGS.defaultPage!=null">
+                            <li class="list-group-item px-0 py-1">
+                                <div class="row p-0 m-0">
+                                    <div class="col-12 p-0">
+                                        <div class="d-flex justify-content-center w-100 wb-font-size-90 text-muted">
+                                            You are currently viewing and posting as
+                                        </div>
+                                    </div>
+                                    <div class="col-12 d-flex justify-content-center p-0">
+                                        <ng-container *ngIf="daywakaService.DW_CONFIGS.defaultPage.picture!=null">
+                                            <img style="max-height:80px;"
+                                                src="{{daywakaService.DW_CONFIGS.defaultPage.picture.face}}"
+                                                class="img-fluid rounded-circle z-depth-0 m-0">
+                                        </ng-container>
+                                    </div>
+                                    <div class="col-12 p-0 d-flex justify-content-center align-items-center">
+                                        <div class="d-inline-block m-0 p-0 font-weight-bold text-truncate">
+                                            {{daywakaService.DW_CONFIGS.defaultPage.name}}
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </li>
+                        </ng-container>
+
+                        <ng-container *ngFor="let mypage of pageService.MYPAGES">
+                            <li *ngIf="daywakaService.DW_CONFIGS.defaultPage==null || (daywakaService.DW_CONFIGS.defaultPage!=null && daywakaService.DW_CONFIGS.defaultPage.id!=mypage.id)"
+                                class="list-group-item px-0 py-1">
+                                <a href="javascript:void(0)" (click)="switchPage(mypage)"
+                                    class="p-0 m-0 text-decoration-none" style="text-decoration: none;">
+                                    <div class="row p-0 m-0">
+                                        <div class="col-3 p-0">
+                                            <ng-container *ngIf="mypage.picture!=null">
+                                                <img style="max-height:50px;" src="{{mypage.picture.face}}"
+                                                    class="img-fluid rounded-circle z-depth-0 m-0">
+                                            </ng-container>
+                                        </div>
+                                        <div class="col-9 p-0 d-flex align-items-center">
+                                            <div class="d-inline-block w-100 m-0 p-0 font-weight-bold text-truncate">
+                                                {{mypage.name}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                        </ng-container>
+                    </ul>
+                </div>
+            </li>
+            <li *ngIf="is_authenticated==true;" ngbDropdown placement="bottom-left"
+            class="nav-item nav-item avatar dropdown nav-user d-none d-md-block d-lg-block">
+            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-5" data-toggle="dropdown"
+                ngbDropdownToggle>
+                <img *ngIf="profileService.MYPROFILE!=null && profileService.MYPROFILE.avatar!=undefined" style="max-height:50px;"
+                    src="{{profileService.MYPROFILE.avatar.face}}" class="img-fluid rounded-circle z-depth-0">
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" style="width:300px;" ngbDropdownMenu>
+                <ul class="list-group list-group-flush">
+                    <li *ngIf="profileService.MYPROFILE!=null" class="list-group-item px-0 py-1">
+                        <a routerLink="/{{profileService.MYPROFILE.url}}"
+                            (click)="urlViewerService.setProfile(getMyProfile());"
+                            class="p-0 m-0 text-decoration-none" style="text-decoration: none;">
+                            <div class="row p-0 m-0">
+                                <div class="col-3 p-0">
+                                    <img style="max-height:60px;" src="{{profileService.MYPROFILE.avatar.face}}"
+                                        class="img-fluid rounded-circle z-depth-0 m-0">
+                                </div>
+                                <div class="col-9 p-0">
+                                    <div class="d-inline-block w-100 m-0 p-0 font-weight-bold text-truncate">
+                                        {{profileService.MYPROFILE.firstname}} {{profileService.MYPROFILE.lastname}}
+                                    </div>
+                                    <div class="d-inline-block w-100  m-0 p-0 text-muted" style="font-size:90%;">
+                                        {{profileService.MYPROFILE.short_info}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-100 d-flex justify-content-center py-1">
+                                <div class="dropdown-item w-100 text-center text-info py-1">View Profile</div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="list-group-item p-0">
+                        <a class="dropdown-item" routerLink="/help"> Help</a>
+                    </li>
+                    <li class="list-group-item p-0">
+                        <a class="dropdown-item" routerLink="/logout">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </li>
         </ul>
     </nav>
     <!-- /.Navbar -->

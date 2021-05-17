@@ -1,0 +1,17 @@
+<div id="wb-showon-google-map">
+</div>
+<ng-container *ngIf="computeDirection==true">
+    <div class="d-block w-100">
+        <div class="row mx-0">
+            <div class="col-4 d-flex justify-content-center" (click)="setTravelModel('DRIVING')">
+                <img src="/assets/icons/travel_model_driving.png" class="img-fluid">
+            </div>
+            <div class="col-4 d-flex justify-content-center" (click)="setTravelModel('TRANSIT')">
+                <img src="/assets/icons/travel_model_transit.png" class="img-fluid">
+            </div>
+            <div class="col-4 d-flex justify-content-center" (click)="setTravelModel('WALKING')">
+                <img src="/assets/icons/travel_model_walking.png" class="img-fluid">
+            </div>
+        </div>
+    </div>
+</ng-container>

@@ -1,0 +1,4625 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>woorbi documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">woorbi documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content injectable">
+                   <div class="content-data">
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Injectables</li>
+  <li>CommentsService</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/services/comments.service.ts</code>
+        </p>
+
+
+
+
+            <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#comment_model">comment_model</a>
+                            </li>
+                            <li>
+                                <a href="#comments">comments</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#crudconfig">crudconfig</a>
+                            </li>
+                            <li>
+                                <a href="#crudprovider">crudprovider</a>
+                            </li>
+                            <li>
+                                <a href="#current_feed_comment_input">current_feed_comment_input</a>
+                            </li>
+                            <li>
+                                <a href="#currentComment">currentComment</a>
+                            </li>
+                            <li>
+                                <a href="#errors">errors</a>
+                            </li>
+                            <li>
+                                <a href="#feedContainerWidth">feedContainerWidth</a>
+                            </li>
+                            <li>
+                                <a href="#feedService">feedService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#imageCompress">imageCompress</a>
+                            </li>
+                            <li>
+                                <a href="#loading_comments">loading_comments</a>
+                            </li>
+                            <li>
+                                <a href="#messages">messages</a>
+                            </li>
+                            <li>
+                                <a href="#modalRef">modalRef</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#pageFeedService">pageFeedService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#profileFeedService">profileFeedService</a>
+                            </li>
+                            <li>
+                                <a href="#profileService">profileService</a>
+                            </li>
+                            <li>
+                                <a href="#provider">provider</a>
+                            </li>
+                            <li>
+                                <a href="#redirectDelay">redirectDelay</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#router">router</a>
+                            </li>
+                            <li>
+                                <a href="#service">service</a>
+                            </li>
+                            <li>
+                                <a href="#showMessages">showMessages</a>
+                            </li>
+                            <li>
+                                <a href="#submitted">submitted</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#CancelcommentEdit">CancelcommentEdit</a>
+                            </li>
+                            <li>
+                                <a href="#CancelcommentReplyEdit">CancelcommentReplyEdit</a>
+                            </li>
+                            <li>
+                                <a href="#clearComment">clearComment</a>
+                            </li>
+                            <li>
+                                <a href="#clearCommentReply">clearCommentReply</a>
+                            </li>
+                            <li>
+                                <a href="#comment">comment</a>
+                            </li>
+                            <li>
+                                <a href="#commentEdit">commentEdit</a>
+                            </li>
+                            <li>
+                                <a href="#CommentEditImageUpload">CommentEditImageUpload</a>
+                            </li>
+                            <li>
+                                <a href="#CommentImageUpload">CommentImageUpload</a>
+                            </li>
+                            <li>
+                                <a href="#commentLike">commentLike</a>
+                            </li>
+                            <li>
+                                <a href="#commentReply">commentReply</a>
+                            </li>
+                            <li>
+                                <a href="#commentReplyEdit">commentReplyEdit</a>
+                            </li>
+                            <li>
+                                <a href="#commentReplyLike">commentReplyLike</a>
+                            </li>
+                            <li>
+                                <a href="#deleteComment">deleteComment</a>
+                            </li>
+                            <li>
+                                <a href="#deleteCommentReply">deleteCommentReply</a>
+                            </li>
+                            <li>
+                                <a href="#EditCommentReply">EditCommentReply</a>
+                            </li>
+                            <li>
+                                <a href="#getConfigValue">getConfigValue</a>
+                            </li>
+                            <li>
+                                <a href="#loadComments">loadComments</a>
+                            </li>
+                            <li>
+                                <a href="#onSelectFile">onSelectFile</a>
+                            </li>
+                            <li>
+                                <a href="#onSelectFileEditComment">onSelectFileEditComment</a>
+                            </li>
+                            <li>
+                                <a href="#PushCommentPreviewPicture">PushCommentPreviewPicture</a>
+                            </li>
+                            <li>
+                                <a href="#pushCommentReply">pushCommentReply</a>
+                            </li>
+                            <li>
+                                <a href="#RemoveCommentEditPreviewImage">RemoveCommentEditPreviewImage</a>
+                            </li>
+                            <li>
+                                <a href="#RemoveCommentPreviewImage">RemoveCommentPreviewImage</a>
+                            </li>
+                            <li>
+                                <a href="#replaceCommentReply">replaceCommentReply</a>
+                            </li>
+                            <li>
+                                <a href="#searchComment">searchComment</a>
+                            </li>
+                            <li>
+                                <a href="#searchReply">searchReply</a>
+                            </li>
+                            <li>
+                                <a href="#setToCommentPost">setToCommentPost</a>
+                            </li>
+                            <li>
+                                <a href="#setToEditComment">setToEditComment</a>
+                            </li>
+                            <li>
+                                <a href="#setToEditCommentReply">setToEditCommentReply</a>
+                            </li>
+                            <li>
+                                <a href="#setToReplyComment">setToReplyComment</a>
+                            </li>
+                            <li>
+                                <a href="#updateCommentLike">updateCommentLike</a>
+                            </li>
+                            <li>
+                                <a href="#updateCommentReplyLike">updateCommentReplyLike</a>
+                            </li>
+                            <li>
+                                <a href="#updateSentComment">updateSentComment</a>
+                            </li>
+                            <li>
+                                <a href="#viewMoreCommentReplies">viewMoreCommentReplies</a>
+                            </li>
+                            <li>
+                                <a href="#viewMoreComments">viewMoreComments</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+            <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(service: <a href="../classes/CrudService.html">CrudService</a>, CRUD_OPTIONS: <a href="../interfaces/CrudOptions.html">CrudOptions</a>, imageCompress: NgxImageCompressService, feedService: <a href="../injectables/FeedService.html">FeedService</a>, profileFeedService: <a href="../injectables/ProfileFeedService.html">ProfileFeedService</a>, pageFeedService: <a href="../injectables/PageFeedService.html">PageFeedService</a>, profileService: <a href="../injectables/ProfileService.html">ProfileService</a>, router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/services/comments.service.ts:43</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>service</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../classes/CrudService.html" target="_self" >CrudService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>CRUD_OPTIONS</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../interfaces/CrudOptions.html" target="_self" >CrudOptions</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>imageCompress</td>
+                                                  
+                                                        <td>
+                                                                    <code>NgxImageCompressService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>feedService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/FeedService.html" target="_self" >FeedService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>profileFeedService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ProfileFeedService.html" target="_self" >ProfileFeedService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>pageFeedService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/PageFeedService.html" target="_self" >PageFeedService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>profileService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ProfileService.html" target="_self" >ProfileService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+            <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="CancelcommentEdit"></a>
+                    <span class="name">
+                        <b>
+                            CancelcommentEdit
+                        </b>
+                        <a href="#CancelcommentEdit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>CancelcommentEdit(comment: <a href="../classes/Comment.html">Comment</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="307"
+                            class="link-to-prism">src/app/services/comments.service.ts:307</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>comment</td>
+                                    <td>
+                                                <code><a href="../classes/Comment.html" target="_self" >Comment</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="CancelcommentReplyEdit"></a>
+                    <span class="name">
+                        <b>
+                            CancelcommentReplyEdit
+                        </b>
+                        <a href="#CancelcommentReplyEdit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>CancelcommentReplyEdit(commentReply: <a href="../classes/CommentReply.html">CommentReply</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="410"
+                            class="link-to-prism">src/app/services/comments.service.ts:410</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>commentReply</td>
+                                    <td>
+                                                <code><a href="../classes/CommentReply.html" target="_self" >CommentReply</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="clearComment"></a>
+                    <span class="name">
+                        <b>
+                            clearComment
+                        </b>
+                        <a href="#clearComment"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>clearComment(comment: <a href="../classes/Comment.html">Comment</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="438"
+                            class="link-to-prism">src/app/services/comments.service.ts:438</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>comment</td>
+                                    <td>
+                                                <code><a href="../classes/Comment.html" target="_self" >Comment</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="clearCommentReply"></a>
+                    <span class="name">
+                        <b>
+                            clearCommentReply
+                        </b>
+                        <a href="#clearCommentReply"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>clearCommentReply(comment: <a href="../classes/Comment.html">Comment</a>, replyId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="669"
+                            class="link-to-prism">src/app/services/comments.service.ts:669</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>comment</td>
+                                    <td>
+                                                <code><a href="../classes/Comment.html" target="_self" >Comment</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>replyId</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="comment"></a>
+                    <span class="name">
+                        <b>
+                            comment
+                        </b>
+                        <a href="#comment"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>comment(feed: <a href="../classes/Feed.html">Feed</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="156"
+                            class="link-to-prism">src/app/services/comments.service.ts:156</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>feed</td>
+                                    <td>
+                                                <code><a href="../classes/Feed.html" target="_self" >Feed</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="commentEdit"></a>
+                    <span class="name">
+                        <b>
+                            commentEdit
+                        </b>
+                        <a href="#commentEdit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>commentEdit(comment: <a href="../classes/Comment.html">Comment</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="243"
+                            class="link-to-prism">src/app/services/comments.service.ts:243</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>comment</td>
+                                    <td>
+                                                <code><a href="../classes/Comment.html" target="_self" >Comment</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="CommentEditImageUpload"></a>
+                    <span class="name">
+                        <b>
+                            CommentEditImageUpload
+                        </b>
+                        <a href="#CommentEditImageUpload"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>CommentEditImageUpload(comment: <a href="../classes/Comment.html">Comment</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="333"
+                            class="link-to-prism">src/app/services/comments.service.ts:333</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>comment</td>
+                                    <td>
+                                                <code><a href="../classes/Comment.html" target="_self" >Comment</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="CommentImageUpload"></a>
+                    <span class="name">
+                        <b>
+                            CommentImageUpload
+                        </b>
+                        <a href="#CommentImageUpload"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>CommentImageUpload(feed: <a href="../classes/Feed.html">Feed</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="327"
+                            class="link-to-prism">src/app/services/comments.service.ts:327</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>feed</td>
+                                    <td>
+                                                <code><a href="../classes/Feed.html" target="_self" >Feed</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="commentLike"></a>
+                    <span class="name">
+                        <b>
+                            commentLike
+                        </b>
+                        <a href="#commentLike"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>commentLike(comment: <a href="../classes/Comment.html">Comment</a>, action: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="202"
+                            class="link-to-prism">src/app/services/comments.service.ts:202</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>comment</td>
+                                    <td>
+                                                <code><a href="../classes/Comment.html" target="_self" >Comment</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>action</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="commentReply"></a>
+                    <span class="name">
+                        <b>
+                            commentReply
+                        </b>
+                        <a href="#commentReply"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>commentReply(comment: <a href="../classes/Comment.html">Comment</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="583"
+                            class="link-to-prism">src/app/services/comments.service.ts:583</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>comment</td>
+                                    <td>
+                                                <code><a href="../classes/Comment.html" target="_self" >Comment</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="commentReplyEdit"></a>
+                    <span class="name">
+                        <b>
+                            commentReplyEdit
+                        </b>
+                        <a href="#commentReplyEdit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>commentReplyEdit(commentReply: <a href="../classes/CommentReply.html">CommentReply</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="619"
+                            class="link-to-prism">src/app/services/comments.service.ts:619</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>commentReply</td>
+                                    <td>
+                                                <code><a href="../classes/CommentReply.html" target="_self" >CommentReply</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="commentReplyLike"></a>
+                    <span class="name">
+                        <b>
+                            commentReplyLike
+                        </b>
+                        <a href="#commentReplyLike"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>commentReplyLike(commentReply: <a href="../classes/CommentReply.html">CommentReply</a>, action: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="826"
+                            class="link-to-prism">src/app/services/comments.service.ts:826</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>commentReply</td>
+                                    <td>
+                                                <code><a href="../classes/CommentReply.html" target="_self" >CommentReply</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>action</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="deleteComment"></a>
+                    <span class="name">
+                        <b>
+                            deleteComment
+                        </b>
+                        <a href="#deleteComment"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>deleteComment(comment: <a href="../classes/Comment.html">Comment</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="415"
+                            class="link-to-prism">src/app/services/comments.service.ts:415</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>comment</td>
+                                    <td>
+                                                <code><a href="../classes/Comment.html" target="_self" >Comment</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="deleteCommentReply"></a>
+                    <span class="name">
+                        <b>
+                            deleteCommentReply
+                        </b>
+                        <a href="#deleteCommentReply"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>deleteCommentReply(comment: <a href="../classes/Comment.html">Comment</a>, commentReply: <a href="../classes/CommentReply.html">CommentReply</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="646"
+                            class="link-to-prism">src/app/services/comments.service.ts:646</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>comment</td>
+                                    <td>
+                                                <code><a href="../classes/Comment.html" target="_self" >Comment</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>commentReply</td>
+                                    <td>
+                                                <code><a href="../classes/CommentReply.html" target="_self" >CommentReply</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="EditCommentReply"></a>
+                    <span class="name">
+                        <b>
+                            EditCommentReply
+                        </b>
+                        <a href="#EditCommentReply"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>EditCommentReply(comment: <a href="../classes/Comment.html">Comment</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="141"
+                            class="link-to-prism">src/app/services/comments.service.ts:141</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>comment</td>
+                                    <td>
+                                                <code><a href="../classes/Comment.html" target="_self" >Comment</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getConfigValue"></a>
+                    <span class="name">
+                        <b>
+                            getConfigValue
+                        </b>
+                        <a href="#getConfigValue"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getConfigValue(key: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="883"
+                            class="link-to-prism">src/app/services/comments.service.ts:883</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>key</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadComments"></a>
+                    <span class="name">
+                        <b>
+                            loadComments
+                        </b>
+                        <a href="#loadComments"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>loadComments(params?: literal type)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="56"
+                            class="link-to-prism">src/app/services/comments.service.ts:56</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>params</td>
+                                    <td>
+                                            <code>literal type</code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onSelectFile"></a>
+                    <span class="name">
+                        <b>
+                            onSelectFile
+                        </b>
+                        <a href="#onSelectFile"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onSelectFile(event: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, feed: <a href="../classes/Feed.html">Feed</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="338"
+                            class="link-to-prism">src/app/services/comments.service.ts:338</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>event</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>feed</td>
+                                    <td>
+                                                <code><a href="../classes/Feed.html" target="_self" >Feed</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onSelectFileEditComment"></a>
+                    <span class="name">
+                        <b>
+                            onSelectFileEditComment
+                        </b>
+                        <a href="#onSelectFileEditComment"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onSelectFileEditComment(event, comment: <a href="../classes/Comment.html">Comment</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="376"
+                            class="link-to-prism">src/app/services/comments.service.ts:376</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>event</td>
+                                    <td>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>comment</td>
+                                    <td>
+                                                <code><a href="../classes/Comment.html" target="_self" >Comment</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="PushCommentPreviewPicture"></a>
+                    <span class="name">
+                        <b>
+                            PushCommentPreviewPicture
+                        </b>
+                        <a href="#PushCommentPreviewPicture"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>PushCommentPreviewPicture(f: File, comment: <a href="../classes/Comment.html">Comment</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="392"
+                            class="link-to-prism">src/app/services/comments.service.ts:392</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>f</td>
+                                    <td>
+                                            <code>File</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>comment</td>
+                                    <td>
+                                                <code><a href="../classes/Comment.html" target="_self" >Comment</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="pushCommentReply"></a>
+                    <span class="name">
+                        <b>
+                            pushCommentReply
+                        </b>
+                        <a href="#pushCommentReply"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>pushCommentReply(feedComment: <a href="../classes/Comment.html">Comment</a>, reply: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="703"
+                            class="link-to-prism">src/app/services/comments.service.ts:703</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>feedComment</td>
+                                    <td>
+                                                <code><a href="../classes/Comment.html" target="_self" >Comment</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>reply</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="RemoveCommentEditPreviewImage"></a>
+                    <span class="name">
+                        <b>
+                            RemoveCommentEditPreviewImage
+                        </b>
+                        <a href="#RemoveCommentEditPreviewImage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>RemoveCommentEditPreviewImage(comment: <a href="../classes/Comment.html">Comment</a>, preview: <a href="../interfaces/PreviewPicture.html">PreviewPicture</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="318"
+                            class="link-to-prism">src/app/services/comments.service.ts:318</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>comment</td>
+                                    <td>
+                                                <code><a href="../classes/Comment.html" target="_self" >Comment</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>preview</td>
+                                    <td>
+                                                <code><a href="../interfaces/PreviewPicture.html" target="_self" >PreviewPicture</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="RemoveCommentPreviewImage"></a>
+                    <span class="name">
+                        <b>
+                            RemoveCommentPreviewImage
+                        </b>
+                        <a href="#RemoveCommentPreviewImage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>RemoveCommentPreviewImage(feed: <a href="../classes/Feed.html">Feed</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="313"
+                            class="link-to-prism">src/app/services/comments.service.ts:313</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>feed</td>
+                                    <td>
+                                                <code><a href="../classes/Feed.html" target="_self" >Feed</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="replaceCommentReply"></a>
+                    <span class="name">
+                        <b>
+                            replaceCommentReply
+                        </b>
+                        <a href="#replaceCommentReply"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>replaceCommentReply(feedComment: <a href="../classes/Comment.html">Comment</a>, reply: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="768"
+                            class="link-to-prism">src/app/services/comments.service.ts:768</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>feedComment</td>
+                                    <td>
+                                                <code><a href="../classes/Comment.html" target="_self" >Comment</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>reply</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="searchComment"></a>
+                    <span class="name">
+                        <b>
+                            searchComment
+                        </b>
+                        <a href="#searchComment"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>searchComment(comments: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="459"
+                            class="link-to-prism">src/app/services/comments.service.ts:459</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>comments</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>id</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../classes/Comment.html" target="_self" >Observable&lt;Comment&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="searchReply"></a>
+                    <span class="name">
+                        <b>
+                            searchReply
+                        </b>
+                        <a href="#searchReply"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>searchReply(replies: CommentReply[], id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="879"
+                            class="link-to-prism">src/app/services/comments.service.ts:879</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>replies</td>
+                                    <td>
+                                            <code>CommentReply[]</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>id</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Observable&lt;CommentReply&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setToCommentPost"></a>
+                    <span class="name">
+                        <b>
+                            setToCommentPost
+                        </b>
+                        <a href="#setToCommentPost"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>setToCommentPost(feed: <a href="../classes/Feed.html">Feed</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="147"
+                            class="link-to-prism">src/app/services/comments.service.ts:147</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>feed</td>
+                                    <td>
+                                                <code><a href="../classes/Feed.html" target="_self" >Feed</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setToEditComment"></a>
+                    <span class="name">
+                        <b>
+                            setToEditComment
+                        </b>
+                        <a href="#setToEditComment"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>setToEditComment(comment: <a href="../classes/Comment.html">Comment</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="113"
+                            class="link-to-prism">src/app/services/comments.service.ts:113</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>comment</td>
+                                    <td>
+                                                <code><a href="../classes/Comment.html" target="_self" >Comment</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setToEditCommentReply"></a>
+                    <span class="name">
+                        <b>
+                            setToEditCommentReply
+                        </b>
+                        <a href="#setToEditCommentReply"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>setToEditCommentReply(commentReply: <a href="../classes/CommentReply.html">CommentReply</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="131"
+                            class="link-to-prism">src/app/services/comments.service.ts:131</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>commentReply</td>
+                                    <td>
+                                                <code><a href="../classes/CommentReply.html" target="_self" >CommentReply</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setToReplyComment"></a>
+                    <span class="name">
+                        <b>
+                            setToReplyComment
+                        </b>
+                        <a href="#setToReplyComment"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>setToReplyComment(feedComment: <a href="../classes/Comment.html">Comment</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="573"
+                            class="link-to-prism">src/app/services/comments.service.ts:573</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>feedComment</td>
+                                    <td>
+                                                <code><a href="../classes/Comment.html" target="_self" >Comment</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateCommentLike"></a>
+                    <span class="name">
+                        <b>
+                            updateCommentLike
+                        </b>
+                        <a href="#updateCommentLike"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>updateCommentLike(comment: <a href="../classes/Comment.html">Comment</a>, action: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="498"
+                            class="link-to-prism">src/app/services/comments.service.ts:498</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>comment</td>
+                                    <td>
+                                                <code><a href="../classes/Comment.html" target="_self" >Comment</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>action</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateCommentReplyLike"></a>
+                    <span class="name">
+                        <b>
+                            updateCommentReplyLike
+                        </b>
+                        <a href="#updateCommentReplyLike"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>updateCommentReplyLike(commentReply: <a href="../classes/CommentReply.html">CommentReply</a>, action: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="865"
+                            class="link-to-prism">src/app/services/comments.service.ts:865</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>commentReply</td>
+                                    <td>
+                                                <code><a href="../classes/CommentReply.html" target="_self" >CommentReply</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>action</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateSentComment"></a>
+                    <span class="name">
+                        <b>
+                            updateSentComment
+                        </b>
+                        <a href="#updateSentComment"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>updateSentComment(comment: <a href="../classes/Comment.html">Comment</a>, tmp_id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="463"
+                            class="link-to-prism">src/app/services/comments.service.ts:463</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>comment</td>
+                                    <td>
+                                                <code><a href="../classes/Comment.html" target="_self" >Comment</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>tmp_id</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="viewMoreCommentReplies"></a>
+                    <span class="name">
+                        <b>
+                            viewMoreCommentReplies
+                        </b>
+                        <a href="#viewMoreCommentReplies"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>viewMoreCommentReplies(comment: <a href="../classes/Comment.html">Comment</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="92"
+                            class="link-to-prism">src/app/services/comments.service.ts:92</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>comment</td>
+                                    <td>
+                                                <code><a href="../classes/Comment.html" target="_self" >Comment</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="viewMoreComments"></a>
+                    <span class="name">
+                        <b>
+                            viewMoreComments
+                        </b>
+                        <a href="#viewMoreComments"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>viewMoreComments(feed: <a href="../classes/Feed.html">Feed</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="69"
+                            class="link-to-prism">src/app/services/comments.service.ts:69</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>feed</td>
+                                    <td>
+                                                <code><a href="../classes/Feed.html" target="_self" >Feed</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+            <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="comment_model"></a>
+                        <span class="name">
+                            <b>
+                            comment_model</b>
+                            <a href="#comment_model"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../classes/Comment.html" target="_self" >Comment</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>new Comment()</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/services/comments.service.ts:41</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="comments"></a>
+                        <span class="name">
+                            <b>
+                            comments</b>
+                            <a href="#comments"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../classes/Comment.html" target="_self" >Comment[]</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/services/comments.service.ts:25</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="crudconfig"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Protected</span>
+                            crudconfig</b>
+                            <a href="#crudconfig"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>literal type</code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/services/comments.service.ts:31</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="crudprovider"></a>
+                        <span class="name">
+                            <b>
+                            crudprovider</b>
+                            <a href="#crudprovider"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../injectables/CrudProvider.html" target="_self" >CrudProvider</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/services/comments.service.ts:28</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="current_feed_comment_input"></a>
+                        <span class="name">
+                            <b>
+                            current_feed_comment_input</b>
+                            <a href="#current_feed_comment_input"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>0</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/services/comments.service.ts:40</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="currentComment"></a>
+                        <span class="name">
+                            <b>
+                            currentComment</b>
+                            <a href="#currentComment"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../classes/Comment.html" target="_self" >Comment</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/services/comments.service.ts:26</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="errors"></a>
+                        <span class="name">
+                            <b>
+                            errors</b>
+                            <a href="#errors"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>string[]</code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/services/comments.service.ts:37</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="feedContainerWidth"></a>
+                        <span class="name">
+                            <b>
+                            feedContainerWidth</b>
+                            <a href="#feedContainerWidth"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/services/comments.service.ts:43</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="feedService"></a>
+                        <span class="name">
+                            <b>
+                            feedService</b>
+                            <a href="#feedService"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../injectables/FeedService.html" target="_self" >FeedService</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/services/comments.service.ts:29</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="imageCompress"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            imageCompress</b>
+                            <a href="#imageCompress"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>NgxImageCompressService</code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/services/comments.service.ts:45</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="loading_comments"></a>
+                        <span class="name">
+                            <b>
+                            loading_comments</b>
+                            <a href="#loading_comments"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>false</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/services/comments.service.ts:39</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="messages"></a>
+                        <span class="name">
+                            <b>
+                            messages</b>
+                            <a href="#messages"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>string[]</code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/services/comments.service.ts:38</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="modalRef"></a>
+                        <span class="name">
+                            <b>
+                            modalRef</b>
+                            <a href="#modalRef"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/services/comments.service.ts:42</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="pageFeedService"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            pageFeedService</b>
+                            <a href="#pageFeedService"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../injectables/PageFeedService.html" target="_self" >PageFeedService</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/services/comments.service.ts:45</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="profileFeedService"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            profileFeedService</b>
+                            <a href="#profileFeedService"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../injectables/ProfileFeedService.html" target="_self" >ProfileFeedService</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/services/comments.service.ts:45</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="profileService"></a>
+                        <span class="name">
+                            <b>
+                            profileService</b>
+                            <a href="#profileService"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../injectables/ProfileService.html" target="_self" >ProfileService</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/services/comments.service.ts:30</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="provider"></a>
+                        <span class="name">
+                            <b>
+                            provider</b>
+                            <a href="#provider"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/services/comments.service.ts:35</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="redirectDelay"></a>
+                        <span class="name">
+                            <b>
+                            redirectDelay</b>
+                            <a href="#redirectDelay"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/services/comments.service.ts:33</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="router"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Protected</span>
+                            router</b>
+                            <a href="#router"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/services/comments.service.ts:32</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="service"></a>
+                        <span class="name">
+                            <b>
+                            service</b>
+                            <a href="#service"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../classes/CrudService.html" target="_self" >CrudService</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/services/comments.service.ts:27</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="showMessages"></a>
+                        <span class="name">
+                            <b>
+                            showMessages</b>
+                            <a href="#showMessages"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/services/comments.service.ts:34</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="submitted"></a>
+                        <span class="name">
+                            <b>
+                            submitted</b>
+                            <a href="#submitted"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>false</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/services/comments.service.ts:36</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+</section>
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, Injectable, Inject } from &#x27;@angular/core&#x27;;
+import { Observable, of } from &#x27;rxjs&#x27;;
+import { Router } from &#x27;@angular/router&#x27;;
+import { Comment } from &#x27;@models/feed/comment&#x27;;
+import { CommentReply } from &#x27;@models/feed/comment-reply&#x27;;
+import * as cloneDeep from &#x27;lodash/cloneDeep&#x27;;
+import { getDeepFromObject } from &#x27;@app/@crud/helpers&#x27;;
+import { CrudService } from &#x27;@app/@crud/services/crud.service&#x27;;
+import { cruddefaultSettings, CrudOptions, CRUD_OPTIONS, CRUD_USER_OPTIONS, CRUD_PROVIDERS, CRUD_INTERCEPTOR_HEADER } from &#x27;@app/@crud/crud.options&#x27;;
+import { CrudProvider } from &#x27;@app/@crud/providers/crud.provider&#x27;;
+import { FeedService } from &#x27;./feed.service&#x27;;
+import { Feed } from &#x27;@app/models/feed/feed&#x27;;
+import { ProfileService } from &#x27;./profile.service&#x27;;
+import { PreviewPicture } from &quot;@app/services/posting.service&quot;;
+import { ProfileFeedService } from &#x27;@app/viewer/profile/services/profile-feed.service&#x27;;
+import { PageFeedService } from &#x27;@app/viewer/page/services/page-feed.service&#x27;;
+import { NgxImageCompressService } from &#x27;ngx-image-compress&#x27;;
+import { SysFunctions } from &#x27;@app/libs/utilities/common-functions&#x27;;
+
+@Injectable({
+  providedIn: &#x27;root&#x27;
+})
+export class CommentsService {
+
+  comments: Comment[];
+  currentComment: Comment;
+  service: CrudService;
+  crudprovider: CrudProvider;
+  feedService: FeedService;
+  profileService: ProfileService;
+  protected crudconfig: {};
+  protected router: Router;
+  redirectDelay: number;
+  showMessages: any;
+  provider: string;
+  submitted: boolean &#x3D; false;
+  errors: string[];
+  messages: string[];
+  loading_comments: boolean &#x3D; false;
+  current_feed_comment_input: number &#x3D; 0;
+  comment_model: Comment &#x3D; new Comment();
+  modalRef: any;
+  feedContainerWidth: number;
+
+  constructor(service: CrudService, @Inject(CRUD_OPTIONS) CRUD_OPTIONS: CrudOptions, public imageCompress: NgxImageCompressService, feedService: FeedService, public profileFeedService: ProfileFeedService, public pageFeedService: PageFeedService, profileService: ProfileService, router: Router) {
+    this.service &#x3D; service;
+    this.feedService &#x3D; feedService;
+    this.profileService &#x3D; profileService;
+    this.crudconfig &#x3D; CRUD_OPTIONS;
+    this.router &#x3D; router;
+    this.submitted &#x3D; false;
+    this.provider &#x3D; this.getConfigValue(&#x27;forms.create.provider&#x27;);
+    this.service.getProvider(this.provider).crudconfig.route_url &#x3D; &#x27;feed/comments/&#x27;;
+  }
+
+  loadComments(params?: {}): any {
+    this.loading_comments &#x3D; true;
+    var _this &#x3D; this;
+    this.service.getProvider(this.provider).crudconfig.route_url &#x3D; &#x27;feed/comments/&#x27;;
+    return this.service.getall(this.provider, params).subscribe(results &#x3D;&gt; {
+      if (results.isSuccess()) {
+        _this.comments &#x3D; results.getResultData();
+        _this.loading_comments &#x3D; false;
+      }
+    });
+  }
+
+  /* Load more comments and append to the comment list*/
+  viewMoreComments(feed: Feed) {
+    if (feed.loading_comments) {
+      return;
+    }
+    var last &#x3D; new Comment();
+    last &#x3D; cloneDeep(feed.comments[feed.comments.length - 1]);
+    this.loading_comments &#x3D; true;
+    var _this &#x3D; this;
+    var params &#x3D; { last: last.id, object_id: last.object_id };
+    feed.loading_comments &#x3D; true;
+    this.service.getProvider(this.provider).crudconfig.route_url &#x3D; &#x27;feed/comments/&#x27;;
+    return this.service.getall(this.provider, params).subscribe(results &#x3D;&gt; {
+      if (results.isSuccess()) {
+        var data &#x3D; results.getResultData();
+        _this.feedService.pushComments(last.object_id, data);
+        _this.profileFeedService.pushComments(last.object_id, data);
+        _this.pageFeedService.pushComments(last.object_id, data);
+        feed.loading_comments &#x3D; false;
+      }
+    });
+  }
+
+  /* Load more replies and prepend to the existing comment replies*/
+  viewMoreCommentReplies(comment: Comment) {
+    if (comment.loading_replies) {
+      return;
+    }
+    var last &#x3D; new CommentReply();
+    last &#x3D; cloneDeep(comment.replies[comment.replies.length - 1]);
+    this.loading_comments &#x3D; true;
+    var _this &#x3D; this;
+    var params &#x3D; { last: last.id, object_id: last.object_id };
+    comment.loading_replies &#x3D; true;
+    this.service.getProvider(this.provider).crudconfig.route_url &#x3D; &#x27;feed/comment-reply/&#x27;;
+    return this.service.getall(this.provider, params).subscribe(results &#x3D;&gt; {
+      if (results.isSuccess()) {
+        var data &#x3D; results.getResultData() as CommentReply[];
+        comment.replies &#x3D; data.concat(comment.replies);
+        comment.loading_replies &#x3D; false;
+      }
+    });
+
+  }
+
+  setToEditComment(comment: Comment) {
+    comment.edit_mode &#x3D; true;
+    comment.edit_input_content &#x3D; comment.message;
+    if (comment.pictures.length) {
+      var i &#x3D; 0;
+      comment.pictures.forEach(picture &#x3D;&gt; {
+        comment.preview_pictures.push({ url: picture.data.url, width: picture.data.width, height: picture.data.height, file: null });
+        comment.edited_pictures.push({ url: picture.data.url, width: picture.data.width, height: picture.data.height, file: null });
+        i++;
+      });
+    }
+    var elem: HTMLElement &#x3D; document.querySelector(&quot;#comment_edit_box_&quot; + comment.id);
+    if (elem !&#x3D; null) {
+      elem.focus();
+      elem.scrollIntoView({ behavior: &quot;smooth&quot;, block: &quot;end&quot;, inline: &quot;nearest&quot; });
+    }
+  }
+
+  setToEditCommentReply(commentReply: CommentReply) {
+    commentReply.edit_mode &#x3D; true;
+    commentReply.edit_input_content &#x3D; commentReply.message;
+    var elem: HTMLElement &#x3D; document.querySelector(&quot;#commentReply_edit_box_&quot; + commentReply.id);
+    if (elem !&#x3D; null) {
+      elem.focus();
+      elem.scrollIntoView({ behavior: &quot;smooth&quot;, block: &quot;end&quot;, inline: &quot;nearest&quot; });
+    }
+  }
+
+  EditCommentReply(comment: Comment) {
+    //this.current_feed_comment_input &#x3D; Number(comment.object_id);
+    //this.comment_model &#x3D; comment;
+    //this.comment_model.isNew &#x3D; false;
+  }
+
+  setToCommentPost(feed: Feed) {
+    feed.comment_mode &#x3D; true;
+    let elem: HTMLElement &#x3D; document.querySelector(&quot;#feed_comment_box_&quot; + feed.id);
+    if (elem !&#x3D; null) {
+      elem.focus();
+      elem.scrollIntoView({ behavior: &quot;smooth&quot;, block: &quot;end&quot;, inline: &quot;nearest&quot; });
+    }
+  }
+
+  comment(feed: Feed) {
+    if ((feed.comment_input_box &#x3D;&#x3D; null || (feed.comment_input_box !&#x3D; null &amp;&amp; feed.comment_input_box.trim() &#x3D;&#x3D; &#x27;&#x27;)) &amp;&amp; feed.comment_image_preview &#x3D;&#x3D; null) {
+      return;
+    }
+    var _this &#x3D; this;
+    this.errors &#x3D; this.messages &#x3D; [];
+    const formData: any &#x3D; new FormData();
+    this.service.getProvider(this.provider).crudconfig.route_url &#x3D; &#x27;feed/comments/&#x27;;
+    //var comment_model&#x3D;new Comment();
+    //comment_model.message&#x3D;feed.comment_input_box;
+    //comment_model.object_id&#x3D;feed.id;
+    //comment_model.profile &#x3D; this.profileService.MYPROFILE;
+
+    if (feed.comment_image_preview !&#x3D; null) {
+      formData.append(&quot;Comment[upload_files][]&quot;, feed.comment_image_preview.file, feed.comment_image_preview.file[&#x27;name&#x27;]);
+    } else {
+      /* formData.append(&quot;link&quot;, JSON.stringify(this.linkPreviewService.link_Preview)); */
+    }
+    formData.append(&quot;isNew&quot;, true);
+    formData.append(&quot;message&quot;, ((feed.comment_input_box !&#x3D; null) ? feed.comment_input_box.trim() : &#x27;&#x27;));
+    formData.append(&quot;object_id&quot;, feed.id);
+    //formData.append(&quot;profile&quot;, this.profileService.MYPROFILE);
+    if (feed.sending_comment !&#x3D; true) {
+      feed.sending_comment &#x3D; true;
+      feed.loading_new_comment &#x3D; true;
+      this.service.create(this.provider, formData, {}).subscribe(function (result) {
+        feed.sending_comment &#x3D; false;
+        if (result.isSuccess()) {
+          _this.messages &#x3D; result.getMessages();
+          var data &#x3D; result.getResultData();
+          if (data.done &#x3D;&#x3D; true) {
+            _this.feedService.pushComment(feed.id, data.data);
+            _this.profileFeedService.pushComment(feed.id, data.data);
+            _this.pageFeedService.pushComment(feed.id, data.data);
+            feed.loading_new_comment &#x3D; false;
+            feed.comment_input_box &#x3D; &#x27;&#x27;;
+            feed.comment_image_preview &#x3D; null
+          }
+        } else {
+          _this.errors &#x3D; result.getErrors();
+        }
+      });
+    }
+  }
+
+  /* Send LIke or Unlike Action to once user click on comment LIke or Unlike button */
+  commentLike(comment: Comment, action: string) {
+    if (comment.sending_like &#x3D;&#x3D; true) {
+      return;
+    }
+    this.updateCommentLike(comment, action);
+    var _this &#x3D; this;
+    this.errors &#x3D; this.messages &#x3D; [];
+    this.service.getProvider(this.provider).crudconfig.route_url &#x3D; &#x27;feed/comment-like/&#x27;;
+    comment.sending_like &#x3D; true;
+    if (action &#x3D;&#x3D; &quot;like&quot;) {
+      this.service.create(this.provider, { object_id: comment.id, target_id: comment.profile.user_id }, {}).subscribe(function (result) {
+        _this.submitted &#x3D; false;
+        comment.sending_like &#x3D; false;
+        if (result.isSuccess()) {
+          var data &#x3D; result.getResultData();
+          if (data !&#x3D; true) {
+            _this.updateCommentLike(comment, &#x27;unlike&#x27;);
+          }
+        }
+        else {
+          _this.errors &#x3D; result.getErrors();
+          _this.updateCommentLike(comment, &#x27;unlike&#x27;);
+        }
+      });
+    } else {
+      this.service.delete(this.provider, { id: comment.id }).subscribe(function (result) {
+        comment.sending_like &#x3D; false;
+        if (result.isSuccess()) {
+          var data &#x3D; result.getResultData();
+          if (data !&#x3D; true) {
+            _this.updateCommentLike(comment, &#x27;like&#x27;);
+          }
+        } else {
+          _this.errors &#x3D; result.getErrors();
+          _this.updateCommentLike(comment, &#x27;like&#x27;);
+        }
+      });
+    }
+  }
+
+  /* Send Editec Comment Information */
+  commentEdit(comment: Comment) {
+    var _this &#x3D; this;
+    this.errors &#x3D; this.messages &#x3D; [];
+    if (comment.edit_input_content.trim() &#x3D;&#x3D; &#x27;&#x27; &amp;&amp; comment.preview_pictures.length &lt; 1) {
+      return;
+    }
+    const formData: any &#x3D; new FormData();
+    var previous_message &#x3D; comment.message;
+    comment.message &#x3D; comment.edit_input_content;
+    comment.isNew &#x3D; false;
+    this.service.getProvider(this.provider).crudconfig.route_url &#x3D; &#x27;feed/comments/&#x27;;
+    if (comment.sending !&#x3D; true &amp;&amp; comment.edit_mode) {
+      if (comment.pictures.length) {
+        comment.pictures[0].data &#x3D; comment.preview_pictures[0];
+      }
+      comment.sending &#x3D; true;
+      comment.edit_mode &#x3D; false;
+      if (comment.upload_files &amp;&amp; comment.upload_files.length) {
+        for (var i &#x3D; 0; i &lt; comment.upload_files.length; i++) {
+          formData.append(&quot;Comment[upload_files][]&quot;, comment.upload_files[i], comment.upload_files[i][&#x27;name&#x27;]);
+        }
+      } else {
+        /* formData.append(&quot;link&quot;, JSON.stringify(this.linkPreviewService.link_Preview)); */
+      }
+      if (comment.edited_pictures.length) {
+        formData.append(&quot;edited_pictures&quot;, JSON.stringify(comment.edited_pictures));
+      }
+      formData.append(&quot;isNew&quot;, false);
+      formData.append(&quot;message&quot;, comment.edit_input_content.trim());
+      this.service.update(this.provider, formData, { &#x27;id&#x27;: comment.id }).subscribe(function (result) {
+        comment.sending &#x3D; false;
+        if (result.isSuccess()) {
+          _this.messages &#x3D; result.getMessages();
+          var data &#x3D; result.getResultData();
+          if (data.done &#x3D;&#x3D; true) {
+            var tmpcomment &#x3D; data.data as Comment;
+            comment.pictures &#x3D; tmpcomment.pictures;
+            comment.updated_at &#x3D; tmpcomment.updated_at;
+            comment.preview_pictures &#x3D; [];
+            comment.upload_files &#x3D; [];
+            comment.edited_pictures &#x3D; [];
+            comment.edit_input_content &#x3D; &#x27;&#x27;;
+          } else {
+            comment.edit_mode &#x3D; true;
+            if (comment.pictures.length &amp;&amp; comment.edited_pictures.length) {
+              comment.pictures[0].data &#x3D; comment.edited_pictures[0];
+            }
+            comment.message &#x3D; previous_message;
+          }
+        }
+        else {
+          _this.errors &#x3D; result.getErrors();
+          comment.edit_mode &#x3D; true;
+          if (comment.pictures.length &amp;&amp; comment.edited_pictures.length) {
+            comment.pictures[0].data &#x3D; comment.edited_pictures[0];
+          }
+          comment.message &#x3D; previous_message;
+        }
+      });
+    }
+    return comment;
+  }
+
+  /* Reset BACK COMMENT TO READ MODE ONCE THE USER CANCEL EDITING COMMENT*/
+  CancelcommentEdit(comment: Comment) {
+    comment.edit_mode &#x3D; false;
+    comment.edit_input_content &#x3D; &#x27;&#x27;;
+  }
+
+  /* Clear Image in new comment Preview once the user click remove button */
+  RemoveCommentPreviewImage(feed: Feed) {
+    feed.comment_image_preview &#x3D; null;
+  }
+
+  /* Removed Image from being uploaded once removed in image preview*/
+  RemoveCommentEditPreviewImage(comment: Comment, preview: PreviewPicture) {
+    comment.preview_pictures &#x3D; comment.preview_pictures.filter((x: PreviewPicture) &#x3D;&gt; x.url !&#x3D;&#x3D; preview.url);
+    comment.edited_pictures &#x3D; comment.edited_pictures.filter((x: PreviewPicture) &#x3D;&gt; x.url !&#x3D;&#x3D; preview.url);
+    if (comment.upload_files &amp;&amp; comment.upload_files.length) {
+      comment.upload_files &#x3D; comment.upload_files.filter((x: File) &#x3D;&gt; x !&#x3D;&#x3D; &lt;File&gt;preview.file);
+    }
+  }
+
+  /* Open the device file browswer or capture once the user click camera icon in comment box */
+  CommentImageUpload(feed: Feed) {
+    var elem: HTMLElement &#x3D; document.querySelector(&#x27;#comment_upload_input_&#x27; + feed.id);
+    elem.click();
+  }
+
+  /* Open the device file browswer or capture once the user click camera icon in comment edit box */
+  CommentEditImageUpload(comment: Comment) {
+    var elem: HTMLElement &#x3D; document.querySelector(&#x27;#comment_edit_upload_input_&#x27; + comment.id);
+    elem.click();
+  }
+
+  onSelectFile(event: any, feed: Feed) {
+    var _this &#x3D; this;
+    if (event.target.files &amp;&amp; event.target.files[0]) {
+      var filesAmount &#x3D; event.target.files.length;
+      let files &#x3D; event.target.files;
+      for (let i &#x3D; 0; i &lt; filesAmount; i++) {
+        var f &#x3D; files[i];
+        /* Only process image files. */
+        if (!f.type.match(&#x27;image.*&#x27;)) {
+          continue;
+        }
+        var fileReader &#x3D; new FileReader();
+        var i_url;
+        fileReader.onload &#x3D; (e) &#x3D;&gt; {
+          if (e) {
+            i_url &#x3D; (&lt;FileReader&gt;e.target).result;
+            SysFunctions.getImageCompressionRates(i_url, &#x27;POST_IMAGE&#x27;).then(rts &#x3D;&gt; {
+              SysFunctions.getImageOrientation(f).then(orientation &#x3D;&gt; {
+                _this.imageCompress.compressFile(i_url, orientation, rts.ratio, rts.quality).then(
+                  processedImageDataUrl &#x3D;&gt; {
+                    var loadedImage &#x3D; new Image();
+                    loadedImage.onload &#x3D; (event) &#x3D;&gt; {
+                      if (event) {
+                        var imgFile &#x3D; SysFunctions.DataUrlToFile(processedImageDataUrl);
+                        feed.comment_image_preview &#x3D; { url: processedImageDataUrl, width: loadedImage.width, height: loadedImage.height, file: imgFile };
+                      }
+                    }
+                    loadedImage.src &#x3D; processedImageDataUrl;
+                  });
+              });
+            });
+          }
+        }
+        fileReader.readAsDataURL(&lt;File&gt;f);
+      }
+    }
+  }
+
+  onSelectFileEditComment(event, comment: Comment) {
+    if (event.target.files &amp;&amp; event.target.files[0]) {
+      var filesAmount &#x3D; event.target.files.length;
+      let files &#x3D; event.target.files;
+      for (let i &#x3D; 0; i &lt; filesAmount; i++) {
+        var f &#x3D; files[i];
+        /* Only process image files. */
+        if (!f.type.match(&#x27;image.*&#x27;)) {
+          continue;
+        }
+        comment.upload_files.push(&lt;File&gt;f);
+        this.PushCommentPreviewPicture(&lt;File&gt;f, comment);
+      }
+    }
+  }
+
+  PushCommentPreviewPicture(f: File, comment: Comment) {
+    var fileReader &#x3D; new FileReader();
+    var i_url;
+    fileReader.onload &#x3D; (e) &#x3D;&gt; {
+      if (e) {
+        i_url &#x3D; (&lt;FileReader&gt;e.target).result;
+        var loadedImage &#x3D; new Image();
+        loadedImage.onload &#x3D; (event) &#x3D;&gt; {
+          if (event) {
+            comment.preview_pictures.push({ url: i_url, width: loadedImage.width, height: loadedImage.height, file: &lt;File&gt;f });
+          }
+        }
+        loadedImage.src &#x3D; i_url;
+      }
+    }
+    fileReader.readAsDataURL(&lt;File&gt;f);
+  }
+
+  CancelcommentReplyEdit(commentReply: CommentReply) {
+    commentReply.edit_mode &#x3D; false;
+    commentReply.edit_input_content &#x3D; &#x27;&#x27;;
+  }
+
+  deleteComment(comment: Comment) {
+    //let elem:Element &#x3D; document.getElementById(&quot;comment_item_&quot;+comment.object_id+&quot;_&quot;+comment.id);
+    let elem: HTMLElement &#x3D; document.querySelector(&quot;#comment_item_&quot; + comment.object_id + &quot;_&quot; + comment.id);
+    elem.style.opacity &#x3D; &#x27;0.6&#x27;;
+    this.clearComment(comment);
+    var _this &#x3D; this;
+    this.errors &#x3D; this.messages &#x3D; [];
+    //this.modalRef.close();
+    this.service.getProvider(this.provider).crudconfig.route_url &#x3D; &#x27;feed/comments/&#x27;;
+    this.service.delete(this.provider, { id: comment.id }).subscribe(function (result) {
+      if (result.isSuccess()) {
+        var data &#x3D; result.getResultData();
+        if (data &#x3D;&#x3D; true) {
+        } else {
+          elem.style.opacity &#x3D; &#x27;1&#x27;;
+        }
+      } else {
+        _this.errors &#x3D; result.getErrors();
+        elem.style.opacity &#x3D; &#x27;1&#x27;;
+      }
+    });
+  }
+
+  clearComment(comment: Comment) {
+    this.feedService.searchFeed(comment.object_id).subscribe((feed: Feed) &#x3D;&gt; {
+      if (feed) {
+        feed.comments &#x3D; feed.comments.filter((x: any) &#x3D;&gt; x.id !&#x3D;&#x3D; comment.id);
+        feed.no_comments &#x3D; Number(feed.no_comments) - 1;
+      }
+    });
+    this.profileFeedService.searchFeed(comment.object_id).subscribe((feed: Feed) &#x3D;&gt; {
+      if (feed) {
+        feed.comments &#x3D; feed.comments.filter((x: any) &#x3D;&gt; x.id !&#x3D;&#x3D; comment.id);
+        feed.no_comments &#x3D; Number(feed.no_comments) - 1;
+      }
+    });
+    this.pageFeedService.searchFeed(comment.object_id).subscribe((feed: Feed) &#x3D;&gt; {
+      if (feed) {
+        feed.comments &#x3D; feed.comments.filter((x: any) &#x3D;&gt; x.id !&#x3D;&#x3D; comment.id);
+        feed.no_comments &#x3D; Number(feed.no_comments) - 1;
+      }
+    });
+  }
+
+  searchComment(comments: any, id: number): Observable&lt;Comment&gt; {
+    return of(comments.find((comment: Comment) &#x3D;&gt; comment.id &#x3D;&#x3D; id));
+  }
+
+  updateSentComment(comment: Comment, tmp_id: number) {
+    var _this &#x3D; this;
+    this.feedService.searchFeed(comment.object_id).subscribe((feed: Feed) &#x3D;&gt; {
+      if (feed) {
+        _this.searchComment(feed.comments, tmp_id).subscribe((comm: Comment) &#x3D;&gt; {
+          if (comm) {
+            _this.comment_model &#x3D; cloneDeep(comment);
+            comm &#x3D; cloneDeep(comment);
+          }
+        });
+      }
+    });
+    this.profileFeedService.searchFeed(comment.object_id).subscribe((feed: Feed) &#x3D;&gt; {
+      if (feed) {
+        _this.searchComment(feed.comments, tmp_id).subscribe((comm: Comment) &#x3D;&gt; {
+          if (comm) {
+            _this.comment_model &#x3D; cloneDeep(comment);
+            comm &#x3D; cloneDeep(comment);
+          }
+        });
+      }
+    });
+    this.pageFeedService.searchFeed(comment.object_id).subscribe((feed: Feed) &#x3D;&gt; {
+      if (feed) {
+        _this.searchComment(feed.comments, tmp_id).subscribe((comm: Comment) &#x3D;&gt; {
+          if (comm) {
+            _this.comment_model &#x3D; cloneDeep(comment);
+            comm &#x3D; cloneDeep(comment);
+          }
+        });
+      }
+    });
+  }
+
+  /* Change the comment like color and count after like or unlike action */
+  updateCommentLike(comment: Comment, action: string) {
+    var _this &#x3D; this;
+    if (this.feedService.OVERLAY_FEED.feed !&#x3D; null &amp;&amp; comment.object_id &#x3D;&#x3D; this.feedService.OVERLAY_FEED.feed.id) {
+      this.searchComment(this.feedService.OVERLAY_FEED.feed.comments, comment.id).subscribe((comm: Comment) &#x3D;&gt; {
+        if (comm) {
+          if (action &#x3D;&#x3D; &#x27;like&#x27; &amp;&amp; comm.i_like !&#x3D; true) {
+            comm.no_likes &#x3D; Number(comm.no_likes) + 1;
+            comm.i_like &#x3D; true;
+          } else {
+            if (Number(comm.no_likes) &gt; 0 &amp;&amp; comm.i_like &#x3D;&#x3D; true) {
+              comm.no_likes &#x3D; Number(comm.no_likes) - 1;
+              comm.i_like &#x3D; false;
+            }
+          }
+        }
+      });
+    }
+
+    this.profileFeedService.searchFeed(comment.object_id).subscribe((feed: Feed) &#x3D;&gt; {
+      if (feed) {
+        _this.searchComment(feed.comments, comment.id).subscribe((comm: Comment) &#x3D;&gt; {
+          if (comm) {
+            if (action &#x3D;&#x3D; &#x27;like&#x27; &amp;&amp; comm.i_like !&#x3D; true) {
+              comm.no_likes &#x3D; Number(comm.no_likes) + 1;
+              comm.i_like &#x3D; true;
+            } else {
+              if (Number(comm.no_likes) &gt; 0 &amp;&amp; comm.i_like &#x3D;&#x3D; true) {
+                comm.no_likes &#x3D; Number(comm.no_likes) - 1;
+                comm.i_like &#x3D; false;
+              }
+            }
+          }
+        });
+      }
+    });
+
+    this.feedService.searchFeed(comment.object_id).subscribe((feed: Feed) &#x3D;&gt; {
+      if (feed) {
+        _this.searchComment(feed.comments, comment.id).subscribe((comm: Comment) &#x3D;&gt; {
+          if (comm) {
+            if (action &#x3D;&#x3D; &#x27;like&#x27; &amp;&amp; comm.i_like !&#x3D; true) {
+              comm.no_likes &#x3D; Number(comm.no_likes) + 1;
+              comm.i_like &#x3D; true;
+            } else {
+              if (Number(comm.no_likes) &gt; 0 &amp;&amp; comm.i_like &#x3D;&#x3D; true) {
+                comm.no_likes &#x3D; Number(comm.no_likes) - 1;
+                comm.i_like &#x3D; false;
+              }
+            }
+          }
+        });
+      }
+    });
+
+    this.pageFeedService.searchFeed(comment.object_id).subscribe((feed: Feed) &#x3D;&gt; {
+      if (feed) {
+        _this.searchComment(feed.comments, comment.id).subscribe((comm: Comment) &#x3D;&gt; {
+          if (comm) {
+            if (action &#x3D;&#x3D; &#x27;like&#x27; &amp;&amp; comm.i_like !&#x3D; true) {
+              comm.no_likes &#x3D; Number(comm.no_likes) + 1;
+              comm.i_like &#x3D; true;
+            } else {
+              if (Number(comm.no_likes) &gt; 0 &amp;&amp; comm.i_like &#x3D;&#x3D; true) {
+                comm.no_likes &#x3D; Number(comm.no_likes) - 1;
+                comm.i_like &#x3D; false;
+              }
+            }
+          }
+        });
+      }
+    });
+
+  }
+
+  /*set comment reply box visible and cursor focus */
+  setToReplyComment(feedComment: Comment) {
+    feedComment.replying &#x3D; true;
+    let elem: HTMLElement &#x3D; document.querySelector(&quot;#comment_reply_box_&quot; + feedComment.object_id + &quot;_&quot; + feedComment.id);
+    if (elem) {
+      elem.focus();
+      elem.scrollIntoView({ behavior: &quot;smooth&quot;, block: &quot;end&quot;, inline: &quot;nearest&quot; });
+    }
+  }
+
+  /*Post comment Reply */
+  commentReply(comment: Comment) {
+    var _this &#x3D; this;
+    if (comment.reply_box.trim() &#x3D;&#x3D; &quot;&quot;) {
+      return;
+    }
+    this.errors &#x3D; this.messages &#x3D; [];
+    var reply_model &#x3D; new CommentReply();
+    reply_model.isNew &#x3D; comment.is_new_reply;
+    reply_model.message &#x3D; comment.reply_box;
+    reply_model.id &#x3D; comment.replyId;
+    reply_model.object_id &#x3D; String(comment.id);
+    this.service.getProvider(this.provider).crudconfig.route_url &#x3D; &#x27;feed/comment-reply/&#x27;;
+    if (comment.sending_reply !&#x3D;&#x3D; true) {
+      comment.sending_reply &#x3D; true;
+      if (comment.is_new_reply &#x3D;&#x3D;&#x3D; true) {
+        comment.loading_new_reply &#x3D; true;
+        this.service.create(this.provider, reply_model, {}).subscribe(function (result) {
+          comment.sending_reply &#x3D; false;
+          if (result.isSuccess()) {
+            _this.messages &#x3D; result.getMessages();
+            var data &#x3D; result.getResultData();
+            _this.pushCommentReply(comment, data.data);
+            comment.loading_new_reply &#x3D; false;
+          } else {
+            _this.errors &#x3D; result.getErrors();
+          }
+        });
+      }
+      comment.is_new_reply &#x3D; true;
+      comment.reply_box &#x3D; &#x27;&#x27;;
+      comment.replyId &#x3D; 0;
+    }
+  }
+
+
+  /*Post comment Reply */
+  commentReplyEdit(commentReply: CommentReply) {
+    var _this &#x3D; this;
+    if (commentReply.edit_input_content.trim() &#x3D;&#x3D; &quot;&quot; || commentReply.sending &#x3D;&#x3D; true) {
+      return;
+    }
+    this.errors &#x3D; this.messages &#x3D; [];
+    var reply_model &#x3D; new CommentReply();
+    reply_model.message &#x3D; commentReply.edit_input_content;
+    this.service.getProvider(this.provider).crudconfig.route_url &#x3D; &#x27;feed/comment-reply/&#x27;;
+    commentReply.sending &#x3D; true;
+    commentReply.edit_mode &#x3D; false;
+    this.service.update(this.provider, reply_model, { &#x27;id&#x27;: commentReply.id }).subscribe(function (result) {
+      commentReply.sending &#x3D; false;
+      if (result.isSuccess()) {
+        _this.messages &#x3D; result.getMessages();
+        var data &#x3D; result.getResultData();
+        commentReply.message &#x3D; reply_model.message;
+        commentReply.edit_input_content &#x3D; &#x27;&#x27;;
+      }
+      else {
+        _this.errors &#x3D; result.getErrors();
+        commentReply.edit_mode &#x3D; true;
+      }
+    });
+
+  }
+
+  deleteCommentReply(comment: Comment, commentReply: CommentReply) {
+    //let elem:Element &#x3D; document.getElementById(&quot;comment_item_&quot;+comment.object_id+&quot;_&quot;+comment.id);
+    let elem: HTMLElement &#x3D; document.querySelector(&quot;#comment_reply_item_&quot; + commentReply.object_id + &quot;_&quot; + commentReply.id);
+    elem.style.opacity &#x3D; &#x27;0.6&#x27;;
+    this.clearCommentReply(comment, commentReply.id);
+    var _this &#x3D; this;
+    this.errors &#x3D; this.messages &#x3D; [];
+    //this.modalRef.close();
+    this.service.getProvider(this.provider).crudconfig.route_url &#x3D; &#x27;feed/comment-reply/&#x27;;
+    this.service.delete(this.provider, { id: commentReply.id }).subscribe(function (result) {
+      if (result.isSuccess()) {
+        var data &#x3D; result.getResultData();
+        if (data &#x3D;&#x3D; true) {
+        } else {
+          elem.style.opacity &#x3D; &#x27;1&#x27;;
+        }
+      } else {
+        _this.errors &#x3D; result.getErrors();
+        elem.style.opacity &#x3D; &#x27;1&#x27;;
+      }
+    });
+  }
+
+  clearCommentReply(comment: Comment, replyId: number) {
+    var _this &#x3D; this;
+    this.feedService.searchFeed(comment.object_id).subscribe((feed: Feed) &#x3D;&gt; {
+      if (feed) {
+        _this.searchComment(feed.comments, comment.id).subscribe((comm: Comment) &#x3D;&gt; {
+          if (comm) {
+            comm.replies &#x3D; comm.replies.filter((x: any) &#x3D;&gt; x.id !&#x3D;&#x3D; replyId);
+            comm.no_replies &#x3D; Number(comm.replies.length) - 1;
+          }
+        });
+      }
+    });
+    this.profileFeedService.searchFeed(comment.object_id).subscribe((feed: Feed) &#x3D;&gt; {
+      if (feed) {
+        _this.searchComment(feed.comments, comment.id).subscribe((comm: Comment) &#x3D;&gt; {
+          if (comm) {
+            comm.replies &#x3D; comm.replies.filter((x: any) &#x3D;&gt; x.id !&#x3D;&#x3D; replyId);
+            comm.no_replies &#x3D; Number(comm.replies.length) - 1;
+          }
+        });
+      }
+    });
+    this.pageFeedService.searchFeed(comment.object_id).subscribe((feed: Feed) &#x3D;&gt; {
+      if (feed) {
+        _this.searchComment(feed.comments, comment.id).subscribe((comm: Comment) &#x3D;&gt; {
+          if (comm) {
+            comm.replies &#x3D; comm.replies.filter((x: any) &#x3D;&gt; x.id !&#x3D;&#x3D; replyId);
+            comm.no_replies &#x3D; Number(comm.replies.length) - 1;
+          }
+        });
+      }
+    });
+  }
+
+  pushCommentReply(feedComment: Comment, reply: any) {
+    var _this &#x3D; this;
+    if (this.feedService.OVERLAY_FEED.feed !&#x3D; null &amp;&amp; feedComment.object_id &#x3D;&#x3D; this.feedService.OVERLAY_FEED.feed.id) {
+      _this.searchComment(this.feedService.OVERLAY_FEED.feed.comments, feedComment.id).subscribe((comm: Comment) &#x3D;&gt; {
+        if (comm) {
+          _this.searchReply(comm.replies, reply.id).subscribe((rep: CommentReply) &#x3D;&gt; {
+            if (rep) { /*Don&#x27;t push reply */ }
+            else {
+              comm.replies.push(reply);
+              comm.no_replies &#x3D; comm.no_replies + 1;
+            }
+          });
+        }
+      });
+    }
+
+    this.feedService.searchFeed(feedComment.object_id).subscribe((feed: Feed) &#x3D;&gt; {
+      if (feed) {
+        this.searchComment(feed.comments, feedComment.id).subscribe((comm: Comment) &#x3D;&gt; {
+          if (comm) {
+            _this.searchReply(comm.replies, reply.id).subscribe((rep: CommentReply) &#x3D;&gt; {
+              if (rep) { /*Don&#x27;t push reply */ }
+              else {
+                comm.replies.push(reply);
+                comm.no_replies &#x3D; comm.no_replies + 1;
+              }
+            });
+          }
+        });
+      }
+    });
+
+    this.profileFeedService.searchFeed(feedComment.object_id).subscribe((feed: Feed) &#x3D;&gt; {
+      if (feed) {
+        this.searchComment(feed.comments, feedComment.id).subscribe((comm: Comment) &#x3D;&gt; {
+          if (comm) {
+            _this.searchReply(comm.replies, reply.id).subscribe((rep: CommentReply) &#x3D;&gt; {
+              if (rep) { /*Don&#x27;t push reply */ }
+              else {
+                comm.replies.push(reply);
+                comm.no_replies &#x3D; comm.no_replies + 1;
+              }
+            });
+          }
+        });
+      }
+    });
+
+    this.pageFeedService.searchFeed(feedComment.object_id).subscribe((feed: Feed) &#x3D;&gt; {
+      if (feed) {
+        this.searchComment(feed.comments, feedComment.id).subscribe((comm: Comment) &#x3D;&gt; {
+          if (comm) {
+            _this.searchReply(comm.replies, reply.id).subscribe((rep: CommentReply) &#x3D;&gt; {
+              if (rep) { /*Don&#x27;t push reply */ }
+              else {
+                comm.replies.push(reply);
+                comm.no_replies &#x3D; comm.no_replies + 1;
+              }
+            });
+          }
+        });
+      }
+    });
+  }
+
+  replaceCommentReply(feedComment: Comment, reply: any) {
+    var _this &#x3D; this;
+    if (this.feedService.OVERLAY_FEED.feed !&#x3D; null &amp;&amp; feedComment.object_id &#x3D;&#x3D; this.feedService.OVERLAY_FEED.feed.id) {
+      this.searchComment(this.feedService.OVERLAY_FEED.feed.comments, feedComment.id).subscribe((comm: Comment) &#x3D;&gt; {
+        if (comm) {
+          _this.searchReply(comm.replies, reply.id).subscribe((rep: CommentReply) &#x3D;&gt; {
+            if (rep) {
+              rep &#x3D; cloneDeep(reply);
+            }
+          });
+        }
+      });
+    }
+
+    this.feedService.searchFeed(feedComment.object_id).subscribe((feed: Feed) &#x3D;&gt; {
+      if (feed) {
+        this.searchComment(feed.comments, feedComment.id).subscribe((comm: Comment) &#x3D;&gt; {
+          if (comm) {
+            this.searchReply(comm.replies, reply.id).subscribe((rep: CommentReply) &#x3D;&gt; {
+              if (rep) {
+                rep &#x3D; cloneDeep(reply);
+              }
+            });
+          }
+        });
+      }
+    });
+
+    this.profileFeedService.searchFeed(feedComment.object_id).subscribe((feed: Feed) &#x3D;&gt; {
+      if (feed) {
+        this.searchComment(feed.comments, feedComment.id).subscribe((comm: Comment) &#x3D;&gt; {
+          if (comm) {
+            this.searchReply(comm.replies, reply.id).subscribe((rep: CommentReply) &#x3D;&gt; {
+              if (rep) {
+                rep &#x3D; cloneDeep(reply);
+              }
+            });
+          }
+        });
+      }
+    });
+
+    this.pageFeedService.searchFeed(feedComment.object_id).subscribe((feed: Feed) &#x3D;&gt; {
+      if (feed) {
+        this.searchComment(feed.comments, feedComment.id).subscribe((comm: Comment) &#x3D;&gt; {
+          if (comm) {
+            this.searchReply(comm.replies, reply.id).subscribe((rep: CommentReply) &#x3D;&gt; {
+              if (rep) {
+                rep &#x3D; cloneDeep(reply);
+              }
+            });
+          }
+        });
+      }
+    });
+
+  }
+
+  commentReplyLike(commentReply: CommentReply, action: string) {
+    if (commentReply.sending_like &#x3D;&#x3D; true) {
+      return;
+    }
+    this.updateCommentReplyLike(commentReply, action);
+    var _this &#x3D; this;
+    this.errors &#x3D; this.messages &#x3D; [];
+    this.service.getProvider(this.provider).crudconfig.route_url &#x3D; &#x27;feed/comment-reply-like/&#x27;;
+    commentReply.sending_like &#x3D; true;
+    if (action &#x3D;&#x3D; &quot;like&quot;) {
+      this.service.create(this.provider, { object_id: commentReply.id, target_id: commentReply.profile.user_id }, {}).subscribe(function (result) {
+        _this.submitted &#x3D; false;
+        commentReply.sending_like &#x3D; false;
+        if (result.isSuccess()) {
+          var data &#x3D; result.getResultData();
+          if (data !&#x3D; true) {
+            _this.updateCommentReplyLike(commentReply, &#x27;unlike&#x27;);
+          }
+        } else {
+          _this.errors &#x3D; result.getErrors();
+          _this.updateCommentReplyLike(commentReply, &#x27;unlike&#x27;);
+        }
+      });
+    } else {
+      this.service.delete(this.provider, { id: commentReply.id }).subscribe(function (result) {
+        commentReply.sending_like &#x3D; false;
+        if (result.isSuccess()) {
+          var data &#x3D; result.getResultData();
+          if (data !&#x3D; true) {
+            _this.updateCommentReplyLike(commentReply, &#x27;like&#x27;);
+          }
+        } else {
+          _this.errors &#x3D; result.getErrors();
+          _this.updateCommentReplyLike(commentReply, &#x27;like&#x27;);
+        }
+      });
+    }
+  }
+
+  updateCommentReplyLike(commentReply: CommentReply, action: string) {
+    if (commentReply) {
+      if (action &#x3D;&#x3D; &#x27;like&#x27;) {
+        commentReply.no_likes &#x3D; Number(commentReply.no_likes) + 1;
+        commentReply.i_like &#x3D; true;
+      } else {
+        if (Number(commentReply.no_likes) &gt; 0) {
+          commentReply.no_likes &#x3D; Number(commentReply.no_likes) - 1;
+          commentReply.i_like &#x3D; false;
+        }
+      }
+    }
+  }
+
+  searchReply(replies: CommentReply[], id: number): Observable&lt;CommentReply&gt; {
+    return of(replies.find((reply: CommentReply) &#x3D;&gt; reply.id &#x3D;&#x3D; id));
+  }
+
+  getConfigValue(key: string): any {
+    return getDeepFromObject(this.crudconfig, key, null);
+  };
+}</code></pre>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'CommentsService.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

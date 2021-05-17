@@ -27,8 +27,8 @@ export class DaywakaProvider {
         _this.http=http;
         _this.route=route;
         _this.defaultConfig = {
-            //baseEndpoint: 'http://localhost/woorbi.ms/api/web/',
-            baseEndpoint: 'http://dw-app.woorbi.com/',
+            baseEndpoint: 'http://196.45.144.12/dw-app.woorbi.com/',
+            //baseEndpoint: 'http://dw-app.woorbi.com/',
 			route_url:'',
             create: {
 				alwaysFail: false,

@@ -1,0 +1,45 @@
+<div class="d-block p-0 m-0">
+    <div class="card m-0 p-0">
+        <div class="card-body m-0 p-0">
+            <div class="d-block wf-profile-hearder"
+                [ngStyle]="{'height':''+dwProfileViewerService.profileCoverHeaderHeight+'px'}">
+                <div [ngStyle]="{'height':''+dwProfileViewerService.profileCoverHeight+'px'}"
+                    class="d-block wf-profile-cover" #profileCoverElm>
+                    <div class="d-block w-100 h-100 p-0 m-0">
+                        <ng-container *ngIf="PROFILE.cover!=null">
+                            <img src="{{PROFILE.cover.picture}}" class="img-fluid w-100 z-depth-2" style="overflow:hidden;">
+                        </ng-container>                     
+                    </div>
+                    <div *ngIf="PROFILE.my_profile==true" class="d-block profile-cover-upload"
+                        title="Update Cover Photo" style="cursor: pointer;">
+                        <span class="d-inline-block text-default"><span class="fa fa-camera"></span></span>
+                    </div>
+                </div>
+                <div class="wf-profile-image-container">
+                    <div class="d-block wf-profile-img  w-100 h-100 m-0 p-0">
+                        <div class="d-block w-100 h-100 m-0 p-0">
+                            <ng-container *ngIf="PROFILE.avatar!=null">
+                                <img src="{{PROFILE.avatar.face}}"
+                                    class="img-fluid rounded-circle img-thumbnail">
+                            </ng-container>
+                            <ng-container *ngIf="PROFILE.avatar==null">
+                                <img src="/assets/img/face.jpg" class="img-fluid rounded-circle img-thumbnail">
+                            </ng-container>
+                        </div>
+                        <div *ngIf="PROFILE.my_profile==true" (click)="editProfileService.editAvatar()" class="d-block profile-avatar-upload"
+                            title="Update Profile Photo" style="cursor: pointer;">
+                            <span class="d-inline-block text-default"><span class="fa fa-camera"></span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="wf-profile-title-buttons p-0 d-block" >
+                    <div class="row m-0 p-0">
+                        <div class="col-12 name">
+                            {{PROFILE.name}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

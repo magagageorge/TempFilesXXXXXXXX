@@ -1,0 +1,127 @@
+main.content {
+    position: relative;
+    margin-top: 65px;
+    padding: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+@media (max-width: 600px) {
+    main.content {
+        position: relative;
+        margin-top: 50px;
+        padding: 0px;
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+}
+
+.wb-page-manager-left {
+    min-height: 80vh;
+}
+
+.page-manager-container {
+    padding-left: 0px;
+    padding-right: 0px;
+    z-index: 100;
+}
+.wb-page-manager-left-navigation {
+    width: 0px;
+    display: none;
+    position: fixed;
+    top: 50px;
+    bottom: 0;
+    left: 0;
+    background-color: #ffffff;
+    z-index: 101;
+}
+
+.wb-page-manager-left-navigation.menu-opened {
+    transition: width 2s ease-in-out;
+    -webkit-transition: width 2s ease-in-out;
+    -moz-transition: width 2s ease-in-out;
+    -o-transition: width 2s ease-in-out;
+    -ms-transition: width 2s ease-in-out;
+}
+
+
+
+@media (min-width: 1281px) {
+    .page-manager-container {
+        padding-left: 250px;
+        padding-right: 0px;
+    }
+    .wb-page-manager-left-navigation {
+        width: 250px;
+        display: block;
+    }
+}
+
+/* 
+      ##Device = Laptops, Desktops
+      ##Screen = B/w 1025px to 1280px
+    */
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+    .page-manager-container {
+        padding-left: 250px;
+        padding-right: 0px;
+    }
+    .wb-page-manager-left-navigation {
+        width: 250px;
+        display: block;
+    }
+}
+
+/* 
+      ##Device = Tablets, Ipads (portrait)
+      ##Screen = B/w 768px to 1024px
+    */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .page-manager-container {
+        padding-left: 250px;
+        padding-right: 0px;
+    }
+    .wb-page-manager-left-navigation {
+        width: 250px;
+        display: block;
+    }
+}
+
+/* 
+      ##Device = Tablets, Ipads (landscape)
+      ##Screen = B/w 768px to 1024px
+    */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    .page-manager-container {
+        padding-left: 250px;
+        padding-right: 0px;
+    }
+    .wb-page-manager-left-navigation {
+        width: 250px;
+        display: block;
+    }
+}
+
+/* 
+      ##Device = Low Resolution Tablets, Mobiles (Landscape)
+      ##Screen = B/w 481px to 767px
+    */
+
+@media (min-width: 481px) and (max-width: 767px) {
+    .wb-page-manager-left-navigation.menu-opened {
+        width: 250px;
+        display: block;
+    }
+}
+
+/* 
+      ##Device = Most of the Smartphones Mobiles (Portrait)
+      ##Screen = B/w 320px to 479px
+    */
+@media (min-width: 120px) and (max-width: 480px) {
+    .wb-page-manager-left-navigation.menu-opened {
+        width: 250px;
+        display: block;
+    }
+}

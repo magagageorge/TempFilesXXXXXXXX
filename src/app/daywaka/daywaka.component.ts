@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DaywakaService } from './services/daywaka.service';
 
 @Component({
   selector: 'app-daywaka',

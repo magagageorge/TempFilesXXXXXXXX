@@ -18,7 +18,7 @@ export class GeoLocationShort{
   type:string;
 }
 
-/*
-Location Type
-country,city,town,custom_location,neighborhood
-*/
+export class LatLong {
+  lat: number;
+  lng: number;
+}
