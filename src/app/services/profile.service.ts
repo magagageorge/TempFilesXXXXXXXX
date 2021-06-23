@@ -10,6 +10,8 @@ import { UtilitiesService } from '@app/services/utilities.service';
 import { MyProfile } from '@app/models/profile/my-profile';
 import { Profile } from '@app/models/profile/profile';
 import { PageProfileViewer } from '@app/models/page-profile-viewer';
+import { AuthService } from '@app/auth';
+import { take, map } from 'rxjs/operators';
 
 
 @Injectable()
@@ -28,16 +30,20 @@ export class ProfileService {
     public MYPROFILE: MyProfile = null;
     loading_myprofile: boolean = false;
 
-    constructor(service: CrudService, @Inject(CRUD_OPTIONS) CRUD_OPTIONS: CrudOptions, router: Router) {
+    constructor(service: CrudService, @Inject(CRUD_OPTIONS) CRUD_OPTIONS: CrudOptions, router: Router, private authService: AuthService,) {
         this.service = service;
         this.crudconfig = CRUD_OPTIONS;
         this.router = router;
-        this.loading_myprofile = true;
-        this.getMyProfile().subscribe(profile => {
-            this.MYPROFILE = profile.getResultData() as MyProfile;
-            this.loading_myprofile = false;
-            if (this.MYPROFILE.init.status == false) {
-                this.router.navigateByUrl('start');
+        this.authenticationStatus().subscribe((loggedIn: boolean) => {
+            if (loggedIn) {
+                this.loading_myprofile = true;
+                this.getMyProfile().subscribe(profile => {
+                    this.MYPROFILE = profile.getResultData() as MyProfile;
+                    this.loading_myprofile = false;
+                    if (this.MYPROFILE.init.status == false) {
+                        this.router.navigateByUrl('start');
+                    }
+                });
             }
         });
     }
@@ -51,4 +57,17 @@ export class ProfileService {
     getConfigValue(key: string): any {
         return getDeepFromObject(this.crudconfig, key, null);
     };
+
+    authenticationStatus(): Observable<boolean> {
+        return this.authService.isAuthenticated()
+            .pipe(
+                take(1),
+                map((authenticated) => {
+                    if (authenticated) {
+                        return true;
+                    }
+                    return false;
+                }),
+            )
+    }
 }

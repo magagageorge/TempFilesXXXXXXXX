@@ -1,0 +1,9 @@
+<div class="w-100 animated slideInRight" style="width:100vw;height: 100vh;" #pageAnimate>
+    <div style="position: absolute;top:0px;right:10px;left:10px;">
+        <app-dw-mobile-app-global-navbar [back_route]="'/dw-mb-getstarted'" [display_text]="title" (navigatingBack)="onPageLeave($event)">
+        </app-dw-mobile-app-global-navbar>
+    </div>
+    <div style="position: absolute;bottom:10%;right:10px;left:10px;">
+        <app-auth-mobile-app-register></app-auth-mobile-app-register>
+    </div>
+</div>

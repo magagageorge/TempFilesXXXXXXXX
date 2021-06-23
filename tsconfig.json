@@ -14,7 +14,7 @@
       "node_modules/@types"
     ],
     "paths": {
-      "@app/*": [ "app/*" ],           // src/app      
+      "@app/*": [ "app/*" ],           // src/app
       "@services/*": [ "app/services/*" ], // src/app/services
       "@assets/*": [ "assets/*" ],     // src/assests
       "@models/*": [ "app/models/*" ],      // src/app/models

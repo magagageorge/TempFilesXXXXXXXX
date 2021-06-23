@@ -1,0 +1,109 @@
+.welcome-widget-container {
+    position: fixed;
+    bottom: 0;
+    top: 0;
+    right: 0;
+    left: 0;
+    background-color: cornflowerblue;
+}
+
+.carousel-item {
+    width: 100vw;
+    height: 100vh;
+}
+
+.ad-card-view-controls {
+    position: absolute;
+    bottom: 10%;
+    border: 2px solid transparent;
+    left: 2px;
+    right: 2px;
+}
+
+.ad-card-view-controls .action-btn {
+    color: #000000;
+    background-color: transparentize($color: #ffffff, $amount: 0.6);
+}
+
+@-webkit-keyframes fourSlidesInRight {
+    from {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+        visibility: visible;
+    }
+
+    to {
+        -webkit-transform: translate3d(-25%, 0, 0);
+        transform: translate3d(-25%, 0, 0);
+    }
+}
+
+@keyframes fourSlidesInRight {
+    from {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+        visibility: visible;
+    }
+
+    to {
+        -webkit-transform: translate3d(-25%, 0, 0);
+        transform: translate3d(-25%, 0, 0);
+    }
+}
+
+.fourSlidesInRight {
+    -webkit-animation-name: fourSlidesInRight;
+    animation-name: fourSlidesInRight;
+}
+
+@-webkit-keyframes fourSlidesInLeft {
+    from {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+        visibility: visible;
+    }
+
+    to {
+        -webkit-transform: translate3d(25%, 0, 0);
+        transform: translate3d(25%, 0, 0);
+    }
+}
+
+@keyframes fourSlidesInLeft {
+    from {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+        visibility: visible;
+    }
+
+    to {
+        -webkit-transform: translate3d(25%, 0, 0);
+        transform: translate3d(25%, 0, 0);
+    }
+}
+
+.fourSlidesInLeft {
+    -webkit-animation-name: fourSlidesInLeft;
+    animation-name: fourSlidesInLeft;
+}
+
+#slider {
+    /*height: 350px;
+    overflow: hidden;
+    width: 100%;*/
+    display: block;
+}
+
+.carousel-item {
+    height: 50px;
+}
+
+.carousel-indicators li {
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+}
+
+.carousel-indicators {
+    bottom: 10px;
+}

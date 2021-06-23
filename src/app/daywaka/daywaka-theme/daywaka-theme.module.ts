@@ -20,7 +20,6 @@ import { DwOverlayModalContainerComponent } from './components/modals/dw-overlay
 import { DwCreatePageModalComponent } from './components/modals/dw-create-page-modal/dw-create-page-modal.component';
 import { ImageCropperModule } from '@app/libs/wb-image-cropper';
 import { WbGoogleMapsModule } from '@app/libs/wb-google-maps/wb-google-maps.module';
-import { DwPageViewerService } from '../dw-viewer/business/services/dw-page-viewer.service';
 import { JobsByListWidgetComponent } from './components/widgets/jobs-by-list-widget/jobs-by-list-widget.component';
 import { JobsByMapWidgetComponent } from './components/widgets/jobs-by-map-widget/jobs-by-map-widget.component';
 import { DwJobsContentContainerComponent } from './components/layouts/dw-jobs-content-container/dw-jobs-content-container.component';
@@ -42,6 +41,7 @@ import { DwEmpoloyerJobListItemWidgetComponent } from './components/widgets/dw-e
 import { DwEmployerDeleteJobModalComponent } from './components/modals/dw-employer-delete-job-modal/dw-employer-delete-job-modal.component';
 import { DwEmployerCancelJobModalComponent } from './components/modals/dw-employer-cancel-job-modal/dw-employer-cancel-job-modal.component';
 import { DwEmployerBulkApproveCompletedJobsModalComponent } from './components/modals/dw-employer-bulk-approve-completed-jobs-modal/dw-employer-bulk-approve-completed-jobs-modal.component';
+import { DwPageViewerService } from '../web-app/dw-viewer/business/services/dw-page-viewer.service';
 
 @NgModule({
   declarations: [DwNavBarComponent, WelcomeOneWidgetComponent, DwMainContentContainerComponent, ForSeekBusWidgetComponent, DwWelcomePageComponent, DwFooterComponent, DwFindWorkersComponent, DwFindWorkComponent, HowItWorksEmployerWidgetComponent, HowItWorksSeekerWidgetComponent, WelcomeSeekerWidgetComponent, WelcomeEmployerWidgetComponent, PostJobFormComponent, DwOverlayModalContainerComponent, DwCreatePageModalComponent, JobsByListWidgetComponent, JobsByMapWidgetComponent, DwJobsContentContainerComponent, DwProfileLeftMenuWidgetComponent, DwProfileNavBarComponent, JobDetailsHeaderWidgetComponent, DwProfileHeaderWidgetComponent, DwEditJobPreferencesWidgetComponent, DwEditProfileOverlayContainerModalComponent, DwAcceptJobModalComponent, EmployerProfileViewerComponent, DwEmployerProfileViewerModalComponent, DwGlobalNavBarComponent, DwEmpoloyerJobScheduleListItemWidgetComponent, DwWorkerJobScheduleDetailsModalComponent, ApproveCompletedJobModalComponent, DwEmpoloyerJobListItemWidgetComponent, DwEmployerDeleteJobModalComponent, DwEmployerCancelJobModalComponent, DwEmployerBulkApproveCompletedJobsModalComponent],

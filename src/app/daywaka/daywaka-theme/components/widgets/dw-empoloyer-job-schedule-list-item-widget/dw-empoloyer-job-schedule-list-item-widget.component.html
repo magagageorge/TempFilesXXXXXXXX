@@ -43,26 +43,18 @@
                     </div>
                 </div>
             </div>
-            <div class="col d-flex align-items-center border-light p-0">
+            <div class="col d-flex align-items-center justify-content-end border-light p-0">
                 <ng-container *ngIf="renderedIn=='JOB_LIST'">
                     <div class="row mx-0 w-100 h-100">
                         <div
-                            class="col-12 p-0 col-md-3 col-lg-3 col-lx-3 cursor-pointer d-flex justify-content-center text-primary align-items-center">
+                            class="col-12 p-0 col-md-6 col-lg-6 col-lx-6 cursor-pointer d-flex justify-content-center text-primary align-items-center">
                             <a routerLink="/{{dwViewerService.VIEWER_URL}}/view-job/{{jobscheduleItem.job_id}}"
                                 class="wb-font-size-120 text-primary"><span class="fa fa-list"></span>
                             </a>
                         </div>
                         <div
-                            class="col-12 p-0 col-md-3 col-lg-3 col-lx-3 cursor-pointer wb-font-size-120 d-flex justify-content-center text-primary align-items-center">
+                            class="col-12 p-0 col-md-6 col-lg-6 col-lx-6 cursor-pointer wb-font-size-120 d-flex justify-content-center text-primary align-items-center">
                             <span class="fa fa-refresh"></span>
-                        </div>
-                        <div
-                            class="col-12 p-0 col-md-3 col-lg-3 col-lx-3 cursor-pointer wb-font-size-120 d-flex justify-content-center text-primary align-items-center">
-                            <span class="fa fa-trash"></span>
-                        </div>
-                        <div
-                            class="col-12 p-0 col-md-3 col-lg-3 col-lx-3 cursor-pointer wb-font-size-120 d-flex justify-content-center text-primary align-items-center">
-                            <span class="fa fa-pencil"></span>
                         </div>
                     </div>
                 </ng-container>

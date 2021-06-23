@@ -31,6 +31,8 @@ import { AuthResetPasswordComponent } from './components/auth-reset-password/aut
 import { AuthRequestPasswordComponent } from './components/auth-request-password/auth-request-password.component';
 import { AuthLogoutComponent } from './components/auth-logout/auth-logout.component';
 import { AuthChangePasswordComponent } from './components/auth-change-password/auth-change-password.component';
+import { AuthMobileAppLoginComponent } from './components/auth-mobile-app-login/auth-mobile-app-login.component';
+import { AuthMobileAppRegisterComponent } from './components/auth-mobile-app-register/auth-mobile-app-register.component';
 
 export function nbAuthServiceFactory(config: any, tokenService: TokenService, injector: Injector): AuthService{
     var providers = config.providers || {};
@@ -86,7 +88,9 @@ let config = new AuthServiceConfig([
   AuthResetPasswordComponent,
   AuthRequestPasswordComponent,
   AuthLogoutComponent,
-  AuthChangePasswordComponent
+  AuthChangePasswordComponent,
+  AuthMobileAppLoginComponent,
+  AuthMobileAppRegisterComponent
   ],
   exports: [
   AuthLoginComponent,
@@ -94,7 +98,9 @@ let config = new AuthServiceConfig([
   AuthResetPasswordComponent,
   AuthRequestPasswordComponent,
   AuthLogoutComponent,
-  AuthChangePasswordComponent
+  AuthChangePasswordComponent,
+  AuthMobileAppLoginComponent,
+  AuthMobileAppRegisterComponent
   ]
 })
 export class AuthModule {

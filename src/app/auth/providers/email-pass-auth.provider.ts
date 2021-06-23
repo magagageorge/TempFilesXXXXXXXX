@@ -4,8 +4,8 @@ import { EmailPassAuthProviderConfig } from './email-pass-auth.options';
 import { AuthResult } from '../services/auth-result';
 import { AbstractAuthProvider } from './abstract-auth.provider';
 import { Injectable } from '@angular/core';
-import { of as observableOf,Observable } from 'rxjs';
-import { switchMap,map,catchError } from 'rxjs/operators';
+import { of as observableOf, Observable } from 'rxjs';
+import { switchMap, map, catchError } from 'rxjs/operators';
 import { getDeepFromObject } from '../helpers';
 
 /**
@@ -107,11 +107,11 @@ export class EmailPassAuthProvider extends AbstractAuthProvider {
     protected http: HttpClient;
     private route;
     protected defaultConfig: EmailPassAuthProviderConfig;
-    constructor(http: HttpClient, route: ActivatedRoute){	
-	    super();
-		var __this =  this;
+    constructor(http: HttpClient, route: ActivatedRoute) {
+        super();
+        var __this = this;
         __this.defaultConfig = {
-            baseEndpoint: 'https://196.45.144.12/app.woorbi.com/auth/',
+            baseEndpoint: 'https://127.0.0.1/app.woorbi.com/auth/',
             //baseEndpoint: 'http://app.woorbi.com/auth/',
             login: {
                 alwaysFail: false,
@@ -161,7 +161,7 @@ export class EmailPassAuthProvider extends AbstractAuthProvider {
             },
             verifyCode: {
                 alwaysFail: false,
-                rememberMe: true,                
+                rememberMe: true,
                 endpoint: 'verify-code',
                 method: 'put',
                 redirect: {
@@ -170,7 +170,7 @@ export class EmailPassAuthProvider extends AbstractAuthProvider {
                 },
                 defaultErrors: ['Something went wrong, please try again.'],
                 defaultMessages: ['Reset Code Verified.'],
-            },            
+            },
             resetPass: {
                 endpoint: 'reset-password',
                 method: 'put',
@@ -201,110 +201,110 @@ export class EmailPassAuthProvider extends AbstractAuthProvider {
                 },
             },
         };
-		
+
         __this.http = http;
-        __this.route = route;			
+        __this.route = route;
         return __this;
     }
-    authenticate(data?: any): Observable<AuthResult>{
+    authenticate(data?: any): Observable<AuthResult> {
         var __this = this;
         var method = this.getConfigValue('login.method');
         var url = this.getActionEndpoint('login');
         return this.http.request(method, url, { body: data, observe: 'response' })
             .pipe(map(function (res) {
-            if (__this.getConfigValue('login.alwaysFail')) {
-                throw __this.createFailResponse(data);
-            }
-            return res;
-        }), this.validateToken('login'), map(function (res) {
-            return new AuthResult(true, res, __this.getConfigValue('login.redirect.success'), [], __this.getConfigValue('messages.getter')('login', res), __this.getConfigValue('token.getter')('login', res));
-        }), catchError(function(res){
-            var errors = [];
-            if (res instanceof HttpErrorResponse) {
-                errors = __this.getConfigValue('errors.getter')('login', res);
-                //errors.push(res.error);
-            }
-            else {
-                errors.push('Something went wrong,please check your Internet Connection.');
-            }
-            return observableOf(new AuthResult(false, res, __this.getConfigValue('login.redirect.failure'), errors));
-        }));
+                if (__this.getConfigValue('login.alwaysFail')) {
+                    throw __this.createFailResponse(data);
+                }
+                return res;
+            }), this.validateToken('login'), map(function (res) {
+                return new AuthResult(true, res, __this.getConfigValue('login.redirect.success'), [], __this.getConfigValue('messages.getter')('login', res), __this.getConfigValue('token.getter')('login', res));
+            }), catchError(function (res) {
+                var errors = [];
+                if (res instanceof HttpErrorResponse) {
+                    errors = __this.getConfigValue('errors.getter')('login', res);
+                    //errors.push(res.error);
+                }
+                else {
+                    errors.push('Something went wrong,please check your Internet Connection.');
+                }
+                return observableOf(new AuthResult(false, res, __this.getConfigValue('login.redirect.failure'), errors));
+            }));
     }
-    register(data?: any): Observable<AuthResult>{
+    register(data?: any): Observable<AuthResult> {
         var __this = this;
         var method = this.getConfigValue('register.method');
         var url = this.getActionEndpoint('register');
         return this.http.request(method, url, { body: data, observe: 'response' })
             .pipe(map(function (res) {
-            if (__this.getConfigValue('register.alwaysFail')) {
-                throw __this.createFailResponse(data);
-            }
-            return res;
-        }), this.validateToken('register'), map(function (res) {
-            return new AuthResult(true, res, __this.getConfigValue('register.redirect.success'), [], __this.getConfigValue('messages.getter')('register', res), __this.getConfigValue('token.getter')('register', res));
-        }), catchError(function (res) {
-            var errors = [];
-            if (res instanceof HttpErrorResponse) {
-                if(res.status===422){
-                 errors.push('This email has already been registered with Woorbi.If you have previously signed up with this email please try to login with it.');
-                }else{
-                    errors = __this.getConfigValue('errors.getter')('register', res);
+                if (__this.getConfigValue('register.alwaysFail')) {
+                    throw __this.createFailResponse(data);
                 }
+                return res;
+            }), this.validateToken('register'), map(function (res) {
+                return new AuthResult(true, res, __this.getConfigValue('register.redirect.success'), [], __this.getConfigValue('messages.getter')('register', res), __this.getConfigValue('token.getter')('register', res));
+            }), catchError(function (res) {
+                var errors = [];
+                if (res instanceof HttpErrorResponse) {
+                    if (res.status === 422) {
+                        errors.push('This email has already been registered with Woorbi.If you have previously signed up with this email please try to login with it.');
+                    } else {
+                        errors = __this.getConfigValue('errors.getter')('register', res);
+                    }
 
-            }
-            else {
-                errors.push('Something went wrong.');
-            }
-            return observableOf(new AuthResult(false, res, __this.getConfigValue('register.redirect.failure'), errors));
-        }));
+                }
+                else {
+                    errors.push('Something went wrong.');
+                }
+                return observableOf(new AuthResult(false, res, __this.getConfigValue('register.redirect.failure'), errors));
+            }));
     }
-    requestPassword(data?: any): Observable<AuthResult>{
+    requestPassword(data?: any): Observable<AuthResult> {
         var __this = this;
         var method = this.getConfigValue('requestPass.method');
         var url = this.getActionEndpoint('requestPass');
         return this.http.request(method, url, { body: data, observe: 'response' })
             .pipe(map(function (res) {
-            if (__this.getConfigValue('requestPass.alwaysFail')) {
-                throw __this.createFailResponse();
-            }
-            return res;
-        }), map(function (res) {
-            return new AuthResult(true, res, __this.getConfigValue('requestPass.redirect.success'), [], __this.getConfigValue('messages.getter')('requestPass', res));
-        }), catchError(function (res) {
-            var errors = [];
-            if (res instanceof HttpErrorResponse) {
-                errors = __this.getConfigValue('errors.getter')('requestPass', res);
-            }
-            else {
-                errors.push('Something went wrong.');
-            }
-            return observableOf(new AuthResult(false, res, __this.getConfigValue('requestPass.redirect.failure'), errors));
-        }));
+                if (__this.getConfigValue('requestPass.alwaysFail')) {
+                    throw __this.createFailResponse();
+                }
+                return res;
+            }), map(function (res) {
+                return new AuthResult(true, res, __this.getConfigValue('requestPass.redirect.success'), [], __this.getConfigValue('messages.getter')('requestPass', res));
+            }), catchError(function (res) {
+                var errors = [];
+                if (res instanceof HttpErrorResponse) {
+                    errors = __this.getConfigValue('errors.getter')('requestPass', res);
+                }
+                else {
+                    errors.push('Something went wrong.');
+                }
+                return observableOf(new AuthResult(false, res, __this.getConfigValue('requestPass.redirect.failure'), errors));
+            }));
     }
-    verifyCode(data?: any): Observable<AuthResult>{
+    verifyCode(data?: any): Observable<AuthResult> {
         var __this = this;
         var method = this.getConfigValue('verifyCode.method');
         var url = this.getActionEndpoint('verifyCode');
         return this.http.request(method, url, { body: data, observe: 'response' })
             .pipe(map(function (res) {
-            if (__this.getConfigValue('verifyCode.alwaysFail')) {
-                throw __this.createFailResponse();
-            }
-            return res;
-        }),this.validateToken('verifyCode'), map(function (res) {
-            return new AuthResult(true, res, __this.getConfigValue('verifyCode.redirect.success'), [], __this.getConfigValue('messages.getter')('verifyCode', res), __this.getConfigValue('token.getter')('verifyCode', res));
-        }),catchError(function (res) {
-            var errors = [];
-            if (res instanceof HttpErrorResponse) {
-                errors = __this.getConfigValue('errors.getter')('verifyCode', res);
-            }
-            else {
-                errors.push('Something went wrong.');
-            }
-            return observableOf(new AuthResult(false, res, __this.getConfigValue('verifyCode.redirect.failure'), errors));
-        }));
-    }    
-    resetPassword(data?: any): Observable<AuthResult>{
+                if (__this.getConfigValue('verifyCode.alwaysFail')) {
+                    throw __this.createFailResponse();
+                }
+                return res;
+            }), this.validateToken('verifyCode'), map(function (res) {
+                return new AuthResult(true, res, __this.getConfigValue('verifyCode.redirect.success'), [], __this.getConfigValue('messages.getter')('verifyCode', res), __this.getConfigValue('token.getter')('verifyCode', res));
+            }), catchError(function (res) {
+                var errors = [];
+                if (res instanceof HttpErrorResponse) {
+                    errors = __this.getConfigValue('errors.getter')('verifyCode', res);
+                }
+                else {
+                    errors.push('Something went wrong.');
+                }
+                return observableOf(new AuthResult(false, res, __this.getConfigValue('verifyCode.redirect.failure'), errors));
+            }));
+    }
+    resetPassword(data?: any): Observable<AuthResult> {
         var __this = this;
         if (data === void 0) { data = {}; }
         var tokenKey = this.getConfigValue('resetPass.resetPasswordTokenKey');
@@ -313,53 +313,53 @@ export class EmailPassAuthProvider extends AbstractAuthProvider {
         var url = this.getActionEndpoint('resetPass');
         return this.http.request(method, url, { body: data, observe: 'response' })
             .pipe(map(function (res) {
-            if (__this.getConfigValue('resetPass.alwaysFail')) {
-                throw __this.createFailResponse();
-            }
-            return res;
-        }), map(function (res) {
-            return new AuthResult(true, res, __this.getConfigValue('resetPass.redirect.success'), [], __this.getConfigValue('messages.getter')('resetPass', res));
-        }), catchError(function (res) {
-            var errors = [];
-            if (res instanceof HttpErrorResponse) {
-                errors = __this.getConfigValue('errors.getter')('resetPass', res);
-            }
-            else {
-                errors.push('Something went wrong.');
-            }
-            return observableOf(new AuthResult(false, res, __this.getConfigValue('resetPass.redirect.failure'), errors));
-        }));
+                if (__this.getConfigValue('resetPass.alwaysFail')) {
+                    throw __this.createFailResponse();
+                }
+                return res;
+            }), map(function (res) {
+                return new AuthResult(true, res, __this.getConfigValue('resetPass.redirect.success'), [], __this.getConfigValue('messages.getter')('resetPass', res));
+            }), catchError(function (res) {
+                var errors = [];
+                if (res instanceof HttpErrorResponse) {
+                    errors = __this.getConfigValue('errors.getter')('resetPass', res);
+                }
+                else {
+                    errors.push('Something went wrong.');
+                }
+                return observableOf(new AuthResult(false, res, __this.getConfigValue('resetPass.redirect.failure'), errors));
+            }));
     }
-    logout(): Observable<AuthResult>{
+    logout(): Observable<AuthResult> {
         var __this = this;
         var method = this.getConfigValue('logout.method');
         var url = this.getActionEndpoint('logout');
-		//url=null;
+        //url=null;
         return observableOf({})
             .pipe(switchMap(function (res) {
-            if (!url) {
-                return observableOf(res);
-            }
-            return __this.http.request(method, url, { observe: 'response' });
-        }), map(function (res) {
-            if (__this.getConfigValue('logout.alwaysFail')) {
-                throw __this.createFailResponse();
-            }
-            return res;
-        }), map(function (res) {
-            return new AuthResult(true, res, __this.getConfigValue('logout.redirect.success'), [], __this.getConfigValue('messages.getter')('logout', res));
-        }), catchError(function (res) {
-            var errors = [];
-            if (res instanceof HttpErrorResponse) {
-                errors = __this.getConfigValue('errors.getter')('logout', res);
-            }
-            else {
-                errors.push('Something went wrong.');
-            }
-            return observableOf(new AuthResult(false, res, __this.getConfigValue('logout.redirect.failure'), errors));
-        }));
+                if (!url) {
+                    return observableOf(res);
+                }
+                return __this.http.request(method, url, { observe: 'response' });
+            }), map(function (res) {
+                if (__this.getConfigValue('logout.alwaysFail')) {
+                    throw __this.createFailResponse();
+                }
+                return res;
+            }), map(function (res) {
+                return new AuthResult(true, res, __this.getConfigValue('logout.redirect.success'), [], __this.getConfigValue('messages.getter')('logout', res));
+            }), catchError(function (res) {
+                var errors = [];
+                if (res instanceof HttpErrorResponse) {
+                    errors = __this.getConfigValue('errors.getter')('logout', res);
+                }
+                else {
+                    errors.push('Something went wrong.');
+                }
+                return observableOf(new AuthResult(false, res, __this.getConfigValue('logout.redirect.failure'), errors));
+            }));
     }
-    protected validateToken(module: string): any{
+    protected validateToken(module: string): any {
         var __this = this;
         return map(function (res) {
             var token = __this.getConfigValue('token.getter')(module, res);
@@ -371,19 +371,20 @@ export class EmailPassAuthProvider extends AbstractAuthProvider {
             return res;
         });
     }
-    protected getActionEndpoint(action: string): string{
+    protected getActionEndpoint(action: string): string {
         var actionEndpoint = this.getConfigValue(action + ".endpoint");
         var baseEndpoint = this.getConfigValue('baseEndpoint');
         return baseEndpoint + actionEndpoint;
     }
-	
-	decorators = [
+
+    decorators = [
         { type: Injectable },
     ];
-    /** @nocollapse */    
-	ctorParameters = function () {
-		return [
-        { type: HttpClient, },
-        { type: ActivatedRoute, },
-      ]; }
+    /** @nocollapse */
+    ctorParameters = function () {
+        return [
+            { type: HttpClient, },
+            { type: ActivatedRoute, },
+        ];
+    }
 }

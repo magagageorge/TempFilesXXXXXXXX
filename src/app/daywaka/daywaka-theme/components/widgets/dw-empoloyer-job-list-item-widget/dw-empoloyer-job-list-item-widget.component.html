@@ -29,18 +29,13 @@
                     </div>
                 </div>
             </div>
-            <div class="col d-flex align-items-end border-light p-0">
-                <div class="row mx-0 w-100 h-100">
+            <div class="col d-flex align-items-center justify-content-end border-light p-0">
+                <div class="row mx-0 h-100">
                     <div class="col-6 cursor-pointer d-flex justify-content-center text-primary align-items-center">
                         <a routerLink="/{{dwViewerService.VIEWER_URL}}/view-job/{{jobItem.id}}"
                             class="wb-font-size-120 text-primary">
                             <span class="fa fa-list"></span>
                         </a>
-                    </div>
-                    <div class="col-6 cursor-pointer d-flex justify-content-center align-items-center">
-                        <div (click)="deleteJob()" class="d-inline-block text-primary wb-font-size-120">
-                            <span class="fa fa-trash"></span>
-                        </div>
                     </div>                    
                     <ng-container *ngIf="jobItem.status=='Draft'">
                         <div class="col-6 cursor-pointer d-flex justify-content-center align-items-center">

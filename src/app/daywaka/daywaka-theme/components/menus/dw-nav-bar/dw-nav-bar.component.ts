@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@app/auth';
-import { DwPageViewerService } from '@app/daywaka/dw-viewer/business/services/dw-page-viewer.service';
 import { DaywakaService } from '@app/daywaka/services/daywaka.service';
+import { DwPageViewerService } from '@app/daywaka/web-app/dw-viewer/business/services/dw-page-viewer.service';
 import { PageService } from '@app/services/page.service';
 
 @Component({

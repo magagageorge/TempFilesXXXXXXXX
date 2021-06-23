@@ -9,10 +9,11 @@ import { DaywakaService } from './services/daywaka.service';
 import { DwViewerService } from './services/dw-viewer.service';
 import { DwJobViewerService } from './services/dw-job-viewer.service';
 import { DwProfileService } from './services/dw-profile.service';
+import { MobileAppComponent } from './mobile-app/mobile-app.component';
 
 
 @NgModule({
-  declarations: [DaywakaComponent],
+  declarations: [DaywakaComponent, MobileAppComponent],
   imports: [
     CommonModule,
     RouterModule,

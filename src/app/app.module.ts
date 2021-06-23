@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
+import { Injectable, NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -78,6 +78,22 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { DaywakaProvider } from './@crud/providers/daywaka.provider';
 
 
+/* particular imports for hammer */
+import * as Hammer from 'hammerjs';
+import {
+  HammerModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG
+}
+  from '@angular/platform-browser';
+
+@Injectable()
+export class MyHammerConfig extends HammerGestureConfig {
+  overrides = <any>{
+    swipe: { direction: Hammer.DIRECTION_ALL },
+  };
+}
+/* End particular imports for hammer */
+
+
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -113,6 +129,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     WfHoverCardModule.forRoot(),
     DeviceDetectorModule.forRoot(),
     HttpClientModule,
+    HammerModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -182,7 +199,11 @@ export function HttpLoaderFactory(http: HttpClient) {
   providers: [AuthGuard, UrlViewerService, ProfileService, PageService, PostingService, UtilitiesService, FeedService, ProfileFeedService, PageFeedService, ProfileConnectionsService, CommentsService, NotificationsService, ConnectionsService, ImageIconsService, EditProfileService, MessengerService, AppModalService, MessengerModalsService, LoadSubmitProgressService, NavigationService, NgxImageCompressService, MathService, AdsService, ShowAdsService, LinkProcessingService, WbWindowService,
     { provide: NgbDateAdapter, useClass: CustomAdapter },
     /* { provide: Window, useValue: window },*/
-    { provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter }],
+    { provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter },
+    {
+      provide: HAMMER_GESTURE_CONFIG,
+      useClass: MyHammerConfig,
+    }],
   schemas: [NO_ERRORS_SCHEMA],
   bootstrap: [AppComponent]
 })

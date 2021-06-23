@@ -1,0 +1,84 @@
+<app-dw-jobs-content-container [TOPNAV_TITLE]="top_title">
+    <ng-container *ngIf="WORKING_JOBS.length>0">
+        <div class="row mx-0 w-100 my-1 border-green">
+            <div class="col-12 p-1 bg-light">
+                <h5>Working Now</h5>
+            </div>
+            <div class="col-12 p-0">
+                <app-jobs-by-list-widget [JOBS]="WORKING_JOBS" [DETAILS_ROUTE]="job_details_route"></app-jobs-by-list-widget>
+            </div>
+            <div class="col-12 p-0 bg-light d-flex justify-content-center">
+                <a routerLink="my-working-jobs">View All</a>
+            </div>
+        </div>
+    </ng-container>    
+    <ng-container *ngIf="UPCOMING_JOBS.length>0">
+        <div class="row mx-0 w-100 my-1">
+            <div class="col-12 p-1 bg-light">
+                <h5>Upcoming</h5>
+            </div>
+            <div class="col-12 p-0">
+                <app-jobs-by-list-widget [JOBS]="UPCOMING_JOBS" [DETAILS_ROUTE]="job_details_route"></app-jobs-by-list-widget>
+            </div>
+            <div class="col-12 p-0 bg-light d-flex justify-content-center">
+                <a routerLink="my-upcoming-jobs">View All</a>
+            </div>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="APPROVED_JOBS.length>0">
+        <div class="row mx-0 w-100 my-1">
+            <div class="col-12 p-1 bg-light">
+                <h5>Approved</h5>
+            </div>
+            <div class="col-12 p-0">
+                <app-jobs-by-list-widget [JOBS]="APPROVED_JOBS" [DETAILS_ROUTE]="job_details_route"></app-jobs-by-list-widget>
+            </div>
+            <div class="col-12 p-0 bg-light d-flex justify-content-center">
+                <a routerLink="my-approved-jobs">View All</a>
+            </div>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="COMPLETED_JOBS.length>0">
+        <div class="row mx-0 w-100 my-1">
+            <div class="col-12 p-1 bg-light">
+                <h5>Completed</h5>
+            </div>
+            <div class="col-12 p-0">
+                <app-jobs-by-list-widget [JOBS]="COMPLETED_JOBS" [DETAILS_ROUTE]="job_details_route"></app-jobs-by-list-widget>
+            </div>
+            <div class="col-12 p-0 bg-light d-flex justify-content-center">
+                <a routerLink="my-completed-jobs">View All</a>
+            </div>
+        </div>
+    </ng-container>    
+
+    <ng-container *ngIf="CANCELLED_JOBS.length>0">
+        <div class="row mx-0 w-100 my-1">
+            <div class="col-12 p-1 bg-light">
+                <h5>Cancelled</h5>
+            </div>
+            <div class="col-12 p-0">
+                <app-jobs-by-list-widget [JOBS]="CANCELLED_JOBS" [DETAILS_ROUTE]="job_details_route"></app-jobs-by-list-widget>
+            </div>
+            <div class="col-12 p-0 bg-light d-flex justify-content-center">
+                <a routerLink="my-cancelled-jobs">View All</a>
+            </div>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="WITHDRAWN_JOBS.length>0">
+        <div class="row mx-0 w-100 my-1">
+            <div class="col-12 p-1 bg-light">
+                <h5>Withdrawn</h5>
+            </div>
+            <div class="col-12 p-0">
+                <app-jobs-by-list-widget [JOBS]="WITHDRAWN_JOBS" [DETAILS_ROUTE]="job_details_route"></app-jobs-by-list-widget>
+            </div>
+            <div class="col-12 p-0 bg-light d-flex justify-content-center">
+                <a routerLink="my-withdrawn-jobs">View All</a>
+            </div>
+        </div>
+    </ng-container>
+</app-dw-jobs-content-container>
